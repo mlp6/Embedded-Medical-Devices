@@ -74,21 +74,27 @@ This course uses a version of [Mastery Learning](https://en.wikipedia.org/wiki/M
 * Spring Break (March 11-15, 2024)
 * LDOC (April 17, 2024)
 
-## Grading
 ## Attendance & Participation
-Class participation, including lecture attendance and scheduled lab time, is strongly encouraged, but attendance will not be taken.  Students are responsible for obtaining missed lecture content from other students in the class.  Lectures will **not** be recorded.
+Class participation in both lecture and scheduled lab time is strongly encouraged.  Student participation will be used to determine borderline course grades at the end of the semester (e.g., round up/down for fractional grades).
 
+Students are responsible for obtaining missed lecture content from other students in the class.  All lecture slides/presented content will be made avaiable online (Canvas/Gitlab), but lectures will **not** be recorded.
+
+## Assignments & Grading
 ### Assignment Grading
-All assignments will be submitted to Gradescope, where you will be able to see your grade and feedback from Dr. Palmeri / TAs.
+**Gradescope** will be used for all assignments.  
 
-There will be approximately 7 learning modules during the class, and the git repositories and technical reports associated with each module will be worth an equal fraction of the course grade.  All assignment grades will be posted to Gradesceop throughout the semester to track your performance.
+There will be quizzes and labs associated with each learning module in the class. All graded Gradescope assignments will be worth an equal fraction of the course grade, unless otherwise noted.  All assignment grades will be posted to Gradescope throughout the semester to track your performance.
+
+For assignments where pages need to be assigned to specific sections of your submission, please make sure to assign pages to each question.  **Failure to accuractely assign pages to your assignment section will prevent you from receiving credit for your submission.**
 
 Extra credit will be available for some of the assignments.
 
 ### Course Grade
-This course is not "curved" (i.e., a distribution of grades will not be enforced), and a traditional grading scheme will be used (e.g., 90-93 = A-, 94-97 = A, 97-100 = A+).
+This course is not "curved" (i.e., a distribution of grades will not be enforced), and a traditional grading scheme will be used (e.g., 90-93 = A-, 94-97 = A, 97-100 = A+).  Participation throughout the semester will influence rounding up/down for fractional grades.
 
-Failing the course can happen with a cummulative score $<$ 65 or not completing all of the assignments.  **All assignments must be satisfactorily completed by each student to pass the class, even if no credit will be awarded based on the late policy.**
+Failing the course can happen with a cummulative score $<$ 70 (C-) or not completing all of the assignments.  
+
+**All assignments must be satisfactorily completed by each student to pass the class, even if no credit will be awarded based on the late policy.**
 
 ### Regrades
 Any regrading requests need to be made via Gradescope **within one week of grades for a given assignment being released**. You must provide a description of why you feel a regrade is appropriate. Requesting a regrade could lead to additional loss of credit when an assignment is re-evaluated.
