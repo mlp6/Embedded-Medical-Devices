@@ -75,7 +75,7 @@ This course uses a version of [Mastery Learning](https://en.wikipedia.org/wiki/M
 * LDOC (April 17, 2024)
 
 ## Attendance & Participation
-Class participation in both lecture and scheduled lab time is strongly encouraged.  Student participation will be used to determine borderline course grades at the end of the semester (e.g., round up/down for fractional grades).
+Class participation in both lecture and scheduled lab time is strongly encouraged.  Student participation will be used to determine borderline course grades at the end of the semester (i.e., round up/down for fractional grades).
 
 Students are responsible for obtaining missed lecture content from other students in the class.  All lecture slides/presented content will be made avaiable online (Canvas/Gitlab), but lectures will **not** be recorded.
 
