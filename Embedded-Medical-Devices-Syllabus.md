@@ -75,7 +75,7 @@ This course uses a version of [Mastery Learning](https://en.wikipedia.org/wiki/M
 ### Special Dates
 * MLK Day (January 15, 2024)
 * Spring Break (March 11-15, 2024)
-* LDOC (April 17, 2024)
+* LDOC (April 26, 2024)
 
 ## Attendance & Participation
 Class participation in both lecture and scheduled lab time is strongly encouraged.  Student participation will be used to determine borderline course grades at the end of the semester (i.e., round up/down for fractional grades).
