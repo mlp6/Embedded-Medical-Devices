@@ -69,8 +69,8 @@ This course uses a version of [Mastery Learning](https://en.wikipedia.org/wiki/M
 | | | [Differential, Buffered ADC Lab](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/zephyr-adc/-/blob/main/lecture/Zephyr-ADC.md?ref_type=heads) |
 | [Pulse Width Modulation (PWM)](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/Zephyr-PWM) | [PWM Gradescope Quiz](https://www.gradescope.com/courses/686749/assignments/4243062) | [PWM Lab](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/Zephyr-PWM/-/blob/main/lab/Zephyr-PWM-Lab.md?ref_type=heads)|
 | [UART/I2C/SPI & Sensors](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/zephyr-serial-comm) |  [UART DevAcademy Module](https://academy.nordicsemi.com/lessons/lesson-4-serial-communication-uart/) & [Serial Communication DevAcademy Module](https://academy.nordicsemi.com/lessons/lesson-6-serial-com-i2c/) (Gradescope Quiz)| None |
-| [Bluetooth Low Energy (BLE)](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/zephyr-ble) |  Coming Soon | Coming Soon |
-| [Device Safety (VBUS)](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/zephyr-vbus) |  Coming Soon | Coming Soon |
+| [Bluetooth Low Energy (BLE)](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/zephyr-ble) |  [DevAcademic: BLE (Lessons 1-4)](https://academy.nordicsemi.com/courses/bluetooth-low-energy-fundamentals/) | [BLE Lab (bringing everything together!)](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/zephyr-ble/-/blob/main/lab/Zephyr-BLE-Lab.md?ref_type=heads)
+<!-- | [Device Safety (VBUS)](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/zephyr-vbus) |  Coming Soon | Coming Soon | -->
 
 ### Special Dates
 * MLK Day (January 15, 2024)
