@@ -8,16 +8,16 @@ Dr. Mark Palmeri
 * Duke GitLab username: [mlp6](https://gitlab.oit.duke.edu/mlp6)
 * Office: 258 Hudson Hall Annex
 ### Teaching Assistants
+* Ceci Schmidz
+* Harvey Shi
 * Brandon Lu
-* Kaden Bock
-* Julia Foust
 
 ## Course Times & Locations
-**Lecture:** Monday & Wednesday, 08:30-09:45, Wilkinson 136
+**Lecture:** Tuesday & Thursday, 11:45-13:00, Hudson Hall 222
 
 **Labs**
-* Friday, 08:30-10:00, Fitzpatrick B209
-* Thursday, 08:30-10:00, Fitzpatrick B209
+* Thursday, 13:25-14:55, Fitzpatrick B209
+* Thursday, 14:55-16:25, Fitzpatrick B209
 * B209 Door Code: 2-[35]-1
 
 ## Course Objectives
@@ -37,12 +37,9 @@ Upon completion of this course, students should be able to:
 
 ## Prerequisites
 ### Mandatory
-* Introductory Circuit Analysis (ECE110L or equivalent)
+* EGR105L or equivalent experience [git, Python]
 * Intrumentation (BME354L) / Mechatronics
 * Signals & Systems (BME271/671 or equivalent experience [filtering, FFTs])
-
-### Recommended
-* Medical Software Design (BME547 or equivalent experience [git, Python])
 
 ## Learning Management System
 We will be using [Canvas](https://canvas.duke.edu) as the learning management system for this course.  Canvas will serve as homebase for all course announcements, and links to this syllabus and Gradescope.  This syllabus will have hyperlinks to all lecture content and lab assignments.
@@ -73,9 +70,9 @@ This course uses a version of [Mastery Learning](https://en.wikipedia.org/wiki/M
 <!-- | [Device Safety (VBUS)](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/zephyr-vbus) |  Coming Soon | Coming Soon | -->
 
 ### Special Dates
-* MLK Day (January 15, 2024)
-* Spring Break (March 11-15, 2024)
-* LDOC (April 26, 2024)
+* Dr. Palmeri OOO (Sept 19-27, 2024)
+* Fall Break (Oct 14-15, 2024)
+* LDOC (Nov 26, 2024)
 
 ## Attendance & Participation
 Class participation in both lecture and scheduled lab time is strongly encouraged.  Student participation will be used to determine borderline course grades at the end of the semester (i.e., round up/down for fractional grades).
