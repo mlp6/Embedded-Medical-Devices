@@ -48,7 +48,7 @@ Duke's [GitLab](https://gitlab.oit.duke.edu) server will be used for most course
 ## Class Schedule
 This class is organized in a sequence of modules.  Specific details surrounding dates for assignments associated with each module will be posted to Canvas and linked below.
 
-This course uses a version of [Mastery Learning](https://en.wikipedia.org/wiki/Mastery_learning), where "mastery" of a given module is necessary to progress onto the subsequent module.  In this course, assignments of later modules depends on the successful completion of earlier modules.
+This course uses a version of [Mastery Learning](https://en.wikipedia.org/wiki/Mastery_learning), where "mastery" of a given module is necessary to progress onto the subsequent module. Quizzes are used to evaluate "knowledge"; lab exercises are used to demonstrate application of skills.  In this course, assignments of later modules depends on the successful completion of earlier modules.
 
 ### Learning Modules
 | Module | Quiz | Lab | 
@@ -79,6 +79,8 @@ Students are responsible for obtaining missed lecture content from other student
 ## Assignments & Grading
 ### Assignment Grading
 There will be quizzes and labs associated with each learning module in the class. All assignment grades will be posted to Canvas throughout the semester to track your performance.
+
+Team-based assignments will have an individual and team component.  The individual component will be graded based on your git branch commit history, while the team component will be graded based on the integrated team branch.
 
 ### Extra Credit
 Fixing typos or augmenting the content of any lecture / assignments--as submitted via GitLab merge requests--will be awarded extra credit at the discretion of Dr. Palmeri.
