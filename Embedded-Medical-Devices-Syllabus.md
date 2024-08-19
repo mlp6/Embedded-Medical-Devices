@@ -13,12 +13,11 @@ Dr. Mark Palmeri
 * Brandon Lu
 
 ## Course Times & Locations
-**Lecture:** Tuesday & Thursday, 11:45-13:00, Hudson Hall 222
+**Lecture:** Tuesday & Thursday, 11:45-13:00, Hudson Hall 216
 
 **Labs**
-* Thursday, 13:25-14:55, Fitzpatrick B209
-* Thursday, 14:55-16:25, Fitzpatrick B209
-* B209 Door Code: 2-[35]-1
+* Thursday, 13:25-14:55; 14:55-16:25 Fitzpatrick B209
+* B209 Door Code: 4-1-5-2
 
 ## Course Objectives
 This course will give students experience with the design, function and deployment of embedded medical devices.  Students will have hands on experience with electronic hardware and firmware (software) development, along with gaining experience with biosignal transduction into circuits.
@@ -42,14 +41,12 @@ Upon completion of this course, students should be able to:
 * Signals & Systems (BME271/671 or equivalent experience [filtering, FFTs])
 
 ## Learning Management System
-We will be using [Canvas](https://canvas.duke.edu) as the learning management system for this course.  Canvas will serve as homebase for all course announcements, and links to this syllabus and Gradescope.  This syllabus will have hyperlinks to all lecture content and lab assignments.
+We will be using [Canvas](https://canvas.duke.edu) as the learning management system for this course.  Canvas will serve as homebase for all course announcements, quizzes, and assignment due dates.  This syllabus will have hyperlinks to all lecture content and lab assignments.
 
 Duke's [GitLab](https://gitlab.oit.duke.edu) server will be used for most course lab exercises, including asking questions to Dr. Palmeri / TAs and receiving comments/feedback on your code (submitted as Issues).  
 
-All graded work will be submitted via Gradescope, including online quizzes based on lecture content and independent reading.
-
 ## Class Schedule
-This class is organized in a sequence of modules.  Specific details surrounding dates for assignments associated with each module will be posted to Gradescope and linked below. 
+This class is organized in a sequence of modules.  Specific details surrounding dates for assignments associated with each module will be posted to Canvas and linked below.
 
 This course uses a version of [Mastery Learning](https://en.wikipedia.org/wiki/Mastery_learning), where "mastery" of a given module is necessary to progress onto the subsequent module.  In this course, assignments of later modules depends on the successful completion of earlier modules.
 
@@ -77,32 +74,29 @@ This course uses a version of [Mastery Learning](https://en.wikipedia.org/wiki/M
 ## Attendance & Participation
 Class participation in both lecture and scheduled lab time is strongly encouraged.  Student participation will be used to determine borderline course grades at the end of the semester (i.e., round up/down for fractional grades).
 
-Students are responsible for obtaining missed lecture content from other students in the class.  All lecture slides/presented content will be made avaiable online (Canvas/Gitlab), but lectures will **not** be recorded.
+Students are responsible for obtaining missed lecture content from other students in the class.  All lecture slides/presented content will be made avaiable online (Canvas/Gitlab), and lectures will be recorded via Panopto and posted to Canvas.
 
 ## Assignments & Grading
 ### Assignment Grading
-**Gradescope** will be used for all assignments.  
+There will be quizzes and labs associated with each learning module in the class. All assignment grades will be posted to Canvas throughout the semester to track your performance.
 
-There will be quizzes and labs associated with each learning module in the class. All graded Gradescope assignments will be worth an equal fraction of the course grade, unless otherwise noted.  All assignment grades will be posted to Gradescope throughout the semester to track your performance.
-
-For assignments where pages need to be assigned to specific sections of your submission, please make sure to assign pages to each question.  **Failure to accuractely assign pages to your assignment section will prevent you from receiving credit for your submission.**
-
-Extra credit will be available for some of the assignments.
+### Extra Credit
+Fixing typos or augmenting the content of any lecture / assignments--as submitted via GitLab merge requests--will be awarded extra credit at the discretion of Dr. Palmeri.
 
 ### Course Grade
 This course is not "curved" (i.e., a distribution of grades will not be enforced), and a traditional grading scheme will be used (e.g., 90-93 = A-, 94-97 = A, 97-100 = A+).  Participation throughout the semester will influence rounding up/down for fractional grades.
 
-Failing the course can happen with a cummulative score $<$ 70 (C-) or not completing all of the assignments at a passing level.  **All assignments must be satisfactorily completed by each student to pass the class, even if no credit will be awarded based on the late policy.**
+Failing the course can happen with a cummulative score $<$ 70 (C-).
 
 ### Regrades
-Any regrading requests need to be made via Gradescope **within one week of grades for a given assignment being released**. You must provide a description of why you feel a regrade is appropriate. Requesting a regrade could lead to additional loss of credit when an assignment is re-evaluated.
+Any regrading requests need to be made **within one week of grades for a given assignment being released**. You must provide a description of why you feel a regrade is appropriate. Requesting a regrade could lead to additional loss of credit when an assignment is re-evaluated.
 
 Some assignments will have an opportunity to be resubmitted based on grading feedback at the discretion of Dr. Palmeri.
 
 ### Late Policy
 Permission to submit an assignment late should be sought from Dr. Palmeri as far in advance as reasonably possible, but no less than 48 hours in advance, except in cases of acute illness.
 
-Unexcused late assignments will lose 10 points per 24 hour period beyond the due date/time.
+Unexcused late assignments will lose 10 points per 24 hour period beyond the due date/time, including weekends.
 
 ## Duke Community Standard
 All students are expected to adhere to all principles of the [Duke Community Standard](https://trinity.duke.edu/undergraduate/academic-policies/community-standard-student-conduct). Violations of the Duke Community Standard will be referred immediately to the Office of Student Conduct. Please do not hesitate to talk with Dr. Palmeri about any situations involving academic honor, especially if it is ambiguous what should be done.
