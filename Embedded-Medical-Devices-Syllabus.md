@@ -7,6 +7,7 @@ Dr. Mark Palmeri
 * Email (slower): mark.palmeri@duke.edu
 * Duke GitLab username: [mlp6](https://gitlab.oit.duke.edu/mlp6)
 * Office: 258 Hudson Hall Annex
+* Office Hours: During lab (in lab) or by appointment
 ### Teaching Assistants
 * Ceci Schmidz
 * Harvey Shi
