@@ -54,15 +54,15 @@ This course uses a version of [Mastery Learning](https://en.wikipedia.org/wiki/M
 ### Learning Modules
 | Module | Quiz | Lab | 
 | --- | --- | --- |
-| [FDOC: Who am I?](https://gitlab.oit.duke.edu/mlp6/FDOC_WhoAmI/-/blob/main/FDOC_WhoAmI.md?ref_type=heads) / [Zephyr Overview](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/zephyr-nrf52833dk-intro-setup/-/blob/main/lecture/Zephyr-nRF52833DK-Intro.md?ref_type=heads) | [Completion Quiz](https://www.gradescope.com/courses/686749/assignments/3893987/) | [Software Installs & Tutorials](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/zephyr-nrf52833dk-intro-setup/-/blob/main/lab/Software-Install-Tutorials.md?ref_type=heads) |
-| [Version Control (`git`)](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/git-fundamentals/-/blob/main/lecture/git-fundamentals.md?ref_type=heads) | [Git Fundamentals Quiz](https://www.gradescope.com/courses/686749/assignments/3939316) | [Lab Exercise](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/git-fundamentals/-/blob/main/lab/git-fundamentals-lab.md?ref_type=heads) / [Gradescope](gradescope.com/courses/686749/assignments/3939317/) |
-| [C Programming](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/c-programming) | [C Programming Quiz](https://www.gradescope.com/courses/686749/assignments/3972261) | [C Programming Lab](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/c-programming-lab/-/blob/main/README.md?ref_type=heads)|
+| [FDOC: Who am I?](https://gitlab.oit.duke.edu/mlp6/FDOC_WhoAmI/-/blob/main/FDOC_WhoAmI.md?ref_type=heads) / [Zephyr Overview](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/zephyr-nrf52833dk-intro-setup/-/blob/main/lecture/Zephyr-nRF52833DK-Intro.md?ref_type=heads) | None | [Software Installs & Tutorials](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/zephyr-nrf52833dk-intro-setup/-/blob/main/lab/Software-Install-Tutorials.md?ref_type=heads) |
+| [Version Control (`git`)](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/git-fundamentals/-/blob/main/lecture/git-fundamentals.md?ref_type=heads) | Coming Soon | [Lab Exercise](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/git-fundamentals/-/blob/main/lab/git-fundamentals-lab.md?ref_type=heads) / [Gradescope](gradescope.com/courses/686749/assignments/3939317/) |
+| [C Programming](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/c-programming) | Coming Soon | [C Programming Lab](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/c-programming-lab/-/blob/main/README.md?ref_type=heads)|
 | [Devicetree, GPIO & Callbacks](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/zephyr-gpio-isr-callbacks) | Upload DevAcademy Lessons 2-4 (Gradescope) | [GPIO Lab](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/zephyr-gpio-isr-callbacks-lab) |
 | [Timers & Work Queues](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/zephyr-timers/-/blob/main/lecture/Zephyr-Timers.md?ref_type=heads) | None | [Timers \& Work Queues Lab](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/zephyr-timers/-/blob/main/lab/Zephyr-Timers-Lab.md?ref_type=heads) |
 | [State Machines & Kernel Events](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/zephyr-state-machine/-/blob/main/lecture/Zephyr-State-Machine.md?ref_type=heads) | None | [State Machines & Kernel Events Lab](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/zephyr-state-machine/-/blob/main/lab/Zephyr-State-Machine-Lab.md?ref_type=heads) |
-| [Analog-to-Digital Conversion (ADC)](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/zephyr-adc/-/blob/main/lecture/Zephyr-ADC.md?ref_type=heads) | [In-Lecture Quiz](https://www.gradescope.com/courses/686749/assignments/4155849) | [ADC Lab](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/zephyr-adc/-/blob/main/lecture/Zephyr-ADC.md?ref_type=heads) |
+| [Analog-to-Digital Conversion (ADC)](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/zephyr-adc/-/blob/main/lecture/Zephyr-ADC.md?ref_type=heads) | Coming Soon | [ADC Lab](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/zephyr-adc/-/blob/main/lecture/Zephyr-ADC.md?ref_type=heads) |
 | | | [Differential, Buffered ADC Lab](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/zephyr-adc/-/blob/main/lecture/Zephyr-ADC.md?ref_type=heads) |
-| [Pulse Width Modulation (PWM)](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/Zephyr-PWM) | [PWM Gradescope Quiz](https://www.gradescope.com/courses/686749/assignments/4243062) | [PWM Lab](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/Zephyr-PWM/-/blob/main/lab/Zephyr-PWM-Lab.md?ref_type=heads)|
+| [Pulse Width Modulation (PWM)](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/Zephyr-PWM) | Coming Soon | [PWM Lab](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/Zephyr-PWM/-/blob/main/lab/Zephyr-PWM-Lab.md?ref_type=heads)|
 | [UART/I2C/SPI & Sensors](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/zephyr-serial-comm) |  [UART DevAcademy Module](https://academy.nordicsemi.com/lessons/lesson-4-serial-communication-uart/) & [Serial Communication DevAcademy Module](https://academy.nordicsemi.com/lessons/lesson-6-serial-com-i2c/) (Gradescope Quiz)| None |
 | [Bluetooth Low Energy (BLE)](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/zephyr-ble) |  [DevAcademic: BLE (Lessons 1-4)](https://academy.nordicsemi.com/courses/bluetooth-low-energy-fundamentals/) | [BLE Lab](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/zephyr-ble/-/blob/main/lab/Zephyr-BLE-Lab.md?ref_type=heads)
 <!-- | [Device Safety (VBUS)](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/zephyr-vbus) |  Coming Soon | Coming Soon | -->
@@ -73,15 +73,15 @@ This course uses a version of [Mastery Learning](https://en.wikipedia.org/wiki/M
 * LDOC (Nov 26, 2024)
 
 ## Attendance & Participation
-Class participation in both lecture and scheduled lab time is strongly encouraged.  Student participation will be used to determine borderline course grades at the end of the semester (i.e., round up/down for fractional grades).
+Class participation in both lecture and lab time is strongly encouraged.  Lecture will be used to provide skill overview and live demonstrations, many of while will kickstart your efforts for your project.  Lab time will provide you access to equipment and the TAs for assistance.
 
 Students are responsible for obtaining missed lecture content from other students in the class.  All lecture slides/presented content will be made avaiable online (Canvas/Gitlab), and lectures will be recorded via Panopto and posted to Canvas.
 
 ## Assignments & Grading
 ### Assignment Grading
-There will be quizzes and labs associated with each learning module in the class. All assignment grades will be posted to Canvas throughout the semester to track your performance.
+There will be quizzes and lab exercises associated with some of the learning modules in the class (25%).  All of the learning modules will contribute to the final project and the associated technical report (75%).
 
-Team-based assignments will have an individual and team component.  The individual component will be graded based on your git branch commit history, while the team component will be graded based on the integrated team branch.
+All assignment grades will be posted to Canvas throughout the semester to track your performance.
 
 ### Extra Credit
 Fixing typos or augmenting the content of any lecture / assignments--as submitted via GitLab merge requests--will be awarded extra credit at the discretion of Dr. Palmeri.
