@@ -28,7 +28,7 @@ Upon completion of this course, students should be able to:
 * Develop firmware using Zephyr as a bare-metal super-loop and a Realtime Operating System (RTOS)
 * Implement state machines and generate state diagrams using the Unified Modeling Language (UML).
 * Utilize callbacks / interupt service routines for realtime event detection and response.
-* Develop firmware to control common periperals, including GPIO, ADC and PWM.
+* Develop firmware to control common peripherals, including GPIO, ADC and PWM.
 * Use different data encoding and communication protocols, including UART, I2C, SPI, and BLE.
 * Utilize firmware logging at different levels.
 * Test firmware implementation on the `nRF52833DK` using electronic bench equipment and generate technical reports with critical data analysis.
