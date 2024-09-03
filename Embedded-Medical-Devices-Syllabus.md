@@ -4,10 +4,10 @@
 
 ### Instructor
 
-Dr. Mark Palmeri 
+Dr. Mark Palmeri
 
 * [Teams](https://teams.microsoft.com) chat is the best way to reach me
-* Email (slower): mark.palmeri@duke.edu
+* Email (slower): [mark.palmeri@duke.edu](mailto:mark.palmeri@duke.edu)
 * Duke GitLab username: [mlp6](https://gitlab.oit.duke.edu/mlp6)
 * Office: 258 Hudson Hall Annex
 * Office Hours: During lab (in lab) or by appointment
@@ -45,6 +45,7 @@ Upon completion of this course, students should be able to:
 * Develop firmware with workflows that adhere to relevant industry and safety standards (e.g., UL, IEC60601, IEC62304) for FDA 510k clearance.
 
 ## Prerequisites
+
 ### Mandatory
 
 * EGR105L or equivalent experience [git, Python]
@@ -124,6 +125,7 @@ Permission to submit an assignment late should be sought from Dr. Palmeri as far
 Unexcused late assignments will lose 10 points per 24 hour period beyond the due date/time, including weekends.
 
 ## Duke Community Standard
+
 All students are expected to adhere to all principles of the [Duke Community Standard](https://trinity.duke.edu/undergraduate/academic-policies/community-standard-student-conduct). Violations of the Duke Community Standard will be referred immediately to the Office of Student Conduct. Please do not hesitate to talk with Dr. Palmeri about any situations involving academic honor, especially if it is ambiguous what should be done.
 
 ## FAQ
@@ -135,6 +137,5 @@ Engineering is inherently a collaborative field, and in this class, you are enco
 ### Can I use AI?
 
 The use of artificial intelligence is a rapidly developing resource / tool in engineering.  In software development, there are many levels of AI-assitance available.  Such form of assistance include the [IntelliCode](https://visualstudio.microsoft.com/services/intellicode/) tools and [GitHub CoPilot](https://github.com/features/copilot) (free to students through the [GitHub Education](https://github.com/education/students) program).  These tools can be leveraged to help with syntax.  **You are, however, strongly cautioned to not rely on these tools for logical implementation.**
-
 
 <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://gitlab.oit.duke.edu/mlp6/Embedded-Medical-Devices/">Embedded Medical Devices</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://bme.duke.edu/faculty/mark-palmeri">Mark L. Palmeri</a> is licensed under <a href="http://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"></a></p>
