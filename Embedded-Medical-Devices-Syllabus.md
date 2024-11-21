@@ -14,17 +14,20 @@ Dr. Mark Palmeri
 
 ### Teaching Assistants
 
-* Ceci Schmidz
-* Harvey Shi
-* Brandon Lu
+* Ceci Schmidz (`cls157`)
+* Harvey Shi (`hys3`)
 
 ## Course Times & Locations
 
-**Lecture:** Tuesday & Thursday, 11:45-13:00, Hudson Hall 216
+### Lecture
 
-**Labs**
+Monday & Wednesday, 08:30-09:45, Wilkinson 136
 
-* Thursday, 13:25-14:55; 14:55-16:25 Fitzpatrick B209
+### Labs
+
+* Thursday, 08:30-10:00, Fitzpatrick B209
+* Friday, 08:30-10:00, Fitzpatrick B209
+* Friday, 10:00-11:30, Fitzpatrick B209
 * B209 Door Code: 4-1-5-2
 
 ## Course Objectives
@@ -34,14 +37,16 @@ This course will give students experience with the design, function and deployme
 Upon completion of this course, students should be able to:
 
 * Version control software / firmware development using `git`.
+* Use an Integrated Development Environment (IDE) for firmware development.
+* Describe hardware using a Devicetree hierarchical data structure.
 * Develop firmware using Zephyr as a bare-metal super-loop and a Realtime Operating System (RTOS)
 * Implement state machines and generate state diagrams using the Unified Modeling Language (UML).
 * Utilize callbacks / interupt service routines for realtime event detection and response.
+* Utilize threads and work queues.
 * Develop firmware to control common periperals, including GPIO, ADC and PWM.
-* Use different data encoding and communication protocols, including UART, I2C, SPI, and BLE.
+* Use different serial communication protocols, including UART, I2C, SPI, and BLE.
 * Utilize firmware logging at different levels.
-* Test firmware implementation on the `nRF52833DK` using electronic bench equipment and generate technical reports with critical data analysis.
-* Debug firmware using a JTAG debugger.
+* Test firmware implementation on the `nRF52833DK` using electronic bench equipment and generate technical reports with data analysis for device verification.
 * Develop firmware with workflows that adhere to relevant industry and safety standards (e.g., UL, IEC60601, IEC62304) for FDA 510k clearance.
 
 ## Prerequisites
@@ -74,7 +79,7 @@ This course uses a version of [Mastery Learning](https://en.wikipedia.org/wiki/M
 | [C Programming](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/c-programming) | Available on Canvas | [C Programming Lab](https://gitlab.oit.duke.edu/kits/BME-590L-001-F24/c-programming-lab-f24)|
 | [Devicetree, GPIO & Callbacks](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/zephyr-gpio-isr-callbacks) | Nordic DevAcademy Lessons 2-4 | [GPIO Lab](https://gitlab.oit.duke.edu/kits/BME-590L-001-F24/zephyr-gpio-isr-callbacks-lab-f24) |
 | [Timers & Work Queues](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/zephyr-timers/-/blob/main/lecture/Zephyr-Timers.md?ref_type=heads) | None | [Timers Lab](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/zephyr-timers/-/blob/main/lab/Zephyr-Timers-Lab.md?ref_type=heads) |
-| [State Machines & Kernel Events](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/zephyr-state-machine/-/blob/main/lecture/Zephyr-State-Machine.md?ref_type=heads) | None | [State Machines & Kernel Events Lab](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/zephyr-state-machine/-/blob/main/lab/Zephyr-State-Machine-Lab.md?ref_type=heads) |
+| [State Machines, Threads & Kernel Events](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/zephyr-state-machine/-/blob/main/lecture/Zephyr-State-Machine.md?ref_type=heads) | None | [State Machines, Threads & Kernel Events Lab](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/zephyr-state-machine/-/blob/main/lab/Zephyr-State-Machine-Lab.md?ref_type=heads) |
 | [Analog-to-Digital Conversion (ADC)](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/zephyr-adc/-/blob/main/lecture/Zephyr-ADC.md?ref_type=heads) | None | [ADC Lab: Part I](https://gitlab.oit.duke.edu/kits/BME-590L-001-F24/zephyr-adc-pwm-lab#part-i-single-channel-adc-sampling) |
 | | | [ADC Lab: Part II](https://gitlab.oit.duke.edu/kits/BME-590L-001-F24/zephyr-adc-pwm-lab#part-ii-buffered-differential-adc-sampling) |
 | [Pulse Width Modulation (PWM)](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/Zephyr-PWM/-/blob/main/lecture/Zephyr-PWM.md) | None | [PWM Lab: Part III](https://gitlab.oit.duke.edu/kits/BME-590L-001-F24/zephyr-adc-pwm-lab#part-iii-steady-state-pwm-output)|
