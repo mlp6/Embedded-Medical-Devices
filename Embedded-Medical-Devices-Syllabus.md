@@ -80,9 +80,9 @@ This course uses a version of [Mastery Learning](https://en.wikipedia.org/wiki/M
 
 ### Learning Modules
 
-| Module | Quiz | Lab |
+| Module | Gradescope | Lab |
 | --- | --- | --- |
-| [FDOC: Who am I?](https://mlp6.pages.oit.duke.edu/FDOC_WhoAmI/FDOC_WhoAmI.html) / [Zephyr Overview](https://embeddedmedicaldevices.pages.oit.duke.edu/zephyr-nrf52833dk-intro-setup/Zephyr-nRF52833DK-Intro.html) | Gradescope | [Software Installs & Tutorials](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/zephyr-nrf52833dk-intro-setup/-/blob/main/lab/Software-Install-Tutorials.md?ref_type=heads) |
+| [FDOC: Who am I?](https://mlp6.pages.oit.duke.edu/FDOC_WhoAmI/FDOC_WhoAmI.html) / [Zephyr Overview](https://embeddedmedicaldevices.pages.oit.duke.edu/zephyr-nrf52833dk-intro-setup/Zephyr-nRF52833DK-Intro.html) | Coming Soon | [Software Installs & Tutorials](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/zephyr-nrf52833dk-intro-setup/-/blob/main/lab/Software-Install-Tutorials.md?ref_type=heads) |
 | Event-Driven State Machine | None | Event-Driven State Machine Lab |
 | Version Control (`git`) | Gradescope| Git Lab Exercise |
 | C Programming | Gradescope| C Programming Lab |
@@ -131,7 +131,7 @@ Participation on Ed Discussion is also encouraged, in the form of:
 
 ### Grading
 
-There will be quizzes and lab exercises associated with some of the learning modules (25%), all of which will be submitted through Gradescope.  All of the learning modules will contribute to the final project and the associated technical report (75%).
+There will be quizzes, lab exercises, and completion surveys associated with some of the learning modules (25%), all of which will be submitted through Gradescope.  All of the learning modules will contribute to the final project and the associated technical report (75%).
 
 All assignment grades will be posted to Gradescope (and linked to the Canvas gradebook) throughout the semester to track your performance.
 
