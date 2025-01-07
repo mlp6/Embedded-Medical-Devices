@@ -121,7 +121,11 @@ Class participation in both lecture and lab time is strongly encouraged.  Lectur
 
 Students are responsible for obtaining missed lecture content from other students in the class.  All lecture slides/presented content will be made availabe online (Canvas/Gitlab), and lectures will be recorded via Panopto and posted to Canvas.
 
-Participation on Ed Discussion is also encouraged.
+Participation on Ed Discussion is also encouraged, in the form of:
+
+* Asking questions about the course material
+* Answering questions from other students
+* Sharing interesting articles or resources related to the course material
 
 ## Assignments & Grading
 
