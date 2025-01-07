@@ -10,22 +10,28 @@ Dr. Mark Palmeri
 * Email (slower): [mark.palmeri@duke.edu](mailto:mark.palmeri@duke.edu)
 * Duke GitLab username: [mlp6](https://gitlab.oit.duke.edu/mlp6)
 * Office: 258 Hudson Hall Annex
-* Office Hours: During lab (in lab) or by appointment
+* Office Hours: https://calendly.com/mark-palmeri/bme554l-office-hours-in-person
 
 ### Teaching Assistants
 
-* Ceci Schmidz
-* Harvey Shi
-* Brandon Lu
+* Ceci Schmidz (`cls157`)
+* Harvey Shi (`hys3`)
+* Pranav Mukund (`ppm14`)
 
 ## Course Times & Locations
 
-**Lecture:** Tuesday & Thursday, 11:45-13:00, Hudson Hall 216
+### Lecture
 
-**Labs**
+Monday & Wednesday, 08:30-09:45, Wilkinson 136
 
-* Thursday, 13:25-14:55; 14:55-16:25 Fitzpatrick B209
+### Labs
+
+* Thursday, 08:30-10:00, Fitzpatrick B209
+* Friday, 08:30-10:00, Fitzpatrick B209
+* Friday, 10:00-11:30, Fitzpatrick B209
 * B209 Door Code: 4-1-5-2
+
+*Note - you can attend any/multiple of the lab sections.*
 
 ## Course Objectives
 
@@ -34,14 +40,16 @@ This course will give students experience with the design, function and deployme
 Upon completion of this course, students should be able to:
 
 * Version control software / firmware development using `git`.
+* Use an Integrated Development Environment (IDE) for firmware development.
+* Describe hardware using a Devicetree hierarchical data structure.
 * Develop firmware using Zephyr as a bare-metal super-loop and a Realtime Operating System (RTOS)
 * Implement state machines and generate state diagrams using the Unified Modeling Language (UML).
 * Utilize callbacks / interupt service routines for realtime event detection and response.
-* Develop firmware to control common peripherals, including GPIO, ADC and PWM.
-* Use different data encoding and communication protocols, including UART, I2C, SPI, and BLE.
+* Utilize threads and work queues.
+* Develop firmware to control common periperals, including GPIO, ADC and PWM.
+* Use different serial communication protocols, including UART, I2C, SPI, and BLE.
 * Utilize firmware logging at different levels.
-* Test firmware implementation on the `nRF52833DK` using electronic bench equipment and generate technical reports with critical data analysis.
-* Debug firmware using a JTAG debugger.
+* Test firmware implementation on the `nRF52833DK` using electronic bench equipment and generate technical reports with data analysis for device verification.
 * Develop firmware with workflows that adhere to relevant industry and safety standards (e.g., UL, IEC60601, IEC62304) for FDA 510k clearance.
 
 ## Prerequisites
@@ -54,13 +62,19 @@ Upon completion of this course, students should be able to:
 
 ## Learning Management System
 
-We will be using [Canvas](https://canvas.duke.edu) as the learning management system for this course.  Canvas will serve as homebase for all course announcements, quizzes, and assignment due dates.  This syllabus will have hyperlinks to all lecture content and lab assignments.
+We will be using [Canvas](https://canvas.duke.edu) as the learning management
+system for this course.  It will host the syllabus, which will have hyperlinks
+to all lecture content and lab assignments.
 
-Duke's [GitLab](https://gitlab.oit.duke.edu) server will be used for most course lab exercises, including asking questions to Dr. Palmeri / TAs and receiving comments/feedback on your code (submitted as Issues).  
+Duke's [GitLab](https://gitlab.oit.duke.edu) server will be used for most course
+lab exercises, and code-related questions will be submitted to Dr. Palmeri / TAs
+using GitLab Issues.
+
+Ed Discussion will be used for general course questions and discussion.
 
 ## Class Schedule
 
-This class is organized in a sequence of modules.  Specific details surrounding dates for assignments associated with each module will be posted to Canvas and linked below.
+This class is organized in a sequence of modules.  Specific details surrounding dates for assignments associated with each module will be posted to Gradescope and linked below.
 
 This course uses a version of [Mastery Learning](https://en.wikipedia.org/wiki/Mastery_learning), where "mastery" of a given module is necessary to progress onto the subsequent module. Quizzes are used to evaluate "knowledge"; lab exercises are used to demonstrate application of skills.  In this course, assignments of later modules depends on the successful completion of earlier modules.
 
@@ -74,8 +88,8 @@ This course uses a version of [Mastery Learning](https://en.wikipedia.org/wiki/M
 | [C Programming](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/c-programming) | Available on Canvas | [C Programming Lab](https://gitlab.oit.duke.edu/kits/BME-590L-001-F24/c-programming-lab-f24)|
 | [Devicetree, GPIO & Callbacks](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/zephyr-gpio-isr-callbacks) | Nordic DevAcademy Lessons 2-4 | [GPIO Lab](https://gitlab.oit.duke.edu/kits/BME-590L-001-F24/zephyr-gpio-isr-callbacks-lab-f24) |
 | [Timers & Work Queues](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/zephyr-timers/-/blob/main/lecture/Zephyr-Timers.md?ref_type=heads) | None | [Timers Lab](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/zephyr-timers/-/blob/main/lab/Zephyr-Timers-Lab.md?ref_type=heads) |
-| [State Machines & Kernel Events](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/zephyr-state-machine/-/blob/main/lecture/Zephyr-State-Machine.md?ref_type=heads) | None | [State Machines & Kernel Events Lab](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/zephyr-state-machine/-/blob/main/lab/Zephyr-State-Machine-Lab.md?ref_type=heads) |
-| [Analog-to-Digital Conversion (ADC)](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/zephyr-adc/-/blob/main/lecture/Zephyr-ADC.md?ref_type=heads) | None | [ADC Lab: Part I](https://gitlab.oit.duke.edu/kits/BME-590L-001-F24/zephyr-adc-pwm-lab#part-i-single-channel-adc-sampling) |
+| [State Machines, Threads & Kernel Events](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/zephyr-state-machine/-/blob/main/lecture/Zephyr-State-Machine.md?ref_type=heads) | None | [State Machines, Threads & Kernel Events Lab](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/zephyr-state-machine/-/blob/main/lab/Zephyr-State-Machine-Lab.md?ref_type=heads) |
+| [Analog-to-Digital Conversion (ADC)](https://embeddedmedicaldevices.pages.oit.duke.edu/zephyr-adc/Zephyr-ADC.html) | None | [ADC Lab: Part I](https://gitlab.oit.duke.edu/kits/BME-590L-001-F24/zephyr-adc-pwm-lab#part-i-single-channel-adc-sampling) |
 | | | [ADC Lab: Part II](https://gitlab.oit.duke.edu/kits/BME-590L-001-F24/zephyr-adc-pwm-lab#part-ii-buffered-differential-adc-sampling) |
 | [Pulse Width Modulation (PWM)](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/Zephyr-PWM/-/blob/main/lecture/Zephyr-PWM.md) | None | [PWM Lab: Part III](https://gitlab.oit.duke.edu/kits/BME-590L-001-F24/zephyr-adc-pwm-lab#part-iii-steady-state-pwm-output)|
 | | | [PWM Lab: Part IV](https://gitlab.oit.duke.edu/kits/BME-590L-001-F24/zephyr-adc-pwm-lab#part-iv-sinusoidal-modulation-of-pwm-output)|
@@ -85,27 +99,25 @@ This course uses a version of [Mastery Learning](https://en.wikipedia.org/wiki/M
 
 ### Special Dates
 
-* Dr. Palmeri OOO (Sept 19-27, 2024)
-* Fall Break (Oct 14-15, 2024)
-* LDOC (Nov 26, 2024)
+* MLK Holiday (Jan 20, 2025)
+* Spring Break (Mar 10-14, 2025)
+* LDOC (Apr 23, 2025)
 
 ## Attendance & Participation
 
 Class participation in both lecture and lab time is strongly encouraged.  Lecture will be used to provide skill overview and live demonstrations, many of while will kickstart your efforts for your project.  Lab time will provide you access to equipment and the TAs for assistance.
 
-Students are responsible for obtaining missed lecture content from other students in the class.  All lecture slides/presented content will be made avaiable online (Canvas/Gitlab), and lectures will be recorded via Panopto and posted to Canvas.
+Students are responsible for obtaining missed lecture content from other students in the class.  All lecture slides/presented content will be made availabe online (Canvas/Gitlab), and lectures will be recorded via Panopto and posted to Canvas.
+
+Participation on Ed Discussion is also encouraged.
 
 ## Assignments & Grading
 
-### Assignment Grading
+### Grading
 
-There will be quizzes and lab exercises associated with some of the learning modules in the class (25%).  All of the learning modules will contribute to the final project and the associated technical report (75%).
+There will be quizzes and lab exercises associated with some of the learning modules (25%), all of which will be submitted through Gradescope.  All of the learning modules will contribute to the final project and the associated technical report (75%).
 
-All assignment grades will be posted to Canvas throughout the semester to track your performance.
-
-### Extra Credit
-
-Fixing typos or augmenting the content of any lecture / assignments--as submitted via GitLab merge requests--will be awarded extra credit at the discretion of Dr. Palmeri.
+All assignment grades will be posted to Gradescope (and linked to the Canvas gradebook) throughout the semester to track your performance.
 
 ### Course Grade
 
@@ -115,7 +127,7 @@ Failing the course can happen with a cummulative score $<$ 70 (C-).
 
 ### Regrades
 
-Any regrading requests need to be made **within one week of grades for a given assignment being released**. You must provide a description of why you feel a regrade is appropriate. Requesting a regrade could lead to additional loss of credit when an assignment is re-evaluated.
+Any regrading requests need to be made **within one week of grades for a given assignment being released"". You must make the request via Gradescope and provide a description of why you feel a regrade is appropriate. Requesting a regrade could lead to additional loss of credit when an assignment is re-evaluated.
 
 Some assignments will have an opportunity to be resubmitted based on grading feedback at the discretion of Dr. Palmeri.
 
@@ -123,7 +135,7 @@ Some assignments will have an opportunity to be resubmitted based on grading fee
 
 Permission to submit an assignment late should be sought from Dr. Palmeri as far in advance as reasonably possible, but no less than 48 hours in advance, except in cases of acute illness.
 
-Unexcused late assignments will lose 10 points per 24 hour period beyond the due date/time, including weekends.
+Unexcused late assignments will be eligible for partial credit based on your class participation at the discretion of Dr. Palmeri.
 
 ## Duke Community Standard
 
