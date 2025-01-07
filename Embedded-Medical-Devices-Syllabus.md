@@ -115,7 +115,7 @@ Participation on Ed Discussion is also encouraged.
 
 ### Grading
 
-There will be quizzes and lab exercises associated with some of the learning modules (25%).  All of the learning modules will contribute to the final project and the associated technical report (75%).
+There will be quizzes and lab exercises associated with some of the learning modules (25%), all of which will be submitted through Gradescope.  All of the learning modules will contribute to the final project and the associated technical report (75%).
 
 All assignment grades will be posted to Gradescope (and linked to the Canvas gradebook) throughout the semester to track your performance.
 
