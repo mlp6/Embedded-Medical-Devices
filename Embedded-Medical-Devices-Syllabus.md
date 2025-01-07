@@ -22,7 +22,7 @@ Dr. Mark Palmeri
 
 ### Lecture
 
-Monday & Wednesday, 08:30-09:45, Wilkinson 136
+Monday & Wednesday, 08:30-09:45, Wilkinson 136 (Panopto recorded)
 
 ### Labs
 
