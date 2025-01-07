@@ -82,7 +82,7 @@ This course uses a version of [Mastery Learning](https://en.wikipedia.org/wiki/M
 
 | Module | Gradescope | Lab |
 | --- | --- | --- |
-| [FDOC: Who am I?](https://mlp6.pages.oit.duke.edu/FDOC_WhoAmI/FDOC_WhoAmI.html) / [Zephyr Overview](https://embeddedmedicaldevices.pages.oit.duke.edu/zephyr-nrf52833dk-intro-setup/Zephyr-nRF52833DK-Intro.html) | Coming Soon | [Software Installs & Tutorials](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/zephyr-nrf52833dk-intro-setup/-/blob/main/lab/Software-Install-Tutorials.md?ref_type=heads) |
+| [FDOC: Who am I?](https://mlp6.pages.oit.duke.edu/FDOC_WhoAmI/FDOC_WhoAmI.html) / [Zephyr Overview](https://embeddedmedicaldevices.pages.oit.duke.edu/zephyr-nrf52833dk-intro-setup/Zephyr-nRF52833DK-Intro.html) | [Completion Survey](https://www.gradescope.com/courses/941957/assignments/5544155) | [Software Installs & Tutorials](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/zephyr-nrf52833dk-intro-setup/-/blob/main/lab/Software-Install-Tutorials.md?ref_type=heads) |
 | Event-Driven State Machine | None | Event-Driven State Machine Lab |
 | Version Control (`git`) | Gradescope| Git Lab Exercise |
 | C Programming | Gradescope| C Programming Lab |
