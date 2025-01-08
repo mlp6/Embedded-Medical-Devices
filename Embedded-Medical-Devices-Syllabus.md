@@ -83,14 +83,14 @@ This course uses a version of [Mastery Learning](https://en.wikipedia.org/wiki/M
 | Module | Gradescope | Lab |
 | --- | --- | --- |
 | [FDOC: Who am I?](https://mlp6.pages.oit.duke.edu/FDOC_WhoAmI/FDOC_WhoAmI.html) / [Zephyr Overview](https://embeddedmedicaldevices.pages.oit.duke.edu/zephyr-nrf52833dk-intro-setup/Zephyr-nRF52833DK-Intro.html) | [Completion Survey](https://www.gradescope.com/courses/941957/assignments/5544155) | [Software Installs & Tutorials](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/zephyr-nrf52833dk-intro-setup/-/blob/main/lab/Software-Install-Tutorials.md?ref_type=heads) |
-| Event-Driven State Machine | None | Event-Driven State Machine Lab |
-| Version Control (`git`) | Gradescope| Git Lab Exercise |
-| C Programming | Gradescope| C Programming Lab |
+| [Event-Driven State Machine](https://embeddedmedicaldevices.pages.oit.duke.edu/event-driven-state-machine/EventDrivenStateMachine.html) | Coming Soon | Event-Driven State Machine Lab |
+| Version Control (`git`) | Coming Soon | Git Lab Exercise |
+| C Programming | Coming Soon | C Programming Lab |
 | Devicetree, GPIO & Callbacks | Nordic DevAcademy Lessons 2-4 | GPIO Lab |
-| Threads, Timers & Work Queues | None | Threads, Timers & Work Queues Lab |
-| State Machines & Kernel Events | None | State Machines & Kernel Events Lab |
-| Analog-to-Digital Conversion (ADC) | None | ADC Lab |
-| Pulse Width Modulation (PWM) | None | PWM Lab |
+| Threads, Timers & Work Queues | Coming Soon  | Threads, Timers & Work Queues Lab |
+| State Machines & Kernel Events | Coming Soon  | State Machines & Kernel Events Lab |
+| Analog-to-Digital Conversion (ADC) | Coming Soon  | ADC Lab |
+| Pulse Width Modulation (PWM) | Coming Soon  | PWM Lab |
 | UART/I2C/SPI & Sensors |  [UART DevAcademy Module](https://academy.nordicsemi.com/lessons/lesson-4-serial-communication-uart/) & [Serial Communication DevAcademy Module](https://academy.nordicsemi.com/lessons/lesson-6-serial-com-i2c/) | None |
 | Bluetooth Low Energy (BLE) | [DevAcademic: BLE (Lessons 1-4)](https://academy.nordicsemi.com/courses/bluetooth-low-energy-fundamentals/) | ECG & Temperature Sensing BLE Device |
 <!--
