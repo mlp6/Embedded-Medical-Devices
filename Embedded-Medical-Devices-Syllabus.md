@@ -30,6 +30,7 @@ Monday & Wednesday, 08:30-09:45, Wilkinson 136 (Panopto recorded)
 * Friday, 08:30-10:00, Fitzpatrick B209
 * Friday, 10:00-11:30, Fitzpatrick B209
 * B209 Door Code: 4-1-5-2
+* ⚠️ No food or drink is allowed in the lab! ⚠️  Failure to adhere to this policy will have consequences on your lab participation.
 
 *Note - you can attend any/multiple of the lab sections.*
 
