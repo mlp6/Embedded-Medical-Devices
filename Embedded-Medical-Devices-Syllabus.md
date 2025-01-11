@@ -10,7 +10,7 @@ Dr. Mark Palmeri
 * Email (slower): [mark.palmeri@duke.edu](mailto:mark.palmeri@duke.edu)
 * Duke GitLab username: [mlp6](https://gitlab.oit.duke.edu/mlp6)
 * Office: 258 Hudson Hall Annex
-* Office Hours: https://calendly.com/mark-palmeri/bme554l-office-hours-in-person
+* Office Hours: https://calendly.com/mark-palmeri
 
 ### Teaching Assistants
 
