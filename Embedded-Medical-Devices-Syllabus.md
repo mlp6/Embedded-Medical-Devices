@@ -143,7 +143,7 @@ Failing the course can happen with a cummulative score $<$ 70 (C-).
 
 ### Regrades
 
-Any regrading requests need to be made **within one week of grades for a given assignment being released"". You must make the request via Gradescope and provide a description of why you feel a regrade is appropriate. Requesting a regrade could lead to additional loss of credit when an assignment is re-evaluated.
+Any regrading requests need to be made **within one week of grades for a given assignment being released**. You must make the request via Gradescope and provide a description of why you feel a regrade is appropriate. Requesting a regrade could lead to additional loss of credit when an assignment is re-evaluated.
 
 Some assignments will have an opportunity to be resubmitted based on grading feedback at the discretion of Dr. Palmeri.
 
