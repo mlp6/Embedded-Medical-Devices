@@ -85,7 +85,7 @@ This course uses a version of [Mastery Learning](https://en.wikipedia.org/wiki/M
 | --- | --- | --- |
 | [FDOC: Who am I?](https://mlp6.pages.oit.duke.edu/FDOC_WhoAmI/FDOC_WhoAmI.html) / [Zephyr Overview](https://embeddedmedicaldevices.pages.oit.duke.edu/zephyr-nrf52833dk-intro-setup/Zephyr-nRF52833DK-Intro.html) | [Completion Survey](https://www.gradescope.com/courses/941957/assignments/5544155) | [Software Installs & Tutorials](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/zephyr-nrf52833dk-intro-setup/-/blob/main/lab/Software-Install-Tutorials.md?ref_type=heads) |
 | [Event-Driven State Machine](https://embeddedmedicaldevices.pages.oit.duke.edu/event-driven-state-machine/EventDrivenStateMachine.html) | [Wireless HRM](https://www.gradescope.com/courses/941957/assignments/5548632) | [Event-Driven State Machine Lab](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/event-driven-state-machine/-/blob/main/lab/EventDriveStateMachineLab.md?ref_type=heads) |
-| [Version Control (`git`)](https://embeddedmedicaldevices.pages.oit.duke.edu/git-fundamentals/git-fundamentals.html) | [Git Fundamentals Quiz](https://www.gradescope.com/courses/941957/assignments/5583313) | Coming Soon |
+| [Version Control (`git`)](https://embeddedmedicaldevices.pages.oit.duke.edu/git-fundamentals/git-fundamentals.html) | [Git Fundamentals Quiz](https://www.gradescope.com/courses/941957/assignments/5583313) | [Git Fundamentals Lab](https://gitlab.oit.duke.edu/kits/BME-554L-001-Sp25/git-fundamentals-lab) |
 | C Programming | Coming Soon | C Programming Lab |
 | Devicetree, GPIO & Callbacks | Nordic DevAcademy Lessons 2-4 | GPIO Lab |
 | Threads, Timers & Work Queues | Coming Soon  | Threads, Timers & Work Queues Lab |
