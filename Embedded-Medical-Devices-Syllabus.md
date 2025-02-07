@@ -89,6 +89,7 @@ This course uses a version of [Mastery Learning](https://en.wikipedia.org/wiki/M
 | [C Programming](https://embeddedmedicaldevices.pages.oit.duke.edu/c-programming/C-programming.html) | [C Programming Quiz](https://www.gradescope.com/courses/941957/assignments/5671363) | [C Programming Lab](https://gitlab.oit.duke.edu/kits/BME-554L-001-Sp25/c-programming-lab) |
 | | [C Programming Lab](https://www.gradescope.com/courses/941957/assignments/5672751) | |
 | [Devicetree, GPIO & Callbacks](https://embeddedmedicaldevices.pages.oit.duke.edu/zephyr-gpio-isr-callbacks/Zephyr-GPIO-ISR-Callbacks.html) | [Nordic DevAcademy Lesson 2: Reading Buttons & Controlling LEDs](https://academy.nordicsemi.com/courses/nrf-connect-sdk-fundamentals/lessons/lesson-2-reading-buttons-and-controlling-leds/) | [DT/GPIO/CB Lab](https://gitlab.oit.duke.edu/kits/BME-554L-001-Sp25/zephyr-gpio-isr-callbacks-lab) |
+| [Timers & Work Queues](https://embeddedmedicaldevices.pages.oit.duke.edu/zephyr-timers/Zephyr-Timers.html) | None | [Timers Lab](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/zephyr-timers/-/blob/main/lab/Zephyr-Timers-Lab.md?ref_type=heads) |
 | Threads, Timers & Work Queues | Coming Soon  | Threads, Timers & Work Queues Lab |
 | State Machines & Kernel Events | Coming Soon  | State Machines & Kernel Events Lab |
 | Analog-to-Digital Conversion (ADC) | Coming Soon  | ADC Lab |
@@ -96,7 +97,6 @@ This course uses a version of [Mastery Learning](https://en.wikipedia.org/wiki/M
 | UART/I2C/SPI & Sensors |  [UART DevAcademy Module](https://academy.nordicsemi.com/lessons/lesson-4-serial-communication-uart/) & [Serial Communication DevAcademy Module](https://academy.nordicsemi.com/lessons/lesson-6-serial-com-i2c/) | None |
 | Bluetooth Low Energy (BLE) | [DevAcademic: BLE (Lessons 1-4)](https://academy.nordicsemi.com/courses/bluetooth-low-energy-fundamentals/) | ECG & Temperature Sensing BLE Device |
 <!--
-| [Timers & Work Queues](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/zephyr-timers/-/blob/main/lecture/Zephyr-Timers.md?ref_type=heads) | None | [Timers Lab](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/zephyr-timers/-/blob/main/lab/Zephyr-Timers-Lab.md?ref_type=heads) |
 | [State Machines, Threads & Kernel Events](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/zephyr-state-machine/-/blob/main/lecture/Zephyr-State-Machine.md?ref_type=heads) | None | [State Machines, Threads & Kernel Events Lab](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/zephyr-state-machine/-/blob/main/lab/Zephyr-State-Machine-Lab.md?ref_type=heads) |
 | [Analog-to-Digital Conversion (ADC)](https://embeddedmedicaldevices.pages.oit.duke.edu/zephyr-adc/Zephyr-ADC.html) | None | [ADC Lab: Part I](https://gitlab.oit.duke.edu/kits/BME-590L-001-F24/zephyr-adc-pwm-lab#part-i-single-channel-adc-sampling) |
 | | | [ADC Lab: Part II](https://gitlab.oit.duke.edu/kits/BME-590L-001-F24/zephyr-adc-pwm-lab#part-ii-buffered-differential-adc-sampling) |
