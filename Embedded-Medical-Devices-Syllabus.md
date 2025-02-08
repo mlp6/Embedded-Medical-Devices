@@ -90,7 +90,7 @@ This course uses a version of [Mastery Learning](https://en.wikipedia.org/wiki/M
 | | [C Programming Lab](https://www.gradescope.com/courses/941957/assignments/5672751) | |
 | [Devicetree, GPIO & Callbacks](https://embeddedmedicaldevices.pages.oit.duke.edu/zephyr-gpio-isr-callbacks/Zephyr-GPIO-ISR-Callbacks.html) | [Nordic DevAcademy Lesson 2: Reading Buttons & Controlling LEDs](https://academy.nordicsemi.com/courses/nrf-connect-sdk-fundamentals/lessons/lesson-2-reading-buttons-and-controlling-leds/) | [DT/GPIO/CB Lab](https://gitlab.oit.duke.edu/kits/BME-554L-001-Sp25/zephyr-gpio-isr-callbacks-lab) |
 | [Timers & Work Queues](https://embeddedmedicaldevices.pages.oit.duke.edu/zephyr-timers/Zephyr-Timers.html) | None | [Timers Lab](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/zephyr-timers/-/blob/main/lab/Zephyr-Timers-Lab.md?ref_type=heads) |
-| Threads, Timers & Work Queues | Coming Soon  | Threads, Timers & Work Queues Lab |
+| [Threads & Kernel Events](https://embeddedmedicaldevices.pages.oit.duke.edu/zephyr-threads-events/Zephyr-Threads-Events.html) | [(Optional) Zephyr RTOS: Beyond the basics](https://academy.nordicsemi.com/courses/nrf-connect-sdk-intermediate/lessons/lesson-1-zephyr-rtos-advanced/) | [Heartbeat & Kernel Events Refactor Lab](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/zephyr-threads-events/-/blob/main/Zephyr-Threads-Kernel-Events-Lab.md?ref_type=heads) |
 | State Machines & Kernel Events | Coming Soon  | State Machines & Kernel Events Lab |
 | Analog-to-Digital Conversion (ADC) | Coming Soon  | ADC Lab |
 | Pulse Width Modulation (PWM) | Coming Soon  | PWM Lab |
