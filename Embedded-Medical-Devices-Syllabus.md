@@ -18,6 +18,9 @@ Dr. Mark Palmeri
 * Harvey Shi (`hys3`)
 * Pranav Mukund (`ppm14`)
 
+*Questions that can be answered by Dr. Palmeri or a teaching assistant should be
+posted on Ed Discussion.*
+
 ## Course Times & Locations
 
 ### Lecture
@@ -121,7 +124,7 @@ Students are responsible for obtaining missed lecture content from other student
 
 Participation on Ed Discussion is also encouraged, in the form of:
 
-* Asking questions about the course material
+* Asking questions about the course material (ideally, publicly, so that others * can benefit (Anonymous okay))
 * Answering questions from other students
 * Sharing interesting articles or resources related to the course material
 
