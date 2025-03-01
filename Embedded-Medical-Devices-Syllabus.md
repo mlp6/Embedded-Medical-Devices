@@ -147,11 +147,13 @@ Any regrading requests need to be made **within one week of grades for a given a
 
 Some assignments will have an opportunity to be resubmitted based on grading feedback at the discretion of Dr. Palmeri.
 
-### Late Policy
+### Late Policy / SDAO Accomodations
 
-Permission to submit an assignment late should be sought from Dr. Palmeri as far in advance as reasonably possible, but no less than 48 hours in advance, except in cases of acute illness.
+Late submission windows will be available for all assignments, minus the final project, and should be used to accomodate acute illness, travel, high workload from other classes and other unforeseen circumstances.  This late submission window can be utilized without penalty and without prior approval.
 
-Unexcused late assignments will be eligible for partial credit based on your class participation at the discretion of Dr. Palmeri.
+Students with SDAO accomodations for extended time on assignments can use this extended late submission window for all assignments.
+
+Any assignments submitted after the late submission window will only be accepted for partial credit at the discretion of Dr. Palmeri or if prior approval was sought **before the original due date**.
 
 ## Duke Community Standard
 
