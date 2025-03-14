@@ -100,8 +100,6 @@ This course uses a version of [Mastery Learning](https://en.wikipedia.org/wiki/M
 | UART/I2C/SPI & Sensors |  [UART DevAcademy Module](https://academy.nordicsemi.com/lessons/lesson-4-serial-communication-uart/) & [Serial Communication DevAcademy Module](https://academy.nordicsemi.com/lessons/lesson-6-serial-com-i2c/) | None |
 | Bluetooth Low Energy (BLE) | [DevAcademic: BLE (Lessons 1-4)](https://academy.nordicsemi.com/courses/bluetooth-low-energy-fundamentals/) | ECG & Temperature Sensing BLE Device |
 <!--
-| [Pulse Width Modulation (PWM)](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/Zephyr-PWM/-/blob/main/lecture/Zephyr-PWM.md) | None | [PWM Lab: Part III](https://gitlab.oit.duke.edu/kits/BME-590L-001-F24/zephyr-adc-pwm-lab#part-iii-steady-state-pwm-output)|
-| | | [PWM Lab: Part IV](https://gitlab.oit.duke.edu/kits/BME-590L-001-F24/zephyr-adc-pwm-lab#part-iv-sinusoidal-modulation-of-pwm-output)|
 | [UART/I2C/SPI & Sensors](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/zephyr-serial-comm/-/blob/main/lecture/Zephyr-Serial-Communication.md?ref_type=heads) |  [UART DevAcademy Module](https://academy.nordicsemi.com/lessons/lesson-4-serial-communication-uart/) & [Serial Communication DevAcademy Module](https://academy.nordicsemi.com/lessons/lesson-6-serial-com-i2c/) | None |
 | [Bluetooth Low Energy (BLE)](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/zephyr-ble/-/blob/main/lecture/Zephyr-BLE.md?ref_type=heads) |  [DevAcademic: BLE (Lessons 1-4)](https://academy.nordicsemi.com/courses/bluetooth-low-energy-fundamentals/) | [ECG & Temperature Sensing BLE Device](https://gitlab.oit.duke.edu/kits/BME-590L-001-F24/ecg-temp-ble-project) |
 -->
