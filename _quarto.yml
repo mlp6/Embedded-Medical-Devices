@@ -10,7 +10,8 @@ website:
   repo-actions: [edit, issue]
 
   sidebar:
-    background: "#5D737E"
+    background: "#012169"
+    foreground: "#FFFFFF"
     pinned: true
     align: center
     style: docked
@@ -46,7 +47,7 @@ format:
     css: styles.css
     toc: true
 
-linkcolor: "#5D737E"
+linkcolor: "#00539B"
 toc: true
 code-copy: hover
 code-link: true

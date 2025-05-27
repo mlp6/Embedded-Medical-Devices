@@ -9,21 +9,9 @@ format:
     slide-number: true
     #logo: "images/logo.png" 
     toc: false
-    webr:
-      cell-options:
-        autorun: false
     smaller: true
   live-html:
     code-link: true
-    webr:
-      cell-options:
-        autorun: true
+    css: styles.css
 engine: knitr
 highlight-style: a11y-light
-execute:
-  echo: true
-  warning: true
-knitr:
-  opts_chunk: 
-    R.options:
-      width: 70
