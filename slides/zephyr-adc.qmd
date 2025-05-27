@@ -7,14 +7,13 @@ format:
     output-file: zephyr-adc-slides.html
 ---
 
-
 ## Introduction
 
 - The `nRF52833` uses a **Sucessive Approximation ADC (SAADC)**.
 - The SAADC is a **differential** ADC.
 - That one SADDC is multiplexed to 8 **channels** (GPIO pins).
 
-<img src="images/adc/ADC-Block-Diagram.png" alt="ADC Block Diagram" width="800"/>
+![](images/adc/ADC-Block-Diagram.png){fig-align="center"}
 
 ## How does an SAADC work?
 
@@ -56,26 +55,26 @@ format:
 
 ---
 
-<img src="images/adc/mapping_analog_pins.png" alt="Mapping Analog Pins"/>
+![](images/adc/mapping_analog_pins.png){fig-align="center"}
 
 ## How Digital Output is Calculated
 
-<img src="images/adc/ADC-Calc-Dout.png" alt="Calculate Digital Output" width="800"/>
+![](images/adc/ADC-Calc-Dout.png){fig-align="center"}
 
 ::: callout-note
-Note that the `RESULT` above is stored as 16-bit [2's complement](https://en.wikipedia.org/wiki/Two's_complement) values.
+`RESULT` is stored as 16-bit [2's complement](https://en.wikipedia.org/wiki/Two's_complement) values.
 :::
 
-### Reference Voltage
+## Reference Voltage
 
-- Only `ADC_REF_INTERNAL` (0.6 V) and `ADC_REF_VDD_1_4` are valid on the `nRF52833`.
-- When using `VDD` (3.0 V) as a reference, you need to also specify the nominal reference voltage in the Devicetree: e.g., `zephyr,vref-mv = <750>;` (3.0 V / 4)
-- `ADC_REF_INTERNAL` is based on a diode threshold voltage and is more stable.
-- `ADC_REF_VDD_1_4` can drift with fluctuations in `VDD` (which can be a good thing).
+-   Only `ADC_REF_INTERNAL` (0.6 V) and `ADC_REF_VDD_1_4` are valid on the `nRF52833`.
+-   When using `VDD` (3.0 V) as a reference, you need to also specify the nominal reference voltage in the Devicetree: e.g., `zephyr,vref-mv = <750>;` (3.0 V / 4)
+-   `ADC_REF_INTERNAL` is based on a diode threshold voltage and is more stable.
+-   `ADC_REF_VDD_1_4` can drift with fluctuations in `VDD` (which can be a good thing).
 
 ---
 
-<img src="images/adc/reference_voltage_nrf52833.png" alt="Reference Voltage"/>
+![](images/adc/reference_voltage_nrf52833.png){fig-align="center"}
 
 ## `main.c`
 
@@ -110,7 +109,7 @@ if (err < 0) {
 }
 ```
 
-### Reading Data from the ADC Buffer
+## Reading Data from the ADC Buffer
 
 - Data are stored in a DMA buffer (separate from any CPU activity)
 - The kernel must copy the data from the DMA buffer to a kernel-accessible buffer.
@@ -125,8 +124,6 @@ struct adc_sequence sequence = {
     .buffer_size = sizeof(buf), // bytes
 };
 ```
-
-https://docs.zephyrproject.org/3.1.0/hardware/peripherals/adc.html#c.adc_sequence_callback
 
 ---
 
@@ -149,7 +146,7 @@ if (ret < 0) {
 }
 ```
 
-### Converting the ADC Buffer to Millivolts
+## Converting the ADC Buffer to Millivolts
 
 - The ADC buffer yields a 16-bit integer, but the ADC was set to 12-bits in the DT.
 - Converting the ADC buffer data to actual voltages requires scaling the ADC buffer data by the reference voltage and the gain factor.
@@ -167,15 +164,18 @@ if (ret < 0) {
 }
 ```
 
-### Reading Multiple Samples at Specified Intervals
+## Reading Multiple Samples at Specified Intervals
 
-- The ADC sequence can be configured to perform multiple measurements ("extra samples") in a single sequence.  
+- ADC sequence can be configured to perform multiple measurements (`extra_samplings`) in a single sequence.  
 - The buffering of multiple data points per acquisition can be useful for sampling data at a fixed sampling rate without hitting the kernel too often with a kernel-based timer.  
-- The ADC can be configured to execute a callback function after each sample is collected.
+- The ADC can be configured to execute a [callback function](https://docs.zephyrproject.org/3.1.0/hardware/peripherals/adc.html#c.adc_sequence_callback) after each sample is collected.
 - To enable the extra samples, you need to add an optional [adc_sequence_options](https://docs.zephyrproject.org/latest/hardware/peripherals/adc.html#c.adc_sequence_options) struct to the `adc_sequence` struct.  The `adc_sequence_options` struct contains the members shown below.
-- :warning: Be careful in how you calculate the buffer size for your array, depending on the scope of the array.
 
 ---
+
+::: callout-caution
+Be careful in how you calculate the buffer size for your array, depending on the scope of the array.
+:::
 
 ```C
 struct adc_sequence_options options = {
@@ -199,20 +199,27 @@ struct adc_sequence sequence = {
 };
 ```
 
-### ADC Acquisition Time
+## ADC Acquisition Time
 
-- The acquisition time for a single ADC sample is specified in the Devicetree:
+-    Acquisition time for a single sample is specified in the DT ADC node:
 
 ```C
-zephyr,acquisition-time = <ADC_ACQ_TIME(ADC_ACQ_TIME_MICROSECONDS, 40)>;  // 40 us is one of several valid sampling periods
+zephyr,acquisition-time = <ADC_ACQ_TIME(ADC_ACQ_TIME_MICROSECONDS, 40)>; 
 ```
 
-<img src="images/adc/adc_acquisition_times.png" alt="ADC Acquisition Times" width="800"/>
+-    There are only a discrete number of valid acquisition times (`TACQ`):
 
-- :warning: The acquisition time is not absolutely accurate and can dependent on many system factors, especially when dependent on the kernel counters.
-- If you do not specify a sampling interval (`interval_us`) in the `adc_sequence_options` struct, the ADC will sample sequencial samples at the acquisition time.
+![](images/adc/adc_acquisition_times.png){fig-align="center"}
 
-### Asynchronous ADC
+::: callout-warning
+The acquisition time is not absolutely accurate and can dependent on many system factors, especially when dependent on the kernel counters.
+:::
+
+::: callout-note
+If you do not specify a sampling interval (`interval_us`) in the `adc_sequence_options` struct, the ADC will sample sequencial samples at the acquisition time.
+:::
+
+## Asynchronous ADC
 
 - `adc_read()` is **blocking**, meaning that your kernel thread will wait for the ADC to complete before continuing.
   - Timers and interrupts can be used to perform other tasks while the ADC is running.
@@ -221,7 +228,7 @@ zephyr,acquisition-time = <ADC_ACQ_TIME(ADC_ACQ_TIME_MICROSECONDS, 40)>;  // 40 
   - This functionality needs to be enabled in the `prj.conf` file: `CONFIG_ADC_ASYNC=y`.
   - [adc_read_async()](https://docs.zephyrproject.org/latest/doxygen/html/group__adc__interface.html#ga009e3733b5b20eb6b26a201c9f9734fc) is the asynchronous version of `adc_read()`.
 
-### Asynchronous ADC Callback
+## Asynchronous ADC Callback
 
 - Use a [adc_sequence_callback](https://docs.zephyrproject.org/latest/doxygen/html/group__adc__interface.html#ga9150eb6dc53d1c62b9fa225c0a371d6d) function to handle the ADC data after *each* sample is read.
 - There are defined ADC action enumerations that can be returned by the callback to handle progression through the sequence:
@@ -233,8 +240,16 @@ zephyr,acquisition-time = <ADC_ACQ_TIME(ADC_ACQ_TIME_MICROSECONDS, 40)>;  // 40 
 ## Logging Arrays
 
 - Logging the values in an array to the serial terminal can be done using the [`LOG_HEXDUMP_INF()`](https://docs.zephyrproject.org/latest/services/logging/index.html#c.LOG_HEXDUMP_DBG) function.  This function takes a pointer to the array, the size of the array, and the number of bytes to display per line.  The function will display the array in hexadecimal format.  
-- *Remember that these HEX values are storing data in [twos complement](https://en.wikipedia.org/wiki/Two's_complement).*
-- :warning: The logging module can also require non-trivial amounts of memory.  Immediate / deferred / optimized logging configurations can significantly impact the [stack usage](https://docs.zephyrproject.org/latest/services/logging/index.html#stack-usage).
+
+::: callout-note
+Remember that these HEX values are storing data in [twos complement](https://en.wikipedia.org/wiki/Two's_complement).*
+:::
+
+::: callout-warning
+The logging module can also require non-trivial amounts of memory.  Immediate /
+deferred / optimized logging configurations can significantly impact the [stack
+usage](https://docs.zephyrproject.org/latest/services/logging/index.html#stack-usage).
+:::
 
 ## Resources
 

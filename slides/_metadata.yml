@@ -12,6 +12,7 @@ format:
     webr:
       cell-options:
         autorun: false
+    smaller: true
   live-html:
     code-link: true
     webr:
