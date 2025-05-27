@@ -6,7 +6,7 @@ website:
   description: "Duke BME 554L - Fall 2025"
   site-url: "https://mlp6.github.io/Embedded-Medical-Devices/"
   
-  repo-url: "https://mlp6.github.io/Embedded-Medical-Devices/"
+  repo-url: "https://github.com/mlp6/Embedded-Medical-Devices/"
   repo-actions: [edit, issue]
 
   sidebar:
@@ -14,16 +14,18 @@ website:
     align: center
     style: docked
     search: false
-    collapse-level: 2
+    collapse-level: 3
     contents:
       - section: "Course Information"
         contents:
         - href: course-syllabus.qmd
           text: Course Syllabus
-      - section: Slides
+      - section: Learning Modules
         contents:
-        - href: slides/zephyr-adc.qmd
-          text: Zephry Analog-to-Digital Conversion (ADC)
+        - section: "Zephyr: Analog-to-Digital Conversion (ADC)"
+          contents:
+          - href: slides/zephyr-adc.qmd
+            text: Slides
 
     page-footer:
       right: 'This page is built with [Quarto](https://quarto.org/).'
