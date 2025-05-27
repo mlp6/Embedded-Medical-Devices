@@ -20,6 +20,8 @@ website:
         contents:
         - href: course-syllabus.qmd
           text: Course Syllabus
+        - href: bme-lab-policies.qmd
+          text: "BME Lab Policies"
       - section: Learning Modules
         contents:
         - section: "Zephyr: Analog-to-Digital Conversion (ADC)"

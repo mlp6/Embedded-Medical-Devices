@@ -1,0 +1,126 @@
+---
+title: "BME Lab Procedures and Safety Expectations"
+subtitle: "Fall 2025"
+format:
+  html: default
+  pdf: default
+---
+
+::: callout-important
+Safety is Always First, Cleanliness a close second
+:::
+
+Safety always comes first in lab. To that end, you are expected to follow the
+rules in this document. Failure to do so may result in revocation of laboratory
+privileges, reduction of your course grade, and possible withdrawal from your
+design course. Understanding risks and learning to work safely in the laboratory
+are an important part of your education.
+
+<!-- TODO: add hyperlinks here -->
+Before entering lab, your safety training must be current. You need Duke’s
+Occupational and Environmental Safety Office’s Fire/Life Safety Training and
+Laboratory Safety-General. We know that you may have done this training before,
+but it expires in one year. You must be current through the end of the semester.
+
+Most accidents are the result of a series of failures. That said, most accidents
+are preventable. You are responsible for your safety and the safety of those
+around you. The vast majority of accidents involve some combination of
+inattention, carelessness, horseplay, impairment, broken tools, and lack of
+knowledge. All of these factors can be mitigated and it’s your job to do so.
+
+You are responsible for keeping the lab clean. Failure to keep a clean workspace
+can result in a lower grade for you and your team.
+
+If you or someone else in lab needs immediate medical attention, call 911 from
+the phone in the hallway. In case you need to report your location, you are in
+CIEMAS B209.  Non-emergent problems, call 681-WELL (681-9355). If you are
+injured in lab, you must let an instructor or Matt Brown know as soon as
+possible. Matt’s after-hours phone number is on the contact cards posted outside
+every lab door.
+
+::: callout-note
+Keep these points in mind...
+-    In an emergency, call 911. Location: CIEMAS B209
+
+-    In the event of a non-emergent injury, seek medical attention and let an
+instructor or Matt know within 12 hours.
+
+-    Find the emergency exits.
+
+-    Never work alone. Two or more people must be present and able to see and hear
+each other.
+
+-    Inspect every tool before use. Remove broken tools from service, place them
+on the broken tools shelf at the back of the room, and notify Matt. 
+
+-    Wear safety glasses when appropriate. This includes, but is not limited to,
+activities such as soldering, sanding, filing, hammering, cutting, and drilling.
+
+-    Wear hearing protection when using noisy tools such as drills and the Dremel
+tool. Ear buds or music headphones are not sufficient hearing protection.
+
+-    Never work impaired. If you are tired, stressed, in a rush, or impaired in
+any other way then do not work in lab. Go home and recuperate.
+
+-    Tie back long hair to keep it away from tools.
+
+-    Closed-toe shoes must be worn in the lab. Long trousers are preferred.
+
+-    Properly secure materials. Clamps, vises and portable worktables are
+available.
+
+-    Don’t force anything. If the job requires significant force, you’re doing it
+wrong.
+
+-    Keep lab work in the lab. The corridor and conference table is NOT for lab
+work.
+
+-    Chairs and stools with soft surfaces are not for use in lab. They must stay
+in the hallway.
+
+-    Keep food and drink out of the lab!
+
+-    Power down equipment when finished with it.
+
+-    An emergency phone is located in the hallway, near the door to the teaching
+lab, 5702.
+
+-    A fire extinguisher is outside the door. 
+
+-   Wash your hands before leaving lab.
+
+-    Bits of unused solder, wire and lead trimmings all go in a “Solder Scrap”
+container.
+
+-    Anything contaminated with solder paste (wipes, boards, applicators) goes in
+a “Solder Scrap” container.
+
+-    Other hazardous waste dealt with on a case by case basis. See Matt for help.
+
+-    Put tools away, in the right place. Tool drawers are labeled, but if you’re
+unsure where to put a tool, ask Matt.
+
+-    Do not hoard parts or tools.
+
+-    This bears repeating: Take the parts you need, but only the parts you need.
+Do not hoard parts. If you see a part becoming scarce, let Matt know so he can
+re-order.
+
+-    Benches are for temporary use only. Leave no trace that you were at the
+bench when you leave for the day. Rarely, with approval, a bench can be claimed
+for the semester.
+
+-    Any and all paint must be pre-approved by an instructor or Matt. Unapproved
+paint on projects will result in a lower grade. (Spray paint is almost never
+approved.)
+
+-    A representative from your group is expected to participate in weekly
+cleaning. Your instructor will give you the schedule.
+
+-    Place a cover on the bench for messy work. Chucks and Ram Board are
+available for this.
+
+-    Matt protects a collection of good soldering tips and fine tools (e.g.
+tweezers). If you have need for something better than you can find in lab, ask
+Matt. 
+:::
