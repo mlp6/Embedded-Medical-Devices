@@ -10,11 +10,12 @@ website:
   repo-actions: [edit, issue]
 
   sidebar:
+    background: "#5D737E"
     pinned: true
     align: center
     style: docked
     search: false
-    collapse-level: 1
+    collapse-level: 2
     contents:
       - section: "Course Information"
         contents:
@@ -45,6 +46,8 @@ format:
     css: styles.css
     toc: true
 
+linkcolor: "#5D737E"
+toc: true
 code-copy: hover
 code-link: true
 code-overflow: wrap

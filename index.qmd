@@ -1,0 +1,9 @@
+---
+title: "Embedded Medical Devices (BME554L)"
+subtitle: "Fall 2025"
+format:
+  html: default
+  pdf: default
+---
+
+{{< include _schedule.qmd >}}
