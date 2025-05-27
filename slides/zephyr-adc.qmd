@@ -5,6 +5,8 @@ date: "2025-09-01"
 format: 
   live-revealjs: 
     output-file: zephyr-adc-slides.html
+  live-html: 
+    output-file: zephyr-adc-notes.html
 ---
 
 ## Introduction
