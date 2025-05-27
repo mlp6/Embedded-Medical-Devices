@@ -14,11 +14,13 @@ website:
     align: center
     style: docked
     search: false
+    collapse-level: 2
     contents:
-      - href: index.qmd
-        text: Home
-      - about.qmd
-      - course-syllabus.qmd
+      - section: "Course Information"
+        contents:
+        - href: course-syllabus.qmd
+          text: Course Syllabus
+      - section: Learning Modules
 
     page-footer:
       right: 'This page is built with [Quarto](https://quarto.org/).'
