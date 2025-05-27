@@ -62,7 +62,9 @@ format:
 
 <img src="images/adc/ADC-Calc-Dout.png" alt="Calculate Digital Output" width="800"/>
 
-:fuelpump: **Note that the `RESULT` above is stored as 16-bit [2's complement](https://en.wikipedia.org/wiki/Two's_complement) values.** :fuelpump:
+::: callout-note
+Note that the `RESULT` above is stored as 16-bit [2's complement](https://en.wikipedia.org/wiki/Two's_complement) values.
+:::
 
 ### Reference Voltage
 
