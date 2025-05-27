@@ -10,8 +10,7 @@ website:
   repo-actions: [edit, issue]
 
   sidebar:
-    background: "#012169"
-    foreground: "#FFFFFF"
+    background: "#91a3b0"
     pinned: true
     align: center
     style: docked
