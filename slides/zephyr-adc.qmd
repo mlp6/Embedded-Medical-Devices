@@ -19,6 +19,8 @@ format:
 
 ## How does an SAADC work?
 
+<!-- TODO: create slides on this; assign the DevAcademy lesson -->
+
 [Nordic DevAcademy: SAADC](https://academy.nordicsemi.com/courses/nrf-connect-sdk-intermediate/lessons/lesson-6-analog-to-digital-converter-adc/topic/adc-peripheral-on-nordic-devices/)
 
 ## `prj.conf`
@@ -238,6 +240,7 @@ If you do not specify a sampling interval (`interval_us`) in the `adc_sequence_o
   - `ADC_ACTION_REPEAT`: New samples or sample should be read from the ADC and written in the same place as the recent ones.
   - `ADC_ACTION_FINISH`: The sequence should be terminated.
 
+<!-- TODO: use Frannie's `diff_adc_callback` for good async example -->
 
 ## Logging Arrays
 
