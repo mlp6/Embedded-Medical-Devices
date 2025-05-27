@@ -247,7 +247,7 @@ If you do not specify a sampling interval (`interval_us`) in the `adc_sequence_o
 - Logging the values in an array to the serial terminal can be done using the [`LOG_HEXDUMP_INF()`](https://docs.zephyrproject.org/latest/services/logging/index.html#c.LOG_HEXDUMP_DBG) function.  This function takes a pointer to the array, the size of the array, and the number of bytes to display per line.  The function will display the array in hexadecimal format.  
 
 ::: callout-note
-Remember that these HEX values are storing data in [twos complement](https://en.wikipedia.org/wiki/Two's_complement).*
+Remember that these HEX values are storing data in [twos complement](https://en.wikipedia.org/wiki/Two's_complement).
 :::
 
 ::: callout-warning
