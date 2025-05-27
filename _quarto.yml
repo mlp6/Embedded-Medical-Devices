@@ -24,8 +24,10 @@ website:
         contents:
         - section: "Zephyr: Analog-to-Digital Conversion (ADC)"
           contents:
-          - href: slides/zephyr-adc.qmd
+          - href: slides/zephyr-adc-slides.html
             text: Slides
+          - href: slides/zephyr-adc-notes.html
+            text: Notes
 
     page-footer:
       right: 'This page is built with [Quarto](https://quarto.org/).'
