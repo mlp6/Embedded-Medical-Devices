@@ -1,0 +1,108 @@
+/*-- scss:defaults --*/
+
+// fonts
+@import 'https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible&display=swap';
+@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gochi+Hand&display=swap');
+
+$font-family-sans-serif: "Atkinson Hyperlegible", sans-serif;
+$presentation-heading-color: #5D737E;
+$presentation-title-slide-text-align: "left";
+$link-color: #5D737E;
+$code-color: #5D737E;
+$code-block-font-size: 0.6em;
+$presentation-font-size-root: 45px;
+$presentation-h2-font-size: 1.2em;
+
+/*-- scss:rules --*/
+
+details>summary {
+  font-size: 0.75em;
+}
+
+.reveal #title-slide .subtitle {
+  color: #5D737E;
+  font-weight: bold;
+  text-align: left;
+}
+
+.reveal #title-slide .author {
+  text-align: left;
+}
+
+.reveal #title-slide .institute {
+  text-align: left;
+}
+
+.center-align {
+  text-align: center;
+}
+
+.small {
+  font-size: 0.75em;
+}
+
+.xsmall {
+  font-size: 0.6em;
+}
+
+.xxsmall {
+  font-size: 0.5em;
+}
+
+.reveal .slide .question {
+  border-left: 3px solid #5D737E;
+  padding-left: 0.5em;
+  padding-top: 0.25em;
+  padding-bottom: 0.25em;
+  background: #5D737E50;
+}
+
+.reveal .slide .poll {
+  border-left: 3px solid #c57644;
+  padding-left: 0.5em;
+  padding-top: 0.25em;
+  padding-bottom: 0.25em;
+  background: #c5764450;
+}
+
+.reveal .slide .task {
+  border-left: 3px solid #BCF4F5;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  padding: 0.5em;
+  background: #BCF4F550;
+}
+
+.reveal .slide .appex {
+  border-left: 3px solid #BCF4F5;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  padding: 0.5em;
+  background: #BCF4F550;
+}
+
+.reveal .slide .demo {
+  border-left: 3px solid #9AA067;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  padding: 0.5em;
+  background: #9AA06750;
+}
+
+.reveal pre code {
+  background-color: #e2e2e2;
+  margin-bottom: 10px;
+}
+
+.reveal .hand {
+  font-family: 'Gochi Hand', cursive;
+  font-size: 1.2em;
+}
+
+.reveal dl.code-annotation-container-grid {
+  background-color: #ecf1f7;
+  font-size: 1em;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}

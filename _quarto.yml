@@ -20,7 +20,10 @@ website:
         contents:
         - href: course-syllabus.qmd
           text: Course Syllabus
-      - section: Learning Modules
+      - section: Slides
+        contents:
+        - href: slides/zephyr-adc.qmd
+          text: Zephry Analog-to-Digital Conversion (ADC)
 
     page-footer:
       right: 'This page is built with [Quarto](https://quarto.org/).'
