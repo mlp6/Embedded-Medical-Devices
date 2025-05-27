@@ -14,7 +14,7 @@ website:
     align: center
     style: docked
     search: false
-    collapse-level: 3
+    collapse-level: 2
     contents:
       - section: "Course Information"
         contents:
