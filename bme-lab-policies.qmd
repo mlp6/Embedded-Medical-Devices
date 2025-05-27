@@ -13,14 +13,17 @@ Safety is Always First, Cleanliness a close second
 Safety always comes first in lab. To that end, you are expected to follow the
 rules in this document. Failure to do so may result in revocation of laboratory
 privileges, reduction of your course grade, and possible withdrawal from your
-design course. Understanding risks and learning to work safely in the laboratory
-are an important part of your education.
+course. Understanding risks and learning to work safely in the laboratory are an
+important part of your education.
 
-<!-- TODO: add hyperlinks here -->
 Before entering lab, your safety training must be current. You need Duke’s
-Occupational and Environmental Safety Office’s Fire/Life Safety Training and
-Laboratory Safety-General. We know that you may have done this training before,
-but it expires in one year. You must be current through the end of the semester.
+Occupational and Environmental Safety Office’s:
+
+-   [Fire/Life Safety](https://sms.duhs.duke.edu/OnlineTraining/FS200W/), and 
+-   [Laboratory Safety-General](https://sms.duhs.duke.edu/OnlineTraining/LABS/)
+
+training modules. We know that you may have done this training before,
+but it expires in one year, and you must be current through the end of the semester.
 
 Most accidents are the result of a series of failures. That said, most accidents
 are preventable. You are responsible for your safety and the safety of those
@@ -28,15 +31,21 @@ around you. The vast majority of accidents involve some combination of
 inattention, carelessness, horseplay, impairment, broken tools, and lack of
 knowledge. All of these factors can be mitigated and it’s your job to do so.
 
-You are responsible for keeping the lab clean. Failure to keep a clean workspace
-can result in a lower grade for you and your team.
+You are responsible for keeping the lab clean. 
 
+::: callout-warning
+Failure to keep a clean workspace can result in a lower grade for you and your
+team.
+:::
+
+::: callout-important
 If you or someone else in lab needs immediate medical attention, call 911 from
-the phone in the hallway. In case you need to report your location, you are in
-CIEMAS B209.  Non-emergent problems, call 681-WELL (681-9355). If you are
-injured in lab, you must let an instructor or Matt Brown know as soon as
-possible. Matt’s after-hours phone number is on the contact cards posted outside
-every lab door.
+the phone in the hallway. 
+:::
+In case you need to report your location, you are in CIEMAS B209.  Non-emergent
+problems, call 681-WELL (681-9355). If you are injured in lab, you must let an
+instructor or Matt Brown know as soon as possible. Matt’s after-hours phone
+number is on the contact cards posted outside every lab door.
 
 ::: callout-note
 Keep these points in mind...
