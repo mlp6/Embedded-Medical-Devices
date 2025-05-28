@@ -35,6 +35,12 @@ website:
             text: Slides
           - href: slides/git-fundamentals-notes.html
             text: Notes
+        - section: "C Programming"
+          contents:
+          - href: slides/c-programming-slides.html
+            text: Slides
+          - href: slides/c-programming-notes.html
+            text: Notes
         - section: "Analog-to-Digital Conversion (ADC)"
           contents:
           - href: slides/zephyr-adc-slides.html
