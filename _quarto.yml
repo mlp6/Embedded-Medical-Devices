@@ -29,6 +29,12 @@ website:
         - text: Panopto
       - section: Learning Modules
         contents:
+        - section: "Introduction to Zephyr & Nordic SoCs"
+          contents:
+          - href: slides/zephyr-nrf52833dk-intro-slides.html
+            text: Slides
+          - href: slides/zephyr-nrf52833dk-intro-notes.html
+            text: Notes
         - section: "Git Fundamentals"
           contents:
           - href: slides/git-fundamentals-slides.html

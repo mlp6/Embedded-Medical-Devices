@@ -1,0 +1,87 @@
+---
+title: Introduction to Zephyr & Nordic SoC
+subtitle: "Fall 2025"
+date: 2025-XX-XX
+format:
+  live-html: 
+    output-file: zephyr-nrf52833dk-intro-notes.html
+  live-revealjs: 
+    output-file: zephyr-nrf52833dk-intro-slides.html
+---
+
+# Why Firmware?
+
+## Firmware isn't "software"...
+
+- Firmware is a special kind of software that is designed to interact with hardware.
+- Firmware is often written in C, but can be written in other languages.
+- Firmware is highly resource constrained
+- Software is often written in Python, Java, C++, etc.
+- Software is often written to be run on a general-purpose computer (laptop, desktop, server, etc.), that typically is not resource constrained.
+  - User Interface
+  - Web Server
+  - Database
+  - Data Processing / Analytics
+
+# Medical Device Examples
+
+---
+
+![](images/intro/ecg.png)
+
+---
+
+![](images/intro/pulse_ox.png)
+
+# Zephyr RTOS
+
+## What is Zephyr?
+
+![](images/intro/zephyr.png){fig-align="center"}
+
+[https://www.zephyrproject.org/](https://www.zephyrproject.org/)
+
+## Why Zephyr?
+
+- Completely open-source RTOS supported by the Linux Foundation
+- Quickly becoming the default RTOS for many embedded device companies (e.g., Nordic Semiconductor)
+- 100% C-based language; CMake build system; Python-based framework (`west`)
+- Online community growing fast
+
+## C Programming Language
+
+- Zephyr is written in C
+- [CMake](https://cmake.org/) build system
+- [West](https://docs.zephyrproject.org/latest/develop/west/index.html) CLI tools
+- We will use an incredibly powerful [Visual Studio Code](https://code.visualstudio.com/) IDE extension pack, [nRF Connect](https://nrfconnect.github.io/vscode-nrf-connect/index.html) developed by Nordic Semiconductor.
+
+## Bare Metal vs. RTOS
+
+- Bare-metal super-loop implementations
+- Realtime Operating System (RTOS)
+- Interupt Service Routines (ISR) / Callbacks
+
+![](images/intro/BareMetalRTOS.png)
+
+# System on a Chip (SoC)
+
+## What is a System on a Chip (SoC)?
+
+- CPU 
+- Memory (RAM) - quite limited
+- I/O
+- Storage (non-volatile)
+- RF / Communication Protocols
+  - Universal Asynchronous Receiver-Transmitter (UART)
+  - Inter-Integrated Circuit (I2C)
+  - Serial Peripheral Interface (SPI)
+  - Bluetooth Low Energy (BLE)
+
+This is in contrast to a motherboard-based personal computer, which uses
+additional discrete components or expansion / peripheral cards.
+
+## Nordic nRF52833 Development Kit (DK)
+
+![](images/intro/nRF52833DK.png)
+
+[https://youtu.be/KOWo9P1qdfk](https://youtu.be/KOWo9P1qdfk)
