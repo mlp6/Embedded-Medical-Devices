@@ -29,6 +29,8 @@ website:
         - text: Panopto
         - href: software-install-tutorials.qmd
           text: "Software Installation & Tutorials"
+        - href: faq.qmd
+          text: FAQ
       - section: Learning Modules
         contents:
         - section: "Introduction to Zephyr & Nordic SoCs"
