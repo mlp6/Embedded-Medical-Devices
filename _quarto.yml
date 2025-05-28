@@ -35,13 +35,13 @@ website:
             text: Slides
           - href: slides/git-fundamentals-notes.html
             text: Notes
-        - section: "Zephyr: Analog-to-Digital Conversion (ADC)"
+        - section: "Analog-to-Digital Conversion (ADC)"
           contents:
           - href: slides/zephyr-adc-slides.html
             text: Slides
           - href: slides/zephyr-adc-notes.html
             text: Notes
-        - section: "Zephyr: Pulse Width Modulation (PWM)"
+        - section: "Pulse Width Modulation (PWM)"
           contents:
           - href: slides/zephyr-pwm-slides.html
             text: Slides
