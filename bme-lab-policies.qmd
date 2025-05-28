@@ -22,8 +22,8 @@ Occupational and Environmental Safety Office’s:
 -   [Fire/Life Safety](https://sms.duhs.duke.edu/OnlineTraining/FS200W/), and 
 -   [Laboratory Safety-General](https://sms.duhs.duke.edu/OnlineTraining/LABS/)
 
-training modules. We know that you may have done this training before,
-but it expires in one year, and you must be current through the end of the semester.
+training modules. We know that you may have done this training before, but it
+expires in one year, and you must be current through the end of the semester.
 
 Most accidents are the result of a series of failures. That said, most accidents
 are preventable. You are responsible for your safety and the safety of those
@@ -39,20 +39,19 @@ team.
 :::
 
 ::: callout-important
-If you or someone else in lab needs immediate medical attention, call 911 from
-the phone in the hallway. 
+If you or someone else in lab needs immediate medical attention, call 911. 
 :::
 In case you need to report your location, you are in CIEMAS B209.  Non-emergent
 problems, call 681-WELL (681-9355). If you are injured in lab, you must let an
-instructor or Matt Brown know as soon as possible. Matt’s after-hours phone
-number is on the contact cards posted outside every lab door.
+instructor/TA/lab staff member know as soon as possible. Lab staff after-hours
+phone number is on the contact cards posted outside every lab door.
 
 ::: callout-note
 Keep these points in mind...
 -    In an emergency, call 911. Location: CIEMAS B209
 
 -    In the event of a non-emergent injury, seek medical attention and let an
-instructor or Matt know within 12 hours.
+instructor/TA/lab staff know within 12 hours.
 
 -    Find the emergency exits.
 
@@ -60,7 +59,7 @@ instructor or Matt know within 12 hours.
 each other.
 
 -    Inspect every tool before use. Remove broken tools from service, place them
-on the broken tools shelf at the back of the room, and notify Matt. 
+on the broken tools shelf at the back of the room, and notify lab staff. 
 
 -    Wear safety glasses when appropriate. This includes, but is not limited to,
 activities such as soldering, sanding, filing, hammering, cutting, and drilling.
@@ -81,18 +80,9 @@ available.
 -    Don’t force anything. If the job requires significant force, you’re doing it
 wrong.
 
--    Keep lab work in the lab. The corridor and conference table is NOT for lab
-work.
-
--    Chairs and stools with soft surfaces are not for use in lab. They must stay
-in the hallway.
-
 -    Keep food and drink out of the lab!
 
 -    Power down equipment when finished with it.
-
--    An emergency phone is located in the hallway, near the door to the teaching
-lab, 5702.
 
 -    A fire extinguisher is outside the door. 
 
@@ -104,24 +94,25 @@ container.
 -    Anything contaminated with solder paste (wipes, boards, applicators) goes in
 a “Solder Scrap” container.
 
--    Other hazardous waste dealt with on a case by case basis. See Matt for help.
+-    Other hazardous waste dealt with on a case by case basis; ask lab staff for
+help.
 
 -    Put tools away, in the right place. Tool drawers are labeled, but if you’re
-unsure where to put a tool, ask Matt.
+unsure where to put a tool, ask your TA/lab staff.
 
 -    Do not hoard parts or tools.
 
 -    This bears repeating: Take the parts you need, but only the parts you need.
-Do not hoard parts. If you see a part becoming scarce, let Matt know so he can
-re-order.
+Do not hoard parts. If you see a part becoming scarce, let lab staff know so
+they can re-order.
 
 -    Benches are for temporary use only. Leave no trace that you were at the
 bench when you leave for the day. Rarely, with approval, a bench can be claimed
 for the semester.
 
--    Any and all paint must be pre-approved by an instructor or Matt. Unapproved
-paint on projects will result in a lower grade. (Spray paint is almost never
-approved.)
+-    Any and all paint must be pre-approved by an instructor/TA/lab staff.
+Unapproved paint on projects will result in a lower grade. (Spray paint indoors
+is never approved.)
 
 -    A representative from your group is expected to participate in weekly
 cleaning. Your instructor will give you the schedule.
@@ -129,7 +120,7 @@ cleaning. Your instructor will give you the schedule.
 -    Place a cover on the bench for messy work. Chucks and Ram Board are
 available for this.
 
--    Matt protects a collection of good soldering tips and fine tools (e.g.
+-    Lab staff have a collection of good soldering tips and fine tools (e.g.
 tweezers). If you have need for something better than you can find in lab, ask
-Matt. 
+lab staff.
 :::
