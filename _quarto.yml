@@ -23,6 +23,10 @@ website:
           text: Course Syllabus
         - href: bme-lab-policies.qmd
           text: "BME Lab Policies"
+        - text: Ed Discussion
+        - text: Canvas
+        - text: Gradescope
+        - text: Panopto
       - section: Learning Modules
         contents:
         - section: "Zephyr: Analog-to-Digital Conversion (ADC)"
