@@ -10,22 +10,21 @@ format:
 
 ### Instructor
 
-Dr. Mark Palmeri
+Dr. Mark Palmeri (`mlp6`)
 
-* [Teams](https://teams.microsoft.com) chat is the best way to reach me
-* Email (slower): [mark.palmeri@duke.edu](mailto:mark.palmeri@duke.edu)
-* Duke GitLab username: [mlp6](https://gitlab.oit.duke.edu/mlp6)
-* Office: 258 Hudson Hall Annex
-* Office Hours: https://calendly.com/mark-palmeri
+* Email: [mark.palmeri@duke.edu](mailto:mark.palmeri@duke.edu)
+* Ed Discussion (private message, TAs included)
+* Office Hours: TBD (258 Hudson Hall Annex)
 
 ### Teaching Assistants
 
 * Ceci Schmidz (`cls157`)
-* Harvey Shi (`hys3`)
-* Pranav Mukund (`ppm14`)
+* TBD
 
-*Questions that can be answered by Dr. Palmeri or a teaching assistant should be
-posted on Ed Discussion.*
+::: callout-tip
+Questions that can be answered by Dr. Palmeri or a teaching assistant should be
+posted on Ed Discussion.
+:::
 
 ## Course Times & Locations
 
@@ -35,17 +34,31 @@ Monday & Wednesday, 08:30-09:45, Wilkinson 136 (Panopto recorded)
 
 ### Labs
 
-* Thursday, 08:30-10:00, Fitzpatrick B209
-* Friday, 08:30-10:00, Fitzpatrick B209
-* Friday, 10:00-11:30, Fitzpatrick B209
-* B209 Door Code: 4-1-5-2
-* ⚠️ No food or drink is allowed in the lab! ⚠️  Failure to adhere to this policy will have consequences on your lab participation.
+There are no formally scheduled lab sections, but you will need to use the lab
+equipment to perform testing of your devices.  Your TAs will announce times when
+they will hold lab hours.  Otherwise, the lab is open to you to use on your
+schedule when classes are not scheduled in that room.
 
-*Note - you can attend any/multiple of the lab sections.*
+::: callout-warning
+No food or drink is allowed in the lab!  Failure to adhere to this policy will
+have consequences on your lab grades.
+:::
+
+::: callout-important
+Please review the [lab policies](bme-lab-policies.qmd) before using the lab for
+the first time this semester.
+:::
+
+::: callout-note
+B209 Door Code: 4-1-5-2
+:::
 
 ## Course Objectives
 
-This course will give students experience with the design, function and deployment of embedded medical devices.  Students will have hands on experience with electronic hardware and firmware (software) development, along with gaining experience with biosignal transduction into circuits.
+This course will give students experience with the design, function and
+deployment of embedded medical devices.  Students will have hands on experience
+with electronic hardware and firmware (software) development, along with gaining
+experience with biosignal transduction into circuits.
 
 Upon completion of this course, students should be able to:
 
@@ -73,8 +86,8 @@ Upon completion of this course, students should be able to:
 ## Learning Management System
 
 We will be using [Canvas](https://canvas.duke.edu) as the learning management
-system for this course.  It will host the syllabus, which will have hyperlinks
-to all lecture content and lab assignments.
+system for this course.  Most resources will be linked to the course website.
+All grades will be posted via Canvas/Gradescope.
 
 Duke's [GitLab](https://gitlab.oit.duke.edu) server will be used for most course
 lab exercises, and code-related questions will be submitted to Dr. Palmeri / TAs
@@ -84,9 +97,15 @@ Ed Discussion will be used for general course questions and discussion.
 
 ## Class Schedule
 
-This class is organized in a sequence of modules.  Specific details surrounding dates for assignments associated with each module will be posted to Gradescope and linked below.
+This class is organized in a sequence of modules.  Specific details surrounding
+dates for assignments associated with each module will be posted to Gradescope
+and linked below.
 
-This course uses a version of [Mastery Learning](https://en.wikipedia.org/wiki/Mastery_learning), where "mastery" of a given module is necessary to progress onto the subsequent module. Quizzes are used to evaluate "knowledge"; lab exercises are used to demonstrate application of skills.  In this course, assignments of later modules depends on the successful completion of earlier modules.
+This course uses a version of [Mastery Learning](https://en.wikipedia.org/wiki/Mastery_learning), where "mastery" of a
+given module is necessary to progress onto the subsequent module. Quizzes are
+used to evaluate "knowledge"; lab exercises are used to demonstrate application
+of skills.  In this course, assignments of later modules depends on the
+successful completion of earlier modules.
 
 ### Learning Module Schedule
 
@@ -99,13 +118,19 @@ This course uses a version of [Mastery Learning](https://en.wikipedia.org/wiki/M
 
 ## Attendance & Participation
 
-Class participation in both lecture and lab time is strongly encouraged.  Lecture will be used to provide skill overview and live demonstrations, many of while will kickstart your efforts for your project.  Lab time will provide you access to equipment and the TAs for assistance.
+Class participation in lecture and utilize lab time with your TAs is strongly
+encouraged.  Lecture will be used to provide skill overview and live
+demonstrations, many of while will kickstart your efforts for your project.  Lab
+time will provide you access to equipment and the TAs for assistance.
 
-Students are responsible for obtaining missed lecture content from other students in the class.  All lecture slides/presented content will be made availabe online (Canvas/Gitlab), and lectures will be recorded via Panopto and posted to Canvas.
+Students are responsible for obtaining missed lecture content from other
+students in the class.  All lecture slides/presented content will be made
+availabe online (Canvas/Gitlab), and lectures will be recorded via Panopto and
+posted to Canvas.
 
 Participation on Ed Discussion is also encouraged, in the form of:
 
-* Asking questions about the course material (ideally, publicly, so that others * can benefit (Anonymous okay))
+* Asking questions about the course material (ideally, publicly, so that others can benefit (Anonymous okay))
 * Answering questions from other students
 * Sharing interesting articles or resources related to the course material
 
@@ -113,42 +138,87 @@ Participation on Ed Discussion is also encouraged, in the form of:
 
 ### Grading
 
-There will be quizzes, lab exercises, and completion surveys associated with some of the learning modules (25%), all of which will be submitted through Gradescope.  All of the learning modules will contribute to the final project and the associated technical report (75%).
+Fundamental knowledge will be assessed with online quizzes (~30%).
 
-All assignment grades will be posted to Gradescope (and linked to the Canvas gradebook) throughout the semester to track your performance.
+Lab exercises will focus on implementing key functionality towards the final
+working device (a wireless ECG and temperature sensor).  Each lab exercise will
+be evaluated with code reviews and technical reports that assess functionality
+(~50%).
+
+Testing of the final working device will be presented in a final technical
+report (~20%).
+
+All assignment grades will be posted to Gradescope (and linked to the Canvas
+gradebook) throughout the semester to track your performance.
 
 ### Course Grade
 
-This course is not "curved" (i.e., a distribution of grades will not be enforced), and a traditional grading scheme will be used (e.g., 90-93 = A-, 94-97 = A, 97-100 = A+).  Participation throughout the semester will influence rounding up/down for fractional grades.
+This course is not "curved" (i.e., a distribution of grades will not be
+enforced), and a traditional grading scheme will be used (e.g., 90-93 = A-,
+94-97 = A, 97-100 = A+).  Participation throughout the semester will influence
+rounding up/down for fractional grades.
 
 Failing the course can happen with a cummulative score $<$ 70 (C-).
 
 ### Regrades
 
-Any regrading requests need to be made **within one week of grades for a given assignment being released**. You must make the request via Gradescope and provide a description of why you feel a regrade is appropriate. Requesting a regrade could lead to additional loss of credit when an assignment is re-evaluated.
+Any regrading requests need to be made **within one week of grades for a given
+assignment being released**. You must make the request via Gradescope and
+provide a description of why you feel a regrade is appropriate. Requesting a
+regrade could lead to additional loss of credit when an assignment is
+re-evaluated.
 
-Some assignments will have an opportunity to be resubmitted based on grading feedback at the discretion of Dr. Palmeri.
+Some assignments will have an opportunity to be resubmitted based on grading
+feedback at the discretion of Dr. Palmeri.
 
 ### Late Policy / SDAO Accomodations
 
-Late submission windows will be available for all assignments, minus the final project, and should be used to accomodate acute illness, travel, high workload from other classes and other unforeseen circumstances.  This late submission window can be utilized without penalty and without prior approval.
+Late submission windows will be available for all assignments, minus the final
+project, and should be used to accomodate acute illness, travel, high workload
+from other classes and other unforeseen circumstances.  This late submission
+window can be utilized without penalty and without prior approval.
 
-Students with SDAO accomodations for extended time on assignments can use this extended late submission window for all assignments.
+Students with SDAO accomodations for extended time on assignments can use this
+extended late submission window for all assignments.
 
-Any assignments submitted after the late submission window will only be accepted for partial credit at the discretion of Dr. Palmeri or if prior approval was sought **before the original due date**.
+Any assignments submitted after the late submission window will only be accepted
+for partial credit at the discretion of Dr. Palmeri or if prior approval was
+sought **before the original due date**.
 
 ## Duke Community Standard
 
-All students are expected to adhere to all principles of the [Duke Community Standard](https://trinity.duke.edu/undergraduate/academic-policies/community-standard-student-conduct). Violations of the Duke Community Standard will be referred immediately to the Office of Student Conduct. Please do not hesitate to talk with Dr. Palmeri about any situations involving academic honor, especially if it is ambiguous what should be done.
+All students are expected to adhere to all principles of the 
+[Duke Community Standard](https://trinity.duke.edu/undergraduate/academic-policies/community-standard-student-conduct).
+Violations of the Duke Community Standard will be referred immediately to the
+Office of Student Conduct. Please do not hesitate to talk with Dr. Palmeri about
+any situations involving academic honor, especially if it is ambiguous what
+should be done.
 
 ## FAQ
 
 ### Can I collaborate with other students?
 
-Engineering is inherently a collaborative field, and in this class, you are encouraged to work collaboratively on your projects.  That being said, all of the work that you submit must be generated by you and reflect your understanding of the material. **All resources used in your projects that were developed by another person or company must be properly acknowledged using comments in your code and lab reports.**
+Engineering is inherently a collaborative field, and in this class, you are
+encouraged to work collaboratively on your projects.  That being said, all of
+the work that you submit must be generated by you and reflect your understanding
+of the material. 
+
+::: callout-important
+All resources used in your projects that were developed by another person or
+company must be properly acknowledged using comments in your code and lab
+reports.
+:::
 
 ### Can I use AI?
 
-The use of artificial intelligence is a rapidly developing resource / tool in engineering.  In software development, there are many levels of AI-assitance available.  Such form of assistance include the [IntelliCode](https://visualstudio.microsoft.com/services/intellicode/) tools and [GitHub CoPilot](https://github.com/features/copilot) (free to students through the [GitHub Education](https://github.com/education/students) program).  These tools can be leveraged to help with syntax.  **You are, however, strongly cautioned to not rely on these tools for logical implementation.**
+The use of artificial intelligence is a rapidly developing resource / tool in
+engineering.  In software development, there are many levels of AI-assitance
+available.  Such form of assistance include the
+[IntelliCode](https://visualstudio.microsoft.com/services/intellicode/) tools
+and [GitHub CoPilot](https://github.com/features/copilot) (free to students
+through the [GitHub Education](https://github.com/education/students) program).
+These tools can be leveraged to help with syntax.  
 
-<p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://gitlab.oit.duke.edu/mlp6/Embedded-Medical-Devices/">Embedded Medical Devices</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://bme.duke.edu/faculty/mark-palmeri">Mark L. Palmeri</a> is licensed under <a href="http://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"></a></p>
+::: callout-caution
+You are strongly cautioned to not rely on these tools for logical implementation.
+:::
