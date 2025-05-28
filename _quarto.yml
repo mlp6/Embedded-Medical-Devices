@@ -47,6 +47,12 @@ website:
             text: Slides
           - href: slides/zephyr-pwm-notes.html
             text: Notes
+        - section: "Bluetooth Low Energy (BLE)"
+          contents:
+          - href: slides/zephyr-ble-slides.html
+            text: Slides
+          - href: slides/zephyr-ble-notes.html
+            text: Notes
 
     page-footer:
       right: 'This page is built with [Quarto](https://quarto.org/).'
