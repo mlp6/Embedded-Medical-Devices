@@ -29,6 +29,12 @@ website:
         - text: Panopto
       - section: Learning Modules
         contents:
+        - section: "Git Fundamentals"
+          contents:
+          - href: slides/git-fundamentals-slides.html
+            text: Slides
+          - href: slides/git-fundamentals-notes.html
+            text: Notes
         - section: "Zephyr: Analog-to-Digital Conversion (ADC)"
           contents:
           - href: slides/zephyr-adc-slides.html
