@@ -1,7 +1,7 @@
 ---
 title: "Zephyr: Analog-to-Digital Conversion"
-subtitle: "Lecture 01"
-date: "2025-09-01"
+subtitle: "Fall 2025"
+date: "2025-XX-XX"
 format: 
   live-html: 
     output-file: zephyr-adc-notes.html

@@ -35,6 +35,12 @@ website:
             text: Slides
           - href: slides/zephyr-adc-notes.html
             text: Notes
+        - section: "Zephyr: Pulse Width Modulation (PWM)"
+          contents:
+          - href: slides/zephyr-pwm-slides.html
+            text: Slides
+          - href: slides/zephyr-pwm-notes.html
+            text: Notes
 
     page-footer:
       right: 'This page is built with [Quarto](https://quarto.org/).'
