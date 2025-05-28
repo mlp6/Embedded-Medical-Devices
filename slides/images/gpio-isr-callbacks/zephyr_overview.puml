@@ -1,0 +1,24 @@
+@startuml
+
+prj.conf: CONFIG_GPIO=y
+note bottom of prj.conf : This enables gpio.h to be included
+
+nrf52833dk_nrf52833.overlay:
+nrf52833dk_nrf52833.overlay: Enable the GPIO ports/pins
+nrf52833dk_nrf52833.overlay: Create aliases
+
+state main.c {
+Preamble: Create GPIO struct from DT alias
+Preamble: Declare and define callback function
+state "main()" as main {
+    state "Configure port & pin" as config:
+        config: Check GPIO port is ready
+        config: Configure/initialize GPIO pin
+    state "Associate GPIO pin with ISR/CB" as isrcb:
+        isrcb: Attach interrupt to pin
+        isrcb: Declare and initialize callback function
+        isrcb: Activate (add) the callback
+}
+}
+
+@enduml

@@ -41,6 +41,12 @@ website:
             text: Slides
           - href: slides/c-programming-notes.html
             text: Notes
+        - section: "GPIO, ISR, and Callbacks"
+          contents:
+          - href: slides/zephyr-gpio-isr-callbacks-slides.html
+            text: Slides
+          - href: slides/zephyr-gpio--isr-callbacks-notes.html
+            text: Notes
         - section: "Analog-to-Digital Conversion (ADC)"
           contents:
           - href: slides/zephyr-adc-slides.html
