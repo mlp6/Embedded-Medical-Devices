@@ -1,6 +1,5 @@
 ---
 title: Bluetooth Low Energy
-subtitle: "Fall 2025"
 date: 2025-XX-XX
 format:
   live-html: 

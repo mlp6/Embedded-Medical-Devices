@@ -1,6 +1,5 @@
 ---
 title: "Zephyr: Pulse Width Modulation"
-subtitle: "Fall 2025"
 date: "2025-XX-XX"
 format:
   live-html: 

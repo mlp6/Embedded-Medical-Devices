@@ -1,6 +1,5 @@
 ---
 title: Introduction to Zephyr & Nordic SoC
-subtitle: "Fall 2025"
 date: 2025-XX-XX
 format:
   live-html: 

@@ -1,6 +1,6 @@
 ---
-title: "Embedded Medical Devices (BME554L)"
-subtitle: "Fall 2025"
+title: "Embedded Medical Devices"
+subtitle: "BME554L (Fall 2025)"
 format:
   html: default
   pdf: default

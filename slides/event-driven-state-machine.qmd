@@ -1,6 +1,5 @@
 ---
 title: "Event-Driven State Machine"
-subtitle: "Fall 2025"
 date: "2025-XX-XX"
 format:
   live-html: 

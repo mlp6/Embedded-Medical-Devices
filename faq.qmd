@@ -1,6 +1,6 @@
 ---
 title: Frequently Asked Questions
-subtitle: "Fall 2025"
+subtitle: "BME554L (Fall 2025)"
 date: 2025-XX-XX
 format:
   html: default

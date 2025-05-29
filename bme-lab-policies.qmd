@@ -1,6 +1,6 @@
 ---
 title: "BME Lab Procedures and Safety Expectations"
-subtitle: "Fall 2025"
+subtitle: "BME554L (Fall 2025)"
 format:
   html: default
   pdf: default
