@@ -144,9 +144,7 @@ Nordic's I2C implementation is called TWI (Two-Wire Interface).
 - Helper functions exist to convert values (units, struct -> float, etc.)
 - [`sensor_value_to_float()`](https://docs.zephyrproject.org/latest/hardware/peripherals/sensor.html#c.sensor_value_to_float)
 
-## Example Firmware
-
-See [application/](application/) for an example library.
+# Example Firmware
 
 ## Example Connection of MCP9808 Temperature Sensor
 
@@ -166,6 +164,104 @@ See [application/](application/) for an example library.
 :::::
 
 [MCP9808 Temperature Sensor](https://www.adafruit.com/product/1782)
+
+---
+
+### `prf.conf`
+
+```C
+CONFIG_SENSOR=y
+```
+
+### `nrf52833dk_nrf52833.overlay`
+
+```C
+/* I2C Pin Mapping
+SCK: P0.27
+SDA: P0.26
+*/
+&i2c0 {
+    mcp9808@18{
+        compatible = "jedec,jc-42.4-temp";
+        reg = <0x18>;
+        status = "okay";
+    };
+
+};
+```
+
+## ``main.c``
+
+```C
+#include <zephyr/kernel.h>
+#include <zephyr/device.h>
+#include <zephyr/logging/log.h>
+#include <zephyr/drivers/sensor.h>  // prf.conf -> CONFIG_SENSOR=y
+#define MEASUREMENT_DELAY_MS 1000 
+LOG_MODULE_REGISTER(main, LOG_LEVEL_DBG);
+
+int read_temperature_sensor(const struct device *temp_sensor, float *temperature_degC);
+
+// the microchip,mcp9808 cannot be accessed in the DT by alias
+// instead, have to directly access the node name, with comma replaced by underscore
+const struct device *const temp_sensor = DEVICE_DT_GET_ONE(jedec_jc_42_4_temp);
+
+static float temperature_degC;
+
+int main(void) {
+ 
+    int ret;
+ 
+	if (!device_is_ready(temp_sensor)) {
+		LOG_ERR("Temperature sensor %s is not ready", temp_sensor->name);
+		return -1;
+	}
+    else {
+        LOG_INF("Temperature sensor %s is ready", temp_sensor->name);
+    }
+    // read the temperature every MEASUREMENT_DELAY_MS
+    while (1) {
+        ret = read_temperature_sensor(temp_sensor, &temperature_degC);
+        if (ret != 0) {
+            LOG_ERR("There was a problem reading the temperature sensor (%d)", ret);
+            return ret;
+        }
+        LOG_INF("Temperature: %f", (double)temperature_degC);
+        k_msleep(MEASUREMENT_DELAY_MS);
+    }
+    return 0;
+}
+int read_temperature_sensor(const struct device *temp_sensor, float *temperature_degC) {
+    /*  Fetch-n-get temperature sensor data
+        INPUTS:
+            temp_sensor (const struct device *) - temperature sensor device
+            temperature_degC (float *) - pointer to store temperature in degrees Celsius
+        RETURNS:
+            0 - success
+            Otherwise, error code
+    */
+    struct sensor_value sensor_vals = {.val1 = 0, .val2 = 0};
+    int err = sensor_sample_fetch(temp_sensor);
+    if (err != 0) {
+        LOG_ERR("Temperature sensor fetch(): %d", err);
+        return err;
+    }
+    else {
+        // sensor channels: https://docs.zephyrproject.org/latest/doxygen/html/group__sensor__interface.html#gaaa1b502bc029b10d7b23b0a25ef4e934
+
+        err = sensor_channel_get(temp_sensor, SENSOR_CHAN_AMBIENT_TEMP, &sensor_vals);
+        if (err != 0) {
+            LOG_ERR("Temperature sensor get(): %d", err);
+            return err;
+        }
+    }
+        
+        // data returned in kPa
+        *temperature_degC = sensor_value_to_float(&sensor_vals);
+        LOG_INF("Temperature (deg C): %f", (double)*temperature_degC);
+        return 0;
+}
+```
 
 ## Resources
 
