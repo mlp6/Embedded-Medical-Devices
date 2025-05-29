@@ -1,4 +1,4 @@
-<a href="https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/Embedded-Medical-Devices/-/commits/main"><img alt="pipeline status" src="https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/Embedded-Medical-Devices/badges/main/pipeline.svg" /></a>
+[![pipeline status](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/Embedded-Medical-Devices/badges/main/pipeline.svg)](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/Embedded-Medical-Devices/-/commits/main) 
 
 # Embedded Medical Devices (BME554L)
 
