@@ -2,7 +2,6 @@
 
 # Embedded Medical Devices (BME554L)
 
-<!-- TODO: Fix this link -->
-Course Website: https://mlp6.github.io/Embedded-Medical-Devices/
+Course Website: https://embeddedmedicaldevices.pages.oit.duke.edu/Embedded-Medical-Devices/
 
 Credit: Inspired by https://sta199-f24.github.io/
