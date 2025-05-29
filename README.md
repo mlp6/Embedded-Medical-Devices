@@ -2,6 +2,8 @@
 
 # Embedded Medical Devices (BME554L)
 
-Course Website: https://embeddedmedicaldevices.pages.oit.duke.edu/Embedded-Medical-Devices/
+## Course Website
 
-Credit: Inspired by https://sta199-f24.github.io/
+https://embeddedmedicaldevices.pages.oit.duke.edu/Embedded-Medical-Devices/
+
+*Credit: Inspired by https://sta199-f24.github.io/*
