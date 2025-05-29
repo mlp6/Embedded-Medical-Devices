@@ -9,7 +9,8 @@ variables:
 
 before_script:
   - quarto install tinytex
-  - apt install libfontconfig1
+  - apt-get update
+  - apt-get install -y libfontconfig1
   - quarto check install
 
 build_site:
