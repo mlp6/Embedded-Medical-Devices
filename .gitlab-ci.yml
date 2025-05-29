@@ -1,0 +1,29 @@
+image: ghcr.io/quarto-dev/quarto:latest
+
+stages:
+  - build
+  - deploy
+
+variables:
+  QUARTO_PUB_DIR: _site
+
+before_script:
+  - quarto check install
+
+build_site:
+  stage: build
+  script:
+    - quarto render
+  artifacts:
+    paths:
+      - $QUARTO_PUB_DIR
+
+pages:
+  stage: deploy
+  script:
+    - mv $QUARTO_PUB_DIR public
+  artifacts:
+    paths:
+      - public
+  only:
+    - main
