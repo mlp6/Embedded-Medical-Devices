@@ -4,7 +4,7 @@ subtitle: "Fall 2025"
 date: 2025-XX-XX
 format:
   live-html: 
-    output-file: zephyr-ble-notes.html
+    output-file: zephyr-ble.html
   live-revealjs: 
     output-file: zephyr-ble-slides.html
 ---

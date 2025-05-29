@@ -4,7 +4,7 @@ subtitle: "Fall 2025"
 date: 2025-XX-XX
 format:
   live-html: 
-    output-file: zephyr-gpio-isr-callbacks-notes.html
+    output-file: zephyr-gpio-isr-callbacks.html
   live-revealjs: 
     output-file: zephyr-gpio-isr-callbacks-slides.html
 ---

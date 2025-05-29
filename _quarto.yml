@@ -33,48 +33,22 @@ website:
           text: FAQ
       - section: Learning Modules
         contents:
-        - section: "Introduction to Zephyr & Nordic SoCs"
-          contents:
-          - href: slides/zephyr-nrf52833dk-intro-slides.html
-            text: Slides
-          - href: slides/zephyr-nrf52833dk-intro-notes.html
-            text: Notes
-        - section: "Git Fundamentals"
-          contents:
-          - href: slides/git-fundamentals-slides.html
-            text: Slides
-          - href: slides/git-fundamentals-notes.html
-            text: Notes
-        - section: "C Programming"
-          contents:
-          - href: slides/c-programming-slides.html
-            text: Slides
-          - href: slides/c-programming-notes.html
-            text: Notes
-        - section: "GPIO, ISR, and Callbacks"
-          contents:
-          - href: slides/zephyr-gpio-isr-callbacks-slides.html
-            text: Slides
-          - href: slides/zephyr-gpio--isr-callbacks-notes.html
-            text: Notes
-        - section: "Analog-to-Digital Conversion (ADC)"
-          contents:
-          - href: slides/zephyr-adc-slides.html
-            text: Slides
-          - href: slides/zephyr-adc-notes.html
-            text: Notes
-        - section: "Pulse Width Modulation (PWM)"
-          contents:
-          - href: slides/zephyr-pwm-slides.html
-            text: Slides
-          - href: slides/zephyr-pwm-notes.html
-            text: Notes
-        - section: "Bluetooth Low Energy (BLE)"
-          contents:
-          - href: slides/zephyr-ble-slides.html
-            text: Slides
-          - href: slides/zephyr-ble-notes.html
-            text: Notes
+        - href: slides/zephyr-nrf52833dk-intro.qmd
+          text: "Introduction to Zephyr & Nordic SoCs"
+        - href: slides/git-fundamentals.qmd
+          text: "Git Fundamentals"
+        - href: slides/c-programming.qmd
+          text: "C Programming"
+        - href: slides/zephyr-gpio-isr-callbacks.qmd
+          text: "GPIO, ISR, and Callbacks"
+        - href: slides/zephyr-adc.qmd
+          text: "Analog-to-Digital Conversion (ADC)"
+        - href: slides/zephyr-pwm.qmd
+          text: "Pulse Width Modulation (PWM)"
+        - href: slides/zephyr-serial-communication.qmd
+          text: "Serial Communication (UART, I2C, SPI)"
+        - href: slides/zephyr-ble.qmd
+          text: "Bluetooth Low Energy (BLE)"
 
     page-footer:
       right: 'This page is built with [Quarto](https://quarto.org/).'

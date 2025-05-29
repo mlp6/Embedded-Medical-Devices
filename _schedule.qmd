@@ -1,7 +1,6 @@
-<!-- TODO: update old GitLab links to new GitHub links -->
 | Module | Materials | Assessment  |
 | --- | --- | --- |
-| Zephyr \& Nordic SoC Overview | [Lecture Notes & Slides](slides/zephyr-gpio-isr-callbacks.qmd) | [Completion Survey](https://www.gradescope.com/courses/941957/assignments/5544155) <br> [Software Installs & Tutorials](software-install-tutorials.qmd) |
+| Zephyr \& Nordic SoC Overview | [Lecture Notes & Slides](slides/zephyr-gpio-isr-callbacks.qmd) | [Completion Survey](https://www.gradescope.com/courses/941957/assignments/5544155) (Due: TBD) <br> [Software Installs & Tutorials](software-install-tutorials.qmd) (Due: TBD) |
 | [Event-Driven State Machine](https://embeddedmedicaldevices.pages.oit.duke.edu/event-driven-state-machine/EventDrivenStateMachine.html) | [Wireless HRM](https://www.gradescope.com/courses/941957/assignments/5548632) | [Event-Driven State Machine Lab](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/event-driven-state-machine/-/blob/main/lab/EventDriveStateMachineLab.md?ref_type=heads) |
 | Version Control (`git`) | [Lecture Notes & Slides](slides/git-fundamentals.qmd) | [Git Fundamentals Quiz](https://www.gradescope.com/courses/941957/assignments/5583313) <br> [Git Fundamentals Lab](https://gitlab.oit.duke.edu/kits/BME-554L-001-Sp25/git-fundamentals-lab) |
 | C Programming | [Lecture Notes & Slides](slides/c-programming.qmd) | [C Programming Quiz](https://www.gradescope.com/courses/941957/assignments/5671363) <br> [C Programming Lab](https://gitlab.oit.duke.edu/kits/BME-554L-001-Sp25/c-programming-lab) <br> [C Programming Lab](https://www.gradescope.com/courses/941957/assignments/5672751) | |
