@@ -55,6 +55,8 @@ website:
         contents:
         - href: labs/event-driven-state-machine-lab.qmd
           text: "Event-Driven State Machine Lab"
+        - href: labs/zephyr-gpio-isr-callbacks-lab.qmd
+          text: "GPIO, ISR, and Callbacks Lab"
 
     page-footer:
       right: 'This page is built with [Quarto](https://quarto.org/).'
