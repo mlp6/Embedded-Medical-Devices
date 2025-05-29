@@ -8,6 +8,7 @@ variables:
   QUARTO_PUB_DIR: _site
 
 before_script:
+  - quarto install tinytex
   - quarto check install
 
 build_site:
