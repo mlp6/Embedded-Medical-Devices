@@ -7,14 +7,13 @@ stages:
 variables:
   QUARTO_PUB_DIR: _site
 
-before_script:
-  - apt-get update
-  - apt-get install -y libcurl4-openssl-dev libudunits2-dev libproj-dev libgdal-dev libgeos-dev libharfbuzz-dev libfribidi-dev 
-  - quarto install tinytex
-  - quarto check install
-
 build_site:
   stage: build
+  before_script:
+    - apt-get update
+    - apt-get install -y libcurl4-openssl-dev libudunits2-dev libproj-dev libgdal-dev libgeos-dev libharfbuzz-dev libfribidi-dev 
+    - quarto install tinytex
+    - quarto check install 
   script:
     - quarto render
   artifacts:
