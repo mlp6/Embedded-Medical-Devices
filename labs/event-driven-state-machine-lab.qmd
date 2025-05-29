@@ -1,0 +1,36 @@
+---
+title: "Event Driven State Machine Lab"
+subtitle: "BME554L (Fall 2025)"
+format:
+  html: default
+  pdf: default
+---
+
+<!-- TODO: change this to something simpler -->
+## Wireless Heart Rate Monitor State Diagram
+
+* Generate a state diagram for a wristwatch-based heart rate monitor that sends "instantaneous" heart rate data to a smartphone.
+  * ✔️ I would recommend doing this with pencil and paper first, not immediately jumping into a tool.
+  * Err on the side of more detail than not.
+* Make sure that your state diagram:
+  * Has start and termination dots.
+  * Includes all functional states, including (but not limited to):
+    * `Init`
+    * `Idle`
+    * `Measuring`
+    * `Transmitting`
+    * `Error`
+  * Consider if states should have entry and exit actions.
+  * Make sure all transitions between states are annotated with associated triggering events.
+
+## Generate the State Diagram
+
+* Formally render your state diagram using either:
+  * [PlantUML](https://plantuml.com/) (the tool shown in lecture)
+  * [Mermaid](https://mermaid.js.org/)
+  * [draw.io](https://www.draw.io/)
+  * [Lucidchart](https://www.lucidchart.com/)
+
+## Gradescope
+
+* Upload your rendered state diagram to the associated Gradescope assignment.

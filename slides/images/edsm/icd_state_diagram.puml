@@ -1,0 +1,43 @@
+@startuml
+
+[*] -> Init
+
+state Init {
+    init_run: Do Stuff
+}
+
+state RhythmDetect {
+    rhythm_detect_run: Detect Rhythm
+}
+
+state Sleep {
+    sleep_run: Save Power
+}
+
+state Pace {
+    pace_run: Pace
+}
+
+state OTA {
+    ota_init: Download Update
+    ota_init -> ota_run
+    ota_run: Over The Air Update
+    ota_run -> ota_exit
+    ota_exit: Post Successful OTA
+}
+
+state Error {
+    error_run: Put device into safe mode
+}
+
+Init -> RhythmDetect : Successful Init
+Init -d-> Error : Init Fault Error Code
+RhythmDetect -> Pace : Arrhythmia Detected
+Pace -> RhythmDetect : Pacing Timer Expired
+RhythmDetect -d-> Sleep : NSR
+Sleep -> RhythmDetect: Sleep Timer Expired
+Sleep -> OTA : OTA Button Pressed
+OTA -> RhythmDetect : OTA Success Kernel Event Posted
+Error -> [*]
+
+@enduml

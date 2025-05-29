@@ -31,10 +31,12 @@ website:
           text: "Software Installation & Tutorials"
         - href: faq.qmd
           text: FAQ
-      - section: Learning Modules
+      - section: "Learning Modules"
         contents:
         - href: slides/zephyr-nrf52833dk-intro.qmd
           text: "Introduction to Zephyr & Nordic SoCs"
+        - href: slides/event-driven-state-machine.qmd
+          text: "Event-Driven State Machines"
         - href: slides/git-fundamentals.qmd
           text: "Git Fundamentals"
         - href: slides/c-programming.qmd
@@ -49,6 +51,10 @@ website:
           text: "Serial Communication (UART, I2C, SPI)"
         - href: slides/zephyr-ble.qmd
           text: "Bluetooth Low Energy (BLE)"
+      - section: Labs
+        contents:
+        - href: labs/event-driven-state-machine-lab.qmd
+          text: "Event-Driven State Machine Lab"
 
     page-footer:
       right: 'This page is built with [Quarto](https://quarto.org/).'
