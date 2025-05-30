@@ -1,0 +1,11 @@
+name: technical_report
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
+  - numpy
+  - scipy
+  - jupyter
+  - matplotlib
+  - pandas
+  - seaborn

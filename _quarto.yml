@@ -43,8 +43,10 @@ website:
           text: "C Programming"
         - href: slides/zephyr-gpio-isr-callbacks.qmd
           text: "GPIO, ISR, and Callbacks"
+        - href: slides/zephyr-timers.qmd
+          text: "Timers"
         - href: slides/zephyr-smf.qmd
-          text: "Zephyr State Machine Framework (SMF)"
+          text: "State Machine Framework (SMF)"
         - href: slides/zephyr-adc.qmd
           text: "Analog-to-Digital Conversion (ADC)"
         - href: slides/zephyr-pwm.qmd
@@ -60,7 +62,9 @@ website:
         - href: labs/zephyr-gpio-isr-callbacks-lab.qmd
           text: "GPIO, ISR, and Callbacks Lab"
         - href: labs/zephyr-smf-lab.qmd
-          text: "Zephyr State Machine Framework (SMF) Refactor Lab"
+          text: "State Machine Framework (SMF) Refactor Lab"
+        - href: labs/zephyr-timers-lab.qmd
+          text: "Timers Lab"
 
     page-footer:
       right: 'This page is built with [Quarto](https://quarto.org/).'

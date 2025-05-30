@@ -1,0 +1,100 @@
+---
+title: "Zephyr: Timers Lab"
+date: "2025-XX-XX"
+format:
+  html: default
+  pdf: default
+---
+
+## Refactor your GPIO Lab Code
+
+You will be refactoring your code from the GPIO lab to now use timers.  Do all
+of the refactoring below on a new branch called `timers`.
+
+- Eliminate any conditional logic (`if/else` statements) to test for elapsed
+time to toggle/set LED output states.
+- Use timers for all LED illumination events.
+- You do not have to use work queues if your timer handler functions run quickly
+and do not block.  However, if your handler functions are more complex, you
+should use work queues to submit the work to the system work queue.
+
+## Git Version Control
+
+{{< include _ask_for_help.qmd >}}
+
+## Test the Accuracy of your Timing
+
+<!-- TODO: update URL for notebook -->
+For the measurements below, record and analyze your data in the technical report
+Jupyter notebook [timing_analysis.ipynb](testing/timing_analysis.ipynb) that you
+can copy from this repository and add to your GPIO repository in a directory
+named `testing/`.
+
+<!-- TODO: move this information into the notebook (?) -->
+Your report should include:
+
+- Very brief statement of what you did (e.g., how you captured the timing via
+logging or how you measured timing on the oscilloscope).
+- Read in raw data from a file (e.g., a CSV file).  Do *not* manually type in
+data.
+- Relevant analysis / plots / tables of your data, highlighting the 95% CI and
+how it compares to the nominal specification (bias and variance).
+- Brielfy discuss agreement or disagreement with the nominal specification, and
+in the case of disagreement, how you might improve the accuracy and precision of
+your timing.
+
+### Logging Statements
+
+- Use logging statements to test the accuracy of your heartbeat and action LED
+timing for the (a) default, (b) fastest and (c) slowest blink rate of your
+action LEDs.  
+  - Note that logging statements, by default, are low priority and non-blocking
+  (asynchronous).  
+  - Given the latency of when a log message may be printed relative to the event
+  you are trying to get the timing of, you should save the execution time of the
+  timing handler to be log printed later.
+- Save your logging output data to a CSV file to be read into your Jupyter
+notebook.  There is no elegant way to directly save your data to a CSV file
+directly from the Terminal in VS Code.  Two possible approaches:
+  - You can save the entire Terminal output to a file and parse it in your Jupyter notebook, or
+  - You can cut-and-paste the relevant values from the Terminal output to a CSV file.
+- Estimate the 95% confidence interval (2x standard deviation for
+normally-distributed data) for your timing relative to the nominal
+specification.
+
+### Oscilloscope Measurements
+
+- Repeat your timing accuracy analysis you performed with logging statements
+using an oscilloscope directly measuring the GPIO pin signals.  *Remember that
+all of the GPIO pins are accessible as female header sockets on the development
+kit; you do not need to try to directly connect to the pads of the LEDs and
+buttons!*
+- Save your oscilloscope measurements to a CSV file to be read into your Jupyter
+notebook.
+- Use the oscilloscope cursors to measure the timing intervals.  Remember that
+you will need multiple independent measurements to calculate confidence
+intervals.
+- Quantify a 95% confidence interval for your timing relative to the nominal
+specification using these oscillosocpe measurements.
+
+### Discussion
+
+- Answer the Discussion questions posed in the Jupyter notebook.
+
+## How to Ask for Help
+
+{{< include _ask_for_help.qmd >}}
+
+## What to Submit
+
+- Make sure that your complete `timing_analysis.ipynb` notebook is in your
+`timers` branch in a directory called `testing/`, which also includes all raw
+CSV data.
+- Make sure that your Jupyter notebook reads in data from relative paths for the
+repository, **not** absolute paths on your local machine.
+- Push your `timers` branch to GitLab.
+- Create a new Merge Request to merge `timers` into your forked repository's
+`main` branch (NOT THE PARENT REPO `main` BRANCH!).
+- Merge your `timers` branch into your `main` branch, and create an annotated
+tag for that merged commit called `v1.1.0`.
+- Create a new Issue assigned to Dr. Palmeri to request a code review for `v1.1.0`.

@@ -1,0 +1,20 @@
+@startuml
+concise "TIMER" as TIMER
+binary "LED" as LED
+
+@0
+LED is low 
+TIMER is "NOT STARTED"
+
+@2500
+LED is high 
+TIMER is "k_timer_start(4000, K_NO_WAIT)"
+
+@6500
+TIMER is "TIMER STOPS"
+LED is low
+
+@9000
+LED is low
+
+@enduml
