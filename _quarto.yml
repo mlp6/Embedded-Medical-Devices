@@ -57,6 +57,8 @@ website:
           text: "Serial Communication (UART, I2C, SPI)"
         - href: slides/zephyr-ble.qmd
           text: "Bluetooth Low Energy (BLE)"
+        - href: slides/zephyr-vbus.qmd
+          text: "VBUS"
       - section: Labs
         contents:
         - href: labs/event-driven-state-machine-lab.qmd
