@@ -45,6 +45,8 @@ website:
           text: "GPIO, ISR, and Callbacks"
         - href: slides/zephyr-timers.qmd
           text: "Timers"
+        - href: slides/zephyr-threads-events.qmd
+          text: "Threads and Kernel Events"
         - href: slides/zephyr-smf.qmd
           text: "State Machine Framework (SMF)"
         - href: slides/zephyr-adc.qmd

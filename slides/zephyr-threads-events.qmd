@@ -1,0 +1,141 @@
+---
+title: "Zephyr: Threads and Kernel Events"
+date: "2025-XX-XX"
+format: 
+  live-html: 
+    output-file: zephyr-threads-events.html
+  live-revealjs: 
+    output-file: zephyr-threads-events-slides.html
+---
+
+## Threads
+
+- Threads are the basic unit of execution in Zephyr.
+- Threads are scheduled by the kernel.
+- Threads can be in one of three states:
+  - **Ready**: The thread is ready to run.
+  - **Running**: The thread is currently running.
+  - **Blocked**: The thread is waiting for an event to occur.
+
+### We've Already Used Threads
+
+- `Main` thread
+- Kernel timer threads
+
+But we can define our own threads for a variety of purposes!
+
+- Wait for a task to complete, then do something else.
+- Example: Wait for data to save to an SD card, then do something else, but
+don't want the kernel to wait.
+
+## Example Use Case: Heartbeat LED Toggle at 25% Duty Cycle
+
+- This is not as easy to implement with a single kernel timer.
+- But we can use a thread to toggle the LED at 25% duty cycle **and** not hit the kernel to do so:
+
+```C
+/* 1024 byte stack, handler, NULL, NULL, NULL, priority 5, no time slice, no delay */
+K_THREAD_DEFINE(heartbeat_thread_id, 1024, error_thread, NULL, NULL, NULL, 5, 0, 0);
+
+extern void heartbeat_thread(void *, void *, void *) {
+
+    while (1) {
+        k_msleep(250);  // scheduler can run other tasks now
+        gpio_pin_toggle_dt(&heartbeat_led);
+        k_msleep(750); // scheduler can run other tasks now
+        gpio_pin_toggle_dt(&heartbeat_led);
+    } 
+
+}
+```
+
+## Threads vs. Timers
+
+- The thread can have blocking calls (e.g., `k_msleep`) without blocking other threads.
+- The scheduler can run other threads while this thread is sleeping (or yields).
+- The scheduler can preempt the thread at any time with higher priority tasks
+(e.g., ISR callbacks, higher-priority threads).
+- No need for a separate handler function.
+- More difficult to start/stop/reset than a timer.
+- Need explicitly allocated stack space.
+- Difficult to coordinate high-accuracy timing with other tasks/threads.
+
+## Kernel Events
+
+- Kernel events can be used to indicate that "something" has happened, which may
+dictate the function of the state machine.
+  - Button press
+  - Sensor crossing a threshold
+  - Timer expiring
+- Enabled in `prj.conf` with `CONFIG_EVENTS=y`.
+
+## Kernel Event Bit Arrays
+
+- Kernel events are stored in a **bit array** (an array, where each bit (`0/1`)
+indicates (`False/True`) if an event has occured).
+- When an event occurs, it is **posted** (`k_event_post`).
+- A state machine can **wait** (`k_event_wait`) for an event (or events) to occur.
+- Events can be **cleared** (`k_event_clear`) after they are processed.
+
+## Why Kernel Events over Boolean Variables?
+
+- Consume less memory.
+- Easier to pass between threads / functions.
+- Can wait for multiple events to occur without having to conditionally test for
+them.
+
+## How to Define Kernel Events
+
+- Kernel events are defined in a `k_event` structure.
+
+```C
+K_EVENT_DEFINE(temp_events);
+
+#define TEMP_TOO_HIGH_EVENT BIT(0)
+#define TEMP_TOO_LOW_EVENT BIT(1)
+
+// somewhere in your code, you can post an event
+
+k_event_post(&temp_events, TEMP_TOO_HIGH_EVENT);
+```
+
+## Waiting for Events
+
+- With kernel events, we can now implement a thread that waits for an event to
+occur and then changes the state of the state machine.  
+- Threads are started when your firmware is initialized; it does not need to be
+"called" (like a function).
+
+```C
+/* 1024 byte stack, handler, NULL, NULL, NULL, priority 5, no time slice, no delay */
+K_THREAD_DEFINE(temp_too_high_thread_id, 1024, temp_too_high_thread, NULL, NULL, NULL, 5, 0, 0);
+
+extern void temp_too_high_thread(void *, void *, void *) {
+
+    // need to loop to keep the thread running after the first error occurs
+    while (1) {
+        
+        /* &temp_events is a pointer to an event bit array
+           0xF is an example of a bit mask of events in the array to wait for - any, not all
+           true clears all of the events that may have previously been posted before waiting
+           K_FOREVER means wait indefinitely (this could be a finite period of time instead) 
+        */
+        uint32_t events = k_event_wait(&temp_events, 0xF, true, K_FOREVER);
+        // can also define the bit mask as a logical operation of the individual bits
+        // uint32_t events = k_event_wait(&temp_events, TEMP_TOO_HIGH_EVENT | TEMP_TOO_LOW EVENT, true, K_FOREVER);
+        // events is an int representation of the  bit mask of the events that were posted
+
+        // if you want to wait for **ALL** events in the mask, use
+        // k_event_wait_all() instead of k_event_wait()
+
+        LOG_INF("Temperature Event Posted: %d", events); // bit array mask output as an int
+
+        shut_down_system(); // do something in response to the temperature event, like change states
+    }
+}
+```
+
+## Resources
+
+- [Nordic DevAcademy: Zephyr RTOS Advanced](https://academy.nordicsemi.com/courses/nrf-connect-sdk-intermediate/lessons/lesson-1-zephyr-rtos-advanced/)
+- [Zephyr Documentation: Events](https://docs.zephyrproject.org/latest/kernel/services/synchronization/events.html#events)
