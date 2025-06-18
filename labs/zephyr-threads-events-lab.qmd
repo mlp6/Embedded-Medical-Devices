@@ -1,0 +1,76 @@
+---
+title: "Zephyr: Threads & Kernel Events Lab"
+date: "2025-XX-XX"
+format:
+  html: default
+  pdf: default
+---
+## Git Version Control
+
+{{< include _git_best_practices.qmd >}}
+
+## Refactor: Heartbeat LED (25% Duty Cycle)
+
+You will be refactoring your code from the timers lab to use a thread to control
+the heartbeat LED.  Do all of the refactoring below on a new branch called
+`heartbeat_refactor`.
+
+- Refactor your code to use a thread instead of a kernel timer to control the
+heartbeat LED.
+- Instead of having your heartbeat blink at 1 Hz with a 50% duty cycle, change
+it to have a 25% duty cycle (i.e., on for 250 ms, off for 750 ms).
+
+## Test the Accuracy of the Heartbeat LED Timing
+
+- Add a new section to your technical report Jupyter notebook
+[timing_analysis.ipynb](./timers-lab-testing-notebook/timing_analysis.ipynb) that analyzes the
+accuracy of your 25% duty cycle heartbeat LED.
+- Perform these measurements using the oscilloscope.
+- Choose what to measure and how to analyze the data to verify that the
+heartbeat LED thread is working as expected.
+- Discuss the results of your measurements and how they compare to the nominal
+specifications for the heartbeat LED.
+
+## Merge-n-Tag this Refactored Heartbeat LED Code and Analysis
+
+- Make sure that your complete `timing_analysis.ipynb` notebook is in your
+`heartbeat_refactor` branch in a directory called `testing/`, which also includes all raw
+CSV data.
+- Make sure that your Jupyter notebook reads in data from relative paths for the
+repository, **not** absolute paths on your local machine.
+- Push your `heartbeat_refactor` branch to GitLab.
+- Create a new Merge Request to merge `heartbeat_refactor` into your forked
+repository's `main` branch (NOT THE PARENT REPO `main` BRANCH!).
+- Merge your `heartbeat_refactor` branch into your `main` branch, and create an annotated
+tag for that merged commit called `v1.2.0`.
+
+## Refactor: Kernel Events
+
+- Do the following refactoring on a new branch called `kernel_events_refactor`.
+- Refactor all of your code to remove Boolean variables being used in your ISR
+callback functions to indicate that buttons have been pressed to now use kernel
+events in a single bit array called `button_events`.
+- You should use 1 bit for each button, meaning the bit array is 4-bits.
+- Implement a `k_event_wait()` in the appropriate state(s) of your main thread
+to wait for button events to occur.  This will be a blocking wait, meaning the
+`main` thread `while` loop will not be running while waiting for button events.
+
+## Verify that your LED Timing Still Works
+
+- Update your `timing_analysis.ipynb` notebook to include a section that
+verifies that your refactored code still works as expected.
+- It is up to you to now determine how to verify that your LED timing is still working with regard to what data to collect, how to analyze it, and how to present it in your notebook.
+
+## Merge-n-Tag this Refactored Kernel Events Code and Analysis
+
+- Be sure that your complete `timing_analysis.ipynb` notebook and associated raw
+data are committed to your `kernel_events_refactor` branch.
+- Create a Merge Request to merge `kernel_events_refactor` into your `main`
+branch.
+- Merge your `kernel_events_refactor` branch into your `main` branch.
+- Create an annotated tag for that merged commit called `v1.3.0`.
+- Create an Issue assigned to Dr. Palmeri to review your code for both `v1.2.0` and `v1.3.0`.
+
+## How do I ask for help?
+
+{{< include _ask_for_help.qmd >}}

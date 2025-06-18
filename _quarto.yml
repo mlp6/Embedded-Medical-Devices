@@ -67,6 +67,8 @@ website:
           text: "State Machine Framework (SMF) Refactor Lab"
         - href: labs/zephyr-timers-lab.qmd
           text: "Timers Lab"
+        - href: labs/zephyr-threads-events-lab.qmd
+          text: "Threads and Kernel Events Lab"
 
     page-footer:
       right: 'This page is built with [Quarto](https://quarto.org/).'
