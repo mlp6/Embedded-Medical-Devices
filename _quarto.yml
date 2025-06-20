@@ -71,6 +71,10 @@ website:
           text: "Timers Lab"
         - href: labs/zephyr-threads-events-lab.qmd
           text: "Threads and Kernel Events Lab"
+      - section: Resources
+        contents:
+        - href: resources/how-to-generate-ecg-waveforms.qmd
+          text: "How to Generate ECG Waveforms"
 
     page-footer:
       right: 'This page is built with [Quarto](https://quarto.org/).'
