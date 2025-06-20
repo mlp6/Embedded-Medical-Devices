@@ -252,7 +252,15 @@ If multiple states share the same entry / exit routines, they can be grouped int
 
 [https://docs.zephyrproject.org/latest/services/smf/index.html#hierarchical-state-machine-example](https://docs.zephyrproject.org/latest/services/smf/index.html#hierarchical-state-machine-example)
 
+## When to Use Threads vs. States
+
+- The state machine is the foundation of describing the behavior of a system.
+- Threads as a tool to help implement a function of the state machine that is not readily captured by an exclusive state.
+- Threads add overhead and complexity to the system, making debugging more difficult.
+- Threads are not readily captured in a state diagram, but are more commonly described using a sequence diagram.
+
 ## Resources
 
 - [Zephyr Docs: State Machine Framework (SMF)](https://docs.zephyrproject.org/latest/services/smf/index.html)
 - [Zephyr Docs: Events](https://docs.zephyrproject.org/latest/kernel/services/synchronization/events.html#events)
+>
