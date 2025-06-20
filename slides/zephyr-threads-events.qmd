@@ -49,6 +49,13 @@ extern void heartbeat_thread(void *, void *, void *) {
 }
 ```
 
+## How to Suspend/Resume Threads
+
+```C
+k_thread_suspend(heartbeat_thread_id);
+k_thread_resume(heartbeat_thread_id);
+```
+
 ## Threads vs. Timers
 
 - The thread can have blocking calls (e.g., `k_msleep`) without blocking other threads.
