@@ -8,6 +8,8 @@ format:
 
 ## Function/Arbitrary Waveform Generator
 
+This video shows how to generate an ECG waveform using the LeCroy WaveStation 2012.
+
 {{<video controls width="640">
   <source src="ecg-function-generator.mp4" type="video/mp4">
   The video cannot be rendered.
