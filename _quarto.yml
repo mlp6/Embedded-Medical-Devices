@@ -75,6 +75,8 @@ website:
         contents:
         - href: resources/how-to-generate-ecg-waveforms.qmd
           text: "How to Generate ECG Waveforms"
+        - href: resources/debugging.qmd
+          text: "Zephyr: Debugging in VS Code"
 
     page-footer:
       right: 'This page is built with [Quarto](https://quarto.org/).'

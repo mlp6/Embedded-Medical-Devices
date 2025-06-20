@@ -1,0 +1,20 @@
+---
+title: "Zephyr: Debugging in VS Code"
+date: "2025-06-20"
+format:
+  html: default
+  pdf: default
+---
+
+## What is a debugger?
+
+- A debugger is a tool that allows you to step through the code and inspect the state of the program.
+- It allows you to set breakpoints and single-step through the code.
+- It allows you to inspect the values of variables and the call stack.
+- It allows you to set conditional breakpoints.
+- It allows you to watch expressions and variables.
+- It allows you to inspect states and threads.
+
+## Nordic DevAcademy: Debugging
+
+[Nordic: DevAcademy: Debugging](https://academy.nordicsemi.com/courses/nrf-connect-sdk-intermediate/lessons/lesson-2-debugging/)
