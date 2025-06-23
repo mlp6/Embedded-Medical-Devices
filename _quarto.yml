@@ -4,10 +4,10 @@ project:
 website:
   title: "Embedded Medical Devices"
   description: "Duke BME 554L - Fall 2025"
-  site-url: "https://embeddedmedicaldevices.pages.oit.duke.edu/Embedded-Medical-Devices"
+  site-url: "https://mlp6.github.io/Embedded-Medical-Devices/"
   
-  repo-url: "https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/Embedded-Medical-Devices/"
-  repo-actions: [edit, issue]
+  repo-url: "https://github.com/mlp6/Embedded-Medical-Devices/"
+  repo-actions: [issue]
 
   sidebar:
     background: "#2d63ba"
