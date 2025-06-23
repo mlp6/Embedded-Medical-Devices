@@ -1,1 +1,1 @@
-Sitemap: https://embeddedmedicaldevices.pages.oit.duke.edu/Embedded-Medical-Devices/sitemap.xml
+Sitemap: https://mlp6.github.io/Embedded-Medical-Devices/sitemap.xml
