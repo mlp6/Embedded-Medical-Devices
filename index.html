@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Dr.&nbsp;Mark Palmeri, M.D., Ph.D.">
-<meta name="dcterms.date" content="2025-06-20">
 
-<title>C Programming Lab – Embedded Medical Devices</title>
+<title>Embedded Medical Devices</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -25,22 +23,22 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-fced259a1985fd972ecb57c7cd45153f.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-0257a2ca8c5beddb405a1e7854b88b3f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-fced259a1985fd972ecb57c7cd45153f.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-0257a2ca8c5beddb405a1e7854b88b3f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -70,7 +68,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="styles.css">
 </head>
 
 <body class="nav-sidebar docked quarto-light">
@@ -82,7 +80,9 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labs/event-driven-state-machine-lab.html">Labs</a></li><li class="breadcrumb-item"><a href="../labs/c-programming-lab.html">C Programming Lab</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
+      Embedded Medical Devices
+      </li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -94,7 +94,7 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-center sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="../">Embedded Medical Devices</a> 
+      <a href="./">Embedded Medical Devices</a> 
     </div>
       </div>
     <div class="sidebar-menu-container"> 
@@ -110,13 +110,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../course-syllabus.html" class="sidebar-item-text sidebar-link">
+  <a href="./course-syllabus.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Course Syllabus</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../bme-lab-policies.html" class="sidebar-item-text sidebar-link">
+  <a href="./bme-lab-policies.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">BME Lab Policies</span></a>
   </div>
 </li>
@@ -134,13 +134,13 @@ ul.task-list li input[type="checkbox"] {
   </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../software-install-tutorials.html" class="sidebar-item-text sidebar-link">
+  <a href="./software-install-tutorials.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Software Installation &amp; Tutorials</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../faq.html" class="sidebar-item-text sidebar-link">
+  <a href="./faq.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">FAQ</span></a>
   </div>
 </li>
@@ -157,79 +157,79 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../slides/zephyr-nrf52833dk-intro.html" class="sidebar-item-text sidebar-link">
+  <a href="./slides/zephyr-nrf52833dk-intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introduction to Zephyr &amp; Nordic SoCs</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../slides/event-driven-state-machine.html" class="sidebar-item-text sidebar-link">
+  <a href="./slides/event-driven-state-machine.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Event-Driven State Machines</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../slides/git-fundamentals-notes.html" class="sidebar-item-text sidebar-link">
+  <a href="./slides/git-fundamentals-notes.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Git Fundamentals</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../slides/c-programming-notes.html" class="sidebar-item-text sidebar-link">
+  <a href="./slides/c-programming-notes.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">C Programming</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../slides/zephyr-gpio-isr-callbacks.html" class="sidebar-item-text sidebar-link">
+  <a href="./slides/zephyr-gpio-isr-callbacks.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">GPIO, ISR, and Callbacks</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../slides/zephyr-timers.html" class="sidebar-item-text sidebar-link">
+  <a href="./slides/zephyr-timers.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Timers</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../slides/zephyr-threads-events.html" class="sidebar-item-text sidebar-link">
+  <a href="./slides/zephyr-threads-events.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Threads and Kernel Events</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../slides/zephyr-smf.html" class="sidebar-item-text sidebar-link">
+  <a href="./slides/zephyr-smf.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">State Machine Framework (SMF)</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../slides/zephyr-adc.html" class="sidebar-item-text sidebar-link">
+  <a href="./slides/zephyr-adc.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Analog-to-Digital Conversion (ADC)</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../slides/zephyr-pwm.html" class="sidebar-item-text sidebar-link">
+  <a href="./slides/zephyr-pwm.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Pulse Width Modulation (PWM)</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../slides/zephyr-serial-communication.html" class="sidebar-item-text sidebar-link">
+  <a href="./slides/zephyr-serial-communication.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Serial Communication (UART, I2C, SPI)</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../slides/zephyr-ble.html" class="sidebar-item-text sidebar-link">
+  <a href="./slides/zephyr-ble.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Bluetooth Low Energy (BLE)</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../slides/zephyr-vbus.html" class="sidebar-item-text sidebar-link">
+  <a href="./slides/zephyr-vbus.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">VBUS</span></a>
   </div>
 </li>
@@ -246,37 +246,37 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../labs/event-driven-state-machine-lab.html" class="sidebar-item-text sidebar-link">
+  <a href="./labs/event-driven-state-machine-lab.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Event-Driven State Machine Lab</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../labs/c-programming-lab.html" class="sidebar-item-text sidebar-link active">
+  <a href="./labs/c-programming-lab.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">C Programming Lab</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../labs/zephyr-gpio-isr-callbacks-lab.html" class="sidebar-item-text sidebar-link">
+  <a href="./labs/zephyr-gpio-isr-callbacks-lab.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">GPIO, ISR, and Callbacks Lab</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../labs/zephyr-smf-lab.html" class="sidebar-item-text sidebar-link">
+  <a href="./labs/zephyr-smf-lab.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">State Machine Framework (SMF) Refactor Lab</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../labs/zephyr-timers-lab.html" class="sidebar-item-text sidebar-link">
+  <a href="./labs/zephyr-timers-lab.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Timers Lab</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../labs/zephyr-threads-events-lab.html" class="sidebar-item-text sidebar-link">
+  <a href="./labs/zephyr-threads-events-lab.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Threads and Kernel Events Lab</span></a>
   </div>
 </li>
@@ -293,13 +293,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../resources/how-to-generate-ecg-waveforms.html" class="sidebar-item-text sidebar-link">
+  <a href="./resources/how-to-generate-ecg-waveforms.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">How to Generate ECG Waveforms</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../resources/debugging.html" class="sidebar-item-text sidebar-link">
+  <a href="./resources/debugging.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Zephyr: Debugging in VS Code</span></a>
   </div>
 </li>
@@ -311,55 +311,22 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#prelab" id="toc-prelab" class="nav-link active" data-scroll-target="#prelab">Prelab</a></li>
-  <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives">Objectives</a></li>
-  <li><a href="#zephyr-application-git-repository-overview" id="toc-zephyr-application-git-repository-overview" class="nav-link" data-scroll-target="#zephyr-application-git-repository-overview">Zephyr Application Git Repository Overview</a></li>
-  <li><a href="#things-to-do" id="toc-things-to-do" class="nav-link" data-scroll-target="#things-to-do">Things To Do</a></li>
-  <li><a href="#git-best-practices" id="toc-git-best-practices" class="nav-link" data-scroll-target="#git-best-practices">Git Best Practices</a>
-  <ul class="collapse">
-  <li><a href="#fork-clone-build-flash-view-serial-output" id="toc-fork-clone-build-flash-view-serial-output" class="nav-link" data-scroll-target="#fork-clone-build-flash-view-serial-output">Fork / Clone / Build / Flash / View Serial Output</a></li>
-  <li><a href="#modify-the-zephyr-application-datatypes-typecasting-formatted-printing" id="toc-modify-the-zephyr-application-datatypes-typecasting-formatted-printing" class="nav-link" data-scroll-target="#modify-the-zephyr-application-datatypes-typecasting-formatted-printing">Modify the Zephyr Application (DataTypes / Typecasting / Formatted Printing)</a></li>
-  </ul></li>
-  <li><a href="#library-refactor" id="toc-library-refactor" class="nav-link" data-scroll-target="#library-refactor">Library Refactor</a></li>
-  <li><a href="#push-everything-to-gitlab-create-an-issue-to-notify-dr.-palmeri" id="toc-push-everything-to-gitlab-create-an-issue-to-notify-dr.-palmeri" class="nav-link" data-scroll-target="#push-everything-to-gitlab-create-an-issue-to-notify-dr.-palmeri">Push Everything to GitLab &amp; Create an Issue to Notify Dr.&nbsp;Palmeri</a></li>
-  <li><a href="#gradescope" id="toc-gradescope" class="nav-link" data-scroll-target="#gradescope">Gradescope</a></li>
-  <li><a href="#how-to-ask-for-help" id="toc-how-to-ask-for-help" class="nav-link" data-scroll-target="#how-to-ask-for-help">How to Ask for Help</a></li>
-  </ul>
-<div class="toc-actions"><ul><li><a href="https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/Embedded-Medical-Devices/edit/main/labs/c-programming-lab.qmd" class="toc-action"><i class="bi bi-git"></i>Edit this page</a></li><li><a href="https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/Embedded-Medical-Devices/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="c-programming-lab.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
-    </div>
+        
+    <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="index.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labs/event-driven-state-machine-lab.html">Labs</a></li><li class="breadcrumb-item"><a href="../labs/c-programming-lab.html">C Programming Lab</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">C Programming Lab</h1>
-<p class="subtitle lead">BME554L - Fall 2025 - Palmeri</p>
-  <div class="quarto-categories">
-    <div class="quarto-category">Lab</div>
-  </div>
-  </div>
+<h1 class="title">Embedded Medical Devices</h1>
+<p class="subtitle lead">BME554L (Fall 2025)</p>
+</div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Dr.&nbsp;Mark Palmeri, M.D., Ph.D. </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">June 20, 2025</p>
-    </div>
-  </div>
   
     
   </div>
@@ -369,143 +336,85 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<!-- TODO: have the students fork the c-programming-lab repository -->
-<!-- TODO: add debugging exercise -->
-<section id="prelab" class="level2">
-<h2 class="anchored" data-anchor-id="prelab">Prelab</h2>
-<ul>
-<li>Complete <a href="https://academy.nordicsemi.com/courses/nrf-connect-sdk-fundamentals/lessons/lesson-3-elements-of-an-nrf-connect-sdk-application/">Nordic DevAcademy: Lesson 3 – Elements of an nRF Connect SDK application</a></li>
-<li>Complete <a href="https://academy.nordicsemi.com/courses/nrf-connect-sdk-fundamentals/lessons/lesson-3-printing-messages-to-console-and-logging/">Nordic DevAcademy: Lesson 4 – Printing messages to console and logging</a></li>
-<li>Review <a href="../resources/debugging.html">Debugging</a> resource.</li>
-</ul>
-</section>
-<section id="objectives" class="level2">
-<h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
-<ul>
-<li>Introduction to C Programming</li>
-<li>Building Zephyr application</li>
-<li>Flashing Zephyr application</li>
-<li>Viewing serial output from Zephyr application running on your <code>nrf52833DK</code></li>
-<li>Debugging Zephyr applications in VS Code</li>
-</ul>
-</section>
-<section id="zephyr-application-git-repository-overview" class="level2">
-<h2 class="anchored" data-anchor-id="zephyr-application-git-repository-overview">Zephyr Application Git Repository Overview</h2>
-<ul>
-<li><code>src/main.c</code> - main application code</li>
-<li><code>.gitingore</code> - ignore files that are not needed in the git repository</li>
-<li><code>CMakeLists.txt</code> - build system configuration file</li>
-<li><code>prj.conf</code> - Zephyr configuration file</li>
-<li><code>README.md</code> - this file</li>
-<li><code>CMakePresets.json</code> - CMake presets file (build configuration)</li>
-<li><code>.gitlab-ci.yml</code> - GitLab CI configuration file</li>
-</ul>
-</section>
-<section id="things-to-do" class="level2">
-<h2 class="anchored" data-anchor-id="things-to-do">Things To Do</h2>
-</section>
-<section id="git-best-practices" class="level2">
-<h2 class="anchored" data-anchor-id="git-best-practices">Git Best Practices</h2>
-<ul>
-<li>Use best practices for version control (branching, commit messages, etc.).</li>
-<li>Do all development on a dedicated branch that is merged into <code>main</code> once it is functional.</li>
-<li>Commits should be very specific to the changes/additions you are making to your code. This will help you and others understand what you did and why you did it.<br>
-</li>
-<li>On a given development branch, try to implement one small piece of functionality at a time, commit it, and then move on to the next piece of functionality.</li>
-</ul>
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Important
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>You do not want one, monolithic git commit right before you submit your project.</p>
-</div>
-</div>
-<section id="fork-clone-build-flash-view-serial-output" class="level3">
-<h3 class="anchored" data-anchor-id="fork-clone-build-flash-view-serial-output">Fork / Clone / Build / Flash / View Serial Output</h3>
-<ul>
-<li>Fork this repository on GitLab</li>
-<li>Add Dr.&nbsp;Palmeri (<code>mlp6</code>) as a Maintainer in your forked repository.</li>
-<li>Clone your forked repository to your local machine</li>
-<li>Build the Zephyr application “as is” (review <a href="https://academy.nordicsemi.com/courses/nrf-connect-sdk-fundamentals/lessons/lesson-1-nrf-connect-sdk-introduction/">DevAcademy: Lesson 1</a>)</li>
-<li>Flash the Zephyr application to your development kit.
-<ul>
-<li>Connect the <code>VCOM</code> port on the <code>nrf52833DK</code> to your computer (using <code>Connected Devices</code> and the plug icon)</li>
-<li>Look at the serial output in the VS Code <code>Terminal</code></li>
-</ul></li>
-</ul>
-</section>
-<section id="modify-the-zephyr-application-datatypes-typecasting-formatted-printing" class="level3">
-<h3 class="anchored" data-anchor-id="modify-the-zephyr-application-datatypes-typecasting-formatted-printing">Modify the Zephyr Application (DataTypes / Typecasting / Formatted Printing)</h3>
-<ul>
-<li>Inspect the code to see how variables <code>a</code>, <code>b</code> and <code>c</code> are declared and initialized.</li>
-<li>Flash the existing code and note the terminal output:</li>
-</ul>
-<p><img src="images/you_lose.png" width="200"></p>
-<ul>
-<li>On a development branch called <code>fix_division</code>, without changing the declared datatypes of <code>a</code>, <code>b</code>, or <code>c</code>, correct the code so that <code>c</code> is output in the terminal:</li>
-</ul>
-<p><img src="images/you_win.png" width="200"></p>
-<ul>
-<li>Push the <code>fix_division</code> branch to your GitLab repository.</li>
-<li>Create a <strong>Merge Request</strong> to merge the <code>fix_division</code> branch into your <code>main</code> branch.</li>
-<li>Make sure the GitLab CI pipeline is successful before merging the <code>fix_division</code> branch into <code>main</code>. If it isn’t passing, fix the problem locally on the same branch and push the changes to GitLab.</li>
-<li>Pull your updated <code>main</code> branch to your local machine.</li>
-<li>Create an annotated tag for the merged commit on main with the fixed division named <code>v1.0.0</code>.</li>
-<li>Push this annotated tag to your GitLab repository.</li>
-</ul>
-<p>:clock10: Note that the CI pipelines running on the GitLab server can take a while to complete. Do not rely on them for immediate development feedback, but rather as a final check before merging code into <code>main</code>.</p>
-</section>
-</section>
-<section id="library-refactor" class="level2">
-<h2 class="anchored" data-anchor-id="library-refactor">Library Refactor</h2>
-<ul>
-<li>On another development branch on your local machine called <code>refactor_library</code>, refactor the code to put the <code>divide_numbers()</code> function into a library called <code>my_math_functions.h</code>.</li>
-<li>Once you have your code working with this library, <strong>locally merge</strong> the <code>refactor_library</code> branch into <code>main</code>.</li>
-<li>Create an annotated tag for the merged commit on main with the refactored library named <code>v1.1.0</code>.</li>
-<li>Push the new commit(s) and annotated tag to your GitLab repository. Remember, this will need to be done with two commands, <code>git push</code> and <code>git push --tags</code>.</li>
-</ul>
-</section>
-<section id="push-everything-to-gitlab-create-an-issue-to-notify-dr.-palmeri" class="level2">
-<h2 class="anchored" data-anchor-id="push-everything-to-gitlab-create-an-issue-to-notify-dr.-palmeri">Push Everything to GitLab &amp; Create an Issue to Notify Dr.&nbsp;Palmeri</h2>
-<ul>
-<li>Make sure all of your commits are pushed to your <code>main</code> branch, along with both annotated tags.</li>
-<li>Confirm that the GitLab CI pipeline is successful.</li>
-<li>Create an Issue titled <code>C Programming Lab Complete</code> and assign it to Dr.&nbsp;Palmeri (<code>mlp6</code>).</li>
-</ul>
-</section>
-<section id="gradescope" class="level2">
-<h2 class="anchored" data-anchor-id="gradescope">Gradescope</h2>
-<p>Complete the Gradescope assignment for this lab that is a few simple tasks:</p>
-<ol type="1">
-<li>Confirm that you created the Issue above</li>
-<li>Confirm that you completed both of the Nordic DevAcademy lessons</li>
-<li>Upload a screenshot of your CI pipeline jobs passing</li>
-</ol>
-</section>
-<section id="how-to-ask-for-help" class="level2">
-<h2 class="anchored" data-anchor-id="how-to-ask-for-help">How to Ask for Help</h2>
-<ol type="1">
-<li>If you have a general / non-coding question, you should ask your TAs / Dr. Palmeri on Ed to allow any of them to respond in a timely manner.</li>
-<li>Push you code to your GitLab repository, ideally with your active development on a non-<code>main</code> branch.</li>
-<li>Create an <a href="https://docs.gitlab.com/ee/user/project/issues/">Issue</a> in your repository.
-<ul>
-<li>Add as much detail as possible as to your problem, and add links to specific lines / section of code when possible.</li>
-<li>Assign the label “Bug” or “Question”, as appropriate.</li>
-<li>Be sure to specify what branch you are working on.</li>
-<li>Assign the Issue to one of the TAs.</li>
-<li>If your TA cannot solve your Issue, they can escalate the Issue to Dr.&nbsp;Palmeri.</li>
-</ul></li>
-<li>You will get a response to your Issue, and maybe a new branch of code will be pushed to help you with some example syntax that you can use <code>git diff</code> to visualize.</li>
-</ol>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Module</th>
+<th>Materials</th>
+<th>Assessment</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Zephyr &amp; Nordic SoC Overview</td>
+<td><a href="./slides/zephyr-gpio-isr-callbacks.html">Lecture Notes &amp; Slides</a></td>
+<td><a href="https://www.gradescope.com/courses/941957/assignments/5544155">Completion Survey</a> (Due: TBD) <br> <a href="./software-install-tutorials.html">Software Installs &amp; Tutorials</a> (Due: TBD)</td>
+</tr>
+<tr class="even">
+<td>Event-Driven State Machines</td>
+<td><a href="./slides/event-driven-state-machine.html">Lecture Notes &amp; Slides</a></td>
+<td><a href="https://www.gradescope.com/courses/941957/assignments/5548632">Wireless HRM</a> <br> <a href="./labs/event-driven-state-machine-lab.html">Event-Driven State Machine Lab</a></td>
+</tr>
+<tr class="odd">
+<td>Version Control (<code>git</code>)</td>
+<td><a href="./slides/git-fundamentals-notes.html">Lecture Notes &amp; Slides</a></td>
+<td><a href="https://www.gradescope.com/courses/941957/assignments/5583313">Git Fundamentals Quiz</a> <br> <a href="https://gitlab.oit.duke.edu/kits/BME-554L-001-Sp25/git-fundamentals-lab">Git Fundamentals Lab</a></td>
+</tr>
+<tr class="even">
+<td>C Programming</td>
+<td><a href="./slides/c-programming-notes.html">Lecture Notes &amp; Slides</a></td>
+<td><a href="https://www.gradescope.com/courses/941957/assignments/5671363">C Programming Quiz</a> <br> <a href="https://gitlab.oit.duke.edu/kits/BME-554L-001-Sp25/c-programming-lab">C Programming Lab</a> <br> <a href="https://www.gradescope.com/courses/941957/assignments/5672751">C Programming Lab</a></td>
+</tr>
+<tr class="odd">
+<td>Devicetree, GPIO &amp; Callbacks</td>
+<td><a href="./slides/zephyr-gpio-isr-callbacks.html">Lecture Notes &amp; Slides</a> <br> <a href="https://academy.nordicsemi.com/courses/nrf-connect-sdk-fundamentals/lessons/lesson-2-reading-buttons-and-controlling-leds/">Nordic DevAcademy Lesson 2: Reading Buttons &amp; Controlling LEDs</a></td>
+<td><a href="./labs/zephyr-gpio-isr-callbacks-lab.html">DT/GPIO/CB Lab</a></td>
+</tr>
+<tr class="even">
+<td>Timers &amp; Work Queues</td>
+<td><a href="./slides/zephyr-timers.html">Lecture Notes &amp; Slides</a></td>
+<td><a href="./labs/zephyr-timers-lab.html">Timers Lab</a></td>
+</tr>
+<tr class="odd">
+<td><a href="https://embeddedmedicaldevices.pages.oit.duke.edu/zephyr-threads-events/Zephyr-Threads-Events.html">Threads &amp; Kernel Events</a></td>
+<td><a href="https://academy.nordicsemi.com/courses/nrf-connect-sdk-intermediate/lessons/lesson-1-zephyr-rtos-advanced/">(Optional) Zephyr RTOS: Beyond the basics</a></td>
+<td><a href="https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/zephyr-threads-events/-/blob/main/Zephyr-Threads-Kernel-Events-Lab.md?ref_type=heads">Heartbeat &amp; Kernel Events Refactor Lab</a></td>
+</tr>
+<tr class="even">
+<td>State Machine Framework</td>
+<td><a href="./slides/zephyr-smf.html">Lecture Notes &amp; Slides</a></td>
+<td><a href="./labs/zephyr-smf-lab.html">State Machine Framework Refactor Lab</a></td>
+</tr>
+<tr class="odd">
+<td>Debugging</td>
+<td><a href="https://academy.nordicsemi.com/courses/nrf-connect-sdk-intermediate/lessons/lesson-2-debugging/">Debugging DevAcademy Module</a></td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td>Analog-to-Digital Conversion (ADC)</td>
+<td><a href="./slides/zephyr-adc.html">Lecture Notes &amp; Slides</a> <br> <a href="https://academy.nordicsemi.com/courses/nrf-connect-sdk-intermediate/lessons/lesson-6-analog-to-digital-converter-adc/">Nordic DevAcademy: ADC</a></td>
+<td><a href="https://gitlab.oit.duke.edu/kits/BME-554L-001-Sp25/zephyr-adc-pwm-lab">ADC Lab: Parts I &amp; II</a></td>
+</tr>
+<tr class="odd">
+<td>Pulse Width Modulation (PWM)</td>
+<td><a href="./slides/zephyr-pwm.html">Lecture Notes &amp; Slides</a> <br> <a href="https://academy.nordicsemi.com/courses/nrf-connect-sdk-intermediate/lessons/lesson-4-pulse-width-modulation-pwm/topic/pulse-width-modulation-pwm/">Nordic DevAcademy: PWM</a></td>
+<td><a href="https://gitlab.oit.duke.edu/kits/BME-554L-001-Sp25/zephyr-adc-pwm-lab">PWM Lab: Parts III &amp; IV</a></td>
+</tr>
+<tr class="even">
+<td><a href="https://embeddedmedicaldevices.pages.oit.duke.edu/zephyr-serial-comm/Zephyr-Serial-Communication.html">UART/I2C/SPI &amp; Sensors</a></td>
+<td><a href="https://academy.nordicsemi.com/lessons/lesson-4-serial-communication-uart/">UART DevAcademy Module</a> &amp; <a href="https://academy.nordicsemi.com/lessons/lesson-6-serial-com-i2c/">Serial Communication DevAcademy Module</a></td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td>Bluetooth Low Energy (BLE)</td>
+<td><a href="./slides/zephyr-ble.html">Lecture Notes &amp; Slides</a> <br> <a href="https://academy.nordicsemi.com/courses/bluetooth-low-energy-fundamentals/">DevAcademic: BLE (Lessons 1-4)</a></td>
+<td><a href="https://gitlab.oit.duke.edu/kits/BME-554L-001-Sp25/ecg-temp-ble-project">ECG &amp; Temperature Sensing BLE Device</a></td>
+</tr>
+</tbody>
+</table>
+<!-- | [Device Safety (VBUS)](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/zephyr-vbus) |  Coming Soon | Coming Soon | -->
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -912,4 +821,4 @@ Important
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/Embedded-Medical-Devices/edit/main/labs/c-programming-lab.qmd" class="toc-action"><i class="bi bi-git"></i>Edit this page</a></li><li><a href="https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/Embedded-Medical-Devices/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/Embedded-Medical-Devices/edit/main/index.qmd" class="toc-action"><i class="bi bi-git"></i>Edit this page</a></li><li><a href="https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/Embedded-Medical-Devices/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>

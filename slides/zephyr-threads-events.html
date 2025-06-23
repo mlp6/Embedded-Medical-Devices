@@ -7,9 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Dr.&nbsp;Mark Palmeri, M.D., Ph.D.">
-<meta name="dcterms.date" content="2025-06-20">
 
-<title>C Programming Lab – Embedded Medical Devices</title>
+<title>Zephyr: Threads and Kernel Events – Embedded Medical Devices</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -40,7 +74,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-fced259a1985fd972ecb57c7cd45153f.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-0257a2ca8c5beddb405a1e7854b88b3f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-10ce6858d882512638623bc10e3ba411.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/live-runtime/live-runtime.js" type="module"></script>
+<link href="../site_libs/quarto-contrib/live-runtime/live-runtime.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -68,9 +104,11 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script type="module" src="../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
+<link href="../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
 
 
-<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="styles.css">
 </head>
 
 <body class="nav-sidebar docked quarto-light">
@@ -82,7 +120,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labs/event-driven-state-machine-lab.html">Labs</a></li><li class="breadcrumb-item"><a href="../labs/c-programming-lab.html">C Programming Lab</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../slides/zephyr-nrf52833dk-intro.html">Learning Modules</a></li><li class="breadcrumb-item"><a href="../slides/zephyr-threads-events.html">Threads and Kernel Events</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -193,7 +231,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../slides/zephyr-threads-events.html" class="sidebar-item-text sidebar-link">
+  <a href="../slides/zephyr-threads-events.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Threads and Kernel Events</span></a>
   </div>
 </li>
@@ -252,7 +290,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../labs/c-programming-lab.html" class="sidebar-item-text sidebar-link active">
+  <a href="../labs/c-programming-lab.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">C Programming Lab</span></a>
   </div>
 </li>
@@ -315,49 +353,53 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#prelab" id="toc-prelab" class="nav-link active" data-scroll-target="#prelab">Prelab</a></li>
-  <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives">Objectives</a></li>
-  <li><a href="#zephyr-application-git-repository-overview" id="toc-zephyr-application-git-repository-overview" class="nav-link" data-scroll-target="#zephyr-application-git-repository-overview">Zephyr Application Git Repository Overview</a></li>
-  <li><a href="#things-to-do" id="toc-things-to-do" class="nav-link" data-scroll-target="#things-to-do">Things To Do</a></li>
-  <li><a href="#git-best-practices" id="toc-git-best-practices" class="nav-link" data-scroll-target="#git-best-practices">Git Best Practices</a>
+  <li><a href="#threads" id="toc-threads" class="nav-link active" data-scroll-target="#threads">Threads</a>
   <ul class="collapse">
-  <li><a href="#fork-clone-build-flash-view-serial-output" id="toc-fork-clone-build-flash-view-serial-output" class="nav-link" data-scroll-target="#fork-clone-build-flash-view-serial-output">Fork / Clone / Build / Flash / View Serial Output</a></li>
-  <li><a href="#modify-the-zephyr-application-datatypes-typecasting-formatted-printing" id="toc-modify-the-zephyr-application-datatypes-typecasting-formatted-printing" class="nav-link" data-scroll-target="#modify-the-zephyr-application-datatypes-typecasting-formatted-printing">Modify the Zephyr Application (DataTypes / Typecasting / Formatted Printing)</a></li>
+  <li><a href="#weve-already-used-threads" id="toc-weve-already-used-threads" class="nav-link" data-scroll-target="#weve-already-used-threads">We’ve Already Used Threads</a></li>
   </ul></li>
-  <li><a href="#library-refactor" id="toc-library-refactor" class="nav-link" data-scroll-target="#library-refactor">Library Refactor</a></li>
-  <li><a href="#push-everything-to-gitlab-create-an-issue-to-notify-dr.-palmeri" id="toc-push-everything-to-gitlab-create-an-issue-to-notify-dr.-palmeri" class="nav-link" data-scroll-target="#push-everything-to-gitlab-create-an-issue-to-notify-dr.-palmeri">Push Everything to GitLab &amp; Create an Issue to Notify Dr.&nbsp;Palmeri</a></li>
-  <li><a href="#gradescope" id="toc-gradescope" class="nav-link" data-scroll-target="#gradescope">Gradescope</a></li>
-  <li><a href="#how-to-ask-for-help" id="toc-how-to-ask-for-help" class="nav-link" data-scroll-target="#how-to-ask-for-help">How to Ask for Help</a></li>
+  <li><a href="#example-use-case-heartbeat-led-toggle-at-25-duty-cycle" id="toc-example-use-case-heartbeat-led-toggle-at-25-duty-cycle" class="nav-link" data-scroll-target="#example-use-case-heartbeat-led-toggle-at-25-duty-cycle">Example Use Case: Heartbeat LED Toggle at 25% Duty Cycle</a></li>
+  <li><a href="#how-to-suspendresume-threads" id="toc-how-to-suspendresume-threads" class="nav-link" data-scroll-target="#how-to-suspendresume-threads">How to Suspend/Resume Threads</a></li>
+  <li><a href="#threads-vs.-timers" id="toc-threads-vs.-timers" class="nav-link" data-scroll-target="#threads-vs.-timers">Threads vs.&nbsp;Timers</a></li>
+  <li><a href="#kernel-events" id="toc-kernel-events" class="nav-link" data-scroll-target="#kernel-events">Kernel Events</a></li>
+  <li><a href="#kernel-event-bit-arrays" id="toc-kernel-event-bit-arrays" class="nav-link" data-scroll-target="#kernel-event-bit-arrays">Kernel Event Bit Arrays</a></li>
+  <li><a href="#why-kernel-events-over-boolean-variables" id="toc-why-kernel-events-over-boolean-variables" class="nav-link" data-scroll-target="#why-kernel-events-over-boolean-variables">Why Kernel Events over Boolean Variables?</a></li>
+  <li><a href="#how-to-define-kernel-events" id="toc-how-to-define-kernel-events" class="nav-link" data-scroll-target="#how-to-define-kernel-events">How to Define Kernel Events</a></li>
+  <li><a href="#waiting-for-events" id="toc-waiting-for-events" class="nav-link" data-scroll-target="#waiting-for-events">Waiting for Events</a></li>
+  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/Embedded-Medical-Devices/edit/main/labs/c-programming-lab.qmd" class="toc-action"><i class="bi bi-git"></i>Edit this page</a></li><li><a href="https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/Embedded-Medical-Devices/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="c-programming-lab.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/Embedded-Medical-Devices/edit/main/slides/zephyr-threads-events.qmd" class="toc-action"><i class="bi bi-git"></i>Edit this page</a></li><li><a href="https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/Embedded-Medical-Devices/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="zephyr-threads-events-slides.html"><i class="bi bi-file-slides"></i>RevealJS (live)</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labs/event-driven-state-machine-lab.html">Labs</a></li><li class="breadcrumb-item"><a href="../labs/c-programming-lab.html">C Programming Lab</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../slides/zephyr-nrf52833dk-intro.html">Learning Modules</a></li><li class="breadcrumb-item"><a href="../slides/zephyr-threads-events.html">Threads and Kernel Events</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">C Programming Lab</h1>
-<p class="subtitle lead">BME554L - Fall 2025 - Palmeri</p>
-  <div class="quarto-categories">
-    <div class="quarto-category">Lab</div>
-  </div>
-  </div>
+<h1 class="title">Zephyr: Threads and Kernel Events</h1>
+<p class="subtitle lead">BME554L -Fall 2025 - Palmeri</p>
+</div>
 
 
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Dr.&nbsp;Mark Palmeri, M.D., Ph.D. </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            Duke University
+          </p>
+      </div>
+  </div>
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Dr.&nbsp;Mark Palmeri, M.D., Ph.D. </p>
-          </div>
-  </div>
-    
+      
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">June 20, 2025</p>
+      <p class="date">Invalid Date</p>
     </div>
   </div>
   
@@ -369,145 +411,181 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<!-- TODO: have the students fork the c-programming-lab repository -->
-<!-- TODO: add debugging exercise -->
-<section id="prelab" class="level2">
-<h2 class="anchored" data-anchor-id="prelab">Prelab</h2>
+<section id="threads" class="level2">
+<h2 class="anchored" data-anchor-id="threads">Threads</h2>
 <ul>
-<li>Complete <a href="https://academy.nordicsemi.com/courses/nrf-connect-sdk-fundamentals/lessons/lesson-3-elements-of-an-nrf-connect-sdk-application/">Nordic DevAcademy: Lesson 3 – Elements of an nRF Connect SDK application</a></li>
-<li>Complete <a href="https://academy.nordicsemi.com/courses/nrf-connect-sdk-fundamentals/lessons/lesson-3-printing-messages-to-console-and-logging/">Nordic DevAcademy: Lesson 4 – Printing messages to console and logging</a></li>
-<li>Review <a href="../resources/debugging.html">Debugging</a> resource.</li>
+<li>Threads are the basic unit of execution in Zephyr.</li>
+<li>Threads are scheduled by the kernel.</li>
+<li>Threads can be in one of three states:
+<ul>
+<li><strong>Ready</strong>: The thread is ready to run.</li>
+<li><strong>Running</strong>: The thread is currently running.</li>
+<li><strong>Blocked</strong>: The thread is waiting for an event to occur.</li>
+</ul></li>
+</ul>
+<section id="weve-already-used-threads" class="level3">
+<h3 class="anchored" data-anchor-id="weve-already-used-threads">We’ve Already Used Threads</h3>
+<ul>
+<li><code>Main</code> thread</li>
+<li>Kernel timer threads</li>
+</ul>
+<p>But we can define our own threads for a variety of purposes!</p>
+<ul>
+<li>Wait for a task to complete, then do something else.</li>
+<li>Example: Wait for data to save to an SD card, then do something else, but don’t want the kernel to wait.</li>
 </ul>
 </section>
-<section id="objectives" class="level2">
-<h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
+</section>
+<section id="example-use-case-heartbeat-led-toggle-at-25-duty-cycle" class="level2">
+<h2 class="anchored" data-anchor-id="example-use-case-heartbeat-led-toggle-at-25-duty-cycle">Example Use Case: Heartbeat LED Toggle at 25% Duty Cycle</h2>
 <ul>
-<li>Introduction to C Programming</li>
-<li>Building Zephyr application</li>
-<li>Flashing Zephyr application</li>
-<li>Viewing serial output from Zephyr application running on your <code>nrf52833DK</code></li>
-<li>Debugging Zephyr applications in VS Code</li>
+<li>This is not as easy to implement with a single kernel timer.</li>
+<li>But we can use a thread to toggle the LED at 25% duty cycle <strong>and</strong> not hit the kernel to do so:</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">/* 1024 byte stack, handler, NULL, NULL, NULL, priority 5, no time slice, no delay */</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>K_THREAD_DEFINE<span class="op">(</span>heartbeat_thread_id<span class="op">,</span> <span class="dv">1024</span><span class="op">,</span> error_thread<span class="op">,</span> NULL<span class="op">,</span> NULL<span class="op">,</span> NULL<span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">);</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">extern</span> <span class="dt">void</span> heartbeat_thread<span class="op">(</span><span class="dt">void</span> <span class="op">*,</span> <span class="dt">void</span> <span class="op">*,</span> <span class="dt">void</span> <span class="op">*)</span> <span class="op">{</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(</span><span class="dv">1</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        k_msleep<span class="op">(</span><span class="dv">250</span><span class="op">);</span>  <span class="co">// scheduler can run other tasks now</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        gpio_pin_toggle_dt<span class="op">(&amp;</span>heartbeat_led<span class="op">);</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        k_msleep<span class="op">(</span><span class="dv">750</span><span class="op">);</span> <span class="co">// scheduler can run other tasks now</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        gpio_pin_toggle_dt<span class="op">(&amp;</span>heartbeat_led<span class="op">);</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> </span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="how-to-suspendresume-threads" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-suspendresume-threads">How to Suspend/Resume Threads</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>k_thread_suspend<span class="op">(</span>heartbeat_thread_id<span class="op">);</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>k_thread_resume<span class="op">(</span>heartbeat_thread_id<span class="op">);</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="threads-vs.-timers" class="level2">
+<h2 class="anchored" data-anchor-id="threads-vs.-timers">Threads vs.&nbsp;Timers</h2>
+<ul>
+<li>The thread can have blocking calls (e.g., <code>k_msleep</code>) without blocking other threads.</li>
+<li>The scheduler can run other threads while this thread is sleeping (or yields).</li>
+<li>The scheduler can preempt the thread at any time with higher priority tasks (e.g., ISR callbacks, higher-priority threads).</li>
+<li>No need for a separate handler function.</li>
+<li>More difficult to start/stop/reset than a timer.</li>
+<li>Need explicitly allocated stack space.</li>
+<li>Difficult to coordinate high-accuracy timing with other tasks/threads.</li>
 </ul>
 </section>
-<section id="zephyr-application-git-repository-overview" class="level2">
-<h2 class="anchored" data-anchor-id="zephyr-application-git-repository-overview">Zephyr Application Git Repository Overview</h2>
+<section id="kernel-events" class="level2">
+<h2 class="anchored" data-anchor-id="kernel-events">Kernel Events</h2>
 <ul>
-<li><code>src/main.c</code> - main application code</li>
-<li><code>.gitingore</code> - ignore files that are not needed in the git repository</li>
-<li><code>CMakeLists.txt</code> - build system configuration file</li>
-<li><code>prj.conf</code> - Zephyr configuration file</li>
-<li><code>README.md</code> - this file</li>
-<li><code>CMakePresets.json</code> - CMake presets file (build configuration)</li>
-<li><code>.gitlab-ci.yml</code> - GitLab CI configuration file</li>
+<li>Kernel events can be used to indicate that “something” has happened, which may dictate the function of the state machine.
+<ul>
+<li>Button press</li>
+<li>Sensor crossing a threshold</li>
+<li>Timer expiring</li>
+</ul></li>
+<li>Enabled in <code>prj.conf</code> with <code>CONFIG_EVENTS=y</code>.</li>
 </ul>
 </section>
-<section id="things-to-do" class="level2">
-<h2 class="anchored" data-anchor-id="things-to-do">Things To Do</h2>
-</section>
-<section id="git-best-practices" class="level2">
-<h2 class="anchored" data-anchor-id="git-best-practices">Git Best Practices</h2>
+<section id="kernel-event-bit-arrays" class="level2">
+<h2 class="anchored" data-anchor-id="kernel-event-bit-arrays">Kernel Event Bit Arrays</h2>
 <ul>
-<li>Use best practices for version control (branching, commit messages, etc.).</li>
-<li>Do all development on a dedicated branch that is merged into <code>main</code> once it is functional.</li>
-<li>Commits should be very specific to the changes/additions you are making to your code. This will help you and others understand what you did and why you did it.<br>
+<li>Kernel events are stored in a <strong>bit array</strong> (an array, where each bit (<code>0/1</code>) indicates (<code>False/True</code>) if an event has occured).</li>
+<li>When an event occurs, it is <strong>posted</strong> (<code>k_event_post</code>).</li>
+<li>A state machine can <strong>wait</strong> (<code>k_event_wait</code>) for an event (or events) to occur.</li>
+<li>Events can be <strong>cleared</strong> (<code>k_event_clear</code>) after they are processed.</li>
+</ul>
+</section>
+<section id="why-kernel-events-over-boolean-variables" class="level2">
+<h2 class="anchored" data-anchor-id="why-kernel-events-over-boolean-variables">Why Kernel Events over Boolean Variables?</h2>
+<ul>
+<li>Consume less memory.</li>
+<li>Easier to pass between threads / functions.</li>
+<li>Can wait for multiple events to occur without having to conditionally test for them.</li>
+</ul>
+</section>
+<section id="how-to-define-kernel-events" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-define-kernel-events">How to Define Kernel Events</h2>
+<ul>
+<li>Kernel events are defined in a <code>k_event</code> structure.</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>K_EVENT_DEFINE<span class="op">(</span>temp_events<span class="op">);</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#define TEMP_TOO_HIGH_EVENT BIT</span><span class="op">(</span><span class="dv">0</span><span class="op">)</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#define TEMP_TOO_LOW_EVENT BIT</span><span class="op">(</span><span class="dv">1</span><span class="op">)</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">// somewhere in your code, you can post an event</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>k_event_post<span class="op">(&amp;</span>temp_events<span class="op">,</span> TEMP_TOO_HIGH_EVENT<span class="op">);</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="waiting-for-events" class="level2">
+<h2 class="anchored" data-anchor-id="waiting-for-events">Waiting for Events</h2>
+<ul>
+<li>With kernel events, we can now implement a thread that waits for an event to occur and then changes the state of the state machine.<br>
 </li>
-<li>On a given development branch, try to implement one small piece of functionality at a time, commit it, and then move on to the next piece of functionality.</li>
+<li>Threads are started when your firmware is initialized; it does not need to be “called” (like a function).</li>
 </ul>
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Important
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>You do not want one, monolithic git commit right before you submit your project.</p>
-</div>
-</div>
-<section id="fork-clone-build-flash-view-serial-output" class="level3">
-<h3 class="anchored" data-anchor-id="fork-clone-build-flash-view-serial-output">Fork / Clone / Build / Flash / View Serial Output</h3>
-<ul>
-<li>Fork this repository on GitLab</li>
-<li>Add Dr.&nbsp;Palmeri (<code>mlp6</code>) as a Maintainer in your forked repository.</li>
-<li>Clone your forked repository to your local machine</li>
-<li>Build the Zephyr application “as is” (review <a href="https://academy.nordicsemi.com/courses/nrf-connect-sdk-fundamentals/lessons/lesson-1-nrf-connect-sdk-introduction/">DevAcademy: Lesson 1</a>)</li>
-<li>Flash the Zephyr application to your development kit.
-<ul>
-<li>Connect the <code>VCOM</code> port on the <code>nrf52833DK</code> to your computer (using <code>Connected Devices</code> and the plug icon)</li>
-<li>Look at the serial output in the VS Code <code>Terminal</code></li>
-</ul></li>
-</ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">/* 1024 byte stack, handler, NULL, NULL, NULL, priority 5, no time slice, no delay */</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>K_THREAD_DEFINE<span class="op">(</span>temp_too_high_thread_id<span class="op">,</span> <span class="dv">1024</span><span class="op">,</span> temp_too_high_thread<span class="op">,</span> NULL<span class="op">,</span> NULL<span class="op">,</span> NULL<span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">);</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="kw">extern</span> <span class="dt">void</span> temp_too_high_thread<span class="op">(</span><span class="dt">void</span> <span class="op">*,</span> <span class="dt">void</span> <span class="op">*,</span> <span class="dt">void</span> <span class="op">*)</span> <span class="op">{</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">// need to loop to keep the thread running after the first error occurs</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(</span><span class="dv">1</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>        <span class="co">/* &amp;temp_events is a pointer to an event bit array</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co">           0xF is an example of a bit mask of events in the array to wait for - any, not all</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co">           true clears all of the events that may have previously been posted before waiting</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co">           K_FOREVER means wait indefinitely (this could be a finite period of time instead) </span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co">        */</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>        <span class="dt">uint32_t</span> events <span class="op">=</span> k_event_wait<span class="op">(&amp;</span>temp_events<span class="op">,</span> <span class="bn">0xF</span><span class="op">,</span> <span class="kw">true</span><span class="op">,</span> K_FOREVER<span class="op">);</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>        <span class="co">// can also define the bit mask as a logical operation of the individual bits</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>        <span class="co">// uint32_t events = k_event_wait(&amp;temp_events, TEMP_TOO_HIGH_EVENT | TEMP_TOO_LOW EVENT, true, K_FOREVER);</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>        <span class="co">// events is an int representation of the  bit mask of the events that were posted</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>        <span class="co">// if you want to wait for **ALL** events in the mask, use</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>        <span class="co">// k_event_wait_all() instead of k_event_wait()</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>        LOG_INF<span class="op">(</span><span class="st">"Temperature Event Posted: </span><span class="sc">%d</span><span class="st">"</span><span class="op">,</span> events<span class="op">);</span> <span class="co">// bit array mask output as an int</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>        shut_down_system<span class="op">();</span> <span class="co">// do something in response to the temperature event, like change states</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="modify-the-zephyr-application-datatypes-typecasting-formatted-printing" class="level3">
-<h3 class="anchored" data-anchor-id="modify-the-zephyr-application-datatypes-typecasting-formatted-printing">Modify the Zephyr Application (DataTypes / Typecasting / Formatted Printing)</h3>
+<section id="resources" class="level2">
+<h2 class="anchored" data-anchor-id="resources">Resources</h2>
 <ul>
-<li>Inspect the code to see how variables <code>a</code>, <code>b</code> and <code>c</code> are declared and initialized.</li>
-<li>Flash the existing code and note the terminal output:</li>
+<li><a href="https://academy.nordicsemi.com/courses/nrf-connect-sdk-intermediate/lessons/lesson-1-zephyr-rtos-advanced/">Nordic DevAcademy: Zephyr RTOS Advanced</a></li>
+<li><a href="https://docs.zephyrproject.org/latest/kernel/services/synchronization/events.html#events">Zephyr Documentation: Events</a></li>
 </ul>
-<p><img src="images/you_lose.png" width="200"></p>
-<ul>
-<li>On a development branch called <code>fix_division</code>, without changing the declared datatypes of <code>a</code>, <code>b</code>, or <code>c</code>, correct the code so that <code>c</code> is output in the terminal:</li>
-</ul>
-<p><img src="images/you_win.png" width="200"></p>
-<ul>
-<li>Push the <code>fix_division</code> branch to your GitLab repository.</li>
-<li>Create a <strong>Merge Request</strong> to merge the <code>fix_division</code> branch into your <code>main</code> branch.</li>
-<li>Make sure the GitLab CI pipeline is successful before merging the <code>fix_division</code> branch into <code>main</code>. If it isn’t passing, fix the problem locally on the same branch and push the changes to GitLab.</li>
-<li>Pull your updated <code>main</code> branch to your local machine.</li>
-<li>Create an annotated tag for the merged commit on main with the fixed division named <code>v1.0.0</code>.</li>
-<li>Push this annotated tag to your GitLab repository.</li>
-</ul>
-<p>:clock10: Note that the CI pipelines running on the GitLab server can take a while to complete. Do not rely on them for immediate development feedback, but rather as a final check before merging code into <code>main</code>.</p>
-</section>
-</section>
-<section id="library-refactor" class="level2">
-<h2 class="anchored" data-anchor-id="library-refactor">Library Refactor</h2>
-<ul>
-<li>On another development branch on your local machine called <code>refactor_library</code>, refactor the code to put the <code>divide_numbers()</code> function into a library called <code>my_math_functions.h</code>.</li>
-<li>Once you have your code working with this library, <strong>locally merge</strong> the <code>refactor_library</code> branch into <code>main</code>.</li>
-<li>Create an annotated tag for the merged commit on main with the refactored library named <code>v1.1.0</code>.</li>
-<li>Push the new commit(s) and annotated tag to your GitLab repository. Remember, this will need to be done with two commands, <code>git push</code> and <code>git push --tags</code>.</li>
-</ul>
-</section>
-<section id="push-everything-to-gitlab-create-an-issue-to-notify-dr.-palmeri" class="level2">
-<h2 class="anchored" data-anchor-id="push-everything-to-gitlab-create-an-issue-to-notify-dr.-palmeri">Push Everything to GitLab &amp; Create an Issue to Notify Dr.&nbsp;Palmeri</h2>
-<ul>
-<li>Make sure all of your commits are pushed to your <code>main</code> branch, along with both annotated tags.</li>
-<li>Confirm that the GitLab CI pipeline is successful.</li>
-<li>Create an Issue titled <code>C Programming Lab Complete</code> and assign it to Dr.&nbsp;Palmeri (<code>mlp6</code>).</li>
-</ul>
-</section>
-<section id="gradescope" class="level2">
-<h2 class="anchored" data-anchor-id="gradescope">Gradescope</h2>
-<p>Complete the Gradescope assignment for this lab that is a few simple tasks:</p>
-<ol type="1">
-<li>Confirm that you created the Issue above</li>
-<li>Confirm that you completed both of the Nordic DevAcademy lessons</li>
-<li>Upload a screenshot of your CI pipeline jobs passing</li>
-</ol>
-</section>
-<section id="how-to-ask-for-help" class="level2">
-<h2 class="anchored" data-anchor-id="how-to-ask-for-help">How to Ask for Help</h2>
-<ol type="1">
-<li>If you have a general / non-coding question, you should ask your TAs / Dr. Palmeri on Ed to allow any of them to respond in a timely manner.</li>
-<li>Push you code to your GitLab repository, ideally with your active development on a non-<code>main</code> branch.</li>
-<li>Create an <a href="https://docs.gitlab.com/ee/user/project/issues/">Issue</a> in your repository.
-<ul>
-<li>Add as much detail as possible as to your problem, and add links to specific lines / section of code when possible.</li>
-<li>Assign the label “Bug” or “Question”, as appropriate.</li>
-<li>Be sure to specify what branch you are working on.</li>
-<li>Assign the Issue to one of the TAs.</li>
-<li>If your TA cannot solve your Issue, they can escalate the Issue to Dr.&nbsp;Palmeri.</li>
-</ul></li>
-<li>You will get a response to your Issue, and maybe a new branch of code will be pushed to help you with some example syntax that you can use <code>git diff</code> to visualize.</li>
-</ol>
 
 
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W119
+</script>
+<div id="exercise-loading-indicator" class="exercise-loading-indicator d-none d-flex align-items-center gap-2">
+<div id="exercise-loading-status" class="d-flex gap-2">
+
+</div>
+<div class="spinner-grow spinner-grow-sm">
+
+</div>
+</div>
+<script type="vfs-file">
+W10=
+</script>
 </section>
 
 </main> <!-- /main -->
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W119
+</script>
+<script type="module">
+if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
+window._ojs.paths.runtimeToDoc = "../../slides";
+window._ojs.paths.runtimeToRoot = "../..";
+window._ojs.paths.docToRoot = "..";
+window._ojs.selfContained = false;
+window._ojs.runtime.interpretFromScriptTags();
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
@@ -912,4 +990,4 @@ Important
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/Embedded-Medical-Devices/edit/main/labs/c-programming-lab.qmd" class="toc-action"><i class="bi bi-git"></i>Edit this page</a></li><li><a href="https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/Embedded-Medical-Devices/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/Embedded-Medical-Devices/edit/main/slides/zephyr-threads-events.qmd" class="toc-action"><i class="bi bi-git"></i>Edit this page</a></li><li><a href="https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/Embedded-Medical-Devices/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>

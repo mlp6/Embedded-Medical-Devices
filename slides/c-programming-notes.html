@@ -1,0 +1,1537 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.31">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Dr.&nbsp;Mark Palmeri, M.D., Ph.D.">
+
+<title>C Programming – Embedded Medical Devices</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-fced259a1985fd972ecb57c7cd45153f.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-10ce6858d882512638623bc10e3ba411.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/live-runtime/live-runtime.js" type="module"></script>
+<link href="../site_libs/quarto-contrib/live-runtime/live-runtime.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script type="module" src="../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
+<link href="../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-sidebar docked quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../slides/zephyr-nrf52833dk-intro.html">Learning Modules</a></li><li class="breadcrumb-item"><a href="../slides/c-programming-notes.html">C Programming</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-center sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Embedded Medical Devices</a> 
+    </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Course Information</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../course-syllabus.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Course Syllabus</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../bme-lab-policies.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">BME Lab Policies</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+ <span class="menu-text">Ed Discussion</span>
+  </li>
+          <li class="sidebar-item">
+ <span class="menu-text">Canvas</span>
+  </li>
+          <li class="sidebar-item">
+ <span class="menu-text">Gradescope</span>
+  </li>
+          <li class="sidebar-item">
+ <span class="menu-text">Panopto</span>
+  </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../software-install-tutorials.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Software Installation &amp; Tutorials</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../faq.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">FAQ</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Learning Modules</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../slides/zephyr-nrf52833dk-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to Zephyr &amp; Nordic SoCs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../slides/event-driven-state-machine.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Event-Driven State Machines</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../slides/git-fundamentals-notes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Git Fundamentals</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../slides/c-programming-notes.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">C Programming</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../slides/zephyr-gpio-isr-callbacks.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">GPIO, ISR, and Callbacks</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../slides/zephyr-timers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Timers</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../slides/zephyr-threads-events.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Threads and Kernel Events</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../slides/zephyr-smf.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">State Machine Framework (SMF)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../slides/zephyr-adc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Analog-to-Digital Conversion (ADC)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../slides/zephyr-pwm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Pulse Width Modulation (PWM)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../slides/zephyr-serial-communication.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Serial Communication (UART, I2C, SPI)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../slides/zephyr-ble.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bluetooth Low Energy (BLE)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../slides/zephyr-vbus.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">VBUS</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Labs</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../labs/event-driven-state-machine-lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Event-Driven State Machine Lab</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../labs/c-programming-lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">C Programming Lab</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../labs/zephyr-gpio-isr-callbacks-lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">GPIO, ISR, and Callbacks Lab</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../labs/zephyr-smf-lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">State Machine Framework (SMF) Refactor Lab</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../labs/zephyr-timers-lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Timers Lab</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../labs/zephyr-threads-events-lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Threads and Kernel Events Lab</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Resources</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../resources/how-to-generate-ecg-waveforms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">How to Generate ECG Waveforms</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../resources/debugging.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Zephyr: Debugging in VS Code</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#binary-data" id="toc-binary-data" class="nav-link active" data-scroll-target="#binary-data">Binary Data</a>
+  <ul class="collapse">
+  <li><a href="#why-base2" id="toc-why-base2" class="nav-link" data-scroll-target="#why-base2">Why Base2?</a></li>
+  <li><a href="#binary-base2-numbers" id="toc-binary-base2-numbers" class="nav-link" data-scroll-target="#binary-base2-numbers">Binary (Base2) Numbers</a></li>
+  <li><a href="#common-binary-number-word-lengths" id="toc-common-binary-number-word-lengths" class="nav-link" data-scroll-target="#common-binary-number-word-lengths">Common Binary Number Word Lengths</a></li>
+  <li><a href="#endianness" id="toc-endianness" class="nav-link" data-scroll-target="#endianness">Endianness</a></li>
+  <li><a href="#data-encoding" id="toc-data-encoding" class="nav-link" data-scroll-target="#data-encoding">Data Encoding</a></li>
+  <li><a href="#hexadecimal-base16" id="toc-hexadecimal-base16" class="nav-link" data-scroll-target="#hexadecimal-base16">Hexadecimal (Base16)</a></li>
+  <li><a href="#base64" id="toc-base64" class="nav-link" data-scroll-target="#base64">Base64</a></li>
+  </ul></li>
+  <li><a href="#text-encoding" id="toc-text-encoding" class="nav-link" data-scroll-target="#text-encoding">Text Encoding</a>
+  <ul class="collapse">
+  <li><a href="#ascii" id="toc-ascii" class="nav-link" data-scroll-target="#ascii">ASCII</a></li>
+  <li><a href="#utf-8" id="toc-utf-8" class="nav-link" data-scroll-target="#utf-8">UTF-8</a></li>
+  <li><a href="#data-types-c" id="toc-data-types-c" class="nav-link" data-scroll-target="#data-types-c">Data Types (C)</a></li>
+  <li><a href="#how-are-floating-point-numbers-represented" id="toc-how-are-floating-point-numbers-represented" class="nav-link" data-scroll-target="#how-are-floating-point-numbers-represented">How are floating point numbers represented?</a></li>
+  <li><a href="#declaring-variables-by-data-type-c" id="toc-declaring-variables-by-data-type-c" class="nav-link" data-scroll-target="#declaring-variables-by-data-type-c">Declaring Variables by Data Type (C)</a></li>
+  <li><a href="#why-not-just-make-all-numbers-floatsdoubles" id="toc-why-not-just-make-all-numbers-floatsdoubles" class="nav-link" data-scroll-target="#why-not-just-make-all-numbers-floatsdoubles">Why not just make all numbers floats/doubles?</a></li>
+  <li><a href="#variable-scope" id="toc-variable-scope" class="nav-link" data-scroll-target="#variable-scope">Variable Scope</a></li>
+  <li><a href="#constants" id="toc-constants" class="nav-link" data-scroll-target="#constants">Constants</a></li>
+  <li><a href="#macros" id="toc-macros" class="nav-link" data-scroll-target="#macros">MACROS</a></li>
+  <li><a href="#static-variables" id="toc-static-variables" class="nav-link" data-scroll-target="#static-variables">Static Variables</a></li>
+  <li><a href="#typecasting" id="toc-typecasting" class="nav-link" data-scroll-target="#typecasting">Typecasting</a></li>
+  <li><a href="#bit-depth" id="toc-bit-depth" class="nav-link" data-scroll-target="#bit-depth">Bit Depth</a></li>
+  <li><a href="#printing-logging-data-types" id="toc-printing-logging-data-types" class="nav-link" data-scroll-target="#printing-logging-data-types">Printing / Logging Data Types</a></li>
+  <li><a href="#pointers" id="toc-pointers" class="nav-link" data-scroll-target="#pointers">Pointers</a></li>
+  <li><a href="#general-c-code-structure" id="toc-general-c-code-structure" class="nav-link" data-scroll-target="#general-c-code-structure">General C Code Structure</a></li>
+  <li><a href="#coding-style" id="toc-coding-style" class="nav-link" data-scroll-target="#coding-style">Coding Style</a></li>
+  </ul></li>
+  <li><a href="#functions" id="toc-functions" class="nav-link" data-scroll-target="#functions">Functions</a>
+  <ul class="collapse">
+  <li><a href="#return-typescodes" id="toc-return-typescodes" class="nav-link" data-scroll-target="#return-typescodes">Return Types/Codes</a></li>
+  <li><a href="#function-arguments" id="toc-function-arguments" class="nav-link" data-scroll-target="#function-arguments">Function Arguments</a></li>
+  <li><a href="#main" id="toc-main" class="nav-link" data-scroll-target="#main"><code>main</code></a></li>
+  </ul></li>
+  <li><a href="#fun-data-structures" id="toc-fun-data-structures" class="nav-link" data-scroll-target="#fun-data-structures">Fun Data Structures</a>
+  <ul class="collapse">
+  <li><a href="#arrays" id="toc-arrays" class="nav-link" data-scroll-target="#arrays">Arrays</a></li>
+  <li><a href="#enumerations-enums" id="toc-enumerations-enums" class="nav-link" data-scroll-target="#enumerations-enums">Enumerations (Enums)</a></li>
+  <li><a href="#structs" id="toc-structs" class="nav-link" data-scroll-target="#structs">Structs</a></li>
+  </ul></li>
+  <li><a href="#flow-control" id="toc-flow-control" class="nav-link" data-scroll-target="#flow-control">Flow Control</a>
+  <ul class="collapse">
+  <li><a href="#conditional-statements" id="toc-conditional-statements" class="nav-link" data-scroll-target="#conditional-statements">Conditional Statements</a></li>
+  <li><a href="#loops" id="toc-loops" class="nav-link" data-scroll-target="#loops">Loops</a></li>
+  <li><a href="#project-libraries" id="toc-project-libraries" class="nav-link" data-scroll-target="#project-libraries">Project Libraries</a></li>
+  <li><a href="#cmake-build-system" id="toc-cmake-build-system" class="nav-link" data-scroll-target="#cmake-build-system">CMake Build System</a></li>
+  <li><a href="#memory-management" id="toc-memory-management" class="nav-link" data-scroll-target="#memory-management">Memory Management</a></li>
+  <li><a href="#const-data" id="toc-const-data" class="nav-link" data-scroll-target="#const-data">Const Data</a></li>
+  <li><a href="#stack" id="toc-stack" class="nav-link" data-scroll-target="#stack">Stack</a></li>
+  <li><a href="#free-store" id="toc-free-store" class="nav-link" data-scroll-target="#free-store">Free Store</a></li>
+  <li><a href="#heap" id="toc-heap" class="nav-link" data-scroll-target="#heap">Heap</a></li>
+  <li><a href="#globalstatic" id="toc-globalstatic" class="nav-link" data-scroll-target="#globalstatic">Global/Static</a></li>
+  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/Embedded-Medical-Devices/edit/main/slides/c-programming.qmd" class="toc-action"><i class="bi bi-git"></i>Edit this page</a></li><li><a href="https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/Embedded-Medical-Devices/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="c-programming-slides.html"><i class="bi bi-file-slides"></i>RevealJS (live)</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../slides/zephyr-nrf52833dk-intro.html">Learning Modules</a></li><li class="breadcrumb-item"><a href="../slides/c-programming-notes.html">C Programming</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">C Programming</h1>
+<p class="subtitle lead">BME554L -Fall 2025 - Palmeri</p>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Dr.&nbsp;Mark Palmeri, M.D., Ph.D. </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            Duke University
+          </p>
+      </div>
+  </div>
+
+<div class="quarto-title-meta">
+
+      
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">Invalid Date</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="binary-data" class="level1">
+<h1>Binary Data</h1>
+<section id="why-base2" class="level2">
+<h2 class="anchored" data-anchor-id="why-base2">Why Base2?</h2>
+<ul>
+<li>Binary states: <code>HIGH</code> and <code>LOW</code></li>
+<li><code>LOW</code> is commonly <code>GND</code></li>
+<li><code>HIGH</code> is commonly either 5, 3.3 or 1.8 V.</li>
+<li>Why binary? Electronics really can only represent <code>On</code> and <code>Off</code> states at the lowest level in hardware.</li>
+</ul>
+</section>
+<section id="binary-base2-numbers" class="level2">
+<h2 class="anchored" data-anchor-id="binary-base2-numbers">Binary (Base2) Numbers</h2>
+<ul>
+<li><code>base10</code> (decimal): 0-9 in summed powers of 10.</li>
+<li><code>base2</code> (binary): 0, 1 in summed powers of 2.</li>
+<li>Convert binary to decimal: <span class="math inline">\(a_n2^n + a_{n-1}2^{n-1}+\dots+a_12^1+a_02^0\)</span>, where <span class="math inline">\(a_n\)</span> is the <span class="math inline">\(n^{th}\)</span> bit in the binary number:
+<ul>
+<li>For example, for the binary number 0b101 (where ‘0b’ means the number is represented in binary), the first 1 (from left to right) is in the 2nd bit spot, the 0 is in the 1st bit spot, and the second 1 is in the 0th bit spot.</li>
+<li>Using the above formula results in <span class="math inline">\(1*2^2 + 0*2^1 + 1*2^0 = 4 + 0 + 1 = 5\)</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="common-binary-number-word-lengths" class="level2">
+<h2 class="anchored" data-anchor-id="common-binary-number-word-lengths">Common Binary Number Word Lengths</h2>
+<p><em>Word:</em> Number of bits to use to express a value</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Bit Depth</th>
+<th>Name</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Bit</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Nibble</td>
+<td>1001</td>
+</tr>
+<tr class="odd">
+<td>8</td>
+<td>Byte</td>
+<td>10011011</td>
+</tr>
+</tbody>
+</table>
+<p>“Standard” word length can be system architecture dependent (16-, 32- or 64-bits)</p>
+</section>
+<section id="endianness" class="level2">
+<h2 class="anchored" data-anchor-id="endianness">Endianness</h2>
+<p>The bits–or bytes–of a word can be organized from most significant to least significant or vice versa; this order is referred to as <strong>endianness</strong>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/c/endian_example.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p><a href="https://en.wikipedia.org/wiki/Endianness">https://en.wikipedia.org/wiki/Endianness</a></p>
+</section>
+<section id="data-encoding" class="level2">
+<h2 class="anchored" data-anchor-id="data-encoding">Data Encoding</h2>
+<p>Raw binary data (bits) can quickly become cumbersome to read and write. To make data more human readable, we can encode it into a more compact form.</p>
+</section>
+<section id="hexadecimal-base16" class="level2">
+<h2 class="anchored" data-anchor-id="hexadecimal-base16">Hexadecimal (Base16)</h2>
+<ul>
+<li><code>base16</code> (hexadecimal): 0-9, A-F in summed powers of 16 (0-15).</li>
+<li>A single character represents a <em>nibble</em>.</li>
+<li>Hex is indicated by a leading <code>0x</code> or <code>16</code> subscript: 22546 = <code>0x5812</code> = <code>5812</code><sub>16</sub></li>
+</ul>
+<p><a href="https://en.wikipedia.org/wiki/Hexadecimal">https://en.wikipedia.org/wiki/Hexadecimal</a></p>
+</section>
+<section id="base64" class="level2">
+<h2 class="anchored" data-anchor-id="base64">Base64</h2>
+<p><img src="images/c/base64.png" class="img-fluid"></p>
+<p><a href="https://en.wikipedia.org/wiki/Base64">https://en.wikipedia.org/wiki/Base64</a></p>
+</section>
+</section>
+<section id="text-encoding" class="level1">
+<h1>Text Encoding</h1>
+<section id="ascii" class="level2">
+<h2 class="anchored" data-anchor-id="ascii">ASCII</h2>
+<p><img src="images/c/USASCII_code_chart.png" class="img-fluid"></p>
+<p><a href="https://en.wikipedia.org/wiki/ASCII">https://en.wikipedia.org/wiki/ASCII</a></p>
+</section>
+<section id="utf-8" class="level2">
+<h2 class="anchored" data-anchor-id="utf-8">UTF-8</h2>
+<p>https://en.wikipedia.org/wiki/UTF-8</p>
+</section>
+<section id="data-types-c" class="level2">
+<h2 class="anchored" data-anchor-id="data-types-c">Data Types (C)</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Bit Depth</th>
+<th>Value Range</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>bool</td>
+<td>1 or 8</td>
+<td>true/false (1/0)</td>
+</tr>
+<tr class="even">
+<td>byte</td>
+<td>8</td>
+<td>0-255 (unsigned)</td>
+</tr>
+<tr class="odd">
+<td>char</td>
+<td>8</td>
+<td>-128-127 (signed)</td>
+</tr>
+<tr class="even">
+<td>int</td>
+<td>16</td>
+<td>-32768-32767 (signed)</td>
+</tr>
+<tr class="odd">
+<td>uint</td>
+<td>16</td>
+<td>0-65535 (unsigned)</td>
+</tr>
+<tr class="even">
+<td>long</td>
+<td>32</td>
+<td>-2147483648-2147483647 (signed)</td>
+</tr>
+<tr class="odd">
+<td>float</td>
+<td>32</td>
+<td>1.2E-38–3.4E38 (signed)</td>
+</tr>
+<tr class="even">
+<td>double</td>
+<td>64</td>
+<td>2.3E-308-1.7E308 (signed)</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="how-are-floating-point-numbers-represented" class="level2">
+<h2 class="anchored" data-anchor-id="how-are-floating-point-numbers-represented">How are floating point numbers represented?</h2>
+<p><img src="images/c/Float_example.png" class="img-fluid"></p>
+<p><img src="images/c/significand-base-exponent.png" class="img-fluid"></p>
+</section>
+<section id="declaring-variables-by-data-type-c" class="level2">
+<h2 class="anchored" data-anchor-id="declaring-variables-by-data-type-c">Declaring Variables by Data Type (C)</h2>
+<ul>
+<li>Matlab, by default, declares variables when first used, and defaults all numerical data to be <code>double</code> (64-bit floating point).<br>
+</li>
+<li>Python infers data type based on the value assigned to the variable.<br>
+</li>
+<li>In C, we must explicitly declare the data type of a variable, and the data type cannot change over the life of the variable.</li>
+</ul>
+</section>
+<section id="why-not-just-make-all-numbers-floatsdoubles" class="level2">
+<h2 class="anchored" data-anchor-id="why-not-just-make-all-numbers-floatsdoubles">Why not just make all numbers floats/doubles?</h2>
+<p>The <code>nRF52833</code> only has 128 kB of RAM. If we can use smaller data types, we can store more data in memory.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int16_t</span> my_int <span class="op">=</span> <span class="dv">5</span><span class="op">;</span> <span class="co">// 16-bit signed integer</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="dt">uint16_t</span> my_uint <span class="op">=</span> <span class="dv">5</span><span class="op">;</span> <span class="co">// 16-bit unsigned integer</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="dt">float</span> my_float <span class="op">=</span> <span class="fl">5.0</span><span class="op">;</span> <span class="co">// 32-bit floating point</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="variable-scope" class="level2">
+<h2 class="anchored" data-anchor-id="variable-scope">Variable Scope</h2>
+<p>Variables can be limited in their <strong>scope</strong> (where they are accessible).</p>
+<ul>
+<li><strong>Global</strong> variables are defined outside of functions and are globally available to everything in your program.</li>
+<li><strong>Local</strong> variables are defined inside of functions and are only visible within that function.</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;zephyr/kernel.h&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> my_global_variable<span class="op">;</span> <span class="co">// global variable</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> my_function<span class="op">(</span><span class="dt">int</span> my_input<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> my_local_variable<span class="op">;</span> <span class="co">// local variable</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">// do something</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="constants" class="level2">
+<h2 class="anchored" data-anchor-id="constants">Constants</h2>
+<ul>
+<li>Variables that have values that will not change can be declared as <strong>Constants</strong> (<code>const</code>).</li>
+<li>Constant variables consume a fixed amount of memory based on their data type when they are declared and defined.</li>
+</ul>
+</section>
+<section id="macros" class="level2">
+<h2 class="anchored" data-anchor-id="macros">MACROS</h2>
+<ul>
+<li><strong>MACROS</strong> are preprocessor directives that are replaced with their values (constants of function definitions) before the code is compiled.</li>
+<li>MACROS save memory compared to using constant variables and can improve readability.</li>
+<li>Defined with the <code>#define</code> directive after <code>#include</code> preprocessor directives and are typically typed in <code>ALLCAPS</code>.</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;zephyr/kernel.h&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#define MY_MACRO </span><span class="dv">1</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> my_function<span class="op">(</span><span class="dt">int</span> my_input<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">// do something</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> a <span class="op">=</span> MY_MACRO <span class="op">*</span> my_input<span class="op">;</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="static-variables" class="level2">
+<h2 class="anchored" data-anchor-id="static-variables">Static Variables</h2>
+<ul>
+<li>Static variables that are local variables in functions retain their value between function calls (exit and re-entry).</li>
+<li>Static global variables are only scoped within the file they are defined in.</li>
+<li>Static variables get their own memory space that is not shared with other variables that are more dynamically allocated.</li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;zephyr/kernel.h&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> my_function<span class="op">(</span><span class="dt">int</span> my_input<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">static</span> <span class="dt">int</span> my_static_variable <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> <span class="co">// static local variable</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  my_static_variable <span class="op">+=</span> my_input<span class="op">;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  printk<span class="op">(</span><span class="st">"The value of my_static_variable is </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> my_static_variable<span class="op">);</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="typecasting" class="level2">
+<h2 class="anchored" data-anchor-id="typecasting">Typecasting</h2>
+<ul>
+<li>Use different data types in mathematical operations can lead to unexpected results.</li>
+</ul>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Watch out for integer math (fixed point) that will yield a non-integer (floating point) result.</p>
+</div>
+</div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> a <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> b <span class="op">=</span> <span class="dv">3</span><span class="op">;</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">float</span> c<span class="op">;</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  c <span class="op">=</span> a <span class="op">/</span> b<span class="op">;</span> <span class="co">// c = 1.0</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<hr>
+<ul>
+<li><strong>Typecasting</strong> is performed by placing the desired data type in parentheses before the value or variable.</li>
+<li>Once a typecasted variable is encountered in the expression (by order of operations), then the rest of the operation is performed in that typecast unless typecasted again.</li>
+</ul>
+<div class="sourceCode" id="cb6"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> a <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> b <span class="op">=</span> <span class="dv">3</span><span class="op">;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="dt">float</span> c<span class="op">;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> <span class="op">(</span><span class="dt">float</span><span class="op">)</span>a <span class="op">/</span> b<span class="op">;</span> <span class="co">// b is typecasted to float </span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>                  <span class="co">// because a is typecasted to float</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="bit-depth" class="level2">
+<h2 class="anchored" data-anchor-id="bit-depth">Bit Depth</h2>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Watch out for the range of your data type! If your mathematical operation exceeds the min/max value of the bit depth, the data will “wrap around”.</p>
+</div>
+</div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="dt">uint8_t</span> a <span class="op">=</span> <span class="dv">255</span><span class="op">;</span> <span class="co">// 8-bit unsigned integer</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> a <span class="op">+</span> <span class="dv">1</span><span class="op">;</span> <span class="co">// a = 0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="printing-logging-data-types" class="level2">
+<h2 class="anchored" data-anchor-id="printing-logging-data-types">Printing / Logging Data Types</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Formatted Print Placeholder</th>
+<th>Data Type</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>%d</code></td>
+<td>decimal (int)</td>
+</tr>
+<tr class="even">
+<td><code>%ld</code></td>
+<td>long decimal (32-bit)</td>
+</tr>
+<tr class="odd">
+<td><code>%lld</code></td>
+<td>long long decimal (64-bit)</td>
+</tr>
+<tr class="even">
+<td><code>%u</code></td>
+<td>unsigned decimal (uint)</td>
+</tr>
+<tr class="odd">
+<td><code>%f</code></td>
+<td>float</td>
+</tr>
+<tr class="even">
+<td><code>%c</code></td>
+<td>char</td>
+</tr>
+<tr class="odd">
+<td><code>%s</code></td>
+<td>string (char array)</td>
+</tr>
+<tr class="even">
+<td><code>%x</code></td>
+<td>hex (int)</td>
+</tr>
+<tr class="odd">
+<td><code>%b</code></td>
+<td>binary (int)</td>
+</tr>
+<tr class="even">
+<td><code>%p</code></td>
+<td>pointer (memory address)</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb8"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>printk<span class="op">(</span><span class="st">"The value of a is </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> a<span class="op">);</span> <span class="co">// %d must match the data type of a to properly print its value</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="pointers" class="level2">
+<h2 class="anchored" data-anchor-id="pointers">Pointers</h2>
+<p>One of the greatest strengths–and most dangerous aspects–of C is the use of pointers. A pointer is a variable that stores the memory address of another variable. Pointers are used to pass variables by reference (in contrast to value) to functions, and to dynamically allocate memory.</p>
+<p>Pointers save memory and time by not copying the value of a variable to a function. Instead, the function can directly access the variable in memory. This is especially useful for large data structures.</p>
+<hr>
+<div class="sourceCode" id="cb9"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> a <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> my_function<span class="op">(</span><span class="dt">int</span> <span class="op">*</span>a_ptr<span class="op">)</span> <span class="op">{</span>  <span class="co">// *a_ptr is a pointer to int a</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="op">*</span>a_ptr <span class="op">=</span> <span class="dv">10</span><span class="op">;</span> <span class="co">// dereference a_ptr to change the value of a</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">// note no value is returned; it is assigned directly to the memory address</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  printk<span class="op">(</span><span class="st">"The value of a is </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> a<span class="op">);</span> <span class="co">// prints 5</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  my_function<span class="op">(&amp;</span>a<span class="op">);</span> <span class="co">// pass the memory address (&amp;) of a to my_function</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  printk<span class="op">(</span><span class="st">"The value of a is </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> a<span class="op">);</span> <span class="co">// prints 10</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="general-c-code-structure" class="level2">
+<h2 class="anchored" data-anchor-id="general-c-code-structure">General C Code Structure</h2>
+<ul>
+<li>Organization of C code is very important! Developers will “expect” certain things to be in certain places.</li>
+<li>C code is compiled (built) into a binary executable that is loaded onto the microcontroller. It is not “run” on-the-fly as an interpreted language like Matlab or Python.</li>
+</ul>
+<hr>
+<div class="sourceCode" id="cb10"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;zephyr/kernel.h&gt;</span><span class="pp">  </span><span class="co">// include system libraries</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">"my_great_library.h"</span><span class="pp"> </span><span class="co">// include your own libraries</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#define MY_MACRO </span><span class="dv">1</span><span class="pp"> </span><span class="co">// define MACROs</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> my_function<span class="op">(</span><span class="dt">int32_t</span> my_input<span class="op">);</span> <span class="co">// function prototype</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="dt">int32_t</span> my_global_variable<span class="op">;</span> <span class="co">// global variable</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> my_function<span class="op">(</span><span class="dt">int32_t</span> my_input<span class="op">)</span> <span class="op">{</span> <span class="co">// function definition</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="co">// do something</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  <span class="co">// no return b/c of void return type</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="coding-style" class="level2">
+<h2 class="anchored" data-anchor-id="coding-style">Coding Style</h2>
+<ul>
+<li>All lines of code must end with a semicolon <code>;</code>.<br>
+</li>
+<li>Indentation helps with readability, but does nothing to delineate code blocks.<br>
+</li>
+<li>Code blocks are delineated by curly braces <code>{}</code>.</li>
+</ul>
+</section>
+</section>
+<section id="functions" class="level1">
+<h1>Functions</h1>
+<section id="return-typescodes" class="level2">
+<h2 class="anchored" data-anchor-id="return-typescodes">Return Types/Codes</h2>
+<ul>
+<li>Most C functions will return a value, but that value tends to be an <strong>exit code</strong>, not a value being assigned to a variable.</li>
+<li>These codes are used to indicate the success or failure of the function, and tend to be ints.<br>
+</li>
+<li>Returned <code>0</code> indicates success, and any other value indicates failure.</li>
+<li>The return type is defined in the function prototype.<br>
+</li>
+<li>If the function does not return a value, the return type is <code>void</code>.</li>
+</ul>
+<hr>
+<div class="sourceCode" id="cb11"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> my_function<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">// do something</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span> <span class="co">// return 0 for success</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> return_code <span class="op">=</span> my_function<span class="op">();</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>return_code<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    printk<span class="op">(</span><span class="st">"Failure!</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    printk<span class="op">(</span><span class="st">"Success!</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="function-arguments" class="level2">
+<h2 class="anchored" data-anchor-id="function-arguments">Function Arguments</h2>
+<ul>
+<li>Function arguments are defined in the function prototype.</li>
+<li>Most of our arguments will be passed by reference (pointers to memory addresses), not value. This means that the function will be able to change the value of the variable passed to it by pointer reference.</li>
+<li>If the function does not take any arguments, the argument list is <code>void</code>. The function may still operate on variables if they are global.</li>
+</ul>
+</section>
+<section id="main" class="level2">
+<h2 class="anchored" data-anchor-id="main"><code>main</code></h2>
+<ul>
+<li>In Zephyr, the primary source code file is <code>src/main.c</code>.</li>
+<li>In Zephyr (and many other C frameworks), the <code>main()</code> function is the entry point of the program.</li>
+</ul>
+</section>
+</section>
+<section id="fun-data-structures" class="level1">
+<h1>Fun Data Structures</h1>
+<section id="arrays" class="level2">
+<h2 class="anchored" data-anchor-id="arrays">Arrays</h2>
+<ul>
+<li>Arrays are a contiguous block of memory that can store multiple values of the same data type.</li>
+<li>Arrays are declared with a fixed length.</li>
+<li>Arrays are indexed starting at <code>0</code> (not <code>1</code>!).</li>
+<li>Arrays can be declared with an initial value, or initialized later.
+<ul>
+<li><code>int my_array[5] = {1, 2, 3, 4, 5};</code></li>
+<li><code>int my_array[5] = {0};</code></li>
+<li><code>int my_array[5];</code></li>
+</ul></li>
+<li>The only time to populate all of the elements of an array is when it is initialized. Otherwise, you can:
+<ul>
+<li>Populate each element individually (e.g., a <code>for</code> loop), or</li>
+<li>Create a new array and then copy it over the existing array using <code>memcpy()</code>.</li>
+</ul></li>
+</ul>
+</section>
+<section id="enumerations-enums" class="level2">
+<h2 class="anchored" data-anchor-id="enumerations-enums">Enumerations (Enums)</h2>
+<ul>
+<li>Enums are a way to assign a name to a value.</li>
+<li>Enums are declared with a fixed length.</li>
+<li>Enums are indexed starting at <code>0</code> (not <code>1</code>!).</li>
+<li>Very useful for more verbose / readable <code>switch/case</code> statements.</li>
+</ul>
+<hr>
+<div class="sourceCode" id="cb12"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">enum</span> Level <span class="op">{</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  LOW<span class="op">,</span>    <span class="co">// by default, 0</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  MEDIUM<span class="op">,</span> <span class="co">// 1</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  HIGH    <span class="co">// 2</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="kw">enum</span> Level my_level <span class="op">=</span> MEDIUM<span class="op">;</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">switch</span> <span class="op">(</span>my_level<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">case</span> LOW<span class="op">:</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>      printk<span class="op">(</span><span class="st">"Low level</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>      <span class="cf">break</span><span class="op">;</span> <span class="co">// break out of switch statement</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">case</span> MEDIUM<span class="op">:</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>      printk<span class="op">(</span><span class="st">"Medium level</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>      <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">case</span> HIGH<span class="op">:</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>      printk<span class="op">(</span><span class="st">"High level</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>      <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">default</span><span class="op">:</span></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>      printk<span class="op">(</span><span class="st">"Unknown level</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>      <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="structs" class="level2">
+<h2 class="anchored" data-anchor-id="structs">Structs</h2>
+<ul>
+<li>Structures group multiple variables together.</li>
+<li>Structures are declared with a fixed length.</li>
+<li>Nice data structure to organize variables that are related to each other.</li>
+</ul>
+<div class="sourceCode" id="cb13"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Person <span class="op">{</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">char</span> name<span class="op">[</span><span class="dv">50</span><span class="op">];</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> age<span class="op">;</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">float</span> height<span class="op">;</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="kw">struct</span> Person my_person <span class="op">=</span> <span class="op">{</span><span class="st">"John"</span><span class="op">,</span> <span class="dv">32</span><span class="op">,</span> <span class="fl">1.8</span><span class="op">};</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  printk<span class="op">(</span><span class="st">"My name is </span><span class="sc">%s\n</span><span class="st">"</span><span class="op">,</span> my_person<span class="op">.</span>name<span class="op">);</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  printk<span class="op">(</span><span class="st">"I am </span><span class="sc">%d</span><span class="st"> years old</span><span class="sc">\n</span><span class="st">"</span><span class="op">,</span> my_person<span class="op">.</span>age<span class="op">);</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  printk<span class="op">(</span><span class="st">"I am </span><span class="sc">%f</span><span class="st"> meters tall</span><span class="sc">\n</span><span class="st">"</span><span class="op">,</span> my_person<span class="op">.</span>height<span class="op">);</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="flow-control" class="level1">
+<h1>Flow Control</h1>
+<section id="conditional-statements" class="level2">
+<h2 class="anchored" data-anchor-id="conditional-statements">Conditional Statements</h2>
+<div class="sourceCode" id="cb14"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>a <span class="op">==</span> <span class="dv">5</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">// do something</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>b <span class="op">!=</span> <span class="dv">3</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">// do something else</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">// do something else</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="loops" class="level2">
+<h2 class="anchored" data-anchor-id="loops">Loops</h2>
+<div class="sourceCode" id="cb15"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="dv">10</span><span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">// do something</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="op">(</span>a <span class="op">&lt;</span> <span class="dv">10</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">// do something</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  a<span class="op">++;</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="op">()</span> <span class="op">{</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  <span class="co">// do something</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>a <span class="op">==</span> <span class="dv">10</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">break</span><span class="op">;</span> <span class="co">// break out of loop</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="project-libraries" class="level2">
+<h2 class="anchored" data-anchor-id="project-libraries">Project Libraries</h2>
+<ul>
+<li>Writing your own libraries is a great way to organize your code and make it more readable.</li>
+<li>Libraries can also be shared with others and re-used in other projects.</li>
+<li><code>#include "your_library.h"</code> can be used to include a library in your source code.</li>
+<li>A library contains a pair of files:
+<ol type="1">
+<li><code>your_library.h</code> contains the function prototypes and macro definitions.</li>
+<li><code>your_library.c</code> contains the function definitions.</li>
+</ol></li>
+<li>To make sure that a library doesn’t get included multiple times, use the following syntax in your header file:</li>
+</ul>
+<hr>
+<div class="sourceCode" id="cb16"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#ifndef YOUR_LIBRARY_H</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#define YOUR_LIBRARY_H</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co">// function prototypes and macro definitions</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="pp">#endif</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>The definition of the macro <code>YOUR_LIBRARY_H</code> is tested for, and it is defined, then it has already been included into the code.</li>
+<li>In your library source code (<code>your_library.c</code>), you need to include this header file:</li>
+</ul>
+<div class="sourceCode" id="cb17"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">"your_library.h"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="cmake-build-system" class="level2">
+<h2 class="anchored" data-anchor-id="cmake-build-system">CMake Build System</h2>
+<ul>
+<li>Zephyr uses <code>cmake</code> as its build system, which helps link libraries used in your source code.</li>
+<li>You will also need to add the library to your <code>CMakeLists.txt</code> file:</li>
+</ul>
+<div class="sourceCode" id="cb18"><pre class="sourceCode cmake code-with-copy"><code class="sourceCode cmake"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">target_sources</span>(<span class="bn">app</span> <span class="ot">PRIVATE</span> src/main.c src/your_library.c)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="memory-management" class="level2">
+<h2 class="anchored" data-anchor-id="memory-management">Memory Management</h2>
+<p><img src="images/c/memory_management.png" class="img-fluid"></p>
+<p>A great summary of the different types of memory in C is summarized below from http://www.gotw.ca/gotw/009.htm:</p>
+</section>
+<section id="const-data" class="level2">
+<h2 class="anchored" data-anchor-id="const-data">Const Data</h2>
+<ul>
+<li>Stores string literals and other data whose values are known at compile time.<br>
+</li>
+<li>All data in this area are available during the entire lifetime of the program.</li>
+<li>All of these data are read-only; trying to modify it is undefined.</li>
+</ul>
+</section>
+<section id="stack" class="level2">
+<h2 class="anchored" data-anchor-id="stack">Stack</h2>
+<ul>
+<li>Stores automatic variables.</li>
+<li>Typically allocation is much faster than for dynamic storage (heap or free store) because a memory allocation involves only pointer increment rather than more complex management.<br>
+</li>
+<li>Objects are constructed immediately after memory is allocated and destroyed immediately before memory is deallocated, so there is no opportunity for programmers to directly manipulate allocated but uninitialized stack space (barring willful tampering using explicit dtors and placement new).</li>
+</ul>
+</section>
+<section id="free-store" class="level2">
+<h2 class="anchored" data-anchor-id="free-store">Free Store</h2>
+<ul>
+<li>The free store is one of the two dynamic memory areas, allocated/freed by new/delete.</li>
+</ul>
+</section>
+<section id="heap" class="level2">
+<h2 class="anchored" data-anchor-id="heap">Heap</h2>
+<ul>
+<li>The other dynamic memory area, allocated/freed by <code>malloc()</code>/<code>free()</code> and their variants.</li>
+</ul>
+</section>
+<section id="globalstatic" class="level2">
+<h2 class="anchored" data-anchor-id="globalstatic">Global/Static</h2>
+<ul>
+<li>Global or static variables and objects have their storage allocated at program startup, but may not be initialized until after the program has begun executing.</li>
+</ul>
+</section>
+<section id="resources" class="level2">
+<h2 class="anchored" data-anchor-id="resources">Resources</h2>
+<ul>
+<li><a href="https://www.geeksforgeeks.org/c-programming-language/">C Programming Language</a></li>
+</ul>
+
+
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W119
+</script>
+<div id="exercise-loading-indicator" class="exercise-loading-indicator d-none d-flex align-items-center gap-2">
+<div id="exercise-loading-status" class="d-flex gap-2">
+
+</div>
+<div class="spinner-grow spinner-grow-sm">
+
+</div>
+</div>
+<script type="vfs-file">
+W10=
+</script>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W119
+</script>
+<script type="module">
+if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
+window._ojs.paths.runtimeToDoc = "../../slides";
+window._ojs.paths.runtimeToRoot = "../..";
+window._ojs.paths.docToRoot = "..";
+window._ojs.selfContained = false;
+window._ojs.runtime.interpretFromScriptTags();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/embeddedmedicaldevices\.pages\.oit\.duke\.edu\/Embedded-Medical-Devices");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/Embedded-Medical-Devices/edit/main/slides/c-programming.qmd" class="toc-action"><i class="bi bi-git"></i>Edit this page</a></li><li><a href="https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/Embedded-Medical-Devices/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>

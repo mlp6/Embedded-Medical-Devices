@@ -7,9 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Dr.&nbsp;Mark Palmeri, M.D., Ph.D.">
-<meta name="dcterms.date" content="2025-06-20">
 
-<title>C Programming Lab – Embedded Medical Devices</title>
+<title>Zephyr: Devicetree, GPIO, ISR and Callbacks Lab – Embedded Medical Devices</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -82,7 +81,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labs/event-driven-state-machine-lab.html">Labs</a></li><li class="breadcrumb-item"><a href="../labs/c-programming-lab.html">C Programming Lab</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labs/event-driven-state-machine-lab.html">Labs</a></li><li class="breadcrumb-item"><a href="../labs/zephyr-gpio-isr-callbacks-lab.html">GPIO, ISR, and Callbacks Lab</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -252,13 +251,13 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../labs/c-programming-lab.html" class="sidebar-item-text sidebar-link active">
+  <a href="../labs/c-programming-lab.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">C Programming Lab</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../labs/zephyr-gpio-isr-callbacks-lab.html" class="sidebar-item-text sidebar-link">
+  <a href="../labs/zephyr-gpio-isr-callbacks-lab.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">GPIO, ISR, and Callbacks Lab</span></a>
   </div>
 </li>
@@ -315,28 +314,25 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#prelab" id="toc-prelab" class="nav-link active" data-scroll-target="#prelab">Prelab</a></li>
-  <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives">Objectives</a></li>
-  <li><a href="#zephyr-application-git-repository-overview" id="toc-zephyr-application-git-repository-overview" class="nav-link" data-scroll-target="#zephyr-application-git-repository-overview">Zephyr Application Git Repository Overview</a></li>
-  <li><a href="#things-to-do" id="toc-things-to-do" class="nav-link" data-scroll-target="#things-to-do">Things To Do</a></li>
-  <li><a href="#git-best-practices" id="toc-git-best-practices" class="nav-link" data-scroll-target="#git-best-practices">Git Best Practices</a>
-  <ul class="collapse">
-  <li><a href="#fork-clone-build-flash-view-serial-output" id="toc-fork-clone-build-flash-view-serial-output" class="nav-link" data-scroll-target="#fork-clone-build-flash-view-serial-output">Fork / Clone / Build / Flash / View Serial Output</a></li>
-  <li><a href="#modify-the-zephyr-application-datatypes-typecasting-formatted-printing" id="toc-modify-the-zephyr-application-datatypes-typecasting-formatted-printing" class="nav-link" data-scroll-target="#modify-the-zephyr-application-datatypes-typecasting-formatted-printing">Modify the Zephyr Application (DataTypes / Typecasting / Formatted Printing)</a></li>
-  </ul></li>
-  <li><a href="#library-refactor" id="toc-library-refactor" class="nav-link" data-scroll-target="#library-refactor">Library Refactor</a></li>
-  <li><a href="#push-everything-to-gitlab-create-an-issue-to-notify-dr.-palmeri" id="toc-push-everything-to-gitlab-create-an-issue-to-notify-dr.-palmeri" class="nav-link" data-scroll-target="#push-everything-to-gitlab-create-an-issue-to-notify-dr.-palmeri">Push Everything to GitLab &amp; Create an Issue to Notify Dr.&nbsp;Palmeri</a></li>
-  <li><a href="#gradescope" id="toc-gradescope" class="nav-link" data-scroll-target="#gradescope">Gradescope</a></li>
-  <li><a href="#how-to-ask-for-help" id="toc-how-to-ask-for-help" class="nav-link" data-scroll-target="#how-to-ask-for-help">How to Ask for Help</a></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#git-version-control" id="toc-git-version-control" class="nav-link" data-scroll-target="#git-version-control">Git Version Control</a></li>
+  <li><a href="#repository-setup" id="toc-repository-setup" class="nav-link" data-scroll-target="#repository-setup">Repository Setup</a></li>
+  <li><a href="#kernel-configuration" id="toc-kernel-configuration" class="nav-link" data-scroll-target="#kernel-configuration">Kernel Configuration</a></li>
+  <li><a href="#devicetree" id="toc-devicetree" class="nav-link" data-scroll-target="#devicetree">Devicetree</a></li>
+  <li><a href="#firmware" id="toc-firmware" class="nav-link" data-scroll-target="#firmware">Firmware</a></li>
+  <li><a href="#state-diagram" id="toc-state-diagram" class="nav-link" data-scroll-target="#state-diagram">State Diagram</a></li>
+  <li><a href="#notes-tips" id="toc-notes-tips" class="nav-link" data-scroll-target="#notes-tips">Notes &amp; Tips</a></li>
+  <li><a href="#how-do-i-ask-for-help" id="toc-how-do-i-ask-for-help" class="nav-link" data-scroll-target="#how-do-i-ask-for-help">How do I ask for help?</a></li>
+  <li><a href="#what-to-submit-grading" id="toc-what-to-submit-grading" class="nav-link" data-scroll-target="#what-to-submit-grading">What to Submit &amp; Grading</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/Embedded-Medical-Devices/edit/main/labs/c-programming-lab.qmd" class="toc-action"><i class="bi bi-git"></i>Edit this page</a></li><li><a href="https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/Embedded-Medical-Devices/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="c-programming-lab.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/Embedded-Medical-Devices/edit/main/labs/zephyr-gpio-isr-callbacks-lab.qmd" class="toc-action"><i class="bi bi-git"></i>Edit this page</a></li><li><a href="https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/Embedded-Medical-Devices/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="zephyr-gpio-isr-callbacks-lab.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labs/event-driven-state-machine-lab.html">Labs</a></li><li class="breadcrumb-item"><a href="../labs/c-programming-lab.html">C Programming Lab</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labs/event-driven-state-machine-lab.html">Labs</a></li><li class="breadcrumb-item"><a href="../labs/zephyr-gpio-isr-callbacks-lab.html">GPIO, ISR, and Callbacks Lab</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">C Programming Lab</h1>
+<h1 class="title">Zephyr: Devicetree, GPIO, ISR and Callbacks Lab</h1>
 <p class="subtitle lead">BME554L - Fall 2025 - Palmeri</p>
   <div class="quarto-categories">
     <div class="quarto-category">Lab</div>
@@ -357,7 +353,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">June 20, 2025</p>
+      <p class="date">Invalid Date</p>
     </div>
   </div>
   
@@ -369,43 +365,12 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<!-- TODO: have the students fork the c-programming-lab repository -->
-<!-- TODO: add debugging exercise -->
-<section id="prelab" class="level2">
-<h2 class="anchored" data-anchor-id="prelab">Prelab</h2>
-<ul>
-<li>Complete <a href="https://academy.nordicsemi.com/courses/nrf-connect-sdk-fundamentals/lessons/lesson-3-elements-of-an-nrf-connect-sdk-application/">Nordic DevAcademy: Lesson 3 – Elements of an nRF Connect SDK application</a></li>
-<li>Complete <a href="https://academy.nordicsemi.com/courses/nrf-connect-sdk-fundamentals/lessons/lesson-3-printing-messages-to-console-and-logging/">Nordic DevAcademy: Lesson 4 – Printing messages to console and logging</a></li>
-<li>Review <a href="../resources/debugging.html">Debugging</a> resource.</li>
-</ul>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>This week we will start programming the firmware that will be controlling your <code>nRF52833DK</code>. We will be using buttons to trigger device events and LEDs will be used to visualize output activity for the device. While LEDs might seem underwhelming, they are a universal way to represent how digital ouput signals could be used to control other devices (e.g., motors, actuators, etc.).</p>
 </section>
-<section id="objectives" class="level2">
-<h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
-<ul>
-<li>Introduction to C Programming</li>
-<li>Building Zephyr application</li>
-<li>Flashing Zephyr application</li>
-<li>Viewing serial output from Zephyr application running on your <code>nrf52833DK</code></li>
-<li>Debugging Zephyr applications in VS Code</li>
-</ul>
-</section>
-<section id="zephyr-application-git-repository-overview" class="level2">
-<h2 class="anchored" data-anchor-id="zephyr-application-git-repository-overview">Zephyr Application Git Repository Overview</h2>
-<ul>
-<li><code>src/main.c</code> - main application code</li>
-<li><code>.gitingore</code> - ignore files that are not needed in the git repository</li>
-<li><code>CMakeLists.txt</code> - build system configuration file</li>
-<li><code>prj.conf</code> - Zephyr configuration file</li>
-<li><code>README.md</code> - this file</li>
-<li><code>CMakePresets.json</code> - CMake presets file (build configuration)</li>
-<li><code>.gitlab-ci.yml</code> - GitLab CI configuration file</li>
-</ul>
-</section>
-<section id="things-to-do" class="level2">
-<h2 class="anchored" data-anchor-id="things-to-do">Things To Do</h2>
-</section>
-<section id="git-best-practices" class="level2">
-<h2 class="anchored" data-anchor-id="git-best-practices">Git Best Practices</h2>
+<section id="git-version-control" class="level2">
+<h2 class="anchored" data-anchor-id="git-version-control">Git Version Control</h2>
 <ul>
 <li>Use best practices for version control (branching, commit messages, etc.).</li>
 <li>Do all development on a dedicated branch that is merged into <code>main</code> once it is functional.</li>
@@ -426,70 +391,206 @@ Important
 <p>You do not want one, monolithic git commit right before you submit your project.</p>
 </div>
 </div>
-<section id="fork-clone-build-flash-view-serial-output" class="level3">
-<h3 class="anchored" data-anchor-id="fork-clone-build-flash-view-serial-output">Fork / Clone / Build / Flash / View Serial Output</h3>
+</section>
+<section id="repository-setup" class="level2">
+<h2 class="anchored" data-anchor-id="repository-setup">Repository Setup</h2>
+<!-- TODO: change this to the semester-specific Kits repo -->
+<ol type="1">
+<li>Fork the <a href="https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/zephyr-gpio-isr-callbacks-lab">lab template repository</a> into your personal GitLab user space.</li>
+<li>Add Dr.&nbsp;Palmeri (<code>mlp6</code>) as a <code>Maintainer</code> of your project ASAP. This will allow him to add your TAs and some project labels.</li>
+<li>Clone your forked project to your local laptop.</li>
+</ol>
+</section>
+<section id="kernel-configuration" class="level2">
+<h2 class="anchored" data-anchor-id="kernel-configuration">Kernel Configuration</h2>
+<p>Take note of kernel configurations enabled in <a href="prj.conf">prj.conf</a>:</p>
 <ul>
-<li>Fork this repository on GitLab</li>
-<li>Add Dr.&nbsp;Palmeri (<code>mlp6</code>) as a Maintainer in your forked repository.</li>
-<li>Clone your forked repository to your local machine</li>
-<li>Build the Zephyr application “as is” (review <a href="https://academy.nordicsemi.com/courses/nrf-connect-sdk-fundamentals/lessons/lesson-1-nrf-connect-sdk-introduction/">DevAcademy: Lesson 1</a>)</li>
-<li>Flash the Zephyr application to your development kit.
+<li><code>CONFIG_GPIO=y</code></li>
+<li><code>CONFIG_LOG=y</code></li>
+</ul>
+</section>
+<section id="devicetree" class="level2">
+<h2 class="anchored" data-anchor-id="devicetree">Devicetree</h2>
 <ul>
-<li>Connect the <code>VCOM</code> port on the <code>nrf52833DK</code> to your computer (using <code>Connected Devices</code> and the plug icon)</li>
-<li>Look at the serial output in the VS Code <code>Terminal</code></li>
+<li><p>We have introduced the concept of the Devicetree (DT) for the <code>nRF52833DK</code>. The development kit has a preconfigured DT (<code>nrf52833dk_nrf52833.dts</code>), which is selected when we create a board configuration (the present selected in <code>CMakePresents.json</code>).</p></li>
+<li><p>To make changes or additions to this DT, we will create a DT overlay file that will be compiled into the firmware. The default name of this file is <code>nrf52833dk_nrf52833.overlay</code> and it is located in the <code>boards/</code> directory.</p></li>
+<li><p>The <code>nRF52833DK</code> has 4 integrated LEDs. Edit the DT overlay file for your project to create alias for 4 LEDs on the following pins (all 4 of which are the integrated LEDs), which will then be associated with the specified firmware GPIO pin struct names:</p></li>
+</ul>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 30%">
+<col style="width: 23%">
+<col style="width: 14%">
+<col style="width: 16%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Firmware gpio_dt_spec Struct Name</strong></th>
+<th><strong>DT Alias</strong></th>
+<th><strong>DT Default Node Name</strong></th>
+<th><strong>Physical GPIO Pin</strong></th>
+<th><strong>DK Part Label</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>heartbeat_led</code></td>
+<td><code>heartbeat</code></td>
+<td><code>led0</code></td>
+<td><code>P0.13</code></td>
+<td><code>LED1</code></td>
+</tr>
+<tr class="even">
+<td><code>iv_pump_led</code></td>
+<td><code>ivpump</code></td>
+<td><code>led1</code></td>
+<td><code>P0.14</code></td>
+<td><code>LED2</code></td>
+</tr>
+<tr class="odd">
+<td><code>buzzer_led</code></td>
+<td><code>buzzer</code></td>
+<td><code>led2</code></td>
+<td><code>P0.15</code></td>
+<td><code>LED3</code></td>
+</tr>
+<tr class="even">
+<td><code>error_led</code></td>
+<td><code>error</code></td>
+<td><code>led3</code></td>
+<td><code>P0.16</code></td>
+<td><code>LED4</code></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>The <code>nRF52833DK</code> also has 4 integrated buttons. Edit the DT overlay file for your project to create aliases for these 4 buttons that are the same as their default DTS node names:</li>
+</ul>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 30%">
+<col style="width: 27%">
+<col style="width: 14%">
+<col style="width: 11%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Firmware gpio_dt_spec Struct Name</strong></th>
+<th><strong>DT Alias</strong></th>
+<th><strong>DT Default Node Name</strong></th>
+<th><strong>Physical GPIO Pin</strong></th>
+<th><strong>DK Part Label</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>sleep_button</code></td>
+<td><code>sleepbutton</code></td>
+<td><code>button0</code></td>
+<td><code>P0.11</code></td>
+<td><code>Button 1</code></td>
+</tr>
+<tr class="even">
+<td><code>freq_up_button</code></td>
+<td><code>frequpbutton</code></td>
+<td><code>button1</code></td>
+<td><code>P0.12</code></td>
+<td><code>Button 2</code></td>
+</tr>
+<tr class="odd">
+<td><code>freq_down_button</code></td>
+<td><code>freqdownbutton</code></td>
+<td><code>button2</code></td>
+<td><code>P0.24</code></td>
+<td><code>Button 3</code></td>
+</tr>
+<tr class="even">
+<td><code>reset_button</code></td>
+<td><code>resetbutton</code></td>
+<td><code>button3</code></td>
+<td><code>P0.25</code></td>
+<td><code>Button 4</code></td>
+</tr>
+</tbody>
+</table>
+<p>Source: https://docs.nordicsemi.com/bundle/ug_nrf52833_dk/page/UG/dk/hw_buttons_leds.html</p>
+</section>
+<section id="firmware" class="level2">
+<h2 class="anchored" data-anchor-id="firmware">Firmware</h2>
+<p>Implement the following firmware functionality as a <strong>state machine</strong> (<code>switch/case</code>):</p>
+<ul>
+<li>Check that the <code>GPIO0</code> interface is ready.</li>
+<li>Initialize all LED output pins as <code>GPIO_OUTPUT_ACTIVE</code> or <code>GPIO_OUTPUT_INACTIVE</code>, as dictated by the functional specifications below. Note that <code>ACTIVE</code> for the LEDs on this DK corresponds to driving them <code>LOW</code>.</li>
+<li>Be sure to capture all function exit codes and have conditional statements to capture any returned error codes.</li>
+</ul>
+<p>Implement the following control logic:</p>
+<ul>
+<li>The <code>heartbeat</code> LED blinks at a fixed 1 Hz while <code>main()</code> is being executed. Issue a <code>LOG_INF()</code> statement each time the <code>heartbeat</code> LED is toggled.</li>
+<li>The 2 “action” LEDs (<code>buzzer_led</code> and <code>iv_pump_led</code>) blink out of phase with one another at 2 Hz by default.<br>
+</li>
+<li>This 2 Hz default blink frequency should be defined using a preprocessor macro: <code>#define LED_BLINK_FREQ_HZ 2</code>.<br>
+</li>
+<li>Issue a <code>LOG_INF()</code> statement each time the “action” LEDs are toggled.</li>
+<li><code>freq_up_button</code> increases the blink frequency of the “action” LEDs by 1 Hz each time it is pressed.</li>
+<li>This incremental increase in blink frequency should be defined by the preprocessor macro: <code>#define FREQ_UP_INC_HZ 1</code>.<br>
+</li>
+<li>Issue a descriptive <code>LOG_INF()</code> statement each time this button is pressed, which indicates the new blink frequency.</li>
+<li><code>freq_down_button</code> decreases the blink frequency of the “action” LEDs by 1 Hz each time it is pressed.</li>
+<li>This incremental increase in blink frequency should be defined by the preprocessor macro: <code>#define FREQ_DOWN_INC_HZ 1</code>.<br>
+</li>
+<li>Issue a descriptive <code>LOG_INF()</code> statement each time this button is pressed, which indicates the new blink frequency.</li>
+<li>If the blink frequency for the “action” LEDs is &lt; 1 Hz or &gt; 5 Hz, then:</li>
+<li>The “action” LEDs should both be off, and</li>
+<li>The <code>error</code> LED is continuously illuminated.<br>
+</li>
+<li>Issue a descriptive <code>LOG_ERR()</code> statement.</li>
+<li>The <code>heartbeat</code> LED should continue to blink at 1 Hz.</li>
+<li><code>freq_up_button</code>, <code>freq_down_button</code>, and <code>sleep_button</code> should be disabled (interrupts disabled).</li>
+<li>Define each of these min/max limits using preprocessor macros (you can choose appropriate names).</li>
+<li>The only way to exit the “error state” is to press the <code>reset</code> button.</li>
+<li>Pressing the <code>reset</code> button resets the “action” LEDs to blink at their default 2 Hz rate, out of phase with one another, and re-enables the <code>freq_up_button</code>, <code>freq_down_button</code>, and <code>sleep_button</code>.</li>
+<li>The <code>reset_button</code> can be pressed from any state and resets the device back to the default state.<br>
+</li>
+<li>A descriptive <code>LOG_INF()</code> statement should be issued each time the <code>reset</code> button is pressed.</li>
+<li>At any point in time when the “action” LEDs are blinking (i.e., not the error state), if the <code>sleep_button</code> is pressed:
+<ul>
+<li>The current blink frequency for the “action” LEDs is stored,</li>
+<li>Both “action” LEDs are turned off,</li>
+<li>The <code>heartbeat</code> LED continues to blink,</li>
+<li>A descriptive <code>LOG_INF()</code> statement is issued,</li>
+<li>The “sleep state” can be exited by:</li>
+<li>Pressing the <code>sleep</code> button again, at which time the device returns to blinking the “action” LEDs at the same frequency and relative phase before being put to sleep. Relative phase means the appropriate relative timing between the different “action” LEDs.</li>
+<li>Pressing the <code>reset_button</code>, at which time the device returns to blinking the “action” LEDs at their default 2 Hz rate, out of phase with one another.</li>
 </ul></li>
 </ul>
 </section>
-<section id="modify-the-zephyr-application-datatypes-typecasting-formatted-printing" class="level3">
-<h3 class="anchored" data-anchor-id="modify-the-zephyr-application-datatypes-typecasting-formatted-printing">Modify the Zephyr Application (DataTypes / Typecasting / Formatted Printing)</h3>
-<ul>
-<li>Inspect the code to see how variables <code>a</code>, <code>b</code> and <code>c</code> are declared and initialized.</li>
-<li>Flash the existing code and note the terminal output:</li>
-</ul>
-<p><img src="images/you_lose.png" width="200"></p>
-<ul>
-<li>On a development branch called <code>fix_division</code>, without changing the declared datatypes of <code>a</code>, <code>b</code>, or <code>c</code>, correct the code so that <code>c</code> is output in the terminal:</li>
-</ul>
-<p><img src="images/you_win.png" width="200"></p>
-<ul>
-<li>Push the <code>fix_division</code> branch to your GitLab repository.</li>
-<li>Create a <strong>Merge Request</strong> to merge the <code>fix_division</code> branch into your <code>main</code> branch.</li>
-<li>Make sure the GitLab CI pipeline is successful before merging the <code>fix_division</code> branch into <code>main</code>. If it isn’t passing, fix the problem locally on the same branch and push the changes to GitLab.</li>
-<li>Pull your updated <code>main</code> branch to your local machine.</li>
-<li>Create an annotated tag for the merged commit on main with the fixed division named <code>v1.0.0</code>.</li>
-<li>Push this annotated tag to your GitLab repository.</li>
-</ul>
-<p>:clock10: Note that the CI pipelines running on the GitLab server can take a while to complete. Do not rely on them for immediate development feedback, but rather as a final check before merging code into <code>main</code>.</p>
-</section>
-</section>
-<section id="library-refactor" class="level2">
-<h2 class="anchored" data-anchor-id="library-refactor">Library Refactor</h2>
-<ul>
-<li>On another development branch on your local machine called <code>refactor_library</code>, refactor the code to put the <code>divide_numbers()</code> function into a library called <code>my_math_functions.h</code>.</li>
-<li>Once you have your code working with this library, <strong>locally merge</strong> the <code>refactor_library</code> branch into <code>main</code>.</li>
-<li>Create an annotated tag for the merged commit on main with the refactored library named <code>v1.1.0</code>.</li>
-<li>Push the new commit(s) and annotated tag to your GitLab repository. Remember, this will need to be done with two commands, <code>git push</code> and <code>git push --tags</code>.</li>
-</ul>
-</section>
-<section id="push-everything-to-gitlab-create-an-issue-to-notify-dr.-palmeri" class="level2">
-<h2 class="anchored" data-anchor-id="push-everything-to-gitlab-create-an-issue-to-notify-dr.-palmeri">Push Everything to GitLab &amp; Create an Issue to Notify Dr.&nbsp;Palmeri</h2>
-<ul>
-<li>Make sure all of your commits are pushed to your <code>main</code> branch, along with both annotated tags.</li>
-<li>Confirm that the GitLab CI pipeline is successful.</li>
-<li>Create an Issue titled <code>C Programming Lab Complete</code> and assign it to Dr.&nbsp;Palmeri (<code>mlp6</code>).</li>
-</ul>
-</section>
-<section id="gradescope" class="level2">
-<h2 class="anchored" data-anchor-id="gradescope">Gradescope</h2>
-<p>Complete the Gradescope assignment for this lab that is a few simple tasks:</p>
+<section id="state-diagram" class="level2">
+<h2 class="anchored" data-anchor-id="state-diagram">State Diagram</h2>
 <ol type="1">
-<li>Confirm that you created the Issue above</li>
-<li>Confirm that you completed both of the Nordic DevAcademy lessons</li>
-<li>Upload a screenshot of your CI pipeline jobs passing</li>
+<li>Create a state diagram of your firmware using <a href="https://plantuml.com/">PlantUML</a>, or your diagraming program of choice.</li>
+<li>Include a PNG of your block diagram in your git repository called <code>state_diagram.png</code>.</li>
 </ol>
 </section>
-<section id="how-to-ask-for-help" class="level2">
-<h2 class="anchored" data-anchor-id="how-to-ask-for-help">How to Ask for Help</h2>
+<section id="notes-tips" class="level2">
+<h2 class="anchored" data-anchor-id="notes-tips">Notes &amp; Tips</h2>
+<ul>
+<li>You may want to make your state diagram before writing any code.</li>
+<li>Do not use <code>k_msleep()</code> in your code to control LED blink timing.
+<ul>
+<li>Sleep is <strong>blocking</strong> and paralyzes a single-threaded application.
+<ul>
+<li>Instead, have your main while loop run as fast as possible and use the <code>k_uptime_get()</code> function to determine when to toggle the LEDs.<br>
+</li>
+<li>Spoiler alert: We will be system kernel timers / threads to control the LED blink timing in the next lab.</li>
+</ul></li>
+</ul></li>
+<li>Consider using a <code>struct</code> for each LED to bookkeep the LED state, phase, blink frequency, etc.</li>
+</ul>
+</section>
+<section id="how-do-i-ask-for-help" class="level2">
+<h2 class="anchored" data-anchor-id="how-do-i-ask-for-help">How do I ask for help?</h2>
 <ol type="1">
 <li>If you have a general / non-coding question, you should ask your TAs / Dr. Palmeri on Ed to allow any of them to respond in a timely manner.</li>
 <li>Push you code to your GitLab repository, ideally with your active development on a non-<code>main</code> branch.</li>
@@ -503,6 +604,27 @@ Important
 </ul></li>
 <li>You will get a response to your Issue, and maybe a new branch of code will be pushed to help you with some example syntax that you can use <code>git diff</code> to visualize.</li>
 </ol>
+</section>
+<section id="what-to-submit-grading" class="level2">
+<h2 class="anchored" data-anchor-id="what-to-submit-grading">What to Submit &amp; Grading</h2>
+<ul>
+<li>Make sure you are committing as you develop your code, and have all of those commits pushed to GitLab (i.e., do not “squash” them).</li>
+<li>Make sure all of the CI pipelines are passing.</li>
+<li>Create and annotated tag called <code>v1.0.0</code> at the commit that represents your completed lab.</li>
+<li>Push your final repository and the annotated tag to GitLab.</li>
+<li>Create an Issue assigned to Dr.&nbsp;Palmeri titled <code>v1.0.0 ready for feedback</code> and assign it the Label <code>Review</code>.</li>
+<li><strong>You do not need to upload anything to the Gradescope assignment; someone on the teaching team will upload your tagged code to the Gradescope assignment for you.</strong></li>
+<li>Grading feedback will be given on code:
+<ul>
+<li>Functionality</li>
+<li>Efficieny of code logic</li>
+<li>“Readability”
+<ul>
+<li>“Readability” does not mean a lot of verbose comments</li>
+<li>“Readability” means that the structure of the code, the naming of variables, etc. convey meaning and logical flow.</li>
+</ul></li>
+</ul></li>
+</ul>
 
 
 </section>
@@ -912,4 +1034,4 @@ Important
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/Embedded-Medical-Devices/edit/main/labs/c-programming-lab.qmd" class="toc-action"><i class="bi bi-git"></i>Edit this page</a></li><li><a href="https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/Embedded-Medical-Devices/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/Embedded-Medical-Devices/edit/main/labs/zephyr-gpio-isr-callbacks-lab.qmd" class="toc-action"><i class="bi bi-git"></i>Edit this page</a></li><li><a href="https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/Embedded-Medical-Devices/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>

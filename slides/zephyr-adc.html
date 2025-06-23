@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.31">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Dr.&nbsp;Mark Palmeri, M.D., Ph.D.">
+
+<title>Zephyr: Analog-to-Digital Conversion – Embedded Medical Devices</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-fced259a1985fd972ecb57c7cd45153f.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-10ce6858d882512638623bc10e3ba411.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/live-runtime/live-runtime.js" type="module"></script>
+<link href="../site_libs/quarto-contrib/live-runtime/live-runtime.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script type="module" src="../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
+<link href="../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-sidebar docked quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../slides/zephyr-nrf52833dk-intro.html">Learning Modules</a></li><li class="breadcrumb-item"><a href="../slides/zephyr-adc.html">Analog-to-Digital Conversion (ADC)</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-center sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Embedded Medical Devices</a> 
+    </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Course Information</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../course-syllabus.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Course Syllabus</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../bme-lab-policies.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">BME Lab Policies</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+ <span class="menu-text">Ed Discussion</span>
+  </li>
+          <li class="sidebar-item">
+ <span class="menu-text">Canvas</span>
+  </li>
+          <li class="sidebar-item">
+ <span class="menu-text">Gradescope</span>
+  </li>
+          <li class="sidebar-item">
+ <span class="menu-text">Panopto</span>
+  </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../software-install-tutorials.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Software Installation &amp; Tutorials</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../faq.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">FAQ</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Learning Modules</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../slides/zephyr-nrf52833dk-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to Zephyr &amp; Nordic SoCs</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../slides/event-driven-state-machine.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Event-Driven State Machines</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../slides/git-fundamentals-notes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Git Fundamentals</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../slides/c-programming-notes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">C Programming</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../slides/zephyr-gpio-isr-callbacks.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">GPIO, ISR, and Callbacks</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../slides/zephyr-timers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Timers</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../slides/zephyr-threads-events.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Threads and Kernel Events</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../slides/zephyr-smf.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">State Machine Framework (SMF)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../slides/zephyr-adc.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Analog-to-Digital Conversion (ADC)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../slides/zephyr-pwm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Pulse Width Modulation (PWM)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../slides/zephyr-serial-communication.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Serial Communication (UART, I2C, SPI)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../slides/zephyr-ble.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bluetooth Low Energy (BLE)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../slides/zephyr-vbus.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">VBUS</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Labs</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../labs/event-driven-state-machine-lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Event-Driven State Machine Lab</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../labs/c-programming-lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">C Programming Lab</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../labs/zephyr-gpio-isr-callbacks-lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">GPIO, ISR, and Callbacks Lab</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../labs/zephyr-smf-lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">State Machine Framework (SMF) Refactor Lab</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../labs/zephyr-timers-lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Timers Lab</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../labs/zephyr-threads-events-lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Threads and Kernel Events Lab</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Resources</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../resources/how-to-generate-ecg-waveforms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">How to Generate ECG Waveforms</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../resources/debugging.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Zephyr: Debugging in VS Code</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#how-does-an-saadc-work" id="toc-how-does-an-saadc-work" class="nav-link" data-scroll-target="#how-does-an-saadc-work">How does an SAADC work?</a></li>
+  <li><a href="#prj.conf" id="toc-prj.conf" class="nav-link" data-scroll-target="#prj.conf"><code>prj.conf</code></a></li>
+  <li><a href="#devicetree-overlay" id="toc-devicetree-overlay" class="nav-link" data-scroll-target="#devicetree-overlay">Devicetree Overlay</a></li>
+  <li><a href="#how-digital-output-is-calculated" id="toc-how-digital-output-is-calculated" class="nav-link" data-scroll-target="#how-digital-output-is-calculated">How Digital Output is Calculated</a></li>
+  <li><a href="#reference-voltage" id="toc-reference-voltage" class="nav-link" data-scroll-target="#reference-voltage">Reference Voltage</a></li>
+  <li><a href="#main.c" id="toc-main.c" class="nav-link" data-scroll-target="#main.c"><code>main.c</code></a></li>
+  <li><a href="#reading-data-from-the-adc-buffer" id="toc-reading-data-from-the-adc-buffer" class="nav-link" data-scroll-target="#reading-data-from-the-adc-buffer">Reading Data from the ADC Buffer</a></li>
+  <li><a href="#converting-the-adc-buffer-to-millivolts" id="toc-converting-the-adc-buffer-to-millivolts" class="nav-link" data-scroll-target="#converting-the-adc-buffer-to-millivolts">Converting the ADC Buffer to Millivolts</a></li>
+  <li><a href="#reading-multiple-samples-at-specified-intervals" id="toc-reading-multiple-samples-at-specified-intervals" class="nav-link" data-scroll-target="#reading-multiple-samples-at-specified-intervals">Reading Multiple Samples at Specified Intervals</a></li>
+  <li><a href="#adc-acquisition-time" id="toc-adc-acquisition-time" class="nav-link" data-scroll-target="#adc-acquisition-time">ADC Acquisition Time</a></li>
+  <li><a href="#asynchronous-adc" id="toc-asynchronous-adc" class="nav-link" data-scroll-target="#asynchronous-adc">Asynchronous ADC</a></li>
+  <li><a href="#asynchronous-adc-callback" id="toc-asynchronous-adc-callback" class="nav-link" data-scroll-target="#asynchronous-adc-callback">Asynchronous ADC Callback</a></li>
+  <li><a href="#logging-arrays" id="toc-logging-arrays" class="nav-link" data-scroll-target="#logging-arrays">Logging Arrays</a></li>
+  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/Embedded-Medical-Devices/edit/main/slides/zephyr-adc.qmd" class="toc-action"><i class="bi bi-git"></i>Edit this page</a></li><li><a href="https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/Embedded-Medical-Devices/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="zephyr-adc-slides.html"><i class="bi bi-file-slides"></i>RevealJS (live)</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../slides/zephyr-nrf52833dk-intro.html">Learning Modules</a></li><li class="breadcrumb-item"><a href="../slides/zephyr-adc.html">Analog-to-Digital Conversion (ADC)</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Zephyr: Analog-to-Digital Conversion</h1>
+<p class="subtitle lead">BME554L -Fall 2025 - Palmeri</p>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Dr.&nbsp;Mark Palmeri, M.D., Ph.D. </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            Duke University
+          </p>
+      </div>
+  </div>
+
+<div class="quarto-title-meta">
+
+      
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">Invalid Date</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<ul>
+<li>The <code>nRF52833</code> uses a <strong>Sucessive Approximation ADC (SAADC)</strong>.</li>
+<li>The SAADC is a <strong>differential</strong> ADC.</li>
+<li>That one SADDC is multiplexed to 8 <strong>channels</strong> (GPIO pins).</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/adc/ADC-Block-Diagram.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+<section id="how-does-an-saadc-work" class="level2">
+<h2 class="anchored" data-anchor-id="how-does-an-saadc-work">How does an SAADC work?</h2>
+<!-- TODO: create slides on this; assign the DevAcademy lesson -->
+<p><a href="https://academy.nordicsemi.com/courses/nrf-connect-sdk-intermediate/lessons/lesson-6-analog-to-digital-converter-adc/topic/adc-peripheral-on-nordic-devices/">Nordic DevAcademy: SAADC</a></p>
+</section>
+<section id="prj.conf" class="level2">
+<h2 class="anchored" data-anchor-id="prj.conf"><code>prj.conf</code></h2>
+<p><code>CONFIG_ADC=y</code></p>
+</section>
+<section id="devicetree-overlay" class="level2">
+<h2 class="anchored" data-anchor-id="devicetree-overlay">Devicetree Overlay</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>    <span class="co">// This is the root level of the DT</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">/</span> <span class="op">{</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        zephyr<span class="op">,</span>user <span class="op">{</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>            io<span class="op">-</span>channels <span class="op">=</span> <span class="op">&lt;&amp;</span>adc <span class="dv">0</span><span class="op">&gt;;</span> <span class="co">// need to "activate" these channels for IO usage</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="op">};</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        aliases <span class="op">{</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>            vadc <span class="op">=</span> <span class="op">&amp;</span>vadc<span class="op">;</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">// This is modifying the existing ADC node in the DT</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">&amp;</span>adc <span class="op">{</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>        <span class="pp">#</span><span class="er">address-cells = &lt;1&gt;;</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>        <span class="pp">#</span><span class="er">size-cells = &lt;0&gt;;</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>        vadc<span class="op">:</span> channel@<span class="dv">0</span> <span class="op">{</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>            reg <span class="op">=</span> <span class="op">&lt;</span><span class="dv">0</span><span class="op">&gt;;</span>  <span class="co">// channel number</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>            zephyr<span class="op">,</span>reference <span class="op">=</span> <span class="st">"ADC_REF_INTERNAL"</span><span class="op">;</span>  <span class="co">// voltage ref for SA (0.6 V)</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>            zephyr<span class="op">,</span>gain <span class="op">=</span> <span class="st">"ADC_GAIN_1_5"</span><span class="op">;</span> <span class="co">// gain factor to scale ref voltage (1/gain)</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>            zephyr<span class="op">,</span>acquisition<span class="op">-</span>time <span class="op">=</span> <span class="op">&lt;</span>ADC_ACQ_TIME_DEFAULT<span class="op">&gt;;</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>            zephyr<span class="op">,</span>input<span class="op">-</span>positive <span class="op">=</span> <span class="op">&lt;</span>NRF_SAADC_AIN0<span class="op">&gt;;</span> <span class="co">// P0.02</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>            zephyr<span class="op">,</span>resolution <span class="op">=</span> <span class="op">&lt;</span><span class="dv">12</span><span class="op">&gt;;</span>  <span class="co">// bit depth</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>        <span class="op">};</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>        status <span class="op">=</span> <span class="st">"okay"</span><span class="op">;</span> <span class="co">// enable the ADC</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="op">};</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<hr>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/adc/mapping_analog_pins.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+<section id="how-digital-output-is-calculated" class="level2">
+<h2 class="anchored" data-anchor-id="how-digital-output-is-calculated">How Digital Output is Calculated</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/adc/ADC-Calc-Dout.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>RESULT</code> is stored as 16-bit <a href="https://en.wikipedia.org/wiki/Two's_complement">2’s complement</a> values.</p>
+</div>
+</div>
+</section>
+<section id="reference-voltage" class="level2">
+<h2 class="anchored" data-anchor-id="reference-voltage">Reference Voltage</h2>
+<ul>
+<li>Only <code>ADC_REF_INTERNAL</code> (0.6 V) and <code>ADC_REF_VDD_1_4</code> are valid on the <code>nRF52833</code>.</li>
+<li>When using <code>VDD</code> (3.0 V) as a reference, you need to also specify the nominal reference voltage in the Devicetree: e.g., <code>zephyr,vref-mv = &lt;750&gt;;</code> (3.0 V / 4)</li>
+<li><code>ADC_REF_INTERNAL</code> is based on a diode threshold voltage and is more stable.</li>
+<li><code>ADC_REF_VDD_1_4</code> can drift with fluctuations in <code>VDD</code> (which can be a good thing).</li>
+</ul>
+<hr>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/adc/reference_voltage_nrf52833.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+<section id="main.c" class="level2">
+<h2 class="anchored" data-anchor-id="main.c"><code>main.c</code></h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">/* Load the ADC library that you ennabled in prj.conf */</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;zephyr/drivers/adc.h&gt;</span><span class="pp"> </span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">/* Define some macros to use some Zephyr macros to help read the DT</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">configuration based on the ADC channel alias (I have no idea why this</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">macro is not available in adc.h) */</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="pp">#define ADC_DT_SPEC_GET_BY_ALIAS</span><span class="op">(</span><span class="pp">adc_alias</span><span class="op">)</span><span class="pp">                    </span><span class="op">\</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="op">{</span><span class="pp">                                                            </span><span class="op">\</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="pp">    </span><span class="op">.</span><span class="pp">dev </span><span class="op">=</span><span class="pp"> DEVICE_DT_GET</span><span class="op">(</span><span class="pp">DT_PARENT</span><span class="op">(</span><span class="pp">DT_ALIAS</span><span class="op">(</span><span class="pp">adc_alias</span><span class="op">))),</span><span class="pp">      </span><span class="op">\</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="pp">    </span><span class="op">.</span><span class="pp">channel_id </span><span class="op">=</span><span class="pp"> DT_REG_ADDR</span><span class="op">(</span><span class="pp">DT_ALIAS</span><span class="op">(</span><span class="pp">adc_alias</span><span class="op">)),</span><span class="pp">            </span><span class="op">\</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="pp">    ADC_CHANNEL_CFG_FROM_DT_NODE</span><span class="op">(</span><span class="pp">DT_ALIAS</span><span class="op">(</span><span class="pp">adc_alias</span><span class="op">))</span><span class="pp">          </span><span class="op">\</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span><span class="pp">                                                            </span><span class="op">\</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co">/* Intialize the ADC struct to store all the DT parameters */</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="dt">static</span> <span class="dt">const</span> <span class="kw">struct</span> adc_dt_spec adc_vadc <span class="op">=</span> ADC_DT_SPEC_GET_BY_ALIAS<span class="op">(</span>vadc<span class="op">);</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co">/* Check that the ADC interface is ready */</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(!</span>device_is_ready<span class="op">(</span>adc_vadc<span class="op">.</span>dev<span class="op">))</span> <span class="op">{</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    LOG_ERR<span class="op">(</span><span class="st">"ADC controller device(s) not ready"</span><span class="op">);</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="co">/* Configure the ADC channel */</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>err <span class="op">=</span> adc_channel_setup_dt<span class="op">(&amp;</span>adc_vadc<span class="op">);</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>err <span class="op">&lt;</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    LOG_ERR<span class="op">(</span><span class="st">"Could not setup ADC channel (</span><span class="sc">%d</span><span class="st">)"</span><span class="op">,</span> err<span class="op">);</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> err<span class="op">;</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="reading-data-from-the-adc-buffer" class="level2">
+<h2 class="anchored" data-anchor-id="reading-data-from-the-adc-buffer">Reading Data from the ADC Buffer</h2>
+<ul>
+<li>Data are stored in a DMA buffer (separate from any CPU activity)</li>
+<li>The kernel must copy the data from the DMA buffer to a kernel-accessible buffer.</li>
+<li>An <code>adc_sequence</code> struct is used to store the buffer and buffer size.</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Note that the buffer must be int16_t (16-bit integer) to store the ADC data</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int16_t</span> buf<span class="op">;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> adc_sequence sequence <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>buffer <span class="op">=</span> <span class="op">&amp;</span>buf<span class="op">,</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>buffer_size <span class="op">=</span> <span class="kw">sizeof</span><span class="op">(</span>buf<span class="op">),</span> <span class="co">// bytes</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<hr>
+<p>Reading the ADC buffer requires:</p>
+<ol type="1">
+<li>Initializing the ADC to make a measurement (each time you need to make a measurement).</li>
+<li>Read the resultant data and store it in the buffer (in the <code>adc_sequence</code> struct).</li>
+</ol>
+<div class="sourceCode" id="cb4"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>LOG_INF<span class="op">(</span><span class="st">"Measuring </span><span class="sc">%s</span><span class="st"> (channel </span><span class="sc">%d</span><span class="st">)... "</span><span class="op">,</span> adc_vadc<span class="op">.</span>dev<span class="op">-&gt;</span>name<span class="op">,</span> adc_vadc<span class="op">.</span>channel_id<span class="op">);</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="op">(</span><span class="dt">void</span><span class="op">)</span>adc_sequence_init_dt<span class="op">(&amp;</span>adc_vadc<span class="op">,</span> <span class="op">&amp;</span>sequence<span class="op">);</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> ret<span class="op">;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>ret <span class="op">=</span> adc_read<span class="op">(</span>adc_channel<span class="op">.</span>dev<span class="op">,</span> <span class="op">&amp;</span>sequence<span class="op">);</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>ret <span class="op">&lt;</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    LOG_ERR<span class="op">(</span><span class="st">"Could not read (</span><span class="sc">%d</span><span class="st">)"</span><span class="op">,</span> ret<span class="op">);</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    LOG_DBG<span class="op">(</span><span class="st">"Raw ADC Buffer: </span><span class="sc">%d</span><span class="st">"</span><span class="op">,</span> buf<span class="op">);</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="converting-the-adc-buffer-to-millivolts" class="level2">
+<h2 class="anchored" data-anchor-id="converting-the-adc-buffer-to-millivolts">Converting the ADC Buffer to Millivolts</h2>
+<ul>
+<li>The ADC buffer yields a 16-bit integer, but the ADC was set to 12-bits in the DT.</li>
+<li>Converting the ADC buffer data to actual voltages requires scaling the ADC buffer data by the reference voltage and the gain factor.</li>
+</ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int32_t</span> val_mv<span class="op">;</span>  <span class="co">//note that adc_raw_to_millivolts_dt() takes a int32_t* to modify the value in place</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>val_mv <span class="op">=</span> buf<span class="op">;</span>  <span class="co">// val_mv is now the raw ADC value</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>ret <span class="op">=</span> adc_raw_to_millivolts_dt<span class="op">(&amp;</span>adc_vadc<span class="op">,</span> <span class="op">&amp;</span>val_mv<span class="op">);</span> <span class="co">// remember that the vadc struct containts all the DT parameters</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">// val_mv now contains the ADC value in millivolts</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">// add in some error checking</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>ret <span class="op">&lt;</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    LOG_ERR<span class="op">(</span><span class="st">"Buffer cannot be converted to mV; returning raw buffer value."</span><span class="op">);</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    LOG_INF<span class="op">(</span><span class="st">"ADC Value (mV): </span><span class="sc">%d</span><span class="st">"</span><span class="op">,</span> val_mv<span class="op">);</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="reading-multiple-samples-at-specified-intervals" class="level2">
+<h2 class="anchored" data-anchor-id="reading-multiple-samples-at-specified-intervals">Reading Multiple Samples at Specified Intervals</h2>
+<ul>
+<li>ADC sequence can be configured to perform multiple measurements (<code>extra_samplings</code>) in a single sequence.<br>
+</li>
+<li>The buffering of multiple data points per acquisition can be useful for sampling data at a fixed sampling rate without hitting the kernel too often with a kernel-based timer.<br>
+</li>
+<li>The ADC can be configured to execute a <a href="https://docs.zephyrproject.org/3.1.0/hardware/peripherals/adc.html#c.adc_sequence_callback">callback function</a> after each sample is collected.</li>
+<li>To enable the extra samples, you need to add an optional <a href="https://docs.zephyrproject.org/latest/hardware/peripherals/adc.html#c.adc_sequence_options">adc_sequence_options</a> struct to the <code>adc_sequence</code> struct. The <code>adc_sequence_options</code> struct contains the members shown below.</li>
+</ul>
+<hr>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Caution
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Be careful in how you calculate the buffer size for your array, depending on the scope of the array.</p>
+</div>
+</div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> adc_sequence_options options <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>        <span class="op">.</span>extra_samplings <span class="op">=</span> BUFFER_ARRAY_LEN <span class="op">-</span> <span class="dv">1</span><span class="op">,</span>  <span class="co">// -1 b/c first sample is already in the buffer</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>        <span class="op">.</span>interval_us <span class="op">=</span> <span class="dv">100</span><span class="op">,</span>  <span class="co">// 100 us between samples</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>        <span class="co">// .callback = NULL,  // called after each sample is collected</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> adc_sequence sequence <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>        <span class="op">.</span>options <span class="op">=</span> <span class="op">&amp;</span>options<span class="op">,</span>  <span class="co">// add the options to the sequence</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>        <span class="op">.</span>buffer <span class="op">=</span> <span class="op">&amp;</span>buf<span class="op">,</span>  <span class="co">// buf is now a pointer to the first index of an array</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>        <span class="op">.</span>buffer_size <span class="op">=</span> <span class="kw">sizeof</span><span class="op">(</span>buf<span class="op">),</span>  <span class="co">// need to specify the size of the buffer array in bytes</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>        <span class="co">/*  If the buffer is not global or local in scope, the buffer (array) name will just be a pointer to </span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co">            the first element of the array!  The buffer_size will need to be calculated as the product of the </span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co">            size (in bytes) of this first index and the length of the array (number of indices in the array)</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co">        .buffer_size = BUFFER_ARRAY_LEN * sizeof(buf),  // non-global/local array scope</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="co">        */</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="adc-acquisition-time" class="level2">
+<h2 class="anchored" data-anchor-id="adc-acquisition-time">ADC Acquisition Time</h2>
+<ul>
+<li>Acquisition time for a single sample is specified in the DT ADC node:</li>
+</ul>
+<div class="sourceCode" id="cb7"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>zephyr<span class="op">,</span>acquisition<span class="op">-</span>time <span class="op">=</span> <span class="op">&lt;</span>ADC_ACQ_TIME<span class="op">(</span>ADC_ACQ_TIME_MICROSECONDS<span class="op">,</span> <span class="dv">40</span><span class="op">)&gt;;</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>There are only a discrete number of valid acquisition times (<code>TACQ</code>):</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/adc/adc_acquisition_times.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The acquisition time is not absolutely accurate and can dependent on many system factors, especially when dependent on the kernel counters.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you do not specify a sampling interval (<code>interval_us</code>) in the <code>adc_sequence_options</code> struct, the ADC will sample sequencial samples at the acquisition time.</p>
+</div>
+</div>
+</section>
+<section id="asynchronous-adc" class="level2">
+<h2 class="anchored" data-anchor-id="asynchronous-adc">Asynchronous ADC</h2>
+<ul>
+<li><code>adc_read()</code> is <strong>blocking</strong>, meaning that your kernel thread will wait for the ADC to complete before continuing.
+<ul>
+<li>Timers and interrupts can be used to perform other tasks while the ADC is running.</li>
+<li>Interrupting threads can come at the expense of the acquisition time accuracy of the ADC.</li>
+</ul></li>
+<li>If you want to perform other tasks while the ADC is running, you can use the <strong>asynchronous</strong> ADC API.
+<ul>
+<li>This functionality needs to be enabled in the <code>prj.conf</code> file: <code>CONFIG_ADC_ASYNC=y</code>.</li>
+<li><a href="https://docs.zephyrproject.org/latest/doxygen/html/group__adc__interface.html#ga009e3733b5b20eb6b26a201c9f9734fc">adc_read_async()</a> is the asynchronous version of <code>adc_read()</code>.</li>
+</ul></li>
+</ul>
+</section>
+<section id="asynchronous-adc-callback" class="level2">
+<h2 class="anchored" data-anchor-id="asynchronous-adc-callback">Asynchronous ADC Callback</h2>
+<ul>
+<li>Use a <a href="https://docs.zephyrproject.org/latest/doxygen/html/group__adc__interface.html#ga9150eb6dc53d1c62b9fa225c0a371d6d">adc_sequence_callback</a> function to handle the ADC data after <em>each</em> sample is read.</li>
+<li>There are defined ADC action enumerations that can be returned by the callback to handle progression through the sequence:
+<ul>
+<li><code>ADC_ACTION_CONTINUE</code>: The sequence should be continued normally.</li>
+<li><code>ADC_ACTION_REPEAT</code>: New samples or sample should be read from the ADC and written in the same place as the recent ones.</li>
+<li><code>ADC_ACTION_FINISH</code>: The sequence should be terminated.</li>
+</ul></li>
+</ul>
+<!-- TODO: use Frannie's `diff_adc_callback` for good async example -->
+</section>
+<section id="logging-arrays" class="level2">
+<h2 class="anchored" data-anchor-id="logging-arrays">Logging Arrays</h2>
+<ul>
+<li>Logging the values in an array to the serial terminal can be done using the <a href="https://docs.zephyrproject.org/latest/services/logging/index.html#c.LOG_HEXDUMP_DBG"><code>LOG_HEXDUMP_INF()</code></a> function. This function takes a pointer to the array, the size of the array, and the number of bytes to display per line. The function will display the array in hexadecimal format.</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Remember that these HEX values are storing data in <a href="https://en.wikipedia.org/wiki/Two's_complement">twos complement</a>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The logging module can also require non-trivial amounts of memory. Immediate / deferred / optimized logging configurations can significantly impact the <a href="https://docs.zephyrproject.org/latest/services/logging/index.html#stack-usage">stack usage</a>.</p>
+</div>
+</div>
+</section>
+<section id="resources" class="level2">
+<h2 class="anchored" data-anchor-id="resources">Resources</h2>
+<ul>
+<li><a href="https://academy.nordicsemi.com/courses/nrf-connect-sdk-intermediate/lessons/lesson-6-analog-to-digital-converter-adc/">Nordic DevAcademy: ADC</a></li>
+<li><a href="https://docs.zephyrproject.org/latest/hardware/peripherals/adc.html">Zephyr Docs: ADC</a></li>
+<li><a href="https://github.com/NordicPlayground/nRF52-ADC-examples">nRF52 ADC Examples</a></li>
+</ul>
+
+
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W119
+</script>
+<div id="exercise-loading-indicator" class="exercise-loading-indicator d-none d-flex align-items-center gap-2">
+<div id="exercise-loading-status" class="d-flex gap-2">
+
+</div>
+<div class="spinner-grow spinner-grow-sm">
+
+</div>
+</div>
+<script type="vfs-file">
+W10=
+</script>
+</section>
+
+</main> <!-- /main -->
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W119
+</script>
+<script type="module">
+if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
+window._ojs.paths.runtimeToDoc = "../../slides";
+window._ojs.paths.runtimeToRoot = "../..";
+window._ojs.paths.docToRoot = "..";
+window._ojs.selfContained = false;
+window._ojs.runtime.interpretFromScriptTags();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/embeddedmedicaldevices\.pages\.oit\.duke\.edu\/Embedded-Medical-Devices");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/Embedded-Medical-Devices/edit/main/slides/zephyr-adc.qmd" class="toc-action"><i class="bi bi-git"></i>Edit this page</a></li><li><a href="https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/Embedded-Medical-Devices/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>

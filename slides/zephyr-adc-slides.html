@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-fced259a1985fd972ecb57c7cd45153f.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/quarto-contrib/live-runtime/live-runtime.js" type="module"></script>
+<link href="../site_libs/quarto-contrib/live-runtime/live-runtime.css" rel="stylesheet"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.7.31">
+
+  <meta name="author" content="Dr.&nbsp;Mark Palmeri, M.D., Ph.D.">
+  <title>Embedded Medical Devices – Zephyr: Analog-to-Digital Conversion</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #767676;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #767676;  padding-left: 4px; }
+    div.sourceCode
+      { color: #545454; background-color: #fefefe; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #545454; } /* Normal */
+    code span.al { color: #7928a1; } /* Alert */
+    code span.an { color: #696969; } /* Annotation */
+    code span.at { color: #a55a00; } /* Attribute */
+    code span.bn { color: #7928a1; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #d91e18; } /* ControlFlow */
+    code span.ch { color: #008000; } /* Char */
+    code span.cn { color: #d91e18; } /* Constant */
+    code span.co { color: #696969; } /* Comment */
+    code span.cv { color: #696969; font-style: italic; } /* CommentVar */
+    code span.do { color: #696969; font-style: italic; } /* Documentation */
+    code span.dt { color: #7928a1; } /* DataType */
+    code span.dv { color: #7928a1; } /* DecVal */
+    code span.er { color: #7928a1; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #a55a00; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #696969; } /* Information */
+    code span.kw { color: #d91e18; } /* Keyword */
+    code span.op { color: #00769e; } /* Operator */
+    code span.ot { color: #d91e18; } /* Other */
+    code span.pp { color: #7928a1; } /* Preprocessor */
+    code span.sc { color: #00769e; } /* SpecialChar */
+    code span.ss { color: #008000; } /* SpecialString */
+    code span.st { color: #008000; } /* String */
+    code span.va { color: #a55a00; } /* Variable */
+    code span.vs { color: #008000; } /* VerbatimString */
+    code span.wa { color: #696969; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-f1d94928152c1c7297a88c13674de5fd.css">
+  <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+  <script type="module" src="../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
+  <link href="../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Zephyr: Analog-to-Digital Conversion</h1>
+  <p class="subtitle">BME554L -Fall 2025 - Palmeri</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Dr.&nbsp;Mark Palmeri, M.D., Ph.D. 
+</div>
+        <p class="quarto-title-affiliation">
+            Duke University
+          </p>
+    </div>
+</div>
+
+  <p class="date">Invalid Date</p>
+</section>
+<section id="introduction" class="slide level2">
+<h2>Introduction</h2>
+<ul>
+<li>The <code>nRF52833</code> uses a <strong>Sucessive Approximation ADC (SAADC)</strong>.</li>
+<li>The SAADC is a <strong>differential</strong> ADC.</li>
+<li>That one SADDC is multiplexed to 8 <strong>channels</strong> (GPIO pins).</li>
+</ul>
+
+<img data-src="images/adc/ADC-Block-Diagram.png" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="how-does-an-saadc-work" class="slide level2">
+<h2>How does an SAADC work?</h2>
+<!-- TODO: create slides on this; assign the DevAcademy lesson -->
+<p><a href="https://academy.nordicsemi.com/courses/nrf-connect-sdk-intermediate/lessons/lesson-6-analog-to-digital-converter-adc/topic/adc-peripheral-on-nordic-devices/">Nordic DevAcademy: SAADC</a></p>
+</section>
+<section id="prj.conf" class="slide level2">
+<h2><code>prj.conf</code></h2>
+<p><code>CONFIG_ADC=y</code></p>
+</section>
+<section id="devicetree-overlay" class="slide level2">
+<h2>Devicetree Overlay</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb1-1"><a></a>    <span class="co">// This is the root level of the DT</span></span>
+<span id="cb1-2"><a></a>    <span class="op">/</span> <span class="op">{</span></span>
+<span id="cb1-3"><a></a>        zephyr<span class="op">,</span>user <span class="op">{</span></span>
+<span id="cb1-4"><a></a>            io<span class="op">-</span>channels <span class="op">=</span> <span class="op">&lt;&amp;</span>adc <span class="dv">0</span><span class="op">&gt;;</span> <span class="co">// need to "activate" these channels for IO usage</span></span>
+<span id="cb1-5"><a></a>        <span class="op">};</span></span>
+<span id="cb1-6"><a></a>        aliases <span class="op">{</span></span>
+<span id="cb1-7"><a></a>            vadc <span class="op">=</span> <span class="op">&amp;</span>vadc<span class="op">;</span></span>
+<span id="cb1-8"><a></a>        <span class="op">}</span></span>
+<span id="cb1-9"><a></a>    <span class="op">}</span></span>
+<span id="cb1-10"><a></a></span>
+<span id="cb1-11"><a></a>    <span class="co">// This is modifying the existing ADC node in the DT</span></span>
+<span id="cb1-12"><a></a>    <span class="op">&amp;</span>adc <span class="op">{</span></span>
+<span id="cb1-13"><a></a>        <span class="pp">#</span><span class="er">address-cells = &lt;1&gt;;</span></span>
+<span id="cb1-14"><a></a>        <span class="pp">#</span><span class="er">size-cells = &lt;0&gt;;</span></span>
+<span id="cb1-15"><a></a></span>
+<span id="cb1-16"><a></a>        vadc<span class="op">:</span> channel@<span class="dv">0</span> <span class="op">{</span></span>
+<span id="cb1-17"><a></a>            reg <span class="op">=</span> <span class="op">&lt;</span><span class="dv">0</span><span class="op">&gt;;</span>  <span class="co">// channel number</span></span>
+<span id="cb1-18"><a></a>            zephyr<span class="op">,</span>reference <span class="op">=</span> <span class="st">"ADC_REF_INTERNAL"</span><span class="op">;</span>  <span class="co">// voltage ref for SA (0.6 V)</span></span>
+<span id="cb1-19"><a></a>            zephyr<span class="op">,</span>gain <span class="op">=</span> <span class="st">"ADC_GAIN_1_5"</span><span class="op">;</span> <span class="co">// gain factor to scale ref voltage (1/gain)</span></span>
+<span id="cb1-20"><a></a>            zephyr<span class="op">,</span>acquisition<span class="op">-</span>time <span class="op">=</span> <span class="op">&lt;</span>ADC_ACQ_TIME_DEFAULT<span class="op">&gt;;</span></span>
+<span id="cb1-21"><a></a>            zephyr<span class="op">,</span>input<span class="op">-</span>positive <span class="op">=</span> <span class="op">&lt;</span>NRF_SAADC_AIN0<span class="op">&gt;;</span> <span class="co">// P0.02</span></span>
+<span id="cb1-22"><a></a>            zephyr<span class="op">,</span>resolution <span class="op">=</span> <span class="op">&lt;</span><span class="dv">12</span><span class="op">&gt;;</span>  <span class="co">// bit depth</span></span>
+<span id="cb1-23"><a></a>        <span class="op">};</span></span>
+<span id="cb1-24"><a></a>        status <span class="op">=</span> <span class="st">"okay"</span><span class="op">;</span> <span class="co">// enable the ADC</span></span>
+<span id="cb1-25"><a></a>    <span class="op">};</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section class="slide level2">
+
+
+<img data-src="images/adc/mapping_analog_pins.png" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="how-digital-output-is-calculated" class="slide level2">
+<h2>How Digital Output is Calculated</h2>
+
+<img data-src="images/adc/ADC-Calc-Dout.png" class="quarto-figure quarto-figure-center r-stretch"><div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p><code>RESULT</code> is stored as 16-bit <a href="https://en.wikipedia.org/wiki/Two's_complement">2’s complement</a> values.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="reference-voltage" class="slide level2">
+<h2>Reference Voltage</h2>
+<ul>
+<li>Only <code>ADC_REF_INTERNAL</code> (0.6 V) and <code>ADC_REF_VDD_1_4</code> are valid on the <code>nRF52833</code>.</li>
+<li>When using <code>VDD</code> (3.0 V) as a reference, you need to also specify the nominal reference voltage in the Devicetree: e.g., <code>zephyr,vref-mv = &lt;750&gt;;</code> (3.0 V / 4)</li>
+<li><code>ADC_REF_INTERNAL</code> is based on a diode threshold voltage and is more stable.</li>
+<li><code>ADC_REF_VDD_1_4</code> can drift with fluctuations in <code>VDD</code> (which can be a good thing).</li>
+</ul>
+</section>
+<section class="slide level2">
+
+
+<img data-src="images/adc/reference_voltage_nrf52833.png" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="main.c" class="slide level2">
+<h2><code>main.c</code></h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb2-1"><a></a><span class="co">/* Load the ADC library that you ennabled in prj.conf */</span></span>
+<span id="cb2-2"><a></a><span class="pp">#include </span><span class="im">&lt;zephyr/drivers/adc.h&gt;</span><span class="pp"> </span></span>
+<span id="cb2-3"><a></a></span>
+<span id="cb2-4"><a></a><span class="co">/* Define some macros to use some Zephyr macros to help read the DT</span></span>
+<span id="cb2-5"><a></a><span class="co">configuration based on the ADC channel alias (I have no idea why this</span></span>
+<span id="cb2-6"><a></a><span class="co">macro is not available in adc.h) */</span></span>
+<span id="cb2-7"><a></a><span class="pp">#define ADC_DT_SPEC_GET_BY_ALIAS</span><span class="op">(</span><span class="pp">adc_alias</span><span class="op">)</span><span class="pp">                    </span><span class="op">\</span></span>
+<span id="cb2-8"><a></a><span class="op">{</span><span class="pp">                                                            </span><span class="op">\</span></span>
+<span id="cb2-9"><a></a><span class="pp">    </span><span class="op">.</span><span class="pp">dev </span><span class="op">=</span><span class="pp"> DEVICE_DT_GET</span><span class="op">(</span><span class="pp">DT_PARENT</span><span class="op">(</span><span class="pp">DT_ALIAS</span><span class="op">(</span><span class="pp">adc_alias</span><span class="op">))),</span><span class="pp">      </span><span class="op">\</span></span>
+<span id="cb2-10"><a></a><span class="pp">    </span><span class="op">.</span><span class="pp">channel_id </span><span class="op">=</span><span class="pp"> DT_REG_ADDR</span><span class="op">(</span><span class="pp">DT_ALIAS</span><span class="op">(</span><span class="pp">adc_alias</span><span class="op">)),</span><span class="pp">            </span><span class="op">\</span></span>
+<span id="cb2-11"><a></a><span class="pp">    ADC_CHANNEL_CFG_FROM_DT_NODE</span><span class="op">(</span><span class="pp">DT_ALIAS</span><span class="op">(</span><span class="pp">adc_alias</span><span class="op">))</span><span class="pp">          </span><span class="op">\</span></span>
+<span id="cb2-12"><a></a><span class="op">}</span><span class="pp">                                                            </span><span class="op">\</span></span>
+<span id="cb2-13"><a></a></span>
+<span id="cb2-14"><a></a><span class="co">/* Intialize the ADC struct to store all the DT parameters */</span></span>
+<span id="cb2-15"><a></a><span class="dt">static</span> <span class="dt">const</span> <span class="kw">struct</span> adc_dt_spec adc_vadc <span class="op">=</span> ADC_DT_SPEC_GET_BY_ALIAS<span class="op">(</span>vadc<span class="op">);</span></span>
+<span id="cb2-16"><a></a></span>
+<span id="cb2-17"><a></a><span class="co">/* Check that the ADC interface is ready */</span></span>
+<span id="cb2-18"><a></a><span class="cf">if</span> <span class="op">(!</span>device_is_ready<span class="op">(</span>adc_vadc<span class="op">.</span>dev<span class="op">))</span> <span class="op">{</span></span>
+<span id="cb2-19"><a></a>    LOG_ERR<span class="op">(</span><span class="st">"ADC controller device(s) not ready"</span><span class="op">);</span></span>
+<span id="cb2-20"><a></a>    <span class="cf">return</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span></span>
+<span id="cb2-21"><a></a><span class="op">}</span></span>
+<span id="cb2-22"><a></a></span>
+<span id="cb2-23"><a></a><span class="co">/* Configure the ADC channel */</span></span>
+<span id="cb2-24"><a></a>err <span class="op">=</span> adc_channel_setup_dt<span class="op">(&amp;</span>adc_vadc<span class="op">);</span></span>
+<span id="cb2-25"><a></a><span class="cf">if</span> <span class="op">(</span>err <span class="op">&lt;</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-26"><a></a>    LOG_ERR<span class="op">(</span><span class="st">"Could not setup ADC channel (</span><span class="sc">%d</span><span class="st">)"</span><span class="op">,</span> err<span class="op">);</span></span>
+<span id="cb2-27"><a></a>    <span class="cf">return</span> err<span class="op">;</span></span>
+<span id="cb2-28"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="reading-data-from-the-adc-buffer" class="slide level2">
+<h2>Reading Data from the ADC Buffer</h2>
+<ul>
+<li>Data are stored in a DMA buffer (separate from any CPU activity)</li>
+<li>The kernel must copy the data from the DMA buffer to a kernel-accessible buffer.</li>
+<li>An <code>adc_sequence</code> struct is used to store the buffer and buffer size.</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb3-1"><a></a><span class="co">// Note that the buffer must be int16_t (16-bit integer) to store the ADC data</span></span>
+<span id="cb3-2"><a></a><span class="dt">int16_t</span> buf<span class="op">;</span></span>
+<span id="cb3-3"><a></a></span>
+<span id="cb3-4"><a></a><span class="kw">struct</span> adc_sequence sequence <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb3-5"><a></a>    <span class="op">.</span>buffer <span class="op">=</span> <span class="op">&amp;</span>buf<span class="op">,</span></span>
+<span id="cb3-6"><a></a>    <span class="op">.</span>buffer_size <span class="op">=</span> <span class="kw">sizeof</span><span class="op">(</span>buf<span class="op">),</span> <span class="co">// bytes</span></span>
+<span id="cb3-7"><a></a><span class="op">};</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section class="slide level2">
+
+<p>Reading the ADC buffer requires:</p>
+<ol type="1">
+<li>Initializing the ADC to make a measurement (each time you need to make a measurement).</li>
+<li>Read the resultant data and store it in the buffer (in the <code>adc_sequence</code> struct).</li>
+</ol>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb4-1"><a></a>LOG_INF<span class="op">(</span><span class="st">"Measuring </span><span class="sc">%s</span><span class="st"> (channel </span><span class="sc">%d</span><span class="st">)... "</span><span class="op">,</span> adc_vadc<span class="op">.</span>dev<span class="op">-&gt;</span>name<span class="op">,</span> adc_vadc<span class="op">.</span>channel_id<span class="op">);</span></span>
+<span id="cb4-2"><a></a></span>
+<span id="cb4-3"><a></a><span class="op">(</span><span class="dt">void</span><span class="op">)</span>adc_sequence_init_dt<span class="op">(&amp;</span>adc_vadc<span class="op">,</span> <span class="op">&amp;</span>sequence<span class="op">);</span></span>
+<span id="cb4-4"><a></a></span>
+<span id="cb4-5"><a></a><span class="dt">int</span> ret<span class="op">;</span></span>
+<span id="cb4-6"><a></a>ret <span class="op">=</span> adc_read<span class="op">(</span>adc_channel<span class="op">.</span>dev<span class="op">,</span> <span class="op">&amp;</span>sequence<span class="op">);</span></span>
+<span id="cb4-7"><a></a><span class="cf">if</span> <span class="op">(</span>ret <span class="op">&lt;</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-8"><a></a>    LOG_ERR<span class="op">(</span><span class="st">"Could not read (</span><span class="sc">%d</span><span class="st">)"</span><span class="op">,</span> ret<span class="op">);</span></span>
+<span id="cb4-9"><a></a><span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb4-10"><a></a>    LOG_DBG<span class="op">(</span><span class="st">"Raw ADC Buffer: </span><span class="sc">%d</span><span class="st">"</span><span class="op">,</span> buf<span class="op">);</span></span>
+<span id="cb4-11"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="converting-the-adc-buffer-to-millivolts" class="slide level2">
+<h2>Converting the ADC Buffer to Millivolts</h2>
+<ul>
+<li>The ADC buffer yields a 16-bit integer, but the ADC was set to 12-bits in the DT.</li>
+<li>Converting the ADC buffer data to actual voltages requires scaling the ADC buffer data by the reference voltage and the gain factor.</li>
+</ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb5-1"><a></a><span class="dt">int32_t</span> val_mv<span class="op">;</span>  <span class="co">//note that adc_raw_to_millivolts_dt() takes a int32_t* to modify the value in place</span></span>
+<span id="cb5-2"><a></a>val_mv <span class="op">=</span> buf<span class="op">;</span>  <span class="co">// val_mv is now the raw ADC value</span></span>
+<span id="cb5-3"><a></a>ret <span class="op">=</span> adc_raw_to_millivolts_dt<span class="op">(&amp;</span>adc_vadc<span class="op">,</span> <span class="op">&amp;</span>val_mv<span class="op">);</span> <span class="co">// remember that the vadc struct containts all the DT parameters</span></span>
+<span id="cb5-4"><a></a><span class="co">// val_mv now contains the ADC value in millivolts</span></span>
+<span id="cb5-5"><a></a><span class="co">// add in some error checking</span></span>
+<span id="cb5-6"><a></a><span class="cf">if</span> <span class="op">(</span>ret <span class="op">&lt;</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-7"><a></a>    LOG_ERR<span class="op">(</span><span class="st">"Buffer cannot be converted to mV; returning raw buffer value."</span><span class="op">);</span></span>
+<span id="cb5-8"><a></a><span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb5-9"><a></a>    LOG_INF<span class="op">(</span><span class="st">"ADC Value (mV): </span><span class="sc">%d</span><span class="st">"</span><span class="op">,</span> val_mv<span class="op">);</span></span>
+<span id="cb5-10"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="reading-multiple-samples-at-specified-intervals" class="slide level2">
+<h2>Reading Multiple Samples at Specified Intervals</h2>
+<ul>
+<li>ADC sequence can be configured to perform multiple measurements (<code>extra_samplings</code>) in a single sequence.<br>
+</li>
+<li>The buffering of multiple data points per acquisition can be useful for sampling data at a fixed sampling rate without hitting the kernel too often with a kernel-based timer.<br>
+</li>
+<li>The ADC can be configured to execute a <a href="https://docs.zephyrproject.org/3.1.0/hardware/peripherals/adc.html#c.adc_sequence_callback">callback function</a> after each sample is collected.</li>
+<li>To enable the extra samples, you need to add an optional <a href="https://docs.zephyrproject.org/latest/hardware/peripherals/adc.html#c.adc_sequence_options">adc_sequence_options</a> struct to the <code>adc_sequence</code> struct. The <code>adc_sequence_options</code> struct contains the members shown below.</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<div class="callout callout-caution callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Caution</strong></p>
+</div>
+<div class="callout-content">
+<p>Be careful in how you calculate the buffer size for your array, depending on the scope of the array.</p>
+</div>
+</div>
+</div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb6-1"><a></a><span class="kw">struct</span> adc_sequence_options options <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb6-2"><a></a>        <span class="op">.</span>extra_samplings <span class="op">=</span> BUFFER_ARRAY_LEN <span class="op">-</span> <span class="dv">1</span><span class="op">,</span>  <span class="co">// -1 b/c first sample is already in the buffer</span></span>
+<span id="cb6-3"><a></a>        <span class="op">.</span>interval_us <span class="op">=</span> <span class="dv">100</span><span class="op">,</span>  <span class="co">// 100 us between samples</span></span>
+<span id="cb6-4"><a></a>        <span class="co">// .callback = NULL,  // called after each sample is collected</span></span>
+<span id="cb6-5"><a></a><span class="op">};</span></span>
+<span id="cb6-6"><a></a></span>
+<span id="cb6-7"><a></a><span class="kw">struct</span> adc_sequence sequence <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb6-8"><a></a>        <span class="op">.</span>options <span class="op">=</span> <span class="op">&amp;</span>options<span class="op">,</span>  <span class="co">// add the options to the sequence</span></span>
+<span id="cb6-9"><a></a>        <span class="op">.</span>buffer <span class="op">=</span> <span class="op">&amp;</span>buf<span class="op">,</span>  <span class="co">// buf is now a pointer to the first index of an array</span></span>
+<span id="cb6-10"><a></a>        <span class="op">.</span>buffer_size <span class="op">=</span> <span class="kw">sizeof</span><span class="op">(</span>buf<span class="op">),</span>  <span class="co">// need to specify the size of the buffer array in bytes</span></span>
+<span id="cb6-11"><a></a></span>
+<span id="cb6-12"><a></a>        <span class="co">/*  If the buffer is not global or local in scope, the buffer (array) name will just be a pointer to </span></span>
+<span id="cb6-13"><a></a><span class="co">            the first element of the array!  The buffer_size will need to be calculated as the product of the </span></span>
+<span id="cb6-14"><a></a><span class="co">            size (in bytes) of this first index and the length of the array (number of indices in the array)</span></span>
+<span id="cb6-15"><a></a></span>
+<span id="cb6-16"><a></a><span class="co">        .buffer_size = BUFFER_ARRAY_LEN * sizeof(buf),  // non-global/local array scope</span></span>
+<span id="cb6-17"><a></a><span class="co">        */</span></span>
+<span id="cb6-18"><a></a></span>
+<span id="cb6-19"><a></a><span class="op">};</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="adc-acquisition-time" class="slide level2">
+<h2>ADC Acquisition Time</h2>
+<ul>
+<li>Acquisition time for a single sample is specified in the DT ADC node:</li>
+</ul>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb7-1"><a></a>zephyr<span class="op">,</span>acquisition<span class="op">-</span>time <span class="op">=</span> <span class="op">&lt;</span>ADC_ACQ_TIME<span class="op">(</span>ADC_ACQ_TIME_MICROSECONDS<span class="op">,</span> <span class="dv">40</span><span class="op">)&gt;;</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>There are only a discrete number of valid acquisition times (<code>TACQ</code>):</li>
+</ul>
+
+<img data-src="images/adc/adc_acquisition_times.png" class="quarto-figure quarto-figure-center r-stretch"><div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Warning</strong></p>
+</div>
+<div class="callout-content">
+<p>The acquisition time is not absolutely accurate and can dependent on many system factors, especially when dependent on the kernel counters.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>If you do not specify a sampling interval (<code>interval_us</code>) in the <code>adc_sequence_options</code> struct, the ADC will sample sequencial samples at the acquisition time.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="asynchronous-adc" class="slide level2">
+<h2>Asynchronous ADC</h2>
+<ul>
+<li><code>adc_read()</code> is <strong>blocking</strong>, meaning that your kernel thread will wait for the ADC to complete before continuing.
+<ul>
+<li>Timers and interrupts can be used to perform other tasks while the ADC is running.</li>
+<li>Interrupting threads can come at the expense of the acquisition time accuracy of the ADC.</li>
+</ul></li>
+<li>If you want to perform other tasks while the ADC is running, you can use the <strong>asynchronous</strong> ADC API.
+<ul>
+<li>This functionality needs to be enabled in the <code>prj.conf</code> file: <code>CONFIG_ADC_ASYNC=y</code>.</li>
+<li><a href="https://docs.zephyrproject.org/latest/doxygen/html/group__adc__interface.html#ga009e3733b5b20eb6b26a201c9f9734fc">adc_read_async()</a> is the asynchronous version of <code>adc_read()</code>.</li>
+</ul></li>
+</ul>
+</section>
+<section id="asynchronous-adc-callback" class="slide level2">
+<h2>Asynchronous ADC Callback</h2>
+<ul>
+<li>Use a <a href="https://docs.zephyrproject.org/latest/doxygen/html/group__adc__interface.html#ga9150eb6dc53d1c62b9fa225c0a371d6d">adc_sequence_callback</a> function to handle the ADC data after <em>each</em> sample is read.</li>
+<li>There are defined ADC action enumerations that can be returned by the callback to handle progression through the sequence:
+<ul>
+<li><code>ADC_ACTION_CONTINUE</code>: The sequence should be continued normally.</li>
+<li><code>ADC_ACTION_REPEAT</code>: New samples or sample should be read from the ADC and written in the same place as the recent ones.</li>
+<li><code>ADC_ACTION_FINISH</code>: The sequence should be terminated.</li>
+</ul></li>
+</ul>
+<!-- TODO: use Frannie's `diff_adc_callback` for good async example -->
+</section>
+<section id="logging-arrays" class="slide level2">
+<h2>Logging Arrays</h2>
+<ul>
+<li>Logging the values in an array to the serial terminal can be done using the <a href="https://docs.zephyrproject.org/latest/services/logging/index.html#c.LOG_HEXDUMP_DBG"><code>LOG_HEXDUMP_INF()</code></a> function. This function takes a pointer to the array, the size of the array, and the number of bytes to display per line. The function will display the array in hexadecimal format.</li>
+</ul>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>Remember that these HEX values are storing data in <a href="https://en.wikipedia.org/wiki/Two's_complement">twos complement</a>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Warning</strong></p>
+</div>
+<div class="callout-content">
+<p>The logging module can also require non-trivial amounts of memory. Immediate / deferred / optimized logging configurations can significantly impact the <a href="https://docs.zephyrproject.org/latest/services/logging/index.html#stack-usage">stack usage</a>.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="resources" class="slide level2">
+<h2>Resources</h2>
+<ul>
+<li><a href="https://academy.nordicsemi.com/courses/nrf-connect-sdk-intermediate/lessons/lesson-6-analog-to-digital-converter-adc/">Nordic DevAcademy: ADC</a></li>
+<li><a href="https://docs.zephyrproject.org/latest/hardware/peripherals/adc.html">Zephyr Docs: ADC</a></li>
+<li><a href="https://github.com/NordicPlayground/nRF52-ADC-examples">nRF52 ADC Examples</a></li>
+</ul>
+
+
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W119
+</script>
+<div id="exercise-loading-indicator" class="exercise-loading-indicator d-none d-flex align-items-center gap-2">
+<div id="exercise-loading-status" class="d-flex gap-2">
+
+</div>
+<div class="spinner-grow spinner-grow-sm">
+
+</div>
+</div>
+<script type="vfs-file">
+W10=
+</script>
+</section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+<p><a href="https://embeddedmedicaldevices.pages.oit.duke.edu/Embedded-Medical-Devices">🔗 https://embeddedmedicaldevices.pages.oit.duke.edu/Embedded-Medical-Devices</a></p>
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': true,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'fade',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script type="ojs-module-contents">
+    eyJjb250ZW50cyI6W119
+    </script>
+    <script type="module">
+    if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
+    window._ojs.paths.runtimeToDoc = "../../slides";
+    window._ojs.paths.runtimeToRoot = "../..";
+    window._ojs.paths.docToRoot = "..";
+    window._ojs.selfContained = false;
+    window._ojs.runtime.interpretFromScriptTags();
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+            const codeEl = trigger.previousElementSibling.cloneNode(true);
+            for (const childEl of codeEl.children) {
+              if (isCodeAnnotation(childEl)) {
+                childEl.remove();
+              }
+            }
+            return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp("https:\/\/embeddedmedicaldevices\.pages\.oit\.duke\.edu\/Embedded-Medical-Devices");
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>

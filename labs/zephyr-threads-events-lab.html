@@ -7,9 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Dr.&nbsp;Mark Palmeri, M.D., Ph.D.">
-<meta name="dcterms.date" content="2025-06-20">
 
-<title>C Programming Lab – Embedded Medical Devices</title>
+<title>Zephyr: Threads &amp; Kernel Events Lab – Embedded Medical Devices</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -82,7 +81,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labs/event-driven-state-machine-lab.html">Labs</a></li><li class="breadcrumb-item"><a href="../labs/c-programming-lab.html">C Programming Lab</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labs/event-driven-state-machine-lab.html">Labs</a></li><li class="breadcrumb-item"><a href="../labs/zephyr-threads-events-lab.html">Threads and Kernel Events Lab</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -252,7 +251,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../labs/c-programming-lab.html" class="sidebar-item-text sidebar-link active">
+  <a href="../labs/c-programming-lab.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">C Programming Lab</span></a>
   </div>
 </li>
@@ -276,7 +275,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../labs/zephyr-threads-events-lab.html" class="sidebar-item-text sidebar-link">
+  <a href="../labs/zephyr-threads-events-lab.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Threads and Kernel Events Lab</span></a>
   </div>
 </li>
@@ -315,28 +314,23 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#prelab" id="toc-prelab" class="nav-link active" data-scroll-target="#prelab">Prelab</a></li>
-  <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives">Objectives</a></li>
-  <li><a href="#zephyr-application-git-repository-overview" id="toc-zephyr-application-git-repository-overview" class="nav-link" data-scroll-target="#zephyr-application-git-repository-overview">Zephyr Application Git Repository Overview</a></li>
-  <li><a href="#things-to-do" id="toc-things-to-do" class="nav-link" data-scroll-target="#things-to-do">Things To Do</a></li>
-  <li><a href="#git-best-practices" id="toc-git-best-practices" class="nav-link" data-scroll-target="#git-best-practices">Git Best Practices</a>
-  <ul class="collapse">
-  <li><a href="#fork-clone-build-flash-view-serial-output" id="toc-fork-clone-build-flash-view-serial-output" class="nav-link" data-scroll-target="#fork-clone-build-flash-view-serial-output">Fork / Clone / Build / Flash / View Serial Output</a></li>
-  <li><a href="#modify-the-zephyr-application-datatypes-typecasting-formatted-printing" id="toc-modify-the-zephyr-application-datatypes-typecasting-formatted-printing" class="nav-link" data-scroll-target="#modify-the-zephyr-application-datatypes-typecasting-formatted-printing">Modify the Zephyr Application (DataTypes / Typecasting / Formatted Printing)</a></li>
-  </ul></li>
-  <li><a href="#library-refactor" id="toc-library-refactor" class="nav-link" data-scroll-target="#library-refactor">Library Refactor</a></li>
-  <li><a href="#push-everything-to-gitlab-create-an-issue-to-notify-dr.-palmeri" id="toc-push-everything-to-gitlab-create-an-issue-to-notify-dr.-palmeri" class="nav-link" data-scroll-target="#push-everything-to-gitlab-create-an-issue-to-notify-dr.-palmeri">Push Everything to GitLab &amp; Create an Issue to Notify Dr.&nbsp;Palmeri</a></li>
-  <li><a href="#gradescope" id="toc-gradescope" class="nav-link" data-scroll-target="#gradescope">Gradescope</a></li>
-  <li><a href="#how-to-ask-for-help" id="toc-how-to-ask-for-help" class="nav-link" data-scroll-target="#how-to-ask-for-help">How to Ask for Help</a></li>
+  <li><a href="#git-version-control" id="toc-git-version-control" class="nav-link active" data-scroll-target="#git-version-control">Git Version Control</a></li>
+  <li><a href="#refactor-heartbeat-led-25-duty-cycle" id="toc-refactor-heartbeat-led-25-duty-cycle" class="nav-link" data-scroll-target="#refactor-heartbeat-led-25-duty-cycle">Refactor: Heartbeat LED (25% Duty Cycle)</a></li>
+  <li><a href="#test-the-accuracy-of-the-heartbeat-led-timing" id="toc-test-the-accuracy-of-the-heartbeat-led-timing" class="nav-link" data-scroll-target="#test-the-accuracy-of-the-heartbeat-led-timing">Test the Accuracy of the Heartbeat LED Timing</a></li>
+  <li><a href="#merge-n-tag-this-refactored-heartbeat-led-code-and-analysis" id="toc-merge-n-tag-this-refactored-heartbeat-led-code-and-analysis" class="nav-link" data-scroll-target="#merge-n-tag-this-refactored-heartbeat-led-code-and-analysis">Merge-n-Tag this Refactored Heartbeat LED Code and Analysis</a></li>
+  <li><a href="#refactor-kernel-events" id="toc-refactor-kernel-events" class="nav-link" data-scroll-target="#refactor-kernel-events">Refactor: Kernel Events</a></li>
+  <li><a href="#verify-that-your-led-timing-still-works" id="toc-verify-that-your-led-timing-still-works" class="nav-link" data-scroll-target="#verify-that-your-led-timing-still-works">Verify that your LED Timing Still Works</a></li>
+  <li><a href="#merge-n-tag-this-refactored-kernel-events-code-and-analysis" id="toc-merge-n-tag-this-refactored-kernel-events-code-and-analysis" class="nav-link" data-scroll-target="#merge-n-tag-this-refactored-kernel-events-code-and-analysis">Merge-n-Tag this Refactored Kernel Events Code and Analysis</a></li>
+  <li><a href="#how-do-i-ask-for-help" id="toc-how-do-i-ask-for-help" class="nav-link" data-scroll-target="#how-do-i-ask-for-help">How do I ask for help?</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/Embedded-Medical-Devices/edit/main/labs/c-programming-lab.qmd" class="toc-action"><i class="bi bi-git"></i>Edit this page</a></li><li><a href="https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/Embedded-Medical-Devices/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="c-programming-lab.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/Embedded-Medical-Devices/edit/main/labs/zephyr-threads-events-lab.qmd" class="toc-action"><i class="bi bi-git"></i>Edit this page</a></li><li><a href="https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/Embedded-Medical-Devices/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="zephyr-threads-events-lab.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labs/event-driven-state-machine-lab.html">Labs</a></li><li class="breadcrumb-item"><a href="../labs/c-programming-lab.html">C Programming Lab</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labs/event-driven-state-machine-lab.html">Labs</a></li><li class="breadcrumb-item"><a href="../labs/zephyr-threads-events-lab.html">Threads and Kernel Events Lab</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">C Programming Lab</h1>
+<h1 class="title">Zephyr: Threads &amp; Kernel Events Lab</h1>
 <p class="subtitle lead">BME554L - Fall 2025 - Palmeri</p>
   <div class="quarto-categories">
     <div class="quarto-category">Lab</div>
@@ -357,7 +351,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">June 20, 2025</p>
+      <p class="date">Invalid Date</p>
     </div>
   </div>
   
@@ -369,43 +363,8 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<!-- TODO: have the students fork the c-programming-lab repository -->
-<!-- TODO: add debugging exercise -->
-<section id="prelab" class="level2">
-<h2 class="anchored" data-anchor-id="prelab">Prelab</h2>
-<ul>
-<li>Complete <a href="https://academy.nordicsemi.com/courses/nrf-connect-sdk-fundamentals/lessons/lesson-3-elements-of-an-nrf-connect-sdk-application/">Nordic DevAcademy: Lesson 3 – Elements of an nRF Connect SDK application</a></li>
-<li>Complete <a href="https://academy.nordicsemi.com/courses/nrf-connect-sdk-fundamentals/lessons/lesson-3-printing-messages-to-console-and-logging/">Nordic DevAcademy: Lesson 4 – Printing messages to console and logging</a></li>
-<li>Review <a href="../resources/debugging.html">Debugging</a> resource.</li>
-</ul>
-</section>
-<section id="objectives" class="level2">
-<h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
-<ul>
-<li>Introduction to C Programming</li>
-<li>Building Zephyr application</li>
-<li>Flashing Zephyr application</li>
-<li>Viewing serial output from Zephyr application running on your <code>nrf52833DK</code></li>
-<li>Debugging Zephyr applications in VS Code</li>
-</ul>
-</section>
-<section id="zephyr-application-git-repository-overview" class="level2">
-<h2 class="anchored" data-anchor-id="zephyr-application-git-repository-overview">Zephyr Application Git Repository Overview</h2>
-<ul>
-<li><code>src/main.c</code> - main application code</li>
-<li><code>.gitingore</code> - ignore files that are not needed in the git repository</li>
-<li><code>CMakeLists.txt</code> - build system configuration file</li>
-<li><code>prj.conf</code> - Zephyr configuration file</li>
-<li><code>README.md</code> - this file</li>
-<li><code>CMakePresets.json</code> - CMake presets file (build configuration)</li>
-<li><code>.gitlab-ci.yml</code> - GitLab CI configuration file</li>
-</ul>
-</section>
-<section id="things-to-do" class="level2">
-<h2 class="anchored" data-anchor-id="things-to-do">Things To Do</h2>
-</section>
-<section id="git-best-practices" class="level2">
-<h2 class="anchored" data-anchor-id="git-best-practices">Git Best Practices</h2>
+<section id="git-version-control" class="level2">
+<h2 class="anchored" data-anchor-id="git-version-control">Git Version Control</h2>
 <ul>
 <li>Use best practices for version control (branching, commit messages, etc.).</li>
 <li>Do all development on a dedicated branch that is merged into <code>main</code> once it is functional.</li>
@@ -426,70 +385,62 @@ Important
 <p>You do not want one, monolithic git commit right before you submit your project.</p>
 </div>
 </div>
-<section id="fork-clone-build-flash-view-serial-output" class="level3">
-<h3 class="anchored" data-anchor-id="fork-clone-build-flash-view-serial-output">Fork / Clone / Build / Flash / View Serial Output</h3>
+</section>
+<section id="refactor-heartbeat-led-25-duty-cycle" class="level2">
+<h2 class="anchored" data-anchor-id="refactor-heartbeat-led-25-duty-cycle">Refactor: Heartbeat LED (25% Duty Cycle)</h2>
+<p>You will be refactoring your code from the timers lab to use a thread to control the heartbeat LED. Do all of the refactoring below on a new branch called <code>heartbeat_refactor</code>.</p>
 <ul>
-<li>Fork this repository on GitLab</li>
-<li>Add Dr.&nbsp;Palmeri (<code>mlp6</code>) as a Maintainer in your forked repository.</li>
-<li>Clone your forked repository to your local machine</li>
-<li>Build the Zephyr application “as is” (review <a href="https://academy.nordicsemi.com/courses/nrf-connect-sdk-fundamentals/lessons/lesson-1-nrf-connect-sdk-introduction/">DevAcademy: Lesson 1</a>)</li>
-<li>Flash the Zephyr application to your development kit.
-<ul>
-<li>Connect the <code>VCOM</code> port on the <code>nrf52833DK</code> to your computer (using <code>Connected Devices</code> and the plug icon)</li>
-<li>Look at the serial output in the VS Code <code>Terminal</code></li>
-</ul></li>
+<li>Refactor your code to use a thread instead of a kernel timer to control the heartbeat LED.</li>
+<li>Instead of having your heartbeat blink at 1 Hz with a 50% duty cycle, change it to have a 25% duty cycle (i.e., on for 250 ms, off for 750 ms).</li>
 </ul>
 </section>
-<section id="modify-the-zephyr-application-datatypes-typecasting-formatted-printing" class="level3">
-<h3 class="anchored" data-anchor-id="modify-the-zephyr-application-datatypes-typecasting-formatted-printing">Modify the Zephyr Application (DataTypes / Typecasting / Formatted Printing)</h3>
+<section id="test-the-accuracy-of-the-heartbeat-led-timing" class="level2">
+<h2 class="anchored" data-anchor-id="test-the-accuracy-of-the-heartbeat-led-timing">Test the Accuracy of the Heartbeat LED Timing</h2>
 <ul>
-<li>Inspect the code to see how variables <code>a</code>, <code>b</code> and <code>c</code> are declared and initialized.</li>
-<li>Flash the existing code and note the terminal output:</li>
-</ul>
-<p><img src="images/you_lose.png" width="200"></p>
-<ul>
-<li>On a development branch called <code>fix_division</code>, without changing the declared datatypes of <code>a</code>, <code>b</code>, or <code>c</code>, correct the code so that <code>c</code> is output in the terminal:</li>
-</ul>
-<p><img src="images/you_win.png" width="200"></p>
-<ul>
-<li>Push the <code>fix_division</code> branch to your GitLab repository.</li>
-<li>Create a <strong>Merge Request</strong> to merge the <code>fix_division</code> branch into your <code>main</code> branch.</li>
-<li>Make sure the GitLab CI pipeline is successful before merging the <code>fix_division</code> branch into <code>main</code>. If it isn’t passing, fix the problem locally on the same branch and push the changes to GitLab.</li>
-<li>Pull your updated <code>main</code> branch to your local machine.</li>
-<li>Create an annotated tag for the merged commit on main with the fixed division named <code>v1.0.0</code>.</li>
-<li>Push this annotated tag to your GitLab repository.</li>
-</ul>
-<p>:clock10: Note that the CI pipelines running on the GitLab server can take a while to complete. Do not rely on them for immediate development feedback, but rather as a final check before merging code into <code>main</code>.</p>
-</section>
-</section>
-<section id="library-refactor" class="level2">
-<h2 class="anchored" data-anchor-id="library-refactor">Library Refactor</h2>
-<ul>
-<li>On another development branch on your local machine called <code>refactor_library</code>, refactor the code to put the <code>divide_numbers()</code> function into a library called <code>my_math_functions.h</code>.</li>
-<li>Once you have your code working with this library, <strong>locally merge</strong> the <code>refactor_library</code> branch into <code>main</code>.</li>
-<li>Create an annotated tag for the merged commit on main with the refactored library named <code>v1.1.0</code>.</li>
-<li>Push the new commit(s) and annotated tag to your GitLab repository. Remember, this will need to be done with two commands, <code>git push</code> and <code>git push --tags</code>.</li>
+<li>Add a new section to your technical report Jupyter notebook <a href="../labs/timers-lab-testing-notebook/timing_analysis.html">timing_analysis.ipynb</a> that analyzes the accuracy of your 25% duty cycle heartbeat LED.</li>
+<li>Perform these measurements using the oscilloscope.</li>
+<li>Choose what to measure and how to analyze the data to verify that the heartbeat LED thread is working as expected.</li>
+<li>Discuss the results of your measurements and how they compare to the nominal specifications for the heartbeat LED.</li>
 </ul>
 </section>
-<section id="push-everything-to-gitlab-create-an-issue-to-notify-dr.-palmeri" class="level2">
-<h2 class="anchored" data-anchor-id="push-everything-to-gitlab-create-an-issue-to-notify-dr.-palmeri">Push Everything to GitLab &amp; Create an Issue to Notify Dr.&nbsp;Palmeri</h2>
+<section id="merge-n-tag-this-refactored-heartbeat-led-code-and-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="merge-n-tag-this-refactored-heartbeat-led-code-and-analysis">Merge-n-Tag this Refactored Heartbeat LED Code and Analysis</h2>
 <ul>
-<li>Make sure all of your commits are pushed to your <code>main</code> branch, along with both annotated tags.</li>
-<li>Confirm that the GitLab CI pipeline is successful.</li>
-<li>Create an Issue titled <code>C Programming Lab Complete</code> and assign it to Dr.&nbsp;Palmeri (<code>mlp6</code>).</li>
+<li>Make sure that your complete <code>timing_analysis.ipynb</code> notebook is in your <code>heartbeat_refactor</code> branch in a directory called <code>testing/</code>, which also includes all raw CSV data.</li>
+<li>Make sure that your Jupyter notebook reads in data from relative paths for the repository, <strong>not</strong> absolute paths on your local machine.</li>
+<li>Push your <code>heartbeat_refactor</code> branch to GitLab.</li>
+<li>Create a new Merge Request to merge <code>heartbeat_refactor</code> into your forked repository’s <code>main</code> branch (NOT THE PARENT REPO <code>main</code> BRANCH!).</li>
+<li>Merge your <code>heartbeat_refactor</code> branch into your <code>main</code> branch, and create an annotated tag for that merged commit called <code>v1.2.0</code>.</li>
 </ul>
 </section>
-<section id="gradescope" class="level2">
-<h2 class="anchored" data-anchor-id="gradescope">Gradescope</h2>
-<p>Complete the Gradescope assignment for this lab that is a few simple tasks:</p>
-<ol type="1">
-<li>Confirm that you created the Issue above</li>
-<li>Confirm that you completed both of the Nordic DevAcademy lessons</li>
-<li>Upload a screenshot of your CI pipeline jobs passing</li>
-</ol>
+<section id="refactor-kernel-events" class="level2">
+<h2 class="anchored" data-anchor-id="refactor-kernel-events">Refactor: Kernel Events</h2>
+<ul>
+<li>Do the following refactoring on a new branch called <code>kernel_events_refactor</code>.</li>
+<li>Refactor all of your code to remove Boolean variables being used in your ISR callback functions to indicate that buttons have been pressed to now use kernel events in a single bit array called <code>button_events</code>.</li>
+<li>You should use 1 bit for each button, meaning the bit array is 4-bits.</li>
+<li>Implement a <code>k_event_wait()</code> in the appropriate state(s) of your main thread to wait for button events to occur. This will be a blocking wait, meaning the <code>main</code> thread <code>while</code> loop will not be running while waiting for button events.</li>
+</ul>
 </section>
-<section id="how-to-ask-for-help" class="level2">
-<h2 class="anchored" data-anchor-id="how-to-ask-for-help">How to Ask for Help</h2>
+<section id="verify-that-your-led-timing-still-works" class="level2">
+<h2 class="anchored" data-anchor-id="verify-that-your-led-timing-still-works">Verify that your LED Timing Still Works</h2>
+<ul>
+<li>Update your <code>timing_analysis.ipynb</code> notebook to include a section that verifies that your refactored code still works as expected.</li>
+<li>It is up to you to now determine how to verify that your LED timing is still working with regard to what data to collect, how to analyze it, and how to present it in your notebook.</li>
+</ul>
+</section>
+<section id="merge-n-tag-this-refactored-kernel-events-code-and-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="merge-n-tag-this-refactored-kernel-events-code-and-analysis">Merge-n-Tag this Refactored Kernel Events Code and Analysis</h2>
+<ul>
+<li>Be sure that your complete <code>timing_analysis.ipynb</code> notebook and associated raw data are committed to your <code>kernel_events_refactor</code> branch.</li>
+<li>Create a Merge Request to merge <code>kernel_events_refactor</code> into your <code>main</code> branch.</li>
+<li>Merge your <code>kernel_events_refactor</code> branch into your <code>main</code> branch.</li>
+<li>Create an annotated tag for that merged commit called <code>v1.3.0</code>.</li>
+<li>Create an Issue assigned to Dr.&nbsp;Palmeri to review your code for both <code>v1.2.0</code> and <code>v1.3.0</code>.</li>
+</ul>
+</section>
+<section id="how-do-i-ask-for-help" class="level2">
+<h2 class="anchored" data-anchor-id="how-do-i-ask-for-help">How do I ask for help?</h2>
 <ol type="1">
 <li>If you have a general / non-coding question, you should ask your TAs / Dr. Palmeri on Ed to allow any of them to respond in a timely manner.</li>
 <li>Push you code to your GitLab repository, ideally with your active development on a non-<code>main</code> branch.</li>
@@ -912,4 +863,4 @@ Important
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/Embedded-Medical-Devices/edit/main/labs/c-programming-lab.qmd" class="toc-action"><i class="bi bi-git"></i>Edit this page</a></li><li><a href="https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/Embedded-Medical-Devices/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/Embedded-Medical-Devices/edit/main/labs/zephyr-threads-events-lab.qmd" class="toc-action"><i class="bi bi-git"></i>Edit this page</a></li><li><a href="https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/Embedded-Medical-Devices/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>

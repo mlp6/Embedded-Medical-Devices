@@ -7,9 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Dr.&nbsp;Mark Palmeri, M.D., Ph.D.">
-<meta name="dcterms.date" content="2025-06-20">
 
-<title>C Programming Lab – Embedded Medical Devices</title>
+<title>Zephyr: Timers Lab – Embedded Medical Devices</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -82,7 +81,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labs/event-driven-state-machine-lab.html">Labs</a></li><li class="breadcrumb-item"><a href="../labs/c-programming-lab.html">C Programming Lab</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labs/event-driven-state-machine-lab.html">Labs</a></li><li class="breadcrumb-item"><a href="../labs/zephyr-timers-lab.html">Timers Lab</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -252,7 +251,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../labs/c-programming-lab.html" class="sidebar-item-text sidebar-link active">
+  <a href="../labs/c-programming-lab.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">C Programming Lab</span></a>
   </div>
 </li>
@@ -270,7 +269,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../labs/zephyr-timers-lab.html" class="sidebar-item-text sidebar-link">
+  <a href="../labs/zephyr-timers-lab.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Timers Lab</span></a>
   </div>
 </li>
@@ -315,28 +314,25 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#prelab" id="toc-prelab" class="nav-link active" data-scroll-target="#prelab">Prelab</a></li>
-  <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives">Objectives</a></li>
-  <li><a href="#zephyr-application-git-repository-overview" id="toc-zephyr-application-git-repository-overview" class="nav-link" data-scroll-target="#zephyr-application-git-repository-overview">Zephyr Application Git Repository Overview</a></li>
-  <li><a href="#things-to-do" id="toc-things-to-do" class="nav-link" data-scroll-target="#things-to-do">Things To Do</a></li>
-  <li><a href="#git-best-practices" id="toc-git-best-practices" class="nav-link" data-scroll-target="#git-best-practices">Git Best Practices</a>
+  <li><a href="#refactor-your-gpio-lab-code" id="toc-refactor-your-gpio-lab-code" class="nav-link active" data-scroll-target="#refactor-your-gpio-lab-code">Refactor your GPIO Lab Code</a></li>
+  <li><a href="#git-version-control" id="toc-git-version-control" class="nav-link" data-scroll-target="#git-version-control">Git Version Control</a></li>
+  <li><a href="#test-the-accuracy-of-your-timing" id="toc-test-the-accuracy-of-your-timing" class="nav-link" data-scroll-target="#test-the-accuracy-of-your-timing">Test the Accuracy of your Timing</a>
   <ul class="collapse">
-  <li><a href="#fork-clone-build-flash-view-serial-output" id="toc-fork-clone-build-flash-view-serial-output" class="nav-link" data-scroll-target="#fork-clone-build-flash-view-serial-output">Fork / Clone / Build / Flash / View Serial Output</a></li>
-  <li><a href="#modify-the-zephyr-application-datatypes-typecasting-formatted-printing" id="toc-modify-the-zephyr-application-datatypes-typecasting-formatted-printing" class="nav-link" data-scroll-target="#modify-the-zephyr-application-datatypes-typecasting-formatted-printing">Modify the Zephyr Application (DataTypes / Typecasting / Formatted Printing)</a></li>
+  <li><a href="#logging-statements" id="toc-logging-statements" class="nav-link" data-scroll-target="#logging-statements">Logging Statements</a></li>
+  <li><a href="#oscilloscope-measurements" id="toc-oscilloscope-measurements" class="nav-link" data-scroll-target="#oscilloscope-measurements">Oscilloscope Measurements</a></li>
+  <li><a href="#discussion" id="toc-discussion" class="nav-link" data-scroll-target="#discussion">Discussion</a></li>
   </ul></li>
-  <li><a href="#library-refactor" id="toc-library-refactor" class="nav-link" data-scroll-target="#library-refactor">Library Refactor</a></li>
-  <li><a href="#push-everything-to-gitlab-create-an-issue-to-notify-dr.-palmeri" id="toc-push-everything-to-gitlab-create-an-issue-to-notify-dr.-palmeri" class="nav-link" data-scroll-target="#push-everything-to-gitlab-create-an-issue-to-notify-dr.-palmeri">Push Everything to GitLab &amp; Create an Issue to Notify Dr.&nbsp;Palmeri</a></li>
-  <li><a href="#gradescope" id="toc-gradescope" class="nav-link" data-scroll-target="#gradescope">Gradescope</a></li>
   <li><a href="#how-to-ask-for-help" id="toc-how-to-ask-for-help" class="nav-link" data-scroll-target="#how-to-ask-for-help">How to Ask for Help</a></li>
+  <li><a href="#what-to-submit" id="toc-what-to-submit" class="nav-link" data-scroll-target="#what-to-submit">What to Submit</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/Embedded-Medical-Devices/edit/main/labs/c-programming-lab.qmd" class="toc-action"><i class="bi bi-git"></i>Edit this page</a></li><li><a href="https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/Embedded-Medical-Devices/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="c-programming-lab.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/Embedded-Medical-Devices/edit/main/labs/zephyr-timers-lab.qmd" class="toc-action"><i class="bi bi-git"></i>Edit this page</a></li><li><a href="https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/Embedded-Medical-Devices/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="zephyr-timers-lab.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labs/event-driven-state-machine-lab.html">Labs</a></li><li class="breadcrumb-item"><a href="../labs/c-programming-lab.html">C Programming Lab</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labs/event-driven-state-machine-lab.html">Labs</a></li><li class="breadcrumb-item"><a href="../labs/zephyr-timers-lab.html">Timers Lab</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">C Programming Lab</h1>
+<h1 class="title">Zephyr: Timers Lab</h1>
 <p class="subtitle lead">BME554L - Fall 2025 - Palmeri</p>
   <div class="quarto-categories">
     <div class="quarto-category">Lab</div>
@@ -357,7 +353,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">June 20, 2025</p>
+      <p class="date">Invalid Date</p>
     </div>
   </div>
   
@@ -369,124 +365,75 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<!-- TODO: have the students fork the c-programming-lab repository -->
-<!-- TODO: add debugging exercise -->
-<section id="prelab" class="level2">
-<h2 class="anchored" data-anchor-id="prelab">Prelab</h2>
+<section id="refactor-your-gpio-lab-code" class="level2">
+<h2 class="anchored" data-anchor-id="refactor-your-gpio-lab-code">Refactor your GPIO Lab Code</h2>
+<p>You will be refactoring your code from the GPIO lab to now use timers. Do all of the refactoring below on a new branch called <code>timers</code>.</p>
 <ul>
-<li>Complete <a href="https://academy.nordicsemi.com/courses/nrf-connect-sdk-fundamentals/lessons/lesson-3-elements-of-an-nrf-connect-sdk-application/">Nordic DevAcademy: Lesson 3 – Elements of an nRF Connect SDK application</a></li>
-<li>Complete <a href="https://academy.nordicsemi.com/courses/nrf-connect-sdk-fundamentals/lessons/lesson-3-printing-messages-to-console-and-logging/">Nordic DevAcademy: Lesson 4 – Printing messages to console and logging</a></li>
-<li>Review <a href="../resources/debugging.html">Debugging</a> resource.</li>
+<li>Eliminate any conditional logic (<code>if/else</code> statements) to test for elapsed time to toggle/set LED output states.</li>
+<li>Use timers for all LED illumination events.</li>
+<li>You do not have to use work queues if your timer handler functions run quickly and do not block. However, if your handler functions are more complex, you should use work queues to submit the work to the system work queue.</li>
 </ul>
 </section>
-<section id="objectives" class="level2">
-<h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
-<ul>
-<li>Introduction to C Programming</li>
-<li>Building Zephyr application</li>
-<li>Flashing Zephyr application</li>
-<li>Viewing serial output from Zephyr application running on your <code>nrf52833DK</code></li>
-<li>Debugging Zephyr applications in VS Code</li>
-</ul>
-</section>
-<section id="zephyr-application-git-repository-overview" class="level2">
-<h2 class="anchored" data-anchor-id="zephyr-application-git-repository-overview">Zephyr Application Git Repository Overview</h2>
-<ul>
-<li><code>src/main.c</code> - main application code</li>
-<li><code>.gitingore</code> - ignore files that are not needed in the git repository</li>
-<li><code>CMakeLists.txt</code> - build system configuration file</li>
-<li><code>prj.conf</code> - Zephyr configuration file</li>
-<li><code>README.md</code> - this file</li>
-<li><code>CMakePresets.json</code> - CMake presets file (build configuration)</li>
-<li><code>.gitlab-ci.yml</code> - GitLab CI configuration file</li>
-</ul>
-</section>
-<section id="things-to-do" class="level2">
-<h2 class="anchored" data-anchor-id="things-to-do">Things To Do</h2>
-</section>
-<section id="git-best-practices" class="level2">
-<h2 class="anchored" data-anchor-id="git-best-practices">Git Best Practices</h2>
-<ul>
-<li>Use best practices for version control (branching, commit messages, etc.).</li>
-<li>Do all development on a dedicated branch that is merged into <code>main</code> once it is functional.</li>
-<li>Commits should be very specific to the changes/additions you are making to your code. This will help you and others understand what you did and why you did it.<br>
-</li>
-<li>On a given development branch, try to implement one small piece of functionality at a time, commit it, and then move on to the next piece of functionality.</li>
-</ul>
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Important
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>You do not want one, monolithic git commit right before you submit your project.</p>
-</div>
-</div>
-<section id="fork-clone-build-flash-view-serial-output" class="level3">
-<h3 class="anchored" data-anchor-id="fork-clone-build-flash-view-serial-output">Fork / Clone / Build / Flash / View Serial Output</h3>
-<ul>
-<li>Fork this repository on GitLab</li>
-<li>Add Dr.&nbsp;Palmeri (<code>mlp6</code>) as a Maintainer in your forked repository.</li>
-<li>Clone your forked repository to your local machine</li>
-<li>Build the Zephyr application “as is” (review <a href="https://academy.nordicsemi.com/courses/nrf-connect-sdk-fundamentals/lessons/lesson-1-nrf-connect-sdk-introduction/">DevAcademy: Lesson 1</a>)</li>
-<li>Flash the Zephyr application to your development kit.
-<ul>
-<li>Connect the <code>VCOM</code> port on the <code>nrf52833DK</code> to your computer (using <code>Connected Devices</code> and the plug icon)</li>
-<li>Look at the serial output in the VS Code <code>Terminal</code></li>
-</ul></li>
-</ul>
-</section>
-<section id="modify-the-zephyr-application-datatypes-typecasting-formatted-printing" class="level3">
-<h3 class="anchored" data-anchor-id="modify-the-zephyr-application-datatypes-typecasting-formatted-printing">Modify the Zephyr Application (DataTypes / Typecasting / Formatted Printing)</h3>
-<ul>
-<li>Inspect the code to see how variables <code>a</code>, <code>b</code> and <code>c</code> are declared and initialized.</li>
-<li>Flash the existing code and note the terminal output:</li>
-</ul>
-<p><img src="images/you_lose.png" width="200"></p>
-<ul>
-<li>On a development branch called <code>fix_division</code>, without changing the declared datatypes of <code>a</code>, <code>b</code>, or <code>c</code>, correct the code so that <code>c</code> is output in the terminal:</li>
-</ul>
-<p><img src="images/you_win.png" width="200"></p>
-<ul>
-<li>Push the <code>fix_division</code> branch to your GitLab repository.</li>
-<li>Create a <strong>Merge Request</strong> to merge the <code>fix_division</code> branch into your <code>main</code> branch.</li>
-<li>Make sure the GitLab CI pipeline is successful before merging the <code>fix_division</code> branch into <code>main</code>. If it isn’t passing, fix the problem locally on the same branch and push the changes to GitLab.</li>
-<li>Pull your updated <code>main</code> branch to your local machine.</li>
-<li>Create an annotated tag for the merged commit on main with the fixed division named <code>v1.0.0</code>.</li>
-<li>Push this annotated tag to your GitLab repository.</li>
-</ul>
-<p>:clock10: Note that the CI pipelines running on the GitLab server can take a while to complete. Do not rely on them for immediate development feedback, but rather as a final check before merging code into <code>main</code>.</p>
-</section>
-</section>
-<section id="library-refactor" class="level2">
-<h2 class="anchored" data-anchor-id="library-refactor">Library Refactor</h2>
-<ul>
-<li>On another development branch on your local machine called <code>refactor_library</code>, refactor the code to put the <code>divide_numbers()</code> function into a library called <code>my_math_functions.h</code>.</li>
-<li>Once you have your code working with this library, <strong>locally merge</strong> the <code>refactor_library</code> branch into <code>main</code>.</li>
-<li>Create an annotated tag for the merged commit on main with the refactored library named <code>v1.1.0</code>.</li>
-<li>Push the new commit(s) and annotated tag to your GitLab repository. Remember, this will need to be done with two commands, <code>git push</code> and <code>git push --tags</code>.</li>
-</ul>
-</section>
-<section id="push-everything-to-gitlab-create-an-issue-to-notify-dr.-palmeri" class="level2">
-<h2 class="anchored" data-anchor-id="push-everything-to-gitlab-create-an-issue-to-notify-dr.-palmeri">Push Everything to GitLab &amp; Create an Issue to Notify Dr.&nbsp;Palmeri</h2>
-<ul>
-<li>Make sure all of your commits are pushed to your <code>main</code> branch, along with both annotated tags.</li>
-<li>Confirm that the GitLab CI pipeline is successful.</li>
-<li>Create an Issue titled <code>C Programming Lab Complete</code> and assign it to Dr.&nbsp;Palmeri (<code>mlp6</code>).</li>
-</ul>
-</section>
-<section id="gradescope" class="level2">
-<h2 class="anchored" data-anchor-id="gradescope">Gradescope</h2>
-<p>Complete the Gradescope assignment for this lab that is a few simple tasks:</p>
+<section id="git-version-control" class="level2">
+<h2 class="anchored" data-anchor-id="git-version-control">Git Version Control</h2>
 <ol type="1">
-<li>Confirm that you created the Issue above</li>
-<li>Confirm that you completed both of the Nordic DevAcademy lessons</li>
-<li>Upload a screenshot of your CI pipeline jobs passing</li>
+<li>If you have a general / non-coding question, you should ask your TAs / Dr. Palmeri on Ed to allow any of them to respond in a timely manner.</li>
+<li>Push you code to your GitLab repository, ideally with your active development on a non-<code>main</code> branch.</li>
+<li>Create an <a href="https://docs.gitlab.com/ee/user/project/issues/">Issue</a> in your repository.
+<ul>
+<li>Add as much detail as possible as to your problem, and add links to specific lines / section of code when possible.</li>
+<li>Assign the label “Bug” or “Question”, as appropriate.</li>
+<li>Be sure to specify what branch you are working on.</li>
+<li>Assign the Issue to one of the TAs.</li>
+<li>If your TA cannot solve your Issue, they can escalate the Issue to Dr.&nbsp;Palmeri.</li>
+</ul></li>
+<li>You will get a response to your Issue, and maybe a new branch of code will be pushed to help you with some example syntax that you can use <code>git diff</code> to visualize.</li>
 </ol>
+</section>
+<section id="test-the-accuracy-of-your-timing" class="level2">
+<h2 class="anchored" data-anchor-id="test-the-accuracy-of-your-timing">Test the Accuracy of your Timing</h2>
+<!-- TODO: update URL for notebook -->
+<p>For the measurements below, record and analyze your data in the technical report Jupyter notebook <a href="testing/timing_analysis.ipynb">timing_analysis.ipynb</a> that you can copy from this repository and add to your GPIO repository in a directory named <code>testing/</code>.</p>
+<!-- TODO: move this information into the notebook (?) -->
+<p>Your report should include:</p>
+<ul>
+<li>Very brief statement of what you did (e.g., how you captured the timing via logging or how you measured timing on the oscilloscope).</li>
+<li>Read in raw data from a file (e.g., a CSV file). Do <em>not</em> manually type in data.</li>
+<li>Relevant analysis / plots / tables of your data, highlighting the 95% CI and how it compares to the nominal specification (bias and variance).</li>
+<li>Brielfy discuss agreement or disagreement with the nominal specification, and in the case of disagreement, how you might improve the accuracy and precision of your timing.</li>
+</ul>
+<section id="logging-statements" class="level3">
+<h3 class="anchored" data-anchor-id="logging-statements">Logging Statements</h3>
+<ul>
+<li>Use logging statements to test the accuracy of your heartbeat and action LED timing for the (a) default, (b) fastest and (c) slowest blink rate of your action LEDs.
+<ul>
+<li>Note that logging statements, by default, are low priority and non-blocking (asynchronous).<br>
+</li>
+<li>Given the latency of when a log message may be printed relative to the event you are trying to get the timing of, you should save the execution time of the timing handler to be log printed later.</li>
+</ul></li>
+<li>Save your logging output data to a CSV file to be read into your Jupyter notebook. There is no elegant way to directly save your data to a CSV file directly from the Terminal in VS Code. Two possible approaches:
+<ul>
+<li>You can save the entire Terminal output to a file and parse it in your Jupyter notebook, or</li>
+<li>You can cut-and-paste the relevant values from the Terminal output to a CSV file.</li>
+</ul></li>
+<li>Estimate the 95% confidence interval (2x standard deviation for normally-distributed data) for your timing relative to the nominal specification.</li>
+</ul>
+</section>
+<section id="oscilloscope-measurements" class="level3">
+<h3 class="anchored" data-anchor-id="oscilloscope-measurements">Oscilloscope Measurements</h3>
+<ul>
+<li>Repeat your timing accuracy analysis you performed with logging statements using an oscilloscope directly measuring the GPIO pin signals. <em>Remember that all of the GPIO pins are accessible as female header sockets on the development kit; you do not need to try to directly connect to the pads of the LEDs and buttons!</em></li>
+<li>Save your oscilloscope measurements to a CSV file to be read into your Jupyter notebook.</li>
+<li>Use the oscilloscope cursors to measure the timing intervals. Remember that you will need multiple independent measurements to calculate confidence intervals.</li>
+<li>Quantify a 95% confidence interval for your timing relative to the nominal specification using these oscillosocpe measurements.</li>
+</ul>
+</section>
+<section id="discussion" class="level3">
+<h3 class="anchored" data-anchor-id="discussion">Discussion</h3>
+<ul>
+<li>Answer the Discussion questions posed in the Jupyter notebook.</li>
+</ul>
+</section>
 </section>
 <section id="how-to-ask-for-help" class="level2">
 <h2 class="anchored" data-anchor-id="how-to-ask-for-help">How to Ask for Help</h2>
@@ -503,6 +450,17 @@ Important
 </ul></li>
 <li>You will get a response to your Issue, and maybe a new branch of code will be pushed to help you with some example syntax that you can use <code>git diff</code> to visualize.</li>
 </ol>
+</section>
+<section id="what-to-submit" class="level2">
+<h2 class="anchored" data-anchor-id="what-to-submit">What to Submit</h2>
+<ul>
+<li>Make sure that your complete <code>timing_analysis.ipynb</code> notebook is in your <code>timers</code> branch in a directory called <code>testing/</code>, which also includes all raw CSV data.</li>
+<li>Make sure that your Jupyter notebook reads in data from relative paths for the repository, <strong>not</strong> absolute paths on your local machine.</li>
+<li>Push your <code>timers</code> branch to GitLab.</li>
+<li>Create a new Merge Request to merge <code>timers</code> into your forked repository’s <code>main</code> branch (NOT THE PARENT REPO <code>main</code> BRANCH!).</li>
+<li>Merge your <code>timers</code> branch into your <code>main</code> branch, and create an annotated tag for that merged commit called <code>v1.1.0</code>.</li>
+<li>Create a new Issue assigned to Dr.&nbsp;Palmeri to request a code review for <code>v1.1.0</code>.</li>
+</ul>
 
 
 </section>
@@ -912,4 +870,4 @@ Important
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/Embedded-Medical-Devices/edit/main/labs/c-programming-lab.qmd" class="toc-action"><i class="bi bi-git"></i>Edit this page</a></li><li><a href="https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/Embedded-Medical-Devices/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/Embedded-Medical-Devices/edit/main/labs/zephyr-timers-lab.qmd" class="toc-action"><i class="bi bi-git"></i>Edit this page</a></li><li><a href="https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/Embedded-Medical-Devices/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>

@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-fced259a1985fd972ecb57c7cd45153f.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/quarto-contrib/live-runtime/live-runtime.js" type="module"></script>
+<link href="../site_libs/quarto-contrib/live-runtime/live-runtime.css" rel="stylesheet"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.7.31">
+
+  <meta name="author" content="Dr.&nbsp;Mark Palmeri, M.D., Ph.D.">
+  <title>Embedded Medical Devices – Zephyr: Timers, Threads, Work Queues &amp; Events</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #767676;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #767676;  padding-left: 4px; }
+    div.sourceCode
+      { color: #545454; background-color: #fefefe; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #545454; } /* Normal */
+    code span.al { color: #7928a1; } /* Alert */
+    code span.an { color: #696969; } /* Annotation */
+    code span.at { color: #a55a00; } /* Attribute */
+    code span.bn { color: #7928a1; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #d91e18; } /* ControlFlow */
+    code span.ch { color: #008000; } /* Char */
+    code span.cn { color: #d91e18; } /* Constant */
+    code span.co { color: #696969; } /* Comment */
+    code span.cv { color: #696969; font-style: italic; } /* CommentVar */
+    code span.do { color: #696969; font-style: italic; } /* Documentation */
+    code span.dt { color: #7928a1; } /* DataType */
+    code span.dv { color: #7928a1; } /* DecVal */
+    code span.er { color: #7928a1; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #a55a00; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #696969; } /* Information */
+    code span.kw { color: #d91e18; } /* Keyword */
+    code span.op { color: #00769e; } /* Operator */
+    code span.ot { color: #d91e18; } /* Other */
+    code span.pp { color: #7928a1; } /* Preprocessor */
+    code span.sc { color: #00769e; } /* SpecialChar */
+    code span.ss { color: #008000; } /* SpecialString */
+    code span.st { color: #008000; } /* String */
+    code span.va { color: #a55a00; } /* Variable */
+    code span.vs { color: #008000; } /* VerbatimString */
+    code span.wa { color: #696969; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-f1d94928152c1c7297a88c13674de5fd.css">
+  <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+  <script type="module" src="../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
+  <link href="../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Zephyr: Timers, Threads, Work Queues &amp; Events</h1>
+  <p class="subtitle">BME554L -Fall 2025 - Palmeri</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Dr.&nbsp;Mark Palmeri, M.D., Ph.D. 
+</div>
+        <p class="quarto-title-affiliation">
+            Duke University
+          </p>
+    </div>
+</div>
+
+  <p class="date">Invalid Date</p>
+</section>
+<section id="what-are-the-challenges-with-sleep-delay-statements" class="slide level2">
+<h2>What are the challenges with <code>sleep</code> / <code>delay</code> statements?</h2>
+<ul>
+<li>Overall timing of the main loop hard to estimate with multiple ”tasks”.</li>
+<li>Adding / removing features can disrupt all of the timing.</li>
+</ul>
+</section>
+<section id="what-are-the-challenges-with-super-loops" class="slide level2">
+<h2>What are the challenges with super-loops?</h2>
+<ul>
+<li>Nested conditional statements testing for timing of events can make the code difficult to read and maintain.</li>
+<li>Leads to “code spaghetti” and “spaghetti timing”.</li>
+</ul>
+</section>
+<section id="threads" class="slide level2">
+<h2>Threads</h2>
+
+<img data-src="images/timers/bare-metal-vs-rtos.png" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="system-vs.-user-threads" class="slide level2">
+<h2>System vs.&nbsp;User Threads</h2>
+<ul>
+<li>Zephyr’s <strong>kernel</strong> starts a system thread and a user-space thread by default.</li>
+<li>User can add tasks to the system thread and/or create user threads.</li>
+</ul>
+</section>
+<section id="thread-priority" class="slide level2">
+<h2>Thread Priority</h2>
+
+<img data-src="images/timers/ex_1_thread_yielding_2.png" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="timer-threads" class="slide level2">
+<h2>Timer Threads</h2>
+<p>In addition to ISR priority and thread priority yielding, the system also has <strong>timers</strong> for high temporal accuracy tasks (one-time or repeated).</p>
+<ul>
+<li>Timers are managed by the kernel (system).</li>
+<li>Timers are always available (i.e., no need to include libraries or enable kernel configurations)</li>
+<li>Like ISR callback functions, <strong>timer handler functions</strong> should not consume significant resources / take much time to execute.
+<ul>
+<li>A handler function at the end of a timer interval (duration / period) must be defined.</li>
+<li>A handler function at the end of a timer stop can optionally be defined.</li>
+</ul></li>
+<li>The kernel gives timing events relatively high priority.</li>
+</ul>
+</section>
+<section>
+<section id="pseudo-code" class="title-slide slide level1 center">
+<h1>Pseudo-Code</h1>
+
+</section>
+<section id="defining-the-timer-and-associated-handler-functions" class="slide level2">
+<h2>Defining the Timer and Associated Handler Functions</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb1-1"><a></a><span class="co">/* Declare timer start[/stop] handler functions */</span></span>
+<span id="cb1-2"><a></a><span class="dt">void</span> timer_interval_expiry_handler<span class="op">(</span><span class="kw">struct</span> k_timer <span class="op">*</span>name_of_timer<span class="op">);</span></span>
+<span id="cb1-3"><a></a><span class="dt">void</span> timer_stop_handler<span class="op">(</span><span class="kw">struct</span> k_timer <span class="op">*</span>name_of_timer<span class="op">);</span> <span class="co">// optional </span></span>
+<span id="cb1-4"><a></a></span>
+<span id="cb1-5"><a></a>K_TIMER_DEFINE<span class="op">(</span>name_of_timer<span class="op">,</span> timer_interval_expiry_handler<span class="op">,</span> timer_stop_handler<span class="op">);</span></span>
+<span id="cb1-6"><a></a></span>
+<span id="cb1-7"><a></a><span class="co">// if the timer will run indefinitely or doesn't need an explicit action upon stopping</span></span>
+<span id="cb1-8"><a></a><span class="co">// K_TIMER_DEFINE(name_of_timer, func_to_exec_on_timer_start, NULL);</span></span>
+<span id="cb1-9"><a></a></span>
+<span id="cb1-10"><a></a><span class="co">/* Define the timer handler functions */</span></span>
+<span id="cb1-11"><a></a><span class="dt">void</span> timer_interval_expiry_handler<span class="op">(</span><span class="kw">struct</span> k_timer <span class="op">*</span>name_of_timer<span class="op">)</span></span>
+<span id="cb1-12"><a></a><span class="op">{</span></span>
+<span id="cb1-13"><a></a>    gpio_pin_toggle_dt<span class="op">(&amp;</span>somepin<span class="op">);</span></span>
+<span id="cb1-14"><a></a>    <span class="co">// in future assignments, could also post an event here</span></span>
+<span id="cb1-15"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="handler-functions-should-not-test-for-state" class="slide level2">
+<h2>Handler Functions Should Not Test for State</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb2-1"><a></a><span class="dt">void</span> timer_interval_expiry_handler<span class="op">(</span><span class="kw">struct</span> k_timer <span class="op">*</span>name_of_timer<span class="op">)</span></span>
+<span id="cb2-2"><a></a><span class="op">{</span></span>
+<span id="cb2-3"><a></a>    <span class="cf">if</span> <span class="op">(</span>state <span class="op">==</span> AWAKE<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-4"><a></a>        gpio_pin_toggle_dt<span class="op">(&amp;</span>somepin<span class="op">);</span></span>
+<span id="cb2-5"><a></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">(</span>state <span class="op">==</span> SLEEP<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-6"><a></a>        gpio_pin_set_dt<span class="op">(&amp;</span>somepin<span class="op">,</span> <span class="dv">0</span><span class="op">);</span></span>
+<span id="cb2-7"><a></a>    <span class="op">}</span></span>
+<span id="cb2-8"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Instead, use a different timer/handler function for each state:
+<ul>
+<li>Stop one timer in an exit transition state.</li>
+<li>Start the other in an entry transition state.</li>
+</ul></li>
+</ul>
+</section>
+<section id="starting-a-repeating-timer" class="slide level2">
+<h2>Starting a Repeating Timer</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb3-1"><a></a>k_timer_start<span class="op">(&amp;</span>name_of_timer<span class="op">,</span> K_MSEC<span class="op">(</span>DURATION_OF_FIRST_INTERVAL<span class="op">),</span> K_MSEC<span class="op">(</span>DURATION_OF_REPEATED_INTERVALS<span class="op">));</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><code>K_MSEC</code> is a macro that converts a time, specified in ms (<code>DURATION_OF_FIRST_EVENT</code>) to whatever time unit the function requires.</li>
+<li>Other useful macros include <code>K_SECONDS</code>, <code>K_MINUTES</code>, <code>K_HOURS</code>, etc.</li>
+<li><strong>Timer functions are executed at the end of each interval (duration / period).</strong></li>
+<li>https://docs.zephyrproject.org/latest/kernel/services/timing/clocks.html</li>
+</ul>
+</section>
+<section id="stopping-a-timer" class="slide level2">
+<h2>Stopping a Timer</h2>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb4-1"><a></a>k_timer_stop<span class="op">(&amp;</span>name_of_timer<span class="op">);</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This will call <code>timer_stop_handler()</code> that you associated with the timer using the <code>K_TIMER_DEFINE</code> macro.</p>
+</section>
+<section id="timer-example" class="slide level2">
+<h2>Timer Example</h2>
+<ul>
+<li>This timer toggles the LED state every 500 ms.<br>
+</li>
+<li>Note that the timer handler is executed at the <strong>end</strong> of each timer interval.<br>
+</li>
+<li>The stop handler function turns off the LED.</li>
+</ul>
+
+<img data-src="images/timers/repeat_timer.png" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="starting-a-one-shot-timer" class="slide level2">
+<h2>Starting a One-Shot Timer</h2>
+<p>If you want to do something once for a specified duration (one-shot behavior).</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb5-1"><a></a>k_timer_start<span class="op">(&amp;</span>name_of_timer<span class="op">,</span> K_MSEC<span class="op">(</span>DURATION_OF_FIRST_INTERVAL<span class="op">),</span> K_NO_WAIT<span class="op">);</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="one-shot-timer-example" class="slide level2">
+<h2>One-Shot Timer Example</h2>
+<ul>
+<li>In the example below, you can use the one-shot timer to toggle the LED state after 1 second. Note that the LED is turned on seaprate from the timer and the timer handler is executed at the <strong>end</strong> of the timer interval to turn it off.</li>
+</ul>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb6-1"><a></a>gpio_pin_toggle_dt<span class="op">(&amp;</span>led<span class="op">);</span></span>
+<span id="cb6-2"><a></a>k_timer_start<span class="op">(&amp;</span>name_of_timer<span class="op">,</span> K_MSEC<span class="op">(</span><span class="dv">4000</span><span class="op">),</span> K_NO_WAIT<span class="op">);</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+<img data-src="images/timers/one_shot.png" class="quarto-figure quarto-figure-center r-stretch"><ul>
+<li>There is no need to stop the timer; it terminates after the specified interval.</li>
+</ul>
+</section>
+<section id="restarting-timers" class="slide level2">
+<h2>Restarting Timers</h2>
+<ul>
+<li>You do not need to stop a timer that is already running to reset the timing interval.</li>
+<li>Just execute <code>k_timer_start()</code> again.</li>
+<li>Note that the timer will not be set to the new interval until it completes the interval it currently is ”in”.</li>
+</ul>
+</section>
+<section id="notes" class="slide level2">
+<h2>Notes</h2>
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Warning</strong></p>
+</div>
+<div class="callout-content">
+<p>If you set a duration / period to <code>0</code>, the timer will:</p>
+<ul>
+<li>Execute as fast as possible, and</li>
+<li><strong>Stop without running the optionally associated stop function!</strong></li>
+</ul>
+</div>
+</div>
+</div>
+<ul>
+<li>The specified duration / period are the <strong>minimum</strong> times between executions of the timer function.<br>
+</li>
+<li>Other blocking code may cause the timer function to execute later than the specified duration / period.</li>
+</ul>
+</section></section>
+<section>
+<section id="work-queues" class="title-slide slide level1 center">
+<h1>Work Queues</h1>
+
+</section>
+<section id="what-is-a-work-queue" class="slide level2">
+<h2>What is a Work Queue?</h2>
+<ul>
+<li>A work queue is a way to execute a function when the system is not busy.</li>
+<li>Work queues are managed by the kernel (system).
+<ul>
+<li>System work queue exists by default (no need to include libraries or enable kernel options).</li>
+<li>User can create additional work queues, but need to be defined and initialized.</li>
+</ul></li>
+</ul>
+</section>
+<section id="how-work-queues-help-us" class="slide level2">
+<h2>How Work Queues Help Us</h2>
+<ul>
+<li>Callbacks and handler functions associated with ISRs and timers should not consume significant resource / take much time to execute.</li>
+<li><strong>Pro:</strong> Work queues allow us to execute functions that may take longer to execute.</li>
+<li><strong>Con:</strong> The specific timing of the execution of the function is not guaranteed.</li>
+<li>No longer need to test for Boolean variables in the main loop to determine when to execute a function.</li>
+</ul>
+</section>
+<section id="pseudo-code-1" class="slide level2">
+<h2>Pseudo-Code</h2>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb7-1"><a></a><span class="co">/* declare work queue handler function */</span></span>
+<span id="cb7-2"><a></a><span class="dt">void</span> blink_timer_work_handler<span class="op">(</span><span class="kw">struct</span> k_work <span class="op">*</span>timer_work<span class="op">);</span></span>
+<span id="cb7-3"><a></a></span>
+<span id="cb7-4"><a></a><span class="co">/* define a work queue to associate with the handler function */</span></span>
+<span id="cb7-5"><a></a>K_WORK_DEFINE<span class="op">(</span>blink_timer_work<span class="op">,</span> blink_timer_work_handler<span class="op">);</span></span>
+<span id="cb7-6"><a></a></span>
+<span id="cb7-7"><a></a><span class="co">/* in your timer callback function, submit your task to the work queue */</span></span>
+<span id="cb7-8"><a></a><span class="dt">void</span> blink_timer_handler<span class="op">(</span><span class="kw">struct</span> k_timer <span class="op">*</span>blink_timer<span class="op">){</span></span>
+<span id="cb7-9"><a></a>    k_work_submit<span class="op">(&amp;</span>blink_timer_work<span class="op">);</span></span>
+<span id="cb7-10"><a></a>    LOG_INF<span class="op">(</span><span class="st">"Submitted blinking work to the queue! (</span><span class="sc">%lld</span><span class="st">)"</span><span class="op">,</span> k_uptime_get<span class="op">());</span></span>
+<span id="cb7-11"><a></a><span class="op">}</span></span>
+<span id="cb7-12"><a></a></span>
+<span id="cb7-13"><a></a><span class="co">/* define the work queue handler function */</span></span>
+<span id="cb7-14"><a></a><span class="dt">void</span> blink_timer_work_handler<span class="op">(</span><span class="kw">struct</span> k_work <span class="op">*</span>timer_work<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb7-15"><a></a>    LOG_INF<span class="op">(</span><span class="st">"Doing blink work! (</span><span class="sc">%lld</span><span class="st">)"</span><span class="op">,</span> k_uptime_get<span class="op">());</span></span>
+<span id="cb7-16"><a></a>    gpio_pin_toggle_dt<span class="op">(&amp;</span>led_blink<span class="op">);</span></span>
+<span id="cb7-17"><a></a>    k_msleep<span class="op">(</span>WORK_QUEUE_NAP_TIME_MS<span class="op">);</span></span>
+<span id="cb7-18"><a></a>    LOG_INF<span class="op">(</span><span class="st">"Took a nap... just woke up. (</span><span class="sc">%lld</span><span class="st">)"</span><span class="op">,</span> k_uptime_get<span class="op">());</span></span>
+<span id="cb7-19"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="example-code" class="slide level2">
+<h2>Example Code</h2>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb8-1"><a></a><span class="pp">#include </span><span class="im">&lt;zephyr/kernel.h&gt;</span></span>
+<span id="cb8-2"><a></a><span class="pp">#include </span><span class="im">&lt;zephyr/drivers/gpio.h&gt;</span></span>
+<span id="cb8-3"><a></a><span class="pp">#include </span><span class="im">&lt;zephyr/logging/log.h&gt;</span></span>
+<span id="cb8-4"><a></a></span>
+<span id="cb8-5"><a></a>LOG_MODULE_REGISTER<span class="op">(</span>main<span class="op">,</span> LOG_LEVEL_DBG<span class="op">);</span></span>
+<span id="cb8-6"><a></a></span>
+<span id="cb8-7"><a></a><span class="pp">#define MAIN_SLEEP_TIME_MS   </span><span class="dv">100000</span></span>
+<span id="cb8-8"><a></a><span class="pp">#define BLINK_TIMER_INTERVAL_MS </span><span class="dv">500</span></span>
+<span id="cb8-9"><a></a><span class="pp">#define WORK_QUEUE_NAP_TIME_MS </span><span class="dv">10</span></span>
+<span id="cb8-10"><a></a><span class="pp">#define ONESHOT_DURATION_MS </span><span class="dv">10000</span></span>
+<span id="cb8-11"><a></a></span>
+<span id="cb8-12"><a></a><span class="dt">static</span> <span class="dt">const</span> <span class="kw">struct</span> gpio_dt_spec led_blink <span class="op">=</span> GPIO_DT_SPEC_GET<span class="op">(</span>DT_ALIAS<span class="op">(</span>led0<span class="op">),</span> gpios<span class="op">);</span></span>
+<span id="cb8-13"><a></a><span class="dt">static</span> <span class="dt">const</span> <span class="kw">struct</span> gpio_dt_spec led_oneshot <span class="op">=</span> GPIO_DT_SPEC_GET<span class="op">(</span>DT_ALIAS<span class="op">(</span>led1<span class="op">),</span> gpios<span class="op">);</span></span>
+<span id="cb8-14"><a></a></span>
+<span id="cb8-15"><a></a><span class="dt">void</span> blink_timer_handler<span class="op">(</span><span class="kw">struct</span> k_timer <span class="op">*</span>blink_timer<span class="op">);</span></span>
+<span id="cb8-16"><a></a><span class="dt">void</span> blink_timer_stop<span class="op">(</span><span class="kw">struct</span> k_timer <span class="op">*</span>blink_timer<span class="op">);</span></span>
+<span id="cb8-17"><a></a><span class="dt">void</span> oneshot_timer_handler<span class="op">(</span><span class="kw">struct</span> k_timer <span class="op">*</span>blink_timer<span class="op">);</span></span>
+<span id="cb8-18"><a></a><span class="dt">void</span> blink_timer_work_handler<span class="op">(</span><span class="kw">struct</span> k_work <span class="op">*</span>timer_work<span class="op">);</span></span>
+<span id="cb8-19"><a></a></span>
+<span id="cb8-20"><a></a>K_TIMER_DEFINE<span class="op">(</span>blink_timer<span class="op">,</span> blink_timer_handler<span class="op">,</span> blink_timer_stop<span class="op">);</span></span>
+<span id="cb8-21"><a></a>K_TIMER_DEFINE<span class="op">(</span>oneshot_timer<span class="op">,</span> oneshot_timer_handler<span class="op">,</span> NULL<span class="op">);</span></span>
+<span id="cb8-22"><a></a>K_WORK_DEFINE<span class="op">(</span>blink_timer_work<span class="op">,</span> blink_timer_work_handler<span class="op">);</span></span>
+<span id="cb8-23"><a></a></span>
+<span id="cb8-24"><a></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span></span>
+<span id="cb8-25"><a></a><span class="op">{</span></span>
+<span id="cb8-26"><a></a>    <span class="dt">int</span> ret<span class="op">;</span></span>
+<span id="cb8-27"><a></a></span>
+<span id="cb8-28"><a></a>    <span class="cf">if</span> <span class="op">(!</span>gpio_is_ready_dt<span class="op">(&amp;</span>led_blink<span class="op">))</span> <span class="op">{</span></span>
+<span id="cb8-29"><a></a>        <span class="cf">return</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span></span>
+<span id="cb8-30"><a></a>    <span class="op">}</span></span>
+<span id="cb8-31"><a></a></span>
+<span id="cb8-32"><a></a>    ret <span class="op">=</span> gpio_pin_configure_dt<span class="op">(&amp;</span>led_blink<span class="op">,</span> GPIO_OUTPUT_ACTIVE<span class="op">);</span></span>
+<span id="cb8-33"><a></a>    <span class="cf">if</span> <span class="op">(</span>ret <span class="op">&lt;</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb8-34"><a></a>        <span class="cf">return</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span></span>
+<span id="cb8-35"><a></a>    <span class="op">}</span></span>
+<span id="cb8-36"><a></a>    ret <span class="op">=</span> gpio_pin_configure_dt<span class="op">(&amp;</span>led_oneshot<span class="op">,</span> GPIO_OUTPUT_ACTIVE<span class="op">);</span></span>
+<span id="cb8-37"><a></a>    <span class="cf">if</span> <span class="op">(</span>ret <span class="op">&lt;</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb8-38"><a></a>        <span class="cf">return</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span></span>
+<span id="cb8-39"><a></a>    <span class="op">}</span></span>
+<span id="cb8-40"><a></a></span>
+<span id="cb8-41"><a></a>    k_timer_start<span class="op">(&amp;</span>blink_timer<span class="op">,</span> K_MSEC<span class="op">(</span>BLINK_TIMER_INTERVAL_MS<span class="op">),</span> K_MSEC<span class="op">(</span>BLINK_TIMER_INTERVAL_MS<span class="op">));</span></span>
+<span id="cb8-42"><a></a>    k_timer_start<span class="op">(&amp;</span>oneshot_timer<span class="op">,</span> K_MSEC<span class="op">(</span>ONESHOT_DURATION_MS<span class="op">),</span> K_NO_WAIT<span class="op">);</span></span>
+<span id="cb8-43"><a></a></span>
+<span id="cb8-44"><a></a>    <span class="cf">while</span> <span class="op">(</span><span class="dv">1</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb8-45"><a></a>        k_msleep<span class="op">(</span>MAIN_SLEEP_TIME_MS<span class="op">);</span></span>
+<span id="cb8-46"><a></a>    <span class="op">}</span></span>
+<span id="cb8-47"><a></a></span>
+<span id="cb8-48"><a></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb8-49"><a></a><span class="op">}</span></span>
+<span id="cb8-50"><a></a></span>
+<span id="cb8-51"><a></a><span class="dt">void</span> blink_timer_handler<span class="op">(</span><span class="kw">struct</span> k_timer <span class="op">*</span>blink_timer<span class="op">){</span></span>
+<span id="cb8-52"><a></a>    k_work_submit<span class="op">(&amp;</span>blink_timer_work<span class="op">);</span></span>
+<span id="cb8-53"><a></a>    LOG_INF<span class="op">(</span><span class="st">"Submitted blinking work to the queue! (</span><span class="sc">%lld</span><span class="st">)"</span><span class="op">,</span> k_uptime_get<span class="op">());</span></span>
+<span id="cb8-54"><a></a><span class="op">}</span></span>
+<span id="cb8-55"><a></a></span>
+<span id="cb8-56"><a></a><span class="dt">void</span> blink_timer_stop<span class="op">(</span><span class="kw">struct</span> k_timer <span class="op">*</span>blink_timer<span class="op">){</span></span>
+<span id="cb8-57"><a></a>    LOG_INF<span class="op">(</span><span class="st">"Stopping the blinking LED."</span><span class="op">);</span></span>
+<span id="cb8-58"><a></a>    gpio_pin_set_dt<span class="op">(&amp;</span>led_blink<span class="op">,</span> <span class="dv">0</span><span class="op">);</span></span>
+<span id="cb8-59"><a></a><span class="op">}</span></span>
+<span id="cb8-60"><a></a></span>
+<span id="cb8-61"><a></a><span class="dt">void</span> blink_timer_work_handler<span class="op">(</span><span class="kw">struct</span> k_work <span class="op">*</span>timer_work<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb8-62"><a></a>    LOG_INF<span class="op">(</span><span class="st">"Doing blink work! (</span><span class="sc">%lld</span><span class="st">)"</span><span class="op">,</span> k_uptime_get<span class="op">());</span></span>
+<span id="cb8-63"><a></a>    gpio_pin_toggle_dt<span class="op">(&amp;</span>led_blink<span class="op">);</span></span>
+<span id="cb8-64"><a></a>    k_msleep<span class="op">(</span>WORK_QUEUE_NAP_TIME_MS<span class="op">);</span></span>
+<span id="cb8-65"><a></a>    LOG_INF<span class="op">(</span><span class="st">"Took a nap... just woke up. (</span><span class="sc">%lld</span><span class="st">)"</span><span class="op">,</span> k_uptime_get<span class="op">());</span></span>
+<span id="cb8-66"><a></a><span class="op">}</span></span>
+<span id="cb8-67"><a></a></span>
+<span id="cb8-68"><a></a><span class="dt">void</span> oneshot_timer_handler<span class="op">(</span><span class="kw">struct</span> k_timer <span class="op">*</span>oneshot_timer<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb8-69"><a></a>    LOG_INF<span class="op">(</span><span class="st">"Turn oneshot LED off (</span><span class="sc">%lld</span><span class="st">)"</span><span class="op">,</span> k_uptime_get<span class="op">());</span></span>
+<span id="cb8-70"><a></a>    gpio_pin_set_dt<span class="op">(&amp;</span>led_oneshot<span class="op">,</span> <span class="dv">0</span><span class="op">);</span></span>
+<span id="cb8-71"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="high-level-flow-chart" class="slide level2">
+<h2>High-level Flow Chart</h2>
+
+<img data-src="images/timers/timers-handlers-work-queues.png" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="resources" class="slide level2">
+<h2>Resources</h2>
+<ul>
+<li><a href="https://docs.zephyrproject.org/latest/kernel/services/timing/timers.html">Zephyr Docs: Timers</a></li>
+<li><a href="https://docs.zephyrproject.org/latest/kernel/services/timing/clocks.html">Zephyr Docs: Clocks</a></li>
+</ul>
+
+
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W119
+</script>
+<div id="exercise-loading-indicator" class="exercise-loading-indicator d-none d-flex align-items-center gap-2">
+<div id="exercise-loading-status" class="d-flex gap-2">
+
+</div>
+<div class="spinner-grow spinner-grow-sm">
+
+</div>
+</div>
+<script type="vfs-file">
+W10=
+</script>
+</section></section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+<p><a href="https://embeddedmedicaldevices.pages.oit.duke.edu/Embedded-Medical-Devices">🔗 https://embeddedmedicaldevices.pages.oit.duke.edu/Embedded-Medical-Devices</a></p>
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': true,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'fade',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script type="ojs-module-contents">
+    eyJjb250ZW50cyI6W119
+    </script>
+    <script type="module">
+    if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
+    window._ojs.paths.runtimeToDoc = "../../slides";
+    window._ojs.paths.runtimeToRoot = "../..";
+    window._ojs.paths.docToRoot = "..";
+    window._ojs.selfContained = false;
+    window._ojs.runtime.interpretFromScriptTags();
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+            const codeEl = trigger.previousElementSibling.cloneNode(true);
+            for (const childEl of codeEl.children) {
+              if (isCodeAnnotation(childEl)) {
+                childEl.remove();
+              }
+            }
+            return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp("https:\/\/embeddedmedicaldevices\.pages\.oit\.duke\.edu\/Embedded-Medical-Devices");
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>
