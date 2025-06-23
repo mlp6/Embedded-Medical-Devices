@@ -1,9 +1,9 @@
-[![pipeline status](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/Embedded-Medical-Devices/badges/main/pipeline.svg)](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/Embedded-Medical-Devices/-/commits/main) 
+[![Build Site](https://github.com/mlp6/Embedded-Medical-Devices/actions/workflows/publish.yml/badge.svg)](https://github.com/mlp6/Embedded-Medical-Devices/actions/workflows/publish.yml)
 
 # Embedded Medical Devices (BME554L)
 
 ## Course Website
 
-https://embeddedmedicaldevices.pages.oit.duke.edu/Embedded-Medical-Devices/
+https://mlp6.github.io/Embedded-Medical-Devices/
 
 *Credit: Inspired by https://sta199-f24.github.io/*
