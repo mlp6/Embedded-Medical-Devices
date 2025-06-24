@@ -7,8 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Dr.&nbsp;Mark Palmeri, M.D., Ph.D.">
+<meta name="dcterms.date" content="2025-06-24">
 
-<title>Zephyr: Pulse Width Modulation – Embedded Medical Devices</title>
+<title>ECG &amp; Temperature Sensor with BLE Lab – Embedded Medical Devices</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,41 +21,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -74,9 +40,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-fced259a1985fd972ecb57c7cd45153f.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-10ce6858d882512638623bc10e3ba411.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<script src="../site_libs/quarto-contrib/live-runtime/live-runtime.js" type="module"></script>
-<link href="../site_libs/quarto-contrib/live-runtime/live-runtime.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-0257a2ca8c5beddb405a1e7854b88b3f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -104,11 +68,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
-<script type="module" src="../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
-<link href="../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-sidebar docked quarto-light">
@@ -120,7 +82,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../slides/zephyr-nrf52833dk-intro.html">Learning Modules</a></li><li class="breadcrumb-item"><a href="../slides/zephyr-pwm.html">Pulse Width Modulation (PWM)</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labs/event-driven-state-machine-lab.html">Labs</a></li><li class="breadcrumb-item"><a href="../labs/ecg-temp-ble-lab.html">ECG, Temperature Sensor, and BLE Lab</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -249,7 +211,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../slides/zephyr-pwm.html" class="sidebar-item-text sidebar-link active">
+  <a href="../slides/zephyr-pwm.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Pulse Width Modulation (PWM)</span></a>
   </div>
 </li>
@@ -332,7 +294,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../labs/ecg-temp-ble-lab.html" class="sidebar-item-text sidebar-link">
+  <a href="../labs/ecg-temp-ble-lab.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">ECG, Temperature Sensor, and BLE Lab</span></a>
   </div>
 </li>
@@ -371,53 +333,50 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
-  <li><a href="#pwm-signal-generation" id="toc-pwm-signal-generation" class="nav-link" data-scroll-target="#pwm-signal-generation">PWM Signal Generation</a></li>
-  <li><a href="#block-diagram" id="toc-block-diagram" class="nav-link" data-scroll-target="#block-diagram">Block Diagram</a></li>
-  <li><a href="#common-uses" id="toc-common-uses" class="nav-link" data-scroll-target="#common-uses">Common Uses</a></li>
-  <li><a href="#project-setup" id="toc-project-setup" class="nav-link" data-scroll-target="#project-setup">Project Setup</a></li>
-  <li><a href="#prj.conf" id="toc-prj.conf" class="nav-link" data-scroll-target="#prj.conf">prj.conf</a></li>
-  <li><a href="#devicetree" id="toc-devicetree" class="nav-link" data-scroll-target="#devicetree">Devicetree</a></li>
-  <li><a href="#configure-the-controllers" id="toc-configure-the-controllers" class="nav-link" data-scroll-target="#configure-the-controllers">Configure the controller(s)</a></li>
-  <li><a href="#use-pinctrl-to-configure-io-behavior-for-non-gpio-pins." id="toc-use-pinctrl-to-configure-io-behavior-for-non-gpio-pins." class="nav-link" data-scroll-target="#use-pinctrl-to-configure-io-behavior-for-non-gpio-pins.">Use <code>pinctrl</code> to configure IO behavior for non-GPIO pins.</a></li>
-  <li><a href="#main-code" id="toc-main-code" class="nav-link" data-scroll-target="#main-code">Main Code</a></li>
-  <li><a href="#changing-pwm-duty-cycle" id="toc-changing-pwm-duty-cycle" class="nav-link" data-scroll-target="#changing-pwm-duty-cycle">Changing PWM Duty Cycle</a></li>
-  <li><a href="#how-to-sinusoidally-module-led-brightness-using-a-pwm" id="toc-how-to-sinusoidally-module-led-brightness-using-a-pwm" class="nav-link" data-scroll-target="#how-to-sinusoidally-module-led-brightness-using-a-pwm">How to Sinusoidally Module LED Brightness Using a PWM</a></li>
-  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a></li>
+  <li><a href="#git-version-control" id="toc-git-version-control" class="nav-link active" data-scroll-target="#git-version-control">Git Version Control</a></li>
+  <li><a href="#best-coding-practices" id="toc-best-coding-practices" class="nav-link" data-scroll-target="#best-coding-practices">Best Coding Practices</a></li>
+  <li><a href="#firmware-functional-specifications" id="toc-firmware-functional-specifications" class="nav-link" data-scroll-target="#firmware-functional-specifications">Firmware Functional Specifications</a></li>
+  <li><a href="#ble-server-mobile-app" id="toc-ble-server-mobile-app" class="nav-link" data-scroll-target="#ble-server-mobile-app">BLE Server (Mobile App)</a></li>
+  <li><a href="#state-diagram" id="toc-state-diagram" class="nav-link" data-scroll-target="#state-diagram">State Diagram</a></li>
+  <li><a href="#testing-verification" id="toc-testing-verification" class="nav-link" data-scroll-target="#testing-verification">Testing &amp; Verification</a></li>
+  <li><a href="#how-to-generate-an-ecg-signal" id="toc-how-to-generate-an-ecg-signal" class="nav-link" data-scroll-target="#how-to-generate-an-ecg-signal">How to Generate an ECG Signal</a></li>
+  <li><a href="#grading" id="toc-grading" class="nav-link" data-scroll-target="#grading">Grading</a></li>
+  <li><a href="#how-to-ask-for-help" id="toc-how-to-ask-for-help" class="nav-link" data-scroll-target="#how-to-ask-for-help">How to Ask for Help</a></li>
+  <li><a href="#what-to-submit" id="toc-what-to-submit" class="nav-link" data-scroll-target="#what-to-submit">What to Submit</a></li>
+  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a>
+  <ul class="collapse">
+  <li><a href="#heart-rate-service-gatt" id="toc-heart-rate-service-gatt" class="nav-link" data-scroll-target="#heart-rate-service-gatt">Heart Rate Service (GATT)</a></li>
+  </ul></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/mlp6/Embedded-Medical-Devices/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="zephyr-pwm-slides.html"><i class="bi bi-file-slides"></i>RevealJS (live)</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/mlp6/Embedded-Medical-Devices/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="ecg-temp-ble-lab.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../slides/zephyr-nrf52833dk-intro.html">Learning Modules</a></li><li class="breadcrumb-item"><a href="../slides/zephyr-pwm.html">Pulse Width Modulation (PWM)</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labs/event-driven-state-machine-lab.html">Labs</a></li><li class="breadcrumb-item"><a href="../labs/ecg-temp-ble-lab.html">ECG, Temperature Sensor, and BLE Lab</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Zephyr: Pulse Width Modulation</h1>
-<p class="subtitle lead">BME554L -Fall 2025 - Palmeri</p>
-</div>
+<h1 class="title">ECG &amp; Temperature Sensor with BLE Lab</h1>
+<p class="subtitle lead">BME554L - Fall 2025 - Palmeri</p>
+  <div class="quarto-categories">
+    <div class="quarto-category">Lab</div>
+  </div>
+  </div>
 
 
-<div class="quarto-title-meta-author">
-  <div class="quarto-title-meta-heading">Author</div>
-  <div class="quarto-title-meta-heading">Affiliation</div>
-  
-    <div class="quarto-title-meta-contents">
-    <p class="author">Dr.&nbsp;Mark Palmeri, M.D., Ph.D. </p>
-  </div>
-  <div class="quarto-title-meta-contents">
-        <p class="affiliation">
-            Duke University
-          </p>
-      </div>
-  </div>
 
 <div class="quarto-title-meta">
 
-      
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Dr.&nbsp;Mark Palmeri, M.D., Ph.D. </p>
+          </div>
+  </div>
+    
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">Invalid Date</p>
+      <p class="date">June 24, 2025</p>
     </div>
   </div>
   
@@ -429,185 +388,184 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="overview" class="level2">
-<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<!-- TODO: update for new forkable repo / or build on previous labs -->
 <ul>
-<li>Most microcontrollers and SoCs do not have a native DAC.</li>
-<li>Much easier to output digital <code>HIGH</code> or <code>LOW</code> signals.</li>
-<li>Timing and duty cycle (pulse width) of <code>HIGH</code> and <code>LOW</code> signals can be used to approximate an analog voltage.</li>
-<li>LPF to smooth out the PWM signal.</li>
+<li>Fork this repository to your userspace.</li>
+<li>Add Dr.&nbsp;Palmeri as a <code>Maintainer</code>.</li>
+<li>Questions should be asked exclusively through GitLab Issues.</li>
+</ul>
+<section id="git-version-control" class="level2">
+<h2 class="anchored" data-anchor-id="git-version-control">Git Version Control</h2>
+<ul>
+<li>Use best practices for version control (branching, commit messages, etc.).</li>
+<li>Do all development on a dedicated branch that is merged into <code>main</code> once it is functional.</li>
+<li>Commits should be very specific to the changes/additions you are making to your code. This will help you and others understand what you did and why you did it.<br>
+</li>
+<li>On a given development branch, try to implement one small piece of functionality at a time, commit it, and then move on to the next piece of functionality.</li>
+</ul>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You do not want one, monolithic git commit right before you submit your project.</p>
+</div>
+</div>
+</section>
+<section id="best-coding-practices" class="level2">
+<h2 class="anchored" data-anchor-id="best-coding-practices">Best Coding Practices</h2>
+<ul>
+<li>Use best coding practices throughout the development of your firmware.</li>
+<li>Functions should be short and do one thing. They should return an exit code that is checked in the calling function, indicating success or failure.</li>
+<li>MACROS! Avoid hard-coded values in your code.</li>
+<li>Use structs to organize related data.</li>
+<li>Use libraries for code that is self-contained.</li>
+<li>Use the <code>LOGGING</code> module to log errors, warnings, information and debug messages.</li>
+<li>You should not have any compiler/build warnings. The CI script will build against <code>v2.9.0</code> of the Zephyr SDK.</li>
+</ul>
+</section>
+<section id="firmware-functional-specifications" class="level2">
+<h2 class="anchored" data-anchor-id="firmware-functional-specifications">Firmware Functional Specifications</h2>
+<ul>
+<li>Write all firmware using the state machine framework.
+<ul>
+<li>Do all device initialization in an <code>INIT</code> state.</li>
+<li>Have an <code>IDLE</code> state when the device isn’t making any measurements.</li>
+<li>Have an <code>ERROR</code> state if any error exit codes are returned from any functions.
+<ul>
+<li>All 4 LEDs should blink at a 50% duty cycle (<code>ON:OFF</code> time), in-phase with each other, in the <code>ERROR</code> state.</li>
+<li>An error condition should post an error-related event that causes the device to enter the <code>ERROR</code> state.</li>
+<li>The error code should specify the error condition that caused the device to enter the <code>ERROR</code> state. For example, you may choose to have a bit array that can capture multiple error conditions.</li>
+<li>A BLE notification should be sent with the error code (see BLE custom service/characteristic below).</li>
+</ul></li>
+<li>Implement states of your choosing for the following measurements, calculations and BLE communications.</li>
+</ul></li>
+<li>Have a heartbeat <code>LED0</code> that blinks every 1 second with a 50% duty cycle (<code>ON:OFF</code> time) in all states.</li>
+<li>Implement functionality to measure a battery voltage (0-3.0 V) using <code>AIN0</code>:
+<ol type="1">
+<li>When the device first powers on, and then</li>
+<li>Every 1 minute thereafter, but only when in the <code>IDLE</code> state.</li>
+<li>You won’t actually be connecting a battery to your device; you can use a power support or another voltage source to input a voltage to <code>AIN0</code> to simulate a battery level.</li>
+</ol></li>
+<li>Have the brightness of <code>LED1</code> linearly modulated by the percentage of the battery level.</li>
+<li>Implement functionality to make two measurements after pressing <code>BUTTON1</code>:
+<ol type="1">
+<li>Read temperature with your <a href="https://www.adafruit.com/product/1782"><code>MCP9808</code></a> sensor (in degrees Celsius).</li>
+<li>Calculate the average heart rate (40-200 BPM) using 25-30 seconds of an ECG signal (ranging from -500 - 500 mV, note this is bipolar) from the function generator (see video on how to setup the function generator to output an ECG signal).</li>
+</ol></li>
+<li>Pressing <code>BUTTON1</code> during the measurements should post an error and go to the <code>ERROR</code> state.</li>
+<li>Blink <code>LED2</code> with a 25% duty cycle (<code>ON:OFF</code> time) at the average heart rate after the measurements are complete.</li>
+<li>Have Bluetooth notifications after the measurements are complete and data have been processed, using the BLE services and characteristics described below.
+<ul>
+<li>Configure the <strong>DIS (Device Information Service)</strong> to report the device model as your Team Name (come up with something fun).</li>
+<li>Set the <strong>BAS (Battery Service)</strong> to report the battery level of your device. (This isn’t actually a battery level, but we’re using the <code>AIN0</code> measurement as a surrogate for a battery level.)</li>
+<li>Set the <strong>Heart Rate Service</strong> to report the average heart rate. (See Resources section below.)</li>
+<li>Setup a custom service with the following custom characterisitics:
+<ul>
+<li><code>Temperature</code> for the I2C temperature sensor data in degrees Celcius.</li>
+<li><code>Error Code</code> for the error code that caused the device to enter the <code>ERROR</code> state.</li>
+</ul></li>
+</ul></li>
+<li><code>BUTTON2</code> should clear (turn off) a blinking <code>LED2</code>, and if <code>LED2</code> is not blinking because a measurement hasn’t been taken, then it should log a warning (<code>LOG_WRN()</code>) as to why it appears nothing happened.</li>
+<li><code>BUTTON3</code> should be used to reset the device from the <code>ERROR</code> state and return to the <code>IDLE</code> state.</li>
+<li>Use timers, kernel events, work queues, threads and any other Zephyr RTOS features as needed to implement the above functionality.</li>
+</ul>
+</section>
+<section id="ble-server-mobile-app" class="level2">
+<h2 class="anchored" data-anchor-id="ble-server-mobile-app">BLE Server (Mobile App)</h2>
+<ul>
+<li>Your device can connect via BLE to a mobile app called <a href="https://www.nordicsemi.com/Products/Development-tools/nrf-connect-for-mobile">nRF Connect</a>.<br>
+</li>
+<li>This app can be used to read the services and characteristics that your device is advertising.</li>
+</ul>
+</section>
+<section id="state-diagram" class="level2">
+<h2 class="anchored" data-anchor-id="state-diagram">State Diagram</h2>
+<ul>
+<li>Generate a detailed state diagram that all states, events and actions for your firmware.<br>
+</li>
+<li>A starter diagram is provided in the <code>state_diagram.puml</code> file, along with its rendering below.<br>
+</li>
+<li>You should add states, events and actions as needed to fully describe the functionality of your firmware.</li>
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/pwm/sine-from-pwm.png" class="img-fluid figure-img"></p>
-<figcaption>sine-from-pwm</figcaption>
+<p><img src="images/state_diagram.png" class="img-fluid figure-img"></p>
+<figcaption>State Diagram</figcaption>
 </figure>
 </div>
 </section>
-<section id="pwm-signal-generation" class="level2">
-<h2 class="anchored" data-anchor-id="pwm-signal-generation">PWM Signal Generation</h2>
-<!-- TODO: create slides on this; assign the DevAcademy lesson -->
-<p><a href="https://academy.nordicsemi.com/courses/nrf-connect-sdk-intermediate/lessons/lesson-4-pulse-width-modulation-pwm/topic/pulse-width-modulation-pwm/">Nordic DevAcademy: PWM</a></p>
+<section id="testing-verification" class="level2">
+<h2 class="anchored" data-anchor-id="testing-verification">Testing &amp; Verification</h2>
+<p>Complete the testing analysis described in <a href="testing/final_project.ipynb">testing/final_project.ipynb</a> to verify the accuracy of your firmware.</p>
 </section>
-<section id="block-diagram" class="level2">
-<h2 class="anchored" data-anchor-id="block-diagram">Block Diagram</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/pwm/sine-from-pwm-block-diagram.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption>sine-from-pwm-block-diagram</figcaption>
-</figure>
-</div>
-</section>
-<section id="common-uses" class="level2">
-<h2 class="anchored" data-anchor-id="common-uses">Common Uses</h2>
+<section id="how-to-generate-an-ecg-signal" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-generate-an-ecg-signal">How to Generate an ECG Signal</h2>
 <ul>
-<li>Adjust LED brightness</li>
-<li>Control motor speed</li>
-<li>Control servo motor direction</li>
-<li>Analog output</li>
-<li>Data encoding</li>
+<li><a href="https://youtu.be/pQYMHtzReZ8?si=oKQQXotuLZJn3cD0">WaveStation 2012 AWG</a></li>
+<li><a href="testing/digilent-ecg-script.txt">Digilent Waveforms Script</a></li>
 </ul>
 </section>
-<section id="project-setup" class="level2">
-<h2 class="anchored" data-anchor-id="project-setup">Project Setup</h2>
-</section>
-<section id="prj.conf" class="level2">
-<h2 class="anchored" data-anchor-id="prj.conf">prj.conf</h2>
-<p><code>CONFIG_PWM=y</code></p>
-</section>
-<section id="devicetree" class="level2">
-<h2 class="anchored" data-anchor-id="devicetree">Devicetree</h2>
+<section id="grading" class="level2">
+<h2 class="anchored" data-anchor-id="grading">Grading</h2>
 <ul>
-<li>There are multiple PWM timers (controllers) on the nRF52833.</li>
-<li>Each PWM timer has multiple channels.</li>
-<li>Zephyr has a “compatibility” label called <code>pwm-leds</code>.</li>
-</ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>aliases <span class="op">=</span> <span class="op">{</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    pwm1 <span class="op">=</span> <span class="op">&amp;</span>pwmch1<span class="op">;</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    pwm2 <span class="op">=</span> <span class="op">&amp;</span>pwmch2<span class="op">;</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>pwm <span class="op">{</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    compatible <span class="op">=</span> <span class="st">"pwm-leds"</span><span class="op">;</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    pwmch1<span class="op">:</span> pwm_1 <span class="op">{</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        pwms <span class="op">=</span> <span class="op">&lt;</span> <span class="op">&amp;</span>pwm0 <span class="dv">0</span> PWM_MSEC<span class="op">(</span><span class="dv">1</span><span class="op">)</span> PWM_POLARITY_NORMAL<span class="op">&gt;;</span>  <span class="co">// 0 - channel</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        label <span class="op">=</span> <span class="st">"PWM_CH1"</span><span class="op">;</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">};</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    pwmch2<span class="op">:</span> pwm_2 <span class="op">{</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        pwms <span class="op">=</span> <span class="op">&lt;</span> <span class="op">&amp;</span>pwm0 <span class="dv">1</span> PWM_MSEC<span class="op">(</span><span class="dv">1</span><span class="op">)</span> PWM_POLARITY_NORMAL<span class="op">&gt;;</span> <span class="co">// 1 - channel</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>        label <span class="op">=</span> <span class="st">"PWM_CH2"</span><span class="op">;</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="op">};</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="configure-the-controllers" class="level2">
-<h2 class="anchored" data-anchor-id="configure-the-controllers">Configure the controller(s)</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">&amp;</span>pwm0 <span class="op">{</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    compatible <span class="op">=</span> <span class="st">"nordic,nrf-pwm"</span><span class="op">;</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    reg <span class="op">=</span> <span class="op">&lt;</span><span class="bn">0x4001c000</span> <span class="bn">0x1000</span><span class="op">&gt;;</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    interrupts <span class="op">=</span> <span class="op">&lt;</span><span class="dv">28</span> NRF_DEFAULT_IRQ_PRIORITY<span class="op">&gt;;</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    status <span class="op">=</span> <span class="st">"okay"</span><span class="op">;</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="pp">#</span><span class="er">pwm-cells = &lt;3&gt;;</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    pinctrl<span class="op">-</span><span class="dv">0</span> <span class="op">=</span> <span class="op">&lt;&amp;</span>pwm0_default<span class="op">&gt;;</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    pinctrl<span class="op">-</span><span class="dv">1</span> <span class="op">=</span> <span class="op">&lt;&amp;</span>pwm0_sleep<span class="op">&gt;;</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    pinctrl<span class="op">-</span>names <span class="op">=</span> <span class="st">"default"</span><span class="op">,</span> <span class="st">"sleep"</span><span class="op">;</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="use-pinctrl-to-configure-io-behavior-for-non-gpio-pins." class="level2">
-<h2 class="anchored" data-anchor-id="use-pinctrl-to-configure-io-behavior-for-non-gpio-pins.">Use <code>pinctrl</code> to configure IO behavior for non-GPIO pins.</h2>
-<div class="sourceCode" id="cb3"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">&amp;</span>pinctrl <span class="op">{</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    compatible <span class="op">=</span> <span class="st">"nordic,nrf-pinctrl"</span><span class="op">;</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    status <span class="op">=</span> <span class="st">"okay"</span><span class="op">;</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    pwm0_default<span class="op">:</span> pwm0_default <span class="op">{</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        group1 <span class="op">{</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>            psels <span class="op">=</span> <span class="op">&lt;</span>NRF_PSEL<span class="op">(</span>PWM_OUT0<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">28</span><span class="op">)&gt;,</span> <span class="co">// P0.28, channel 0</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>                    <span class="op">&lt;</span>NRF_PSEL<span class="op">(</span>PWM_OUT1<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">30</span><span class="op">)&gt;;</span> <span class="co">// P0.30, channel 1</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>            nordic<span class="op">,</span>invert<span class="op">;</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>        <span class="op">};</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">};</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    pwm0_sleep<span class="op">:</span> pwm0_sleep <span class="op">{</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>        group1 <span class="op">{</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>            psels <span class="op">=</span> <span class="op">&lt;</span>NRF_PSEL<span class="op">(</span>PWM_OUT0<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">28</span><span class="op">)&gt;,</span> <span class="co">// P0.28, channel 0</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>                    <span class="op">&lt;</span>NRF_PSEL<span class="op">(</span>PWM_OUT1<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">30</span><span class="op">)&gt;;</span> <span class="co">// P0.30, channel 1</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>            low<span class="op">-</span>power<span class="op">-</span>enable<span class="op">;</span></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>        <span class="op">};</span></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    <span class="op">};</span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="op">};</span>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="main-code" class="level2">
-<h2 class="anchored" data-anchor-id="main-code">Main Code</h2>
-<div class="sourceCode" id="cb4"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">// load in the Zephyr library</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;zephyr/drivers/pwm.h&gt;</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">// define structs based on DT aliases</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="dt">static</span> <span class="dt">const</span> <span class="kw">struct</span> pwm_dt_spec pwm1 <span class="op">=</span> PWM_DT_SPEC_GET<span class="op">(</span>DT_ALIAS<span class="op">(</span>pwm1<span class="op">));</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="dt">static</span> <span class="dt">const</span> <span class="kw">struct</span> pwm_dt_spec pwm2 <span class="op">=</span> PWM_DT_SPEC_GET<span class="op">(</span>DT_ALIAS<span class="op">(</span>pwm2<span class="op">));</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">// check that the PWM controller is ready</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(!</span>device_is_ready<span class="op">(</span>pwm1<span class="op">.</span>dev<span class="op">))</span>  <span class="op">{</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    LOG_ERR<span class="op">(</span><span class="st">"PWM device </span><span class="sc">%s</span><span class="st"> is not ready."</span><span class="op">,</span> pwm1<span class="op">.</span>dev<span class="op">-&gt;</span>name<span class="op">);</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co">// set the PWM duty cycle (pulse length)</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>err <span class="op">=</span> pwm_set_pulse_dt<span class="op">(</span>pwm1<span class="op">,</span> pwm1<span class="op">-&gt;</span>period<span class="op">/</span><span class="dv">2</span><span class="op">);</span> <span class="co">// 50% duty cycle</span></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>err<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    LOG_ERR<span class="op">(</span><span class="st">"Could not set pwm1 driver."</span><span class="op">);</span></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="changing-pwm-duty-cycle" class="level2">
-<h2 class="anchored" data-anchor-id="changing-pwm-duty-cycle">Changing PWM Duty Cycle</h2>
-<ul>
-<li>The pulse length (duty cycle) can be changed “on the fly”, but only changes at the next period.</li>
-<li>Can be done with a timer or event-driven.</li>
+<li>This final project is worth 75% of your grade. <em>Absolutely no late submissions will be accepted.</em></li>
+<li>Git version control will be graded based on best practices.</li>
+<li>Firmware will be graded based on all best practices taught throughout the semester.</li>
+<li>Code organization and coding best practices will be graded.</li>
+<li>State diagram will be graded based on completeness, accuracy and ease of interpretation.</li>
+<li>Testing and analysis technical report will be graded based on presentation, completeness, and accuracy.</li>
 </ul>
 </section>
-<section id="how-to-sinusoidally-module-led-brightness-using-a-pwm" class="level2">
-<h2 class="anchored" data-anchor-id="how-to-sinusoidally-module-led-brightness-using-a-pwm">How to Sinusoidally Module LED Brightness Using a PWM</h2>
+<section id="how-to-ask-for-help" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-ask-for-help">How to Ask for Help</h2>
+<ol type="1">
+<li>If you have a general / non-coding question, you should ask your TAs / Dr. Palmeri on Ed to allow any of them to respond in a timely manner.</li>
+<li>Push you code to your GitLab repository, ideally with your active development on a non-<code>main</code> branch.</li>
+<li>Create an <a href="https://docs.gitlab.com/ee/user/project/issues/">Issue</a> in your repository.
 <ul>
-<li>Use a timer to change the duty cycle of the PWM signal. How often?</li>
-<li>Set PWM counter period to ???</li>
-<li>LPF</li>
+<li>Add as much detail as possible as to your problem, and add links to specific lines / section of code when possible.</li>
+<li>Assign the label “Bug” or “Question”, as appropriate.</li>
+<li>Be sure to specify what branch you are working on.</li>
+<li>Assign the Issue to one of the TAs.</li>
+<li>If your TA cannot solve your Issue, they can escalate the Issue to Dr.&nbsp;Palmeri.</li>
+</ul></li>
+<li>You will get a response to your Issue, and maybe a new branch of code will be pushed to help you with some example syntax that you can use <code>git diff</code> to visualize.</li>
+</ol>
+</section>
+<section id="what-to-submit" class="level2">
+<h2 class="anchored" data-anchor-id="what-to-submit">What to Submit</h2>
+<ul>
+<li>Make sure that all of your branches have been merged into the <code>main</code> branch.</li>
+<li>Create an annotated tag called <code>v1.0.0</code> to mark the commit that you want to be graded.
+<ul>
+<li>If you fix any bugs after creating this tag, you can create another tag called <code>v1.0.1</code>, etc.<br>
+</li>
+<li>Your latest tag will be the one that is graded up until the final due date/time of the project.</li>
+</ul></li>
+<li>Create an Issue in your repository with the title “Final Project Submission”, and assign it to Dr.&nbsp;Palmeri.</li>
+<li><strong>All repositories will be cloned at the due date/time for grading. Absolutely no changes will be accepted after this time.</strong></li>
 </ul>
 </section>
 <section id="resources" class="level2">
 <h2 class="anchored" data-anchor-id="resources">Resources</h2>
+<section id="heart-rate-service-gatt" class="level3">
+<h3 class="anchored" data-anchor-id="heart-rate-service-gatt">Heart Rate Service (GATT)</h3>
 <ul>
-<li><a href="https://docs.zephyrproject.org/latest/hardware/peripherals/pwm.html">Zephry: PWM</a></li>
-<li><a href="https://www.analogictips.com/pulse-width-modulation-pwm/">Pulse Width Modulation</a></li>
-<li><a href="https://github.com/zephyrproject-rtos/zephyr/tree/main/samples/basic/blinky_pwm">Zephyr: Blinky Sample</a></li>
-<li><a href="https://deepbluembedded.com/stm32-change-pwm-duty-cycle-with-dma-for-sine-wave-generation/">Sine Wave Generation</a></li>
-<li><a href="https://developer.nordicsemi.com/nRF_Connect_SDK/doc/2.9.0/nrf/app_dev/pin_control/index.html">Nordic Semiconductor: PinCtrl</a></li>
-<li><a href="https://academy.nordicsemi.com/courses/nrf-connect-sdk-intermediate/lessons/lesson-4-pulse-width-modulation-pwm/">Nordic DevAcademy: PWM</a></li>
+<li><a href="https://github.com/zephyrproject-rtos/zephyr/tree/main/samples/bluetooth/peripheral_hr">BLE Sample: Peripheral Heartrate</a></li>
+<li><a href="https://docs.zephyrproject.org/latest/doxygen/html/group__bt__hrs.html">Zephyr Docs: BT Heartrate Service</a></li>
 </ul>
 
 
-<script type="ojs-module-contents">
-eyJjb250ZW50cyI6W119
-</script>
-<div id="exercise-loading-indicator" class="exercise-loading-indicator d-none d-flex align-items-center gap-2">
-<div id="exercise-loading-status" class="d-flex gap-2">
-
-</div>
-<div class="spinner-grow spinner-grow-sm">
-
-</div>
-</div>
-<script type="vfs-file">
-W10=
-</script>
+</section>
 </section>
 
 </main> <!-- /main -->
-<script type="ojs-module-contents">
-eyJjb250ZW50cyI6W119
-</script>
-<script type="module">
-if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
-window._ojs.paths.runtimeToDoc = "../../slides";
-window._ojs.paths.runtimeToRoot = "../..";
-window._ojs.paths.docToRoot = "..";
-window._ojs.selfContained = false;
-window._ojs.runtime.interpretFromScriptTags();
-</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
