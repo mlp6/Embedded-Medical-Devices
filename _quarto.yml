@@ -73,6 +73,8 @@ website:
           text: "Timers Lab"
         - href: labs/zephyr-threads-events-lab.qmd
           text: "Threads and Kernel Events Lab"
+        - href: labs/zephyr-adc-pwm-lab.qmd
+          text: "ADC & PWM Lab"
       - section: Resources
         contents:
         - href: resources/how-to-generate-ecg-waveforms.qmd
