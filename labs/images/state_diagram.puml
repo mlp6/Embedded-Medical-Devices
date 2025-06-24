@@ -1,0 +1,25 @@
+@startuml
+
+[*] -> INIT
+
+state INIT {
+    init_run: Do initty things
+}
+
+INIT -> IDLE : Successful initialization
+
+state IDLE {
+    idle_entry: Do idle entry things
+    idle_entry -> idle_run
+    idle_run: Do idle things
+}
+
+state ERROR {
+    error_entry: Do error entry things
+    error_entry -> error_run
+    error_run: Do error things
+    error_run -> error_exit
+    error_exit: Do error exit things
+}
+
+@enduml

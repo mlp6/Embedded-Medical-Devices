@@ -77,6 +77,8 @@ website:
           text: "Threads and Kernel Events Lab"
         - href: labs/zephyr-adc-pwm-lab.qmd
           text: "ADC & PWM Lab"
+        - href: labs/ecg-temp-ble-lab.qmd
+          text: "ECG, Temperature Sensor, and BLE Lab"
       - section: Resources
         contents:
         - href: resources/how-to-generate-ecg-waveforms.qmd
