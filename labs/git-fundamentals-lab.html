@@ -384,10 +384,23 @@ ul.task-list li input[type="checkbox"] {
 <section id="initial-main-branch-development" class="level3">
 <h3 class="anchored" data-anchor-id="initial-main-branch-development">Initial <code>main</code> Branch Development</h3>
 <ol type="1">
-<li>Make sure that you have git installed, ssh keys configured, and your Duke GitLab account is setup, as detailed in the <a href="https://gitlab.oit.duke.edu/MedTechPrototyping/medtech-skill-overview/-/blob/main/lab/Software-Install-Tutorials.md?ref_type=heads#git-version-control">first lab</a>.</li>
-<li>Create a <strong>fork</strong> (:warning: not a clone :warning:) of this project.</li>
-<li>Clone your forked (:warning: not the parent you forked from:warning:) repository to your laptop, which contains the default <code>README.md</code> file to your laptop.</li>
+<li>Make sure that you have git installed, ssh keys configured, and your Duke GitLab account is setup, as detailed in the <a href="../software-install-tutorials.html">Software Installation Lab</a>.</li>
+<li>Create a <strong>fork</strong>–<em>not a <strong>clone</strong></em>–of this project on GitLab in your userspace.</li>
+<li>Clone your forked repository to your laptop, which contains the default <code>README.md</code> file to your laptop.</li>
 </ol>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You want to clone your forked repository, not the parent repository you forked from!</p>
+</div>
+</div>
 </section>
 <section id="working-on-a-branch-local" class="level3">
 <h3 class="anchored" data-anchor-id="working-on-a-branch-local">Working on a Branch (Local)</h3>
@@ -484,6 +497,7 @@ no changes added to commit (use "git add" and/or "git commit -a") </code></pre><
 <li>Go to the <code>Build -&gt; Pipelines</code> page of your GitLab repository.</li>
 <li>Take a screenshot of the latest pipeline that shows all of the tests passing, along with your repository information, as shown below (except all of those <code>Failed</code> tests should report <code>Passed</code>).</li>
 </ol>
+<!--- TODO: might need to update this image -->
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/ci_pipeline.png" class="img-fluid figure-img"></p>
