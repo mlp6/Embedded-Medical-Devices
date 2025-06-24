@@ -66,7 +66,7 @@ For the following testing, you can use a power supply to provide known voltage i
   * Remember that single data points for any single input voltage pair is not adequate; multiple measurements should be made and error bars presented on all plots.
 * Quantify the accuract of the `LED1` 10% duty cycle for each frequency that you measure.
 * Quantify the accuracy of `LED1` 5 sec ontime duration.
-* Present all of these data, your analysis and your interpretation in a [testing/technical_report.ipynb](testing/technical_report.ipynb) Jupyter notebook.
+* Present all of these data, your analysis and your interpretation in a `technical_report.ipynb` Jupyter notebook.
 
 ### Commit-n-Merge Part I
 
