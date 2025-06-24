@@ -6,6 +6,8 @@ format:
   pdf: default
 ---
 
+<!-- TODO: update this to work with standalone repo to be forked -->
+
 ## Git Practice
 
 This week we will go through a very simple git workflow to get you familiar with the process and to confirm that your toolchain works for future assignments.
