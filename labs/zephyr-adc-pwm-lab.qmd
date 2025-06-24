@@ -6,27 +6,7 @@ format:
   pdf: default
 ---
 
-<!-- 
-
-TODO: use dictionary-based log for HEXDUMP (?) 
-https://docs.zephyrproject.org/latest/samples/subsys/logging/dictionary/README.html#logging-dictionary
-
-TODO: Add more information on how to measurement PWN sinusoid output with o-scope 
-* Include snippet on how to impose the LPF in Math mode on the o-scope, with the correct bandwidth and the correct time window of data (lots of cycles).
-* Remind students that the LED is ON with an inverted voltage, so HIGH on the o-scope is OFF.
-
-TODO: Improvements to testing and analysis
-* Get rid of RMS calculation
-* Have students testing different sampling rates and resolutions; plot sine wave and do FFT
-* Conclude what is adequate sampling and resolution
-* Maybe do this for an ECG waveform instead of a sine wave?
-
--->
- 
-
 ## Fork and Clone the Repository
-
-<!-- TODO: build off GPIO lab repo instead of separate repo -->
 
 * Fork this repository to your own GitLab account.
 * Add Dr. Palmeri (`mlp6`) as a `Maintainer` to your GitLab repository.  He will add TAs, graders and projects labels to your repository once this has been done.
