@@ -7,8 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Dr.&nbsp;Mark Palmeri, M.D., Ph.D.">
+<meta name="dcterms.date" content="2025-06-24">
 
-<title>Zephyr: VBUS Detection – Embedded Medical Devices</title>
+<title>Git Fundamentals Lab – Embedded Medical Devices</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,41 +21,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -74,9 +40,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-fced259a1985fd972ecb57c7cd45153f.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-10ce6858d882512638623bc10e3ba411.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<script src="../site_libs/quarto-contrib/live-runtime/live-runtime.js" type="module"></script>
-<link href="../site_libs/quarto-contrib/live-runtime/live-runtime.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-0257a2ca8c5beddb405a1e7854b88b3f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -104,11 +68,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
-<script type="module" src="../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
-<link href="../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-sidebar docked quarto-light">
@@ -120,7 +82,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../slides/zephyr-nrf52833dk-intro.html">Learning Modules</a></li><li class="breadcrumb-item"><a href="../slides/zephyr-vbus.html">VBUS</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labs/event-driven-state-machine-lab.html">Labs</a></li><li class="breadcrumb-item"><a href="../labs/git-fundamentals-lab.html">Git Fundamentals Lab</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -267,7 +229,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../slides/zephyr-vbus.html" class="sidebar-item-text sidebar-link active">
+  <a href="../slides/zephyr-vbus.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">VBUS</span></a>
   </div>
 </li>
@@ -290,7 +252,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../labs/git-fundamentals-lab.html" class="sidebar-item-text sidebar-link">
+  <a href="../labs/git-fundamentals-lab.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Git Fundamentals Lab</span></a>
   </div>
 </li>
@@ -365,48 +327,46 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#what-is-vbus" id="toc-what-is-vbus" class="nav-link active" data-scroll-target="#what-is-vbus">What is <code>VBUS</code>?</a></li>
-  <li><a href="#nrf52833-product-specification" id="toc-nrf52833-product-specification" class="nav-link" data-scroll-target="#nrf52833-product-specification"><code>nRF52833</code> Product Specification</a></li>
-  <li><a href="#vbus-detection" id="toc-vbus-detection" class="nav-link" data-scroll-target="#vbus-detection"><code>VBUS</code> Detection</a></li>
-  <li><a href="#why-is-this-important" id="toc-why-is-this-important" class="nav-link" data-scroll-target="#why-is-this-important">Why is this important?</a></li>
-  <li><a href="#firmware-implementation" id="toc-firmware-implementation" class="nav-link" data-scroll-target="#firmware-implementation">Firmware Implementation</a></li>
-  <li><a href="#drawbacks" id="toc-drawbacks" class="nav-link" data-scroll-target="#drawbacks">Drawbacks</a></li>
-  <li><a href="#how-to-test" id="toc-how-to-test" class="nav-link" data-scroll-target="#how-to-test">How to Test</a></li>
-  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a></li>
+  <li><a href="#git-practice" id="toc-git-practice" class="nav-link active" data-scroll-target="#git-practice">Git Practice</a>
+  <ul class="collapse">
+  <li><a href="#initial-main-branch-development" id="toc-initial-main-branch-development" class="nav-link" data-scroll-target="#initial-main-branch-development">Initial <code>main</code> Branch Development</a></li>
+  <li><a href="#working-on-a-branch-local" id="toc-working-on-a-branch-local" class="nav-link" data-scroll-target="#working-on-a-branch-local">Working on a Branch (Local)</a></li>
+  <li><a href="#merge-request-time" id="toc-merge-request-time" class="nav-link" data-scroll-target="#merge-request-time">Merge Request Time!</a></li>
+  <li><a href="#create-an-annotated-tag" id="toc-create-an-annotated-tag" class="nav-link" data-scroll-target="#create-an-annotated-tag">Create an Annotated Tag</a></li>
+  <li><a href="#fix-a-merge-conflict-locally" id="toc-fix-a-merge-conflict-locally" class="nav-link" data-scroll-target="#fix-a-merge-conflict-locally">Fix a Merge Conflict (Locally)</a></li>
+  </ul></li>
+  <li><a href="#how-to-ask-for-help" id="toc-how-to-ask-for-help" class="nav-link" data-scroll-target="#how-to-ask-for-help">How to Ask for Help</a></li>
+  <li><a href="#what-to-submit" id="toc-what-to-submit" class="nav-link" data-scroll-target="#what-to-submit">What to Submit</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/mlp6/Embedded-Medical-Devices/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="zephyr-vbus-slides.html"><i class="bi bi-file-slides"></i>RevealJS (live)</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/mlp6/Embedded-Medical-Devices/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="git-fundamentals-lab.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../slides/zephyr-nrf52833dk-intro.html">Learning Modules</a></li><li class="breadcrumb-item"><a href="../slides/zephyr-vbus.html">VBUS</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labs/event-driven-state-machine-lab.html">Labs</a></li><li class="breadcrumb-item"><a href="../labs/git-fundamentals-lab.html">Git Fundamentals Lab</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Zephyr: VBUS Detection</h1>
-<p class="subtitle lead">BME554L -Fall 2025 - Palmeri</p>
-</div>
+<h1 class="title">Git Fundamentals Lab</h1>
+<p class="subtitle lead">BME554L - Fall 2025 - Palmeri</p>
+  <div class="quarto-categories">
+    <div class="quarto-category">Lab</div>
+  </div>
+  </div>
 
 
-<div class="quarto-title-meta-author">
-  <div class="quarto-title-meta-heading">Author</div>
-  <div class="quarto-title-meta-heading">Affiliation</div>
-  
-    <div class="quarto-title-meta-contents">
-    <p class="author">Dr.&nbsp;Mark Palmeri, M.D., Ph.D. </p>
-  </div>
-  <div class="quarto-title-meta-contents">
-        <p class="affiliation">
-            Duke University
-          </p>
-      </div>
-  </div>
 
 <div class="quarto-title-meta">
 
-      
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Dr.&nbsp;Mark Palmeri, M.D., Ph.D. </p>
+          </div>
+  </div>
+    
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">Invalid Date</p>
+      <p class="date">June 24, 2025</p>
     </div>
   </div>
   
@@ -418,88 +378,126 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="what-is-vbus" class="level2">
-<h2 class="anchored" data-anchor-id="what-is-vbus">What is <code>VBUS</code>?</h2>
-<p><img src="images/vbus/vbus.png" class="img-fluid"></p>
+<section id="git-practice" class="level2">
+<h2 class="anchored" data-anchor-id="git-practice">Git Practice</h2>
+<p>This week we will go through a very simple git workflow to get you familiar with the process and to confirm that your toolchain works for future assignments.</p>
+<section id="initial-main-branch-development" class="level3">
+<h3 class="anchored" data-anchor-id="initial-main-branch-development">Initial <code>main</code> Branch Development</h3>
+<ol type="1">
+<li>Make sure that you have git installed, ssh keys configured, and your Duke GitLab account is setup, as detailed in the <a href="https://gitlab.oit.duke.edu/MedTechPrototyping/medtech-skill-overview/-/blob/main/lab/Software-Install-Tutorials.md?ref_type=heads#git-version-control">first lab</a>.</li>
+<li>Create a <strong>fork</strong> (:warning: not a clone :warning:) of this project.</li>
+<li>Clone your forked (:warning: not the parent you forked from:warning:) repository to your laptop, which contains the default <code>README.md</code> file to your laptop.</li>
+</ol>
 </section>
-<section id="nrf52833-product-specification" class="level2">
-<h2 class="anchored" data-anchor-id="nrf52833-product-specification"><code>nRF52833</code> Product Specification</h2>
-<p><img src="images/vbus/vbus_docs.png" class="img-fluid"></p>
+<section id="working-on-a-branch-local" class="level3">
+<h3 class="anchored" data-anchor-id="working-on-a-branch-local">Working on a Branch (Local)</h3>
+<ol type="1">
+<li>Switch to the <code>about_me</code> branch.</li>
+<li>Edit <code>AboutMe.md</code> to replace all of the <code>FILL_ME_IN</code> placeholders with your own information.</li>
+<li>Add and commit these text changes with a meaningful commit message.</li>
+<li>Add and commit a new image file named <code>fun_picture.png</code> in a directory called <code>images/</code> to complete that section of the <code>AboutMe.md</code> file.</li>
+<li>Push this updated branch to the remote of your GitLab repository.<br>
+</li>
+<li>Confirm that you can see your latest commit on this branch on the GitLab website.</li>
+</ol>
 </section>
-<section id="vbus-detection" class="level2">
-<h2 class="anchored" data-anchor-id="vbus-detection"><code>VBUS</code> Detection</h2>
-<p><img src="images/vbus/vbus_detection.png" class="img-fluid"></p>
-</section>
-<section id="why-is-this-important" class="level2">
-<h2 class="anchored" data-anchor-id="why-is-this-important">Why is this important?</h2>
+<section id="merge-request-time" class="level3">
+<h3 class="anchored" data-anchor-id="merge-request-time">Merge Request Time!</h3>
+<ol type="1">
+<li>Create a new Merge Request on the GitLab to merge the <code>about_me</code> branch into the <code>main</code> branch.
 <ul>
-<li>Safety! Shock risk</li>
-<li>USB charging / power provides a physical connection to a power source.</li>
-<li>IEC60601 has very different safety testing requirements for “wall” powered vs.&nbsp;battery-powered devices.</li>
-</ul>
-</section>
-<section id="firmware-implementation" class="level2">
-<h2 class="anchored" data-anchor-id="firmware-implementation">Firmware Implementation</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;nrfx_power.h&gt;</span><span class="pp"> </span><span class="co">// </span><span class="al">NOTE</span><span class="co">: This is not a Zephyr library!!  It is a Nordic NRFX library.</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="dt">bool</span> usbregstatus <span class="op">=</span> nrf_power_usbregstatus_vbusdet_get<span class="op">(</span>NRF_POWER<span class="op">);</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>usbregstatus<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">// VBUS detected</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// VBUS not detected</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<li>Assign the Merge Request to yourself.</li>
+<li>You do not need a Reviewer.</li>
+<li>You do <strong>not</strong> want to <em>squash</em> or <em>rebase</em> your branch commits</li>
+<li>You do not want to delete the source branch.</li>
+</ul></li>
+<li>Check that the <code>check_image</code> and <code>check_about_me</code> pipline jobs have passed.
 <ul>
-<li>If you have a battery-powered device that cannot be used while charging, could change to “charging” state that would block operation.</li>
-</ul>
-</section>
-<section id="drawbacks" class="level2">
-<h2 class="anchored" data-anchor-id="drawbacks">Drawbacks</h2>
+<li><code>Build -&gt; Pipelines</code></li>
+<li>Click on the latest pipeline</li>
+<li>Click on the <code>check_image</code> or <code>check_about_me</code> job to see the output of the test if it <code>Failed</code>.</li>
+</ul></li>
+<li>If the pipeline jobs for this branch have failed, you will need to fix the issue(s) and push the changes to your <code>about_me</code> branch.
 <ul>
-<li>Not ideal; this is now chip-specific code.</li>
-<li>This breaks the Zephyr abstraction layer; now firmware code is hardware-specific. :(</li>
-<li>But… Zephyr <code>usbc_vbus</code> API is not implemented for the <code>nRF52833</code>.</li>
-</ul>
+<li>If you are not sure what the issue is, click on the failed job to see the output of the test.</li>
+<li>If you are not sure how to fix it, ask for help!</li>
+</ul></li>
+<li>Once your CI jobs pass, approve your Merge Request on the GitLab website and <code>Merge</code> your <code>about_me</code> branch into <code>main</code>.</li>
+<li>Checkout the <code>main</code> branch on your laptop and pull the latest changes from the GitLab server.</li>
+<li>Confirm that you can see the updated <code>AboutMe.md</code> file in your <code>main</code> branch, along with its associated commit in your git commit history.</li>
+</ol>
 </section>
-<section id="how-to-test" class="level2">
-<h2 class="anchored" data-anchor-id="how-to-test">How to Test</h2>
-<p>You can use the second USB port (<code>nRF USB</code>) on the nRF52833 DK to test this. The second USB port is connected directly to the <code>VBUS</code> pin on the nRF52833.</p>
-<p><img src="images/vbus/image.png" class="img-fluid"></p>
+<section id="create-an-annotated-tag" class="level3">
+<h3 class="anchored" data-anchor-id="create-an-annotated-tag">Create an Annotated Tag</h3>
+<ol type="1">
+<li>On <code>main</code>, create an annotated tag for this commit associated with your merged <code>about_me</code> branch called <code>v1.0.0</code>, with the message <code>"include the about me info"</code>.</li>
+<li>Push this annotated tag to the GitLab server (<code>origin</code>).</li>
+<li>Confirm that you can see your latest commit and tag on the GitLab website.</li>
+<li>You should see that the <code>check_v1_0_0_tag</code> pipeline job has passed if this was successful.</li>
+</ol>
 </section>
-<section id="resources" class="level2">
-<h2 class="anchored" data-anchor-id="resources">Resources</h2>
+<section id="fix-a-merge-conflict-locally" class="level3">
+<h3 class="anchored" data-anchor-id="fix-a-merge-conflict-locally">Fix a Merge Conflict (Locally)</h3>
+<ol type="1">
+<li>Inspect the contents of <code>AboutDrPalmeri.md</code> in <code>main</code>.</li>
+<li>Switch to the <code>about_dr_p</code> branch, and look at the content (slightly different) of <code>AboutDrPalmeri.md</code>.</li>
+<li>Switch back to the <code>main</code> branch, and merge the <code>about_dr_p</code> branch into <code>main</code>.
 <ul>
-<li><a href="https://docs.zephyrproject.org/latest/hardware/peripherals/usbc_vbus.html">Zephyr: USB-C VBUS</a></li>
+<li>You will be told that there is a <code>Merge Conflict</code>:</li>
 </ul>
+<pre class="text"><code>$ git merge about_dr_p
+CONFLICT (content): Merge conflict in AboutDrPalmeri.md
+Automatic merge failed; fix conflicts and then commit the result.</code></pre>
+<ul>
+<li><code>git status</code> will show you the files that are in conflict, and what your next likely steps will be to resolve this conflict:</li>
+</ul>
+<pre class="text"><code>$ git status
+Your branch is up to date with 'origin/main'.
 
+You have unmerged paths.
+(fix conflicts and run "git commit")
+(use "git merge --abort" to abort the merge)
 
-<script type="ojs-module-contents">
-eyJjb250ZW50cyI6W119
-</script>
-<div id="exercise-loading-indicator" class="exercise-loading-indicator d-none d-flex align-items-center gap-2">
-<div id="exercise-loading-status" class="d-flex gap-2">
+Unmerged paths:
+(use "git add &lt;file&gt;..." to mark resolution)
+        both modified:   AboutDrPalmeri.md
 
+no changes added to commit (use "git add" and/or "git commit -a") </code></pre></li>
+<li>Staying on the <code>main</code> branch, open <code>AboutDrPalmeri.md</code> in your text editor, and inspect the <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>, <code>=======</code>, and <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code> markers that indicate the conflicting lines.</li>
+<li>Keep the version of the conflicting line that is in <code>main</code>, and delete the line that was incoming from <code>about_dr_p</code>.</li>
+<li>Be sure to delete the <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>, <code>=======</code>, and <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code> markers (lines).</li>
+<li>Add and commit this merge conflict resolution.</li>
+<li>Create an annotated tag called <code>v1.0.1</code> with the message <code>"fix Dr. P's age"</code>.</li>
+<li>Push your latest commits and tags to <code>main</code> on the GitLab server (<code>origin</code>).</li>
+<li>All of your CI jobs should pass if everything was successful.</li>
+</ol>
+</section>
+</section>
+<section id="how-to-ask-for-help" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-ask-for-help">How to Ask for Help</h2>
+<p>{{ &lt;include _ask_for_help.qmd &gt;}}</p>
+</section>
+<section id="what-to-submit" class="level2">
+<h2 class="anchored" data-anchor-id="what-to-submit">What to Submit</h2>
+<p>Your fork of this GitLab repository will be running this CI script: <a href=".gitlab-ci.yml"><code>.gitlab-ci.yml</code></a></p>
+<ol type="1">
+<li>Go to the <code>Build -&gt; Pipelines</code> page of your GitLab repository.</li>
+<li>Take a screenshot of the latest pipeline that shows all of the tests passing, along with your repository information, as shown below (except all of those <code>Failed</code> tests should report <code>Passed</code>).</li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/ci_pipeline.png" class="img-fluid figure-img"></p>
+<figcaption>ci_pipeline</figcaption>
+</figure>
 </div>
-<div class="spinner-grow spinner-grow-sm">
+<ol type="1">
+<li>Submit this screenshot to Gradescope assignment, along with completing the prompted questions.</li>
+</ol>
 
-</div>
-</div>
-<script type="vfs-file">
-W10=
-</script>
+
 </section>
 
 </main> <!-- /main -->
-<script type="ojs-module-contents">
-eyJjb250ZW50cyI6W119
-</script>
-<script type="module">
-if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
-window._ojs.paths.runtimeToDoc = "../../slides";
-window._ojs.paths.runtimeToRoot = "../..";
-window._ojs.paths.docToRoot = "..";
-window._ojs.selfContained = false;
-window._ojs.runtime.interpretFromScriptTags();
-</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
