@@ -99,6 +99,7 @@ Your fork of this GitLab repository will be running this CI script: [`.gitlab-ci
 1. Go to the `Build -> Pipelines` page of your GitLab repository.
 1. Take a screenshot of the latest pipeline that shows all of the tests passing, along with your repository information, as shown below (except all of those `Failed` tests should report `Passed`).
 
+<!--- TODO: might need to update this image -->
 ![ci_pipeline](images/ci_pipeline.png)
 
 1. Submit this screenshot to Gradescope assignment, along with completing the prompted questions.
