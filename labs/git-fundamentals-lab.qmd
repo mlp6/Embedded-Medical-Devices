@@ -94,7 +94,7 @@ You want to clone your forked repository, not the parent repository you forked f
 
 ## How to Ask for Help
 
-{{ <include _ask_for_help.qmd >}}
+{{< include _ask_for_help.qmd >}}
 
 ## What to Submit
 
