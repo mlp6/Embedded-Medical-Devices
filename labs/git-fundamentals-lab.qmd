@@ -12,7 +12,7 @@ This week we will go through a very simple git workflow to get you familiar with
 
 ### Initial `main` Branch Development
 
-1. Make sure that you have git installed, ssh keys configured, and your Duke GitLab account is setup, as detailed in the [first lab](https://gitlab.oit.duke.edu/MedTechPrototyping/medtech-skill-overview/-/blob/main/lab/Software-Install-Tutorials.md?ref_type=heads#git-version-control).
+1. Make sure that you have git installed, ssh keys configured, and your Duke GitLab account is setup, as detailed in the [Software Installation Lab](../software-install-tutorials.qmd).
 1. Create a **fork** (:warning: not a clone :warning:) of this project.
 1. Clone your forked (:warning: not the parent you forked from:warning:) repository to your laptop, which contains the default `README.md` file to your laptop.
 
