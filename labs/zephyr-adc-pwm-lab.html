@@ -7,8 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Dr.&nbsp;Mark Palmeri, M.D., Ph.D.">
+<meta name="dcterms.date" content="2025-06-24">
 
-<title>Bluetooth Low Energy – Embedded Medical Devices</title>
+<title>Zephyr ADC &amp; PWM Lab – Embedded Medical Devices</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -39,9 +40,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-fced259a1985fd972ecb57c7cd45153f.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-10ce6858d882512638623bc10e3ba411.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<script src="../site_libs/quarto-contrib/live-runtime/live-runtime.js" type="module"></script>
-<link href="../site_libs/quarto-contrib/live-runtime/live-runtime.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-0257a2ca8c5beddb405a1e7854b88b3f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -69,11 +68,38 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script type="module" src="../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
-<link href="../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<link rel="stylesheet" href="styles.css">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-sidebar docked quarto-light">
@@ -85,7 +111,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../slides/zephyr-nrf52833dk-intro.html">Learning Modules</a></li><li class="breadcrumb-item"><a href="../slides/zephyr-ble.html">Bluetooth Low Energy (BLE)</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labs/event-driven-state-machine-lab.html">Labs</a></li><li class="breadcrumb-item"><a href="../labs/zephyr-adc-pwm-lab.html">ADC &amp; PWM Lab</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -226,7 +252,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../slides/zephyr-ble.html" class="sidebar-item-text sidebar-link active">
+  <a href="../slides/zephyr-ble.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Bluetooth Low Energy (BLE)</span></a>
   </div>
 </li>
@@ -285,7 +311,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../labs/zephyr-adc-pwm-lab.html" class="sidebar-item-text sidebar-link">
+  <a href="../labs/zephyr-adc-pwm-lab.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">ADC &amp; PWM Lab</span></a>
   </div>
 </li>
@@ -324,53 +350,64 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#what-is-bluetooth" id="toc-what-is-bluetooth" class="nav-link active" data-scroll-target="#what-is-bluetooth">What is Bluetooth?</a></li>
-  <li><a href="#generic-access-profile-gap" id="toc-generic-access-profile-gap" class="nav-link" data-scroll-target="#generic-access-profile-gap">Generic Access Profile (GAP)</a></li>
-  <li><a href="#device-advertising" id="toc-device-advertising" class="nav-link" data-scroll-target="#device-advertising">Device Advertising</a></li>
-  <li><a href="#broadcast-topology" id="toc-broadcast-topology" class="nav-link" data-scroll-target="#broadcast-topology">Broadcast Topology</a></li>
-  <li><a href="#mesh-profiles" id="toc-mesh-profiles" class="nav-link" data-scroll-target="#mesh-profiles">Mesh Profiles</a></li>
-  <li><a href="#generic-attribute-gatt-profiles" id="toc-generic-attribute-gatt-profiles" class="nav-link" data-scroll-target="#generic-attribute-gatt-profiles">Generic Attribute (GATT) Profiles</a></li>
-  <li><a href="#gatt-profiles" id="toc-gatt-profiles" class="nav-link" data-scroll-target="#gatt-profiles">GATT Profiles</a></li>
-  <li><a href="#universally-unique-identifier-uuid" id="toc-universally-unique-identifier-uuid" class="nav-link" data-scroll-target="#universally-unique-identifier-uuid">Universally Unique Identifier (UUID)</a></li>
-  <li><a href="#generating-uuids" id="toc-generating-uuids" class="nav-link" data-scroll-target="#generating-uuids">Generating UUIDs</a></li>
-  <li><a href="#gatt-workflow" id="toc-gatt-workflow" class="nav-link" data-scroll-target="#gatt-workflow">GATT Workflow</a></li>
-  <li><a href="#notifications" id="toc-notifications" class="nav-link" data-scroll-target="#notifications">Notifications</a></li>
-  <li><a href="#firmware-implementation" id="toc-firmware-implementation" class="nav-link" data-scroll-target="#firmware-implementation">Firmware Implementation</a></li>
-  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a></li>
+  <li><a href="#fork-and-clone-the-repository" id="toc-fork-and-clone-the-repository" class="nav-link active" data-scroll-target="#fork-and-clone-the-repository">Fork and Clone the Repository</a></li>
+  <li><a href="#git-best-practices" id="toc-git-best-practices" class="nav-link" data-scroll-target="#git-best-practices">Git Best Practices</a></li>
+  <li><a href="#firmware-expectations" id="toc-firmware-expectations" class="nav-link" data-scroll-target="#firmware-expectations">Firmware Expectations</a></li>
+  <li><a href="#part-i-adc-sampling" id="toc-part-i-adc-sampling" class="nav-link" data-scroll-target="#part-i-adc-sampling">Part I: ADC Sampling</a>
+  <ul class="collapse">
+  <li><a href="#firmware-functional-specifications" id="toc-firmware-functional-specifications" class="nav-link" data-scroll-target="#firmware-functional-specifications">Firmware Functional Specifications</a></li>
+  <li><a href="#testing" id="toc-testing" class="nav-link" data-scroll-target="#testing">Testing</a></li>
+  <li><a href="#commit-n-merge-part-i" id="toc-commit-n-merge-part-i" class="nav-link" data-scroll-target="#commit-n-merge-part-i">Commit-n-Merge Part I</a></li>
+  </ul></li>
+  <li><a href="#part-ii-buffered-differential-adc-sampling" id="toc-part-ii-buffered-differential-adc-sampling" class="nav-link" data-scroll-target="#part-ii-buffered-differential-adc-sampling">Part II: Buffered Differential ADC Sampling</a>
+  <ul class="collapse">
+  <li><a href="#firmware-functional-specifications-1" id="toc-firmware-functional-specifications-1" class="nav-link" data-scroll-target="#firmware-functional-specifications-1">Firmware Functional Specifications</a></li>
+  <li><a href="#testing-1" id="toc-testing-1" class="nav-link" data-scroll-target="#testing-1">Testing</a></li>
+  <li><a href="#commit-n-merge-part-ii" id="toc-commit-n-merge-part-ii" class="nav-link" data-scroll-target="#commit-n-merge-part-ii">Commit-n-Merge Part II</a></li>
+  </ul></li>
+  <li><a href="#part-iii-steady-state-pwm-output" id="toc-part-iii-steady-state-pwm-output" class="nav-link" data-scroll-target="#part-iii-steady-state-pwm-output">Part III: Steady-State PWM Output</a>
+  <ul class="collapse">
+  <li><a href="#firmware-functional-specifications-2" id="toc-firmware-functional-specifications-2" class="nav-link" data-scroll-target="#firmware-functional-specifications-2">Firmware Functional Specifications</a></li>
+  <li><a href="#testing-2" id="toc-testing-2" class="nav-link" data-scroll-target="#testing-2">Testing</a></li>
+  <li><a href="#commit-n-merge-part-iii" id="toc-commit-n-merge-part-iii" class="nav-link" data-scroll-target="#commit-n-merge-part-iii">Commit-n-Merge Part III</a></li>
+  </ul></li>
+  <li><a href="#part-iv-sinusoidal-modulation-of-pwm-output" id="toc-part-iv-sinusoidal-modulation-of-pwm-output" class="nav-link" data-scroll-target="#part-iv-sinusoidal-modulation-of-pwm-output">Part IV: Sinusoidal Modulation of PWM Output</a>
+  <ul class="collapse">
+  <li><a href="#firmware-functional-specifications-3" id="toc-firmware-functional-specifications-3" class="nav-link" data-scroll-target="#firmware-functional-specifications-3">Firmware Functional Specifications</a></li>
+  <li><a href="#testing-3" id="toc-testing-3" class="nav-link" data-scroll-target="#testing-3">Testing</a></li>
+  <li><a href="#commit-n-merge-part-iv" id="toc-commit-n-merge-part-iv" class="nav-link" data-scroll-target="#commit-n-merge-part-iv">Commit-n-Merge Part IV</a></li>
+  </ul></li>
+  <li><a href="#how-to-ask-for-help" id="toc-how-to-ask-for-help" class="nav-link" data-scroll-target="#how-to-ask-for-help">How to Ask for Help</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/mlp6/Embedded-Medical-Devices/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="zephyr-ble-slides.html"><i class="bi bi-file-slides"></i>RevealJS (live)</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/mlp6/Embedded-Medical-Devices/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="zephyr-adc-pwm-lab.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../slides/zephyr-nrf52833dk-intro.html">Learning Modules</a></li><li class="breadcrumb-item"><a href="../slides/zephyr-ble.html">Bluetooth Low Energy (BLE)</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labs/event-driven-state-machine-lab.html">Labs</a></li><li class="breadcrumb-item"><a href="../labs/zephyr-adc-pwm-lab.html">ADC &amp; PWM Lab</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Bluetooth Low Energy</h1>
-<p class="subtitle lead">BME554L -Fall 2025 - Palmeri</p>
-</div>
+<h1 class="title">Zephyr ADC &amp; PWM Lab</h1>
+<p class="subtitle lead">BME554L - Fall 2025 - Palmeri</p>
+  <div class="quarto-categories">
+    <div class="quarto-category">Lab</div>
+  </div>
+  </div>
 
 
-<div class="quarto-title-meta-author">
-  <div class="quarto-title-meta-heading">Author</div>
-  <div class="quarto-title-meta-heading">Affiliation</div>
-  
-    <div class="quarto-title-meta-contents">
-    <p class="author">Dr.&nbsp;Mark Palmeri, M.D., Ph.D. </p>
-  </div>
-  <div class="quarto-title-meta-contents">
-        <p class="affiliation">
-            Duke University
-          </p>
-      </div>
-  </div>
 
 <div class="quarto-title-meta">
 
-      
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Dr.&nbsp;Mark Palmeri, M.D., Ph.D. </p>
+          </div>
+  </div>
+    
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">Invalid Date</p>
+      <p class="date">June 24, 2025</p>
     </div>
   </div>
   
@@ -382,153 +419,246 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="what-is-bluetooth" class="level2">
-<h2 class="anchored" data-anchor-id="what-is-bluetooth">What is Bluetooth?</h2>
+<!-- 
+
+TODO: use dictionary-based log for HEXDUMP (?) 
+https://docs.zephyrproject.org/latest/samples/subsys/logging/dictionary/README.html#logging-dictionary
+
+TODO: Add more information on how to measurement PWN sinusoid output with o-scope 
+* Include snippet on how to impose the LPF in Math mode on the o-scope, with the correct bandwidth and the correct time window of data (lots of cycles).
+* Remind students that the LED is ON with an inverted voltage, so HIGH on the o-scope is OFF.
+
+TODO: Improvements to testing and analysis
+* Get rid of RMS calculation
+* Have students testing different sampling rates and resolutions; plot sine wave and do FFT
+* Conclude what is adequate sampling and resolution
+* Maybe do this for an ECG waveform instead of a sine wave?
+
+-->
+<section id="fork-and-clone-the-repository" class="level2">
+<h2 class="anchored" data-anchor-id="fork-and-clone-the-repository">Fork and Clone the Repository</h2>
+<!-- TODO: build off GPIO lab repo instead of separate repo -->
 <ul>
-<li>Bluetooth Low Energy (BLE) is a wireless serial communication protocol.</li>
-<li>Part of BT 4.0 core; very distinct from previous version of BT.</li>
-<li>Standardized via the BT Special Interest Group (SIG)</li>
-<li>“Only” ubiquitous communication protocol between device:OS (iOS, Android, OS X, Windows, Linux)</li>
-<li>Designed for technology in smart homes, health, sport and fitness.</li>
-<li>“Low energy” - months/years of power on single battery (e.g., CR2032)</li>
-<li>Small size &amp; low cost</li>
+<li>Fork this repository to your own GitLab account.</li>
+<li>Add Dr.&nbsp;Palmeri (<code>mlp6</code>) as a <code>Maintainer</code> to your GitLab repository. He will add TAs, graders and projects labels to your repository once this has been done.</li>
 </ul>
 </section>
-<section id="generic-access-profile-gap" class="level2">
-<h2 class="anchored" data-anchor-id="generic-access-profile-gap">Generic Access Profile (GAP)</h2>
+<section id="git-best-practices" class="level2">
+<h2 class="anchored" data-anchor-id="git-best-practices">Git Best Practices</h2>
 <ul>
-<li><strong>Peripheral Device:</strong> more resource-constrained (power, size, horsepower) device</li>
-<li><strong>Central Device:</strong> more resource-equipped device that will do most processing and data storage</li>
+<li>Use best practices for version control (branching, commit messages, etc.).</li>
+<li>Do all development on a dedicated branch that is merged into <code>main</code> once it is functional.</li>
+<li>Commits should be very specific to the changes/additions you are making to your code. This will help you and others understand what you did and why you did it.<br>
+</li>
+<li>On a given development branch, try to implement one small piece of functionality at a time, commit it, and then move on to the next piece of functionality.</li>
+</ul>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You do not want one, monolithic git commit right before you submit your project.</p>
+</div>
+</div>
+</section>
+<section id="firmware-expectations" class="level2">
+<h2 class="anchored" data-anchor-id="firmware-expectations">Firmware Expectations</h2>
+<ul>
+<li>All firmware should be written using the <strong>State Machine Framework</strong>.<br>
+</li>
+<li>Choose your states for each part as a firmware engineer would, using what you have learned so far this semester.</li>
+<li>Timers, work queues, callbacks, and interrupts should be used as appropriate.</li>
+<li>All good coding practices developed this semester should be followed.</li>
+<li>Use logging to display state information and other relevant information, warnings, and errors. Debugging log messages can remain in the code, but the logging level should be submitted at the <code>INF</code> level.</li>
+<li>Include a state diagram in your repository (<code>state_diagram.png</code>) using UML (<code>state_diagram.puml</code>) or some equivalent.</li>
 </ul>
 </section>
-<section id="device-advertising" class="level2">
-<h2 class="anchored" data-anchor-id="device-advertising">Device Advertising</h2>
+<section id="part-i-adc-sampling" class="level2">
+<h2 class="anchored" data-anchor-id="part-i-adc-sampling">Part I: ADC Sampling</h2>
+<section id="firmware-functional-specifications" class="level3">
+<h3 class="anchored" data-anchor-id="firmware-functional-specifications">Firmware Functional Specifications</h3>
 <ul>
-<li>31 bytes of data</li>
-<li>Can configure advertising interval (frequency proportional to energy consumption)</li>
-<li>Optional: Scan Response Request</li>
-</ul>
-<p><img src="images/ble/advertising.png" class="img-fluid"></p>
+<li>Do all development and testing for Part I on a developnment branch called <code>part1</code>.</li>
+<li><code>LED</code> and <code>BUTTON</code> number references below are based on Devicetree labels (not the annotation on the DK board itself).</li>
+<li>There should be a heartbeat LED (<code>LED0</code>) that blinks at 1 Hz with a 25% duty cycle at all times when the firmware is running.</li>
+<li>When <code>BUTTON0</code> is pressed:
 <ul>
-<li>Once a connection is established, advertising ceases and GATT operations take over.</li>
-</ul>
-</section>
-<section id="broadcast-topology" class="level2">
-<h2 class="anchored" data-anchor-id="broadcast-topology">Broadcast Topology</h2>
-<p><img src="images/ble/broadcast_topology.png" class="img-fluid"></p>
-</section>
-<section id="mesh-profiles" class="level2">
-<h2 class="anchored" data-anchor-id="mesh-profiles">Mesh Profiles</h2>
+<li>Make a measurement using the <code>AIN0</code> channel of the ADC.
 <ul>
-<li>BLE peripherals can communicate with one another to pass information to other devices (that might otherwise be out of range).</li>
-<li>Common example: lights in a building</li>
-<li>Zephyr has its own standard protocol: https://launchstudio.bluetooth.com/ListingDetails/95153</li>
-</ul>
-<p><img src="images/ble/mesh.png" class="img-fluid"></p>
-</section>
-<section id="generic-attribute-gatt-profiles" class="level2">
-<h2 class="anchored" data-anchor-id="generic-attribute-gatt-profiles">Generic Attribute (GATT) Profiles</h2>
-<ul>
-<li>API used by all BLE devices.</li>
-<li><strong>Client:</strong> initiates GATT commands/requests &amp; accepts responses (e.g., smartphone)</li>
-<li><strong>Server:</strong> receives GATT commands/requests &amp; returns responses (e.g., wearable sensor)</li>
-<li><strong>Characteristic:</strong> Data value communicated between client/server</li>
-<li><strong>Service:</strong> Collection of related characteristics (similar to a structure or class/object)</li>
-<li><strong>Descriptor:</strong> optional characteristic metadata (e.g., value units)</li>
-</ul>
-</section>
-<section id="gatt-profiles" class="level2">
-<h2 class="anchored" data-anchor-id="gatt-profiles">GATT Profiles</h2>
-<p><img src="images/ble/GattStructure.png" class="img-fluid"></p>
-</section>
-<section id="universally-unique-identifier-uuid" class="level2">
-<h2 class="anchored" data-anchor-id="universally-unique-identifier-uuid">Universally Unique Identifier (UUID)</h2>
-<ul>
-<li>Identifiers are used to identify all <strong>attributes</strong>.
-<ul>
-<li>Services</li>
-<li>Characteristics</li>
-<li>Descriptors</li>
+<li>Use the <code>ADC_REF_INTERNAL</code> reference voltage.</li>
+<li>Linearly map 0-3.0 V measured on the <code>AIN0</code> input to an <code>LED1</code> blink rate of 1-5 Hz (e.g., 0 V -&gt; 1 Hz; 3.0 V -&gt; 5 Hz) with a duty cycle of 10%.</li>
+<li><code>LED1</code> should remaining blinking for 5 seconds after the button has been pressed.</li>
 </ul></li>
-<li>UUIDs are specified by the BT SIG. They are 128-bits, but 16- or 32- bits represent the unique information.</li>
-<li>Can be used to encode information, such as manufacturer, project ID, firmware revision, etc.</li>
+</ul></li>
 </ul>
 </section>
-<section id="generating-uuids" class="level2">
-<h2 class="anchored" data-anchor-id="generating-uuids">Generating UUIDs</h2>
-<p>Online generators exist to create valid UUIDs: https://www.uuidgenerator.net/</p>
+<section id="testing" class="level3">
+<h3 class="anchored" data-anchor-id="testing">Testing</h3>
+<p>For the following testing, you can use a power supply to provide known voltage input to <code>AIN0</code>.</p>
 <ul>
-<li>Example: <code>b562bf0c-0039-418e-9756-8b271b33d5be</code></li>
-<li>The “base” UUID can be set for a device and then incremented for custom services not in the standard GATT.</li>
+<li>Quantify how linear the relationship is between the voltage applied to <code>AIN0</code> and the <code>LED1</code> blinking frequency.
+<ul>
+<li>Not sure how to quantify linearity? Consider plotting the data and presenting the <span class="math inline">\(R^2\)</span> of a linear regression fit.</li>
+<li>Remember that single data points for any single input voltage pair is not adequate; multiple measurements should be made and error bars presented on all plots.</li>
+</ul></li>
+<li>Quantify the accuract of the <code>LED1</code> 10% duty cycle for each frequency that you measure.</li>
+<li>Quantify the accuracy of <code>LED1</code> 5 sec ontime duration.</li>
+<li>Present all of these data, your analysis and your interpretation in a <code>technical_report.ipynb</code> Jupyter notebook.</li>
 </ul>
 </section>
-<section id="gatt-workflow" class="level2">
-<h2 class="anchored" data-anchor-id="gatt-workflow">GATT Workflow</h2>
+<section id="commit-n-merge-part-i" class="level3">
+<h3 class="anchored" data-anchor-id="commit-n-merge-part-i">Commit-n-Merge Part I</h3>
 <ul>
-<li>UUIDs can be <em>discovered</em> or explicitly <em>found</em>.</li>
-<li>Service characteristics can be <em>discovered</em>.</li>
-<li>Data can be read (server -&gt; client) using either a UUID or <strong>handle</strong> (similar to an “alias”).</li>
-<li>Data can be written to the server using the handle (with or without response).</li>
-<li>Data streams are limited / dictated by the Maximum Transfer Unit (MTU), which can be extended, but with tradeoffs.</li>
+<li>Merge your completed <code>part1</code> branch into your <code>main</code> branch using a Merge Request on Gitlab.</li>
+<li>Create an annotated tag of your <code>main</code> branch with all part of this lab merged in called <code>part1</code>.</li>
+<li>Create an Issue for Dr.&nbsp;Palmeri to review Part I, assigning it the <code>Review</code> label.</li>
 </ul>
 </section>
-<section id="notifications" class="level2">
-<h2 class="anchored" data-anchor-id="notifications">Notifications</h2>
+</section>
+<section id="part-ii-buffered-differential-adc-sampling" class="level2">
+<h2 class="anchored" data-anchor-id="part-ii-buffered-differential-adc-sampling">Part II: Buffered Differential ADC Sampling</h2>
+<section id="firmware-functional-specifications-1" class="level3">
+<h3 class="anchored" data-anchor-id="firmware-functional-specifications-1">Firmware Functional Specifications</h3>
+<p>You will keep all of the functionality of Part I, and in a new development branch called <code>part2</code>, add the following functionality to your firmware:</p>
 <ul>
-<li>A <strong>notification</strong> can be sent by the server when a characteristic is available for the client (e.g., data stored in the characteristic has been updated). The client is responsible for then reading the characteristic.</li>
-<li>Notifications avoid the client having to periodically read a characteristic to determine if a value has been updated or is available.</li>
-<li>Notifications are similar to an ISR for the client to know to send a read request to the server.</li>
-<li>An <strong>indication</strong> is a notification that requires a response from the client.</li>
+<li>When you press <code>BUTTON1</code> , add an additional differential ADC measurement using <code>AIN1</code> and <code>AIN2</code>.</li>
+<li>Choose the reference voltage, gain, bit depth and acquisition time to adequately sample at least 20 cycles of a 10 Hz sinusoidal signal (<span class="math inline">\(V_{pp}\)</span> = 2 V).</li>
+<li>Implement the <code>extra_sampling</code> buffering of the ADC for this differential sinusoidal signal measurement so that all of the data are stored in an array in a single <code>adc_read()</code> call (i.e., you are not using a kernel call for every sample).</li>
+<li>Disable the <code>BUTTON1</code> while your device is reading <code>AIN1</code> and <code>AIN2</code> and performing calculations below.</li>
+<li>Write a <strong>library</strong> called <code>calc_cycles</code> that calculates the number of sampled sinusoidal cycles in the buffered ADC samples.
+<ul>
+<li>This can be rounded to the nearest integer, depending on your algorithm.</li>
+<li>Have this calculated number of cycles displayed using <code>LOG_INF()</code> in the console.</li>
+</ul></li>
+<li>Write log messages to your serial terminal that:
+<ul>
+<li>Display a HEX array of the buffered ADC samples.<br>
+</li>
+<li>:warning: Be careful for the log message memory consumption! Remember that the data will be saved using <a href="https://en.wikipedia.org/wiki/Two's_complement">two’s complement</a>.</li>
+</ul></li>
+<li>Update your state diagram for this new functionality.</li>
 </ul>
 </section>
-<section id="firmware-implementation" class="level2">
-<h2 class="anchored" data-anchor-id="firmware-implementation">Firmware Implementation</h2>
-<p>The following library is used as a skeleton for BLE communication in your final project:</p>
-<!-- TODO: update this links after migrating to GitHub -->
+<section id="testing-1" class="level3">
+<h3 class="anchored" data-anchor-id="testing-1">Testing</h3>
 <ul>
-<li><a href="https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/ecg-temp-ble-project/-/blob/main/application/src/ble-lib.h?ref_type=heads">ble-lib.h</a></li>
-<li><a href="https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/ecg-temp-ble-project/-/blob/main/application/src/ble-lib.c?ref_type=heads">ble-lib.c</a></li>
+<li>Input a 10 Hz sinusoidal signal with a 2 V <span class="math inline">\(V_{pp}\)</span> into the differential <code>AIN1</code> and <code>AIN2</code> inputs.</li>
+<li>Create a plot of your input signal and the buffered ADC samples (using the HEX array output).
+<ul>
+<li>The HEX data array from the terminal can be copied and pasted into a text file in your git repository to read into your Jupyter notebook for analysis.</li>
+<li>Example code to decode your HEX data is included in the Jupyter notebook.</li>
+<li>Discuss any differences between the input signal and your sampled signal.</li>
+</ul></li>
+<li>Compare your calculated number of cycles in the sampling period to the nominal value. Discuss any differences between your calculated number of cycles and the expected number of cycles.</li>
+<li>Add this analysis to <a href="testing/technical_report.ipynb">testing/technical_report.ipynb</a>.</li>
 </ul>
 </section>
-<section id="resources" class="level2">
-<h2 class="anchored" data-anchor-id="resources">Resources</h2>
+<section id="commit-n-merge-part-ii" class="level3">
+<h3 class="anchored" data-anchor-id="commit-n-merge-part-ii">Commit-n-Merge Part II</h3>
 <ul>
-<li><a href="https://learn.adafruit.com/introduction-to-bluetooth-low-energy">Adafruit: introduction to Bluetooth Low Energy</a></li>
-<li><a href="https://en.wikipedia.org/wiki/Bluetooth_Low_Energy">Wikipedia: BLE</a></li>
-<li><a href="https://en.wikipedia.org/wiki/Bluetooth_mesh_networking">BLE: Mesh Networking</a></li>
-<li><a href="https://docs.zephyrproject.org/apidoc/latest/group__bt__bas.html">Zephyr: Battery Service (BAS)</a></li>
-<li><a href="https://academy.nordicsemi.com/courses/bluetooth-low-energy-fundamentals/">Nordic DevAcademy BLE Fundamentals</a></li>
+<li>Merge your completed <code>part2</code> branch into your <code>main</code> branch using a Merge Request on Gitlab.</li>
+<li>Create an annotated tag of your <code>main</code> branch with all part of this lab merged in called <code>part2</code>.</li>
+<li>Create an Issue for Dr.&nbsp;Palmeri to review Part II, assigning it the <code>Review</code> label.</li>
 </ul>
+</section>
+</section>
+<section id="part-iii-steady-state-pwm-output" class="level2">
+<h2 class="anchored" data-anchor-id="part-iii-steady-state-pwm-output">Part III: Steady-State PWM Output</h2>
+<p>Using all of the the functionality of Parts I &amp; II, in a new development branch called <code>part3</code>, add the following functionality to your firmware:</p>
+<section id="firmware-functional-specifications-2" class="level3">
+<h3 class="anchored" data-anchor-id="firmware-functional-specifications-2">Firmware Functional Specifications</h3>
+<ul>
+<li>Using the Part I functionality to read a DC voltage on <code>AIN0</code>, map this read DC voltage to scale the maximum brightness of <code>LED2</code> using a PWM output.
+<ul>
+<li>For example:
+<ul>
+<li>If <code>AIN0</code> = 0 V, then <code>LED2</code> should be off (0% duty cycle).<br>
+</li>
+<li>If <code>AIN0</code> = 1.5 V, then <code>LED2</code> should be at 50% brightness (50% duty cycle).</li>
+<li>If <code>AIN0</code> = 3 V, then <code>LED2</code> should be at maximum brightness (100% duty cycle).<br>
+</li>
+</ul></li>
+</ul></li>
+<li>Update your state diagram to include the new functionality.</li>
+</ul>
+</section>
+<section id="testing-2" class="level3">
+<h3 class="anchored" data-anchor-id="testing-2">Testing</h3>
+<ul>
+<li>Quantify the linearity of the maximum brightness of <code>LED2</code> as a function of <code>AIN0</code> voltage ranging from 0-3 V.</li>
+<li>Present your data and analysis in the technical report Jupyter notebook.</li>
+</ul>
+</section>
+<section id="commit-n-merge-part-iii" class="level3">
+<h3 class="anchored" data-anchor-id="commit-n-merge-part-iii">Commit-n-Merge Part III</h3>
+<ul>
+<li>Merge your completed <code>part3</code> branch into your <code>main</code> branch using a Merge Request on Gitlab.</li>
+<li>Create an annotated tag of your <code>main</code> branch with all part of this lab merged in called <code>part3</code>.</li>
+<li>Create an Issue for Dr.&nbsp;Palmeri to review Part III, assigning it the <code>Review</code> label.</li>
+</ul>
+</section>
+</section>
+<section id="part-iv-sinusoidal-modulation-of-pwm-output" class="level2">
+<h2 class="anchored" data-anchor-id="part-iv-sinusoidal-modulation-of-pwm-output">Part IV: Sinusoidal Modulation of PWM Output</h2>
+<p>Using all of the the functionality of Parts I - III, in a new development branch called <code>part4</code>, add the following functionality to your firmware:</p>
+<section id="firmware-functional-specifications-3" class="level3">
+<h3 class="anchored" data-anchor-id="firmware-functional-specifications-3">Firmware Functional Specifications</h3>
+<ul>
+<li>Modulate the brighness of <code>LED3</code> to match the read sinusoidal voltage on <code>AIN1</code> and <code>AIN2</code> after pressing <code>BUTTON2</code>, as implemented and testing in Part II, <strong>with as little latency (phase distortion) between the input and output signals</strong>.</li>
+<li>The blocking nature of the buffered acquisition scheme of Part II will not be ameable to realtime modulation of the PWM output.
+<ul>
+<li><strong>Consider if the <code>async</code> / <code>callback</code> ADC sampling approach is appropriate for this task,</strong> or</li>
+<li>Consider a non-buffered ADC sampling approach that uses a timer to sample the ADC at a fixed rate.</li>
+</ul></li>
+<li>Set the minumum and maximum sinusoidal brightnesses to be PWM duty cycles of 0 and 100%, respectively.</li>
+<li>Update your state diagram to include the new functionality.</li>
+</ul>
+</section>
+<section id="testing-3" class="level3">
+<h3 class="anchored" data-anchor-id="testing-3">Testing</h3>
+<ul>
+<li>Using the oscilloscope, measure your input sinusoidal signal on <code>AIN1</code> and <code>AIN2</code> and the output PWM signal on <code>LED3</code> at the same time.</li>
+<li>Save this acquired oscilloscope data to a CSV file using a USB memory stick.</li>
+<li>In your Jupyter notebook, plot the input and output signals.</li>
+<li>Calculate the frequency of your PWM signal and the phase difference between the PWM sinusoid and your input signal.</li>
+<li>Present your data and analysis in your Jupyter notebook.</li>
+<li>Discuss the latency of your system and how you could improve it in the future.</li>
+</ul>
+</section>
+<section id="commit-n-merge-part-iv" class="level3">
+<h3 class="anchored" data-anchor-id="commit-n-merge-part-iv">Commit-n-Merge Part IV</h3>
+<ul>
+<li>Merge your completed <code>part4</code> branch into your <code>main</code> branch using a Merge Request on Gitlab.</li>
+<li>Create an annotated tag of your <code>main</code> branch with all part of this lab merged in called <code>part4</code>.</li>
+<li>Create an Issue for Dr.&nbsp;Palmeri to review Part IV, assigning it the <code>Review</code> label.</li>
+</ul>
+</section>
+</section>
+<section id="how-to-ask-for-help" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-ask-for-help">How to Ask for Help</h2>
+<ol type="1">
+<li>If you have a general / non-coding question, you should ask your TAs / Dr. Palmeri on Ed to allow any of them to respond in a timely manner.</li>
+<li>Push you code to your GitLab repository, ideally with your active development on a non-<code>main</code> branch.</li>
+<li>Create an <a href="https://docs.gitlab.com/ee/user/project/issues/">Issue</a> in your repository.
+<ul>
+<li>Add as much detail as possible as to your problem, and add links to specific lines / section of code when possible.</li>
+<li>Assign the label “Bug” or “Question”, as appropriate.</li>
+<li>Be sure to specify what branch you are working on.</li>
+<li>Assign the Issue to one of the TAs.</li>
+<li>If your TA cannot solve your Issue, they can escalate the Issue to Dr.&nbsp;Palmeri.</li>
+</ul></li>
+<li>You will get a response to your Issue, and maybe a new branch of code will be pushed to help you with some example syntax that you can use <code>git diff</code> to visualize.</li>
+</ol>
 
 
-<script type="ojs-module-contents">
-eyJjb250ZW50cyI6W119
-</script>
-<div id="exercise-loading-indicator" class="exercise-loading-indicator d-none d-flex align-items-center gap-2">
-<div id="exercise-loading-status" class="d-flex gap-2">
-
-</div>
-<div class="spinner-grow spinner-grow-sm">
-
-</div>
-</div>
-<script type="vfs-file">
-W10=
-</script>
 </section>
 
 </main> <!-- /main -->
-<script type="ojs-module-contents">
-eyJjb250ZW50cyI6W119
-</script>
-<script type="module">
-if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
-window._ojs.paths.runtimeToDoc = "../../slides";
-window._ojs.paths.runtimeToRoot = "../..";
-window._ojs.paths.docToRoot = "..";
-window._ojs.selfContained = false;
-window._ojs.runtime.interpretFromScriptTags();
-</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
