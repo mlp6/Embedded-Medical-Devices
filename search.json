@@ -4882,7 +4882,7 @@
     "href": "labs/git-fundamentals-lab.html#how-to-ask-for-help",
     "title": "Git Fundamentals Lab",
     "section": "How to Ask for Help",
-    "text": "How to Ask for Help\n{{ &lt;include _ask_for_help.qmd &gt;}}",
+    "text": "How to Ask for Help\n\nIf you have a general / non-coding question, you should ask your TAs / Dr. Palmeri on Ed to allow any of them to respond in a timely manner.\nPush you code to your GitLab repository, ideally with your active development on a non-main branch.\nCreate an Issue in your repository.\n\nAdd as much detail as possible as to your problem, and add links to specific lines / section of code when possible.\nAssign the label “Bug” or “Question”, as appropriate.\nBe sure to specify what branch you are working on.\nAssign the Issue to one of the TAs.\nIf your TA cannot solve your Issue, they can escalate the Issue to Dr. Palmeri.\n\nYou will get a response to your Issue, and maybe a new branch of code will be pushed to help you with some example syntax that you can use git diff to visualize.",
     "crumbs": [
       "Labs",
       "Git Fundamentals Lab"
