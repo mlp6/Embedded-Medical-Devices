@@ -53,11 +53,11 @@ format:
 * Inspect the code to see how variables `a`, `b` and `c` are declared and initialized.
 * Flash the existing code and note the terminal output:
 
-<img src="images/you_lose.png" width="200">
+![](images/you_lose.png)
 
 * On a development branch called `fix_division`, without changing the declared datatypes of `a`, `b`, or `c`, correct the code so that `c` is output in the terminal:
 
-<img src="images/you_win.png" width="200">
+![](images/you_win.png)
 
 * Push the `fix_division` branch to your GitLab repository.
 * Create a **Merge Request** to merge the `fix_division` branch into your `main` branch.
