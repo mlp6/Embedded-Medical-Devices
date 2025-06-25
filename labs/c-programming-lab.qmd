@@ -40,10 +40,10 @@ format:
 
 ### Fork / Clone / Build / Flash / View Serial Output
 
-* Fork this repository on GitLab
+* Fork the C Programing lab repository on Duke's GitLab server: [https://gitlab.oit.duke.edu/kits/BME-554L-001-F25/c-programming-lab](https://gitlab.oit.duke.edu/kits/BME-554L-001-F25/c-programming-lab)
 * Add Dr. Palmeri (`mlp6`) as a Maintainer in your forked repository.
-* Clone your forked repository to your local machine
-* Build the Zephyr application "as is" (review [DevAcademy: Lesson 1](https://academy.nordicsemi.com/courses/nrf-connect-sdk-fundamentals/lessons/lesson-1-nrf-connect-sdk-introduction/))
+* Clone your forked repository to your local machine.
+* Build the Zephyr application "as is" (review [DevAcademy: Lesson 1](https://academy.nordicsemi.com/courses/nrf-connect-sdk-fundamentals/lessons/lesson-1-nrf-connect-sdk-introduction/)).
 * Flash the Zephyr application to your development kit.
   * Connect the `VCOM` port on the `nrf52833DK` to your computer (using `Connected Devices` and the plug icon)
   * Look at the serial output in the VS Code `Terminal`
@@ -66,7 +66,11 @@ format:
 * Create an annotated tag for the merged commit on main with the fixed division named `v1.0.0`.
 * Push this annotated tag to your GitLab repository.
 
-:clock10: Note that the CI pipelines running on the GitLab server can take a while to complete.  Do not rely on them for immediate development feedback, but rather as a final check before merging code into `main`.
+::: callout-tip
+Note that the CI pipelines running on the GitLab server can take a while to
+complete.  Do not rely on them for immediate development feedback, but rather as
+a final check before merging code into `main`.
+:::
 
 ## Library Refactor
 
