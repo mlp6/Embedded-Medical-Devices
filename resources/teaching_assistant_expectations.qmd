@@ -1,0 +1,21 @@
+---
+title: "Teaching Assistant Expectations"
+date: "2025-06-20"
+format:
+  html: default
+  pdf: default
+---
+
+A teaching assistant for this class is expected to:
+
+* Check Ed Discussion for questions at least once daily.
+* Triage student GitLab Issues at least once daily.
+* Staff 3 lab hours each week, communicating these hours via Ed Discusison and Canvas announcements.
+* Help provide timely assignment feedback via GitLab Merge Request code reviews and Gradescope.
+
+These responsibilities are expected to take up to 10 hours / week.
+
+Dr. Palmeri will have a group Teams chat for "realtime" communication with all TAs and the department lab staff.  A Todoist project for the course will also be shared with the teaching team to track pending tasks.
+
+Students who are paid hourly must submit timecards by 5 PM on Mondays when
+timecards are due so that Dr. Palmeri can approve your hours in a timely manner.
