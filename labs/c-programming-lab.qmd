@@ -8,6 +8,7 @@ format:
 
 <!-- TODO: have the students fork the c-programming-lab repository -->
 <!-- TODO: add debugging exercise -->
+<!-- FIXME: `native` builds not working on Fedora 42 (`libcurl` and `nghhtp2` library issues) -->
 
 ## Prelab
 
