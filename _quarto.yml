@@ -69,10 +69,10 @@ website:
           text: "C Programming Lab"
         - href: labs/zephyr-gpio-isr-callbacks-lab.qmd
           text: "GPIO, ISR, and Callbacks Lab"
-        - href: labs/zephyr-smf-lab.qmd
-          text: "State Machine Framework (SMF) Refactor Lab"
         - href: labs/zephyr-timers-lab.qmd
           text: "Timers Lab"
+        - href: labs/zephyr-smf-lab.qmd
+          text: "State Machine Framework (SMF) Refactor Lab"
         - href: labs/zephyr-threads-events-lab.qmd
           text: "Threads and Kernel Events Lab"
         - href: labs/zephyr-adc-pwm-lab.qmd
