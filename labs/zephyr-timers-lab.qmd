@@ -112,7 +112,18 @@ CSV data.
 repository, **not** absolute paths on your local machine.
 - Push your `timers` branch to GitLab.
 - Create a new Merge Request to merge `timers` into your forked repository's
-`main` branch (NOT THE PARENT REPO `main` BRANCH!).
-- Merge your `timers` branch into your `main` branch, and create an annotated
-tag for that merged commit called `v1.1.0`.
+`main` branch.
+
+::: callout-warning
+Do not create a Merge Request in to the parent repository that you forked from!
+:::
+
+- Merge your `timers` branch into your `main` branch. 
+- Create an annotated tag for that merge commit called `v1.1.0`.
 - Create a new Issue assigned to Dr. Palmeri to request a code review for `v1.1.0`.
+
+::: callout-note
+If you fix any bugs after creating the original annotated tag, increment up the
+patch number with a new annotated tag version number, and update the Issue to
+reflect which annotated tag should be reviewed.
+:::
