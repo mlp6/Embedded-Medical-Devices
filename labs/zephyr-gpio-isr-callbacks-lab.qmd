@@ -1,6 +1,6 @@
 ---
 title: "Zephyr: Devicetree, GPIO, ISR and Callbacks Lab"
-date: "2025-XX-XX"
+date: "2025-07-11"
 format:
   html: default
   pdf: default
@@ -20,17 +20,17 @@ could be used to control other devices (e.g., motors, actuators, etc.).
 
 ## Repository Setup
 
-<!-- TODO: change this to the semester-specific Kits repo -->
-1. Fork the [lab template repository](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/zephyr-gpio-isr-callbacks-lab) into your personal GitLab user space.
-1. Add Dr. Palmeri (`mlp6`) as a `Maintainer` of your project ASAP.  This will allow him to add your TAs and some project labels.
+1. Fork the
+[Duke-BME554-ECG-TEMP-BLE-Lab](https://gitlab.oit.duke.edu/kits/BME-554L-001-F25/duke-bme554-ecg-temp-ble-lab)
+template repository into your personal GitLab user space.
+1. Add Dr. Palmeri (`mlp6`) as a `Maintainer` of your project ASAP.  This will
+allow him to add your TAs and some project labels to your repository.
 1. Clone your forked project to your local laptop.
+1. Run `west update` to setup the SDK to for your project.
 
 ## Kernel Configuration
 
-Take note of kernel configurations enabled in [prj.conf](prj.conf):
-
-- `CONFIG_GPIO=y`
-- `CONFIG_LOG=y`
+Take note of kernel configurations enabled in `application/prj.conf`.
 
 ## Devicetree
 
@@ -41,7 +41,7 @@ selected when we create a board configuration (the present selected in
 
 - To make changes or additions to this DT, we will create a DT overlay file
 that will be compiled into the firmware.  The default name of this file is
-`nrf52833dk_nrf52833.overlay` and it is located in the `boards/` directory.
+`nrf52833dk_nrf52833.overlay` and it is located in the `application/boards/` directory.
 
 - The `nRF52833DK` has 4 integrated LEDs. Edit the DT overlay file for your
 project to create alias for 4 LEDs on the following pins (all 4 of which are the
@@ -86,12 +86,14 @@ one another at 2 Hz by default.
 - This 2 Hz default blink frequency should be defined using a preprocessor
 macro: `#define LED_BLINK_FREQ_HZ 2`.  
 - Issue a `LOG_INF()` statement each time the "action" LEDs are toggled.
-- `freq_up_button` increases the blink frequency of the "action" LEDs by 1 Hz each time it is pressed. 
+- `freq_up_button` increases the blink frequency of the "action" LEDs by 1 Hz
+each time it is pressed. 
 - This incremental increase in blink frequency should be defined by the
 preprocessor macro: `#define FREQ_UP_INC_HZ 1`.  
 - Issue a descriptive `LOG_INF()` statement each time this button is
 pressed, which indicates the new blink frequency.
-- `freq_down_button` decreases the blink frequency of the "action" LEDs by 1 Hz each time it is pressed. 
+- `freq_down_button` decreases the blink frequency of the "action" LEDs by 1 Hz
+each time it is pressed. 
 - This incremental increase in blink frequency should be defined by the
 preprocessor macro: `#define FREQ_DOWN_INC_HZ 1`.  
 - Issue a descriptive `LOG_INF()` statement each time this button is
@@ -103,7 +105,8 @@ pressed, which indicates the new blink frequency.
 - The `heartbeat` LED should continue to blink at 1 Hz.
 - `freq_up_button`, `freq_down_button`, and `sleep_button` should be
 disabled (interrupts disabled).
-- Define each of these min/max limits using preprocessor macros (you can choose appropriate names).
+- Define each of these min/max limits using preprocessor macros (you can choose
+appropriate names).
 - The only way to exit the "error state" is to press the `reset` button.
 - Pressing the `reset` button resets the "action" LEDs to blink at their
 default 2 Hz rate, out of phase with one another, and re-enables the
@@ -127,14 +130,7 @@ error state), if the `sleep_button` is pressed:
     blinking the "action" LEDs at their default 2 Hz rate, out of phase with
     one another.
 
-## State Diagram
-
-1. Create a state diagram of your firmware using
-[PlantUML](https://plantuml.com/), or your diagraming program of choice.
-2. Include a PNG of your block diagram in your git repository called `state_diagram.png`.
-
-## Notes & Tips
-
+::: callout-note
 - You may want to make your state diagram before writing any code.
 - Do not use `k_msleep()` in your code to control LED blink timing.  
   - Sleep is **blocking** and paralyzes a single-threaded application.
@@ -144,6 +140,14 @@ error state), if the `sleep_button` is pressed:
     LED blink timing in the next lab.
 - Consider using a `struct` for each LED to bookkeep the LED state, phase, blink
 frequency, etc.
+:::
+
+## State Diagram
+
+1. Create a state diagram of your firmware using
+[PlantUML](https://plantuml.com/), or your diagraming program of choice.
+2. Include a PNG of your block diagram in your git repository called
+`state_diagram.png`.
 
 ## How do I ask for help?
 
@@ -154,13 +158,17 @@ frequency, etc.
 - Make sure you are committing as you develop your code, and have all of those
 commits pushed to GitLab (i.e., do not "squash" them).
 - Make sure all of the CI pipelines are passing.
-- Create and annotated tag called `v1.0.0` at the commit that represents your completed lab.
+- Create and annotated tag called `v1.0.0` at the commit that represents your
+completed lab.
 - Push your final repository and the annotated tag to GitLab.
-- Create an Issue assigned to Dr. Palmeri titled `v1.0.0 ready for feedback` and assign it the Label `Review`.
+- Create an Issue assigned to Dr. Palmeri titled `v1.0.0 ready for feedback` and
+assign it the Label `Review`.
 - **You do not need to upload anything to the Gradescope assignment; someone on the teaching team will upload your tagged code to the Gradescope assignment for you.**
-- Grading feedback will be given on code:
-  - Functionality
+- Grading feedback will be given on:
+  - Git Usage
+  - Code Functionality
   - Efficieny of code logic
+  - State diagram completeness and matching the firmware implementation
   - "Readability"
     - "Readability" does not mean a lot of verbose comments
     - "Readability" means that the structure of the code, the naming of
