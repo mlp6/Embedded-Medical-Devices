@@ -8,6 +8,8 @@ format:
 
 <!-- 
 
+TODO: split up ADC and PWM into separate lab handouts
+
 TODO: use dictionary-based log for HEXDUMP (?) 
 https://docs.zephyrproject.org/latest/samples/subsys/logging/dictionary/README.html#logging-dictionary
 
@@ -22,14 +24,6 @@ TODO: Improvements to testing and analysis
 * Maybe do this for an ECG waveform instead of a sine wave?
 
 -->
- 
-
-## Fork and Clone the Repository
-
-<!-- TODO: build off GPIO lab repo instead of separate repo -->
-
-* Fork this repository to your own GitLab account.
-* Add Dr. Palmeri (`mlp6`) as a `Maintainer` to your GitLab repository.  He will add TAs, graders and projects labels to your repository once this has been done.
 
 ## Git Best Practices
 
