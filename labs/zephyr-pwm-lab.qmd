@@ -6,14 +6,6 @@ format:
   pdf: default
 ---
 
-<!-- 
-
-TODO: Add more information on how to measurement PWN sinusoid output with o-scope 
-* Include snippet on how to impose the LPF in Math mode on the o-scope, with the correct bandwidth and the correct time window of data (lots of cycles).
-* Remind students that the LED is ON with an inverted voltage, so HIGH on the o-scope is OFF.
-
--->
-
 ## Git Best Practices
 
 {{< include _git_best_practices.qmd >}}
@@ -27,14 +19,17 @@ TODO: Add more information on how to measurement PWN sinusoid output with o-scop
 * Use logging to display state information and other relevant information, warnings, and errors.  Debugging log messages can remain in the code, but the logging level should be submitted at the `INF` level.
 * Include a state diagram in your repository (`state_diagram.png`) using UML (`state_diagram.puml`) or some equivalent.
 
+::: callout-tip
+Do all development for this lab on section-specific development branches.
+:::
+
 ## Steady-State PWM Output
 
-Using all of the the functionality of Parts I & II, in a new development branch
-called `part3`, add the following functionality to your firmware:
+Do this section on a development branch called `pwm-steady-state`.
 
 ### Firmware Functional Specifications
 
-* Using the Part I functionality to read a DC voltage on `AIN0`, map this read DC voltage to scale the maximum brightness of `LED2` using a PWM output.  
+* Using the ADC lab functionality to read a DC voltage on `AIN0`, map this read DC voltage to scale the maximum brightness of `LED2` using a PWM output.  
   * For example: 
     * If `AIN0` = 0 V, then `LED2` should be off (0% duty cycle).  
     * If `AIN0` = 1.5 V, then `LED2` should be at 50% brightness (50% duty cycle).
@@ -44,42 +39,54 @@ called `part3`, add the following functionality to your firmware:
 ### Testing
 
 * Quantify the linearity of the maximum brightness of `LED2` as a function of `AIN0` voltage ranging from 0-3 V.
-* Present your data and analysis in the technical report Jupyter notebook.
+* Present your data and analysis in the technical report Jupyter notebook called `testing/testing_pwm.ipynb`.
+
+::: callout-note
+Remember that LEDs on the DK are `ACTIVE_LOW`.
+:::
 
 ### Commit-n-Merge Steady-State PWM
 
-* Merge your completed `part3` branch into your `main` branch using a Merge Request on Gitlab.
-* Create an annotated tag of your `main` branch with all part of this lab merged in called `part3`.
-* Create an Issue for Dr. Palmeri to review Part III, assigning it the `Review` label.
+* Merge your completed `pwm-steady-state` branch into your `main` branch using a Merge Request on Gitlab.
+* Create an annotated tag of your `main` branch with all part of this lab merged in called `v3.0.0`.
 
 ## Sinusoidal Modulation of PWM Output
 
-Using all of the the functionality of Parts I - III, in a new development branch
-called `part4`, add the following functionality to your firmware:
+Do this section on a development branch called `pwm-sinusoid`, branched off of
+`main` after `pwm-steady-state` was merged.
 
 ### Firmware Functional Specifications
 
-* Modulate the brighness of `LED3` to match the read sinusoidal voltage on `AIN1` and `AIN2` after pressing `BUTTON2`, as implemented and testing in Part II, **with as little latency (phase distortion) between the input and output signals**.
-* The blocking nature of the buffered acquisition scheme of Part II will not be ameable to realtime modulation of the PWM output.
-  * **Consider if the `async` / `callback` ADC sampling approach is appropriate for this task,** or
-  * Consider a non-buffered ADC sampling approach that uses a timer to sample the ADC at a fixed rate.
+* Modulate the brighness of `LED3` to match samping a 2-second, 10 Hz differential sinusoidal voltage on `AIN1` and `AIN2` after pressing `BUTTON2`.
+* `LED3` should have its brightness modulated with as little latency as possible with respect to the input voltage.
+
+::: callout-tip
+The blocking nature of a syncronous buffered acquisition scheme is not ameable to realtime modulation of the PWM output.  Consider using the aynchronous ADC sampling approach with a callback to update the PWM duty cycle after each sampling event or a timer-based, single-sample acqusition approach. 
+:::
+
 * Set the minumum and maximum sinusoidal brightnesses to be PWM duty cycles of 0 and 100%, respectively.
 * Update your state diagram to include the new functionality.
 
 ### Testing
 
 * Using the oscilloscope, measure your input sinusoidal signal on `AIN1` and `AIN2` and the output PWM signal on `LED3` at the same time.
+
+<!-- TODO: include more details on how to set cutoff and sampling window -->
+::: callout-tip
+You will need to low pass filter your modulated PWM output to see a smooth sinusoidal output.  You can do this using the LPF Math mode on the oscilloscope with an appropriate cutoff frequency and sampling window.
+:::
+
 * Save this acquired oscilloscope data to a CSV file using a USB memory stick.
-* In your Jupyter notebook, plot the input and output signals.
+* In your Jupyter notebook, in a new section, plot the input and output signals.
 * Calculate the frequency of your PWM signal and the phase difference between the PWM sinusoid and your input signal.
 * Present your data and analysis in your Jupyter notebook.
-* Discuss the latency of your system and how you could improve it in the future.
+* Discuss the accuracy of your PWM frequency and the latency (phase lag) of your system and how you could improve it in the future.
 
 ### Commit-n-Merge Modulated PWM
 
-* Merge your completed `part4` branch into your `main` branch using a Merge Request on Gitlab.
-* Create an annotated tag of your `main` branch with all part of this lab merged in called `part4`.
-* Create an Issue for Dr. Palmeri to review Part IV, assigning it the `Review` label.
+* Merge your completed `pwm-sinusoid` branch into your `main` branch using a Merge Request on Gitlab.
+* Create an annotated tag of your `main` branch with all part of this lab merged in called `v3.1.0`.
+* Create an Issue for Dr. Palmeri to review this PWM lab, assigning it the `Review` label.
 
 ## How to Ask for Help
 
