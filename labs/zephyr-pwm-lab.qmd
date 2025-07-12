@@ -6,6 +6,11 @@ format:
   pdf: default
 ---
 
+## Learning Objectives
+
+* Implement a steady-state PWM output to control "intensity" over a finite dynamic range.
+* Implement a temporally-modulated PWM output.
+
 ## Git Best Practices
 
 {{< include _git_best_practices.qmd >}}
@@ -71,9 +76,11 @@ The blocking nature of a syncronous buffered acquisition scheme is not ameable t
 
 * Using the oscilloscope, measure your input sinusoidal signal on `AIN1` and `AIN2` and the output PWM signal on `LED3` at the same time.
 
-<!-- TODO: include more details on how to set cutoff and sampling window -->
 ::: callout-tip
-You will need to low pass filter your modulated PWM output to see a smooth sinusoidal output.  You can do this using the LPF Math mode on the oscilloscope with an appropriate cutoff frequency and sampling window.
+You will need to low pass filter your modulated PWM output to see a smooth
+sinusoidal output.  You can do this using the LPF Math mode on the oscilloscope
+with an appropriate cutoff frequency (relative to the frequency of the input
+sinusoid) and sampling window (capturing multiple cycles of the sinusoid).
 :::
 
 * Save this acquired oscilloscope data to a CSV file using a USB memory stick.
