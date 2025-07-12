@@ -6,4 +6,18 @@
 
 https://mlp6.github.io/Embedded-Medical-Devices/
 
-*Credit: Inspired by https://sta199-f24.github.io/*
+## Canvas
+
+Coming soon...
+
+## Ed Discussion
+
+Coming soon...
+
+## Gradescope
+
+Coming soon...
+
+## Acknowledgments
+
+This course website layout was Inspired by https://sta199-f24.github.io/ .
