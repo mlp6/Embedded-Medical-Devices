@@ -1,0 +1,86 @@
+---
+title: "Pulse Width Modulation (PWM) Lab"
+date: "2025-07-12"
+format:
+  html: default
+  pdf: default
+---
+
+<!-- 
+
+TODO: Add more information on how to measurement PWN sinusoid output with o-scope 
+* Include snippet on how to impose the LPF in Math mode on the o-scope, with the correct bandwidth and the correct time window of data (lots of cycles).
+* Remind students that the LED is ON with an inverted voltage, so HIGH on the o-scope is OFF.
+
+-->
+
+## Git Best Practices
+
+{{< include _git_best_practices.qmd >}}
+
+## Firmware Expectations
+
+* All firmware should be written using the **State Machine Framework**.  
+* Choose your states for each part as a firmware engineer would, using what you have learned so far this semester.
+* Timers, work queues, callbacks, and interrupts should be used as appropriate.
+* All good coding practices developed this semester should be followed.
+* Use logging to display state information and other relevant information, warnings, and errors.  Debugging log messages can remain in the code, but the logging level should be submitted at the `INF` level.
+* Include a state diagram in your repository (`state_diagram.png`) using UML (`state_diagram.puml`) or some equivalent.
+
+## Steady-State PWM Output
+
+Using all of the the functionality of Parts I & II, in a new development branch
+called `part3`, add the following functionality to your firmware:
+
+### Firmware Functional Specifications
+
+* Using the Part I functionality to read a DC voltage on `AIN0`, map this read DC voltage to scale the maximum brightness of `LED2` using a PWM output.  
+  * For example: 
+    * If `AIN0` = 0 V, then `LED2` should be off (0% duty cycle).  
+    * If `AIN0` = 1.5 V, then `LED2` should be at 50% brightness (50% duty cycle).
+    * If `AIN0` = 3 V, then `LED2` should be at maximum brightness (100% duty cycle).  
+* Update your state diagram to include the new functionality.
+
+### Testing
+
+* Quantify the linearity of the maximum brightness of `LED2` as a function of `AIN0` voltage ranging from 0-3 V.
+* Present your data and analysis in the technical report Jupyter notebook.
+
+### Commit-n-Merge Steady-State PWM
+
+* Merge your completed `part3` branch into your `main` branch using a Merge Request on Gitlab.
+* Create an annotated tag of your `main` branch with all part of this lab merged in called `part3`.
+* Create an Issue for Dr. Palmeri to review Part III, assigning it the `Review` label.
+
+## Sinusoidal Modulation of PWM Output
+
+Using all of the the functionality of Parts I - III, in a new development branch
+called `part4`, add the following functionality to your firmware:
+
+### Firmware Functional Specifications
+
+* Modulate the brighness of `LED3` to match the read sinusoidal voltage on `AIN1` and `AIN2` after pressing `BUTTON2`, as implemented and testing in Part II, **with as little latency (phase distortion) between the input and output signals**.
+* The blocking nature of the buffered acquisition scheme of Part II will not be ameable to realtime modulation of the PWM output.
+  * **Consider if the `async` / `callback` ADC sampling approach is appropriate for this task,** or
+  * Consider a non-buffered ADC sampling approach that uses a timer to sample the ADC at a fixed rate.
+* Set the minumum and maximum sinusoidal brightnesses to be PWM duty cycles of 0 and 100%, respectively.
+* Update your state diagram to include the new functionality.
+
+### Testing
+
+* Using the oscilloscope, measure your input sinusoidal signal on `AIN1` and `AIN2` and the output PWM signal on `LED3` at the same time.
+* Save this acquired oscilloscope data to a CSV file using a USB memory stick.
+* In your Jupyter notebook, plot the input and output signals.
+* Calculate the frequency of your PWM signal and the phase difference between the PWM sinusoid and your input signal.
+* Present your data and analysis in your Jupyter notebook.
+* Discuss the latency of your system and how you could improve it in the future.
+
+### Commit-n-Merge Modulated PWM
+
+* Merge your completed `part4` branch into your `main` branch using a Merge Request on Gitlab.
+* Create an annotated tag of your `main` branch with all part of this lab merged in called `part4`.
+* Create an Issue for Dr. Palmeri to review Part IV, assigning it the `Review` label.
+
+## How to Ask for Help
+
+{{< include _ask_for_help.qmd >}}

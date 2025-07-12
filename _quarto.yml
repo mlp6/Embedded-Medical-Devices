@@ -75,8 +75,10 @@ website:
           text: "State Machine Framework (SMF) Refactor Lab"
         - href: labs/zephyr-threads-events-lab.qmd
           text: "Threads and Kernel Events Lab"
-        - href: labs/zephyr-adc-pwm-lab.qmd
-          text: "ADC & PWM Lab"
+        - href: labs/zephyr-adc-lab.qmd
+          text: "Analog-to-Digital Conversion (ADC) Lab"
+        - href: labs/zephyr-pwm-lab.qmd
+          text: "Pulse Width Modulation (PWM) Lab"
         - href: labs/ecg-temp-ble-lab.qmd
           text: "ECG, Temperature Sensor, and BLE Lab"
       - section: Resources

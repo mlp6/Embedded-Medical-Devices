@@ -1,6 +1,6 @@
 ---
-title: "Zephyr ADC & PWM Lab"
-date: "2025-06-24"
+title: "Analog-to-Digital Conversion (ADC) Lab"
+date: "2025-07-12"
 format:
   html: default
   pdf: default
@@ -8,14 +8,8 @@ format:
 
 <!-- 
 
-TODO: split up ADC and PWM into separate lab handouts
-
 TODO: use dictionary-based log for HEXDUMP (?) 
 https://docs.zephyrproject.org/latest/samples/subsys/logging/dictionary/README.html#logging-dictionary
-
-TODO: Add more information on how to measurement PWN sinusoid output with o-scope 
-* Include snippet on how to impose the LPF in Math mode on the o-scope, with the correct bandwidth and the correct time window of data (lots of cycles).
-* Remind students that the LED is ON with an inverted voltage, so HIGH on the o-scope is OFF.
 
 TODO: Improvements to testing and analysis
 * Get rid of RMS calculation
@@ -24,6 +18,12 @@ TODO: Improvements to testing and analysis
 * Maybe do this for an ECG waveform instead of a sine wave?
 
 -->
+
+## Learning Objectives
+
+* Implement single-sample and buffered ADC data acquisitions.
+* Implement fixed-reference and differential ADC inputs.
+* Implement synchronous and asynchronous ADC acquisitions.
 
 ## Git Best Practices
 
@@ -38,7 +38,7 @@ TODO: Improvements to testing and analysis
 * Use logging to display state information and other relevant information, warnings, and errors.  Debugging log messages can remain in the code, but the logging level should be submitted at the `INF` level.
 * Include a state diagram in your repository (`state_diagram.png`) using UML (`state_diagram.puml`) or some equivalent.
 
-## Part I: ADC Sampling
+## ADC Single Sampling
 
 ### Firmware Functional Specifications
 
@@ -58,17 +58,17 @@ For the following testing, you can use a power supply to provide known voltage i
 * Quantify how linear the relationship is between the voltage applied to `AIN0` and the `LED1` blinking frequency.  
   * Not sure how to quantify linearity?  Consider plotting the data and presenting the $R^2$ of a linear regression fit.
   * Remember that single data points for any single input voltage pair is not adequate; multiple measurements should be made and error bars presented on all plots.
-* Quantify the accuract of the `LED1` 10% duty cycle for each frequency that you measure.
+* Quantify the accuracy of the `LED1` 10% duty cycle for each frequency that you measure.
 * Quantify the accuracy of `LED1` 5 sec ontime duration.
 * Present all of these data, your analysis and your interpretation in a `technical_report.ipynb` Jupyter notebook.
 
-### Commit-n-Merge Part I
+### Commit-n-Merge Single Sample Acquisition
 
 * Merge your completed `part1` branch into your `main` branch using a Merge Request on Gitlab.
 * Create an annotated tag of your `main` branch with all part of this lab merged in called `part1`.
 * Create an Issue for Dr. Palmeri to review Part I, assigning it the `Review` label.
 
-## Part II: Buffered Differential ADC Sampling
+## Buffered Differential ADC Sampling
 
 ### Firmware Functional Specifications
 
@@ -97,65 +97,19 @@ branch called `part2`, add the following functionality to your firmware:
 * Compare your calculated number of cycles in the sampling period to the nominal value.  Discuss any differences between your calculated number of cycles and the expected number of cycles.
 * Add this analysis to [testing/technical_report.ipynb](testing/technical_report.ipynb).
 
-### Commit-n-Merge Part II
+### Commit-n-Merge Buffered Acquisition
 
 * Merge your completed `part2` branch into your `main` branch using a Merge Request on Gitlab.
 * Create an annotated tag of your `main` branch with all part of this lab merged in called `part2`.
 * Create an Issue for Dr. Palmeri to review Part II, assigning it the `Review` label.
 
-## Part III: Steady-State PWM Output
-
-Using all of the the functionality of Parts I & II, in a new development branch
-called `part3`, add the following functionality to your firmware:
+## Asynchronous ADC Sampling
 
 ### Firmware Functional Specifications
 
-* Using the Part I functionality to read a DC voltage on `AIN0`, map this read DC voltage to scale the maximum brightness of `LED2` using a PWM output.  
-  * For example: 
-    * If `AIN0` = 0 V, then `LED2` should be off (0% duty cycle).  
-    * If `AIN0` = 1.5 V, then `LED2` should be at 50% brightness (50% duty cycle).
-    * If `AIN0` = 3 V, then `LED2` should be at maximum brightness (100% duty cycle).  
-* Update your state diagram to include the new functionality.
-
 ### Testing
 
-* Quantify the linearity of the maximum brightness of `LED2` as a function of `AIN0` voltage ranging from 0-3 V.
-* Present your data and analysis in the technical report Jupyter notebook.
-
-### Commit-n-Merge Part III
-
-* Merge your completed `part3` branch into your `main` branch using a Merge Request on Gitlab.
-* Create an annotated tag of your `main` branch with all part of this lab merged in called `part3`.
-* Create an Issue for Dr. Palmeri to review Part III, assigning it the `Review` label.
-
-## Part IV: Sinusoidal Modulation of PWM Output
-
-Using all of the the functionality of Parts I - III, in a new development branch
-called `part4`, add the following functionality to your firmware:
-
-### Firmware Functional Specifications
-
-* Modulate the brighness of `LED3` to match the read sinusoidal voltage on `AIN1` and `AIN2` after pressing `BUTTON2`, as implemented and testing in Part II, **with as little latency (phase distortion) between the input and output signals**.
-* The blocking nature of the buffered acquisition scheme of Part II will not be ameable to realtime modulation of the PWM output.
-  * **Consider if the `async` / `callback` ADC sampling approach is appropriate for this task,** or
-  * Consider a non-buffered ADC sampling approach that uses a timer to sample the ADC at a fixed rate.
-* Set the minumum and maximum sinusoidal brightnesses to be PWM duty cycles of 0 and 100%, respectively.
-* Update your state diagram to include the new functionality.
-
-### Testing
-
-* Using the oscilloscope, measure your input sinusoidal signal on `AIN1` and `AIN2` and the output PWM signal on `LED3` at the same time.
-* Save this acquired oscilloscope data to a CSV file using a USB memory stick.
-* In your Jupyter notebook, plot the input and output signals.
-* Calculate the frequency of your PWM signal and the phase difference between the PWM sinusoid and your input signal.
-* Present your data and analysis in your Jupyter notebook.
-* Discuss the latency of your system and how you could improve it in the future.
-
-### Commit-n-Merge Part IV
-
-* Merge your completed `part4` branch into your `main` branch using a Merge Request on Gitlab.
-* Create an annotated tag of your `main` branch with all part of this lab merged in called `part4`.
-* Create an Issue for Dr. Palmeri to review Part IV, assigning it the `Review` label.
+### Commit-n-Merge Asynchronous Sampling
 
 ## How to Ask for Help
 
