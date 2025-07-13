@@ -42,7 +42,7 @@ TODO: Improvements to testing and analysis
 
 ### Firmware Functional Specifications
 
-* Do all development and testing for Part I on a developnment branch called `part1`.
+* Do all development and testing for Part I on a developnment branch called `adc_single_sample`.
 * `LED` and `BUTTON` number references below are based on Devicetree labels (not the annotation on the DK board itself).
 * There should be a heartbeat LED (`LED0`) that blinks at 1 Hz with a 25% duty cycle at all times when the firmware is running.
 * When `BUTTON0` is pressed:
@@ -55,25 +55,31 @@ TODO: Improvements to testing and analysis
 
 For the following testing, you can use a power supply to provide known voltage input to `AIN0`.
 
-* Quantify how linear the relationship is between the voltage applied to `AIN0` and the `LED1` blinking frequency.  
-  * Not sure how to quantify linearity?  Consider plotting the data and presenting the $R^2$ of a linear regression fit.
-  * Remember that single data points for any single input voltage pair is not adequate; multiple measurements should be made and error bars presented on all plots.
+* Quantify how linear the relationship is between the voltage applied to `AIN0` and the `LED1` blinking frequency by acquiring data to perform a linear regression of these variables and analyzing the resultant $R^2$, slope and intercept.  
+
+::: callout-tip
+Remember that single data points for any single input voltage pair is not adequate; multiple measurements should be made and error bars presented on all plots.
+:::
+
+::: callout-tip
+The `bme554.py` library has a functions called `plot_with_fit()` and `calculate_confidence_intervals()` that can help.
+:::
+
 * Quantify the accuracy of the `LED1` 10% duty cycle for each frequency that you measure.
-* Quantify the accuracy of `LED1` 5 sec ontime duration.
-* Present all of these data, your analysis and your interpretation in a `technical_report.ipynb` Jupyter notebook.
+* Quantify the accuracy of `LED1` 5 second ontime duration.
+* Present all of these data, your analysis and your interpretation in a new Jupyter notebook named `testing/testing_adc.ipynb`.
 
 ### Commit-n-Merge Single Sample Acquisition
 
-* Merge your completed `part1` branch into your `main` branch using a Merge Request on Gitlab.
-* Create an annotated tag of your `main` branch with all part of this lab merged in called `part1`.
-* Create an Issue for Dr. Palmeri to review Part I, assigning it the `Review` label.
+* Merge your completed `adc_single_sample` branch into your `main` branch using a Merge Request on Gitlab.
+* Create an annotated tag of your `main` branch with all part of this lab merged in called `v2.0.0`.
 
 ## Buffered Differential ADC Sampling
 
 ### Firmware Functional Specifications
 
-You will keep all of the functionality of Part I, and in a new development
-branch called `part2`, add the following functionality to your firmware:
+In a new development branch called `diff_adc`, add the following
+functionality to your firmware:
 
 * When you press `BUTTON1` , add an additional differential ADC measurement using `AIN1` and `AIN2`. 
 * Choose the reference voltage, gain, bit depth and acquisition time to adequately sample at least 20 cycles of a 10 Hz sinusoidal signal ($V_{pp}$ = 2 V).
@@ -91,17 +97,23 @@ branch called `part2`, add the following functionality to your firmware:
 
 * Input a 10 Hz sinusoidal signal with a 2 V $V_{pp}$ into the differential `AIN1` and `AIN2` inputs.
 * Create a plot of your input signal and the buffered ADC samples (using the HEX array output).  
-  * The HEX data array from the terminal can be copied and pasted into a text file in your git repository to read into your Jupyter notebook for analysis.
-  * Example code to decode your HEX data is included in the Jupyter notebook.
-  * Discuss any differences between the input signal and your sampled signal.
+  
+::: callout-tip
+There are helper functions in `bme554.py` called `read_hex_data()` and `unwrap_twos_completely()`.
+
+The HEX data array from the terminal can be copied and pasted into a text file
+in your git repository to read into your Jupyter notebook for analysis.
+:::
+
+
+* Discuss any differences between the input signal and your sampled signal.
 * Compare your calculated number of cycles in the sampling period to the nominal value.  Discuss any differences between your calculated number of cycles and the expected number of cycles.
-* Add this analysis to [testing/technical_report.ipynb](testing/technical_report.ipynb).
+* Add this analysis to a new section in [testing/testing_adc.ipynb](testing/technical_report.ipynb).
 
 ### Commit-n-Merge Buffered Acquisition
 
-* Merge your completed `part2` branch into your `main` branch using a Merge Request on Gitlab.
-* Create an annotated tag of your `main` branch with all part of this lab merged in called `part2`.
-* Create an Issue for Dr. Palmeri to review Part II, assigning it the `Review` label.
+* Merge your completed `diff_adc` branch into your `main` branch using a Merge Request on Gitlab.
+* Create an annotated tag of your `main` branch with all part of this lab merged in called `v2.1.0`.
 
 ## Asynchronous ADC Sampling
 
@@ -110,6 +122,21 @@ branch called `part2`, add the following functionality to your firmware:
 ### Testing
 
 ### Commit-n-Merge Asynchronous Sampling
+
+## Timer-Based Single Sampling to Array
+
+### Firmware Functional Specifications
+
+### Testing
+
+### Discussion
+
+Discuss the pros/cons of sampling a time-series of data using:
+1. Syncronous Buffered Sampling
+1. Asyncronous Buffered Sampling
+1. Timers-Based Single Sampling
+
+### Commit-n-Merge Timer Sampling
 
 ## How to Ask for Help
 
