@@ -164,7 +164,8 @@ in your git repository to read into your Jupyter notebook for analysis.
 
 - Calculate the frequency of your sampled signal and compare it to your input frequency.
 
-- Add this analysis to a new section in `testing/testing_adc.ipynb`.
+- Add this analysis to a new section called `Buffered Differential ADC Sampling`
+in `testing/testing_adc.ipynb`.
 
 ### Commit-n-Merge Buffered Acquisition
 
@@ -190,8 +191,8 @@ the asynchronous callback function.
 
 ### Testing
 
-- Repeat the testing you performed in the syncronous section in a new section in
-`testing/testing_adc.ipynb`.
+- Repeat the testing you performed in the syncronous section in a new section
+called `Asynchronous ADC Sampling` in `testing/testing_adc.ipynb`.
 
 - Discuss the benefits and drawbacks of the asyncronous ADC sequence sampling compared to
 the synchronous sampling.
@@ -208,19 +209,25 @@ in called `v2.2.0`.
 
 ### Firmware Functional Specifications
 
+In a new development branch called `timer_adc`, add the following
+functionality to your firmware:
+
+- Refactor your firmware to use a kernel timer to do single ADC samples that are sequentially stored in the array that was associated with the ADC sequence in the previous two sections.
+
 ### Testing
 
-### Discussion
+- Repeat the testing you performed in the asyncronous section in a new section
+called `Timer-Based Single Sampling to Array` in `testing/testing_adc.ipynb`.
 
-Discuss the pros/cons of sampling a time-series of data using:
-
-1. Syncronous Buffered Sampling
-
-1. Asyncronous Buffered Sampling
-
-1. Timers-Based Single Sampling
+- Discuss the benefits and drawbacks of using a timer-based ADC sampling scheme compared to the previous approaches when trying to accurately sample a sinusoidal signal.
 
 ### Commit-n-Merge Timer Sampling
+
+- Merge your completed `timer_adc` branch into your `main` branch using a Merge
+Request on Gitlab.
+
+- Create an annotated tag of your `main` branch with all part of this lab merged
+in called `v2.3.0`.
 
 ## How to Ask for Help
 
