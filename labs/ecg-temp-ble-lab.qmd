@@ -74,6 +74,7 @@ format:
 
 ## Testing & Verification
 
+<!-- TODO: add testing protocol here -->
 Complete the testing analysis described in [testing/final_project.ipynb](testing/final_project.ipynb) to verify the accuracy of your firmware.
 
 ## How to Generate an ECG Signal
