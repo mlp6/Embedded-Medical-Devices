@@ -7,6 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Dr.&nbsp;Mark Palmeri, M.D., Ph.D.">
+<meta name="dcterms.date" content="2025-07-11">
 
 <title>Zephyr: Devicetree, GPIO, ISR and Callbacks Lab – Embedded Medical Devices</title>
 <style>
@@ -39,7 +40,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-fced259a1985fd972ecb57c7cd45153f.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-46c7166e1455e05f7ac413ac9ad7d2a8.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-818025d643b08bcde8d572171ad99962.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -269,14 +270,14 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../labs/zephyr-smf-lab.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">State Machine Framework (SMF) Refactor Lab</span></a>
+  <a href="../labs/zephyr-timers-lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Timers Lab</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../labs/zephyr-timers-lab.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Timers Lab</span></a>
+  <a href="../labs/zephyr-smf-lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">State Machine Framework (SMF) Refactor Lab</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -287,8 +288,14 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../labs/zephyr-adc-pwm-lab.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">ADC &amp; PWM Lab</span></a>
+  <a href="../labs/zephyr-adc-lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Analog-to-Digital Conversion (ADC) Lab</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../labs/zephyr-pwm-lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Pulse Width Modulation (PWM) Lab</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -345,7 +352,6 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#devicetree" id="toc-devicetree" class="nav-link" data-scroll-target="#devicetree">Devicetree</a></li>
   <li><a href="#firmware" id="toc-firmware" class="nav-link" data-scroll-target="#firmware">Firmware</a></li>
   <li><a href="#state-diagram" id="toc-state-diagram" class="nav-link" data-scroll-target="#state-diagram">State Diagram</a></li>
-  <li><a href="#notes-tips" id="toc-notes-tips" class="nav-link" data-scroll-target="#notes-tips">Notes &amp; Tips</a></li>
   <li><a href="#how-do-i-ask-for-help" id="toc-how-do-i-ask-for-help" class="nav-link" data-scroll-target="#how-do-i-ask-for-help">How do I ask for help?</a></li>
   <li><a href="#what-to-submit-grading" id="toc-what-to-submit-grading" class="nav-link" data-scroll-target="#what-to-submit-grading">What to Submit &amp; Grading</a></li>
   </ul>
@@ -377,7 +383,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">Invalid Date</p>
+      <p class="date">July 11, 2025</p>
     </div>
   </div>
   
@@ -418,26 +424,22 @@ Important
 </section>
 <section id="repository-setup" class="level2">
 <h2 class="anchored" data-anchor-id="repository-setup">Repository Setup</h2>
-<!-- TODO: change this to the semester-specific Kits repo -->
 <ol type="1">
-<li>Fork the <a href="https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/zephyr-gpio-isr-callbacks-lab">lab template repository</a> into your personal GitLab user space.</li>
-<li>Add Dr.&nbsp;Palmeri (<code>mlp6</code>) as a <code>Maintainer</code> of your project ASAP. This will allow him to add your TAs and some project labels.</li>
+<li>Fork the <a href="https://gitlab.oit.duke.edu/kits/BME-554L-001-F25/duke-bme554-ecg-temp-ble-lab">Duke-BME554-ECG-TEMP-BLE-Lab</a> template repository into your personal GitLab user space.</li>
+<li>Add Dr.&nbsp;Palmeri (<code>mlp6</code>) as a <code>Maintainer</code> of your project ASAP. This will allow him to add your TAs and some project labels to your repository.</li>
 <li>Clone your forked project to your local laptop.</li>
+<li>Run <code>west update</code> to setup the SDK to for your project.</li>
 </ol>
 </section>
 <section id="kernel-configuration" class="level2">
 <h2 class="anchored" data-anchor-id="kernel-configuration">Kernel Configuration</h2>
-<p>Take note of kernel configurations enabled in <a href="prj.conf">prj.conf</a>:</p>
-<ul>
-<li><code>CONFIG_GPIO=y</code></li>
-<li><code>CONFIG_LOG=y</code></li>
-</ul>
+<p>Take note of kernel configurations enabled in <code>application/prj.conf</code>.</p>
 </section>
 <section id="devicetree" class="level2">
 <h2 class="anchored" data-anchor-id="devicetree">Devicetree</h2>
 <ul>
 <li><p>We have introduced the concept of the Devicetree (DT) for the <code>nRF52833DK</code>. The development kit has a preconfigured DT (<code>nrf52833dk_nrf52833.dts</code>), which is selected when we create a board configuration (the present selected in <code>CMakePresents.json</code>).</p></li>
-<li><p>To make changes or additions to this DT, we will create a DT overlay file that will be compiled into the firmware. The default name of this file is <code>nrf52833dk_nrf52833.overlay</code> and it is located in the <code>boards/</code> directory.</p></li>
+<li><p>To make changes or additions to this DT, we will create a DT overlay file that will be compiled into the firmware. The default name of this file is <code>nrf52833dk_nrf52833.overlay</code> and it is located in the <code>application/boards/</code> directory.</p></li>
 <li><p>The <code>nRF52833DK</code> has 4 integrated LEDs. Edit the DT overlay file for your project to create alias for 4 LEDs on the following pins (all 4 of which are the integrated LEDs), which will then be associated with the specified firmware GPIO pin struct names:</p></li>
 </ul>
 <table class="caption-top table">
@@ -589,16 +591,16 @@ Important
 <li>Pressing the <code>reset_button</code>, at which time the device returns to blinking the “action” LEDs at their default 2 Hz rate, out of phase with one another.</li>
 </ul></li>
 </ul>
-</section>
-<section id="state-diagram" class="level2">
-<h2 class="anchored" data-anchor-id="state-diagram">State Diagram</h2>
-<ol type="1">
-<li>Create a state diagram of your firmware using <a href="https://plantuml.com/">PlantUML</a>, or your diagraming program of choice.</li>
-<li>Include a PNG of your block diagram in your git repository called <code>state_diagram.png</code>.</li>
-</ol>
-</section>
-<section id="notes-tips" class="level2">
-<h2 class="anchored" data-anchor-id="notes-tips">Notes &amp; Tips</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <ul>
 <li>You may want to make your state diagram before writing any code.</li>
 <li>Do not use <code>k_msleep()</code> in your code to control LED blink timing.
@@ -612,6 +614,15 @@ Important
 </ul></li>
 <li>Consider using a <code>struct</code> for each LED to bookkeep the LED state, phase, blink frequency, etc.</li>
 </ul>
+</div>
+</div>
+</section>
+<section id="state-diagram" class="level2">
+<h2 class="anchored" data-anchor-id="state-diagram">State Diagram</h2>
+<ol type="1">
+<li>Create a state diagram of your firmware using <a href="https://plantuml.com/">PlantUML</a>, or your diagraming program of choice.</li>
+<li>Include a PNG of your block diagram in your git repository called <code>state_diagram.png</code>.</li>
+</ol>
 </section>
 <section id="how-do-i-ask-for-help" class="level2">
 <h2 class="anchored" data-anchor-id="how-do-i-ask-for-help">How do I ask for help?</h2>
@@ -638,10 +649,12 @@ Important
 <li>Push your final repository and the annotated tag to GitLab.</li>
 <li>Create an Issue assigned to Dr.&nbsp;Palmeri titled <code>v1.0.0 ready for feedback</code> and assign it the Label <code>Review</code>.</li>
 <li><strong>You do not need to upload anything to the Gradescope assignment; someone on the teaching team will upload your tagged code to the Gradescope assignment for you.</strong></li>
-<li>Grading feedback will be given on code:
+<li>Grading feedback will be given on:
 <ul>
-<li>Functionality</li>
+<li>Git Usage</li>
+<li>Code Functionality</li>
 <li>Efficieny of code logic</li>
+<li>State diagram completeness and matching the firmware implementation</li>
 <li>“Readability”
 <ul>
 <li>“Readability” does not mean a lot of verbose comments</li>

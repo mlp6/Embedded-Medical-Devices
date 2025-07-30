@@ -7,6 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Dr.&nbsp;Mark Palmeri, M.D., Ph.D.">
+<meta name="dcterms.date" content="2025-07-11">
 
 <title>Zephyr: Threads &amp; Kernel Events Lab – Embedded Medical Devices</title>
 <style>
@@ -39,7 +40,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-fced259a1985fd972ecb57c7cd45153f.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-46c7166e1455e05f7ac413ac9ad7d2a8.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-818025d643b08bcde8d572171ad99962.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -269,14 +270,14 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../labs/zephyr-smf-lab.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">State Machine Framework (SMF) Refactor Lab</span></a>
+  <a href="../labs/zephyr-timers-lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Timers Lab</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../labs/zephyr-timers-lab.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Timers Lab</span></a>
+  <a href="../labs/zephyr-smf-lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">State Machine Framework (SMF) Refactor Lab</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -287,8 +288,14 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../labs/zephyr-adc-pwm-lab.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">ADC &amp; PWM Lab</span></a>
+  <a href="../labs/zephyr-adc-lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Analog-to-Digital Conversion (ADC) Lab</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../labs/zephyr-pwm-lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Pulse Width Modulation (PWM) Lab</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -375,7 +382,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">Invalid Date</p>
+      <p class="date">July 11, 2025</p>
     </div>
   </div>
   
@@ -421,26 +428,37 @@ Important
 <section id="test-the-accuracy-of-the-heartbeat-led-timing" class="level2">
 <h2 class="anchored" data-anchor-id="test-the-accuracy-of-the-heartbeat-led-timing">Test the Accuracy of the Heartbeat LED Timing</h2>
 <ul>
-<li>Add a new section to your technical report Jupyter notebook <a href="../labs/timers-lab-testing-notebook/timing_analysis.html">timing_analysis.ipynb</a> that analyzes the accuracy of your 25% duty cycle heartbeat LED.</li>
-<li>Perform these measurements using the oscilloscope.</li>
+<li>Create a new Jupyter notebook for this lab’s technical report called <code>testing/thread_testing.ipynb</code> that analyzes the accuracy of your 25% duty cycle heartbeat LED.</li>
+<li>Perform these measurements using the oscilloscope, and save all raw data in dedicated CSV files.</li>
 <li>Choose what to measure and how to analyze the data to verify that the heartbeat LED thread is working as expected.</li>
 <li>Discuss the results of your measurements and how they compare to the nominal specifications for the heartbeat LED.</li>
 </ul>
 </section>
 <section id="merge-n-tag-this-refactored-heartbeat-led-code-and-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="merge-n-tag-this-refactored-heartbeat-led-code-and-analysis">Merge-n-Tag this Refactored Heartbeat LED Code and Analysis</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Make sure that your Jupyter notebook reads in data from relative paths for the repository, <strong>not</strong> absolute paths on your local machine.</p>
+</div>
+</div>
 <ul>
-<li>Make sure that your complete <code>timing_analysis.ipynb</code> notebook is in your <code>heartbeat_refactor</code> branch in a directory called <code>testing/</code>, which also includes all raw CSV data.</li>
-<li>Make sure that your Jupyter notebook reads in data from relative paths for the repository, <strong>not</strong> absolute paths on your local machine.</li>
 <li>Push your <code>heartbeat_refactor</code> branch to GitLab.</li>
-<li>Create a new Merge Request to merge <code>heartbeat_refactor</code> into your forked repository’s <code>main</code> branch (NOT THE PARENT REPO <code>main</code> BRANCH!).</li>
+<li>Create a new Merge Request to merge <code>heartbeat_refactor</code> into your forked repository’s <code>main</code> branch.</li>
 <li>Merge your <code>heartbeat_refactor</code> branch into your <code>main</code> branch, and create an annotated tag for that merged commit called <code>v1.2.0</code>.</li>
 </ul>
 </section>
 <section id="refactor-kernel-events" class="level2">
 <h2 class="anchored" data-anchor-id="refactor-kernel-events">Refactor: Kernel Events</h2>
 <ul>
-<li>Do the following refactoring on a new branch called <code>kernel_events_refactor</code>.</li>
+<li>Do the following refactoring on a new branch called <code>kernel_events_refactor</code>, branched after the <code>v1.2.0</code> commit.</li>
 <li>Refactor all of your code to remove Boolean variables being used in your ISR callback functions to indicate that buttons have been pressed to now use kernel events in a single bit array called <code>button_events</code>.</li>
 <li>You should use 1 bit for each button, meaning the bit array is 4-bits.</li>
 <li>Implement a <code>k_event_wait()</code> in the appropriate state(s) of your main thread to wait for button events to occur. This will be a blocking wait, meaning the <code>main</code> thread <code>while</code> loop will not be running while waiting for button events.</li>
@@ -449,17 +467,16 @@ Important
 <section id="verify-that-your-led-timing-still-works" class="level2">
 <h2 class="anchored" data-anchor-id="verify-that-your-led-timing-still-works">Verify that your LED Timing Still Works</h2>
 <ul>
-<li>Update your <code>timing_analysis.ipynb</code> notebook to include a section that verifies that your refactored code still works as expected.</li>
+<li>Create a new Jupyter notebook called <code>testing/kernel_events_validation.ipynb</code> to verify that your refactored code still works as expected.</li>
 <li>It is up to you to now determine how to verify that your LED timing is still working with regard to what data to collect, how to analyze it, and how to present it in your notebook.</li>
 </ul>
 </section>
 <section id="merge-n-tag-this-refactored-kernel-events-code-and-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="merge-n-tag-this-refactored-kernel-events-code-and-analysis">Merge-n-Tag this Refactored Kernel Events Code and Analysis</h2>
 <ul>
-<li>Be sure that your complete <code>timing_analysis.ipynb</code> notebook and associated raw data are committed to your <code>kernel_events_refactor</code> branch.</li>
 <li>Create a Merge Request to merge <code>kernel_events_refactor</code> into your <code>main</code> branch.</li>
 <li>Merge your <code>kernel_events_refactor</code> branch into your <code>main</code> branch.</li>
-<li>Create an annotated tag for that merged commit called <code>v1.3.0</code>.</li>
+<li>Create an annotated tag for that merge commit called <code>v1.3.0</code>.</li>
 <li>Create an Issue assigned to Dr.&nbsp;Palmeri to review your code for both <code>v1.2.0</code> and <code>v1.3.0</code>.</li>
 </ul>
 </section>

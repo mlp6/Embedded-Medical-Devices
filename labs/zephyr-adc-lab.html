@@ -7,8 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Dr.&nbsp;Mark Palmeri, M.D., Ph.D.">
+<meta name="dcterms.date" content="2025-07-12">
 
-<title>Event-Driven State Machine – Embedded Medical Devices</title>
+<title>Analog-to-Digital Conversion (ADC) Lab – Embedded Medical Devices</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,41 +21,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -74,9 +40,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-fced259a1985fd972ecb57c7cd45153f.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-4a6976381dc4a475ef964f6506f0fb24.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<script src="../site_libs/quarto-contrib/live-runtime/live-runtime.js" type="module"></script>
-<link href="../site_libs/quarto-contrib/live-runtime/live-runtime.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-818025d643b08bcde8d572171ad99962.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -104,11 +68,38 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
-<script type="module" src="../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
-<link href="../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<link rel="stylesheet" href="styles.css">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-sidebar docked quarto-light">
@@ -120,7 +111,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../slides/zephyr-nrf52833dk-intro.html">Learning Modules</a></li><li class="breadcrumb-item"><a href="../slides/event-driven-state-machine.html">Event-Driven State Machines</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labs/event-driven-state-machine-lab.html">Labs</a></li><li class="breadcrumb-item"><a href="../labs/zephyr-adc-lab.html">Analog-to-Digital Conversion (ADC) Lab</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -201,7 +192,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../slides/event-driven-state-machine.html" class="sidebar-item-text sidebar-link active">
+  <a href="../slides/event-driven-state-machine.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Event-Driven State Machines</span></a>
   </div>
 </li>
@@ -326,7 +317,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../labs/zephyr-adc-lab.html" class="sidebar-item-text sidebar-link">
+  <a href="../labs/zephyr-adc-lab.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Analog-to-Digital Conversion (ADC) Lab</span></a>
   </div>
 </li>
@@ -383,51 +374,64 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#in-class-demo" id="toc-in-class-demo" class="nav-link" data-scroll-target="#in-class-demo">In-Class Demo</a></li>
-  <li><a href="#implementation" id="toc-implementation" class="nav-link" data-scroll-target="#implementation">Implementation</a>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning Objectives</a></li>
+  <li><a href="#git-best-practices" id="toc-git-best-practices" class="nav-link" data-scroll-target="#git-best-practices">Git Best Practices</a></li>
+  <li><a href="#firmware-expectations" id="toc-firmware-expectations" class="nav-link" data-scroll-target="#firmware-expectations">Firmware Expectations</a></li>
+  <li><a href="#adc-single-sampling" id="toc-adc-single-sampling" class="nav-link" data-scroll-target="#adc-single-sampling">ADC Single Sampling</a>
   <ul class="collapse">
-  <li><a href="#state-diagram" id="toc-state-diagram" class="nav-link" data-scroll-target="#state-diagram">State Diagram</a></li>
-  <li><a href="#plantuml-example" id="toc-plantuml-example" class="nav-link" data-scroll-target="#plantuml-example">PlantUML Example</a></li>
-  <li><a href="#kernel-events" id="toc-kernel-events" class="nav-link" data-scroll-target="#kernel-events">Kernel Events</a></li>
-  <li><a href="#code-switch-case" id="toc-code-switch-case" class="nav-link" data-scroll-target="#code-switch-case">Code: Switch-Case</a></li>
-  <li><a href="#pseudo-code" id="toc-pseudo-code" class="nav-link" data-scroll-target="#pseudo-code">Pseudo-Code</a></li>
-  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a></li>
+  <li><a href="#firmware-functional-specifications" id="toc-firmware-functional-specifications" class="nav-link" data-scroll-target="#firmware-functional-specifications">Firmware Functional Specifications</a></li>
+  <li><a href="#testing" id="toc-testing" class="nav-link" data-scroll-target="#testing">Testing</a></li>
+  <li><a href="#commit-n-merge-single-sample-acquisition" id="toc-commit-n-merge-single-sample-acquisition" class="nav-link" data-scroll-target="#commit-n-merge-single-sample-acquisition">Commit-n-Merge Single Sample Acquisition</a></li>
   </ul></li>
+  <li><a href="#buffered-differential-adc-sampling" id="toc-buffered-differential-adc-sampling" class="nav-link" data-scroll-target="#buffered-differential-adc-sampling">Buffered Differential ADC Sampling</a>
+  <ul class="collapse">
+  <li><a href="#firmware-functional-specifications-1" id="toc-firmware-functional-specifications-1" class="nav-link" data-scroll-target="#firmware-functional-specifications-1">Firmware Functional Specifications</a></li>
+  <li><a href="#testing-1" id="toc-testing-1" class="nav-link" data-scroll-target="#testing-1">Testing</a></li>
+  <li><a href="#commit-n-merge-buffered-acquisition" id="toc-commit-n-merge-buffered-acquisition" class="nav-link" data-scroll-target="#commit-n-merge-buffered-acquisition">Commit-n-Merge Buffered Acquisition</a></li>
+  </ul></li>
+  <li><a href="#asynchronous-adc-sampling" id="toc-asynchronous-adc-sampling" class="nav-link" data-scroll-target="#asynchronous-adc-sampling">Asynchronous ADC Sampling</a>
+  <ul class="collapse">
+  <li><a href="#firmware-functional-specifications-2" id="toc-firmware-functional-specifications-2" class="nav-link" data-scroll-target="#firmware-functional-specifications-2">Firmware Functional Specifications</a></li>
+  <li><a href="#testing-2" id="toc-testing-2" class="nav-link" data-scroll-target="#testing-2">Testing</a></li>
+  <li><a href="#commit-n-merge-asynchronous-sampling" id="toc-commit-n-merge-asynchronous-sampling" class="nav-link" data-scroll-target="#commit-n-merge-asynchronous-sampling">Commit-n-Merge Asynchronous Sampling</a></li>
+  </ul></li>
+  <li><a href="#timer-based-single-sampling-to-array" id="toc-timer-based-single-sampling-to-array" class="nav-link" data-scroll-target="#timer-based-single-sampling-to-array">Timer-Based Single Sampling to Array</a>
+  <ul class="collapse">
+  <li><a href="#firmware-functional-specifications-3" id="toc-firmware-functional-specifications-3" class="nav-link" data-scroll-target="#firmware-functional-specifications-3">Firmware Functional Specifications</a></li>
+  <li><a href="#testing-3" id="toc-testing-3" class="nav-link" data-scroll-target="#testing-3">Testing</a></li>
+  <li><a href="#commit-n-merge-timer-sampling" id="toc-commit-n-merge-timer-sampling" class="nav-link" data-scroll-target="#commit-n-merge-timer-sampling">Commit-n-Merge Timer Sampling</a></li>
+  </ul></li>
+  <li><a href="#how-to-ask-for-help" id="toc-how-to-ask-for-help" class="nav-link" data-scroll-target="#how-to-ask-for-help">How to Ask for Help</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/mlp6/Embedded-Medical-Devices/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="event-driven-state-machine-slides.html"><i class="bi bi-file-slides"></i>RevealJS (live)</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/mlp6/Embedded-Medical-Devices/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="zephyr-adc-lab.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../slides/zephyr-nrf52833dk-intro.html">Learning Modules</a></li><li class="breadcrumb-item"><a href="../slides/event-driven-state-machine.html">Event-Driven State Machines</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labs/event-driven-state-machine-lab.html">Labs</a></li><li class="breadcrumb-item"><a href="../labs/zephyr-adc-lab.html">Analog-to-Digital Conversion (ADC) Lab</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Event-Driven State Machine</h1>
-<p class="subtitle lead">BME554L -Fall 2025 - Palmeri</p>
-</div>
+<h1 class="title">Analog-to-Digital Conversion (ADC) Lab</h1>
+<p class="subtitle lead">BME554L - Fall 2025 - Palmeri</p>
+  <div class="quarto-categories">
+    <div class="quarto-category">Lab</div>
+  </div>
+  </div>
 
 
-<div class="quarto-title-meta-author">
-  <div class="quarto-title-meta-heading">Author</div>
-  <div class="quarto-title-meta-heading">Affiliation</div>
-  
-    <div class="quarto-title-meta-contents">
-    <p class="author">Dr.&nbsp;Mark Palmeri, M.D., Ph.D. </p>
-  </div>
-  <div class="quarto-title-meta-contents">
-        <p class="affiliation">
-            Duke University
-          </p>
-      </div>
-  </div>
 
 <div class="quarto-title-meta">
 
-      
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Dr.&nbsp;Mark Palmeri, M.D., Ph.D. </p>
+          </div>
+  </div>
+    
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">Invalid Date</p>
+      <p class="date">July 12, 2025</p>
     </div>
   </div>
   
@@ -439,203 +443,269 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="introduction" class="level2">
-<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<!-- 
+
+TODO: use dictionary-based log for HEXDUMP (?) 
+https://docs.zephyrproject.org/latest/samples/subsys/logging/dictionary/README.html#logging-dictionary
+
+TODO: Improvements to testing and analysis
+* Get rid of RMS calculation
+* Have students testing different sampling rates and resolutions; plot sine wave and do FFT
+* Conclude what is adequate sampling and resolution
+* Maybe do this for an ECG waveform instead of a sine wave?
+
+-->
+<section id="learning-objectives" class="level2">
+<h2 class="anchored" data-anchor-id="learning-objectives">Learning Objectives</h2>
 <ul>
-<li>Nested conditional logic main loops are hard to read and maintain.</li>
-<li>State machines are a common way to implement complex logic.</li>
-<li>States have transitions that are triggered by <strong>events</strong> or conditions.
-<ul>
-<li>States can have entry / exit routines that are executed when the state is entered / exited.</li>
-<li>The “run” status of a state is commonly referred to as the “state machine tick” and recurrently loops.</li>
-</ul></li>
-<li>State diagrams are used to visualize state machines.</li>
-<li>State structures are used to capture variables associated with describing the state.</li>
+<li><p>Implement single-sample and buffered ADC data acquisitions.</p></li>
+<li><p>Implement fixed-reference and differential ADC inputs.</p></li>
+<li><p>Implement synchronous and asynchronous ADC acquisitions.</p></li>
 </ul>
 </section>
-<section id="in-class-demo" class="level2">
-<h2 class="anchored" data-anchor-id="in-class-demo">In-Class Demo</h2>
+<section id="git-best-practices" class="level2">
+<h2 class="anchored" data-anchor-id="git-best-practices">Git Best Practices</h2>
 <ul>
-<li>You (and your daily routine)
-<ul>
-<li>What are your “states”?</li>
-<li>What are your “events”?</li>
-</ul></li>
-<li>ICD</li>
+<li>Use best practices for version control (branching, commit messages, etc.).</li>
+<li>Do all development on a dedicated branch that is merged into <code>main</code> once it is functional.</li>
+<li>Commits should be very specific to the changes/additions you are making to your code. This will help you and others understand what you did and why you did it.<br>
+</li>
+<li>On a given development branch, try to implement one small piece of functionality at a time, commit it, and then move on to the next piece of functionality.</li>
 </ul>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/edsm/icd_state_diagram.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
-</figure>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-</section>
-<section id="implementation" class="level1">
-<h1>Implementation</h1>
-<section id="state-diagram" class="level2">
-<h2 class="anchored" data-anchor-id="state-diagram">State Diagram</h2>
-<ul>
-<li>Generating the state diagram is the first step in implementing a state machine.</li>
-<li>Usually start with “pencil and paper” to sketch out the states and transitions.</li>
-<li>Consider the following:
-<ul>
-<li>What are the states?</li>
-<li>What are the transitions?</li>
-<li>What are the events that trigger transitions?</li>
-<li>What are the entry / exit routines for each state?</li>
-</ul></li>
-<li>UML (Universal Modeling Language) is a common way to represent state diagrams.</li>
-</ul>
-</section>
-<section id="plantuml-example" class="level2">
-<h2 class="anchored" data-anchor-id="plantuml-example">PlantUML Example</h2>
-<pre class="plantuml"><code>@startuml
-
-[*] -&gt; Init
-
-state Init {
-    init_run: Do Stuff
-}
-
-state RhythmDetect {
-    rhythm_detect_run: Detect Rhythm
-}
-
-state Sleep {
-    sleep_run: Save Power
-}
-
-state Pace {
-    pace_run: Pace
-}
-
-state OTA {
-    ota_init: Download Update
-    ota_init -&gt; ota_run
-    ota_run: Over The Air Update
-    ota_run -&gt; ota_exit
-    ota_exit: Post Successful OTA
-}
-
-state Error {
-    error_run: Put device into safe mode
-}
-
-Init -&gt; RhythmDetect : Successful Init
-Init -d-&gt; Error : Init Fault Error Code
-RhythmDetect -&gt; Pace : Arrhythmia Detected
-Pace -&gt; RhythmDetect : Pacing Timer Expired
-RhythmDetect -d-&gt; Sleep : NSR
-Sleep -&gt; RhythmDetect: Sleep Timer Expired
-Sleep -&gt; OTA : OTA Button Pressed
-OTA -&gt; RhythmDetect : OTA Success Kernel Event Posted
-Error -&gt; [*]
-
-@enduml</code></pre>
-</section>
-<section id="kernel-events" class="level2">
-<h2 class="anchored" data-anchor-id="kernel-events">Kernel Events</h2>
-<ul>
-<li>What is a “kernel”?
-<ul>
-<li>The part of the RTOS that interacts with hardware.</li>
-</ul></li>
-<li>Kernel events can be used to indicate that “something” has happened, which may dictate the function of the state machine.
-<ul>
-<li>Button press</li>
-<li>Sensor crossing a threshold</li>
-<li>Timer expiring</li>
-</ul></li>
-<li>When an event occurs, it triggers an <strong>Interupt Service Routine</strong> (<code>ISR</code>), which calls a <strong>callback</strong> function.</li>
-</ul>
-</section>
-<section id="code-switch-case" class="level2">
-<h2 class="anchored" data-anchor-id="code-switch-case">Code: Switch-Case</h2>
-<ul>
-<li>The simplest implementation of a state machine is a switch-case statement.</li>
-<li>The switch statement is used to select the current state.</li>
-<li>The case statements are used to implement the logic for each state.
-<ul>
-<li>Cases can be nested to implement sub-states.</li>
-<li>Enumerations can be used to give states verbose names instead of numbers.</li>
-</ul></li>
-<li>The break statement is used to exit the switch statement.</li>
-<li>The default statement is used to handle unexpected states.</li>
-</ul>
-</section>
-<section id="pseudo-code" class="level2">
-<h2 class="anchored" data-anchor-id="pseudo-code">Pseudo-Code</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">enum</span> device_states <span class="op">{</span> init<span class="op">,</span> run<span class="op">,</span> sleep <span class="op">};</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> device_state <span class="op">=</span> init<span class="op">;</span> <span class="co">// initialize state</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">/* structure to bookkeep state variables */</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> device_state_vars <span class="op">{</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> var1<span class="op">;</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> var2<span class="op">;</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="op">(</span><span class="dv">1</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">switch</span> <span class="op">(</span>device_state<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> init<span class="op">:</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>            <span class="co">/* do stuff to initialize device */</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>            device_state <span class="op">=</span> run<span class="op">;</span> <span class="co">// change the state</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span><span class="op">;</span>  <span class="co">// exit the switch statement</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> run<span class="op">:</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>            <span class="co">/* run device */</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="op">(</span>condition<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>                device_state <span class="op">=</span> sleep<span class="op">;</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>            <span class="op">}</span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span><span class="op">;</span></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> sleep<span class="op">:</span></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>            <span class="co">/* sleep device */</span></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="op">(</span>condition<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>                device_state <span class="op">=</span> run<span class="op">;</span></span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>            <span class="op">}</span></span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span><span class="op">;</span></span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>        <span class="cf">default</span><span class="op">:</span></span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>            <span class="co">/* handle unexpected state */</span></span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span><span class="op">;</span></span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The switch-case approach loses some of its elegance when there are many states and many transitions and states have entry / exit routines.</p>
-</section>
-<section id="resources" class="level2">
-<h2 class="anchored" data-anchor-id="resources">Resources</h2>
-<ul>
-<li><a href="https://www.digikey.com/en/maker/tutorials/2023/how-to-program-an-arduino-finite-state-machine">DigiKey: How to Program and Arduino Finite State Machine</a></li>
-<li><a href="https://www.instructables.com/Finite-State-Machine-on-an-Arduino/">Instructables: Finite State Machine on an Arduino</a></li>
-</ul>
-
-
-<script type="ojs-module-contents">
-eyJjb250ZW50cyI6W119
-</script>
-<div id="exercise-loading-indicator" class="exercise-loading-indicator d-none d-flex align-items-center gap-2">
-<div id="exercise-loading-status" class="d-flex gap-2">
-
-</div>
-<div class="spinner-grow spinner-grow-sm">
-
+<div class="callout-title-container flex-fill">
+Important
 </div>
 </div>
-<script type="vfs-file">
-W10=
-</script>
+<div class="callout-body-container callout-body">
+<p>You do not want one, monolithic git commit right before you submit your project.</p>
+</div>
+</div>
 </section>
+<section id="firmware-expectations" class="level2">
+<h2 class="anchored" data-anchor-id="firmware-expectations">Firmware Expectations</h2>
+<ul>
+<li><p>All firmware should be written using the <strong>State Machine Framework</strong>.</p></li>
+<li><p>Choose your states for each part as a firmware engineer would, using what you have learned so far this semester.</p></li>
+<li><p>Timers, work queues, callbacks, and interrupts should be used as appropriate.</p></li>
+<li><p>All good coding practices developed this semester should be followed.</p></li>
+<li><p>Use logging to display state information and other relevant information, warnings, and errors. Debugging log messages can remain in the code, but the logging level should be submitted at the <code>INF</code> level.</p></li>
+<li><p>Include a state diagram in your repository (<code>state_diagram.png</code>) using UML (<code>state_diagram.puml</code>) or some equivalent.</p></li>
+</ul>
+</section>
+<section id="adc-single-sampling" class="level2">
+<h2 class="anchored" data-anchor-id="adc-single-sampling">ADC Single Sampling</h2>
+<section id="firmware-functional-specifications" class="level3">
+<h3 class="anchored" data-anchor-id="firmware-functional-specifications">Firmware Functional Specifications</h3>
+<ul>
+<li><p>Do all development and testing for Part I on a developnment branch called <code>adc_single_sample</code>.</p></li>
+<li><p><code>LED</code> and <code>BUTTON</code> number references below are based on Devicetree labels (not the annotation on the DK board itself).</p></li>
+<li><p>There should be a heartbeat LED (<code>LED0</code>) that blinks at 1 Hz with a 25% duty cycle at all times when the firmware is running.</p></li>
+<li><p>When <code>BUTTON0</code> is pressed, make a measurement using the <code>AIN0</code> channel of the ADC.</p>
+<ul>
+<li><p>Use the <code>ADC_REF_INTERNAL</code> reference voltage.</p></li>
+<li><p>Linearly map 0-3.0 V measured on the <code>AIN0</code> input to an <code>LED1</code> blink rate of 1-5 Hz (e.g., 0 V -&gt; 1 Hz; 3.0 V -&gt; 5 Hz) with a duty cycle of 10%.</p></li>
+<li><p><code>LED1</code> should remaining blinking for 5 seconds after the button has been pressed.</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="testing" class="level3">
+<h3 class="anchored" data-anchor-id="testing">Testing</h3>
+<p>For the following testing, you can use a power supply to provide known voltage input to <code>AIN0</code>.</p>
+<ul>
+<li>Quantify how linear the relationship is between the voltage applied to <code>AIN0</code> and the <code>LED1</code> blinking frequency by acquiring data to perform a linear regression of these variables and analyzing the resultant <span class="math inline">\(R^2\)</span>, slope and intercept.</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Remember that single data points for any single input voltage pair is not adequate; multiple measurements should be made and error bars presented on all plots.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The <code>bme554.py</code> library has a functions called <code>plot_with_fit()</code> and <code>calculate_confidence_intervals()</code> that can help.</p>
+</div>
+</div>
+<ul>
+<li><p>Quantify the accuracy of the <code>LED1</code> 10% duty cycle for each frequency that you measure.</p></li>
+<li><p>Quantify the accuracy of <code>LED1</code> 5 second ontime duration.</p></li>
+<li><p>Present all of these data, your analysis and your interpretation in a new Jupyter notebook named <code>testing/testing_adc.ipynb</code>.</p></li>
+</ul>
+</section>
+<section id="commit-n-merge-single-sample-acquisition" class="level3">
+<h3 class="anchored" data-anchor-id="commit-n-merge-single-sample-acquisition">Commit-n-Merge Single Sample Acquisition</h3>
+<ul>
+<li><p>Update your state diagram.</p></li>
+<li><p>Merge your completed <code>adc_single_sample</code> branch into your <code>main</code> branch using a Merge Request on Gitlab.</p></li>
+<li><p>Create an annotated tag of your <code>main</code> branch with all part of this lab merged in called <code>v2.0.0</code>.</p></li>
+</ul>
+</section>
+</section>
+<section id="buffered-differential-adc-sampling" class="level2">
+<h2 class="anchored" data-anchor-id="buffered-differential-adc-sampling">Buffered Differential ADC Sampling</h2>
+<section id="firmware-functional-specifications-1" class="level3">
+<h3 class="anchored" data-anchor-id="firmware-functional-specifications-1">Firmware Functional Specifications</h3>
+<p>In a new development branch called <code>diff_adc</code>, add the following functionality to your firmware:</p>
+<ul>
+<li><p>When you press <code>BUTTON1</code> , add an additional differential ADC measurement using <code>AIN1</code> and <code>AIN2</code>.</p></li>
+<li><p>Choose the reference voltage, gain, bit depth and acquisition time to adequately sample at least 20 cycles of a 10 Hz sinusoidal signal (<span class="math inline">\(V_{pp}\)</span> = 2 V). 0 Implement the <code>extra_sampling</code> buffering of the ADC for this differential sinusoidal signal measurement so that all of the data are stored in an array in a single <code>adc_read()</code> call (i.e., you are not using a kernel call for every sample).</p></li>
+<li><p>Disable the <code>BUTTON1</code> while your device is reading <code>AIN1</code> and <code>AIN2</code> and performing calculations below. 0 Write a <strong>library</strong> called <code>calc_cycles</code> that calculates the number of sampled sinusoidal cycles in the buffered ADC samples.</p>
+<ul>
+<li><p>This can be rounded to the nearest integer, depending on your algorithm.</p></li>
+<li><p>Have this calculated number of cycles displayed using <code>LOG_INF()</code> in the console.</p></li>
+</ul></li>
+<li><p>Write log messages to your serial terminal that dsplay a HEX array of the buffered ADC samples.</p></li>
+<li><p>Update your state diagram for this new functionality.</p></li>
+</ul>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Be careful for the log message memory consumption! You may need to adjust the stack size of the appopriate thread if you are getting memory-related firmware faults.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Remember that the data will be saved using <a href="https://en.wikipedia.org/wiki/Two's_complement">two’s complement</a>.</p>
+</div>
+</div>
+</section>
+<section id="testing-1" class="level3">
+<h3 class="anchored" data-anchor-id="testing-1">Testing</h3>
+<ul>
+<li><p>Input a 10 Hz sinusoidal signal with a 2 V <span class="math inline">\(V_{pp}\)</span> into the differential <code>AIN1</code> and <code>AIN2</code> inputs.</p></li>
+<li><p>Create a plot of your input signal and the buffered ADC samples (using the HEX array output).</p></li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>There are helper functions in <code>bme554.py</code> called <code>read_hex_data()</code> and <code>unwrap_twos_completely()</code>.</p>
+<p>The HEX data array from the terminal can be copied and pasted into a text file in your git repository to read into your Jupyter notebook for analysis.</p>
+</div>
+</div>
+<ul>
+<li><p>Discuss any differences between the input signal and your sampled signal.</p></li>
+<li><p>Calculate the frequency of your sampled signal and compare it to your input frequency.</p></li>
+<li><p>Add this analysis to a new section called <code>Buffered Differential ADC Sampling</code> in <code>testing/testing_adc.ipynb</code>.</p></li>
+</ul>
+</section>
+<section id="commit-n-merge-buffered-acquisition" class="level3">
+<h3 class="anchored" data-anchor-id="commit-n-merge-buffered-acquisition">Commit-n-Merge Buffered Acquisition</h3>
+<ul>
+<li><p>Merge your completed <code>diff_adc</code> branch into your <code>main</code> branch using a Merge Request on Gitlab.</p></li>
+<li><p>Create an annotated tag of your <code>main</code> branch with all part of this lab merged in called <code>v2.1.0</code>.</p></li>
+</ul>
+</section>
+</section>
+<section id="asynchronous-adc-sampling" class="level2">
+<h2 class="anchored" data-anchor-id="asynchronous-adc-sampling">Asynchronous ADC Sampling</h2>
+<section id="firmware-functional-specifications-2" class="level3">
+<h3 class="anchored" data-anchor-id="firmware-functional-specifications-2">Firmware Functional Specifications</h3>
+<p>In a new development branch called <code>async_adc</code>, add the following functionality to your firmware:</p>
+<ul>
+<li><p>Refactor your blocking, synchronous buffered ADC sequence acquisition to an <strong>asynchronous</strong> acquisition that populates the same array that was populated with the synchronous approach.</p></li>
+<li><p>Utilize the 3 Zephyr macros presented in lecture to modulate the behaviour of the asynchronous callback function.</p></li>
+</ul>
+</section>
+<section id="testing-2" class="level3">
+<h3 class="anchored" data-anchor-id="testing-2">Testing</h3>
+<ul>
+<li><p>Repeat the testing you performed in the syncronous section in a new section called <code>Asynchronous ADC Sampling</code> in <code>testing/testing_adc.ipynb</code>.</p></li>
+<li><p>Discuss the benefits and drawbacks of the asyncronous ADC sequence sampling compared to the synchronous sampling.</p></li>
+</ul>
+</section>
+<section id="commit-n-merge-asynchronous-sampling" class="level3">
+<h3 class="anchored" data-anchor-id="commit-n-merge-asynchronous-sampling">Commit-n-Merge Asynchronous Sampling</h3>
+<ul>
+<li><p>Merge your completed <code>async_adc</code> branch into your <code>main</code> branch using a Merge Request on Gitlab.</p></li>
+<li><p>Create an annotated tag of your <code>main</code> branch with all part of this lab merged in called <code>v2.2.0</code>.</p></li>
+</ul>
+</section>
+</section>
+<section id="timer-based-single-sampling-to-array" class="level2">
+<h2 class="anchored" data-anchor-id="timer-based-single-sampling-to-array">Timer-Based Single Sampling to Array</h2>
+<section id="firmware-functional-specifications-3" class="level3">
+<h3 class="anchored" data-anchor-id="firmware-functional-specifications-3">Firmware Functional Specifications</h3>
+<p>In a new development branch called <code>timer_adc</code>, add the following functionality to your firmware:</p>
+<ul>
+<li>Refactor your firmware to use a kernel timer to do single ADC samples that are sequentially stored in the array that was associated with the ADC sequence in the previous two sections.</li>
+</ul>
+</section>
+<section id="testing-3" class="level3">
+<h3 class="anchored" data-anchor-id="testing-3">Testing</h3>
+<ul>
+<li><p>Repeat the testing you performed in the asyncronous section in a new section called <code>Timer-Based Single Sampling to Array</code> in <code>testing/testing_adc.ipynb</code>.</p></li>
+<li><p>Discuss the benefits and drawbacks of using a timer-based ADC sampling scheme compared to the previous approaches when trying to accurately sample a sinusoidal signal.</p></li>
+</ul>
+</section>
+<section id="commit-n-merge-timer-sampling" class="level3">
+<h3 class="anchored" data-anchor-id="commit-n-merge-timer-sampling">Commit-n-Merge Timer Sampling</h3>
+<ul>
+<li><p>Merge your completed <code>timer_adc</code> branch into your <code>main</code> branch using a Merge Request on Gitlab.</p></li>
+<li><p>Create an annotated tag of your <code>main</code> branch with all part of this lab merged in called <code>v2.3.0</code>.</p></li>
+</ul>
+</section>
+</section>
+<section id="how-to-ask-for-help" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-ask-for-help">How to Ask for Help</h2>
+<ol type="1">
+<li>If you have a general / non-coding question, you should ask your TAs / Dr. Palmeri on Ed to allow any of them to respond in a timely manner.</li>
+<li>Push you code to your GitLab repository, ideally with your active development on a non-<code>main</code> branch.</li>
+<li>Create an <a href="https://docs.gitlab.com/ee/user/project/issues/">Issue</a> in your repository.
+<ul>
+<li>Add as much detail as possible as to your problem, and add links to specific lines / section of code when possible.</li>
+<li>Assign the label “Bug” or “Question”, as appropriate.</li>
+<li>Be sure to specify what branch you are working on.</li>
+<li>Assign the Issue to one of the TAs.</li>
+<li>If your TA cannot solve your Issue, they can escalate the Issue to Dr.&nbsp;Palmeri.</li>
+</ul></li>
+<li>You will get a response to your Issue, and maybe a new branch of code will be pushed to help you with some example syntax that you can use <code>git diff</code> to visualize.</li>
+</ol>
+
+
 </section>
 
 </main> <!-- /main -->
-<script type="ojs-module-contents">
-eyJjb250ZW50cyI6W119
-</script>
-<script type="module">
-if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
-window._ojs.paths.runtimeToDoc = "../../slides";
-window._ojs.paths.runtimeToRoot = "../..";
-window._ojs.paths.docToRoot = "..";
-window._ojs.selfContained = false;
-window._ojs.runtime.interpretFromScriptTags();
-</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

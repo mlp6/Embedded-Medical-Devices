@@ -40,7 +40,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-fced259a1985fd972ecb57c7cd45153f.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-46c7166e1455e05f7ac413ac9ad7d2a8.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-818025d643b08bcde8d572171ad99962.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -270,14 +270,14 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../labs/zephyr-smf-lab.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">State Machine Framework (SMF) Refactor Lab</span></a>
+  <a href="../labs/zephyr-timers-lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Timers Lab</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../labs/zephyr-timers-lab.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Timers Lab</span></a>
+  <a href="../labs/zephyr-smf-lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">State Machine Framework (SMF) Refactor Lab</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -288,8 +288,14 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../labs/zephyr-adc-pwm-lab.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">ADC &amp; PWM Lab</span></a>
+  <a href="../labs/zephyr-adc-lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Analog-to-Digital Conversion (ADC) Lab</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../labs/zephyr-pwm-lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Pulse Width Modulation (PWM) Lab</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -344,7 +350,12 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#firmware-functional-specifications" id="toc-firmware-functional-specifications" class="nav-link" data-scroll-target="#firmware-functional-specifications">Firmware Functional Specifications</a></li>
   <li><a href="#ble-server-mobile-app" id="toc-ble-server-mobile-app" class="nav-link" data-scroll-target="#ble-server-mobile-app">BLE Server (Mobile App)</a></li>
   <li><a href="#state-diagram" id="toc-state-diagram" class="nav-link" data-scroll-target="#state-diagram">State Diagram</a></li>
-  <li><a href="#testing-verification" id="toc-testing-verification" class="nav-link" data-scroll-target="#testing-verification">Testing &amp; Verification</a></li>
+  <li><a href="#testing-verification" id="toc-testing-verification" class="nav-link" data-scroll-target="#testing-verification">Testing &amp; Verification</a>
+  <ul class="collapse">
+  <li><a href="#battery-voltage-measurement" id="toc-battery-voltage-measurement" class="nav-link" data-scroll-target="#battery-voltage-measurement">Battery Voltage Measurement</a></li>
+  <li><a href="#ecg-heart-rate-measurement" id="toc-ecg-heart-rate-measurement" class="nav-link" data-scroll-target="#ecg-heart-rate-measurement">ECG Heart Rate Measurement</a></li>
+  <li><a href="#temperature-sensor-measurment" id="toc-temperature-sensor-measurment" class="nav-link" data-scroll-target="#temperature-sensor-measurment">Temperature Sensor Measurment</a></li>
+  </ul></li>
   <li><a href="#how-to-generate-an-ecg-signal" id="toc-how-to-generate-an-ecg-signal" class="nav-link" data-scroll-target="#how-to-generate-an-ecg-signal">How to Generate an ECG Signal</a></li>
   <li><a href="#grading" id="toc-grading" class="nav-link" data-scroll-target="#grading">Grading</a></li>
   <li><a href="#how-to-ask-for-help" id="toc-how-to-ask-for-help" class="nav-link" data-scroll-target="#how-to-ask-for-help">How to Ask for Help</a></li>
@@ -508,7 +519,31 @@ Important
 </section>
 <section id="testing-verification" class="level2">
 <h2 class="anchored" data-anchor-id="testing-verification">Testing &amp; Verification</h2>
-<p>Complete the testing analysis described in <a href="testing/final_project.ipynb">testing/final_project.ipynb</a> to verify the accuracy of your firmware.</p>
+<section id="battery-voltage-measurement" class="level3">
+<h3 class="anchored" data-anchor-id="battery-voltage-measurement">Battery Voltage Measurement</h3>
+<p>Verify the accuracy of your battery level measurement (<code>AIN0</code>) for 0-3.7 V, as read through the nRF Connect app Bluetooth Battery Level GATT. Quantitative analysis should include:</p>
+<ul>
+<li><p>Linear regression analysis of the input voltage versus the battery level for both the <code>LOG_INF()</code> output, the oscilloscope measurement of the PWM duty cycle, and the nRF Connect app.</p></li>
+<li><p>95% confidence intervals for the slope and intercept of the linear regression.</p></li>
+</ul>
+</section>
+<section id="ecg-heart-rate-measurement" class="level3">
+<h3 class="anchored" data-anchor-id="ecg-heart-rate-measurement">ECG Heart Rate Measurement</h3>
+<p>Demonstrate that your average heart rate measurement is accurate, as recorded through <code>LOG_INF()</code> output, the oscilloscope measurements, and the nRF Connect app, relative to what was set on the function generator. This should be done for 40, 60, 120, 150, and 180 bpm. The 25% duty cycle should also be verified. Quantitative analysis should include:</p>
+<ul>
+<li><p>Linear regression analysis of the recorded heart rate versus the set heart rate for both the <code>LOG_INF()</code> output, oscilloscope measurements, and the nRF Connect app.</p></li>
+<li><p>95% confidence intervals for the slope and intercept of the linear regression.</p></li>
+<li><p>Verification that the duty cycle of out output is 25% for all heart rates.</p></li>
+</ul>
+</section>
+<section id="temperature-sensor-measurment" class="level3">
+<h3 class="anchored" data-anchor-id="temperature-sensor-measurment">Temperature Sensor Measurment</h3>
+<ul>
+<li><p>Demonstrate that your temperature sensor can have a room temperature measurement read through <code>LOG_INF()</code> output and the nRF Connect app.</p></li>
+<li><p>Do this in 3 locations with different temperatures.</p></li>
+<li><p>You do not need to verify accuracy, just a reasonable measurements with agreement.</p></li>
+</ul>
+</section>
 </section>
 <section id="how-to-generate-an-ecg-signal" class="level2">
 <h2 class="anchored" data-anchor-id="how-to-generate-an-ecg-signal">How to Generate an ECG Signal</h2>
