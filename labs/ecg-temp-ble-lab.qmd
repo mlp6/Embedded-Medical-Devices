@@ -74,8 +74,31 @@ format:
 
 ## Testing & Verification
 
-<!-- TODO: add testing protocol here -->
-Complete the testing analysis described in [testing/final_project.ipynb](testing/final_project.ipynb) to verify the accuracy of your firmware.
+### Battery Voltage Measurement
+
+Verify the accuracy of your battery level measurement (`AIN0`) for 0-3.7 V, as read through the nRF Connect app Bluetooth Battery Level GATT.  Quantitative analysis should include:
+
+- Linear regression analysis of the input voltage versus the battery level for both the `LOG_INF()` output, the oscilloscope measurement of the PWM duty cycle, and the nRF Connect app.
+
+- 95% confidence intervals for the slope and intercept of the linear regression.
+
+### ECG Heart Rate Measurement
+
+Demonstrate that your average heart rate measurement is accurate, as recorded through `LOG_INF()` output, the oscilloscope measurements, and the nRF Connect app, relative to what was set on the function generator.  This should be done for 40, 60, 120, 150, and 180 bpm.  The 25% duty cycle should also be verified. Quantitative analysis should include:
+
+- Linear regression analysis of the recorded heart rate versus the set heart rate for both the `LOG_INF()` output, oscilloscope measurements, and the nRF Connect app.
+
+- 95% confidence intervals for the slope and intercept of the linear regression.
+
+- Verification that the duty cycle of out output is 25% for all heart rates.
+
+### Temperature Sensor Measurment
+
+- Demonstrate that your temperature sensor can have a room temperature measurement read through `LOG_INF()` output and the nRF Connect app.  
+
+- Do this in 3 locations with different temperatures.  
+
+- You do not need to verify accuracy, just a reasonable measurements with agreement.
 
 ## How to Generate an ECG Signal
 
