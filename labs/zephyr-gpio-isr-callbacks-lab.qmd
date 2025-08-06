@@ -1,6 +1,6 @@
 ---
 title: "Zephyr: Devicetree, GPIO, ISR and Callbacks Lab"
-date: "2025-07-11"
+date: "2025-08-25"
 format:
   html: default
   pdf: default

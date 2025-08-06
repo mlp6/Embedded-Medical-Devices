@@ -1,6 +1,6 @@
 ---
 title: "Zephyr: Timers Lab"
-date: "2025-XX-XX"
+date: "2025-08-25"
 format:
   html: default
   pdf: default

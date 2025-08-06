@@ -1,6 +1,6 @@
 ---
 title: "C Programming Lab"
-date: "2025-06-20"
+date: "2025-08-25"
 format:
   html: default
   pdf: default

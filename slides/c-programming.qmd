@@ -1,6 +1,6 @@
 ---
-title: C Programming
-date: 2025-XX-XX
+title: "C Programming"
+date: "2025-08-25"
 format:
   live-html: 
     output-file: c-programming-notes.html
