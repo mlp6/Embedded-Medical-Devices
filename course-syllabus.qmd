@@ -14,12 +14,13 @@ Dr. Mark Palmeri (`mlp6`)
 
 * Email: [mark.palmeri@duke.edu](mailto:mark.palmeri@duke.edu)
 * Ed Discussion (private message, TAs included)
-* Office Hours: TBD (258 Hudson Hall Annex)
+* Office Hours: TBD (Zoom / 258 Hudson Hall Annex)
 
 ### Teaching Assistants
 
 * Ceci Schmidz (`cls157`)
-* TBD
+* Evan Smith (`jes114`)
+* Harvey Shi (`hys3`)
 
 ::: callout-tip
 Questions that can be answered by Dr. Palmeri or a teaching assistant should be
@@ -34,10 +35,12 @@ Monday & Wednesday, 08:30-09:45, Wilkinson 136 (Panopto recorded)
 
 ### Labs
 
+Location: CIEMAS B209
+
 There are no formally scheduled lab sections, but you will need to use the lab
 equipment to perform testing of your devices.  Your TAs will announce times when
-they will hold lab hours.  Otherwise, the lab is open to you to use on your
-schedule when classes are not scheduled in that room.
+they will hold lab hours.
+
 
 ::: callout-warning
 No food or drink is allowed in the lab!  Failure to adhere to this policy will
