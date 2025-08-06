@@ -42,19 +42,19 @@ equipment to perform testing of your devices.  Your TAs will announce times when
 they will hold lab hours.
 
 
-::: callout-warning
-No food or drink is allowed in the lab!  Failure to adhere to this policy will
-have consequences on your lab grades.
-:::
-
 ::: callout-important
 Please review the [lab policies](bme-lab-policies.qmd) before using the lab for
 the first time this semester.
 :::
 
-::: callout-note
-B209 Door Code: 4-1-5-2
+::: callout-warning
+No food or drink is allowed in the lab!  Failure to adhere to this policy will
+have consequences on your lab grades.
 :::
+
+<!-- ::: callout-note
+B209 Door Code: 4-1-5-2
+::: -->
 
 ## Course Objectives
 
@@ -104,11 +104,11 @@ This class is organized in a sequence of modules.  Specific details surrounding
 dates for assignments associated with each module will be posted to Gradescope
 and linked below.
 
-This course uses a version of [Mastery Learning](https://en.wikipedia.org/wiki/Mastery_learning), where "mastery" of a
-given module is necessary to progress onto the subsequent module. Quizzes are
-used to evaluate "knowledge"; lab exercises are used to demonstrate application
-of skills.  In this course, assignments of later modules depends on the
-successful completion of earlier modules.
+This course uses a version of [Mastery Learning](https://en.wikipedia.org/wiki/Mastery_learning),
+ where "mastery" of a given module is necessary to progress onto the subsequent
+ module. Quizzes are used to evaluate "knowledge"; lab exercises are used to
+ demonstrate application of skills.  In this course, assignments of later
+ modules depends on the successful completion of earlier modules.
 
 ### Learning Module Schedule
 
