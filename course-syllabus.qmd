@@ -155,6 +155,15 @@ report (~20%).
 All assignment grades will be posted to Gradescope (and linked to the Canvas
 gradebook) throughout the semester to track your performance.
 
+| Grade Category   | Relative Percentage   |
+|:----------------|:---------------------|
+| Quizzes         | 30%                  |
+| Labs            | 50%                  |
+| Final Device    | 20%                  |
+
+: Grade Distribution
+
+
 ### Course Grade
 
 This course is not "curved" (i.e., a distribution of grades will not be
