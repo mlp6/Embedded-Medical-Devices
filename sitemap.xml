@@ -2,186 +2,182 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://mlp6.github.io/Embedded-Medical-Devices/software-install-tutorials.html</loc>
-    <lastmod>2025-08-18T16:44:54.475Z</lastmod>
+    <lastmod>2025-08-18T22:17:30.831Z</lastmod>
   </url>
   <url>
     <loc>https://mlp6.github.io/Embedded-Medical-Devices/resources/debugging.html</loc>
-    <lastmod>2025-08-18T16:44:54.409Z</lastmod>
+    <lastmod>2025-08-18T22:17:30.764Z</lastmod>
   </url>
   <url>
     <loc>https://mlp6.github.io/Embedded-Medical-Devices/index.html</loc>
-    <lastmod>2025-08-18T16:44:54.407Z</lastmod>
+    <lastmod>2025-08-18T22:17:30.763Z</lastmod>
   </url>
   <url>
     <loc>https://mlp6.github.io/Embedded-Medical-Devices/faq.html</loc>
-    <lastmod>2025-08-18T16:44:54.407Z</lastmod>
+    <lastmod>2025-08-18T22:17:30.762Z</lastmod>
   </url>
   <url>
     <loc>https://mlp6.github.io/Embedded-Medical-Devices/labs/zephyr-pwm-lab.html</loc>
-    <lastmod>2025-08-18T16:44:54.408Z</lastmod>
+    <lastmod>2025-08-18T22:17:30.764Z</lastmod>
   </url>
   <url>
     <loc>https://mlp6.github.io/Embedded-Medical-Devices/labs/zephyr-threads-events-lab.html</loc>
-    <lastmod>2025-08-18T16:44:54.408Z</lastmod>
+    <lastmod>2025-08-18T22:17:30.764Z</lastmod>
   </url>
   <url>
     <loc>https://mlp6.github.io/Embedded-Medical-Devices/labs/zephyr-adc-lab.html</loc>
-    <lastmod>2025-08-18T16:44:54.408Z</lastmod>
+    <lastmod>2025-08-18T22:17:30.764Z</lastmod>
   </url>
   <url>
     <loc>https://mlp6.github.io/Embedded-Medical-Devices/labs/zephyr-smf-lab.html</loc>
-    <lastmod>2025-08-18T16:44:54.408Z</lastmod>
+    <lastmod>2025-08-18T22:17:30.764Z</lastmod>
   </url>
   <url>
     <loc>https://mlp6.github.io/Embedded-Medical-Devices/labs/timers-lab-testing-notebook/timing_analysis.html</loc>
-    <lastmod>2025-08-18T16:44:54.408Z</lastmod>
+    <lastmod>2025-08-18T22:17:30.764Z</lastmod>
   </url>
   <url>
     <loc>https://mlp6.github.io/Embedded-Medical-Devices/course-syllabus.html</loc>
-    <lastmod>2025-08-18T16:44:54.407Z</lastmod>
+    <lastmod>2025-08-18T22:17:30.762Z</lastmod>
   </url>
   <url>
     <loc>https://mlp6.github.io/Embedded-Medical-Devices/slides/zephyr-gpio-isr-callbacks.html</loc>
-    <lastmod>2025-08-18T16:44:54.475Z</lastmod>
+    <lastmod>2025-08-18T22:17:30.831Z</lastmod>
   </url>
   <url>
     <loc>https://mlp6.github.io/Embedded-Medical-Devices/slides/zephyr-gpio-isr-callbacks-slides.html</loc>
-    <lastmod>2025-08-18T16:44:54.475Z</lastmod>
+    <lastmod>2025-08-18T22:17:30.831Z</lastmod>
   </url>
   <url>
     <loc>https://mlp6.github.io/Embedded-Medical-Devices/slides/zephyr-vbus.html</loc>
-    <lastmod>2025-08-18T16:44:54.475Z</lastmod>
+    <lastmod>2025-08-18T22:17:30.831Z</lastmod>
   </url>
   <url>
     <loc>https://mlp6.github.io/Embedded-Medical-Devices/slides/zephyr-vbus-slides.html</loc>
-    <lastmod>2025-08-18T16:44:54.475Z</lastmod>
+    <lastmod>2025-08-18T22:17:30.831Z</lastmod>
   </url>
   <url>
     <loc>https://mlp6.github.io/Embedded-Medical-Devices/slides/zephyr-serial-communication.html</loc>
-    <lastmod>2025-08-18T16:44:54.475Z</lastmod>
+    <lastmod>2025-08-18T22:17:30.831Z</lastmod>
   </url>
   <url>
     <loc>https://mlp6.github.io/Embedded-Medical-Devices/slides/zephyr-serial-communication-slides.html</loc>
-    <lastmod>2025-08-18T16:44:54.475Z</lastmod>
+    <lastmod>2025-08-18T22:17:30.831Z</lastmod>
   </url>
   <url>
     <loc>https://mlp6.github.io/Embedded-Medical-Devices/slides/c-programming-notes.html</loc>
-    <lastmod>2025-08-18T16:44:54.444Z</lastmod>
+    <lastmod>2025-08-18T22:17:30.799Z</lastmod>
   </url>
   <url>
     <loc>https://mlp6.github.io/Embedded-Medical-Devices/slides/c-programming-slides.html</loc>
-    <lastmod>2025-08-18T16:44:54.444Z</lastmod>
+    <lastmod>2025-08-18T22:17:30.799Z</lastmod>
   </url>
   <url>
     <loc>https://mlp6.github.io/Embedded-Medical-Devices/slides/zephyr-timers.html</loc>
-    <lastmod>2025-08-18T16:44:54.475Z</lastmod>
+    <lastmod>2025-08-18T22:17:30.831Z</lastmod>
   </url>
   <url>
     <loc>https://mlp6.github.io/Embedded-Medical-Devices/slides/zephyr-timers-slides.html</loc>
-    <lastmod>2025-08-18T16:44:54.475Z</lastmod>
+    <lastmod>2025-08-18T22:17:30.831Z</lastmod>
   </url>
   <url>
     <loc>https://mlp6.github.io/Embedded-Medical-Devices/slides/zephyr-threads-events.html</loc>
-    <lastmod>2025-08-18T16:44:54.475Z</lastmod>
+    <lastmod>2025-08-18T22:17:30.831Z</lastmod>
   </url>
   <url>
     <loc>https://mlp6.github.io/Embedded-Medical-Devices/slides/zephyr-threads-events-slides.html</loc>
-    <lastmod>2025-08-18T16:44:54.475Z</lastmod>
-  </url>
-  <url>
-    <loc>https://mlp6.github.io/Embedded-Medical-Devices/AGENTS.html</loc>
-    <lastmod>2025-08-18T16:44:54.402Z</lastmod>
+    <lastmod>2025-08-18T22:17:30.831Z</lastmod>
   </url>
   <url>
     <loc>https://mlp6.github.io/Embedded-Medical-Devices/slides/event-driven-state-machine-slides.html</loc>
-    <lastmod>2025-08-18T16:44:54.444Z</lastmod>
+    <lastmod>2025-08-18T22:17:30.799Z</lastmod>
   </url>
   <url>
     <loc>https://mlp6.github.io/Embedded-Medical-Devices/slides/event-driven-state-machine.html</loc>
-    <lastmod>2025-08-18T16:44:54.444Z</lastmod>
+    <lastmod>2025-08-18T22:17:30.799Z</lastmod>
   </url>
   <url>
     <loc>https://mlp6.github.io/Embedded-Medical-Devices/slides/zephyr-adc-slides.html</loc>
-    <lastmod>2025-08-18T16:44:54.475Z</lastmod>
+    <lastmod>2025-08-18T22:17:30.830Z</lastmod>
   </url>
   <url>
     <loc>https://mlp6.github.io/Embedded-Medical-Devices/slides/zephyr-adc.html</loc>
-    <lastmod>2025-08-18T16:44:54.475Z</lastmod>
+    <lastmod>2025-08-18T22:17:30.830Z</lastmod>
   </url>
   <url>
     <loc>https://mlp6.github.io/Embedded-Medical-Devices/slides/zephyr-ble-slides.html</loc>
-    <lastmod>2025-08-18T16:44:54.475Z</lastmod>
+    <lastmod>2025-08-18T22:17:30.831Z</lastmod>
   </url>
   <url>
     <loc>https://mlp6.github.io/Embedded-Medical-Devices/slides/zephyr-ble.html</loc>
-    <lastmod>2025-08-18T16:44:54.475Z</lastmod>
+    <lastmod>2025-08-18T22:17:30.831Z</lastmod>
   </url>
   <url>
     <loc>https://mlp6.github.io/Embedded-Medical-Devices/slides/zephyr-nrf52833dk-intro-slides.html</loc>
-    <lastmod>2025-08-18T16:44:54.475Z</lastmod>
+    <lastmod>2025-08-18T22:17:30.831Z</lastmod>
   </url>
   <url>
     <loc>https://mlp6.github.io/Embedded-Medical-Devices/slides/zephyr-nrf52833dk-intro.html</loc>
-    <lastmod>2025-08-18T16:44:54.475Z</lastmod>
+    <lastmod>2025-08-18T22:17:30.831Z</lastmod>
   </url>
   <url>
     <loc>https://mlp6.github.io/Embedded-Medical-Devices/slides/git-fundamentals-slides.html</loc>
-    <lastmod>2025-08-18T16:44:54.444Z</lastmod>
+    <lastmod>2025-08-18T22:17:30.799Z</lastmod>
   </url>
   <url>
     <loc>https://mlp6.github.io/Embedded-Medical-Devices/slides/git-fundamentals-notes.html</loc>
-    <lastmod>2025-08-18T16:44:54.444Z</lastmod>
+    <lastmod>2025-08-18T22:17:30.799Z</lastmod>
   </url>
   <url>
     <loc>https://mlp6.github.io/Embedded-Medical-Devices/slides/zephyr-smf-slides.html</loc>
-    <lastmod>2025-08-18T16:44:54.475Z</lastmod>
+    <lastmod>2025-08-18T22:17:30.831Z</lastmod>
   </url>
   <url>
     <loc>https://mlp6.github.io/Embedded-Medical-Devices/slides/zephyr-smf.html</loc>
-    <lastmod>2025-08-18T16:44:54.475Z</lastmod>
+    <lastmod>2025-08-18T22:17:30.831Z</lastmod>
   </url>
   <url>
     <loc>https://mlp6.github.io/Embedded-Medical-Devices/slides/zephyr-pwm-slides.html</loc>
-    <lastmod>2025-08-18T16:44:54.475Z</lastmod>
+    <lastmod>2025-08-18T22:17:30.831Z</lastmod>
   </url>
   <url>
     <loc>https://mlp6.github.io/Embedded-Medical-Devices/slides/zephyr-pwm.html</loc>
-    <lastmod>2025-08-18T16:44:54.475Z</lastmod>
+    <lastmod>2025-08-18T22:17:30.831Z</lastmod>
   </url>
   <url>
     <loc>https://mlp6.github.io/Embedded-Medical-Devices/labs/c-programming-lab.html</loc>
-    <lastmod>2025-08-18T16:44:54.407Z</lastmod>
+    <lastmod>2025-08-18T22:17:30.763Z</lastmod>
   </url>
   <url>
     <loc>https://mlp6.github.io/Embedded-Medical-Devices/labs/git-fundamentals-lab.html</loc>
-    <lastmod>2025-08-18T16:44:54.407Z</lastmod>
+    <lastmod>2025-08-18T22:17:30.763Z</lastmod>
   </url>
   <url>
     <loc>https://mlp6.github.io/Embedded-Medical-Devices/labs/zephyr-gpio-isr-callbacks-lab.html</loc>
-    <lastmod>2025-08-18T16:44:54.408Z</lastmod>
+    <lastmod>2025-08-18T22:17:30.764Z</lastmod>
   </url>
   <url>
     <loc>https://mlp6.github.io/Embedded-Medical-Devices/labs/ecg-temp-ble-lab.html</loc>
-    <lastmod>2025-08-18T16:44:54.407Z</lastmod>
+    <lastmod>2025-08-18T22:17:30.763Z</lastmod>
   </url>
   <url>
     <loc>https://mlp6.github.io/Embedded-Medical-Devices/labs/zephyr-timers-lab.html</loc>
-    <lastmod>2025-08-18T16:44:54.408Z</lastmod>
+    <lastmod>2025-08-18T22:17:30.764Z</lastmod>
   </url>
   <url>
     <loc>https://mlp6.github.io/Embedded-Medical-Devices/labs/event-driven-state-machine-lab.html</loc>
-    <lastmod>2025-08-18T16:44:54.407Z</lastmod>
+    <lastmod>2025-08-18T22:17:30.763Z</lastmod>
   </url>
   <url>
     <loc>https://mlp6.github.io/Embedded-Medical-Devices/bme-lab-policies.html</loc>
-    <lastmod>2025-08-18T16:44:54.407Z</lastmod>
+    <lastmod>2025-08-18T22:17:30.762Z</lastmod>
   </url>
   <url>
     <loc>https://mlp6.github.io/Embedded-Medical-Devices/resources/how-to-generate-ecg-waveforms.html</loc>
-    <lastmod>2025-08-18T16:44:54.443Z</lastmod>
+    <lastmod>2025-08-18T22:17:30.799Z</lastmod>
   </url>
   <url>
     <loc>https://mlp6.github.io/Embedded-Medical-Devices/resources/teaching_assistant_expectations.html</loc>
-    <lastmod>2025-08-18T16:44:54.443Z</lastmod>
+    <lastmod>2025-08-18T22:17:30.799Z</lastmod>
   </url>
 </urlset>
