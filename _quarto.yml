@@ -23,10 +23,14 @@ website:
           text: Course Syllabus
         - href: bme-lab-policies.qmd
           text: "BME Lab Policies"
-        - text: Ed Discussion
-        - text: Canvas
-        - text: Gradescope
-        - text: Panopto
+        - href: https://edstem.org/us/courses/81241/discussion
+          text: Ed Discussion
+        - href: ttps://canvas.duke.edu/courses/62452
+          text: Canvas
+        - href: https://www.gradescope.com/courses/1075664
+          text: Gradescope
+        - href: https://duke.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx?folderID=7ce45649-7fe7-4549-9c8d-b33d00c57b38
+          text: Panopto
         - href: software-install-tutorials.qmd
           text: "Software Installation & Tutorials"
         - href: faq.qmd
