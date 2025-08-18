@@ -1,12 +1,6 @@
 project:
   type: website
 
-site:
-  vars:
-    canvas: https://canvas.duke.edu/courses/62452
-    ed-discussion: https://edstem.org/us/courses/81241/discussion
-    gradescope: https://www.gradescope.com/courses/1075664
-
 website:
   title: "Embedded Medical Devices"
   description: "Duke BME 554L - Fall 2025"
