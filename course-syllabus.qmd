@@ -88,7 +88,7 @@ Upon completion of this course, students should be able to:
 
 ## Learning Management System
 
-We will be using [Canvas](https://canvas.duke.edu) as the learning management
+We will be using [Canvas]( {{ site.vars.canvas }}) as the learning management
 system for this course.  Most resources will be linked to the course website.
 All grades will be posted via Canvas/Gradescope.
 
