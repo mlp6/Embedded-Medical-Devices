@@ -6,8 +6,6 @@ format:
   pdf: default
 ---
 
-<!-- TODO: update this to work with standalone repo to be forked -->
-
 ## Git Practice
 
 This week we will go through a very simple git workflow to get you familiar with the process and to confirm that your toolchain works for future assignments.
@@ -16,8 +14,9 @@ This week we will go through a very simple git workflow to get you familiar with
 
 1. Make sure that you have git installed, ssh keys configured, and your Duke GitLab account is setup, as detailed [here](../resources/git.qmd) 
 1. Be sure to review the tutorials outlined on the [git setup page](../resources/git.qmd), as needed, to complete the tasks below.
-1. Create a **fork**--*not a **clone***--of [this project on GitLab]() in your userspace.
-1. Clone your forked repository to your laptop, which contains the default `README.md` file to your laptop.
+1. Create a **fork**--*not a **clone***--of the [git-fundamentals-lab](https://gitlab.oit.duke.edu/kits/BME-554L-001-F25/git-fundamentals-lab) in your userspace.
+1. Add Dr. Palmeri (`mlp6`) as a `Maintainer` of your forked repository (Left Sidebar: `Manage -> Members -> Invite members`)
+1. Clone your forked repository to your laptop using the URL available under the blue Code button: `Clone with SSH`.
 
 ::: callout-warning
 You want to clone your forked repository, not the parent repository you forked from!
@@ -106,7 +105,6 @@ Your fork of this GitLab repository will be running this CI script: [`.gitlab-ci
 1. Go to the `Build -> Pipelines` page of your GitLab repository.
 1. Take a screenshot of the latest pipeline that shows all of the tests passing, along with your repository information, as shown below (except all of those `Failed` tests should report `Passed`).
 
-<!--- TODO: might need to update this image -->
 ![ci_pipeline](images/ci_pipeline.png)
 
 1. Submit this screenshot to Gradescope assignment, along with completing the prompted questions.
