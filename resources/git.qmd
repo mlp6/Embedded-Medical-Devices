@@ -84,8 +84,9 @@ The guide above will reference `gitlab.com`; you want to substitute `gitlab.oit.
 
 We are going to cover `git` extensively in class, but it can really help to review some tutorials ahead of time to get familiar with the nomenclature and high-level overview of the workflow.  If you have never used `git` before, I would recommend reviewing the following tutorials:
 
+* [Git Immersion](https://gitimmersion.com/)
+* [Learn Git Branching](https://learngitbranching.js.org/)
+* [Think Like (a) Git](https://think-like-a-git.net/)
 * [Git Tutorial for Beginners: Learn Git in 1 Hour](https://www.youtube.com/watch?v=8JJ101D3knE)
-* [Duke Innovation Co-Lab - Ed Lessons - Git](https://edstem.org/us/courses/7749/lessons/22601)
-* [Backing Up and Sharing Code: Git](https://pathways.duke.edu/modulepage/135)
 
 More comprehensive `git` documentation can be found at https://git-scm.com/doc.
