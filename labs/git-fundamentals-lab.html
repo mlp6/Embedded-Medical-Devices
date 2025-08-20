@@ -426,7 +426,6 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<!-- TODO: update this to work with standalone repo to be forked -->
 <section id="git-practice" class="level2">
 <h2 class="anchored" data-anchor-id="git-practice">Git Practice</h2>
 <p>This week we will go through a very simple git workflow to get you familiar with the process and to confirm that your toolchain works for future assignments.</p>
@@ -435,8 +434,9 @@ ul.task-list li input[type="checkbox"] {
 <ol type="1">
 <li>Make sure that you have git installed, ssh keys configured, and your Duke GitLab account is setup, as detailed <a href="../resources/git.html">here</a></li>
 <li>Be sure to review the tutorials outlined on the <a href="../resources/git.html">git setup page</a>, as needed, to complete the tasks below.</li>
-<li>Create a <strong>fork</strong>–<em>not a <strong>clone</strong></em>–of <a href="">this project on GitLab</a> in your userspace.</li>
-<li>Clone your forked repository to your laptop, which contains the default <code>README.md</code> file to your laptop.</li>
+<li>Create a <strong>fork</strong>–<em>not a <strong>clone</strong></em>–of the <a href="https://gitlab.oit.duke.edu/kits/BME-554L-001-F25/git-fundamentals-lab">git-fundamentals-lab</a> in your userspace.</li>
+<li>Add Dr.&nbsp;Palmeri (<code>mlp6</code>) as a <code>Maintainer</code> of your forked repository (Left Sidebar: <code>Manage -&gt; Members -&gt; Invite members</code>)</li>
+<li>Clone your forked repository to your laptop using the URL available under the blue Code button: <code>Clone with SSH</code>.</li>
 </ol>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -559,7 +559,6 @@ no changes added to commit (use "git add" and/or "git commit -a") </code></pre><
 <li>Go to the <code>Build -&gt; Pipelines</code> page of your GitLab repository.</li>
 <li>Take a screenshot of the latest pipeline that shows all of the tests passing, along with your repository information, as shown below (except all of those <code>Failed</code> tests should report <code>Passed</code>).</li>
 </ol>
-<!--- TODO: might need to update this image -->
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/ci_pipeline.png" class="img-fluid figure-img"></p>
