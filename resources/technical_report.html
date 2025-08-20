@@ -6,10 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Dr.&nbsp;Mark Palmeri, M.D., Ph.D.">
 <meta name="dcterms.date" content="2025-08-25">
 
-<title>Zephyr: Threads &amp; Kernel Events Lab – Embedded Medical Devices</title>
+<title>Technical Report Preparation – Embedded Medical Devices</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -82,7 +81,9 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labs/event-driven-state-machine-lab.html">Labs</a></li><li class="breadcrumb-item"><a href="../labs/zephyr-threads-events-lab.html">Threads and Kernel Events Lab</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
+      Embedded Medical Devices
+      </li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -294,7 +295,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../labs/zephyr-threads-events-lab.html" class="sidebar-item-text sidebar-link active">
+  <a href="../labs/zephyr-threads-events-lab.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Threads and Kernel Events Lab</span></a>
   </div>
 </li>
@@ -363,39 +364,23 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#git-version-control" id="toc-git-version-control" class="nav-link active" data-scroll-target="#git-version-control">Git Version Control</a></li>
-  <li><a href="#refactor-heartbeat-led-25-duty-cycle" id="toc-refactor-heartbeat-led-25-duty-cycle" class="nav-link" data-scroll-target="#refactor-heartbeat-led-25-duty-cycle">Refactor: Heartbeat LED (25% Duty Cycle)</a></li>
-  <li><a href="#test-the-accuracy-of-the-heartbeat-led-timing" id="toc-test-the-accuracy-of-the-heartbeat-led-timing" class="nav-link" data-scroll-target="#test-the-accuracy-of-the-heartbeat-led-timing">Test the Accuracy of the Heartbeat LED Timing</a></li>
-  <li><a href="#merge-n-tag-this-refactored-heartbeat-led-code-and-analysis" id="toc-merge-n-tag-this-refactored-heartbeat-led-code-and-analysis" class="nav-link" data-scroll-target="#merge-n-tag-this-refactored-heartbeat-led-code-and-analysis">Merge-n-Tag this Refactored Heartbeat LED Code and Analysis</a></li>
-  <li><a href="#refactor-kernel-events" id="toc-refactor-kernel-events" class="nav-link" data-scroll-target="#refactor-kernel-events">Refactor: Kernel Events</a></li>
-  <li><a href="#verify-that-your-led-timing-still-works" id="toc-verify-that-your-led-timing-still-works" class="nav-link" data-scroll-target="#verify-that-your-led-timing-still-works">Verify that your LED Timing Still Works</a></li>
-  <li><a href="#merge-n-tag-this-refactored-kernel-events-code-and-analysis" id="toc-merge-n-tag-this-refactored-kernel-events-code-and-analysis" class="nav-link" data-scroll-target="#merge-n-tag-this-refactored-kernel-events-code-and-analysis">Merge-n-Tag this Refactored Kernel Events Code and Analysis</a></li>
-  <li><a href="#how-do-i-ask-for-help" id="toc-how-do-i-ask-for-help" class="nav-link" data-scroll-target="#how-do-i-ask-for-help">How do I ask for help?</a></li>
+  <li><a href="#technical-report-preparation" id="toc-technical-report-preparation" class="nav-link active" data-scroll-target="#technical-report-preparation">Technical Report Preparation</a></li>
+  <li><a href="#python-virtual-environment" id="toc-python-virtual-environment" class="nav-link" data-scroll-target="#python-virtual-environment">Python Virtual Environment</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/mlp6/Embedded-Medical-Devices/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="zephyr-threads-events-lab.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/mlp6/Embedded-Medical-Devices/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="technical_report.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labs/event-driven-state-machine-lab.html">Labs</a></li><li class="breadcrumb-item"><a href="../labs/zephyr-threads-events-lab.html">Threads and Kernel Events Lab</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Zephyr: Threads &amp; Kernel Events Lab</h1>
-<p class="subtitle lead">BME554L - Fall 2025 - Palmeri</p>
-  <div class="quarto-categories">
-    <div class="quarto-category">Lab</div>
-  </div>
-  </div>
+<h1 class="title">Technical Report Preparation</h1>
+</div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Dr.&nbsp;Mark Palmeri, M.D., Ph.D. </p>
-          </div>
-  </div>
     
     <div>
     <div class="quarto-title-meta-heading">Published</div>
@@ -412,48 +397,16 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="git-version-control" class="level2">
-<h2 class="anchored" data-anchor-id="git-version-control">Git Version Control</h2>
+<section id="technical-report-preparation" class="level2">
+<h2 class="anchored" data-anchor-id="technical-report-preparation">Technical Report Preparation</h2>
+<p>Each lab exercise will have an associated technical report submitted. These reports will be prepared and submitted using Python-based Jupyter notebooks that will be included as part of your assignment git repositories.</p>
+<p>You will need to be able to perform the following tasks in your Jupyter notebooks:</p>
 <ul>
-<li>Use best practices for version control (branching, commit messages, etc.).</li>
-<li>Do all development on a dedicated branch that is merged into <code>main</code> once it is functional.</li>
-<li>Commits should be very specific to the changes/additions you are making to your code. This will help you and others understand what you did and why you did it.<br>
-</li>
-<li>On a given development branch, try to implement one small piece of functionality at a time, commit it, and then move on to the next piece of functionality.</li>
+<li>Read CSV text data saved from an oscilloscope.</li>
+<li>Perform signal processing (e.g., FFT, filtering, etc.) on the data.</li>
+<li>Perform simple statistics (e.g., mean, standard deviation, 95% CI) on the data.</li>
+<li>Generate plots</li>
 </ul>
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Important
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>You do not want one, monolithic git commit right before you submit your project.</p>
-</div>
-</div>
-</section>
-<section id="refactor-heartbeat-led-25-duty-cycle" class="level2">
-<h2 class="anchored" data-anchor-id="refactor-heartbeat-led-25-duty-cycle">Refactor: Heartbeat LED (25% Duty Cycle)</h2>
-<p>You will be refactoring your code from the timers lab to use a thread to control the heartbeat LED. Do all of the refactoring below on a new branch called <code>heartbeat_refactor</code>.</p>
-<ul>
-<li>Refactor your code to use a thread instead of a kernel timer to control the heartbeat LED.</li>
-<li>Instead of having your heartbeat blink at 1 Hz with a 50% duty cycle, change it to have a 25% duty cycle (i.e., on for 250 ms, off for 750 ms).</li>
-</ul>
-</section>
-<section id="test-the-accuracy-of-the-heartbeat-led-timing" class="level2">
-<h2 class="anchored" data-anchor-id="test-the-accuracy-of-the-heartbeat-led-timing">Test the Accuracy of the Heartbeat LED Timing</h2>
-<ul>
-<li>Create a new Jupyter notebook for this lab’s technical report called <code>testing/thread_testing.ipynb</code> that analyzes the accuracy of your 25% duty cycle heartbeat LED.</li>
-<li>Perform these measurements using the oscilloscope, and save all raw data in dedicated CSV files.</li>
-<li>Choose what to measure and how to analyze the data to verify that the heartbeat LED thread is working as expected.</li>
-<li>Discuss the results of your measurements and how they compare to the nominal specifications for the heartbeat LED.</li>
-</ul>
-</section>
-<section id="merge-n-tag-this-refactored-heartbeat-led-code-and-analysis" class="level2">
-<h2 class="anchored" data-anchor-id="merge-n-tag-this-refactored-heartbeat-led-code-and-analysis">Merge-n-Tag this Refactored Heartbeat LED Code and Analysis</h2>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -464,55 +417,19 @@ Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Make sure that your Jupyter notebook reads in data from relative paths for the repository, <strong>not</strong> absolute paths on your local machine.</p>
+<p>An example technical report can be found <a href="https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/technical_report_example">here</a>.</p>
 </div>
 </div>
-<ul>
-<li>Push your <code>heartbeat_refactor</code> branch to GitLab.</li>
-<li>Create a new Merge Request to merge <code>heartbeat_refactor</code> into your forked repository’s <code>main</code> branch.</li>
-<li>Merge your <code>heartbeat_refactor</code> branch into your <code>main</code> branch, and create an annotated tag for that merged commit called <code>v1.2.0</code>.</li>
-</ul>
 </section>
-<section id="refactor-kernel-events" class="level2">
-<h2 class="anchored" data-anchor-id="refactor-kernel-events">Refactor: Kernel Events</h2>
-<ul>
-<li>Do the following refactoring on a new branch called <code>kernel_events_refactor</code>, branched after the <code>v1.2.0</code> commit.</li>
-<li>Refactor all of your code to remove Boolean variables being used in your ISR callback functions to indicate that buttons have been pressed to now use kernel events in a single bit array called <code>button_events</code>.</li>
-<li>You should use 1 bit for each button, meaning the bit array is 4-bits.</li>
-<li>Implement a <code>k_event_wait()</code> in the appropriate state(s) of your main thread to wait for button events to occur. This will be a blocking wait, meaning the <code>main</code> thread <code>while</code> loop will not be running while waiting for button events.</li>
-</ul>
-</section>
-<section id="verify-that-your-led-timing-still-works" class="level2">
-<h2 class="anchored" data-anchor-id="verify-that-your-led-timing-still-works">Verify that your LED Timing Still Works</h2>
-<ul>
-<li>Create a new Jupyter notebook called <code>testing/kernel_events_validation.ipynb</code> to verify that your refactored code still works as expected.</li>
-<li>It is up to you to now determine how to verify that your LED timing is still working with regard to what data to collect, how to analyze it, and how to present it in your notebook.</li>
-</ul>
-</section>
-<section id="merge-n-tag-this-refactored-kernel-events-code-and-analysis" class="level2">
-<h2 class="anchored" data-anchor-id="merge-n-tag-this-refactored-kernel-events-code-and-analysis">Merge-n-Tag this Refactored Kernel Events Code and Analysis</h2>
-<ul>
-<li>Create a Merge Request to merge <code>kernel_events_refactor</code> into your <code>main</code> branch.</li>
-<li>Merge your <code>kernel_events_refactor</code> branch into your <code>main</code> branch.</li>
-<li>Create an annotated tag for that merge commit called <code>v1.3.0</code>.</li>
-<li>Create an Issue assigned to Dr.&nbsp;Palmeri to review your code for both <code>v1.2.0</code> and <code>v1.3.0</code>.</li>
-</ul>
-</section>
-<section id="how-do-i-ask-for-help" class="level2">
-<h2 class="anchored" data-anchor-id="how-do-i-ask-for-help">How do I ask for help?</h2>
+<section id="python-virtual-environment" class="level2">
+<h2 class="anchored" data-anchor-id="python-virtual-environment">Python Virtual Environment</h2>
+<p>Preparing your technical reports will require either:</p>
 <ol type="1">
-<li>If you have a general / non-coding question, you should ask your TAs / Dr. Palmeri on Ed to allow any of them to respond in a timely manner.</li>
-<li>Push you code to your GitLab repository, ideally with your active development on a non-<code>main</code> branch.</li>
-<li>Create an <a href="https://docs.gitlab.com/ee/user/project/issues/">Issue</a> in your repository.
-<ul>
-<li>Add as much detail as possible as to your problem, and add links to specific lines / section of code when possible.</li>
-<li>Assign the label “Bug” or “Question”, as appropriate.</li>
-<li>Be sure to specify what branch you are working on.</li>
-<li>Assign the Issue to one of the TAs.</li>
-<li>If your TA cannot solve your Issue, they can escalate the Issue to Dr.&nbsp;Palmeri.</li>
-</ul></li>
-<li>You will get a response to your Issue, and maybe a new branch of code will be pushed to help you with some example syntax that you can use <code>git diff</code> to visualize.</li>
+<li>Using a cloud-based Jupyter notebook platform (e.g., <a href="https://colab.google/">Google CoLab</a>), or</li>
+<li>Use a local Python virtual environment on your laptop with the necessary packages installed.</li>
 </ol>
+<p>If you need to install a Python environment on your laptop, then this is a good starting point: <a href="https://code.visualstudio.com/docs/python/python-tutorial">Getting Started with Python in VS Code</a>.</p>
+<p>This is a good tutorial on getting started with Jupyter notebooks in VS Code: <a href="https://code.visualstudio.com/docs/python/jupyter-support">Jupyter Notebooks in Visual Studio Code</a>.</p>
 
 
 </section>

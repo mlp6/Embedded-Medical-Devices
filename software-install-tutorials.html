@@ -6,6 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="dcterms.date" content="2025-08-25">
 
 <title>Software Installation and Tutorials – Embedded Medical Devices</title>
 <style>
@@ -19,41 +20,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -362,6 +328,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./resources/git.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Git Version Control</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./resources/how-to-generate-ecg-waveforms.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">How to Generate ECG Waveforms</span></a>
   </div>
@@ -391,15 +363,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#git-version-control" id="toc-git-version-control" class="nav-link active" data-scroll-target="#git-version-control">Git (Version Control)</a></li>
-  <li><a href="#installation-configuration" id="toc-installation-configuration" class="nav-link" data-scroll-target="#installation-configuration">Installation &amp; Configuration</a></li>
-  <li><a href="#setup-duke-gitlab-account" id="toc-setup-duke-gitlab-account" class="nav-link" data-scroll-target="#setup-duke-gitlab-account">Setup Duke GitLab Account</a></li>
-  <li><a href="#ssh-key-authentication" id="toc-ssh-key-authentication" class="nav-link" data-scroll-target="#ssh-key-authentication">SSH Key Authentication</a></li>
-  <li><a href="#git-tutorials" id="toc-git-tutorials" class="nav-link" data-scroll-target="#git-tutorials">Git Tutorials</a></li>
   <li><a href="#visual-studio-code-ide" id="toc-visual-studio-code-ide" class="nav-link" data-scroll-target="#visual-studio-code-ide">Visual Studio Code (IDE)</a></li>
   <li><a href="#state-diagram-software" id="toc-state-diagram-software" class="nav-link" data-scroll-target="#state-diagram-software">State Diagram Software</a></li>
   <li><a href="#zephyr-sdk-nrf-connect-nordic-dev-academy" id="toc-zephyr-sdk-nrf-connect-nordic-dev-academy" class="nav-link" data-scroll-target="#zephyr-sdk-nrf-connect-nordic-dev-academy">Zephyr SDK / nRF Connect / Nordic Dev Academy</a></li>
   <li><a href="#nordic-hardware-to-buy" id="toc-nordic-hardware-to-buy" class="nav-link" data-scroll-target="#nordic-hardware-to-buy">Nordic Hardware to Buy</a></li>
-  <li><a href="#technical-report-preparation" id="toc-technical-report-preparation" class="nav-link" data-scroll-target="#technical-report-preparation">Technical Report Preparation</a></li>
+  <li><a href="#technical-reports-jupyter-notebooks" id="toc-technical-reports-jupyter-notebooks" class="nav-link" data-scroll-target="#technical-reports-jupyter-notebooks">Technical Reports: Jupyter Notebooks</a></li>
   <li><a href="#what-to-submit" id="toc-what-to-submit" class="nav-link" data-scroll-target="#what-to-submit">What to Submit</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/mlp6/Embedded-Medical-Devices/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="software-install-tutorials.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
@@ -421,7 +389,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">Invalid Date</p>
+      <p class="date">August 25, 2025</p>
     </div>
   </div>
   
@@ -435,179 +403,43 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="git-version-control" class="level2">
 <h2 class="anchored" data-anchor-id="git-version-control">Git (Version Control)</h2>
-</section>
-<section id="installation-configuration" class="level2">
-<h2 class="anchored" data-anchor-id="installation-configuration">Installation &amp; Configuration</h2>
+<p>Please follow the instructions on this dedicated <a href="./resources/git.html">git page</a> to:</p>
 <ul>
-<li><a href="https://git-scm.com/">Git</a> - version control software
-<ul>
-<li>Note - MacOS usually comes with <code>git</code> pre-installed, so there is no need to install anything else.</li>
-</ul></li>
-<li>After installing <code>git</code>, please configure it: https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup</li>
-<li>The setup steps above should create a <code>~/.gitconfig</code> file that has some barebones configuration options. We can expand that a bit by manually editing it with the following content:</li>
+<li>Install <code>git</code></li>
+<li>Configure <code>git</code></li>
+<li>Setup an SSH key</li>
+<li>Provide links to <code>git</code> tutorials to remind you how to use <code>git</code> version control</li>
 </ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[user]</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="ex">name</span> = your first and last name</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="ex">email</span> = yournetid@duke.edu</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">[alias]</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="ex">lg</span> = log <span class="at">--graph</span> <span class="at">--pretty</span><span class="op">=</span>format:<span class="st">'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset'</span> <span class="at">--abbrev-commit</span> <span class="at">--date</span><span class="op">=</span>relative</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="ex">[core]</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="ex">editor</span> = nano</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="ex">autocrlf</span> = input</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="ex">preloadindex</span> = true</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="ex">fileMode</span> = false</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="ex">[color]</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="ex">status</span> = auto</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="ex">branch</span> = auto</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="ex">interactive</span> = auto</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">diff</span> = auto</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="ex">ui</span> = auto</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="ex">[push]</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="ex">default</span> = current</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="ex">autoSetupRemote</span> = true</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="ex">[pull]</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    <span class="ex">rebase</span> = true</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="ex">[init]</span></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="ex">defaultBranch</span> = main</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul>
-<li>The above configuration will:
-<ul>
-<li>Set your name and email address for commits</li>
-<li>Set up a <code>git lg</code> alias that will show a nice graph of the commit history</li>
-<li>Change the default editor for making commit messages from <code>vi</code> to <code>nano</code>. (Note, you can change this to something else.)</li>
-<li>Set the default branch name to <code>main</code> (instead of the legacy <code>master</code> name). <em>It is important to do this for our grading scripts to work properly.</em></li>
-</ul></li>
-<li>This is a good tutorial on using <code>git</code> within VS Code: <a href="https://code.visualstudio.com/docs/sourcecontrol/overview">Using Git source control in VS Code</a></li>
-</ul>
-</section>
-<section id="setup-duke-gitlab-account" class="level2">
-<h2 class="anchored" data-anchor-id="setup-duke-gitlab-account">Setup Duke GitLab Account</h2>
-<p>While <a href="https://github.com">GitHub</a> is a very popular public git repository hosting site, we will be using Duke’s GitLab server. Please make sure you can log into https://gitlab.oit.duke.edu using your Oath2 NetID authentication.</p>
-<div class="callout callout-style-default callout-warning callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Warning
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>This is <strong>not</strong> <code>gitlab.com</code>!</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Caution
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Do <strong>not</strong> edit files in remote git repositories using the GitLab web interface!! Only work with your repository files using your local clone of the repository.</p>
-</div>
-</div>
-</section>
-<section id="ssh-key-authentication" class="level2">
-<h2 class="anchored" data-anchor-id="ssh-key-authentication">SSH Key Authentication</h2>
-<!-- TODO: don't link to websites; just show the commands here explicitly -->
-<p>We will use SSH keys to authenticate us on GitLab to be able to <code>clone</code>/<code>push</code>/<code>pull</code> from GitLab without needing to always enter your username and password.</p>
-<p>To setup an SSH key and add it to your GitLab profile:</p>
-<div class="callout callout-style-default callout-warning callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Warning
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>The guide below will reference <code>github.com</code>; you want to substitute <code>gitlab.oit.duke.edu</code>.</p>
-</div>
-</div>
-<ol type="1">
-<li><p><a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent">Generate a New SSH Key</a></p>
-<ul>
-<li>While your private key is most secure by encrypting it with a passphrase, you will need to either enter that passphrase everytime the key is used, or you will need to add it to your local credential manager (i.e., keychain) or <code>ssh-agent</code> to keep it unlocked.<br>
-</li>
-<li>If you are just using this SSH key for this class, you can use an empty passphrase and not need to worry about needing to deal with the password management.</li>
-</ul></li>
-<li><p><a href="https://linuxhint.com/add-and-configure-ssh-key-on-gitlab">Add your SSH key to your GitLab Profile</a></p></li>
-</ol>
-<div class="callout callout-style-default callout-warning callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Warning
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>The guide above will reference <code>gitlab.com</code>; you want to substitute <code>gitlab.oit.duke.edu</code>.</p>
-</div>
-</div>
-</section>
-<section id="git-tutorials" class="level2">
-<h2 class="anchored" data-anchor-id="git-tutorials">Git Tutorials</h2>
-<p>We are going to cover <code>git</code> extensively in class, but it can really help to review some tutorials ahead of time to get familiar with the nomenclature and high-level overview of the workflow. If you have never used <code>git</code> before, I would recommend reviewing the following tutorials:</p>
-<ul>
-<li><a href="https://www.youtube.com/watch?v=8JJ101D3knE">Git Tutorial for Beginners: Learn Git in 1 Hour</a></li>
-<li><a href="https://pathways.duke.edu/modulepage/135">Backing Up and Sharing Code: Git</a></li>
-</ul>
-<p>More comprehensive <code>git</code> documentation can be found at https://git-scm.com/doc.</p>
 </section>
 <section id="visual-studio-code-ide" class="level2">
 <h2 class="anchored" data-anchor-id="visual-studio-code-ide">Visual Studio Code (IDE)</h2>
 <p>We will be using <a href="https://code.visualstudio.com/">Visual Studio Code</a> as the IDE for all projects in this class. In addition to installing the base program, please install the following Extensions:</p>
 <ul>
 <li><code>nRF Connect for VS Code (Extension Pack)</code></li>
-<li><code>GitLens</code> (help with git operations / visualization)</li>
+<li><code>GitLens</code> (help with <code>git</code> operations / visualization)</li>
 <li><code>C/C++</code> (not the extension pack, since it include <code>CMake Tools</code> that has some incompatibilities with the Zephyr build tools)</li>
 <li><code>Cmake</code></li>
 <li>Microsoft <code>IntelliCode</code> (assistance with C syntax)</li>
 <li>State diagram software (see below)</li>
-<li><a href="https://code.visualstudio.com/docs/copilot/overview">GitHub CoPilot</a> (AI-assisted coding)
-<ul>
-<li>Sign up for free GitHub Education Student account to get access to this extension: https://github.com/education/students</li>
-<li>You will need a document to verify your student status that includes your dates of enrollment, which your DukeCard does not contain. Instead, you can get an Enrollment Verification document through DukeHub (Academics Tab) and convert the downloaded PDF to a JPG or PNG file to upload to GitHub.</li>
-<li>Install the GitHub CoPilot extension</li>
-</ul></li>
+<li><a href="https://code.visualstudio.com/docs/copilot/overview">GitHub CoPilot</a> (AI-assisted coding)</li>
 </ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You can get “Pro” status for GitHub CoPilot by signing up for a free <a href="https://github.com/education/students">GitHub Education Student</a> account. You will need a document to verify your student status that includes your dates of enrollment, which your DukeCard does not contain. Instead, you can get an Enrollment Verification document through DukeHub (Academics Tab) and convert the downloaded PDF to a JPG or PNG file to upload to GitHub.</p>
+</div>
+</div>
 </section>
 <section id="state-diagram-software" class="level2">
 <h2 class="anchored" data-anchor-id="state-diagram-software">State Diagram Software</h2>
-<p>We will be generating state diagrams all semester, which can be done with a variety of different software packages:</p>
-<ul>
-<li><a href="https://plantuml.com/">PlantUML</a>
-<ul>
-<li>Text-based diagramming tool that can be integrated into VS Code</li>
-<li>A bit outdated, and a tad clunky in default layouts without some “nudging”</li>
-<li>What will be used in lecture and lab assignments</li>
-</ul></li>
-<li><a href="https://mermaid-js.github.io/mermaid/#/">Mermaid Markdown</a>
-<ul>
-<li>Markdown-based diagramming tool that can be integrated into VS Code</li>
-<li>More modern and easier to use than PlantUML</li>
-<li>Not as feature-rich as PlantUML</li>
-</ul></li>
-<li><a href="https://app.diagrams.net/">draw.io</a>
-<ul>
-<li>Web-based diagramming tool that can be integrated into VS Code (Draw.io Integration)</li>
-<li>Very feature-rich and easy to use</li>
-<li>Not text-based</li>
-</ul></li>
-<li><a href="https://www.lucidchart.com/">Lucidchart</a>
-<ul>
-<li>Web-based diagramming tool</li>
-<li>Very feature-rich and easy to use</li>
-<li>Not text-based (less VCS friendly)</li>
-</ul></li>
-</ul>
-<p>You can use whatever software package you prefer.</p>
+<p>We will be generating state diagrams all semester, which can be done with a variety of different software packages, described <a href="./resources/state_diagram.html">here</a>. Please be sure to have one of the described software packages ready for you to prepare state diagrams this semester.</p>
 </section>
 <section id="zephyr-sdk-nrf-connect-nordic-dev-academy" class="level2">
 <h2 class="anchored" data-anchor-id="zephyr-sdk-nrf-connect-nordic-dev-academy">Zephyr SDK / nRF Connect / Nordic Dev Academy</h2>
@@ -617,24 +449,29 @@ Warning
 <li>Installing the <a href="https://nrfconnect.github.io/vscode-nrf-connect/index.html">nRF Connect for VS Code</a> extension pack.</li>
 <li>Installing all of the associated <code>nRF Connect</code> tools for your laptop, including the <code>nRF Connect SDK</code> and associated <code>toolchain</code>.
 <ul>
-<li>This should be done via VS Code, not the nRF Desktop application.</li>
-<li>Be sure to use the <code>nRF Connect SDK v2.9.0</code> for this class.</li>
+<li>Be sure to use the <code>nRF Connect SDK v2.9.0</code> for this class. <code>v3.x</code> may work, but may not.</li>
 </ul></li>
-<li>Flashing the <code>zephyr/samples/basic/blinky</code> to your <code>nRF52833DK</code>.
-<ul>
-<li>You will need a data-capable USB cable to connect your <code>nRF52833DK</code> to your laptop.</li>
-<li>Make sure you can successfully do this, as it will test your USB cable connection, USB serial port device permissions and your build/flash environment.</li>
-</ul></li>
+<li>Once you have the hardware you need to order described below, flash the <code>zephyr/samples/basic/blinky</code> to your <code>nRF52833DK</code>.</li>
 </ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Make sure you can successfully do this, as it will test your USB cable connection, USB serial port device permissions and your build/flash environment.</p>
+</div>
+</div>
 </section>
 <section id="nordic-hardware-to-buy" class="level2">
 <h2 class="anchored" data-anchor-id="nordic-hardware-to-buy">Nordic Hardware to Buy</h2>
 <ul>
 <li><strong>Order a <a href="https://www.nordicsemi.com/Products/Development-hardware/nrf52833-dk">nRF52833DK</a></strong>.</li>
-<li>Make sure you have the appropriate USB cable to flash the device from your laptop.
-<ul>
-<li>This may require a USB adapter for some laptops.**</li>
-</ul></li>
+<li>Make sure you have the appropriate USB cable to flash the device from your laptop. This may require an adaptor for some laptops.</li>
 </ul>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -649,23 +486,23 @@ Important
 <p>Make sure that your USB cable supports data transfer and is not just a charging cable.</p>
 </div>
 </div>
-<!-- TODO: move this to a dedicated page -->
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>We will not have USB cables and adapters available in the lab.</p>
+</div>
+</div>
 </section>
-<section id="technical-report-preparation" class="level2">
-<h2 class="anchored" data-anchor-id="technical-report-preparation">Technical Report Preparation</h2>
-<p>Each lab exercise will have an associated technical report submitted. These reports will be prepared and submitted using Python-based Jupyter notebooks that will be included as part of your assignment git repositories.</p>
-<p>You will need to be able to perform the following tasks in your Jupyter notebooks:</p>
-<ul>
-<li>Read CSV text data saved from an oscilloscope.</li>
-<li>Perform signal processing (e.g., FFT, filtering, etc.) on the data.</li>
-<li>Perform simple statistics (e.g., mean, standard deviation, 95% CI) on the data.</li>
-<li>Generate plots</li>
-</ul>
-<p>An example technical report can be found <a href="https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/technical_report_example">here</a>.</p>
-<!-- TODO: make this a dedicated page -->
-<p>If you need to install a Python environment on your laptop, then this is a good starting point: <a href="https://code.visualstudio.com/docs/python/python-tutorial">Getting Started with Python in VS Code</a>.</p>
-<p>This is a good tutorial on getting started with Jupyter notebooks in VS Code: <a href="https://code.visualstudio.com/docs/python/jupyter-support">Jupyter Notebooks in Visual Studio Code</a>.</p>
-<!-- TODO: maybe eliminate this? -->
+<section id="technical-reports-jupyter-notebooks" class="level2">
+<h2 class="anchored" data-anchor-id="technical-reports-jupyter-notebooks">Technical Reports: Jupyter Notebooks</h2>
+<p>Lab exercises will require data analysis to be performed in Jupyter notebooks. Please review the <a href="./resources/technical_report.html">Technical Report Preparation</a> page to make sure that you have all of the necessary tools to edit Jupyter notebooks and access to the necessary Python packages.</p>
 </section>
 <section id="what-to-submit" class="level2">
 <h2 class="anchored" data-anchor-id="what-to-submit">What to Submit</h2>

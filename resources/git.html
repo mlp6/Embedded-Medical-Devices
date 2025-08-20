@@ -6,10 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Dr.&nbsp;Mark Palmeri, M.D., Ph.D.">
 <meta name="dcterms.date" content="2025-08-25">
 
-<title>Zephyr: Threads &amp; Kernel Events Lab – Embedded Medical Devices</title>
+<title>Git: Getting Started – Embedded Medical Devices</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -82,7 +116,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labs/event-driven-state-machine-lab.html">Labs</a></li><li class="breadcrumb-item"><a href="../labs/zephyr-threads-events-lab.html">Threads and Kernel Events Lab</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../resources/git.html">Resources</a></li><li class="breadcrumb-item"><a href="../resources/git.html">Git Version Control</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -294,7 +328,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../labs/zephyr-threads-events-lab.html" class="sidebar-item-text sidebar-link active">
+  <a href="../labs/zephyr-threads-events-lab.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Threads and Kernel Events Lab</span></a>
   </div>
 </li>
@@ -329,7 +363,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../resources/git.html" class="sidebar-item-text sidebar-link">
+  <a href="../resources/git.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Git Version Control</span></a>
   </div>
 </li>
@@ -363,39 +397,25 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#git-version-control" id="toc-git-version-control" class="nav-link active" data-scroll-target="#git-version-control">Git Version Control</a></li>
-  <li><a href="#refactor-heartbeat-led-25-duty-cycle" id="toc-refactor-heartbeat-led-25-duty-cycle" class="nav-link" data-scroll-target="#refactor-heartbeat-led-25-duty-cycle">Refactor: Heartbeat LED (25% Duty Cycle)</a></li>
-  <li><a href="#test-the-accuracy-of-the-heartbeat-led-timing" id="toc-test-the-accuracy-of-the-heartbeat-led-timing" class="nav-link" data-scroll-target="#test-the-accuracy-of-the-heartbeat-led-timing">Test the Accuracy of the Heartbeat LED Timing</a></li>
-  <li><a href="#merge-n-tag-this-refactored-heartbeat-led-code-and-analysis" id="toc-merge-n-tag-this-refactored-heartbeat-led-code-and-analysis" class="nav-link" data-scroll-target="#merge-n-tag-this-refactored-heartbeat-led-code-and-analysis">Merge-n-Tag this Refactored Heartbeat LED Code and Analysis</a></li>
-  <li><a href="#refactor-kernel-events" id="toc-refactor-kernel-events" class="nav-link" data-scroll-target="#refactor-kernel-events">Refactor: Kernel Events</a></li>
-  <li><a href="#verify-that-your-led-timing-still-works" id="toc-verify-that-your-led-timing-still-works" class="nav-link" data-scroll-target="#verify-that-your-led-timing-still-works">Verify that your LED Timing Still Works</a></li>
-  <li><a href="#merge-n-tag-this-refactored-kernel-events-code-and-analysis" id="toc-merge-n-tag-this-refactored-kernel-events-code-and-analysis" class="nav-link" data-scroll-target="#merge-n-tag-this-refactored-kernel-events-code-and-analysis">Merge-n-Tag this Refactored Kernel Events Code and Analysis</a></li>
-  <li><a href="#how-do-i-ask-for-help" id="toc-how-do-i-ask-for-help" class="nav-link" data-scroll-target="#how-do-i-ask-for-help">How do I ask for help?</a></li>
+  <li><a href="#installation-configuration" id="toc-installation-configuration" class="nav-link active" data-scroll-target="#installation-configuration">Installation &amp; Configuration</a></li>
+  <li><a href="#setup-duke-gitlab-account" id="toc-setup-duke-gitlab-account" class="nav-link" data-scroll-target="#setup-duke-gitlab-account">Setup Duke GitLab Account</a></li>
+  <li><a href="#ssh-key-authentication" id="toc-ssh-key-authentication" class="nav-link" data-scroll-target="#ssh-key-authentication">SSH Key Authentication</a></li>
+  <li><a href="#git-tutorials" id="toc-git-tutorials" class="nav-link" data-scroll-target="#git-tutorials">Git Tutorials</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/mlp6/Embedded-Medical-Devices/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="zephyr-threads-events-lab.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/mlp6/Embedded-Medical-Devices/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="git.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labs/event-driven-state-machine-lab.html">Labs</a></li><li class="breadcrumb-item"><a href="../labs/zephyr-threads-events-lab.html">Threads and Kernel Events Lab</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../resources/git.html">Resources</a></li><li class="breadcrumb-item"><a href="../resources/git.html">Git Version Control</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Zephyr: Threads &amp; Kernel Events Lab</h1>
-<p class="subtitle lead">BME554L - Fall 2025 - Palmeri</p>
-  <div class="quarto-categories">
-    <div class="quarto-category">Lab</div>
-  </div>
-  </div>
+<h1 class="title">Git: Getting Started</h1>
+</div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Dr.&nbsp;Mark Palmeri, M.D., Ph.D. </p>
-          </div>
-  </div>
     
     <div>
     <div class="quarto-title-meta-heading">Published</div>
@@ -412,107 +432,129 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="git-version-control" class="level2">
-<h2 class="anchored" data-anchor-id="git-version-control">Git Version Control</h2>
+<section id="installation-configuration" class="level2">
+<h2 class="anchored" data-anchor-id="installation-configuration">Installation &amp; Configuration</h2>
 <ul>
-<li>Use best practices for version control (branching, commit messages, etc.).</li>
-<li>Do all development on a dedicated branch that is merged into <code>main</code> once it is functional.</li>
-<li>Commits should be very specific to the changes/additions you are making to your code. This will help you and others understand what you did and why you did it.<br>
-</li>
-<li>On a given development branch, try to implement one small piece of functionality at a time, commit it, and then move on to the next piece of functionality.</li>
-</ul>
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Important
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>You do not want one, monolithic git commit right before you submit your project.</p>
-</div>
-</div>
-</section>
-<section id="refactor-heartbeat-led-25-duty-cycle" class="level2">
-<h2 class="anchored" data-anchor-id="refactor-heartbeat-led-25-duty-cycle">Refactor: Heartbeat LED (25% Duty Cycle)</h2>
-<p>You will be refactoring your code from the timers lab to use a thread to control the heartbeat LED. Do all of the refactoring below on a new branch called <code>heartbeat_refactor</code>.</p>
+<li><a href="https://git-scm.com/">Git</a> - version control software
 <ul>
-<li>Refactor your code to use a thread instead of a kernel timer to control the heartbeat LED.</li>
-<li>Instead of having your heartbeat blink at 1 Hz with a 50% duty cycle, change it to have a 25% duty cycle (i.e., on for 250 ms, off for 750 ms).</li>
-</ul>
-</section>
-<section id="test-the-accuracy-of-the-heartbeat-led-timing" class="level2">
-<h2 class="anchored" data-anchor-id="test-the-accuracy-of-the-heartbeat-led-timing">Test the Accuracy of the Heartbeat LED Timing</h2>
-<ul>
-<li>Create a new Jupyter notebook for this lab’s technical report called <code>testing/thread_testing.ipynb</code> that analyzes the accuracy of your 25% duty cycle heartbeat LED.</li>
-<li>Perform these measurements using the oscilloscope, and save all raw data in dedicated CSV files.</li>
-<li>Choose what to measure and how to analyze the data to verify that the heartbeat LED thread is working as expected.</li>
-<li>Discuss the results of your measurements and how they compare to the nominal specifications for the heartbeat LED.</li>
-</ul>
-</section>
-<section id="merge-n-tag-this-refactored-heartbeat-led-code-and-analysis" class="level2">
-<h2 class="anchored" data-anchor-id="merge-n-tag-this-refactored-heartbeat-led-code-and-analysis">Merge-n-Tag this Refactored Heartbeat LED Code and Analysis</h2>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Make sure that your Jupyter notebook reads in data from relative paths for the repository, <strong>not</strong> absolute paths on your local machine.</p>
-</div>
-</div>
-<ul>
-<li>Push your <code>heartbeat_refactor</code> branch to GitLab.</li>
-<li>Create a new Merge Request to merge <code>heartbeat_refactor</code> into your forked repository’s <code>main</code> branch.</li>
-<li>Merge your <code>heartbeat_refactor</code> branch into your <code>main</code> branch, and create an annotated tag for that merged commit called <code>v1.2.0</code>.</li>
-</ul>
-</section>
-<section id="refactor-kernel-events" class="level2">
-<h2 class="anchored" data-anchor-id="refactor-kernel-events">Refactor: Kernel Events</h2>
-<ul>
-<li>Do the following refactoring on a new branch called <code>kernel_events_refactor</code>, branched after the <code>v1.2.0</code> commit.</li>
-<li>Refactor all of your code to remove Boolean variables being used in your ISR callback functions to indicate that buttons have been pressed to now use kernel events in a single bit array called <code>button_events</code>.</li>
-<li>You should use 1 bit for each button, meaning the bit array is 4-bits.</li>
-<li>Implement a <code>k_event_wait()</code> in the appropriate state(s) of your main thread to wait for button events to occur. This will be a blocking wait, meaning the <code>main</code> thread <code>while</code> loop will not be running while waiting for button events.</li>
-</ul>
-</section>
-<section id="verify-that-your-led-timing-still-works" class="level2">
-<h2 class="anchored" data-anchor-id="verify-that-your-led-timing-still-works">Verify that your LED Timing Still Works</h2>
-<ul>
-<li>Create a new Jupyter notebook called <code>testing/kernel_events_validation.ipynb</code> to verify that your refactored code still works as expected.</li>
-<li>It is up to you to now determine how to verify that your LED timing is still working with regard to what data to collect, how to analyze it, and how to present it in your notebook.</li>
-</ul>
-</section>
-<section id="merge-n-tag-this-refactored-kernel-events-code-and-analysis" class="level2">
-<h2 class="anchored" data-anchor-id="merge-n-tag-this-refactored-kernel-events-code-and-analysis">Merge-n-Tag this Refactored Kernel Events Code and Analysis</h2>
-<ul>
-<li>Create a Merge Request to merge <code>kernel_events_refactor</code> into your <code>main</code> branch.</li>
-<li>Merge your <code>kernel_events_refactor</code> branch into your <code>main</code> branch.</li>
-<li>Create an annotated tag for that merge commit called <code>v1.3.0</code>.</li>
-<li>Create an Issue assigned to Dr.&nbsp;Palmeri to review your code for both <code>v1.2.0</code> and <code>v1.3.0</code>.</li>
-</ul>
-</section>
-<section id="how-do-i-ask-for-help" class="level2">
-<h2 class="anchored" data-anchor-id="how-do-i-ask-for-help">How do I ask for help?</h2>
-<ol type="1">
-<li>If you have a general / non-coding question, you should ask your TAs / Dr. Palmeri on Ed to allow any of them to respond in a timely manner.</li>
-<li>Push you code to your GitLab repository, ideally with your active development on a non-<code>main</code> branch.</li>
-<li>Create an <a href="https://docs.gitlab.com/ee/user/project/issues/">Issue</a> in your repository.
-<ul>
-<li>Add as much detail as possible as to your problem, and add links to specific lines / section of code when possible.</li>
-<li>Assign the label “Bug” or “Question”, as appropriate.</li>
-<li>Be sure to specify what branch you are working on.</li>
-<li>Assign the Issue to one of the TAs.</li>
-<li>If your TA cannot solve your Issue, they can escalate the Issue to Dr.&nbsp;Palmeri.</li>
+<li>Note - MacOS usually comes with <code>git</code> pre-installed, so there is no need to install anything else.</li>
 </ul></li>
-<li>You will get a response to your Issue, and maybe a new branch of code will be pushed to help you with some example syntax that you can use <code>git diff</code> to visualize.</li>
+<li>After installing <code>git</code>, please configure it: <a href="https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup">Getting Started - First-Time Git Setup</a></li>
+<li>The setup steps above should create a <code>~/.gitconfig</code> file that has some barebones configuration options. We can expand that a bit by manually editing it with the following content:</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[user]</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="ex">name</span> = your first and last name</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="ex">email</span> = yournetid@duke.edu</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">[alias]</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="ex">lg</span> = log <span class="at">--graph</span> <span class="at">--pretty</span><span class="op">=</span>format:<span class="st">'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset'</span> <span class="at">--abbrev-commit</span> <span class="at">--date</span><span class="op">=</span>relative</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="ex">[core]</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="ex">editor</span> = nano</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="ex">autocrlf</span> = input</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="ex">preloadindex</span> = true</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="ex">fileMode</span> = false</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="ex">[color]</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="ex">status</span> = auto</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="ex">branch</span> = auto</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="ex">interactive</span> = auto</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">diff</span> = auto</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="ex">ui</span> = auto</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="ex">[push]</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="ex">default</span> = current</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="ex">autoSetupRemote</span> = true</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="ex">[pull]</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    <span class="ex">rebase</span> = false</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="ex">[init]</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="ex">defaultBranch</span> = main</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>The above configuration will:
+<ul>
+<li>Set your name and email address for commits</li>
+<li>Set up a <code>git lg</code> alias that will show a nice graph of the commit history</li>
+<li>Change the default editor for making commit messages from <code>vi</code> to <code>nano</code>. (Note, you can change this to something else.)</li>
+<li>Set the default branch name to <code>main</code> (instead of the legacy <code>master</code> name). <em>It is important to do this for our grading scripts to work properly.</em></li>
+</ul></li>
+<li>This is a good tutorial on using <code>git</code> within VS Code: <a href="https://code.visualstudio.com/docs/sourcecontrol/overview">Using Git source control in VS Code</a></li>
+</ul>
+</section>
+<section id="setup-duke-gitlab-account" class="level2">
+<h2 class="anchored" data-anchor-id="setup-duke-gitlab-account">Setup Duke GitLab Account</h2>
+<p>While <a href="https://github.com">GitHub</a> is a very popular public git repository hosting site, we will be using Duke’s GitLab server. Please make sure you can log into https://gitlab.oit.duke.edu using your Oath2 NetID authentication.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This is <strong>not</strong> <code>gitlab.com</code>!</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Caution
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Do <strong>not</strong> edit files in remote git repositories using the GitLab web interface!! Only work with your repository files using your local clone of the repository.</p>
+</div>
+</div>
+</section>
+<section id="ssh-key-authentication" class="level2">
+<h2 class="anchored" data-anchor-id="ssh-key-authentication">SSH Key Authentication</h2>
+<p>We will use SSH keys to authenticate us on GitLab to be able to <code>clone</code>/<code>push</code>/<code>pull</code> from GitLab without needing to always enter your username and password.</p>
+<p>To setup an SSH key and add it to your GitLab profile:</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The guide below will reference <code>github.com</code>; you want to substitute <code>gitlab.oit.duke.edu</code>.</p>
+</div>
+</div>
+<ol type="1">
+<li><p><a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent">Generate a New SSH Key</a></p>
+<ul>
+<li>While your private key is most secure by encrypting it with a passphrase, you will need to either enter that passphrase everytime the key is used, or you will need to add it to your local credential manager (i.e., keychain) or <code>ssh-agent</code> to keep it unlocked.<br>
+</li>
+<li>If you are just using this SSH key for this class, you can use an empty passphrase and not need to worry about needing to deal with the password management.</li>
+</ul></li>
+<li><p><a href="https://linuxhint.com/add-and-configure-ssh-key-on-gitlab">Add your SSH key to your GitLab Profile</a></p></li>
 </ol>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The guide above will reference <code>gitlab.com</code>; you want to substitute <code>gitlab.oit.duke.edu</code>.</p>
+</div>
+</div>
+</section>
+<section id="git-tutorials" class="level2">
+<h2 class="anchored" data-anchor-id="git-tutorials">Git Tutorials</h2>
+<p>We are going to cover <code>git</code> extensively in class, but it can really help to review some tutorials ahead of time to get familiar with the nomenclature and high-level overview of the workflow. If you have never used <code>git</code> before, I would recommend reviewing the following tutorials:</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=8JJ101D3knE">Git Tutorial for Beginners: Learn Git in 1 Hour</a></li>
+<li><a href="https://edstem.org/us/courses/7749/lessons/22601">Duke Innovation Co-Lab - Ed Lessons - Git</a></li>
+<li><a href="https://pathways.duke.edu/modulepage/135">Backing Up and Sharing Code: Git</a></li>
+</ul>
+<p>More comprehensive <code>git</code> documentation can be found at https://git-scm.com/doc.</p>
 
 
 </section>
