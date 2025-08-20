@@ -1,0 +1,33 @@
+---
+title: "Technical Report Preparation"
+date: 2025-08-25
+format:
+  html: default
+  pdf: default
+---
+
+## Technical Report Preparation
+
+Each lab exercise will have an associated technical report submitted.  These reports will be prepared and submitted using Python-based Jupyter notebooks that will be included as part of your assignment git repositories.
+
+You will need to be able to perform the following tasks in your Jupyter notebooks:
+
+* Read CSV text data saved from an oscilloscope.
+* Perform signal processing (e.g., FFT, filtering, etc.) on the data.
+* Perform simple statistics (e.g., mean, standard deviation, 95% CI) on the data.
+* Generate plots
+
+::: callout-tip
+An example technical report can be found [here](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/technical_report_example).
+:::
+
+## Python Virtual Environment
+
+Preparing your technical reports will require either:
+
+1. Using a cloud-based Jupyter notebook platform (e.g., [Google CoLab](https://colab.google/)), or 
+1. Use a local Python virtual environment on your laptop with the necessary packages installed.
+
+If you need to install a Python environment on your laptop, then this is a good starting point: [Getting Started with Python in VS Code](https://code.visualstudio.com/docs/python/python-tutorial).
+
+This is a good tutorial on getting started with Jupyter notebooks in VS Code: [Jupyter Notebooks in Visual Studio Code](https://code.visualstudio.com/docs/python/jupyter-support).

@@ -87,6 +87,8 @@ website:
           text: "ECG, Temperature Sensor, and BLE Lab"
       - section: Resources
         contents:
+        - href: resources/git.qmd
+          text: "Git Version Control"
         - href: resources/how-to-generate-ecg-waveforms.qmd
           text: "How to Generate ECG Waveforms"
         - href: resources/debugging.qmd
