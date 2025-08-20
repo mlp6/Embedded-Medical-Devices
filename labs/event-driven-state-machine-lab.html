@@ -363,7 +363,8 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#wireless-heart-rate-monitor-state-diagram" id="toc-wireless-heart-rate-monitor-state-diagram" class="nav-link active" data-scroll-target="#wireless-heart-rate-monitor-state-diagram">Wireless Heart Rate Monitor State Diagram</a></li>
+  <li><a href="#digital-kitchen-timer" id="toc-digital-kitchen-timer" class="nav-link active" data-scroll-target="#digital-kitchen-timer">Digital Kitchen Timer</a></li>
+  <li><a href="#functional-states" id="toc-functional-states" class="nav-link" data-scroll-target="#functional-states">Functional States</a></li>
   <li><a href="#generate-the-state-diagram" id="toc-generate-the-state-diagram" class="nav-link" data-scroll-target="#generate-the-state-diagram">Generate the State Diagram</a></li>
   <li><a href="#gradescope" id="toc-gradescope" class="nav-link" data-scroll-target="#gradescope">Gradescope</a></li>
   </ul>
@@ -407,48 +408,87 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<!-- TODO: change this to something simpler -->
-<section id="wireless-heart-rate-monitor-state-diagram" class="level2">
-<h2 class="anchored" data-anchor-id="wireless-heart-rate-monitor-state-diagram">Wireless Heart Rate Monitor State Diagram</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>I would recommend doing this with pencil and paper first, not immediately jumping into a tool. Err on the side of more detail than not.</p>
+</div>
+</div>
+<section id="digital-kitchen-timer" class="level2">
+<h2 class="anchored" data-anchor-id="digital-kitchen-timer">Digital Kitchen Timer</h2>
+<p>Generate a state diagram for a simple digital kitchen timer that has the following buttons:</p>
 <ul>
-<li>Generate a state diagram for a wristwatch-based heart rate monitor that sends “instantaneous” heart rate data to a smartphone.
+<li><code>Start/Stop</code> Button</li>
+<li><code>Reset</code> Button</li>
+<li><code>Pause</code> Button</li>
+<li><code>Up</code>/<code>Down</code>/<code>Left</code>/<code>Right</code> Arrow Buttons (4)</li>
+</ul>
+<p>The timer outputs time intervals in the format: <code>HH:MM:SS</code></p>
+</section>
+<section id="functional-states" class="level2">
+<h2 class="anchored" data-anchor-id="functional-states">Functional States</h2>
 <ul>
-<li>✔️ I would recommend doing this with pencil and paper first, not immediately jumping into a tool.</li>
-<li>Err on the side of more detail than not.</li>
+<li>The kitchen timer has an “Idle” state when it isn’t actively counting down time. In this state:
+<ul>
+<li>The <code>Up</code>/<code>Down</code> buttons increment the time for the <code>HH</code>, <code>MM</code> or <code>SS</code> values.</li>
+<li>The <code>Left</code>/<code>Right</code> buttons let you move between <code>HH</code>, <code>MM</code> and <code>SS</code>.</li>
+<li>Time intervals will wrap around to <code>00</code> when a reasonable max value is exceeded.</li>
+<li>The <code>Reset</code> button sets all of the time values to <code>00</code>.</li>
+<li>The <code>Pause</code> button is inactive.</li>
 </ul></li>
-<li>Make sure that your state diagram:
+<li><code>Start/Stop</code> will start the timer countdown when in <code>Idle</code>.</li>
+<li>In the <code>Countdown</code> state:
 <ul>
-<li>Has start and termination dots.</li>
+<li>The <code>Start/Stop</code> button will stop and reset the countdown interval.</li>
+<li>The <code>Pause</code> button will pause, but not reset, the countdown time.</li>
+</ul></li>
+<li>When the countdown is done, the timer enters an <code>Alarm</code> state, where:
+<ul>
+<li>The <code>Up</code>/<code>Down</code>/<code>Right</code>/<code>Left</code> arrow buttons, <code>Reset</code> and <code>Pause</code> buttons are inactive.</li>
+<li><code>Start/Stop</code> will stop the alarm and return the timer to <code>Idle</code> with the previously set countdown time.</li>
+</ul></li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If any functional state expectation isn’t explicitly described above, please implement something reasonable.</p>
+</div>
+</div>
+<p>Make sure that your state diagram:</p>
+<ul>
+<li>Has initialization (i.e., batteries put in) and termination (i.e., completely powered off) dots.</li>
 <li>Includes all functional states, including (but not limited to):
 <ul>
-<li><code>Init</code></li>
 <li><code>Idle</code></li>
-<li><code>Measuring</code></li>
-<li><code>Transmitting</code></li>
-<li><code>Error</code></li>
+<li><code>Countdown</code></li>
+<li><code>Paused</code></li>
+<li><code>Alarm</code></li>
 </ul></li>
 <li>Consider if states should have entry and exit actions.</li>
 <li>Make sure all transitions between states are annotated with associated triggering events.</li>
-</ul></li>
 </ul>
 </section>
 <section id="generate-the-state-diagram" class="level2">
 <h2 class="anchored" data-anchor-id="generate-the-state-diagram">Generate the State Diagram</h2>
-<ul>
-<li>Formally render your state diagram using either:
-<ul>
-<li><a href="https://plantuml.com/">PlantUML</a> (the tool shown in lecture)</li>
-<li><a href="https://mermaid.js.org/">Mermaid</a></li>
-<li><a href="https://www.draw.io/">draw.io</a></li>
-<li><a href="https://www.lucidchart.com/">Lucidchart</a></li>
-</ul></li>
-</ul>
+<p>Formally render your state diagram using one of the tools outlined on the <a href="../resources/state_diagram.html">State Diagram Tools</a> page.</p>
 </section>
 <section id="gradescope" class="level2">
 <h2 class="anchored" data-anchor-id="gradescope">Gradescope</h2>
-<ul>
-<li>Upload your rendered state diagram to the associated Gradescope assignment.</li>
-</ul>
+<p>Upload your rendered state diagram to the associated Gradescope assignment.</p>
 
 
 </section>

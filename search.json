@@ -205,18 +205,29 @@
     "href": "labs/event-driven-state-machine-lab.html",
     "title": "Event Driven State Machine Lab",
     "section": "",
-    "text": "Generate a state diagram for a wristwatch-based heart rate monitor that sends “instantaneous” heart rate data to a smartphone.\n\n✔️ I would recommend doing this with pencil and paper first, not immediately jumping into a tool.\nErr on the side of more detail than not.\n\nMake sure that your state diagram:\n\nHas start and termination dots.\nIncludes all functional states, including (but not limited to):\n\nInit\nIdle\nMeasuring\nTransmitting\nError\n\nConsider if states should have entry and exit actions.\nMake sure all transitions between states are annotated with associated triggering events.",
+    "text": "Tip\n\n\n\nI would recommend doing this with pencil and paper first, not immediately jumping into a tool. Err on the side of more detail than not.",
     "crumbs": [
       "Labs",
       "Event-Driven State Machine Lab"
     ]
   },
   {
-    "objectID": "labs/event-driven-state-machine-lab.html#wireless-heart-rate-monitor-state-diagram",
-    "href": "labs/event-driven-state-machine-lab.html#wireless-heart-rate-monitor-state-diagram",
+    "objectID": "labs/event-driven-state-machine-lab.html#digital-kitchen-timer",
+    "href": "labs/event-driven-state-machine-lab.html#digital-kitchen-timer",
     "title": "Event Driven State Machine Lab",
-    "section": "",
-    "text": "Generate a state diagram for a wristwatch-based heart rate monitor that sends “instantaneous” heart rate data to a smartphone.\n\n✔️ I would recommend doing this with pencil and paper first, not immediately jumping into a tool.\nErr on the side of more detail than not.\n\nMake sure that your state diagram:\n\nHas start and termination dots.\nIncludes all functional states, including (but not limited to):\n\nInit\nIdle\nMeasuring\nTransmitting\nError\n\nConsider if states should have entry and exit actions.\nMake sure all transitions between states are annotated with associated triggering events.",
+    "section": "Digital Kitchen Timer",
+    "text": "Digital Kitchen Timer\nGenerate a state diagram for a simple digital kitchen timer that has the following buttons:\n\nStart/Stop Button\nReset Button\nPause Button\nUp/Down/Left/Right Arrow Buttons (4)\n\nThe timer outputs time intervals in the format: HH:MM:SS",
+    "crumbs": [
+      "Labs",
+      "Event-Driven State Machine Lab"
+    ]
+  },
+  {
+    "objectID": "labs/event-driven-state-machine-lab.html#functional-states",
+    "href": "labs/event-driven-state-machine-lab.html#functional-states",
+    "title": "Event Driven State Machine Lab",
+    "section": "Functional States",
+    "text": "Functional States\n\nThe kitchen timer has an “Idle” state when it isn’t actively counting down time. In this state:\n\nThe Up/Down buttons increment the time for the HH, MM or SS values.\nThe Left/Right buttons let you move between HH, MM and SS.\nTime intervals will wrap around to 00 when a reasonable max value is exceeded.\nThe Reset button sets all of the time values to 00.\nThe Pause button is inactive.\n\nStart/Stop will start the timer countdown when in Idle.\nIn the Countdown state:\n\nThe Start/Stop button will stop and reset the countdown interval.\nThe Pause button will pause, but not reset, the countdown time.\n\nWhen the countdown is done, the timer enters an Alarm state, where:\n\nThe Up/Down/Right/Left arrow buttons, Reset and Pause buttons are inactive.\nStart/Stop will stop the alarm and return the timer to Idle with the previously set countdown time.\n\n\n\n\n\n\n\n\nTip\n\n\n\nIf any functional state expectation isn’t explicitly described above, please implement something reasonable.\n\n\nMake sure that your state diagram:\n\nHas initialization (i.e., batteries put in) and termination (i.e., completely powered off) dots.\nIncludes all functional states, including (but not limited to):\n\nIdle\nCountdown\nPaused\nAlarm\n\nConsider if states should have entry and exit actions.\nMake sure all transitions between states are annotated with associated triggering events.",
     "crumbs": [
       "Labs",
       "Event-Driven State Machine Lab"
@@ -227,7 +238,7 @@
     "href": "labs/event-driven-state-machine-lab.html#generate-the-state-diagram",
     "title": "Event Driven State Machine Lab",
     "section": "Generate the State Diagram",
-    "text": "Generate the State Diagram\n\nFormally render your state diagram using either:\n\nPlantUML (the tool shown in lecture)\nMermaid\ndraw.io\nLucidchart",
+    "text": "Generate the State Diagram\nFormally render your state diagram using one of the tools outlined on the State Diagram Tools page.",
     "crumbs": [
       "Labs",
       "Event-Driven State Machine Lab"
@@ -238,7 +249,7 @@
     "href": "labs/event-driven-state-machine-lab.html#gradescope",
     "title": "Event Driven State Machine Lab",
     "section": "Gradescope",
-    "text": "Gradescope\n\nUpload your rendered state diagram to the associated Gradescope assignment.",
+    "text": "Gradescope\nUpload your rendered state diagram to the associated Gradescope assignment.",
     "crumbs": [
       "Labs",
       "Event-Driven State Machine Lab"
