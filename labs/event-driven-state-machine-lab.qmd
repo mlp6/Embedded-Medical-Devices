@@ -6,31 +6,60 @@ format:
   pdf: default
 ---
 
-<!-- TODO: change this to something simpler -->
-## Wireless Heart Rate Monitor State Diagram
+::: callout-tip
+I would recommend doing this with pencil and paper first, not immediately
+jumping into a tool.  Err on the side of more detail than not.
+:::
 
-* Generate a state diagram for a wristwatch-based heart rate monitor that sends "instantaneous" heart rate data to a smartphone.
-  * ✔️ I would recommend doing this with pencil and paper first, not immediately jumping into a tool.
-  * Err on the side of more detail than not.
-* Make sure that your state diagram:
-  * Has start and termination dots.
-  * Includes all functional states, including (but not limited to):
-    * `Init`
+## Digital Kitchen Timer
+
+Generate a state diagram for a simple digital kitchen timer that has the following buttons:
+
+* `Start/Stop` Button
+* `Reset` Button
+* `Pause` Button
+* `Up`/`Down`/`Left`/`Right` Arrow Buttons (4)
+
+The timer outputs time intervals in the format: `HH:MM:SS`
+
+## Functional States
+
+* The kitchen timer has an "Idle" state when it isn't actively counting down time.  In this state:
+    * The `Up`/`Down` buttons increment the time for the `HH`, `MM` or `SS` values.
+    * The `Left`/`Right` buttons let you move between `HH`, `MM` and `SS`.
+    * Time intervals will wrap around to `00` when a reasonable max value is exceeded.
+    * The `Reset` button sets all of the time values to `00`.
+    * The `Pause` button is inactive.
+
+* `Start/Stop` will start the timer countdown when in `Idle`.
+* In the `Countdown` state:
+    * The `Start/Stop` button will stop and reset the countdown interval. 
+    * The `Pause` button will pause, but not reset, the countdown time.
+
+* When the countdown is done, the timer enters an `Alarm` state, where:
+    * The `Up`/`Down`/`Right`/`Left` arrow buttons, `Reset` and `Pause` buttons are inactive.
+    * `Start/Stop`  will stop the alarm and return the timer to `Idle` with the previously set countdown time.
+
+
+::: callout-tip
+If any functional state expectation isn't explicitly described above, please implement something reasonable.
+:::
+
+Make sure that your state diagram:
+
+* Has initialization (i.e., batteries put in) and termination (i.e., completely powered off) dots.
+* Includes all functional states, including (but not limited to):
     * `Idle`
-    * `Measuring`
-    * `Transmitting`
-    * `Error`
-  * Consider if states should have entry and exit actions.
-  * Make sure all transitions between states are annotated with associated triggering events.
+    * `Countdown`
+    * `Paused`
+    * `Alarm`
+* Consider if states should have entry and exit actions.
+* Make sure all transitions between states are annotated with associated triggering events.
 
 ## Generate the State Diagram
 
-* Formally render your state diagram using either:
-  * [PlantUML](https://plantuml.com/) (the tool shown in lecture)
-  * [Mermaid](https://mermaid.js.org/)
-  * [draw.io](https://www.draw.io/)
-  * [Lucidchart](https://www.lucidchart.com/)
+Formally render your state diagram using one of the tools outlined on the [State Diagram Tools](../resources/state_diagram.qmd) page.
 
 ## Gradescope
 
-* Upload your rendered state diagram to the associated Gradescope assignment.
+Upload your rendered state diagram to the associated Gradescope assignment.
