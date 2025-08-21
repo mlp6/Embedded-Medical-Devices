@@ -4,7 +4,7 @@ author: "Dr. Mark Palmeri, M.D., Ph.D."
 date-format: long
 format:
   live-revealjs:
-    footer: "[🔗 https://embeddedmedicaldevices.pages.oit.duke.edu/Embedded-Medical-Devices](https://embeddedmedicaldevices.pages.oit.duke.edu/Embedded-Medical-Devices)"
+    footer: "[🔗 https://github.com/mlp6/Embedded-Medical-Devices/](https://github.com/mlp6/Embedded-Medical-Devices/)"
     theme: slides.scss
     transition: fade
     slide-number: true
