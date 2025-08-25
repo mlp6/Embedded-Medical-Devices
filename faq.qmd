@@ -18,6 +18,10 @@ storage device was not unmounted properly.  To avoid this, you can do the
 following:
 [https://docs.zephyrproject.org/latest/develop/flash_debug/nordic_segger.html#disabling-the-mass-storage-device-functionality](https://docs.zephyrproject.org/latest/develop/flash_debug/nordic_segger.html#disabling-the-mass-storage-device-functionality)
 
+### Permission Denied when Upgrading nrfutil 
+
+When attempting to run `nrfutil self-upgrade` or other subsequent commands detailed for nrfutil, on macOS, if you encounter `permission denied`, navigate to the directory where you saved the nrfutil binary (via terminal) and run `chmod u+x nrfutil` to adjust its permissions. You can verify the effect of this by running `ls -l` before and after.  
+
 ### Permission Issues when Flashing
 
 The [nRF Command Line
