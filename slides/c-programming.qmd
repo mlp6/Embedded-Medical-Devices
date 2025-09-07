@@ -1,6 +1,6 @@
 ---
 title: "C Programming"
-date: "2025-08-25"
+date: "2025-09-08"
 format:
   live-html: 
     output-file: c-programming-notes.html
@@ -59,7 +59,7 @@ Raw binary data (bits) can quickly become cumbersome to read and write.  To make
 
 ## Base64
 
-![](images/c/base64.png)
+![](images/c/base64.png){fig-align="center"}
 
 [https://en.wikipedia.org/wiki/Base64](https://en.wikipedia.org/wiki/Base64)
 
@@ -67,7 +67,7 @@ Raw binary data (bits) can quickly become cumbersome to read and write.  To make
 
 ## ASCII
 
-![](images/c/USASCII_code_chart.png)
+![](images/c/USASCII_code_chart.png){fig-align="center"}
 
 [https://en.wikipedia.org/wiki/ASCII](https://en.wikipedia.org/wiki/ASCII)
 
@@ -90,9 +90,9 @@ https://en.wikipedia.org/wiki/UTF-8
 
 ## How are floating point numbers represented?
 
-![](images/c/Float_example.png)
+![](images/c/Float_example.png){fig-align="center"}
 
-![](images/c/significand-base-exponent.png)
+![](images/c/significand-base-exponent.png){fig-align="center"}
 
 ## Declaring Variables by Data Type (C)
 
