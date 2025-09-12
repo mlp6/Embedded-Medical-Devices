@@ -35,6 +35,8 @@ format:
     autoSetupRemote = true
 [pull]
     rebase = false
+[merge]
+    ff = no
 [init]
     defaultBranch = main
 ```
