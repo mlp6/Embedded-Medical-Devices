@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Dr.&nbsp;Mark Palmeri, M.D., Ph.D.">
-<meta name="dcterms.date" content="2025-08-25">
+<meta name="dcterms.date" content="2025-09-15">
 
 <title>GPIO / ISR / Callbacks – Embedded Medical Devices</title>
 <style>
@@ -449,6 +449,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#configure-gpio-pin-as-output" id="toc-configure-gpio-pin-as-output" class="nav-link" data-scroll-target="#configure-gpio-pin-as-output">Configure GPIO Pin as Output</a></li>
   <li><a href="#set-pin-state" id="toc-set-pin-state" class="nav-link" data-scroll-target="#set-pin-state">Set Pin State</a></li>
   <li><a href="#interrupt-configuration-flags" id="toc-interrupt-configuration-flags" class="nav-link" data-scroll-target="#interrupt-configuration-flags">Interrupt Configuration Flags</a></li>
+  <li><a href="#gpio-pins-can-be-both-input-and-output-concurrently" id="toc-gpio-pins-can-be-both-input-and-output-concurrently" class="nav-link" data-scroll-target="#gpio-pins-can-be-both-input-and-output-concurrently">GPIO Pins can be both <code>INPUT</code> and <code>OUTPUT</code> Concurrently</a></li>
   <li><a href="#button-debouncing" id="toc-button-debouncing" class="nav-link" data-scroll-target="#button-debouncing">Button Debouncing</a></li>
   </ul></li>
   </ul>
@@ -484,7 +485,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">August 25, 2025</p>
+      <p class="date">September 15, 2025</p>
     </div>
   </div>
   
@@ -784,13 +785,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="interrupt-configuration-flags" class="level2">
 <h2 class="anchored" data-anchor-id="interrupt-configuration-flags">Interrupt Configuration Flags</h2>
 <p>There are several other interrupt configuration flags that can be used to toggle the interrupt to trigger on falling edge, on both edges, etc.:</p>
-<!-- TODO: show relevant GPIO macro content in the slide -->
-<p><a href="https://docs.zephyrproject.org/latest/hardware/peripherals/gpio.html">GPIO Flags &amp; Documentation</a></p>
-<!-- TODO: show how GPIO can be set to both OUTPUT and INPUT (to read state) -->
+<p><a href="https://docs.zephyrproject.org/latest/doxygen/html/group__gpio__interface.html">GPIO Flags &amp; Documentation</a></p>
+<p>Relevant MACROS:</p>
+<ul>
+<li><p><code>GPIO_INT_EDGE_[TO_ACTIVE/TO_INACTIVE/BOTH]</code></p></li>
+<li><p><code>GPIO_INT_DISABLE</code></p></li>
+</ul>
+</section>
+<section id="gpio-pins-can-be-both-input-and-output-concurrently" class="level2">
+<h2 class="anchored" data-anchor-id="gpio-pins-can-be-both-input-and-output-concurrently">GPIO Pins can be both <code>INPUT</code> and <code>OUTPUT</code> Concurrently</h2>
+<p><strong>Why do this?</strong></p>
+<p>Intend to specify the output state of the pin, but also want to be able to read the actual state of the pin.</p>
+<p><code>gpio_pin_configure_dt(&amp;pin, GPIO_OUTPUT | GPIO_INPUT);</code></p>
 </section>
 <section id="button-debouncing" class="level2">
 <h2 class="anchored" data-anchor-id="button-debouncing">Button Debouncing</h2>
-<!-- TODO: show relevant debouncing content in the slide -->
+<div class="callout callout-style-default callout-note callout-titled" title="What is debouncing?">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+What is debouncing?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>“Debouncing” is a technique used to ensure that only a single signal is registered when a button is pressed, despite the fact that mechanical buttons can produce multiple rapid on/off signals (bounces) when pressed or released.</p>
+</div>
+</div>
 <p><a href="https://blog.golioth.io/how-to-debounce-button-inputs-in-a-real-time-operating-system/">How to Debounce Button Inputs in a RTOS</a></p>
 
 
