@@ -1,6 +1,6 @@
 ---
 title: "Zephyr: Devicetree, GPIO, ISR and Callbacks Lab"
-date: "2025-08-25"
+date: "2025-09-15"
 format:
   html: default
   pdf: default
@@ -13,6 +13,13 @@ This week we will start programming the firmware that will be controlling your
 be used to visualize output activity for the device.  While LEDs might seem
 underwhelming, they are a universal way to represent how digital ouput signals
 could be used to control other devices (e.g., motors, actuators, etc.).
+
+## Nordic DevAcademy Modules
+
+Please complete the following Nordic DevAcademy modules:
+
+1. [Reading Buttons and Controlling LEDs](https://academy.nordicsemi.com/courses/nrf-connect-sdk-fundamentals/lessons/lesson-2-reading-buttons-and-controlling-leds/)
+1. [Debugging & Troubleshooting](https://academy.nordicsemi.com/courses/nrf-connect-sdk-intermediate/lessons/lesson-2-debugging/)
 
 ## Git Version Control
 
