@@ -106,15 +106,15 @@ preprocessor macro: `#define FREQ_DOWN_INC_HZ 1`.
 - Issue a descriptive `LOG_INF()` statement each time this button is
 pressed, which indicates the new blink frequency.
 - If the blink frequency for the "action" LEDs is < 1 Hz or > 5 Hz, then:
-- The "action" LEDs should both be off, and 
-- The `error` LED is continuously illuminated.  
-- Issue a descriptive `LOG_ERR()` statement.
-- The `heartbeat` LED should continue to blink at 1 Hz.
-- `freq_up_button`, `freq_down_button`, and `sleep_button` should be
-disabled (interrupts disabled).
-- Define each of these min/max limits using preprocessor macros (you can choose
-appropriate names).
-- The only way to exit the "error state" is to press the `reset` button.
+    - The "action" LEDs should both be off, and 
+    - The `error` LED is continuously illuminated.  
+    - Issue a descriptive `LOG_ERR()` statement.
+    - The `heartbeat` LED should continue to blink at 1 Hz.
+    - `freq_up_button`, `freq_down_button`, and `sleep_button` should be
+    disabled (interrupts disabled).
+    - The only way to exit the "error state" is to press the `reset` button.
+- Define each of these min/max blinking frequencylimits using preprocessor
+macros (you can choose appropriate names).
 - Pressing the `reset` button resets the "action" LEDs to blink at their
 default 2 Hz rate, out of phase with one another, and re-enables the
 `freq_up_button`, `freq_down_button`, and `sleep_button`.
