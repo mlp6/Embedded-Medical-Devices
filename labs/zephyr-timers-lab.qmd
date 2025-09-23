@@ -1,6 +1,6 @@
 ---
 title: "Zephyr: Timers Lab"
-date: "2025-08-25"
+date: "2025-09-22"
 format:
   html: default
   pdf: default
@@ -20,7 +20,7 @@ should use work queues to submit the work to the system work queue.
 
 ## Git Version Control
 
-{{< include _ask_for_help.qmd >}}
+{{< include _git_best_practices.qmd >}}
 
 ## Test the Accuracy of your Timing
 
