@@ -2063,7 +2063,7 @@
     "href": "labs/zephyr-timers-lab.html#git-version-control",
     "title": "Zephyr: Timers Lab",
     "section": "Git Version Control",
-    "text": "Git Version Control\n\nIf you have a general / non-coding question, you should ask your TAs / Dr. Palmeri on Ed to allow any of them to respond in a timely manner.\nPush you code to your GitLab repository, ideally with your active development on a non-main branch.\nCreate an Issue in your repository.\n\nAdd as much detail as possible as to your problem, and add links to specific lines / section of code when possible.\nAssign the label “Bug” or “Question”, as appropriate.\nBe sure to specify what branch you are working on.\nAssign the Issue to one of the TAs.\nIf your TA cannot solve your Issue, they can escalate the Issue to Dr. Palmeri.\n\nYou will get a response to your Issue, and maybe a new branch of code will be pushed to help you with some example syntax that you can use git diff to visualize.",
+    "text": "Git Version Control\n\nUse best practices for version control (branching, commit messages, etc.).\nDo all development on a dedicated branch that is merged into main once it is functional.\nCommits should be very specific to the changes/additions you are making to your code. This will help you and others understand what you did and why you did it.\n\nOn a given development branch, try to implement one small piece of functionality at a time, commit it, and then move on to the next piece of functionality.\n\n\n\n\n\n\n\nImportant\n\n\n\nYou do not want one, monolithic git commit right before you submit your project.",
     "crumbs": [
       "Labs",
       "Timers Lab"
