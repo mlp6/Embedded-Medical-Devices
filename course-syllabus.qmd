@@ -14,13 +14,15 @@ Dr. Mark Palmeri (`mlp6`)
 
 * Email: [mark.palmeri@duke.edu](mailto:mark.palmeri@duke.edu)
 * [Ed Discussion](https://edstem.org/us/courses/81241/discussion) (private message, TAs included)
-* Office Hours: Tues, 13:00-15:00 (258 Hudson Hall Annex)
+* Office Hours: Tues & Thurs, 14:30-15:30 (258 Hudson Hall Annex)
 
 ### Teaching Assistants
 
 * Ceci Schmidz (`cls157`)
 * Evan Smith (`jes114`)
 * Harvey Shi (`hys3`)
+
+For TA office hours (in the lab), please see the Canvas calendar.
 
 ::: callout-tip
 Questions that can be answered by Dr. Palmeri or a teaching assistant should be
