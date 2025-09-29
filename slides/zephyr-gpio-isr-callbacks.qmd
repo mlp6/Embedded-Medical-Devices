@@ -308,15 +308,6 @@ Relevant MACROS:
 
 - `GPIO_INT_DISABLE`
 
-## GPIO Pins can be both `INPUT` and `OUTPUT` Concurrently
-
-**Why do this?**
-
-Intend to specify the output state of the pin, but also want to be able to read the actual state of the pin.
-
-`gpio_pin_configure_dt(&pin, GPIO_OUTPUT | GPIO_INPUT);`
-
-
 ## Button Debouncing
 
 ::: {.callout-note title="What is debouncing?"}
