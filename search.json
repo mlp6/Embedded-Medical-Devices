@@ -1122,17 +1122,6 @@
     ]
   },
   {
-    "objectID": "slides/zephyr-gpio-isr-callbacks.html#gpio-pins-can-be-both-input-and-output-concurrently",
-    "href": "slides/zephyr-gpio-isr-callbacks.html#gpio-pins-can-be-both-input-and-output-concurrently",
-    "title": "GPIO / ISR / Callbacks",
-    "section": "GPIO Pins can be both INPUT and OUTPUT Concurrently",
-    "text": "GPIO Pins can be both INPUT and OUTPUT Concurrently\nWhy do this?\nIntend to specify the output state of the pin, but also want to be able to read the actual state of the pin.\ngpio_pin_configure_dt(&pin, GPIO_OUTPUT | GPIO_INPUT);",
-    "crumbs": [
-      "Learning Modules",
-      "GPIO, ISR, and Callbacks"
-    ]
-  },
-  {
     "objectID": "slides/zephyr-gpio-isr-callbacks.html#button-debouncing",
     "href": "slides/zephyr-gpio-isr-callbacks.html#button-debouncing",
     "title": "GPIO / ISR / Callbacks",
@@ -1282,13 +1271,6 @@
     "title": "GPIO / ISR / Callbacks",
     "section": "Interrupt Configuration Flags",
     "text": "Interrupt Configuration Flags\nThere are several other interrupt configuration flags that can be used to toggle the interrupt to trigger on falling edge, on both edges, etc.:\nGPIO Flags & Documentation\nRelevant MACROS:\n\nGPIO_INT_EDGE_[TO_ACTIVE/TO_INACTIVE/BOTH]\nGPIO_INT_DISABLE"
-  },
-  {
-    "objectID": "slides/zephyr-gpio-isr-callbacks-slides.html#gpio-pins-can-be-both-input-and-output-concurrently",
-    "href": "slides/zephyr-gpio-isr-callbacks-slides.html#gpio-pins-can-be-both-input-and-output-concurrently",
-    "title": "GPIO / ISR / Callbacks",
-    "section": "GPIO Pins can be both INPUT and OUTPUT Concurrently",
-    "text": "GPIO Pins can be both INPUT and OUTPUT Concurrently\nWhy do this?\nIntend to specify the output state of the pin, but also want to be able to read the actual state of the pin.\ngpio_pin_configure_dt(&pin, GPIO_OUTPUT | GPIO_INPUT);"
   },
   {
     "objectID": "slides/zephyr-gpio-isr-callbacks-slides.html#button-debouncing",

@@ -523,12 +523,6 @@ Dr.&nbsp;Mark Palmeri, M.D., Ph.D.
 <li><p><code>GPIO_INT_DISABLE</code></p></li>
 </ul>
 </section>
-<section id="gpio-pins-can-be-both-input-and-output-concurrently" class="slide level2">
-<h2>GPIO Pins can be both <code>INPUT</code> and <code>OUTPUT</code> Concurrently</h2>
-<p><strong>Why do this?</strong></p>
-<p>Intend to specify the output state of the pin, but also want to be able to read the actual state of the pin.</p>
-<p><code>gpio_pin_configure_dt(&amp;pin, GPIO_OUTPUT | GPIO_INPUT);</code></p>
-</section>
 <section id="button-debouncing" class="slide level2">
 <h2>Button Debouncing</h2>
 <div title="What is debouncing?">

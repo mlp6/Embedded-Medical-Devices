@@ -449,7 +449,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#configure-gpio-pin-as-output" id="toc-configure-gpio-pin-as-output" class="nav-link" data-scroll-target="#configure-gpio-pin-as-output">Configure GPIO Pin as Output</a></li>
   <li><a href="#set-pin-state" id="toc-set-pin-state" class="nav-link" data-scroll-target="#set-pin-state">Set Pin State</a></li>
   <li><a href="#interrupt-configuration-flags" id="toc-interrupt-configuration-flags" class="nav-link" data-scroll-target="#interrupt-configuration-flags">Interrupt Configuration Flags</a></li>
-  <li><a href="#gpio-pins-can-be-both-input-and-output-concurrently" id="toc-gpio-pins-can-be-both-input-and-output-concurrently" class="nav-link" data-scroll-target="#gpio-pins-can-be-both-input-and-output-concurrently">GPIO Pins can be both <code>INPUT</code> and <code>OUTPUT</code> Concurrently</a></li>
   <li><a href="#button-debouncing" id="toc-button-debouncing" class="nav-link" data-scroll-target="#button-debouncing">Button Debouncing</a></li>
   </ul></li>
   </ul>
@@ -791,12 +790,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p><code>GPIO_INT_EDGE_[TO_ACTIVE/TO_INACTIVE/BOTH]</code></p></li>
 <li><p><code>GPIO_INT_DISABLE</code></p></li>
 </ul>
-</section>
-<section id="gpio-pins-can-be-both-input-and-output-concurrently" class="level2">
-<h2 class="anchored" data-anchor-id="gpio-pins-can-be-both-input-and-output-concurrently">GPIO Pins can be both <code>INPUT</code> and <code>OUTPUT</code> Concurrently</h2>
-<p><strong>Why do this?</strong></p>
-<p>Intend to specify the output state of the pin, but also want to be able to read the actual state of the pin.</p>
-<p><code>gpio_pin_configure_dt(&amp;pin, GPIO_OUTPUT | GPIO_INPUT);</code></p>
 </section>
 <section id="button-debouncing" class="level2">
 <h2 class="anchored" data-anchor-id="button-debouncing">Button Debouncing</h2>
