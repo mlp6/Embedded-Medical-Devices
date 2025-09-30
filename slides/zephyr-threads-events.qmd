@@ -41,7 +41,7 @@ don't want the kernel to wait.
 
 ```C
 /* 1024 byte stack, handler, NULL, NULL, NULL, priority 5, no time slice, no delay */
-K_THREAD_DEFINE(heartbeat_thread_id, 1024, error_thread, NULL, NULL, NULL, 5, 0, 0);
+K_THREAD_DEFINE(heartbeat_thread_id, 1024, heartbeat_thread, NULL, NULL, NULL, 5, 0, 0);
 
 extern void heartbeat_thread(void *, void *, void *) {
 
