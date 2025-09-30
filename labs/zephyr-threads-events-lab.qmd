@@ -1,10 +1,11 @@
 ---
 title: "Zephyr: Threads & Kernel Events Lab"
-date: "2025-08-25"
+date: "2025-09-29"
 format:
   html: default
   pdf: default
 ---
+
 ## Git Version Control
 
 {{< include _git_best_practices.qmd >}}
@@ -17,6 +18,7 @@ the heartbeat LED.  Do all of the refactoring below on a new branch called
 
 - Refactor your code to use a thread instead of a kernel timer to control the
 heartbeat LED.
+
 - Instead of having your heartbeat blink at 1 Hz with a 50% duty cycle, change
 it to have a 25% duty cycle (i.e., on for 250 ms, off for 750 ms).
 
@@ -25,10 +27,13 @@ it to have a 25% duty cycle (i.e., on for 250 ms, off for 750 ms).
 - Create a new Jupyter notebook for this lab's technical report called
 `testing/thread_testing.ipynb` that analyzes the accuracy of your 25% duty cycle
 heartbeat LED.
+
 - Perform these measurements using the oscilloscope, and save all raw data in
 dedicated CSV files.
+
 - Choose what to measure and how to analyze the data to verify that the
 heartbeat LED thread is working as expected.
+
 - Discuss the results of your measurements and how they compare to the nominal
 specifications for the heartbeat LED.
 
@@ -40,8 +45,10 @@ repository, **not** absolute paths on your local machine.
 :::
 
 - Push your `heartbeat_refactor` branch to GitLab.
+
 - Create a new Merge Request to merge `heartbeat_refactor` into your forked
 repository's `main` branch.
+
 - Merge your `heartbeat_refactor` branch into your `main` branch, and create an
 annotated tag for that merged commit called `v1.2.0`.
 
@@ -49,10 +56,13 @@ annotated tag for that merged commit called `v1.2.0`.
 
 - Do the following refactoring on a new branch called `kernel_events_refactor`,
 branched after the `v1.2.0` commit.
+
 - Refactor all of your code to remove Boolean variables being used in your ISR
 callback functions to indicate that buttons have been pressed to now use kernel
 events in a single bit array called `button_events`.
-- You should use 1 bit for each button, meaning the bit array is 4-bits.
+
+- You should use 1-bit for each button, meaning the bit array is 4-bits.
+
 - Implement a `k_event_wait()` in the appropriate state(s) of your main thread
 to wait for button events to occur.  This will be a blocking wait, meaning the
 `main` thread `while` loop will not be running while waiting for button events.
@@ -61,6 +71,7 @@ to wait for button events to occur.  This will be a blocking wait, meaning the
 
 - Create a new Jupyter notebook called `testing/kernel_events_validation.ipynb`
 to verify that your refactored code still works as expected.
+
 - It is up to you to now determine how to verify that your LED timing is still
 working with regard to what data to collect, how to analyze it, and how to
 present it in your notebook.
@@ -69,8 +80,11 @@ present it in your notebook.
 
 - Create a Merge Request to merge `kernel_events_refactor` into your `main`
 branch.
+
 - Merge your `kernel_events_refactor` branch into your `main` branch.
+
 - Create an annotated tag for that merge commit called `v1.3.0`.
+
 - Create an Issue assigned to Dr. Palmeri to review your code for both `v1.2.0`
 and `v1.3.0`.
 
