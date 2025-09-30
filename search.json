@@ -373,7 +373,7 @@
     "href": "slides/zephyr-threads-events.html",
     "title": "Zephyr: Threads and Kernel Events",
     "section": "",
-    "text": "Threads are the basic unit of execution in Zephyr.\nThreads are scheduled by the kernel.\nThreads can be in one of three states:\n\nReady: The thread is ready to run.\nRunning: The thread is currently running.\nBlocked: The thread is waiting for an event to occur.\n\n\n\n\n\nMain thread\nKernel timer threads\n\nBut we can define our own threads for a variety of purposes!\n\nWait for a task to complete, then do something else.\nExample: Wait for data to save to an SD card, then do something else, but don’t want the kernel to wait.",
+    "text": "Threads are the basic unit of execution in Zephyr.\nThreads are scheduled by the kernel.\nThreads can be in one of three states:\n\nReady: The thread is ready to run.\nRunning: The thread is currently running.\nBlocked: The thread is waiting for an event to occur.",
     "crumbs": [
       "Learning Modules",
       "Threads and Kernel Events"
@@ -384,7 +384,18 @@
     "href": "slides/zephyr-threads-events.html#threads",
     "title": "Zephyr: Threads and Kernel Events",
     "section": "",
-    "text": "Threads are the basic unit of execution in Zephyr.\nThreads are scheduled by the kernel.\nThreads can be in one of three states:\n\nReady: The thread is ready to run.\nRunning: The thread is currently running.\nBlocked: The thread is waiting for an event to occur.\n\n\n\n\n\nMain thread\nKernel timer threads\n\nBut we can define our own threads for a variety of purposes!\n\nWait for a task to complete, then do something else.\nExample: Wait for data to save to an SD card, then do something else, but don’t want the kernel to wait.",
+    "text": "Threads are the basic unit of execution in Zephyr.\nThreads are scheduled by the kernel.\nThreads can be in one of three states:\n\nReady: The thread is ready to run.\nRunning: The thread is currently running.\nBlocked: The thread is waiting for an event to occur.",
+    "crumbs": [
+      "Learning Modules",
+      "Threads and Kernel Events"
+    ]
+  },
+  {
+    "objectID": "slides/zephyr-threads-events.html#weve-already-used-threads",
+    "href": "slides/zephyr-threads-events.html#weve-already-used-threads",
+    "title": "Zephyr: Threads and Kernel Events",
+    "section": "We’ve Already Used Threads",
+    "text": "We’ve Already Used Threads\n\nMain thread\nKernel timer threads\n\nBut we can define our own threads for a variety of purposes!\n\nWait for a task to complete, then do something else.\nExample: Wait for data to save to an SD card, then do something else, but don’t want the kernel to wait.",
     "crumbs": [
       "Learning Modules",
       "Threads and Kernel Events"
@@ -472,7 +483,7 @@
     "href": "slides/zephyr-threads-events.html#waiting-for-events",
     "title": "Zephyr: Threads and Kernel Events",
     "section": "Waiting for Events",
-    "text": "Waiting for Events\n\nWith kernel events, we can now implement a thread that waits for an event to occur and then changes the state of the state machine.\n\nThreads are started when your firmware is initialized; it does not need to be “called” (like a function).\n\n/* 1024 byte stack, handler, NULL, NULL, NULL, priority 5, no time slice, no delay */\nK_THREAD_DEFINE(temp_too_high_thread_id, 1024, temp_too_high_thread, NULL, NULL, NULL, 5, 0, 0);\n\nextern void temp_too_high_thread(void *, void *, void *) {\n\n    // need to loop to keep the thread running after the first error occurs\n    while (1) {\n        \n        /* &temp_events is a pointer to an event bit array\n           0xF is an example of a bit mask of events in the array to wait for - any, not all\n           true clears all of the events that may have previously been posted before waiting\n           K_FOREVER means wait indefinitely (this could be a finite period of time instead) \n        */\n        uint32_t events = k_event_wait(&temp_events, 0xF, true, K_FOREVER);\n        // can also define the bit mask as a logical operation of the individual bits\n        // uint32_t events = k_event_wait(&temp_events, TEMP_TOO_HIGH_EVENT | TEMP_TOO_LOW EVENT, true, K_FOREVER);\n        // events is an int representation of the  bit mask of the events that were posted\n\n        // if you want to wait for **ALL** events in the mask, use\n        // k_event_wait_all() instead of k_event_wait()\n\n        LOG_INF(\"Temperature Event Posted: %d\", events); // bit array mask output as an int\n\n        shut_down_system(); // do something in response to the temperature event, like change states\n    }\n}",
+    "text": "Waiting for Events\n\nWith kernel events, we can now implement a thread that waits for an event to occur and then changes the state of the state machine.\nThreads are started when your firmware is initialized; it does not need to be “called” (like a function).\n\n/* 1024 byte stack, handler, NULL, NULL, NULL, priority 5, no time slice, no delay */\nK_THREAD_DEFINE(temp_too_high_thread_id, 1024, temp_too_high_thread, NULL, NULL, NULL, 5, 0, 0);\n\nextern void temp_too_high_thread(void *, void *, void *) {\n\n    // need to loop to keep the thread running after the first error occurs\n    while (1) {\n        \n        /* &temp_events is a pointer to an event bit array\n           0xF is an example of a bit mask of events in the array to wait for - any, not all\n           true clears all of the events that may have previously been posted before waiting\n           K_FOREVER means wait indefinitely (this could be a finite period of time instead) \n        */\n        uint32_t events = k_event_wait(&temp_events, 0xF, true, K_FOREVER);\n        // can also define the bit mask as a logical operation of the individual bits\n        // uint32_t events = k_event_wait(&temp_events, TEMP_TOO_HIGH_EVENT | TEMP_TOO_LOW EVENT, true, K_FOREVER);\n        // events is an int representation of the  bit mask of the events that were posted\n\n        // if you want to wait for **ALL** events in the mask, use\n        // k_event_wait_all() instead of k_event_wait()\n\n        LOG_INF(\"Temperature Event Posted: %d\", events); // bit array mask output as an int\n\n        shut_down_system(); // do something in response to the temperature event, like change states\n    }\n}",
     "crumbs": [
       "Learning Modules",
       "Threads and Kernel Events"
@@ -494,7 +505,14 @@
     "href": "slides/zephyr-threads-events-slides.html#threads",
     "title": "Zephyr: Threads and Kernel Events",
     "section": "Threads",
-    "text": "Threads\n\nThreads are the basic unit of execution in Zephyr.\nThreads are scheduled by the kernel.\nThreads can be in one of three states:\n\nReady: The thread is ready to run.\nRunning: The thread is currently running.\nBlocked: The thread is waiting for an event to occur.\n\n\nWe’ve Already Used Threads\n\nMain thread\nKernel timer threads\n\nBut we can define our own threads for a variety of purposes!\n\nWait for a task to complete, then do something else.\nExample: Wait for data to save to an SD card, then do something else, but don’t want the kernel to wait."
+    "text": "Threads\n\nThreads are the basic unit of execution in Zephyr.\nThreads are scheduled by the kernel.\nThreads can be in one of three states:\n\nReady: The thread is ready to run.\nRunning: The thread is currently running.\nBlocked: The thread is waiting for an event to occur."
+  },
+  {
+    "objectID": "slides/zephyr-threads-events-slides.html#weve-already-used-threads",
+    "href": "slides/zephyr-threads-events-slides.html#weve-already-used-threads",
+    "title": "Zephyr: Threads and Kernel Events",
+    "section": "We’ve Already Used Threads",
+    "text": "We’ve Already Used Threads\n\nMain thread\nKernel timer threads\n\nBut we can define our own threads for a variety of purposes!\n\nWait for a task to complete, then do something else.\nExample: Wait for data to save to an SD card, then do something else, but don’t want the kernel to wait."
   },
   {
     "objectID": "slides/zephyr-threads-events-slides.html#example-use-case-heartbeat-led-toggle-at-25-duty-cycle",
@@ -550,7 +568,7 @@
     "href": "slides/zephyr-threads-events-slides.html#waiting-for-events",
     "title": "Zephyr: Threads and Kernel Events",
     "section": "Waiting for Events",
-    "text": "Waiting for Events\n\nWith kernel events, we can now implement a thread that waits for an event to occur and then changes the state of the state machine.\n\nThreads are started when your firmware is initialized; it does not need to be “called” (like a function).\n\n/* 1024 byte stack, handler, NULL, NULL, NULL, priority 5, no time slice, no delay */\nK_THREAD_DEFINE(temp_too_high_thread_id, 1024, temp_too_high_thread, NULL, NULL, NULL, 5, 0, 0);\n\nextern void temp_too_high_thread(void *, void *, void *) {\n\n    // need to loop to keep the thread running after the first error occurs\n    while (1) {\n        \n        /* &temp_events is a pointer to an event bit array\n           0xF is an example of a bit mask of events in the array to wait for - any, not all\n           true clears all of the events that may have previously been posted before waiting\n           K_FOREVER means wait indefinitely (this could be a finite period of time instead) \n        */\n        uint32_t events = k_event_wait(&temp_events, 0xF, true, K_FOREVER);\n        // can also define the bit mask as a logical operation of the individual bits\n        // uint32_t events = k_event_wait(&temp_events, TEMP_TOO_HIGH_EVENT | TEMP_TOO_LOW EVENT, true, K_FOREVER);\n        // events is an int representation of the  bit mask of the events that were posted\n\n        // if you want to wait for **ALL** events in the mask, use\n        // k_event_wait_all() instead of k_event_wait()\n\n        LOG_INF(\"Temperature Event Posted: %d\", events); // bit array mask output as an int\n\n        shut_down_system(); // do something in response to the temperature event, like change states\n    }\n}"
+    "text": "Waiting for Events\n\nWith kernel events, we can now implement a thread that waits for an event to occur and then changes the state of the state machine.\nThreads are started when your firmware is initialized; it does not need to be “called” (like a function).\n\n/* 1024 byte stack, handler, NULL, NULL, NULL, priority 5, no time slice, no delay */\nK_THREAD_DEFINE(temp_too_high_thread_id, 1024, temp_too_high_thread, NULL, NULL, NULL, 5, 0, 0);\n\nextern void temp_too_high_thread(void *, void *, void *) {\n\n    // need to loop to keep the thread running after the first error occurs\n    while (1) {\n        \n        /* &temp_events is a pointer to an event bit array\n           0xF is an example of a bit mask of events in the array to wait for - any, not all\n           true clears all of the events that may have previously been posted before waiting\n           K_FOREVER means wait indefinitely (this could be a finite period of time instead) \n        */\n        uint32_t events = k_event_wait(&temp_events, 0xF, true, K_FOREVER);\n        // can also define the bit mask as a logical operation of the individual bits\n        // uint32_t events = k_event_wait(&temp_events, TEMP_TOO_HIGH_EVENT | TEMP_TOO_LOW EVENT, true, K_FOREVER);\n        // events is an int representation of the  bit mask of the events that were posted\n\n        // if you want to wait for **ALL** events in the mask, use\n        // k_event_wait_all() instead of k_event_wait()\n\n        LOG_INF(\"Temperature Event Posted: %d\", events); // bit array mask output as an int\n\n        shut_down_system(); // do something in response to the temperature event, like change states\n    }\n}"
   },
   {
     "objectID": "slides/zephyr-threads-events-slides.html#resources",

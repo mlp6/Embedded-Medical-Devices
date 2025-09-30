@@ -12,7 +12,7 @@
   <meta name="generator" content="quarto-1.7.31">
 
   <meta name="author" content="Dr.&nbsp;Mark Palmeri, M.D., Ph.D.">
-  <meta name="dcterms.date" content="2025-08-25">
+  <meta name="dcterms.date" content="2025-09-29">
   <title>Embedded Medical Devices – Zephyr: Threads and Kernel Events</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -212,21 +212,23 @@ Dr.&nbsp;Mark Palmeri, M.D., Ph.D.
     </div>
 </div>
 
-  <p class="date">August 25, 2025</p>
+  <p class="date">September 29, 2025</p>
 </section>
 <section id="threads" class="slide level2">
 <h2>Threads</h2>
 <ul>
-<li>Threads are the basic unit of execution in Zephyr.</li>
-<li>Threads are scheduled by the kernel.</li>
-<li>Threads can be in one of three states:
+<li><p>Threads are the basic unit of execution in Zephyr.</p></li>
+<li><p>Threads are scheduled by the kernel.</p></li>
+<li><p>Threads can be in one of three states:</p>
 <ul>
-<li><strong>Ready</strong>: The thread is ready to run.</li>
-<li><strong>Running</strong>: The thread is currently running.</li>
-<li><strong>Blocked</strong>: The thread is waiting for an event to occur.</li>
+<li><p><strong>Ready</strong>: The thread is ready to run.</p></li>
+<li><p><strong>Running</strong>: The thread is currently running.</p></li>
+<li><p><strong>Blocked</strong>: The thread is waiting for an event to occur.</p></li>
 </ul></li>
 </ul>
-<h3 id="weve-already-used-threads">We’ve Already Used Threads</h3>
+</section>
+<section id="weve-already-used-threads" class="slide level2">
+<h2>We’ve Already Used Threads</h2>
 <ul>
 <li><code>Main</code> thread</li>
 <li>Kernel timer threads</li>
@@ -240,8 +242,8 @@ Dr.&nbsp;Mark Palmeri, M.D., Ph.D.
 <section id="example-use-case-heartbeat-led-toggle-at-25-duty-cycle" class="slide level2">
 <h2>Example Use Case: Heartbeat LED Toggle at 25% Duty Cycle</h2>
 <ul>
-<li>This is not as easy to implement with a single kernel timer.</li>
-<li>But we can use a thread to toggle the LED at 25% duty cycle <strong>and</strong> not hit the kernel to do so:</li>
+<li><p>This is not as easy to implement with a single kernel timer.</p></li>
+<li><p>But we can use a thread to toggle the LED at 25% duty cycle <strong>and</strong> not hit the kernel to do so:</p></li>
 </ul>
 <div class="sourceCode" id="cb1"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb1-1"><a></a><span class="co">/* 1024 byte stack, handler, NULL, NULL, NULL, priority 5, no time slice, no delay */</span></span>
 <span id="cb1-2"><a></a>K_THREAD_DEFINE<span class="op">(</span>heartbeat_thread_id<span class="op">,</span> <span class="dv">1024</span><span class="op">,</span> error_thread<span class="op">,</span> NULL<span class="op">,</span> NULL<span class="op">,</span> NULL<span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">);</span></span>
@@ -265,34 +267,34 @@ Dr.&nbsp;Mark Palmeri, M.D., Ph.D.
 <section id="threads-vs.-timers" class="slide level2">
 <h2>Threads vs.&nbsp;Timers</h2>
 <ul>
-<li>The thread can have blocking calls (e.g., <code>k_msleep</code>) without blocking other threads.</li>
-<li>The scheduler can run other threads while this thread is sleeping (or yields).</li>
-<li>The scheduler can preempt the thread at any time with higher priority tasks (e.g., ISR callbacks, higher-priority threads).</li>
-<li>No need for a separate handler function.</li>
-<li>More difficult to start/stop/reset than a timer.</li>
-<li>Need explicitly allocated stack space.</li>
-<li>Difficult to coordinate high-accuracy timing with other tasks/threads.</li>
+<li><p>The thread can have blocking calls (e.g., <code>k_msleep</code>) without blocking other threads.</p></li>
+<li><p>The scheduler can run other threads while this thread is sleeping (or yields).</p></li>
+<li><p>The scheduler can preempt the thread at any time with higher priority tasks (e.g., ISR callbacks, higher-priority threads).</p></li>
+<li><p>No need for a separate handler function.</p></li>
+<li><p>More difficult to start/stop/reset than a timer.</p></li>
+<li><p>Need explicitly allocated stack space.</p></li>
+<li><p>Difficult to coordinate high-accuracy timing with other tasks/threads.</p></li>
 </ul>
 </section>
 <section id="kernel-events" class="slide level2">
 <h2>Kernel Events</h2>
 <ul>
-<li>Kernel events can be used to indicate that “something” has happened, which may dictate the function of the state machine.
+<li><p>Kernel events can be used to indicate that “something” has happened, which may dictate the function of the state machine.</p>
 <ul>
-<li>Button press</li>
-<li>Sensor crossing a threshold</li>
-<li>Timer expiring</li>
+<li><p>Button press</p></li>
+<li><p>Sensor crossing a threshold</p></li>
+<li><p>Timer expiring</p></li>
 </ul></li>
-<li>Enabled in <code>prj.conf</code> with <code>CONFIG_EVENTS=y</code>.</li>
+<li><p>Enabled in <code>prj.conf</code> with <code>CONFIG_EVENTS=y</code>.</p></li>
 </ul>
 </section>
 <section id="kernel-event-bit-arrays" class="slide level2">
 <h2>Kernel Event Bit Arrays</h2>
 <ul>
-<li>Kernel events are stored in a <strong>bit array</strong> (an array, where each bit (<code>0/1</code>) indicates (<code>False/True</code>) if an event has occured).</li>
-<li>When an event occurs, it is <strong>posted</strong> (<code>k_event_post</code>).</li>
-<li>A state machine can <strong>wait</strong> (<code>k_event_wait</code>) for an event (or events) to occur.</li>
-<li>Events can be <strong>cleared</strong> (<code>k_event_clear</code>) after they are processed.</li>
+<li><p>Kernel events are stored in a <strong>bit array</strong> (an array, where each bit (<code>0/1</code>) indicates (<code>False/True</code>) if an event has occured).</p></li>
+<li><p>When an event occurs, it is <strong>posted</strong> (<code>k_event_post</code>).</p></li>
+<li><p>A state machine can <strong>wait</strong> (<code>k_event_wait</code>) for an event (or events) to occur.</p></li>
+<li><p>Events can be <strong>cleared</strong> (<code>k_event_clear</code>) after they are processed.</p></li>
 </ul>
 </section>
 <section id="why-kernel-events-over-boolean-variables" class="slide level2">
@@ -320,9 +322,8 @@ Dr.&nbsp;Mark Palmeri, M.D., Ph.D.
 <section id="waiting-for-events" class="slide level2">
 <h2>Waiting for Events</h2>
 <ul>
-<li>With kernel events, we can now implement a thread that waits for an event to occur and then changes the state of the state machine.<br>
-</li>
-<li>Threads are started when your firmware is initialized; it does not need to be “called” (like a function).</li>
+<li><p>With kernel events, we can now implement a thread that waits for an event to occur and then changes the state of the state machine.</p></li>
+<li><p>Threads are started when your firmware is initialized; it does not need to be “called” (like a function).</p></li>
 </ul>
 <div class="sourceCode" id="cb4"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb4-1"><a></a><span class="co">/* 1024 byte stack, handler, NULL, NULL, NULL, priority 5, no time slice, no delay */</span></span>
 <span id="cb4-2"><a></a>K_THREAD_DEFINE<span class="op">(</span>temp_too_high_thread_id<span class="op">,</span> <span class="dv">1024</span><span class="op">,</span> temp_too_high_thread<span class="op">,</span> NULL<span class="op">,</span> NULL<span class="op">,</span> NULL<span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">);</span></span>
@@ -354,8 +355,8 @@ Dr.&nbsp;Mark Palmeri, M.D., Ph.D.
 <section id="resources" class="slide level2">
 <h2>Resources</h2>
 <ul>
-<li><a href="https://academy.nordicsemi.com/courses/nrf-connect-sdk-intermediate/lessons/lesson-1-zephyr-rtos-advanced/">Nordic DevAcademy: Zephyr RTOS Advanced</a></li>
-<li><a href="https://docs.zephyrproject.org/latest/kernel/services/synchronization/events.html#events">Zephyr Documentation: Events</a></li>
+<li><p><a href="https://academy.nordicsemi.com/courses/nrf-connect-sdk-intermediate/lessons/lesson-1-zephyr-rtos-advanced/">Nordic DevAcademy: Zephyr RTOS Advanced</a></p></li>
+<li><p><a href="https://docs.zephyrproject.org/latest/kernel/services/synchronization/events.html#events">Zephyr Documentation: Events</a></p></li>
 </ul>
 
 
