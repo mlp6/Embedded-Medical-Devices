@@ -1,6 +1,6 @@
 ---
 title: "Zephyr: Threads and Kernel Events"
-date: "2025-08-25"
+date: "2025-09-29"
 format: 
   live-html: 
     output-file: zephyr-threads-events.html
@@ -11,13 +11,18 @@ format:
 ## Threads
 
 - Threads are the basic unit of execution in Zephyr.
+
 - Threads are scheduled by the kernel.
+
 - Threads can be in one of three states:
+
   - **Ready**: The thread is ready to run.
+
   - **Running**: The thread is currently running.
+
   - **Blocked**: The thread is waiting for an event to occur.
 
-### We've Already Used Threads
+## We've Already Used Threads
 
 - `Main` thread
 - Kernel timer threads
@@ -31,6 +36,7 @@ don't want the kernel to wait.
 ## Example Use Case: Heartbeat LED Toggle at 25% Duty Cycle
 
 - This is not as easy to implement with a single kernel timer.
+
 - But we can use a thread to toggle the LED at 25% duty cycle **and** not hit the kernel to do so:
 
 ```C
@@ -59,29 +65,42 @@ k_thread_resume(heartbeat_thread_id);
 ## Threads vs. Timers
 
 - The thread can have blocking calls (e.g., `k_msleep`) without blocking other threads.
+
 - The scheduler can run other threads while this thread is sleeping (or yields).
+
 - The scheduler can preempt the thread at any time with higher priority tasks
 (e.g., ISR callbacks, higher-priority threads).
+
 - No need for a separate handler function.
+
 - More difficult to start/stop/reset than a timer.
+
 - Need explicitly allocated stack space.
+
 - Difficult to coordinate high-accuracy timing with other tasks/threads.
 
 ## Kernel Events
 
 - Kernel events can be used to indicate that "something" has happened, which may
 dictate the function of the state machine.
+
   - Button press
+
   - Sensor crossing a threshold
+
   - Timer expiring
+
 - Enabled in `prj.conf` with `CONFIG_EVENTS=y`.
 
 ## Kernel Event Bit Arrays
 
 - Kernel events are stored in a **bit array** (an array, where each bit (`0/1`)
 indicates (`False/True`) if an event has occured).
+
 - When an event occurs, it is **posted** (`k_event_post`).
+
 - A state machine can **wait** (`k_event_wait`) for an event (or events) to occur.
+
 - Events can be **cleared** (`k_event_clear`) after they are processed.
 
 ## Why Kernel Events over Boolean Variables?
@@ -110,6 +129,7 @@ k_event_post(&temp_events, TEMP_TOO_HIGH_EVENT);
 
 - With kernel events, we can now implement a thread that waits for an event to
 occur and then changes the state of the state machine.  
+
 - Threads are started when your firmware is initialized; it does not need to be
 "called" (like a function).
 
@@ -145,4 +165,5 @@ extern void temp_too_high_thread(void *, void *, void *) {
 ## Resources
 
 - [Nordic DevAcademy: Zephyr RTOS Advanced](https://academy.nordicsemi.com/courses/nrf-connect-sdk-intermediate/lessons/lesson-1-zephyr-rtos-advanced/)
+
 - [Zephyr Documentation: Events](https://docs.zephyrproject.org/latest/kernel/services/synchronization/events.html#events)
