@@ -2759,7 +2759,7 @@
     "href": "labs/zephyr-threads-events-lab.html#refactor-kernel-events",
     "title": "Zephyr: Threads & Kernel Events Lab",
     "section": "Refactor: Kernel Events",
-    "text": "Refactor: Kernel Events\n\nDo the following refactoring on a new branch called kernel_events_refactor, branched after the v1.2.0 commit.\nRefactor all of your code to remove Boolean variables being used in your ISR callback functions to indicate that buttons have been pressed to now use kernel events in a single bit array called button_events.\nYou should use 1 bit for each button, meaning the bit array is 4-bits.\nImplement a k_event_wait() in the appropriate state(s) of your main thread to wait for button events to occur. This will be a blocking wait, meaning the main thread while loop will not be running while waiting for button events.",
+    "text": "Refactor: Kernel Events\n\nDo the following refactoring on a new branch called kernel_events_refactor, branched after the v1.2.0 commit.\nRefactor all of your code to remove Boolean variables being used in your ISR callback functions to indicate that buttons have been pressed to now use kernel events in a single bit array called button_events.\nYou should use 1-bit for each button, meaning the bit array is 4-bits.\nImplement a k_event_wait() in the appropriate state(s) of your main thread to wait for button events to occur. This will be a blocking wait, meaning the main thread while loop will not be running while waiting for button events.",
     "crumbs": [
       "Labs",
       "Threads and Kernel Events Lab"

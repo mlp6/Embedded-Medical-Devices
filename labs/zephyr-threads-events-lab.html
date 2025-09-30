@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Dr.&nbsp;Mark Palmeri, M.D., Ph.D.">
-<meta name="dcterms.date" content="2025-08-25">
+<meta name="dcterms.date" content="2025-09-29">
 
 <title>Zephyr: Threads &amp; Kernel Events Lab – Embedded Medical Devices</title>
 <style>
@@ -412,7 +412,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">August 25, 2025</p>
+      <p class="date">September 29, 2025</p>
     </div>
   </div>
   
@@ -451,17 +451,17 @@ Important
 <h2 class="anchored" data-anchor-id="refactor-heartbeat-led-25-duty-cycle">Refactor: Heartbeat LED (25% Duty Cycle)</h2>
 <p>You will be refactoring your code from the timers lab to use a thread to control the heartbeat LED. Do all of the refactoring below on a new branch called <code>heartbeat_refactor</code>.</p>
 <ul>
-<li>Refactor your code to use a thread instead of a kernel timer to control the heartbeat LED.</li>
-<li>Instead of having your heartbeat blink at 1 Hz with a 50% duty cycle, change it to have a 25% duty cycle (i.e., on for 250 ms, off for 750 ms).</li>
+<li><p>Refactor your code to use a thread instead of a kernel timer to control the heartbeat LED.</p></li>
+<li><p>Instead of having your heartbeat blink at 1 Hz with a 50% duty cycle, change it to have a 25% duty cycle (i.e., on for 250 ms, off for 750 ms).</p></li>
 </ul>
 </section>
 <section id="test-the-accuracy-of-the-heartbeat-led-timing" class="level2">
 <h2 class="anchored" data-anchor-id="test-the-accuracy-of-the-heartbeat-led-timing">Test the Accuracy of the Heartbeat LED Timing</h2>
 <ul>
-<li>Create a new Jupyter notebook for this lab’s technical report called <code>testing/thread_testing.ipynb</code> that analyzes the accuracy of your 25% duty cycle heartbeat LED.</li>
-<li>Perform these measurements using the oscilloscope, and save all raw data in dedicated CSV files.</li>
-<li>Choose what to measure and how to analyze the data to verify that the heartbeat LED thread is working as expected.</li>
-<li>Discuss the results of your measurements and how they compare to the nominal specifications for the heartbeat LED.</li>
+<li><p>Create a new Jupyter notebook for this lab’s technical report called <code>testing/thread_testing.ipynb</code> that analyzes the accuracy of your 25% duty cycle heartbeat LED.</p></li>
+<li><p>Perform these measurements using the oscilloscope, and save all raw data in dedicated CSV files.</p></li>
+<li><p>Choose what to measure and how to analyze the data to verify that the heartbeat LED thread is working as expected.</p></li>
+<li><p>Discuss the results of your measurements and how they compare to the nominal specifications for the heartbeat LED.</p></li>
 </ul>
 </section>
 <section id="merge-n-tag-this-refactored-heartbeat-led-code-and-analysis" class="level2">
@@ -480,34 +480,34 @@ Tip
 </div>
 </div>
 <ul>
-<li>Push your <code>heartbeat_refactor</code> branch to GitLab.</li>
-<li>Create a new Merge Request to merge <code>heartbeat_refactor</code> into your forked repository’s <code>main</code> branch.</li>
-<li>Merge your <code>heartbeat_refactor</code> branch into your <code>main</code> branch, and create an annotated tag for that merged commit called <code>v1.2.0</code>.</li>
+<li><p>Push your <code>heartbeat_refactor</code> branch to GitLab.</p></li>
+<li><p>Create a new Merge Request to merge <code>heartbeat_refactor</code> into your forked repository’s <code>main</code> branch.</p></li>
+<li><p>Merge your <code>heartbeat_refactor</code> branch into your <code>main</code> branch, and create an annotated tag for that merged commit called <code>v1.2.0</code>.</p></li>
 </ul>
 </section>
 <section id="refactor-kernel-events" class="level2">
 <h2 class="anchored" data-anchor-id="refactor-kernel-events">Refactor: Kernel Events</h2>
 <ul>
-<li>Do the following refactoring on a new branch called <code>kernel_events_refactor</code>, branched after the <code>v1.2.0</code> commit.</li>
-<li>Refactor all of your code to remove Boolean variables being used in your ISR callback functions to indicate that buttons have been pressed to now use kernel events in a single bit array called <code>button_events</code>.</li>
-<li>You should use 1 bit for each button, meaning the bit array is 4-bits.</li>
-<li>Implement a <code>k_event_wait()</code> in the appropriate state(s) of your main thread to wait for button events to occur. This will be a blocking wait, meaning the <code>main</code> thread <code>while</code> loop will not be running while waiting for button events.</li>
+<li><p>Do the following refactoring on a new branch called <code>kernel_events_refactor</code>, branched after the <code>v1.2.0</code> commit.</p></li>
+<li><p>Refactor all of your code to remove Boolean variables being used in your ISR callback functions to indicate that buttons have been pressed to now use kernel events in a single bit array called <code>button_events</code>.</p></li>
+<li><p>You should use 1-bit for each button, meaning the bit array is 4-bits.</p></li>
+<li><p>Implement a <code>k_event_wait()</code> in the appropriate state(s) of your main thread to wait for button events to occur. This will be a blocking wait, meaning the <code>main</code> thread <code>while</code> loop will not be running while waiting for button events.</p></li>
 </ul>
 </section>
 <section id="verify-that-your-led-timing-still-works" class="level2">
 <h2 class="anchored" data-anchor-id="verify-that-your-led-timing-still-works">Verify that your LED Timing Still Works</h2>
 <ul>
-<li>Create a new Jupyter notebook called <code>testing/kernel_events_validation.ipynb</code> to verify that your refactored code still works as expected.</li>
-<li>It is up to you to now determine how to verify that your LED timing is still working with regard to what data to collect, how to analyze it, and how to present it in your notebook.</li>
+<li><p>Create a new Jupyter notebook called <code>testing/kernel_events_validation.ipynb</code> to verify that your refactored code still works as expected.</p></li>
+<li><p>It is up to you to now determine how to verify that your LED timing is still working with regard to what data to collect, how to analyze it, and how to present it in your notebook.</p></li>
 </ul>
 </section>
 <section id="merge-n-tag-this-refactored-kernel-events-code-and-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="merge-n-tag-this-refactored-kernel-events-code-and-analysis">Merge-n-Tag this Refactored Kernel Events Code and Analysis</h2>
 <ul>
-<li>Create a Merge Request to merge <code>kernel_events_refactor</code> into your <code>main</code> branch.</li>
-<li>Merge your <code>kernel_events_refactor</code> branch into your <code>main</code> branch.</li>
-<li>Create an annotated tag for that merge commit called <code>v1.3.0</code>.</li>
-<li>Create an Issue assigned to Dr.&nbsp;Palmeri to review your code for both <code>v1.2.0</code> and <code>v1.3.0</code>.</li>
+<li><p>Create a Merge Request to merge <code>kernel_events_refactor</code> into your <code>main</code> branch.</p></li>
+<li><p>Merge your <code>kernel_events_refactor</code> branch into your <code>main</code> branch.</p></li>
+<li><p>Create an annotated tag for that merge commit called <code>v1.3.0</code>.</p></li>
+<li><p>Create an Issue assigned to Dr.&nbsp;Palmeri to review your code for both <code>v1.2.0</code> and <code>v1.3.0</code>.</p></li>
 </ul>
 </section>
 <section id="how-do-i-ask-for-help" class="level2">
