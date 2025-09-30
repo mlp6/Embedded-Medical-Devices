@@ -246,7 +246,7 @@ Dr.&nbsp;Mark Palmeri, M.D., Ph.D.
 <li><p>But we can use a thread to toggle the LED at 25% duty cycle <strong>and</strong> not hit the kernel to do so:</p></li>
 </ul>
 <div class="sourceCode" id="cb1"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb1-1"><a></a><span class="co">/* 1024 byte stack, handler, NULL, NULL, NULL, priority 5, no time slice, no delay */</span></span>
-<span id="cb1-2"><a></a>K_THREAD_DEFINE<span class="op">(</span>heartbeat_thread_id<span class="op">,</span> <span class="dv">1024</span><span class="op">,</span> error_thread<span class="op">,</span> NULL<span class="op">,</span> NULL<span class="op">,</span> NULL<span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">);</span></span>
+<span id="cb1-2"><a></a>K_THREAD_DEFINE<span class="op">(</span>heartbeat_thread_id<span class="op">,</span> <span class="dv">1024</span><span class="op">,</span> heartbeat_thread<span class="op">,</span> NULL<span class="op">,</span> NULL<span class="op">,</span> NULL<span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">);</span></span>
 <span id="cb1-3"><a></a></span>
 <span id="cb1-4"><a></a><span class="kw">extern</span> <span class="dt">void</span> heartbeat_thread<span class="op">(</span><span class="dt">void</span> <span class="op">*,</span> <span class="dt">void</span> <span class="op">*,</span> <span class="dt">void</span> <span class="op">*)</span> <span class="op">{</span></span>
 <span id="cb1-5"><a></a></span>

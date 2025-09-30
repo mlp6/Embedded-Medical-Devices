@@ -406,7 +406,7 @@
     "href": "slides/zephyr-threads-events.html#example-use-case-heartbeat-led-toggle-at-25-duty-cycle",
     "title": "Zephyr: Threads and Kernel Events",
     "section": "Example Use Case: Heartbeat LED Toggle at 25% Duty Cycle",
-    "text": "Example Use Case: Heartbeat LED Toggle at 25% Duty Cycle\n\nThis is not as easy to implement with a single kernel timer.\nBut we can use a thread to toggle the LED at 25% duty cycle and not hit the kernel to do so:\n\n/* 1024 byte stack, handler, NULL, NULL, NULL, priority 5, no time slice, no delay */\nK_THREAD_DEFINE(heartbeat_thread_id, 1024, error_thread, NULL, NULL, NULL, 5, 0, 0);\n\nextern void heartbeat_thread(void *, void *, void *) {\n\n    while (1) {\n        k_msleep(250);  // scheduler can run other tasks now\n        gpio_pin_toggle_dt(&heartbeat_led);\n        k_msleep(750); // scheduler can run other tasks now\n        gpio_pin_toggle_dt(&heartbeat_led);\n    } \n\n}",
+    "text": "Example Use Case: Heartbeat LED Toggle at 25% Duty Cycle\n\nThis is not as easy to implement with a single kernel timer.\nBut we can use a thread to toggle the LED at 25% duty cycle and not hit the kernel to do so:\n\n/* 1024 byte stack, handler, NULL, NULL, NULL, priority 5, no time slice, no delay */\nK_THREAD_DEFINE(heartbeat_thread_id, 1024, heartbeat_thread, NULL, NULL, NULL, 5, 0, 0);\n\nextern void heartbeat_thread(void *, void *, void *) {\n\n    while (1) {\n        k_msleep(250);  // scheduler can run other tasks now\n        gpio_pin_toggle_dt(&heartbeat_led);\n        k_msleep(750); // scheduler can run other tasks now\n        gpio_pin_toggle_dt(&heartbeat_led);\n    } \n\n}",
     "crumbs": [
       "Learning Modules",
       "Threads and Kernel Events"
@@ -519,7 +519,7 @@
     "href": "slides/zephyr-threads-events-slides.html#example-use-case-heartbeat-led-toggle-at-25-duty-cycle",
     "title": "Zephyr: Threads and Kernel Events",
     "section": "Example Use Case: Heartbeat LED Toggle at 25% Duty Cycle",
-    "text": "Example Use Case: Heartbeat LED Toggle at 25% Duty Cycle\n\nThis is not as easy to implement with a single kernel timer.\nBut we can use a thread to toggle the LED at 25% duty cycle and not hit the kernel to do so:\n\n/* 1024 byte stack, handler, NULL, NULL, NULL, priority 5, no time slice, no delay */\nK_THREAD_DEFINE(heartbeat_thread_id, 1024, error_thread, NULL, NULL, NULL, 5, 0, 0);\n\nextern void heartbeat_thread(void *, void *, void *) {\n\n    while (1) {\n        k_msleep(250);  // scheduler can run other tasks now\n        gpio_pin_toggle_dt(&heartbeat_led);\n        k_msleep(750); // scheduler can run other tasks now\n        gpio_pin_toggle_dt(&heartbeat_led);\n    } \n\n}"
+    "text": "Example Use Case: Heartbeat LED Toggle at 25% Duty Cycle\n\nThis is not as easy to implement with a single kernel timer.\nBut we can use a thread to toggle the LED at 25% duty cycle and not hit the kernel to do so:\n\n/* 1024 byte stack, handler, NULL, NULL, NULL, priority 5, no time slice, no delay */\nK_THREAD_DEFINE(heartbeat_thread_id, 1024, heartbeat_thread, NULL, NULL, NULL, 5, 0, 0);\n\nextern void heartbeat_thread(void *, void *, void *) {\n\n    while (1) {\n        k_msleep(250);  // scheduler can run other tasks now\n        gpio_pin_toggle_dt(&heartbeat_led);\n        k_msleep(750); // scheduler can run other tasks now\n        gpio_pin_toggle_dt(&heartbeat_led);\n    } \n\n}"
   },
   {
     "objectID": "slides/zephyr-threads-events-slides.html#how-to-suspendresume-threads",
