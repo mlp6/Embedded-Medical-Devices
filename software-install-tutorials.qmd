@@ -25,9 +25,8 @@ We will be using [Visual Studio Code](https://code.visualstudio.com/) as the IDE
 * `Cmake`
 * Microsoft `IntelliCode` (assistance with C syntax)
 * State diagram software (see below)
-* An AI coding agent:
-    * [Codex (OpenAI)](https://developers.openai.com/codex/ide): this will work using your Duke ChatGPT EDU account
-    * [GitHub CoPilot](https://code.visualstudio.com/docs/copilot/overview)
+* [GitHub CoPilot](https://code.visualstudio.com/docs/copilot/overview) AI coding assistant (optional, but highly recommended)
+<!--    * [Codex (OpenAI)](https://developers.openai.com/codex/ide): this will work using your Duke ChatGPT EDU account -->
 
 ::: callout-tip
 You can get "Pro" status for GitHub CoPilot by signing up for a free [GitHub Education Student](https://github.com/education/students) account.  You will need a document to verify your student status that includes your dates of enrollment, which your DukeCard does not contain.  Instead, you can get an Enrollment Verification document through DukeHub (Academics Tab) and convert the downloaded PDF to a JPG or PNG file to upload to GitHub.
