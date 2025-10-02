@@ -395,6 +395,16 @@ ul.task-list li input[type="checkbox"] {
 <p>[ ] setup gradebook [ ] setup semester-long calendar</p>
 <section id="lecture" class="level2">
 <h2 class="anchored" data-anchor-id="lecture">Lecture</h2>
+<ul class="task-list">
+<li><label><input type="checkbox">Add Evan’s insights on static declarations:</label></li>
+</ul>
+<pre><code>Perhaps @Mark will have more nuanced thoughts about this, but static and const are both qualifiers for declaration that have separate implications.
+
+    a global static variable is only accessible within the same .c file, whereas a static variable within a function (a local variable) retains its value between invocations of said function.
+
+    a const "variable" is immutable, meaning its value will not (and cannot) change once initialized.
+
+The benefit on the former depends on scope. In the case of a global declaration, you are basically safe guarding against unintended linkage / use in other .c files. In the case of a local declaration, this has structural implications for the program (ie, which variables are passed by reference vs. local to the function and persistent for being static). The benefit of the latter (const) is minimized memory utilization and guarding against inadvertent changes. </code></pre>
 </section>
 <section id="labs" class="level2">
 <h2 class="anchored" data-anchor-id="labs">Labs</h2>
