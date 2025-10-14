@@ -1,6 +1,6 @@
 ---
 title: "Zephyr: Analog-to-Digital Conversion"
-date: "2025-08-25"
+date: "2025-10-15"
 format: 
   live-html: 
     output-file: zephyr-adc.html
