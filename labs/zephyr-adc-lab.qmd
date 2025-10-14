@@ -1,6 +1,6 @@
 ---
 title: "Analog-to-Digital Conversion (ADC) Lab"
-date: "2025-08-25"
+date: "2025-10-15"
 format:
   html: default
   pdf: default
@@ -106,6 +106,9 @@ a Merge Request on Gitlab.
 - Create an annotated tag of your `main` branch with all part of this lab merged
 in called `v2.0.0`.
 
+- Create an Issue **assigned to your teaching assistant** indicating that this
+tag is ready for review.
+
 ## Buffered Differential ADC Sampling
 
 ### Firmware Functional Specifications
@@ -175,6 +178,9 @@ Request on Gitlab.
 - Create an annotated tag of your `main` branch with all part of this lab merged
 in called `v2.1.0`.
 
+- Create an Issue **assigned to your teaching assistant** indicating that this
+tag is ready for review.
+
 ## Asynchronous ADC Sampling
 
 ### Firmware Functional Specifications
@@ -205,6 +211,9 @@ Request on Gitlab.
 - Create an annotated tag of your `main` branch with all part of this lab merged
 in called `v2.2.0`.
 
+- Create an Issue **assigned to your teaching assistant** indicating that this
+tag is ready for review.
+
 ## Timer-Based Single Sampling to Array
 
 ### Firmware Functional Specifications
@@ -228,6 +237,9 @@ Request on Gitlab.
 
 - Create an annotated tag of your `main` branch with all part of this lab merged
 in called `v2.3.0`.
+
+- Create an Issue **assigned to your teaching assistant** indicating that this
+tag is ready for review.
 
 ## How to Ask for Help
 
