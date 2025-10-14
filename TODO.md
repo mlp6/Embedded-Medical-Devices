@@ -27,5 +27,3 @@ The benefit on the former depends on scope. In the case of a global declaration,
 
 * [ ] Create GPIO quiz
 * [ ] Create timers quiz
-* [ ] FIX: ADC quiz - the REF voltage question isn't allowing for multiple choices
-* [ ] ADD: ADC quiz - sync vs. async vs. timer-based ADC sampling
