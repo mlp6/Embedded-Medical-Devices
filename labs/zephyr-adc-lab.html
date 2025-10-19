@@ -40,7 +40,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-fced259a1985fd972ecb57c7cd45153f.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-13f007c1943c6d3711256cc1d3aa22a2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-502af5662682e57a3996ba3bbb0c7358.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -541,6 +541,8 @@ Important
 <li><p>Linearly map 0-3.0 V measured on the <code>AIN0</code> input to an <code>LED1</code> blink rate of 1-5 Hz (e.g., 0 V -&gt; 1 Hz; 3.0 V -&gt; 5 Hz) with a duty cycle of 10%.</p></li>
 <li><p><code>LED1</code> should remaining blinking for 5 seconds after the button has been pressed.</p></li>
 </ul></li>
+<li><p><code>BUTTON0</code> should be disabled while the ADC measurement and <code>LED1</code> blinking.</p></li>
+<li><p><code>LED1</code> blinking should not occur in the <code>SLEEP</code> state; instead, if blinking happening when entering <code>SLEEP</code>, it should stop until the next <code>BUTTON0</code> press (not resume when waking).</p></li>
 </ul>
 </section>
 <section id="testing" class="level3">
