@@ -622,7 +622,7 @@ Note
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="op">(</span><span class="dt">void</span><span class="op">)</span>adc_sequence_init_dt<span class="op">(&amp;</span>adc_vadc<span class="op">,</span> <span class="op">&amp;</span>sequence<span class="op">);</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> ret<span class="op">;</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>ret <span class="op">=</span> adc_read<span class="op">(</span>adc_channel<span class="op">.</span>dev<span class="op">,</span> <span class="op">&amp;</span>sequence<span class="op">);</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>ret <span class="op">=</span> adc_read<span class="op">(</span>adc_vadc<span class="op">.</span>dev<span class="op">,</span> <span class="op">&amp;</span>sequence<span class="op">);</span></span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>ret <span class="op">&lt;</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    LOG_ERR<span class="op">(</span><span class="st">"Could not read (</span><span class="sc">%d</span><span class="st">)"</span><span class="op">,</span> ret<span class="op">);</span></span>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
