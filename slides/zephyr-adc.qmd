@@ -141,7 +141,7 @@ LOG_INF("Measuring %s (channel %d)... ", adc_vadc.dev->name, adc_vadc.channel_id
 (void)adc_sequence_init_dt(&adc_vadc, &sequence);
 
 int ret;
-ret = adc_read(adc_channel.dev, &sequence);
+ret = adc_read(adc_vadc.dev, &sequence);
 if (ret < 0) {
     LOG_ERR("Could not read (%d)", ret);
 } else {
