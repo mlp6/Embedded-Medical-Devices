@@ -71,6 +71,10 @@ cycle at all times when the firmware is running.
   - `LED1` should remaining blinking for 5 seconds after the button has been
   pressed.
 
+- `BUTTON0` should be disabled while the ADC measurement and `LED1` blinking.
+
+- `LED1` blinking should not occur in the `SLEEP` state; instead, if blinking happening when entering `SLEEP`, it should stop until the next `BUTTON0` press (not resume when waking).
+
 ### Testing
 
 For the following testing, you can use a power supply to provide known voltage input to `AIN0`.
