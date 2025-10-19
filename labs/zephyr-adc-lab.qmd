@@ -49,6 +49,12 @@ logging level should be submitted at the `INF` level.
 - Include a state diagram in your repository (`state_diagram.png`) using UML
 (`state_diagram.puml`) or some equivalent.
 
+::: callout-note
+You will continue to build upon the firmware from your previous labs, but you are replacing all functional specifications with those in this lab.
+
+This significant change in functionality is represented with the version tags changing to a new major version number starting at `v2.0.0`.
+:::
+
 ## ADC Single Sampling
 
 ### Firmware Functional Specifications
