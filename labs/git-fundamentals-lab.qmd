@@ -40,7 +40,7 @@ You want to clone your forked repository, not the parent repository you forked f
     * You do not want to delete the source branch.
 1. Check that the `check_image` and `check_about_me` pipline jobs have passed.
     * `Build -> Pipelines`
-    * Click on the latest pipeline 
+    * Click on the latest pipeline (the colored rounded rectangle button in the status column).
     * Click on the `check_image` or `check_about_me` job to see the output of the test if it `Failed`.
 1. If the pipeline jobs for this branch have failed, you will need to fix the issue(s) and push the changes to your `about_me` branch.
     * If you are not sure what the issue is, click on the failed job to see the output of the test.
