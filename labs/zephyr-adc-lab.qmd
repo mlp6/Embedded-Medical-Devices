@@ -50,9 +50,13 @@ logging level should be submitted at the `INF` level.
 (`state_diagram.puml`) or some equivalent.
 
 ::: callout-note
-You will continue to build upon the firmware from your previous labs, but you are replacing all functional specifications with those in this lab.
+You will continue to build upon the firmware from your previous labs, but you
+are replacing all functional specifications with those in this lab.
 
-This significant change in functionality is represented with the version tags changing to a new major version number starting at `v2.0.0`.
+All states should be reconsidered given the new functional specifications.
+
+This significant change in functionality is represented with the version tags
+changing to a new major version number starting at `v2.0.0`.
 :::
 
 ## ADC Single Sampling
@@ -79,7 +83,8 @@ cycle at all times when the firmware is running.
 
 - `BUTTON0` should be disabled while the ADC measurement and `LED1` blinking.
 
-- `LED1` blinking should not occur in the `SLEEP` state; instead, if blinking happening when entering `SLEEP`, it should stop until the next `BUTTON0` press (not resume when waking).
+- All errors should result in a transition to an `ERROR` state that can only be
+exited by hitting a reset button.
 
 ### Testing
 
