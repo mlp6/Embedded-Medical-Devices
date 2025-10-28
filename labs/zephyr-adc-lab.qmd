@@ -207,8 +207,15 @@ functionality to your firmware:
 **asynchronous** acquisition that populates the same array that was populated
 with the synchronous approach.
 
-- Utilize the 3 Zephyr macros presented in lecture to modulate the behaviour of
-the asynchronous callback function.
+- Utilize the 3 Zephyr enumerations presented in lecture to modulate the
+behaviour of the asynchronous callback function.
+
+- Optional functionality: 
+
+    - Use a kernel poll (`k_poll`) to wait for the ADC sequence to complete.
+
+    - Implement a timeout mechanism to handle the case where the ADC sequence
+    does not complete within a reasonable time frame.
 
 ### Testing
 
