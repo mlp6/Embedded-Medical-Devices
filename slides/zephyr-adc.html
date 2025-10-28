@@ -426,7 +426,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#reading-multiple-samples-at-specified-intervals" id="toc-reading-multiple-samples-at-specified-intervals" class="nav-link" data-scroll-target="#reading-multiple-samples-at-specified-intervals">Reading Multiple Samples at Specified Intervals</a></li>
   <li><a href="#adc-acquisition-time" id="toc-adc-acquisition-time" class="nav-link" data-scroll-target="#adc-acquisition-time">ADC Acquisition Time</a></li>
   <li><a href="#asynchronous-adc" id="toc-asynchronous-adc" class="nav-link" data-scroll-target="#asynchronous-adc">Asynchronous ADC</a></li>
-  <li><a href="#asynchronous-adc-callback" id="toc-asynchronous-adc-callback" class="nav-link" data-scroll-target="#asynchronous-adc-callback">Asynchronous ADC Callback</a></li>
+  <li><a href="#asynchronous-adc-callback" id="toc-asynchronous-adc-callback" class="nav-link" data-scroll-target="#asynchronous-adc-callback">Asynchronous ADC Callback</a>
+  <ul class="collapse">
+  <li><a href="#async-adc-k_poll-signal" id="toc-async-adc-k_poll-signal" class="nav-link" data-scroll-target="#async-adc-k_poll-signal">Async ADC <code>k_poll</code> Signal</a></li>
+  </ul></li>
   <li><a href="#logging-arrays" id="toc-logging-arrays" class="nav-link" data-scroll-target="#logging-arrays">Logging Arrays</a></li>
   <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a></li>
   </ul>
@@ -744,20 +747,55 @@ Note
 <li>This functionality needs to be enabled in the <code>prj.conf</code> file: <code>CONFIG_ADC_ASYNC=y</code>.</li>
 <li><a href="https://docs.zephyrproject.org/latest/doxygen/html/group__adc__interface.html#ga009e3733b5b20eb6b26a201c9f9734fc">adc_read_async()</a> is the asynchronous version of <code>adc_read()</code>.</li>
 </ul></li>
+<li>The return code for <code>adc_read_async()</code> is immediate and indicates whether the ADC sequence was started successfully. (It is not the returned enumerations from the callback function described on the next slide.)</li>
 </ul>
 </section>
 <section id="asynchronous-adc-callback" class="level2">
 <h2 class="anchored" data-anchor-id="asynchronous-adc-callback">Asynchronous ADC Callback</h2>
 <ul>
 <li>Use a <a href="https://docs.zephyrproject.org/latest/doxygen/html/group__adc__interface.html#ga9150eb6dc53d1c62b9fa225c0a371d6d">adc_sequence_callback</a> function to handle the ADC data after <em>each</em> sample is read.</li>
-<li>There are defined ADC action enumerations that can be returned by the callback to handle progression through the sequence:
+<li>There are defined ADC action enumerations that can be returned by the callback to signal to the async read function how to handle progression through the sequence:
 <ul>
 <li><code>ADC_ACTION_CONTINUE</code>: The sequence should be continued normally.</li>
 <li><code>ADC_ACTION_REPEAT</code>: New samples or sample should be read from the ADC and written in the same place as the recent ones.</li>
 <li><code>ADC_ACTION_FINISH</code>: The sequence should be terminated.</li>
 </ul></li>
+<li>These enumerated values should be <strong>returned</strong> by the callback function to signal how to proceed.</li>
 </ul>
-<!-- TODO: use Frannie's `diff_adc_callback` for good async example -->
+<section id="async-adc-k_poll-signal" class="level3">
+<h3 class="anchored" data-anchor-id="async-adc-k_poll-signal">Async ADC <code>k_poll</code> Signal</h3>
+<ul>
+<li>The asynchronous ADC API uses a <code>k_poll</code> signal to notify the kernel thread when the ADC sequence is complete.</li>
+<li>The signal must be initialized and passed to the <code>adc_read_async()</code> function.</li>
+</ul>
+<div class="sourceCode" id="cb8"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> k_poll_signal adc_signal<span class="op">;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> k_poll_event  evt <span class="op">=</span> K_POLL_EVENT_INITIALIZER<span class="op">(</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>                                K_POLL_TYPE_SIGNAL<span class="op">,</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>                                K_POLL_MODE_NOTIFY_ONLY<span class="op">,</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>                                <span class="op">&amp;</span>adc_signal<span class="op">);</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>k_poll_signal_init<span class="op">(&amp;</span>adc_signal<span class="op">);</span>    </span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>adc_read_async<span class="op">(</span>adc_dev<span class="op">,</span> <span class="op">&amp;</span>sequence<span class="op">,</span> <span class="op">&amp;</span>adc_signal<span class="op">);</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You can then wait/test for the <code>k_poll</code> event to be signaled in your thread:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>k_poll<span class="op">(&amp;</span>evt<span class="op">,</span> <span class="dv">1</span><span class="op">,</span> K_FOREVER<span class="op">);</span>  <span class="co">// wait forever for the event</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>evt<span class="op">.</span>state <span class="op">==</span> K_POLL_STATE_SIGNALED<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ADC sequence is complete; process data</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>k_poll_signal_reset<span class="op">(&amp;</span>adc_signal<span class="op">);</span>  <span class="co">// reset the signal for next use</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Note that <code>k_poll</code> events/signals are similar to kernel events, but tend to be used for more specific use-cases (e.g., one thread waiting on a signal from another thread or peripheral).</p>
+</div>
+</div>
+</section>
 </section>
 <section id="logging-arrays" class="level2">
 <h2 class="anchored" data-anchor-id="logging-arrays">Logging Arrays</h2>
