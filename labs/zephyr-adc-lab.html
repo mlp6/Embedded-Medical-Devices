@@ -693,7 +693,12 @@ Tip
 <p>In a new development branch called <code>async_adc</code>, add the following functionality to your firmware:</p>
 <ul>
 <li><p>Refactor your blocking, synchronous buffered ADC sequence acquisition to an <strong>asynchronous</strong> acquisition that populates the same array that was populated with the synchronous approach.</p></li>
-<li><p>Utilize the 3 Zephyr macros presented in lecture to modulate the behaviour of the asynchronous callback function.</p></li>
+<li><p>Utilize the 3 Zephyr enumerations presented in lecture to modulate the behaviour of the asynchronous callback function.</p></li>
+<li><p>Optional functionality:</p>
+<ul>
+<li><p>Use a kernel poll (<code>k_poll</code>) to wait for the ADC sequence to complete.</p></li>
+<li><p>Implement a timeout mechanism to handle the case where the ADC sequence does not complete within a reasonable time frame.</p></li>
+</ul></li>
 </ul>
 </section>
 <section id="testing-2" class="level3">
