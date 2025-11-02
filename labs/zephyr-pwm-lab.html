@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Dr.&nbsp;Mark Palmeri, M.D., Ph.D.">
-<meta name="dcterms.date" content="2025-08-25">
+<meta name="dcterms.date" content="2025-11-03">
 
 <title>Pulse Width Modulation (PWM) Lab – Embedded Medical Devices</title>
 <style>
@@ -420,7 +420,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">August 25, 2025</p>
+      <p class="date">November 3, 2025</p>
     </div>
   </div>
   
@@ -435,8 +435,8 @@ ul.task-list li input[type="checkbox"] {
 <section id="learning-objectives" class="level2">
 <h2 class="anchored" data-anchor-id="learning-objectives">Learning Objectives</h2>
 <ul>
-<li>Implement a steady-state PWM output to control “intensity” over a finite dynamic range.</li>
-<li>Implement a temporally-modulated PWM output.</li>
+<li><p>Implement a steady-state PWM output to control “intensity” over a finite dynamic range.</p></li>
+<li><p>Implement a time-series-modulated PWM output.</p></li>
 </ul>
 </section>
 <section id="git-best-practices" class="level2">
@@ -465,13 +465,12 @@ Important
 <section id="firmware-expectations" class="level2">
 <h2 class="anchored" data-anchor-id="firmware-expectations">Firmware Expectations</h2>
 <ul>
-<li>All firmware should be written using the <strong>State Machine Framework</strong>.<br>
-</li>
-<li>Choose your states for each part as a firmware engineer would, using what you have learned so far this semester.</li>
-<li>Timers, work queues, callbacks, and interrupts should be used as appropriate.</li>
-<li>All good coding practices developed this semester should be followed.</li>
-<li>Use logging to display state information and other relevant information, warnings, and errors. Debugging log messages can remain in the code, but the logging level should be submitted at the <code>INF</code> level.</li>
-<li>Include a state diagram in your repository (<code>state_diagram.png</code>) using UML (<code>state_diagram.puml</code>) or some equivalent.</li>
+<li><p>All firmware should be written using the <strong>State Machine Framework</strong>.</p></li>
+<li><p>Choose your states for each part as a firmware engineer would, using what you have learned so far this semester.</p></li>
+<li><p>Timers, work queues, callbacks, and interrupts should be used as appropriate.</p></li>
+<li><p>All good coding practices developed this semester should be followed.</p></li>
+<li><p>Use logging to display state information and other relevant information, warnings, and errors. Debugging log messages can remain in the code, but the logging level should be submitted at the <code>INF</code> level.</p></li>
+<li><p>Include a state diagram in your repository (<code>state_diagram.png</code>) using UML (<code>state_diagram.puml</code>) or some equivalent.</p></li>
 </ul>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -493,33 +492,44 @@ Tip
 <section id="firmware-functional-specifications" class="level3">
 <h3 class="anchored" data-anchor-id="firmware-functional-specifications">Firmware Functional Specifications</h3>
 <ul>
-<li>Using the ADC lab functionality to read a DC voltage on <code>AIN0</code>, map this read DC voltage to scale the maximum brightness of <code>LED2</code> using a PWM output.
-<ul>
-<li>For example:
+<li>Using the ADC lab functionality to read a DC voltage on <code>AIN0</code>, map this read DC voltage to scale the maximum brightness of <code>LED2</code> using a PWM output.</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled" title="Example">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Example
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <ul>
 <li>If <code>AIN0</code> = 0 V, then <code>LED2</code> should be off (0% duty cycle).<br>
 </li>
 <li>If <code>AIN0</code> = 1.5 V, then <code>LED2</code> should be at 50% brightness (50% duty cycle).</li>
 <li>If <code>AIN0</code> = 3 V, then <code>LED2</code> should be at maximum brightness (100% duty cycle).<br>
 </li>
-</ul></li>
-</ul></li>
+</ul>
+</div>
+</div>
+<ul>
 <li>Update your state diagram to include the new functionality.</li>
 </ul>
 </section>
 <section id="testing" class="level3">
 <h3 class="anchored" data-anchor-id="testing">Testing</h3>
 <ul>
-<li>Quantify the linearity of the maximum brightness of <code>LED2</code> as a function of <code>AIN0</code> voltage ranging from 0-3 V.</li>
-<li>Present your data and analysis in the technical report Jupyter notebook called <code>testing/testing_pwm.ipynb</code>.</li>
+<li><p>Quantify the linearity of the maximum brightness of <code>LED2</code> as a function of <code>AIN0</code> voltage ranging from 0-3 V.</p></li>
+<li><p>Present your data and analysis in the technical report Jupyter notebook called <code>testing/testing_pwm.ipynb</code>.</p></li>
 </ul>
-<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout callout-style-default callout-tip callout-titled" title="Do Things Looks Inverted?">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Note
+Do Things Looks Inverted?
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -530,20 +540,13 @@ Note
 <section id="commit-n-merge-steady-state-pwm" class="level3">
 <h3 class="anchored" data-anchor-id="commit-n-merge-steady-state-pwm">Commit-n-Merge Steady-State PWM</h3>
 <ul>
-<li>Merge your completed <code>pwm-steady-state</code> branch into your <code>main</code> branch using a Merge Request on Gitlab.</li>
-<li>Create an annotated tag of your <code>main</code> branch with all part of this lab merged in called <code>v3.0.0</code>.</li>
+<li><p>Merge your completed <code>pwm-steady-state</code> branch into your <code>main</code> branch using a Merge Request on Gitlab.</p></li>
+<li><p>Create an annotated tag of your <code>main</code> branch with all part of this lab merged in called <code>v3.0.0</code>.</p></li>
 </ul>
 </section>
 </section>
 <section id="sinusoidal-modulation-of-pwm-output" class="level2">
 <h2 class="anchored" data-anchor-id="sinusoidal-modulation-of-pwm-output">Sinusoidal Modulation of PWM Output</h2>
-<p>Do this section on a development branch called <code>pwm-sinusoid</code>, branched off of <code>main</code> after <code>pwm-steady-state</code> was merged.</p>
-<section id="firmware-functional-specifications-1" class="level3">
-<h3 class="anchored" data-anchor-id="firmware-functional-specifications-1">Firmware Functional Specifications</h3>
-<ul>
-<li>Modulate the brighness of <code>LED3</code> to match samping a 2-second, 10 Hz differential sinusoidal voltage on <code>AIN1</code> and <code>AIN2</code> after pressing <code>BUTTON2</code>.</li>
-<li><code>LED3</code> should have its brightness modulated with as little latency as possible with respect to the input voltage.</li>
-</ul>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -551,21 +554,56 @@ Note
 </div>
 <div class="callout-title-container flex-fill">
 Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Do this section on a development branch called <code>pwm-sinusoid</code>, branched off of <code>main</code> after <code>pwm-steady-state</code> was merged.</p>
+</div>
+</div>
+<section id="firmware-functional-specifications-1" class="level3">
+<h3 class="anchored" data-anchor-id="firmware-functional-specifications-1">Firmware Functional Specifications</h3>
+<ul>
+<li><p>Modulate the brighness of <code>LED3</code> to match sampling a 2-second, 10 Hz differential sinusoidal voltage on <code>AIN1</code> and <code>AIN2</code> after pressing <code>BUTTON2</code>.</p></li>
+<li><p><code>LED3</code> should have its brightness modulated with as little latency as possible with respect to the input voltage. In other words, the brightness of <code>LED3</code> should follow the input sinusoid as closely as possible in time.</p></li>
+</ul>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <p>The blocking nature of a syncronous buffered acquisition scheme is not ameable to realtime modulation of the PWM output. Consider using the aynchronous ADC sampling approach with a callback to update the PWM duty cycle after each sampling event or a timer-based, single-sample acqusition approach.</p>
 </div>
 </div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <ul>
-<li>Set the minumum and maximum sinusoidal brightnesses to be PWM duty cycles of 0 and 100%, respectively.</li>
-<li>Update your state diagram to include the new functionality.</li>
+<li><p>Be cognizant of your sampling rate, PWM on-time period update rate and the PWM clock period relative to your input signal.</p></li>
+<li><p>There are several ways to implement the 2-second sampling period, including using a monostable timer or counting the number of samples taken at a known sampling rate. Make a purposeful decision in how you implement this functionality.</p></li>
+</ul>
+</div>
+</div>
+<ul>
+<li><p>Set the minumum and maximum sinusoidal brightnesses to be PWM duty cycles of 0 and 100%, respectively.</p></li>
+<li><p>Update your state diagram to include the new functionality.</p></li>
 </ul>
 </section>
 <section id="testing-1" class="level3">
 <h3 class="anchored" data-anchor-id="testing-1">Testing</h3>
 <ul>
-<li>Using the oscilloscope, measure your input sinusoidal signal on <code>AIN1</code> and <code>AIN2</code> and the output PWM signal on <code>LED3</code> at the same time.</li>
+<li>Using the oscilloscope, concurrently measure your input sinusoidal signal (what is differentially input to <code>AIN1</code> and <code>AIN2</code>) and the output PWM signal on <code>LED3</code>.</li>
 </ul>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -577,23 +615,23 @@ Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>You will need to low pass filter your modulated PWM output to see a smooth sinusoidal output. You can do this using the LPF Math mode on the oscilloscope with an appropriate cutoff frequency (relative to the frequency of the input sinusoid) and sampling window (capturing multiple cycles of the sinusoid).</p>
+<p>You will need to low pass filter your modulated PWM output to see a smooth sinusoidal output. You can do this using the LPF Math mode on the oscilloscope with an appropriate cutoff frequency (relative to the frequency of the input sinusoid) and sampling window (capturing multiple cycles of the sinusoid). You can also build a simple RC low pass filter circuit to connect to the oscilloscope probe.</p>
 </div>
 </div>
 <ul>
-<li>Save this acquired oscilloscope data to a CSV file using a USB memory stick.</li>
-<li>In your Jupyter notebook, in a new section, plot the input and output signals.</li>
-<li>Calculate the frequency of your PWM signal and the phase difference between the PWM sinusoid and your input signal.</li>
-<li>Present your data and analysis in your Jupyter notebook.</li>
-<li>Discuss the accuracy of your PWM frequency and the latency (phase lag) of your system and how you could improve it in the future.</li>
+<li><p>Save this acquired oscilloscope data to a CSV file using a USB memory stick.</p></li>
+<li><p>In your Jupyter notebook, in a new section, plot the input and output signals.</p></li>
+<li><p>Calculate the frequency of your PWM signal and the phase difference between the PWM sinusoid and your input signal.</p></li>
+<li><p>Present your data and analysis in your Jupyter notebook.</p></li>
+<li><p>Discuss the accuracy of your PWM frequency and the latency (phase lag) of your system and how you could improve it in the future.</p></li>
 </ul>
 </section>
 <section id="commit-n-merge-modulated-pwm" class="level3">
 <h3 class="anchored" data-anchor-id="commit-n-merge-modulated-pwm">Commit-n-Merge Modulated PWM</h3>
 <ul>
-<li>Merge your completed <code>pwm-sinusoid</code> branch into your <code>main</code> branch using a Merge Request on Gitlab.</li>
-<li>Create an annotated tag of your <code>main</code> branch with all part of this lab merged in called <code>v3.1.0</code>.</li>
-<li>Create an Issue for Dr.&nbsp;Palmeri to review this PWM lab, assigning it the <code>Review</code> label.</li>
+<li><p>Merge your completed <code>pwm-sinusoid</code> branch into your <code>main</code> branch using a Merge Request on Gitlab.</p></li>
+<li><p>Create an annotated tag of your <code>main</code> branch with all part of this lab merged in called <code>v3.1.0</code>.</p></li>
+<li><p>Create an Issue for your TA to review this PWM lab, assigning it the <code>Review</code> label.</p></li>
 </ul>
 </section>
 </section>

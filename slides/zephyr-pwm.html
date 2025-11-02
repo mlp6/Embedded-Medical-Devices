@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Dr.&nbsp;Mark Palmeri, M.D., Ph.D.">
-<meta name="dcterms.date" content="2025-08-25">
+<meta name="dcterms.date" content="2025-11-03">
 
 <title>Zephyr: Pulse Width Modulation – Embedded Medical Devices</title>
 <style>
@@ -426,6 +426,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#main-code" id="toc-main-code" class="nav-link" data-scroll-target="#main-code">Main Code</a></li>
   <li><a href="#changing-pwm-duty-cycle" id="toc-changing-pwm-duty-cycle" class="nav-link" data-scroll-target="#changing-pwm-duty-cycle">Changing PWM Duty Cycle</a></li>
   <li><a href="#how-to-sinusoidally-module-led-brightness-using-a-pwm" id="toc-how-to-sinusoidally-module-led-brightness-using-a-pwm" class="nav-link" data-scroll-target="#how-to-sinusoidally-module-led-brightness-using-a-pwm">How to Sinusoidally Module LED Brightness Using a PWM</a></li>
+  <li><a href="#lower-level-nrf-pwm-control" id="toc-lower-level-nrf-pwm-control" class="nav-link" data-scroll-target="#lower-level-nrf-pwm-control">Lower-Level nRF PWM Control</a></li>
   <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/mlp6/Embedded-Medical-Devices/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="zephyr-pwm-slides.html"><i class="bi bi-file-slides"></i>RevealJS (live)</a></li></ul></div></nav>
@@ -460,7 +461,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">August 25, 2025</p>
+      <p class="date">November 3, 2025</p>
     </div>
   </div>
   
@@ -610,6 +611,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Set PWM counter period to ???</li>
 <li>LPF</li>
 </ul>
+</section>
+<section id="lower-level-nrf-pwm-control" class="level2">
+<h2 class="anchored" data-anchor-id="lower-level-nrf-pwm-control">Lower-Level nRF PWM Control</h2>
+<p><a href="https://docs.nordicsemi.com/bundle/ps_nrf52833/page/pwm.html">https://docs.nordicsemi.com/bundle/ps_nrf52833/page/pwm.html</a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://docs-be.nordicsemi.com/bundle/ps_nrf52833/page/ip/pwm/doc/image/pwm-module.svg?_LANG=enus" class="img-fluid figure-img"></p>
+<figcaption>PWM Module</figcaption>
+</figure>
+</div>
 </section>
 <section id="resources" class="level2">
 <h2 class="anchored" data-anchor-id="resources">Resources</h2>

@@ -3285,7 +3285,7 @@
     "href": "labs/zephyr-pwm-lab.html",
     "title": "Pulse Width Modulation (PWM) Lab",
     "section": "",
-    "text": "Implement a steady-state PWM output to control “intensity” over a finite dynamic range.\nImplement a temporally-modulated PWM output.",
+    "text": "Implement a steady-state PWM output to control “intensity” over a finite dynamic range.\nImplement a time-series-modulated PWM output.",
     "crumbs": [
       "Labs",
       "Pulse Width Modulation (PWM) Lab"
@@ -3296,7 +3296,7 @@
     "href": "labs/zephyr-pwm-lab.html#learning-objectives",
     "title": "Pulse Width Modulation (PWM) Lab",
     "section": "",
-    "text": "Implement a steady-state PWM output to control “intensity” over a finite dynamic range.\nImplement a temporally-modulated PWM output.",
+    "text": "Implement a steady-state PWM output to control “intensity” over a finite dynamic range.\nImplement a time-series-modulated PWM output.",
     "crumbs": [
       "Labs",
       "Pulse Width Modulation (PWM) Lab"
@@ -3318,7 +3318,7 @@
     "href": "labs/zephyr-pwm-lab.html#firmware-expectations",
     "title": "Pulse Width Modulation (PWM) Lab",
     "section": "Firmware Expectations",
-    "text": "Firmware Expectations\n\nAll firmware should be written using the State Machine Framework.\n\nChoose your states for each part as a firmware engineer would, using what you have learned so far this semester.\nTimers, work queues, callbacks, and interrupts should be used as appropriate.\nAll good coding practices developed this semester should be followed.\nUse logging to display state information and other relevant information, warnings, and errors. Debugging log messages can remain in the code, but the logging level should be submitted at the INF level.\nInclude a state diagram in your repository (state_diagram.png) using UML (state_diagram.puml) or some equivalent.\n\n\n\n\n\n\n\nTip\n\n\n\nDo all development for this lab on section-specific development branches.",
+    "text": "Firmware Expectations\n\nAll firmware should be written using the State Machine Framework.\nChoose your states for each part as a firmware engineer would, using what you have learned so far this semester.\nTimers, work queues, callbacks, and interrupts should be used as appropriate.\nAll good coding practices developed this semester should be followed.\nUse logging to display state information and other relevant information, warnings, and errors. Debugging log messages can remain in the code, but the logging level should be submitted at the INF level.\nInclude a state diagram in your repository (state_diagram.png) using UML (state_diagram.puml) or some equivalent.\n\n\n\n\n\n\n\nTip\n\n\n\nDo all development for this lab on section-specific development branches.",
     "crumbs": [
       "Labs",
       "Pulse Width Modulation (PWM) Lab"
@@ -3329,7 +3329,7 @@
     "href": "labs/zephyr-pwm-lab.html#steady-state-pwm-output",
     "title": "Pulse Width Modulation (PWM) Lab",
     "section": "Steady-State PWM Output",
-    "text": "Steady-State PWM Output\nDo this section on a development branch called pwm-steady-state.\n\nFirmware Functional Specifications\n\nUsing the ADC lab functionality to read a DC voltage on AIN0, map this read DC voltage to scale the maximum brightness of LED2 using a PWM output.\n\nFor example:\n\nIf AIN0 = 0 V, then LED2 should be off (0% duty cycle).\n\nIf AIN0 = 1.5 V, then LED2 should be at 50% brightness (50% duty cycle).\nIf AIN0 = 3 V, then LED2 should be at maximum brightness (100% duty cycle).\n\n\n\nUpdate your state diagram to include the new functionality.\n\n\n\nTesting\n\nQuantify the linearity of the maximum brightness of LED2 as a function of AIN0 voltage ranging from 0-3 V.\nPresent your data and analysis in the technical report Jupyter notebook called testing/testing_pwm.ipynb.\n\n\n\n\n\n\n\nNote\n\n\n\nRemember that LEDs on the DK are ACTIVE_LOW.\n\n\n\n\nCommit-n-Merge Steady-State PWM\n\nMerge your completed pwm-steady-state branch into your main branch using a Merge Request on Gitlab.\nCreate an annotated tag of your main branch with all part of this lab merged in called v3.0.0.",
+    "text": "Steady-State PWM Output\nDo this section on a development branch called pwm-steady-state.\n\nFirmware Functional Specifications\n\nUsing the ADC lab functionality to read a DC voltage on AIN0, map this read DC voltage to scale the maximum brightness of LED2 using a PWM output.\n\n\n\n\n\n\n\nExample\n\n\n\n\nIf AIN0 = 0 V, then LED2 should be off (0% duty cycle).\n\nIf AIN0 = 1.5 V, then LED2 should be at 50% brightness (50% duty cycle).\nIf AIN0 = 3 V, then LED2 should be at maximum brightness (100% duty cycle).\n\n\n\n\n\nUpdate your state diagram to include the new functionality.\n\n\n\nTesting\n\nQuantify the linearity of the maximum brightness of LED2 as a function of AIN0 voltage ranging from 0-3 V.\nPresent your data and analysis in the technical report Jupyter notebook called testing/testing_pwm.ipynb.\n\n\n\n\n\n\n\nDo Things Looks Inverted?\n\n\n\nRemember that LEDs on the DK are ACTIVE_LOW.\n\n\n\n\nCommit-n-Merge Steady-State PWM\n\nMerge your completed pwm-steady-state branch into your main branch using a Merge Request on Gitlab.\nCreate an annotated tag of your main branch with all part of this lab merged in called v3.0.0.",
     "crumbs": [
       "Labs",
       "Pulse Width Modulation (PWM) Lab"
@@ -3340,7 +3340,7 @@
     "href": "labs/zephyr-pwm-lab.html#sinusoidal-modulation-of-pwm-output",
     "title": "Pulse Width Modulation (PWM) Lab",
     "section": "Sinusoidal Modulation of PWM Output",
-    "text": "Sinusoidal Modulation of PWM Output\nDo this section on a development branch called pwm-sinusoid, branched off of main after pwm-steady-state was merged.\n\nFirmware Functional Specifications\n\nModulate the brighness of LED3 to match samping a 2-second, 10 Hz differential sinusoidal voltage on AIN1 and AIN2 after pressing BUTTON2.\nLED3 should have its brightness modulated with as little latency as possible with respect to the input voltage.\n\n\n\n\n\n\n\nTip\n\n\n\nThe blocking nature of a syncronous buffered acquisition scheme is not ameable to realtime modulation of the PWM output. Consider using the aynchronous ADC sampling approach with a callback to update the PWM duty cycle after each sampling event or a timer-based, single-sample acqusition approach.\n\n\n\nSet the minumum and maximum sinusoidal brightnesses to be PWM duty cycles of 0 and 100%, respectively.\nUpdate your state diagram to include the new functionality.\n\n\n\nTesting\n\nUsing the oscilloscope, measure your input sinusoidal signal on AIN1 and AIN2 and the output PWM signal on LED3 at the same time.\n\n\n\n\n\n\n\nTip\n\n\n\nYou will need to low pass filter your modulated PWM output to see a smooth sinusoidal output. You can do this using the LPF Math mode on the oscilloscope with an appropriate cutoff frequency (relative to the frequency of the input sinusoid) and sampling window (capturing multiple cycles of the sinusoid).\n\n\n\nSave this acquired oscilloscope data to a CSV file using a USB memory stick.\nIn your Jupyter notebook, in a new section, plot the input and output signals.\nCalculate the frequency of your PWM signal and the phase difference between the PWM sinusoid and your input signal.\nPresent your data and analysis in your Jupyter notebook.\nDiscuss the accuracy of your PWM frequency and the latency (phase lag) of your system and how you could improve it in the future.\n\n\n\nCommit-n-Merge Modulated PWM\n\nMerge your completed pwm-sinusoid branch into your main branch using a Merge Request on Gitlab.\nCreate an annotated tag of your main branch with all part of this lab merged in called v3.1.0.\nCreate an Issue for Dr. Palmeri to review this PWM lab, assigning it the Review label.",
+    "text": "Sinusoidal Modulation of PWM Output\n\n\n\n\n\n\nTip\n\n\n\nDo this section on a development branch called pwm-sinusoid, branched off of main after pwm-steady-state was merged.\n\n\n\nFirmware Functional Specifications\n\nModulate the brighness of LED3 to match sampling a 2-second, 10 Hz differential sinusoidal voltage on AIN1 and AIN2 after pressing BUTTON2.\nLED3 should have its brightness modulated with as little latency as possible with respect to the input voltage. In other words, the brightness of LED3 should follow the input sinusoid as closely as possible in time.\n\n\n\n\n\n\n\nImportant\n\n\n\nThe blocking nature of a syncronous buffered acquisition scheme is not ameable to realtime modulation of the PWM output. Consider using the aynchronous ADC sampling approach with a callback to update the PWM duty cycle after each sampling event or a timer-based, single-sample acqusition approach.\n\n\n\n\n\n\n\n\nTip\n\n\n\n\nBe cognizant of your sampling rate, PWM on-time period update rate and the PWM clock period relative to your input signal.\nThere are several ways to implement the 2-second sampling period, including using a monostable timer or counting the number of samples taken at a known sampling rate. Make a purposeful decision in how you implement this functionality.\n\n\n\n\nSet the minumum and maximum sinusoidal brightnesses to be PWM duty cycles of 0 and 100%, respectively.\nUpdate your state diagram to include the new functionality.\n\n\n\nTesting\n\nUsing the oscilloscope, concurrently measure your input sinusoidal signal (what is differentially input to AIN1 and AIN2) and the output PWM signal on LED3.\n\n\n\n\n\n\n\nTip\n\n\n\nYou will need to low pass filter your modulated PWM output to see a smooth sinusoidal output. You can do this using the LPF Math mode on the oscilloscope with an appropriate cutoff frequency (relative to the frequency of the input sinusoid) and sampling window (capturing multiple cycles of the sinusoid). You can also build a simple RC low pass filter circuit to connect to the oscilloscope probe.\n\n\n\nSave this acquired oscilloscope data to a CSV file using a USB memory stick.\nIn your Jupyter notebook, in a new section, plot the input and output signals.\nCalculate the frequency of your PWM signal and the phase difference between the PWM sinusoid and your input signal.\nPresent your data and analysis in your Jupyter notebook.\nDiscuss the accuracy of your PWM frequency and the latency (phase lag) of your system and how you could improve it in the future.\n\n\n\nCommit-n-Merge Modulated PWM\n\nMerge your completed pwm-sinusoid branch into your main branch using a Merge Request on Gitlab.\nCreate an annotated tag of your main branch with all part of this lab merged in called v3.1.0.\nCreate an Issue for your TA to review this PWM lab, assigning it the Review label.",
     "crumbs": [
       "Labs",
       "Pulse Width Modulation (PWM) Lab"
@@ -3663,6 +3663,13 @@
     "text": "How to Sinusoidally Module LED Brightness Using a PWM\n\nUse a timer to change the duty cycle of the PWM signal. How often?\nSet PWM counter period to ???\nLPF"
   },
   {
+    "objectID": "slides/zephyr-pwm-slides.html#lower-level-nrf-pwm-control",
+    "href": "slides/zephyr-pwm-slides.html#lower-level-nrf-pwm-control",
+    "title": "Zephyr: Pulse Width Modulation",
+    "section": "Lower-Level nRF PWM Control",
+    "text": "Lower-Level nRF PWM Control\nhttps://docs.nordicsemi.com/bundle/ps_nrf52833/page/pwm.html\n\nPWM Module"
+  },
+  {
     "objectID": "slides/zephyr-pwm-slides.html#resources",
     "href": "slides/zephyr-pwm-slides.html#resources",
     "title": "Zephyr: Pulse Width Modulation",
@@ -3807,6 +3814,17 @@
     "title": "Zephyr: Pulse Width Modulation",
     "section": "How to Sinusoidally Module LED Brightness Using a PWM",
     "text": "How to Sinusoidally Module LED Brightness Using a PWM\n\nUse a timer to change the duty cycle of the PWM signal. How often?\nSet PWM counter period to ???\nLPF",
+    "crumbs": [
+      "Learning Modules",
+      "Pulse Width Modulation (PWM)"
+    ]
+  },
+  {
+    "objectID": "slides/zephyr-pwm.html#lower-level-nrf-pwm-control",
+    "href": "slides/zephyr-pwm.html#lower-level-nrf-pwm-control",
+    "title": "Zephyr: Pulse Width Modulation",
+    "section": "Lower-Level nRF PWM Control",
+    "text": "Lower-Level nRF PWM Control\nhttps://docs.nordicsemi.com/bundle/ps_nrf52833/page/pwm.html\n\n\n\nPWM Module",
     "crumbs": [
       "Learning Modules",
       "Pulse Width Modulation (PWM)"
