@@ -1,6 +1,6 @@
 ---
 title: "Zephyr: Pulse Width Modulation"
-date: "2025-08-25"
+date: "2025-11-03"
 format:
   live-html: 
     output-file: zephyr-pwm.html
@@ -136,6 +136,12 @@ if (err) {
 - Use a timer to change the duty cycle of the PWM signal.  How often?
 - Set PWM counter period to ???
 - LPF
+
+## Lower-Level nRF PWM Control
+
+[https://docs.nordicsemi.com/bundle/ps_nrf52833/page/pwm.html](https://docs.nordicsemi.com/bundle/ps_nrf52833/page/pwm.html)
+
+![PWM Module](https://docs-be.nordicsemi.com/bundle/ps_nrf52833/page/ip/pwm/doc/image/pwm-module.svg?_LANG=enus)
 
 ## Resources
 
