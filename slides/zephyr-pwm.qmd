@@ -120,9 +120,10 @@ if (!device_is_ready(pwm1.dev))  {
 }
 
 // set the PWM duty cycle (pulse length)
-err = pwm_set_pulse_dt(pwm1, pwm1->period/2); // 50% duty cycle
+err = pwm_set_pulse_dt(&pwm1, pwm1.period/2); // 50% duty cycle
 if (err) {
     LOG_ERR("Could not set pwm1 driver.");
+    // maybe change to an ERROR state
 }
 ```
 
