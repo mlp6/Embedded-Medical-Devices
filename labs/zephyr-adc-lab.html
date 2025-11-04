@@ -595,7 +595,7 @@ Tip
 <ul>
 <li><p>Quantify the accuracy of the <code>LED1</code> 10% duty cycle for each frequency that you measure.</p></li>
 <li><p>Quantify the accuracy of <code>LED1</code> 5 second ontime duration.</p></li>
-<li><p>Present all of these data, your analysis and your interpretation in a new Jupyter notebook named <code>testing/testing_adc.ipynb</code>.</p></li>
+<li><p>Present all of these data, your analysis and your interpretation in a new Jupyter notebook named <code>testing/testing_adc_single_sample.ipynb</code>.</p></li>
 </ul>
 </section>
 <section id="commit-n-merge-single-sample-acquisition" class="level3">
@@ -674,8 +674,21 @@ Tip
 <ul>
 <li><p>Discuss any differences between the input signal and your sampled signal.</p></li>
 <li><p>Calculate the frequency of your sampled signal and compare it to your input frequency.</p></li>
-<li><p>Add this analysis to a new section called <code>Buffered Differential ADC Sampling</code> in <code>testing/testing_adc.ipynb</code>.</p></li>
+<li><p>Add this analysis to a new Jupyter notebook named <code>testing/testing_adc_sync.ipynb</code>.</p></li>
 </ul>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Merging Jupyter notebooks from different branches can be tricky and usually requires some extra tools or manual intervention. We are creating separate Jupyter notebooks for each part of this lab in case you jump to code development in a different part before finishing the testing for the previous part.</p>
+</div>
+</div>
 </section>
 <section id="commit-n-merge-buffered-acquisition" class="level3">
 <h3 class="anchored" data-anchor-id="commit-n-merge-buffered-acquisition">Commit-n-Merge Buffered Acquisition</h3>
@@ -694,17 +707,14 @@ Tip
 <ul>
 <li><p>Refactor your blocking, synchronous buffered ADC sequence acquisition to an <strong>asynchronous</strong> acquisition that populates the same array that was populated with the synchronous approach.</p></li>
 <li><p>Utilize the 3 Zephyr enumerations presented in lecture to modulate the behaviour of the asynchronous callback function.</p></li>
-<li><p>Optional functionality:</p>
-<ul>
 <li><p>Use a kernel poll (<code>k_poll</code>) to wait for the ADC sequence to complete.</p></li>
 <li><p>Implement a timeout mechanism to handle the case where the ADC sequence does not complete within a reasonable time frame.</p></li>
-</ul></li>
 </ul>
 </section>
 <section id="testing-2" class="level3">
 <h3 class="anchored" data-anchor-id="testing-2">Testing</h3>
 <ul>
-<li><p>Repeat the testing you performed in the syncronous section in a new section called <code>Asynchronous ADC Sampling</code> in <code>testing/testing_adc.ipynb</code>.</p></li>
+<li><p>Repeat the testing you performed in a new Jupyter notebook named <code>testing/testing_adc_async.ipynb</code>.</p></li>
 <li><p>Discuss the benefits and drawbacks of the asyncronous ADC sequence sampling compared to the synchronous sampling.</p></li>
 </ul>
 </section>
@@ -729,7 +739,7 @@ Tip
 <section id="testing-3" class="level3">
 <h3 class="anchored" data-anchor-id="testing-3">Testing</h3>
 <ul>
-<li><p>Repeat the testing you performed in the asyncronous section in a new section called <code>Timer-Based Single Sampling to Array</code> in <code>testing/testing_adc.ipynb</code>.</p></li>
+<li><p>Repeat the testing you performed in the asyncronous section for this timer-based implementation in a new Jupyter notebook named <code>testing/testing_adc_timer.ipynb</code>.</p></li>
 <li><p>Discuss the benefits and drawbacks of using a timer-based ADC sampling scheme compared to the previous approaches when trying to accurately sample a sinusoidal signal.</p></li>
 </ul>
 </section>
