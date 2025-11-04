@@ -109,7 +109,7 @@ measure.
 - Quantify the accuracy of `LED1` 5 second ontime duration.
 
 - Present all of these data, your analysis and your interpretation in a new
-Jupyter notebook named `testing/testing_adc.ipynb`.
+Jupyter notebook named `testing/testing_adc_single_sample.ipynb`.
 
 ### Commit-n-Merge Single Sample Acquisition
 
@@ -182,8 +182,11 @@ in your git repository to read into your Jupyter notebook for analysis.
 
 - Calculate the frequency of your sampled signal and compare it to your input frequency.
 
-- Add this analysis to a new section called `Buffered Differential ADC Sampling`
-in `testing/testing_adc.ipynb`.
+- Add this analysis to a new Jupyter notebook named `testing/testing_adc_sync.ipynb`.
+  
+::: callout-warning
+Merging Jupyter notebooks from different branches can be tricky and usually requires some extra tools or manual intervention.  We are creating separate Jupyter notebooks for each part of this lab in case you jump to code development in a different part before finishing the testing for the previous part.
+:::
 
 ### Commit-n-Merge Buffered Acquisition
 
@@ -210,17 +213,13 @@ with the synchronous approach.
 - Utilize the 3 Zephyr enumerations presented in lecture to modulate the
 behaviour of the asynchronous callback function.
 
-- Optional functionality: 
+- Use a kernel poll (`k_poll`) to wait for the ADC sequence to complete.
 
-    - Use a kernel poll (`k_poll`) to wait for the ADC sequence to complete.
-
-    - Implement a timeout mechanism to handle the case where the ADC sequence
-    does not complete within a reasonable time frame.
+- Implement a timeout mechanism to handle the case where the ADC sequence does not complete within a reasonable time frame.
 
 ### Testing
 
-- Repeat the testing you performed in the syncronous section in a new section
-called `Asynchronous ADC Sampling` in `testing/testing_adc.ipynb`.
+- Repeat the testing you performed in a new Jupyter notebook named `testing/testing_adc_async.ipynb`.
 
 - Discuss the benefits and drawbacks of the asyncronous ADC sequence sampling compared to
 the synchronous sampling.
@@ -247,8 +246,7 @@ functionality to your firmware:
 
 ### Testing
 
-- Repeat the testing you performed in the asyncronous section in a new section
-called `Timer-Based Single Sampling to Array` in `testing/testing_adc.ipynb`.
+- Repeat the testing you performed in the asyncronous section for this timer-based implementation in a new Jupyter notebook named `testing/testing_adc_timer.ipynb`.
 
 - Discuss the benefits and drawbacks of using a timer-based ADC sampling scheme compared to the previous approaches when trying to accurately sample a sinusoidal signal.
 
