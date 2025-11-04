@@ -120,7 +120,7 @@ if (!device_is_ready(pwm1.dev))  {
 }
 
 // set the PWM duty cycle (pulse length)
-err = pwm_set_pulse_dt(&pwm1, pwm1.period/2); // 50% duty cycle
+err = pwm_set_pulse_dt(&pwm1, pwm1.period/2); // 50% duty cycle (be careful with integer division)
 if (err) {
     LOG_ERR("Could not set pwm1 driver.");
     // maybe change to an ERROR state
@@ -130,13 +130,18 @@ if (err) {
 ## Changing PWM Duty Cycle
 
 - The pulse length (duty cycle) can be changed "on the fly", but only changes at the next period.
-- Can be done with a timer or event-driven.
+
+- Can be done with a timer or triggered by an event or poll signal.
 
 ## How to Sinusoidally Module LED Brightness Using a PWM
 
-- Use a timer to change the duty cycle of the PWM signal.  How often?
-- Set PWM counter period to ???
-- LPF
+- Change the duty cycle of the PWM signal at a known timing interval.  Can be done with a timer, callback function run at a set interval (e.g., ADC async), etc.
+
+- Need to consider how often to update based on frequency content of the desired output signal.
+
+- PWM clock frequency should be much higher than the output signal frequency.
+
+- LPF to smooth out PWM clock frequency-based transitions.
 
 ## Lower-Level nRF PWM Control
 
