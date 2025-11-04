@@ -323,10 +323,11 @@ Dr.&nbsp;Mark Palmeri, M.D., Ph.D.
 <span id="cb4-12"><a></a><span class="op">}</span></span>
 <span id="cb4-13"><a></a></span>
 <span id="cb4-14"><a></a><span class="co">// set the PWM duty cycle (pulse length)</span></span>
-<span id="cb4-15"><a></a>err <span class="op">=</span> pwm_set_pulse_dt<span class="op">(</span>pwm1<span class="op">,</span> pwm1<span class="op">-&gt;</span>period<span class="op">/</span><span class="dv">2</span><span class="op">);</span> <span class="co">// 50% duty cycle</span></span>
+<span id="cb4-15"><a></a>err <span class="op">=</span> pwm_set_pulse_dt<span class="op">(&amp;</span>pwm1<span class="op">,</span> pwm1<span class="op">.</span>period<span class="op">/</span><span class="dv">2</span><span class="op">);</span> <span class="co">// 50% duty cycle</span></span>
 <span id="cb4-16"><a></a><span class="cf">if</span> <span class="op">(</span>err<span class="op">)</span> <span class="op">{</span></span>
 <span id="cb4-17"><a></a>    LOG_ERR<span class="op">(</span><span class="st">"Could not set pwm1 driver."</span><span class="op">);</span></span>
-<span id="cb4-18"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-18"><a></a>    <span class="co">// maybe change to an ERROR state</span></span>
+<span id="cb4-19"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="changing-pwm-duty-cycle" class="slide level2">
 <h2>Changing PWM Duty Cycle</h2>

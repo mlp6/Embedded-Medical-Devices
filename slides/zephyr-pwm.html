@@ -592,10 +592,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
 <span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co">// set the PWM duty cycle (pulse length)</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>err <span class="op">=</span> pwm_set_pulse_dt<span class="op">(</span>pwm1<span class="op">,</span> pwm1<span class="op">-&gt;</span>period<span class="op">/</span><span class="dv">2</span><span class="op">);</span> <span class="co">// 50% duty cycle</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>err <span class="op">=</span> pwm_set_pulse_dt<span class="op">(&amp;</span>pwm1<span class="op">,</span> pwm1<span class="op">.</span>period<span class="op">/</span><span class="dv">2</span><span class="op">);</span> <span class="co">// 50% duty cycle</span></span>
 <span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>err<span class="op">)</span> <span class="op">{</span></span>
 <span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    LOG_ERR<span class="op">(</span><span class="st">"Could not set pwm1 driver."</span><span class="op">);</span></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    <span class="co">// maybe change to an ERROR state</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="changing-pwm-duty-cycle" class="level2">
 <h2 class="anchored" data-anchor-id="changing-pwm-duty-cycle">Changing PWM Duty Cycle</h2>

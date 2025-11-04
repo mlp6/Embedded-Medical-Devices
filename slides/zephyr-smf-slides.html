@@ -468,59 +468,6 @@ Dr.&nbsp;Mark Palmeri, M.D., Ph.D.
 <li>Threads are not readily captured in a state diagram, but are more commonly described using a sequence diagram.</li>
 </ul>
 </section>
-<section id="avoiding-global-variables-with-s_object-struct" class="slide level2">
-<h2>Avoiding Global Variables with <code>s_object</code> Struct</h2>
-<p>As you implement functionality within the SMF, you may wonder how to make a variable available in two different states — which is a good question, because a natural instinct might be to utilize a global variable, which we want to avoid.</p>
-<p>Generally, you can leverage the fact that the <code>s_object</code> struct we create for <code>smf_ctx</code> (ie, state machine context) is passed to all states as a pointer and populate it with members for your own purpose. You can declare an <code>s_object</code> struct template in the global scope that contains anything you need to access between states. Something like:</p>
-<pre><code>struct s_object {
-    struct smf_ctx ctx; // must be first element
-    struct struct_type my_struct;
-    int16_t my_variable;
-    int16_t my_array[ARR_LENGTH];
-};</code></pre>
-<p>To be clear, this is merely defining a struct type and does not constitute creating a variable. Then, within <code>main()</code>, you can create an instance of this struct (that will be local to main) and populate the members with initial values — here, this example shows how to do this with a helper function:</p>
-<pre><code>#define S_OBJ_SUCCESS         0
-#define S_OBJ_ERR_NULL_PTR   -1
-#define S_OBJ_ERR_BAD_CONFIG -2 // define your own error codes
-
-int8_t init_s_object(struct s_object *s) {
-    if (s == NULL) {
-        return S_OBJ_ERR_NULL_PTR;  // invalid pointer
-    }
-    s-&gt;my_variable = 0; // initial value
-    s-&gt;my_struct.member = &amp;s-&gt;my_variable; // assign member of my_struct pointer to my_variable 
-    s-&gt;my_struct.array_size = sizeof(s-&gt;my_array[0])*ARR_LENGTH;
-    if (s-&gt;my_struct.member == NULL) {
-        return S_OBJ_ERR_BAD_CONFIG;
-    }
-    return S_OBJ_SUCCESS;
-}</code></pre>
-<p>As always, utilize function returns for error handling using exit codes.</p>
-<pre><code>int main(void){
-    static struct s_object s_obj; // create an instance of s_object called s_obj
-    int ret = init_s_object(&amp;s_obj); // initialize s_obj using helper function
-    if (ret != 0) {
-        LOG_ERR("could not initialize s_object stuct (%d)", ret);
-        break;
-    }
-    smf_set_initial(SMF_CTX(&amp;s_obj), &amp;fsm_states[INIT]);
-    for (;;) {
-        ret = smf_run_state(SMF_CTX(&amp;s_obj));
-        if (ret != 0) {
-            LOG_ERR("terminating state machine (%d)", ret);
-            break;
-        }
-    }
-    return 0;
-}</code></pre>
-<p>Then, within a state:</p>
-<pre><code> static void state_run(void *o){
-    struct s_object *s = (struct s_object *)o; // cast explicitly for compiler
-    (void)my_function(&amp;s-&gt;my_variable); // pass pointer to my_variable to my_function
-    // remainder of state code
-}</code></pre>
-<p>Because the default argument for states is a generic pointer (<code>void *o</code>), you will need to cast the input to a pointer for the <code>s_object struct</code> to safely access its members. If you’re unfamiliar with the arrow operator (<code>-&gt;</code>), this allows you to access members of a struct via a pointer. This syntax is equivalent to <code>(*s).member</code> , where the <code>.</code> is how we would typically access a member directly (ie, not as a pointer).</p>
-</section>
 <section id="resources" class="slide level2">
 <h2>Resources</h2>
 <ul>
