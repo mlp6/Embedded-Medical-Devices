@@ -729,53 +729,53 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="avoiding-global-variables-with-s_object-struct">Avoiding Global Variables with <code>s_object</code> Struct</h2>
 <p>As you implement functionality within the SMF, you may wonder how to make a variable available in two different states — which is a good question, because a natural instinct might be to utilize a global variable, which we want to avoid.</p>
 <p>Generally, you can leverage the fact that the <code>s_object</code> struct we create for <code>smf_ctx</code> (ie, state machine context) is passed to all states as a pointer and populate it with members for your own purpose. You can declare an <code>s_object</code> struct template in the global scope that contains anything you need to access between states. Something like:</p>
-<pre><code>struct s_object {
-    struct smf_ctx ctx; // must be first element
-    struct struct_type my_struct;
-    int16_t my_variable;
-    int16_t my_array[ARR_LENGTH];
-};</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> s_object <span class="op">{</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> smf_ctx ctx<span class="op">;</span> <span class="co">// must be first element</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> struct_type my_struct<span class="op">;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int16_t</span> my_variable<span class="op">;</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int16_t</span> my_array<span class="op">[</span>ARR_LENGTH<span class="op">];</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>To be clear, this is merely defining a struct type and does not constitute creating a variable. Then, within <code>main()</code>, you can create an instance of this struct (that will be local to main) and populate the members with initial values — here, this example shows how to do this with a helper function:</p>
-<pre><code>#define S_OBJ_SUCCESS         0
-#define S_OBJ_ERR_NULL_PTR   -1
-#define S_OBJ_ERR_BAD_CONFIG -2 // define your own error codes
-
-int8_t init_s_object(struct s_object *s) {
-    if (s == NULL) {
-        return S_OBJ_ERR_NULL_PTR;  // invalid pointer
-    }
-    s-&gt;my_variable = 0; // initial value
-    s-&gt;my_struct.member = &amp;s-&gt;my_variable; // assign member of my_struct pointer to my_variable 
-    s-&gt;my_struct.array_size = sizeof(s-&gt;my_array[0])*ARR_LENGTH;
-    if (s-&gt;my_struct.member == NULL) {
-        return S_OBJ_ERR_BAD_CONFIG;
-    }
-    return S_OBJ_SUCCESS;
-}</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#define S_OBJ_SUCCESS         </span><span class="dv">0</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#define S_OBJ_ERR_NULL_PTR   </span><span class="op">-</span><span class="dv">1</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#define S_OBJ_ERR_BAD_CONFIG </span><span class="op">-</span><span class="dv">2</span><span class="pp"> </span><span class="co">// define your own error codes</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="dt">int8_t</span> init_s_object<span class="op">(</span><span class="kw">struct</span> s_object <span class="op">*</span>s<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>s <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> S_OBJ_ERR_NULL_PTR<span class="op">;</span>  <span class="co">// invalid pointer</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    s<span class="op">-&gt;</span>my_variable <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> <span class="co">// initial value</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    s<span class="op">-&gt;</span>my_struct<span class="op">.</span>member <span class="op">=</span> <span class="op">&amp;</span>s<span class="op">-&gt;</span>my_variable<span class="op">;</span> <span class="co">// assign member of my_struct pointer to my_variable </span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    s<span class="op">-&gt;</span>my_struct<span class="op">.</span>array_size <span class="op">=</span> <span class="kw">sizeof</span><span class="op">(</span>s<span class="op">-&gt;</span>my_array<span class="op">[</span><span class="dv">0</span><span class="op">])*</span>ARR_LENGTH<span class="op">;</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>s<span class="op">-&gt;</span>my_struct<span class="op">.</span>member <span class="op">==</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> S_OBJ_ERR_BAD_CONFIG<span class="op">;</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> S_OBJ_SUCCESS<span class="op">;</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>As always, utilize function returns for error handling using exit codes.</p>
-<pre><code>int main(void){
-    static struct s_object s_obj; // create an instance of s_object called s_obj
-    int ret = init_s_object(&amp;s_obj); // initialize s_obj using helper function
-    if (ret != 0) {
-        LOG_ERR("could not initialize s_object stuct (%d)", ret);
-        break;
-    }
-    smf_set_initial(SMF_CTX(&amp;s_obj), &amp;fsm_states[INIT]);
-    for (;;) {
-        ret = smf_run_state(SMF_CTX(&amp;s_obj));
-        if (ret != 0) {
-            LOG_ERR("terminating state machine (%d)", ret);
-            break;
-        }
-    }
-    return 0;
-}</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">){</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">static</span> <span class="kw">struct</span> s_object s_obj<span class="op">;</span> <span class="co">// create an instance of s_object called s_obj</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> ret <span class="op">=</span> init_s_object<span class="op">(&amp;</span>s_obj<span class="op">);</span> <span class="co">// initialize s_obj using helper function</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>ret <span class="op">!=</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>        LOG_ERR<span class="op">(</span><span class="st">"could not initialize s_object stuct (</span><span class="sc">%d</span><span class="st">)"</span><span class="op">,</span> ret<span class="op">);</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    smf_set_initial<span class="op">(</span>SMF_CTX<span class="op">(&amp;</span>s_obj<span class="op">),</span> <span class="op">&amp;</span>fsm_states<span class="op">[</span>INIT<span class="op">]);</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(;;)</span> <span class="op">{</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>        ret <span class="op">=</span> smf_run_state<span class="op">(</span>SMF_CTX<span class="op">(&amp;</span>s_obj<span class="op">));</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>ret <span class="op">!=</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>            LOG_ERR<span class="op">(</span><span class="st">"terminating state machine (</span><span class="sc">%d</span><span class="st">)"</span><span class="op">,</span> ret<span class="op">);</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Then, within a state:</p>
-<pre><code> static void state_run(void *o){
-    struct s_object *s = (struct s_object *)o; // cast explicitly for compiler
-    (void)my_function(&amp;s-&gt;my_variable); // pass pointer to my_variable to my_function
-    // remainder of state code
-}</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a> <span class="dt">static</span> <span class="dt">void</span> state_run<span class="op">(</span><span class="dt">void</span> <span class="op">*</span>o<span class="op">){</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> s_object <span class="op">*</span>s <span class="op">=</span> <span class="op">(</span><span class="kw">struct</span> s_object <span class="op">*)</span>o<span class="op">;</span> <span class="co">// cast explicitly for compiler</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">(</span><span class="dt">void</span><span class="op">)</span>my_function<span class="op">(&amp;</span>s<span class="op">-&gt;</span>my_variable<span class="op">);</span> <span class="co">// pass pointer to my_variable to my_function</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">// remainder of state code</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Because the default argument for states is a generic pointer (<code>void *o</code>), you will need to cast the input to a pointer for the <code>s_object struct</code> to safely access its members. If you’re unfamiliar with the arrow operator (<code>-&gt;</code>), this allows you to access members of a struct via a pointer. This syntax is equivalent to <code>(*s).member</code> , where the <code>.</code> is how we would typically access a member directly (ie, not as a pointer).</p>
 </section>
 <section id="resources" class="level2">
