@@ -323,7 +323,7 @@ Dr.&nbsp;Mark Palmeri, M.D., Ph.D.
 <span id="cb4-12"><a></a><span class="op">}</span></span>
 <span id="cb4-13"><a></a></span>
 <span id="cb4-14"><a></a><span class="co">// set the PWM duty cycle (pulse length)</span></span>
-<span id="cb4-15"><a></a>err <span class="op">=</span> pwm_set_pulse_dt<span class="op">(&amp;</span>pwm1<span class="op">,</span> pwm1<span class="op">.</span>period<span class="op">/</span><span class="dv">2</span><span class="op">);</span> <span class="co">// 50% duty cycle</span></span>
+<span id="cb4-15"><a></a>err <span class="op">=</span> pwm_set_pulse_dt<span class="op">(&amp;</span>pwm1<span class="op">,</span> pwm1<span class="op">.</span>period<span class="op">/</span><span class="dv">2</span><span class="op">);</span> <span class="co">// 50% duty cycle (be careful with integer division)</span></span>
 <span id="cb4-16"><a></a><span class="cf">if</span> <span class="op">(</span>err<span class="op">)</span> <span class="op">{</span></span>
 <span id="cb4-17"><a></a>    LOG_ERR<span class="op">(</span><span class="st">"Could not set pwm1 driver."</span><span class="op">);</span></span>
 <span id="cb4-18"><a></a>    <span class="co">// maybe change to an ERROR state</span></span>
@@ -332,16 +332,17 @@ Dr.&nbsp;Mark Palmeri, M.D., Ph.D.
 <section id="changing-pwm-duty-cycle" class="slide level2">
 <h2>Changing PWM Duty Cycle</h2>
 <ul>
-<li>The pulse length (duty cycle) can be changed “on the fly”, but only changes at the next period.</li>
-<li>Can be done with a timer or event-driven.</li>
+<li><p>The pulse length (duty cycle) can be changed “on the fly”, but only changes at the next period.</p></li>
+<li><p>Can be done with a timer or triggered by an event or poll signal.</p></li>
 </ul>
 </section>
 <section id="how-to-sinusoidally-module-led-brightness-using-a-pwm" class="slide level2">
 <h2>How to Sinusoidally Module LED Brightness Using a PWM</h2>
 <ul>
-<li>Use a timer to change the duty cycle of the PWM signal. How often?</li>
-<li>Set PWM counter period to ???</li>
-<li>LPF</li>
+<li><p>Change the duty cycle of the PWM signal at a known timing interval. Can be done with a timer, callback function run at a set interval (e.g., ADC async), etc.</p></li>
+<li><p>Need to consider how often to update based on frequency content of the desired output signal.</p></li>
+<li><p>PWM clock frequency should be much higher than the output signal frequency.</p></li>
+<li><p>LPF to smooth out PWM clock frequency-based transitions.</p></li>
 </ul>
 </section>
 <section id="lower-level-nrf-pwm-control" class="slide level2">
