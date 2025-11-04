@@ -99,6 +99,8 @@ website:
           text: "Zephyr: Debugging in VS Code"
         - href: resources/teaching_assistant_expectations.qmd
           text: "Teaching Assistant Expectations"
+        - href: https://docs.nordicsemi.com/
+          text: Nordic Semiconductor Documentation
 
     page-footer:
       right: 'This page is built with [Quarto](https://quarto.org/).'
