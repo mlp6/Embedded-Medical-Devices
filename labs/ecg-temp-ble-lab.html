@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Dr.&nbsp;Mark Palmeri, M.D., Ph.D.">
-<meta name="dcterms.date" content="2025-08-25">
+<meta name="dcterms.date" content="2025-11-12">
 
 <title>ECG &amp; Temperature Sensor with BLE Lab – Embedded Medical Devices</title>
 <style>
@@ -429,7 +429,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">August 25, 2025</p>
+      <p class="date">November 12, 2025</p>
     </div>
   </div>
   
@@ -441,12 +441,7 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<!-- TODO: update for new forkable repo / or build on previous labs -->
-<ul>
-<li>Fork this repository to your userspace.</li>
-<li>Add Dr.&nbsp;Palmeri as a <code>Maintainer</code>.</li>
-<li>Questions should be asked exclusively through GitLab Issues.</li>
-</ul>
+<p>This lab will be the final addition of functionality to your course firmware repository. You should take all functional specifications below to override and replace any previous lab functionality. You should refactor your code from all of the previous labs to demonstrate your mastery of best coding practices from this semester.</p>
 <section id="git-version-control" class="level2">
 <h2 class="anchored" data-anchor-id="git-version-control">Git Version Control</h2>
 <ul>
@@ -472,79 +467,77 @@ Important
 </section>
 <section id="best-coding-practices" class="level2">
 <h2 class="anchored" data-anchor-id="best-coding-practices">Best Coding Practices</h2>
+<p>You should refactor your code from all of the previous labs to demonstrate your mastery of best coding practices from this semester. Some reminders:</p>
 <ul>
-<li>Use best coding practices throughout the development of your firmware.</li>
-<li>Functions should be short and do one thing. They should return an exit code that is checked in the calling function, indicating success or failure.</li>
-<li>MACROS! Avoid hard-coded values in your code.</li>
-<li>Use structs to organize related data.</li>
-<li>Use libraries for code that is self-contained.</li>
-<li>Use the <code>LOGGING</code> module to log errors, warnings, information and debug messages.</li>
-<li>You should not have any compiler/build warnings. The CI script will build against <code>v2.9.0</code> of the Zephyr SDK.</li>
+<li><p>Functions should be short and do one thing. They should return an exit code that is checked in the calling function, indicating success or failure.</p></li>
+<li><p>MACROS! Avoid hard-coded values in your code.</p></li>
+<li><p>Use structs to organize related data.</p></li>
+<li><p>Use libraries for code that is self-contained.</p></li>
+<li><p>Use the <code>LOGGING</code> module to log errors, warnings, information and debug messages.</p></li>
+<li><p>You should not have any compiler/build warnings. The CI script will build against <code>v2.9.0</code> of the Zephyr SDK.</p></li>
 </ul>
 </section>
 <section id="firmware-functional-specifications" class="level2">
 <h2 class="anchored" data-anchor-id="firmware-functional-specifications">Firmware Functional Specifications</h2>
 <ul>
-<li>Write all firmware using the state machine framework.
+<li><p>Write all firmware using the state machine framework.</p>
 <ul>
-<li>Do all device initialization in an <code>INIT</code> state.</li>
-<li>Have an <code>IDLE</code> state when the device isn’t making any measurements.</li>
-<li>Have an <code>ERROR</code> state if any error exit codes are returned from any functions.
+<li><p>Do all device initialization in an <code>INIT</code> state.</p></li>
+<li><p>Have an <code>IDLE</code> state when the device isn’t making any measurements.</p></li>
+<li><p>Have an <code>ERROR</code> state if any error exit codes are returned from any functions.</p>
 <ul>
-<li>All 4 LEDs should blink at a 50% duty cycle (<code>ON:OFF</code> time), in-phase with each other, in the <code>ERROR</code> state.</li>
-<li>An error condition should post an error-related event that causes the device to enter the <code>ERROR</code> state.</li>
-<li>The error code should specify the error condition that caused the device to enter the <code>ERROR</code> state. For example, you may choose to have a bit array that can capture multiple error conditions.</li>
-<li>A BLE notification should be sent with the error code (see BLE custom service/characteristic below).</li>
+<li><p>All 4 LEDs should blink at a 50% duty cycle (<code>ON:OFF</code> time), in-phase with each other, in the <code>ERROR</code> state.</p></li>
+<li><p>An error condition should post an error-related event that causes the device to enter the <code>ERROR</code> state.</p></li>
+<li><p>The error code should specify the error condition that caused the device to enter the <code>ERROR</code> state. For example, you may choose to have a bit array that can capture multiple error conditions.</p></li>
+<li><p>A BLE notification should be sent with the error code (see BLE custom service/characteristic below).</p></li>
 </ul></li>
-<li>Implement states of your choosing for the following measurements, calculations and BLE communications.</li>
+<li><p>Implement states of your choosing for the following measurements, calculations and BLE communications.</p></li>
 </ul></li>
-<li>Have a heartbeat <code>LED0</code> that blinks every 1 second with a 50% duty cycle (<code>ON:OFF</code> time) in all states.</li>
-<li>Implement functionality to measure a battery voltage (0-3.0 V) using <code>AIN0</code>:
+<li><p>Have a heartbeat <code>LED0</code> that blinks every 1 second with a 50% duty cycle (<code>ON:OFF</code> time) in all states.</p></li>
+<li><p>Implement functionality to measure a battery voltage (0-3.0 V) using <code>AIN0</code>:</p>
 <ol type="1">
-<li>When the device first powers on, and then</li>
-<li>Every 1 minute thereafter, but only when in the <code>IDLE</code> state.</li>
-<li>You won’t actually be connecting a battery to your device; you can use a power support or another voltage source to input a voltage to <code>AIN0</code> to simulate a battery level.</li>
+<li><p>When the device first powers on, and then</p></li>
+<li><p>Every 1 minute thereafter, but only when in the <code>IDLE</code> state.</p></li>
+<li><p>You won’t actually be connecting a battery to your device; you can use a power support or another voltage source to input a voltage to <code>AIN0</code> to simulate a battery level.</p></li>
 </ol></li>
-<li>Have the brightness of <code>LED1</code> linearly modulated by the percentage of the battery level.</li>
-<li>Implement functionality to make two measurements after pressing <code>BUTTON1</code>:
-<ol type="1">
-<li>Read temperature with your <a href="https://www.adafruit.com/product/1782"><code>MCP9808</code></a> sensor (in degrees Celsius).</li>
-<li>Calculate the average heart rate (40-200 BPM) using 25-30 seconds of an ECG signal (ranging from -500 - 500 mV, note this is bipolar) from the function generator (see video on how to setup the function generator to output an ECG signal).</li>
-</ol></li>
-<li>Pressing <code>BUTTON1</code> during the measurements should post an error and go to the <code>ERROR</code> state.</li>
-<li>Blink <code>LED2</code> with a 25% duty cycle (<code>ON:OFF</code> time) at the average heart rate after the measurements are complete.</li>
-<li>Have Bluetooth notifications after the measurements are complete and data have been processed, using the BLE services and characteristics described below.
+<li><p>Have the brightness of <code>LED1</code> linearly modulated by the percentage of the battery level.</p></li>
+<li><p>Implement functionality to make a temperature measurement with your <a href="https://www.adafruit.com/product/1782"><code>MCP9808</code></a> sensor (in degrees Celsius) after pressing <code>BUTTON1</code>.</p></li>
+<li><p>When you press <code>BUTTON2</code>, the device should measure “instantaneous” heart rate, expected to range from 40-200 BPM, using an ECG signal (ranging from -500 - 500 mV, note this is bipolar) from the function generator (see video on how to setup the function generator to output an ECG signal).</p>
 <ul>
-<li>Configure the <strong>DIS (Device Information Service)</strong> to report the device model as your Team Name (come up with something fun).</li>
-<li>Set the <strong>BAS (Battery Service)</strong> to report the battery level of your device. (This isn’t actually a battery level, but we’re using the <code>AIN0</code> measurement as a surrogate for a battery level.)</li>
-<li>Set the <strong>Heart Rate Service</strong> to report the average heart rate. (See Resources section below.)</li>
-<li>Setup a custom service with the following custom characterisitics:
+<li><p>Pressing <code>BUTTON2</code> during ECG measurements will stop the “live” ECG measurements.</p></li>
+<li><p>Blink <code>LED2</code> with a 25% duty cycle (<code>ON:OFF</code> time) at the average heart rate you have calculated (updated as often as you feel is appropriate).</p></li>
+<li><p>You should decide how often the heart rate is updated in the blinking rate of <code>LED2</code> (e.g., every 1 second, every 5 seconds, etc.).</p></li>
+<li><p><code>BUTTON1</code> is allowed to be pressed during ECG measurements to take temperature measurements.</p></li>
+</ul></li>
+<li><p>Have Bluetooth notifications after the measurements are complete/updated and data have been processed, using the BLE services and characteristics described below.</p>
 <ul>
-<li><code>Temperature</code> for the I2C temperature sensor data in degrees Celcius.</li>
-<li><code>Error Code</code> for the error code that caused the device to enter the <code>ERROR</code> state.</li>
+<li><p>Configure the <strong>DIS (Device Information Service)</strong> to report the device model as your Team Name (come up with something fun).</p></li>
+<li><p>Set the <strong>BAS (Battery Service)</strong> to report the battery level of your device. (This isn’t actually a battery level, but we’re using the <code>AIN0</code> measurement as a surrogate for a battery level.)</p></li>
+<li><p>Set the <strong>Heart Rate Service</strong> to report the average heart rate. (See Resources section below.)</p></li>
+<li><p>Setup a custom service with the following custom characterisitics:</p>
+<ul>
+<li><p><code>Temperature</code> for the I2C temperature sensor data in degrees Celcius.</p></li>
+<li><p><code>Error Code</code> for the error code that caused the device to enter the <code>ERROR</code> state.</p></li>
 </ul></li>
 </ul></li>
-<li><code>BUTTON2</code> should clear (turn off) a blinking <code>LED2</code>, and if <code>LED2</code> is not blinking because a measurement hasn’t been taken, then it should log a warning (<code>LOG_WRN()</code>) as to why it appears nothing happened.</li>
-<li><code>BUTTON3</code> should be used to reset the device from the <code>ERROR</code> state and return to the <code>IDLE</code> state.</li>
-<li>Use timers, kernel events, work queues, threads and any other Zephyr RTOS features as needed to implement the above functionality.</li>
+<li><p><code>BUTTON3</code> should be used to reset the device from the <code>ERROR</code> state or any measurement state and return to the <code>IDLE</code> state.</p></li>
+<li><p><code>BUTTON0</code> should be used to return the device to the <code>IDLE</code> state from any measurement state without resetting the device (i.e., preserve all measured values that are stored in memory).</p></li>
+<li><p>Use timers, kernel events, work queues, threads and any other Zephyr RTOS features as needed to implement the above functionality.</p></li>
+<li><p>Any functionality not explicitly described above is left to your design discretion.</p></li>
 </ul>
 </section>
 <section id="ble-server-mobile-app" class="level2">
 <h2 class="anchored" data-anchor-id="ble-server-mobile-app">BLE Server (Mobile App)</h2>
 <ul>
-<li>Your device can connect via BLE to a mobile app called <a href="https://www.nordicsemi.com/Products/Development-tools/nrf-connect-for-mobile">nRF Connect</a>.<br>
-</li>
-<li>This app can be used to read the services and characteristics that your device is advertising.</li>
+<li><p>Your device can connect via BLE to a mobile app called <a href="https://www.nordicsemi.com/Products/Development-tools/nrf-connect-for-mobile">nRF Connect</a>.</p></li>
+<li><p>This app can be used to read the services and characteristics that your device is advertising.</p></li>
 </ul>
 </section>
 <section id="state-diagram" class="level2">
 <h2 class="anchored" data-anchor-id="state-diagram">State Diagram</h2>
 <ul>
-<li>Generate a detailed state diagram that all states, events and actions for your firmware.<br>
-</li>
-<li>A starter diagram is provided in the <code>state_diagram.puml</code> file, along with its rendering below.<br>
-</li>
-<li>You should add states, events and actions as needed to fully describe the functionality of your firmware.</li>
+<li><p>Generate a detailed state diagram that all states, events and actions for your firmware.</p></li>
+<li><p>You should add states, events and actions as needed to fully describe the functionality of your firmware.</p></li>
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -555,9 +548,10 @@ Important
 </section>
 <section id="testing-verification" class="level2">
 <h2 class="anchored" data-anchor-id="testing-verification">Testing &amp; Verification</h2>
+<p>Create a new Jupyter notebook named <code>final_technical_report.ipynb</code> for your testing and verification technical report. The notebook should include the following sections:</p>
 <section id="battery-voltage-measurement" class="level3">
 <h3 class="anchored" data-anchor-id="battery-voltage-measurement">Battery Voltage Measurement</h3>
-<p>Verify the accuracy of your battery level measurement (<code>AIN0</code>) for 0-3.7 V, as read through the nRF Connect app Bluetooth Battery Level GATT. Quantitative analysis should include:</p>
+<p>Verify the accuracy of your battery level measurement (<code>AIN0</code>) for 0-3 V, as read through the nRF Connect app Bluetooth Battery Level GATT. Quantitative analysis should include:</p>
 <ul>
 <li><p>Linear regression analysis of the input voltage versus the battery level for both the <code>LOG_INF()</code> output, the oscilloscope measurement of the PWM duty cycle, and the nRF Connect app.</p></li>
 <li><p>95% confidence intervals for the slope and intercept of the linear regression.</p></li>
@@ -565,11 +559,14 @@ Important
 </section>
 <section id="ecg-heart-rate-measurement" class="level3">
 <h3 class="anchored" data-anchor-id="ecg-heart-rate-measurement">ECG Heart Rate Measurement</h3>
-<p>Demonstrate that your average heart rate measurement is accurate, as recorded through <code>LOG_INF()</code> output, the oscilloscope measurements, and the nRF Connect app, relative to what was set on the function generator. This should be done for 40, 60, 120, 150, and 180 bpm. The 25% duty cycle should also be verified. Quantitative analysis should include:</p>
+<ul>
+<li><p>Describe your method for calculating average heart rate from the ECG signal input. This should include any filtering, peak detection, and averaging methods used.</p></li>
+<li><p>Demonstrate that your average heart rate measurement is accurate, as recorded through <code>LOG_INF()</code> output, the oscilloscope measurements, and the nRF Connect app, relative to what was set on the function generator. This should be done for 40, 60, 120, 150, and 180 bpm. The 25% duty cycle should also be verified. Quantitative analysis should include:</p>
 <ul>
 <li><p>Linear regression analysis of the recorded heart rate versus the set heart rate for both the <code>LOG_INF()</code> output, oscilloscope measurements, and the nRF Connect app.</p></li>
 <li><p>95% confidence intervals for the slope and intercept of the linear regression.</p></li>
 <li><p>Verification that the duty cycle of out output is 25% for all heart rates.</p></li>
+</ul></li>
 </ul>
 </section>
 <section id="temperature-sensor-measurment" class="level3">
@@ -584,19 +581,19 @@ Important
 <section id="how-to-generate-an-ecg-signal" class="level2">
 <h2 class="anchored" data-anchor-id="how-to-generate-an-ecg-signal">How to Generate an ECG Signal</h2>
 <ul>
-<li><a href="https://youtu.be/pQYMHtzReZ8?si=oKQQXotuLZJn3cD0">WaveStation 2012 AWG</a></li>
-<li><a href="testing/digilent-ecg-script.txt">Digilent Waveforms Script</a></li>
+<li><p><a href="https://youtu.be/pQYMHtzReZ8?si=oKQQXotuLZJn3cD0">WaveStation 2012 AWG</a></p></li>
+<li><p><a href="testing/digilent-ecg-script.txt">Digilent Waveforms Script</a></p></li>
 </ul>
 </section>
 <section id="grading" class="level2">
 <h2 class="anchored" data-anchor-id="grading">Grading</h2>
 <ul>
-<li>This final project is worth 75% of your grade. <em>Absolutely no late submissions will be accepted.</em></li>
-<li>Git version control will be graded based on best practices.</li>
-<li>Firmware will be graded based on all best practices taught throughout the semester.</li>
-<li>Code organization and coding best practices will be graded.</li>
-<li>State diagram will be graded based on completeness, accuracy and ease of interpretation.</li>
-<li>Testing and analysis technical report will be graded based on presentation, completeness, and accuracy.</li>
+<li><p>This final project is worth 20% of your grade. <em>Absolutely no late submissions will be accepted.</em></p></li>
+<li><p>Git version control will be graded based on best practices.</p></li>
+<li><p>Firmware will be graded based on all best practices taught throughout the semester.</p></li>
+<li><p>Code organization and coding best practices will be graded.</p></li>
+<li><p>State diagram will be graded based on completeness, accuracy and ease of interpretation.</p></li>
+<li><p>Testing and analysis technical report will be graded based on presentation, completeness, and accuracy.</p></li>
 </ul>
 </section>
 <section id="how-to-ask-for-help" class="level2">
@@ -618,16 +615,27 @@ Important
 <section id="what-to-submit" class="level2">
 <h2 class="anchored" data-anchor-id="what-to-submit">What to Submit</h2>
 <ul>
-<li>Make sure that all of your branches have been merged into the <code>main</code> branch.</li>
-<li>Create an annotated tag called <code>v1.0.0</code> to mark the commit that you want to be graded.
+<li><p>Make sure that all of your branches have been merged into the <code>main</code> branch.</p></li>
+<li><p>Create an annotated tag called <code>v4.0.0</code> to mark the commit that you want to be graded.</p>
 <ul>
-<li>If you fix any bugs after creating this tag, you can create another tag called <code>v1.0.1</code>, etc.<br>
-</li>
-<li>Your latest tag will be the one that is graded up until the final due date/time of the project.</li>
+<li><p>If you fix any bugs after creating this tag, you can create another tag called <code>v4.0.1</code>, etc.</p></li>
+<li><p>Your latest tag will be the one that is graded up until the final due date/time of the project.</p></li>
 </ul></li>
-<li>Create an Issue in your repository with the title “Final Project Submission”, and assign it to Dr.&nbsp;Palmeri.</li>
-<li><strong>All repositories will be cloned at the due date/time for grading. Absolutely no changes will be accepted after this time.</strong></li>
 </ul>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You do <em>not</em> need to create an Issue for this final submission.</p>
+<p>All repositories will be cloned with the latest tag at the due date/time for grading. No repository commits after the due date/time will be accepted.</p>
+</div>
+</div>
 </section>
 <section id="resources" class="level2">
 <h2 class="anchored" data-anchor-id="resources">Resources</h2>
