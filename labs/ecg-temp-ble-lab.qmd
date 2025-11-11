@@ -1,16 +1,12 @@
 ---
 title: "ECG & Temperature Sensor with BLE Lab"
-date: "2025-08-25"
+date: "2025-11-12"
 format:
   html: default
   pdf: default
 ---
 
-<!-- TODO: update for new forkable repo / or build on previous labs -->
-
-* Fork this repository to your userspace. 
-* Add Dr. Palmeri as a `Maintainer`.
-* Questions should be asked exclusively through GitLab Issues.
+This lab will be the final addition of functionality to your course firmware repository. You should take all functional specifications below to override and replace any previous lab functionality.  You should refactor your code from all of the previous labs to demonstrate your mastery of best coding practices from this semester.
 
 ## Git Version Control 
 
@@ -18,65 +14,107 @@ format:
 
 ## Best Coding Practices
 
-* Use best coding practices throughout the development of your firmware.
-* Functions should be short and do one thing.  They should return an exit code that is checked in the calling function, indicating success or failure.
-* MACROS!  Avoid hard-coded values in your code.
-* Use structs to organize related data.
-* Use libraries for code that is self-contained. 
-* Use the `LOGGING` module to log errors, warnings, information and debug messages.
-* You should not have any compiler/build warnings.  The CI script will build against `v2.9.0` of the Zephyr SDK.
+You should refactor your code from all of the previous labs to demonstrate your mastery of best coding practices from this semester.  Some reminders:
+
+- Functions should be short and do one thing.  They should return an exit code that is checked in the calling function, indicating success or failure.
+
+- MACROS!  Avoid hard-coded values in your code.
+
+- Use structs to organize related data.
+
+- Use libraries for code that is self-contained. 
+
+- Use the `LOGGING` module to log errors, warnings, information and debug messages.
+
+- You should not have any compiler/build warnings.  The CI script will build against `v2.9.0` of the Zephyr SDK.
 
 ## Firmware Functional Specifications
 
-* Write all firmware using the state machine framework.
-  * Do all device initialization in an `INIT` state.
-  * Have an `IDLE` state when the device isn't making any measurements.
-  * Have an `ERROR` state if any error exit codes are returned from any functions.
-    * All 4 LEDs should blink at a 50% duty cycle (`ON:OFF` time), in-phase with each other, in the `ERROR` state.
-    * An error condition should post an error-related event that causes the device to enter the `ERROR` state.
-    * The error code should specify the error condition that caused the device to enter the `ERROR` state.  For example, you may choose to have a bit array that can capture multiple error conditions.
-    * A BLE notification should be sent with the error code (see BLE custom service/characteristic below).
-  * Implement states of your choosing for the following measurements, calculations and BLE communications.
-* Have a heartbeat `LED0` that blinks every 1 second with a 50% duty cycle (`ON:OFF` time) in all states.
-* Implement functionality to measure a battery voltage (0-3.0 V) using `AIN0`:
+- Write all firmware using the state machine framework.
+
+  - Do all device initialization in an `INIT` state.
+
+  - Have an `IDLE` state when the device isn't making any measurements.
+
+  - Have an `ERROR` state if any error exit codes are returned from any functions.
+
+    - All 4 LEDs should blink at a 50% duty cycle (`ON:OFF` time), in-phase with each other, in the `ERROR` state.
+
+    - An error condition should post an error-related event that causes the device to enter the `ERROR` state.
+
+    - The error code should specify the error condition that caused the device to enter the `ERROR` state.  For example, you may choose to have a bit array that can capture multiple error conditions.
+
+    - A BLE notification should be sent with the error code (see BLE custom service/characteristic below).
+
+  - Implement states of your choosing for the following measurements, calculations and BLE communications.
+
+- Have a heartbeat `LED0` that blinks every 1 second with a 50% duty cycle (`ON:OFF` time) in all states.
+
+- Implement functionality to measure a battery voltage (0-3.0 V) using `AIN0`:
+
   1. When the device first powers on, and then
+
   1. Every 1 minute thereafter, but only when in the `IDLE` state.
+
   1. You won't actually be connecting a battery to your device; you can use a power support or another voltage source to input a voltage to `AIN0` to simulate a battery level.
-* Have the brightness of `LED1` linearly modulated by the percentage of the battery level.
-* Implement functionality to make two measurements after pressing `BUTTON1`:
-  1. Read temperature with your [`MCP9808`](https://www.adafruit.com/product/1782) sensor (in degrees Celsius).
-  1. Calculate the average heart rate (40-200 BPM) using 25-30 seconds of an ECG signal (ranging from -500 - 500 mV, note this is bipolar) from the function generator (see video on how to setup the function generator to output an ECG signal).
-* Pressing `BUTTON1` during the measurements should post an error and go to the `ERROR` state.
-* Blink `LED2` with a 25% duty cycle (`ON:OFF` time) at the average heart rate after the measurements are complete.
-* Have Bluetooth notifications after the measurements are complete and data have been processed, using the BLE services and characteristics described below.
-  * Configure the **DIS (Device Information Service)** to report the device model as your Team Name (come up with something fun).
-  * Set the **BAS (Battery Service)** to report the battery level of your device.  (This isn't actually a battery level, but we're using the `AIN0` measurement as a surrogate for a battery level.)
-  * Set the **Heart Rate Service** to report the average heart rate.  (See Resources section below.)
-  * Setup a custom service with the following custom characterisitics:
-    * `Temperature` for the I2C temperature sensor data in degrees Celcius.
-    * `Error Code` for the error code that caused the device to enter the `ERROR` state.
-* `BUTTON2` should clear (turn off) a blinking `LED2`, and if `LED2` is not blinking because a measurement hasn't been taken, then it should log a warning (`LOG_WRN()`) as to why it appears nothing happened.
-* `BUTTON3` should be used to reset the device from the `ERROR` state and return to the `IDLE` state.
-* Use timers, kernel events, work queues, threads and any other Zephyr RTOS features as needed to implement the above functionality.
+
+- Have the brightness of `LED1` linearly modulated by the percentage of the battery level.
+
+- Implement functionality to make a temperature measurement with your [`MCP9808`](https://www.adafruit.com/product/1782) sensor (in degrees Celsius) after pressing `BUTTON1`.
+
+- When you press `BUTTON2`, the device should measure "instantaneous" heart rate, expected to range from 40-200 BPM, using an ECG signal (ranging from -500 - 500 mV, note this is bipolar) from the function generator (see video on how to setup the function generator to output an ECG signal).
+
+  - Pressing `BUTTON2` during ECG measurements will stop the "live" ECG measurements. 
+
+  - Blink `LED2` with a 25% duty cycle (`ON:OFF` time) at the average heart rate you have calculated (updated as often as you feel is appropriate). 
+
+  - You should decide how often the heart rate is updated in the blinking rate of `LED2` (e.g., every 1 second, every 5 seconds, etc.).
+  
+  - `BUTTON1` is allowed to be pressed during ECG measurements to take temperature measurements.
+
+- Have Bluetooth notifications after the measurements are complete/updated and data have been processed, using the BLE services and characteristics described below.
+
+  - Configure the **DIS (Device Information Service)** to report the device model as your Team Name (come up with something fun).
+
+  - Set the **BAS (Battery Service)** to report the battery level of your device.  (This isn't actually a battery level, but we're using the `AIN0` measurement as a surrogate for a battery level.)
+
+  - Set the **Heart Rate Service** to report the average heart rate.  (See Resources section below.)
+
+  - Setup a custom service with the following custom characterisitics:
+
+    - `Temperature` for the I2C temperature sensor data in degrees Celcius.
+
+    - `Error Code` for the error code that caused the device to enter the `ERROR` state.
+
+- `BUTTON3` should be used to reset the device from the `ERROR` state or any measurement state and return to the `IDLE` state.
+  
+- `BUTTON0` should be used to return the device to the `IDLE` state from any measurement state without resetting the device (i.e., preserve all measured values that are stored in memory).
+
+- Use timers, kernel events, work queues, threads and any other Zephyr RTOS features as needed to implement the above functionality.
+  
+- Any functionality not explicitly described above is left to your design discretion.
 
 ## BLE Server (Mobile App)
 
-* Your device can connect via BLE to a mobile app called [nRF Connect](https://www.nordicsemi.com/Products/Development-tools/nrf-connect-for-mobile).  
-* This app can be used to read the services and characteristics that your device is advertising.
+- Your device can connect via BLE to a mobile app called [nRF Connect](https://www.nordicsemi.com/Products/Development-tools/nrf-connect-for-mobile).  
+
+- This app can be used to read the services and characteristics that your device is advertising.
 
 ## State Diagram
 
-* Generate a detailed state diagram that all states, events and actions for your firmware.  
-* A starter diagram is provided in the `state_diagram.puml` file, along with its rendering below.  
-* You should add states, events and actions as needed to fully describe the functionality of your firmware.
+- Generate a detailed state diagram that all states, events and actions for your firmware.  
+
+- You should add states, events and actions as needed to fully describe the functionality of your firmware.
 
 ![State Diagram](images/state_diagram.png)
 
 ## Testing & Verification
 
+Create a new Jupyter notebook named `final_technical_report.ipynb` for your testing and verification technical report.  The notebook should include the following sections:
+
 ### Battery Voltage Measurement
 
-Verify the accuracy of your battery level measurement (`AIN0`) for 0-3.7 V, as read through the nRF Connect app Bluetooth Battery Level GATT.  Quantitative analysis should include:
+Verify the accuracy of your battery level measurement (`AIN0`) for 0-3 V, as read through the nRF Connect app Bluetooth Battery Level GATT.  Quantitative analysis should include:
 
 - Linear regression analysis of the input voltage versus the battery level for both the `LOG_INF()` output, the oscilloscope measurement of the PWM duty cycle, and the nRF Connect app.
 
@@ -84,13 +122,15 @@ Verify the accuracy of your battery level measurement (`AIN0`) for 0-3.7 V, as r
 
 ### ECG Heart Rate Measurement
 
-Demonstrate that your average heart rate measurement is accurate, as recorded through `LOG_INF()` output, the oscilloscope measurements, and the nRF Connect app, relative to what was set on the function generator.  This should be done for 40, 60, 120, 150, and 180 bpm.  The 25% duty cycle should also be verified. Quantitative analysis should include:
+- Describe your method for calculating average heart rate from the ECG signal input.  This should include any filtering, peak detection, and averaging methods used.
 
-- Linear regression analysis of the recorded heart rate versus the set heart rate for both the `LOG_INF()` output, oscilloscope measurements, and the nRF Connect app.
+- Demonstrate that your average heart rate measurement is accurate, as recorded through `LOG_INF()` output, the oscilloscope measurements, and the nRF Connect app, relative to what was set on the function generator.  This should be done for 40, 60, 120, 150, and 180 bpm.  The 25% duty cycle should also be verified. Quantitative analysis should include:
 
-- 95% confidence intervals for the slope and intercept of the linear regression.
+  - Linear regression analysis of the recorded heart rate versus the set heart rate for both the `LOG_INF()` output, oscilloscope measurements, and the nRF Connect app.
 
-- Verification that the duty cycle of out output is 25% for all heart rates.
+  - 95% confidence intervals for the slope and intercept of the linear regression.
+
+  - Verification that the duty cycle of out output is 25% for all heart rates.
 
 ### Temperature Sensor Measurment
 
@@ -102,17 +142,23 @@ Demonstrate that your average heart rate measurement is accurate, as recorded th
 
 ## How to Generate an ECG Signal
 
-* [WaveStation 2012 AWG](https://youtu.be/pQYMHtzReZ8?si=oKQQXotuLZJn3cD0)
-* [Digilent Waveforms Script](testing/digilent-ecg-script.txt)
+- [WaveStation 2012 AWG](https://youtu.be/pQYMHtzReZ8?si=oKQQXotuLZJn3cD0)
+
+- [Digilent Waveforms Script](testing/digilent-ecg-script.txt)
 
 ## Grading
 
-* This final project is worth 75% of your grade.  *Absolutely no late submissions will be accepted.*
-* Git version control will be graded based on best practices.
-* Firmware will be graded based on all best practices taught throughout the semester.
-* Code organization and coding best practices will be graded.
-* State diagram will be graded based on completeness, accuracy and ease of interpretation.
-* Testing and analysis technical report will be graded based on presentation, completeness, and accuracy.
+- This final project is worth 20% of your grade.  *Absolutely no late submissions will be accepted.*
+
+- Git version control will be graded based on best practices.
+
+- Firmware will be graded based on all best practices taught throughout the semester.
+
+- Code organization and coding best practices will be graded.
+
+- State diagram will be graded based on completeness, accuracy and ease of interpretation.
+
+- Testing and analysis technical report will be graded based on presentation, completeness, and accuracy.
 
 ## How to Ask for Help
 
@@ -120,12 +166,19 @@ Demonstrate that your average heart rate measurement is accurate, as recorded th
 
 ## What to Submit
 
-* Make sure that all of your branches have been merged into the `main` branch.
-* Create an annotated tag called `v1.0.0` to mark the commit that you want to be graded.  
-  * If you fix any bugs after creating this tag, you can create another tag called `v1.0.1`, etc.  
-  * Your latest tag will be the one that is graded up until the final due date/time of the project.
-* Create an Issue in your repository with the title "Final Project Submission", and assign it to Dr. Palmeri.
-* **All repositories will be cloned at the due date/time for grading.  Absolutely no changes will be accepted after this time.**
+- Make sure that all of your branches have been merged into the `main` branch.
+
+- Create an annotated tag called `v4.0.0` to mark the commit that you want to be graded.  
+
+  - If you fix any bugs after creating this tag, you can create another tag called `v4.0.1`, etc.  
+
+  - Your latest tag will be the one that is graded up until the final due date/time of the project.
+
+::: callout-important
+You do *not* need to create an Issue for this final submission.  
+
+All repositories will be cloned with the latest tag at the due date/time for grading.  No repository commits after the due date/time will be accepted.
+:::
 
 ## Resources
 
