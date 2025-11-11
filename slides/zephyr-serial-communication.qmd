@@ -1,6 +1,6 @@
 ---
 title: "Zephyr: Serial Communication"
-date: "2025-08-25"
+date: "2025-11-12"
 format:
   live-html: 
     output-file: zephyr-serial-communication.html
