@@ -1,13 +1,12 @@
 # TODO
 
-[ ] setup gradebook
 [ ] setup semester-long calendar
 
 ## Lecture
 
 * [ ] Add Evan's insights on static declarations:
 
-```
+```txt
 Perhaps @Mark will have more nuanced thoughts about this, but static and const are both qualifiers for declaration that have separate implications.
 
     a global static variable is only accessible within the same .c file, whereas a static variable within a function (a local variable) retains its value between invocations of said function.
