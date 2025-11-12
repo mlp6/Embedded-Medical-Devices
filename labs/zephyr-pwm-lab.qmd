@@ -123,22 +123,27 @@ and 100%, respectively.
 
 ::: callout-tip
 You will need to low pass filter your modulated PWM output to see a smooth
-sinusoidal output.  You can do this using the LPF Math mode on the oscilloscope
+sinusoidal output.  You can do this using the LPF `Math` mode on the oscilloscope
 with an appropriate cutoff frequency (relative to the frequency of the input
-sinusoid) and sampling window (capturing multiple cycles of the sinusoid).  You can also build a simple RC low pass filter circuit to connect to the oscilloscope probe.
+sinusoid) and sampling window (capturing multiple cycles of the sinusoid).  Remember to also adjust the offset to match the offset of the PWM signal.
 :::
 
-- Save this acquired oscilloscope data to a CSV file using a USB memory stick.
+- On the oscilloscope, measure:
 
-- In your Jupyter notebook, in a new section, plot the input and output signals.
-
-- Calculate the frequency of your PWM signal and the phase difference between
-the PWM sinusoid and your input signal.
+  a. The frequency of your low-pass-filtered PWM signal, and 
+  
+  a. The phase difference between the PWM sinusoid and your input signal.
+  
+  a. Capture a screen shot of the oscilloscope showing both signals and these two measured quantities.
 
 - Present your data and analysis in your Jupyter notebook.
 
 - Discuss the accuracy of your PWM frequency and the latency (phase lag) of your
 system and how you could improve it in the future.
+
+::: callout-tip
+Remember that your PWM signal is inverted from the input signal when interpreting your phase lag measurement.
+:::
 
 ### Commit-n-Merge Modulated PWM
 
