@@ -634,16 +634,32 @@ Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>You will need to low pass filter your modulated PWM output to see a smooth sinusoidal output. You can do this using the LPF Math mode on the oscilloscope with an appropriate cutoff frequency (relative to the frequency of the input sinusoid) and sampling window (capturing multiple cycles of the sinusoid). You can also build a simple RC low pass filter circuit to connect to the oscilloscope probe.</p>
+<p>You will need to low pass filter your modulated PWM output to see a smooth sinusoidal output. You can do this using the LPF <code>Math</code> mode on the oscilloscope with an appropriate cutoff frequency (relative to the frequency of the input sinusoid) and sampling window (capturing multiple cycles of the sinusoid). Remember to also adjust the offset to match the offset of the PWM signal.</p>
 </div>
 </div>
 <ul>
-<li><p>Save this acquired oscilloscope data to a CSV file using a USB memory stick.</p></li>
-<li><p>In your Jupyter notebook, in a new section, plot the input and output signals.</p></li>
-<li><p>Calculate the frequency of your PWM signal and the phase difference between the PWM sinusoid and your input signal.</p></li>
+<li><p>On the oscilloscope, measure:</p>
+<ol type="a">
+<li><p>The frequency of your low-pass-filtered PWM signal, and</p></li>
+<li><p>The phase difference between the PWM sinusoid and your input signal.</p></li>
+<li><p>Capture a screen shot of the oscilloscope showing both signals and these two measured quantities.</p></li>
+</ol></li>
 <li><p>Present your data and analysis in your Jupyter notebook.</p></li>
 <li><p>Discuss the accuracy of your PWM frequency and the latency (phase lag) of your system and how you could improve it in the future.</p></li>
 </ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Remember that your PWM signal is inverted from the input signal when interpreting your phase lag measurement.</p>
+</div>
+</div>
 </section>
 <section id="commit-n-merge-modulated-pwm" class="level3">
 <h3 class="anchored" data-anchor-id="commit-n-merge-modulated-pwm">Commit-n-Merge Modulated PWM</h3>
