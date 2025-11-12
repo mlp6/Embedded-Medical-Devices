@@ -144,7 +144,7 @@ Verify the accuracy of your battery level measurement (`AIN0`) for 0-3 V, as rea
 
 - [WaveStation 2012 AWG](https://youtu.be/pQYMHtzReZ8?si=oKQQXotuLZJn3cD0)
 
-- [Digilent Waveforms Script](testing/digilent-ecg-script.txt)
+- [Digilent Waveforms Script](../resources/digilent-ecg-script.txt)
 
 ## Grading
 
