@@ -45,6 +45,10 @@ Do this section on a development branch called `pwm-steady-state`.
 
 ### Firmware Functional Specifications
 
+::: callout-note
+Selectively keep ADC lab functionality to help complete the tasks below, but you do not have to keep any ADC lab functionality that isn't necessary for this lab.
+:::
+
 - Using the ADC lab functionality to read a DC voltage on `AIN0`, map this read DC voltage to scale the maximum brightness of `LED2` using a PWM output.  
 
 ::: {.callout-tip title="Example"}
