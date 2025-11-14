@@ -225,6 +225,8 @@ int main(void) {
             LOG_ERR("There was a problem reading the temperature sensor (%d)", ret);
             return ret;
         }
+        
+        // make sure CONFIG_CBPRINTF_FP_SUPPORT=y is set in `prf.conf` for float support
         LOG_INF("Temperature: %f", (double)temperature_degC);
         k_msleep(MEASUREMENT_DELAY_MS);
     }
