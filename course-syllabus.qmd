@@ -116,12 +116,6 @@ This course uses a version of [Mastery Learning](https://en.wikipedia.org/wiki/M
 
 {{< include _schedule.qmd >}}
 
-### Special Dates
-
-* Labor Day (Sep 01, 2025)
-* Fall Break (Oct 11-14, 2025)
-* LDOC (Nov 25, 2025)
-
 ## Attendance & Participation
 
 Class participation in lecture and utilize lab time with your TAs is strongly
