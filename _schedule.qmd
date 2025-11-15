@@ -1,16 +1,1 @@
-| Module | Materials | Assessment  |
-| --- | --- | --- |
-| Zephyr \& Nordic SoC Overview | [Lecture Notes & Slides](slides/zephyr-nrf52833dk-intro.qmd) | Completion Survey (Gradescope) <br> [Software Installs & Tutorials](software-install-tutorials.qmd) |
-| Event-Driven State Machines | [Lecture Notes & Slides](slides/event-driven-state-machine.qmd) | [Event-Driven State Machine Lab](labs/event-driven-state-machine-lab.qmd) |
-| Version Control (`git`) | [Lecture Notes & Slides](slides/git-fundamentals.qmd) | Git Fundamentals Quiz (Gradescope) <br> [Git Fundamentals Lab](labs/git-fundamentals-lab.qmd) |
-| C Programming | [Lecture Notes & Slides](slides/c-programming.qmd) | C Programming Quiz (Gradescope) <br> [C Programming Lab](labs/c-programming-lab.qmd) | |
-| Devicetree, GPIO & Callbacks; Debugging | [Lecture Notes & Slides](slides/zephyr-gpio-isr-callbacks.qmd) <br> [Nordic DevAcademy Lesson 2: Reading Buttons & Controlling LEDs](https://academy.nordicsemi.com/courses/nrf-connect-sdk-fundamentals/lessons/lesson-2-reading-buttons-and-controlling-leds/) <br> [Debugging DevAcademy Module](https://academy.nordicsemi.com/courses/nrf-connect-sdk-intermediate/lessons/lesson-2-debugging/) | [DT/GPIO/CB Lab](labs/zephyr-gpio-isr-callbacks-lab.qmd) |
-| Timers & Work Queues | [Lecture Notes & Slides](slides/zephyr-timers.qmd) | [Timers Lab](labs/zephyr-timers-lab.qmd) |
-| Threads & Kernel Events | [Lecture Notes & Slides](slides/zephyr-threads-events.qmd) <br> [Zephyr RTOS: Beyond the basics](https://academy.nordicsemi.com/courses/nrf-connect-sdk-intermediate/lessons/lesson-1-zephyr-rtos-advanced/) | [Heartbeat & Kernel Events Refactor Lab](labs/zephyr-threads-events-lab.qmd) |
-| State Machine Framework | [Lecture Notes & Slides](slides/zephyr-smf.qmd) | [State Machine Framework Refactor Lab](labs/zephyr-smf-lab.qmd) |
-| Analog-to-Digital Conversion (ADC) | [Lecture Notes & Slides](slides/zephyr-adc.qmd) <br> [Nordic DevAcademy: ADC](https://academy.nordicsemi.com/courses/nrf-connect-sdk-intermediate/lessons/lesson-6-analog-to-digital-converter-adc/)| [ADC Lab](labs/zephyr-adc-lab.qmd) |
-| Pulse Width Modulation (PWM) | [Lecture Notes & Slides](slides/zephyr-pwm.qmd) <br> [Nordic DevAcademy: PWM](https://academy.nordicsemi.com/courses/nrf-connect-sdk-intermediate/lessons/lesson-4-pulse-width-modulation-pwm/topic/pulse-width-modulation-pwm/) | [PWM Lab](labs/zephyr-pwm-lab.qmd) |
-| Serial Communications | [Lecture Notes & Slides](slides/zephyr-serial-communication.qmd) <br>  [UART DevAcademy Module](https://academy.nordicsemi.com/lessons/lesson-4-serial-communication-uart/) <br> [Serial Communication DevAcademy Module](https://academy.nordicsemi.com/lessons/lesson-6-serial-com-i2c/) | None |
-| Bluetooth Low Energy (BLE) | [Lecture Notes & Slides](slides/zephyr-ble.qmd) <br> [DevAcademic: BLE (Lessons 1-4)](https://academy.nordicsemi.com/courses/bluetooth-low-energy-fundamentals/) | [ECG & Temperature Sensing BLE Device](labs/ecg-temp-ble-lab.qmd) |
-
-<!-- | [Device Safety (VBUS)](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/zephyr-vbus) |  Coming Soon | Coming Soon | -->
+<iframe class="airtable-embed" src="https://airtable.com/embed/appIX5jmyvBG23yHi/shrduwz8IDTV66mb1" frameborder="0" onmousewheel="" width="100%" height="533" style="background: transparent; border: 1px solid #ccc;"></iframe>
