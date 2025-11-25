@@ -1151,6 +1151,17 @@
     ]
   },
   {
+    "objectID": "slides/zephyr-gpio-isr-callbacks.html#resources",
+    "href": "slides/zephyr-gpio-isr-callbacks.html#resources",
+    "title": "GPIO / ISR / Callbacks",
+    "section": "Resources",
+    "text": "Resources\n\nNordic DevAcademy: Reading buttons and controlling LEDs",
+    "crumbs": [
+      "Learning Modules",
+      "GPIO, ISR, and Callbacks"
+    ]
+  },
+  {
     "objectID": "slides/zephyr-gpio-isr-callbacks-slides.html#timing-of-read-in-main",
     "href": "slides/zephyr-gpio-isr-callbacks-slides.html#timing-of-read-in-main",
     "title": "GPIO / ISR / Callbacks",
@@ -1296,6 +1307,13 @@
     "title": "GPIO / ISR / Callbacks",
     "section": "Button Debouncing",
     "text": "Button Debouncing\n\n\n\n\n\n\n\nWhat is debouncing?\n\n\n“Debouncing” is a technique used to ensure that only a single signal is registered when a button is pressed, despite the fact that mechanical buttons can produce multiple rapid on/off signals (bounces) when pressed or released.\n\n\n\n\nHow to Debounce Button Inputs in a RTOS"
+  },
+  {
+    "objectID": "slides/zephyr-gpio-isr-callbacks-slides.html#resources",
+    "href": "slides/zephyr-gpio-isr-callbacks-slides.html#resources",
+    "title": "GPIO / ISR / Callbacks",
+    "section": "Resources",
+    "text": "Resources\n\nNordic DevAcademy: Reading buttons and controlling LEDs"
   },
   {
     "objectID": "slides/c-programming-notes.html",
@@ -1742,7 +1760,7 @@
     "href": "slides/c-programming-notes.html#resources",
     "title": "C Programming",
     "section": "Resources",
-    "text": "Resources\n\nC Programming Language",
+    "text": "Resources\n\nC Programming Language\nNordic DevAcademy: Debugging",
     "crumbs": [
       "Learning Modules",
       "C Programming"
@@ -2026,7 +2044,7 @@
     "href": "slides/c-programming-slides.html#resources",
     "title": "C Programming",
     "section": "Resources",
-    "text": "Resources\n\nC Programming Language"
+    "text": "Resources\n\nC Programming Language\nNordic DevAcademy: Debugging"
   },
   {
     "objectID": "slides/event-driven-state-machine.html",
@@ -2188,7 +2206,7 @@
     "href": "TODO.html",
     "title": "TODO",
     "section": "",
-    "text": "[ ] setup semester-long calendar\n\n\n\nAdd Evan’s insights on static declarations:\n\nPerhaps @Mark will have more nuanced thoughts about this, but static and const are both qualifiers for declaration that have separate implications.\n\n    a global static variable is only accessible within the same .c file, whereas a static variable within a function (a local variable) retains its value between invocations of said function.\n\n    a const \"variable\" is immutable, meaning its value will not (and cannot) change once initialized.\n\nThe benefit on the former depends on scope. In the case of a global declaration, you are basically safe guarding against unintended linkage / use in other .c files. In the case of a local declaration, this has structural implications for the program (ie, which variables are passed by reference vs. local to the function and persistent for being static). The benefit of the latter (const) is minimized memory utilization and guarding against inadvertent changes. \n\n\n\n\nUpdate timers lab to use k_uptime_ticks() instead of k_uptime_get().\nFUTURE: Unit tests w/ hardware emulators\nAdd Evan code on how to extract data from serial monitor (https://edstem.org/us/courses/81241/discussion/7052125)\n\n\n\n\n\nCreate GPIO quiz\nCreate timers quiz"
+    "text": "setup semester-long calendar\nhave everyone earn the Nordic DevAcademy certificate\n\n\n\n\nAdd Evan’s insights on static declarations:\n\nPerhaps @Mark will have more nuanced thoughts about this, but static and const are both qualifiers for declaration that have separate implications.\n\n    a global static variable is only accessible within the same .c file, whereas a static variable within a function (a local variable) retains its value between invocations of said function.\n\n    a const \"variable\" is immutable, meaning its value will not (and cannot) change once initialized.\n\nThe benefit on the former depends on scope. In the case of a global declaration, you are basically safe guarding against unintended linkage / use in other .c files. In the case of a local declaration, this has structural implications for the program (ie, which variables are passed by reference vs. local to the function and persistent for being static). The benefit of the latter (const) is minimized memory utilization and guarding against inadvertent changes. \n\n\n\n\nUpdate timers lab to use k_uptime_ticks() instead of k_uptime_get().\nFUTURE: Unit tests w/ hardware emulators\nAdd Evan code on how to extract data from serial monitor (https://edstem.org/us/courses/81241/discussion/7052125)\n\n\n\n\n\nCreate GPIO quiz\nCreate timers quiz"
   },
   {
     "objectID": "TODO.html#lecture",
@@ -2331,6 +2349,13 @@
       "Resources",
       "Git Version Control"
     ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Embedded Medical Devices",
+    "section": "",
+    "text": "Please use the links in the sidebar to navigate through the course materials."
   },
   {
     "objectID": "labs/event-driven-state-machine-lab.html",
@@ -2744,7 +2769,7 @@
     "href": "course-syllabus.html#class-schedule",
     "title": "Embedded Medical Devices",
     "section": "Class Schedule",
-    "text": "Class Schedule\nThis class is organized in a sequence of modules. Specific details surrounding dates for assignments associated with each module will be posted to Gradescope and linked below.\nThis course uses a version of Mastery Learning, where “mastery” of a given module is necessary to progress onto the subsequent module. Quizzes are used to evaluate “knowledge”; lab exercises are used to demonstrate application of skills. In this course, assignments of later modules depends on the successful completion of earlier modules.\n\nLearning Module Schedule",
+    "text": "Class Schedule\nThis class is organized in a sequence of modules. Specific details surrounding dates for assignments associated with each module will be posted to Gradescope and linked below.\nThis course uses a version of Mastery Learning, where “mastery” of a given module is necessary to progress onto the subsequent module. Quizzes are used to evaluate “knowledge”; lab exercises are used to demonstrate application of skills. In this course, assignments of later modules depends on the successful completion of earlier modules.\n\nZephyr & Nordic SoC Overview\nEvent-Drive State Machines\nVersion Control with Git\nC Programming Overview\nDevicetree, GPIO, ISR, Callbacks\nTimers & Work Queues\nThreads & Kernel Events\nState Machine Framework\nAnalog-to-Digital Conversion (ADC)\nPulse-Width Modulation (PWM)\nSerial Communication Protocols: UART, I2C, SPI\nBluetooth Low Energy (BLE)",
     "crumbs": [
       "Course Information",
       "Course Syllabus"
