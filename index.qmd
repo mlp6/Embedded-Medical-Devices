@@ -6,4 +6,4 @@ format:
   pdf: default
 ---
 
-{{< include _schedule.qmd >}}
+Please use the links in the sidebar to navigate through the course materials.

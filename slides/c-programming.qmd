@@ -503,3 +503,4 @@ A great summary of the different types of memory in C is summarized below from h
 ## Resources
 
 - [C Programming Language](https://www.geeksforgeeks.org/c-programming-language/)
+- [Nordic DevAcademy: Debugging](https://academy.nordicsemi.com/courses/nrf-connect-sdk-intermediate/lessons/lesson-2-debugging/)

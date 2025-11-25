@@ -315,3 +315,7 @@ Relevant MACROS:
 :::
 
 [How to Debounce Button Inputs in a RTOS](https://blog.golioth.io/how-to-debounce-button-inputs-in-a-real-time-operating-system/)
+
+## Resources
+
+- [Nordic DevAcademy: Reading buttons and controlling LEDs](https://academy.nordicsemi.com/courses/nrf-connect-sdk-fundamentals/lessons/lesson-2-reading-buttons-and-controlling-leds/)

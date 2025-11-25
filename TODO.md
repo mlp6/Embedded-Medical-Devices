@@ -1,6 +1,7 @@
 # TODO
 
-[ ] setup semester-long calendar
+- [ ] setup semester-long calendar
+- [ ] have everyone earn the Nordic DevAcademy certificate
 
 ## Lecture
 

@@ -112,9 +112,19 @@ This course uses a version of [Mastery Learning](https://en.wikipedia.org/wiki/M
  demonstrate application of skills.  In this course, assignments of later
  modules depends on the successful completion of earlier modules.
 
-### Learning Module Schedule
+- [Zephyr & Nordic SoC Overview](slides/zephyr-nrf52833dk-intro.qmd)
+- [Event-Drive State Machines](slides/event-driven-state-machine.qmd)
+- [Version Control with Git](slides/git-fundamentals.qmd)
+- [C Programming Overview](slides/c-programming.qmd)
+- [Devicetree, GPIO, ISR, Callbacks](slides/zephyr-gpio-isr-callbacks.qmd)
+- [Timers & Work Queues](slides/zephyr-timers.qmd)
+- [Threads & Kernel Events](slides/zephyr-threads-events.qmd)
+- [State Machine Framework](slides/zephyr-smf.qmd)
+- [Analog-to-Digital Conversion (ADC)](slides/zephyr-adc.qmd)
+- [Pulse-Width Modulation (PWM)](slides/zephyr-pwm.qmd)
+- [Serial Communication Protocols: UART, I2C, SPI](slides/zephyr-serial-communication.qmd)
+- [Bluetooth Low Energy (BLE)](slides/zephyr-ble.qmd)
 
-{{< include _schedule.qmd >}}
 
 ## Attendance & Participation
 
