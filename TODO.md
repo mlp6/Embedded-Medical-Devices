@@ -29,7 +29,8 @@
 - [ ] Create timers quiz
 
 ## New Semester Tasks
-[ ] Update schedule & syllabus
+
+- [ ] Update schedule & syllabus
 - [ ] Setup Ed Discussion
   - [ ] Link to Syllabus
   - [ ] Discussion Categories
@@ -39,7 +40,7 @@
   - [ ] Link syllabus
 - [ ] Setup Pratt AV Panopto recording (https://it.pratt.duke.edu/av)
 - [ ] Order project parts
-- [ ] Setup GitLab Group
+- [ ] Setup GitLab Group (switch to GitHub Classroom)
   - [ ] Members
   - [ ] Labels
   - [ ] Projects
