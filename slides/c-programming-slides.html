@@ -410,10 +410,10 @@ Dr.&nbsp;Mark Palmeri, M.D., Ph.D.
 <span id="cb2-7"><a></a>  <span class="co">// do something</span></span>
 <span id="cb2-8"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="constants" class="slide level2">
-<h2>Constants</h2>
+<section id="constants-const" class="slide level2">
+<h2>Constants (<code>const</code>)</h2>
 <ul>
-<li>Variables that have values that will not change can be declared as <strong>Constants</strong> (<code>const</code>).</li>
+<li>Variables that have values that will not change can be declared as <strong>constants</strong> (<code>const</code>).</li>
 <li>Constant variables consume a fixed amount of memory based on their data type when they are declared and defined.</li>
 </ul>
 </section>
@@ -423,6 +423,7 @@ Dr.&nbsp;Mark Palmeri, M.D., Ph.D.
 <li><strong>MACROS</strong> are preprocessor directives that are replaced with their values (constants of function definitions) before the code is compiled.</li>
 <li>MACROS save memory compared to using constant variables and can improve readability.</li>
 <li>Defined with the <code>#define</code> directive after <code>#include</code> preprocessor directives and are typically typed in <code>ALLCAPS</code>.</li>
+<li>VS Code will color highlight MACROs differently than variables.</li>
 </ul>
 <div class="sourceCode" id="cb3"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb3-1"><a></a><span class="pp">#include </span><span class="im">&lt;zephyr/kernel.h&gt;</span></span>
 <span id="cb3-2"><a></a></span>
@@ -435,10 +436,15 @@ Dr.&nbsp;Mark Palmeri, M.D., Ph.D.
 </section>
 <section id="static-variables" class="slide level2">
 <h2>Static Variables</h2>
+<p>Static variables have different properties depending on whether they are local or global. Static variables get their own memory space that is not shared with other variables that are more dynamically allocated.</p>
+<h3 id="global">Global</h3>
 <ul>
-<li>Static variables that are local variables in functions retain their value between function calls (exit and re-entry).</li>
-<li>Static global variables are only scoped within the file they are defined in.</li>
-<li>Static variables get their own memory space that is not shared with other variables that are more dynamically allocated.</li>
+<li>Globally-defined static variables are limited in scope to the <code>*.c</code> file they are defined in.</li>
+<li>Protects against name collisions (linkage) across multiple source code files.</li>
+</ul>
+<h3 id="local">Local</h3>
+<ul>
+<li>Static variables defined in functions retain their value between function calls (exit and re-entry).</li>
 </ul>
 <div class="sourceCode" id="cb4"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb4-1"><a></a><span class="pp">#include </span><span class="im">&lt;zephyr/kernel.h&gt;</span></span>
 <span id="cb4-2"><a></a></span>
@@ -818,12 +824,14 @@ Dr.&nbsp;Mark Palmeri, M.D., Ph.D.
 <img data-src="images/c/memory_management.png" class="r-stretch"><p>A great summary of the different types of memory in C is summarized below from http://www.gotw.ca/gotw/009.htm:</p>
 </section>
 <section id="const-data" class="slide level2">
-<h2>Const Data</h2>
+<h2><code>const</code> Data</h2>
 <ul>
-<li>Stores string literals and other data whose values are known at compile time.<br>
+<li>Immutable data that are read-only; trying to modify it is undefined.<br>
+</li>
+<li>Store data whose values are known at compile time and guarded against inadvertent modification.<br>
 </li>
 <li>All data in this area are available during the entire lifetime of the program.</li>
-<li>All of these data are read-only; trying to modify it is undefined.</li>
+<li>Optimized memory usage since multiple references to the same <code>const</code> data can share the same memory location.</li>
 </ul>
 </section>
 <section id="stack" class="slide level2">

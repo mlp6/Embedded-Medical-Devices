@@ -1481,11 +1481,11 @@
     ]
   },
   {
-    "objectID": "slides/c-programming-notes.html#constants",
-    "href": "slides/c-programming-notes.html#constants",
+    "objectID": "slides/c-programming-notes.html#constants-const",
+    "href": "slides/c-programming-notes.html#constants-const",
     "title": "C Programming",
-    "section": "Constants",
-    "text": "Constants\n\nVariables that have values that will not change can be declared as Constants (const).\nConstant variables consume a fixed amount of memory based on their data type when they are declared and defined.",
+    "section": "Constants (const)",
+    "text": "Constants (const)\n\nVariables that have values that will not change can be declared as constants (const).\nConstant variables consume a fixed amount of memory based on their data type when they are declared and defined.",
     "crumbs": [
       "Learning Modules",
       "C Programming"
@@ -1496,7 +1496,7 @@
     "href": "slides/c-programming-notes.html#macros",
     "title": "C Programming",
     "section": "MACROS",
-    "text": "MACROS\n\nMACROS are preprocessor directives that are replaced with their values (constants of function definitions) before the code is compiled.\nMACROS save memory compared to using constant variables and can improve readability.\nDefined with the #define directive after #include preprocessor directives and are typically typed in ALLCAPS.\n\n#include &lt;zephyr/kernel.h&gt;\n\n#define MY_MACRO 1\n\nvoid my_function(int my_input) {\n  // do something\n  int a = MY_MACRO * my_input;\n}",
+    "text": "MACROS\n\nMACROS are preprocessor directives that are replaced with their values (constants of function definitions) before the code is compiled.\nMACROS save memory compared to using constant variables and can improve readability.\nDefined with the #define directive after #include preprocessor directives and are typically typed in ALLCAPS.\nVS Code will color highlight MACROs differently than variables.\n\n#include &lt;zephyr/kernel.h&gt;\n\n#define MY_MACRO 1\n\nvoid my_function(int my_input) {\n  // do something\n  int a = MY_MACRO * my_input;\n}",
     "crumbs": [
       "Learning Modules",
       "C Programming"
@@ -1507,7 +1507,7 @@
     "href": "slides/c-programming-notes.html#static-variables",
     "title": "C Programming",
     "section": "Static Variables",
-    "text": "Static Variables\n\nStatic variables that are local variables in functions retain their value between function calls (exit and re-entry).\nStatic global variables are only scoped within the file they are defined in.\nStatic variables get their own memory space that is not shared with other variables that are more dynamically allocated.\n\n#include &lt;zephyr/kernel.h&gt;\n\nvoid my_function(int my_input) {\n  static int my_static_variable = 0; // static local variable\n  my_static_variable += my_input;\n  printk(\"The value of my_static_variable is %d\\n\", my_static_variable);\n}",
+    "text": "Static Variables\nStatic variables have different properties depending on whether they are local or global. Static variables get their own memory space that is not shared with other variables that are more dynamically allocated.\n\nGlobal\n\nGlobally-defined static variables are limited in scope to the *.c file they are defined in.\nProtects against name collisions (linkage) across multiple source code files.\n\n\n\nLocal\n\nStatic variables defined in functions retain their value between function calls (exit and re-entry).\n\n#include &lt;zephyr/kernel.h&gt;\n\nvoid my_function(int my_input) {\n  static int my_static_variable = 0; // static local variable\n  my_static_variable += my_input;\n  printk(\"The value of my_static_variable is %d\\n\", my_static_variable);\n}",
     "crumbs": [
       "Learning Modules",
       "C Programming"
@@ -1704,8 +1704,8 @@
     "objectID": "slides/c-programming-notes.html#const-data",
     "href": "slides/c-programming-notes.html#const-data",
     "title": "C Programming",
-    "section": "Const Data",
-    "text": "Const Data\n\nStores string literals and other data whose values are known at compile time.\n\nAll data in this area are available during the entire lifetime of the program.\nAll of these data are read-only; trying to modify it is undefined.",
+    "section": "const Data",
+    "text": "const Data\n\nImmutable data that are read-only; trying to modify it is undefined.\n\nStore data whose values are known at compile time and guarded against inadvertent modification.\n\nAll data in this area are available during the entire lifetime of the program.\nOptimized memory usage since multiple references to the same const data can share the same memory location.",
     "crumbs": [
       "Learning Modules",
       "C Programming"
@@ -1865,25 +1865,25 @@
     "text": "Variable Scope\nVariables can be limited in their scope (where they are accessible).\n\nGlobal variables are defined outside of functions and are globally available to everything in your program.\nLocal variables are defined inside of functions and are only visible within that function.\n\n#include &lt;zephyr/kernel.h&gt;\n\nint my_global_variable; // global variable\n\nvoid my_function(int my_input) {\n  int my_local_variable; // local variable\n  // do something\n}"
   },
   {
-    "objectID": "slides/c-programming-slides.html#constants",
-    "href": "slides/c-programming-slides.html#constants",
+    "objectID": "slides/c-programming-slides.html#constants-const",
+    "href": "slides/c-programming-slides.html#constants-const",
     "title": "C Programming",
-    "section": "Constants",
-    "text": "Constants\n\nVariables that have values that will not change can be declared as Constants (const).\nConstant variables consume a fixed amount of memory based on their data type when they are declared and defined."
+    "section": "Constants (const)",
+    "text": "Constants (const)\n\nVariables that have values that will not change can be declared as constants (const).\nConstant variables consume a fixed amount of memory based on their data type when they are declared and defined."
   },
   {
     "objectID": "slides/c-programming-slides.html#macros",
     "href": "slides/c-programming-slides.html#macros",
     "title": "C Programming",
     "section": "MACROS",
-    "text": "MACROS\n\nMACROS are preprocessor directives that are replaced with their values (constants of function definitions) before the code is compiled.\nMACROS save memory compared to using constant variables and can improve readability.\nDefined with the #define directive after #include preprocessor directives and are typically typed in ALLCAPS.\n\n#include &lt;zephyr/kernel.h&gt;\n\n#define MY_MACRO 1\n\nvoid my_function(int my_input) {\n  // do something\n  int a = MY_MACRO * my_input;\n}"
+    "text": "MACROS\n\nMACROS are preprocessor directives that are replaced with their values (constants of function definitions) before the code is compiled.\nMACROS save memory compared to using constant variables and can improve readability.\nDefined with the #define directive after #include preprocessor directives and are typically typed in ALLCAPS.\nVS Code will color highlight MACROs differently than variables.\n\n#include &lt;zephyr/kernel.h&gt;\n\n#define MY_MACRO 1\n\nvoid my_function(int my_input) {\n  // do something\n  int a = MY_MACRO * my_input;\n}"
   },
   {
     "objectID": "slides/c-programming-slides.html#static-variables",
     "href": "slides/c-programming-slides.html#static-variables",
     "title": "C Programming",
     "section": "Static Variables",
-    "text": "Static Variables\n\nStatic variables that are local variables in functions retain their value between function calls (exit and re-entry).\nStatic global variables are only scoped within the file they are defined in.\nStatic variables get their own memory space that is not shared with other variables that are more dynamically allocated.\n\n#include &lt;zephyr/kernel.h&gt;\n\nvoid my_function(int my_input) {\n  static int my_static_variable = 0; // static local variable\n  my_static_variable += my_input;\n  printk(\"The value of my_static_variable is %d\\n\", my_static_variable);\n}"
+    "text": "Static Variables\nStatic variables have different properties depending on whether they are local or global. Static variables get their own memory space that is not shared with other variables that are more dynamically allocated.\nGlobal\n\nGlobally-defined static variables are limited in scope to the *.c file they are defined in.\nProtects against name collisions (linkage) across multiple source code files.\n\nLocal\n\nStatic variables defined in functions retain their value between function calls (exit and re-entry).\n\n#include &lt;zephyr/kernel.h&gt;\n\nvoid my_function(int my_input) {\n  static int my_static_variable = 0; // static local variable\n  my_static_variable += my_input;\n  printk(\"The value of my_static_variable is %d\\n\", my_static_variable);\n}"
   },
   {
     "objectID": "slides/c-programming-slides.html#typecasting",
@@ -2008,8 +2008,8 @@
     "objectID": "slides/c-programming-slides.html#const-data",
     "href": "slides/c-programming-slides.html#const-data",
     "title": "C Programming",
-    "section": "Const Data",
-    "text": "Const Data\n\nStores string literals and other data whose values are known at compile time.\n\nAll data in this area are available during the entire lifetime of the program.\nAll of these data are read-only; trying to modify it is undefined."
+    "section": "const Data",
+    "text": "const Data\n\nImmutable data that are read-only; trying to modify it is undefined.\n\nStore data whose values are known at compile time and guarded against inadvertent modification.\n\nAll data in this area are available during the entire lifetime of the program.\nOptimized memory usage since multiple references to the same const data can share the same memory location."
   },
   {
     "objectID": "slides/c-programming-slides.html#stack",
@@ -2206,14 +2206,7 @@
     "href": "TODO.html",
     "title": "TODO",
     "section": "",
-    "text": "Setup Canvas site with semester-long calendar (https://go.canvas.duke.edu/instructors/start-term-readiness-checklist/)\nhave everyone earn the Nordic DevAcademy certificate\n\n\n\n\nAdd Evan’s insights on static declarations:\n\nPerhaps @Mark will have more nuanced thoughts about this, but static and const are both qualifiers for declaration that have separate implications.\n\n    a global static variable is only accessible within the same .c file, whereas a static variable within a function (a local variable) retains its value between invocations of said function.\n\n    a const \"variable\" is immutable, meaning its value will not (and cannot) change once initialized.\n\nThe benefit on the former depends on scope. In the case of a global declaration, you are basically safe guarding against unintended linkage / use in other .c files. In the case of a local declaration, this has structural implications for the program (ie, which variables are passed by reference vs. local to the function and persistent for being static). The benefit of the latter (const) is minimized memory utilization and guarding against inadvertent changes. \n\n\n\n\nUpdate timers lab to use k_uptime_ticks() instead of k_uptime_get().\nFUTURE: Unit tests w/ hardware emulators\nAdd Evan code on how to extract data from serial monitor (https://edstem.org/us/courses/81241/discussion/7052125)\nImprove the mechanics of giving code feedback to integrate with the git repo and be more timely\n\n\n\n\n\nCreate GPIO quiz\nCreate timers quiz"
-  },
-  {
-    "objectID": "TODO.html#lecture",
-    "href": "TODO.html#lecture",
-    "title": "TODO",
-    "section": "",
-    "text": "Add Evan’s insights on static declarations:\n\nPerhaps @Mark will have more nuanced thoughts about this, but static and const are both qualifiers for declaration that have separate implications.\n\n    a global static variable is only accessible within the same .c file, whereas a static variable within a function (a local variable) retains its value between invocations of said function.\n\n    a const \"variable\" is immutable, meaning its value will not (and cannot) change once initialized.\n\nThe benefit on the former depends on scope. In the case of a global declaration, you are basically safe guarding against unintended linkage / use in other .c files. In the case of a local declaration, this has structural implications for the program (ie, which variables are passed by reference vs. local to the function and persistent for being static). The benefit of the latter (const) is minimized memory utilization and guarding against inadvertent changes."
+    "text": "Setup Canvas site with semester-long calendar (https://go.canvas.duke.edu/instructors/start-term-readiness-checklist/)\nhave everyone earn the Nordic DevAcademy certificate\n\n\n\n\n\n\n\nUpdate timers lab to use k_uptime_ticks() instead of k_uptime_get().\nFUTURE: Unit tests w/ hardware emulators\nAdd Evan code on how to extract data from serial monitor (https://edstem.org/us/courses/81241/discussion/7052125)\nImprove the mechanics of giving code feedback to integrate with the git repo and be more timely\n\n\n\n\n\nCreate GPIO quiz\nCreate timers quiz"
   },
   {
     "objectID": "TODO.html#labs",

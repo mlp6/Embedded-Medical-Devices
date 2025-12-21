@@ -474,9 +474,13 @@ window.Quarto = {
   <li><a href="#declaring-variables-by-data-type-c" id="toc-declaring-variables-by-data-type-c" class="nav-link" data-scroll-target="#declaring-variables-by-data-type-c">Declaring Variables by Data Type (C)</a></li>
   <li><a href="#why-not-just-make-all-numbers-floatsdoubles" id="toc-why-not-just-make-all-numbers-floatsdoubles" class="nav-link" data-scroll-target="#why-not-just-make-all-numbers-floatsdoubles">Why not just make all numbers floats/doubles?</a></li>
   <li><a href="#variable-scope" id="toc-variable-scope" class="nav-link" data-scroll-target="#variable-scope">Variable Scope</a></li>
-  <li><a href="#constants" id="toc-constants" class="nav-link" data-scroll-target="#constants">Constants</a></li>
+  <li><a href="#constants-const" id="toc-constants-const" class="nav-link" data-scroll-target="#constants-const">Constants (<code>const</code>)</a></li>
   <li><a href="#macros" id="toc-macros" class="nav-link" data-scroll-target="#macros">MACROS</a></li>
-  <li><a href="#static-variables" id="toc-static-variables" class="nav-link" data-scroll-target="#static-variables">Static Variables</a></li>
+  <li><a href="#static-variables" id="toc-static-variables" class="nav-link" data-scroll-target="#static-variables">Static Variables</a>
+  <ul class="collapse">
+  <li><a href="#global" id="toc-global" class="nav-link" data-scroll-target="#global">Global</a></li>
+  <li><a href="#local" id="toc-local" class="nav-link" data-scroll-target="#local">Local</a></li>
+  </ul></li>
   <li><a href="#typecasting" id="toc-typecasting" class="nav-link" data-scroll-target="#typecasting">Typecasting</a></li>
   <li><a href="#bit-depth" id="toc-bit-depth" class="nav-link" data-scroll-target="#bit-depth">Bit Depth</a></li>
   <li><a href="#printing-logging-data-types" id="toc-printing-logging-data-types" class="nav-link" data-scroll-target="#printing-logging-data-types">Printing / Logging Data Types</a></li>
@@ -503,7 +507,7 @@ window.Quarto = {
   <li><a href="#project-libraries" id="toc-project-libraries" class="nav-link" data-scroll-target="#project-libraries">Project Libraries</a></li>
   <li><a href="#cmake-build-system" id="toc-cmake-build-system" class="nav-link" data-scroll-target="#cmake-build-system">CMake Build System</a></li>
   <li><a href="#memory-management" id="toc-memory-management" class="nav-link" data-scroll-target="#memory-management">Memory Management</a></li>
-  <li><a href="#const-data" id="toc-const-data" class="nav-link" data-scroll-target="#const-data">Const Data</a></li>
+  <li><a href="#const-data" id="toc-const-data" class="nav-link" data-scroll-target="#const-data"><code>const</code> Data</a></li>
   <li><a href="#stack" id="toc-stack" class="nav-link" data-scroll-target="#stack">Stack</a></li>
   <li><a href="#free-store" id="toc-free-store" class="nav-link" data-scroll-target="#free-store">Free Store</a></li>
   <li><a href="#heap" id="toc-heap" class="nav-link" data-scroll-target="#heap">Heap</a></li>
@@ -758,10 +762,10 @@ window.Quarto = {
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">// do something</span></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="constants" class="level2">
-<h2 class="anchored" data-anchor-id="constants">Constants</h2>
+<section id="constants-const" class="level2">
+<h2 class="anchored" data-anchor-id="constants-const">Constants (<code>const</code>)</h2>
 <ul>
-<li>Variables that have values that will not change can be declared as <strong>Constants</strong> (<code>const</code>).</li>
+<li>Variables that have values that will not change can be declared as <strong>constants</strong> (<code>const</code>).</li>
 <li>Constant variables consume a fixed amount of memory based on their data type when they are declared and defined.</li>
 </ul>
 </section>
@@ -771,6 +775,7 @@ window.Quarto = {
 <li><strong>MACROS</strong> are preprocessor directives that are replaced with their values (constants of function definitions) before the code is compiled.</li>
 <li>MACROS save memory compared to using constant variables and can improve readability.</li>
 <li>Defined with the <code>#define</code> directive after <code>#include</code> preprocessor directives and are typically typed in <code>ALLCAPS</code>.</li>
+<li>VS Code will color highlight MACROs differently than variables.</li>
 </ul>
 <div class="sourceCode" id="cb3"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;zephyr/kernel.h&gt;</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -783,10 +788,18 @@ window.Quarto = {
 </section>
 <section id="static-variables" class="level2">
 <h2 class="anchored" data-anchor-id="static-variables">Static Variables</h2>
+<p>Static variables have different properties depending on whether they are local or global. Static variables get their own memory space that is not shared with other variables that are more dynamically allocated.</p>
+<section id="global" class="level3">
+<h3 class="anchored" data-anchor-id="global">Global</h3>
 <ul>
-<li>Static variables that are local variables in functions retain their value between function calls (exit and re-entry).</li>
-<li>Static global variables are only scoped within the file they are defined in.</li>
-<li>Static variables get their own memory space that is not shared with other variables that are more dynamically allocated.</li>
+<li>Globally-defined static variables are limited in scope to the <code>*.c</code> file they are defined in.</li>
+<li>Protects against name collisions (linkage) across multiple source code files.</li>
+</ul>
+</section>
+<section id="local" class="level3">
+<h3 class="anchored" data-anchor-id="local">Local</h3>
+<ul>
+<li>Static variables defined in functions retain their value between function calls (exit and re-entry).</li>
 </ul>
 <div class="sourceCode" id="cb4"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;zephyr/kernel.h&gt;</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -795,6 +808,7 @@ window.Quarto = {
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  my_static_variable <span class="op">+=</span> my_input<span class="op">;</span></span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  printk<span class="op">(</span><span class="st">"The value of my_static_variable is </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> my_static_variable<span class="op">);</span></span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
 </section>
 <section id="typecasting" class="level2">
 <h2 class="anchored" data-anchor-id="typecasting">Typecasting</h2>
@@ -1148,12 +1162,14 @@ Warning
 <p>A great summary of the different types of memory in C is summarized below from http://www.gotw.ca/gotw/009.htm:</p>
 </section>
 <section id="const-data" class="level2">
-<h2 class="anchored" data-anchor-id="const-data">Const Data</h2>
+<h2 class="anchored" data-anchor-id="const-data"><code>const</code> Data</h2>
 <ul>
-<li>Stores string literals and other data whose values are known at compile time.<br>
+<li>Immutable data that are read-only; trying to modify it is undefined.<br>
+</li>
+<li>Store data whose values are known at compile time and guarded against inadvertent modification.<br>
 </li>
 <li>All data in this area are available during the entire lifetime of the program.</li>
-<li>All of these data are read-only; trying to modify it is undefined.</li>
+<li>Optimized memory usage since multiple references to the same <code>const</code> data can share the same memory location.</li>
 </ul>
 </section>
 <section id="stack" class="level2">
