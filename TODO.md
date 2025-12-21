@@ -27,3 +27,19 @@
 - [ ] Create GPIO quiz
 
 - [ ] Create timers quiz
+
+## New Semester Tasks
+[ ] Update schedule & syllabus
+- [ ] Setup Ed Discussion
+  - [ ] Link to Syllabus
+  - [ ] Discussion Categories
+- [ ] Setup Gradescope
+[ ] Publish Canvas
+  - [ ] Add TAs and lab staff
+  - [ ] Link syllabus
+- [ ] Setup Pratt AV Panopto recording (https://it.pratt.duke.edu/av)
+- [ ] Order project parts
+- [ ] Setup GitLab Group
+  - [ ] Members
+  - [ ] Labels
+  - [ ] Projects
