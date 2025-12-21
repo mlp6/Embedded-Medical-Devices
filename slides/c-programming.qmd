@@ -131,16 +131,22 @@ void my_function(int my_input) {
 
 ```
 
-## Constants
+## Constants (`const`)
 
-- Variables that have values that will not change can be declared as **Constants** (`const`).
-- Constant variables consume a fixed amount of memory based on their data type when they are declared and defined.
+- Variables that have values that will not change can be declared as
+**constants** (`const`).
+- Constant variables consume a fixed amount of memory based on their data type
+when they are declared and defined.
 
 ## MACROS
 
-- **MACROS** are preprocessor directives that are replaced with their values (constants of function definitions) before the code is compiled.
-- MACROS save memory compared to using constant variables and can improve readability.
-- Defined with the `#define` directive after `#include` preprocessor directives and are typically typed in `ALLCAPS`.
+- **MACROS** are preprocessor directives that are replaced with their values
+(constants of function definitions) before the code is compiled.
+- MACROS save memory compared to using constant variables and can improve
+readability.
+- Defined with the `#define` directive after `#include` preprocessor directives
+and are typically typed in `ALLCAPS`.
+- VS Code will color highlight MACROs differently than variables.
 
 ```C
 #include <zephyr/kernel.h>
@@ -155,9 +161,21 @@ void my_function(int my_input) {
 
 ## Static Variables
 
-- Static variables that are local variables in functions retain their value between function calls (exit and re-entry).
-- Static global variables are only scoped within the file they are defined in.
-- Static variables get their own memory space that is not shared with other variables that are more dynamically allocated.
+Static variables have different properties depending on whether they are local
+or global.  Static variables get their own memory space that is not shared with
+other variables that are more dynamically allocated.
+
+### Global
+
+- Globally-defined static variables are limited in scope to the `*.c` file they
+are defined in.
+- Protects against name collisions (linkage) across multiple source code files.
+
+### Local
+
+- Static variables defined in functions retain their value between function
+calls (exit and re-entry).
+
 
 ```C
 #include <zephyr/kernel.h>
@@ -476,11 +494,14 @@ target_sources(app PRIVATE src/main.c src/your_library.c)
 
 A great summary of the different types of memory in C is summarized below from http://www.gotw.ca/gotw/009.htm:
 
-## Const Data
+## `const` Data
 
-- Stores string literals and other data whose values are known at compile time.  
+- Immutable data that are read-only; trying to modify it is undefined.  
+- Store data whose values are known at compile time and guarded against
+inadvertent modification.  
 - All data in this area are available during the entire lifetime of the program.
-- All of these data are read-only; trying to modify it is undefined.  
+- Optimized memory usage since multiple references to the same `const` data can
+share the same memory location.
 
 ## Stack
 
