@@ -5,6 +5,8 @@
 
 - [ ] have everyone earn the Nordic DevAcademy certificate
 
+- [ ] upgrade SDK to `v3.2.1`
+
 ## Lecture
 
 - Update ADC lecture on what happens if `adc_read_async()` is called while
