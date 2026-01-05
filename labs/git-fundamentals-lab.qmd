@@ -1,6 +1,6 @@
 ---
 title: "Git Fundamentals Lab"
-date: "2025-08-25"
+date: "2026-01-05"
 format:
   html: default
   pdf: default
@@ -14,7 +14,7 @@ This week we will go through a very simple git workflow to get you familiar with
 
 1. Make sure that you have git installed, ssh keys configured, and your Duke GitLab account is setup, as detailed [here](../resources/git.qmd) 
 1. Be sure to review the tutorials outlined on the [git setup page](../resources/git.qmd), as needed, to complete the tasks below.
-1. Create a **fork**--*not a **clone***--of the [git-fundamentals-lab](https://gitlab.oit.duke.edu/kits/BME-554L-001-F25/git-fundamentals-lab) in your userspace.
+1. Create a **fork**--*not a **clone***--of the [git-fundamentals-lab](https://gitlab.oit.duke.edu/mlp6/git-fundamentals-lab) in your userspace.
 1. Add Dr. Palmeri (`mlp6`) as a `Maintainer` of your forked repository (Left Sidebar: `Manage -> Members -> Invite members`)
 1. Clone your forked repository to your laptop using the URL available under the blue Code button: `Clone with SSH`.
 
