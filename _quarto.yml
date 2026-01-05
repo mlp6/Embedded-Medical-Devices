@@ -3,7 +3,7 @@ project:
 
 website:
   title: "Embedded Medical Devices"
-  description: "Duke BME 554L - Fall 2025"
+  description: "Duke BME 554L - Spring 2026"
   site-url: "https://mlp6.github.io/Embedded-Medical-Devices/"
   
   repo-url: "https://github.com/mlp6/Embedded-Medical-Devices/"
@@ -27,7 +27,7 @@ website:
           text: Ed Discussion
         - href: https://canvas.duke.edu/courses/74002
           text: Canvas
-        - href: https://www.gradescope.com/courses/1075664
+        - href: https://www.gradescope.com/courses/1210835
           text: Gradescope
         - href: https://duke.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx?folderID=7ce45649-7fe7-4549-9c8d-b33d00c57b38
           text: Panopto
@@ -106,7 +106,7 @@ website:
 
     page-footer:
       right: 'This page is built with [Quarto](https://quarto.org/).'
-      left: "&copy; Copyright 2025, Mark Palmeri"
+      left: "&copy; Copyright 2026, Mark Palmeri"
 
 format:
   html:
@@ -119,6 +119,7 @@ format:
     toc: true
 
 linkcolor: "#5D737E"
+textcolor: "#000000"
 toc: true
 code-copy: hover
 code-link: true
