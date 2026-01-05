@@ -1,14 +1,6 @@
 # TODO
 
-- [ ] Setup Canvas site with semester-long calendar
-  (https://go.canvas.duke.edu/instructors/start-term-readiness-checklist/)
-
-- [ ] Setup assignments for dev academy certificates
-
 ## Lecture
-
-- Update ADC lecture on what happens if `adc_read_async()` is called while
-  another instance is running
 
 ## Labs
 
@@ -23,13 +15,16 @@
 
 - [ ] Create timers quiz
 
+- [ ] Setup assignments for dev academy certificates
+
 ## New Semester Tasks
 
 - [WIP] Update schedule & syllabus
 - [X] Setup Ed Discussion
   - [X] Discussion Categories
 - [X] Setup Gradescope
+  - [ ] Duplicate assignments
 - [X] Publish Canvas
   - [X] Add TAs and lab staff
   - [X] Link syllabus
-- [WIP] Setup Pratt AV Panopto recording (https://it.pratt.duke.edu/av)
+- [X] Setup Pratt AV Panopto recording (https://it.pratt.duke.edu/av)
