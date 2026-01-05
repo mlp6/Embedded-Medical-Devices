@@ -3,6 +3,8 @@
 - [ ] Setup Canvas site with semester-long calendar
   (https://go.canvas.duke.edu/instructors/start-term-readiness-checklist/)
 
+- [ ] Setup assignments for dev academy certificates
+
 ## Lecture
 
 - Update ADC lecture on what happens if `adc_read_async()` is called while
@@ -23,17 +25,11 @@
 
 ## New Semester Tasks
 
-- [ ] Update schedule & syllabus
-- [ ] Setup Ed Discussion
-  - [ ] Link to Syllabus
-  - [ ] Discussion Categories
-- [ ] Setup Gradescope
-[ ] Publish Canvas
-  - [ ] Add TAs and lab staff
-  - [ ] Link syllabus
-- [ ] Setup Pratt AV Panopto recording (https://it.pratt.duke.edu/av)
-- [ ] Order project parts
-- [ ] Setup GitLab Group (switch to GitHub Classroom)
-  - [ ] Members
-  - [ ] Labels
-  - [ ] Projects
+- [WIP] Update schedule & syllabus
+- [X] Setup Ed Discussion
+  - [X] Discussion Categories
+- [X] Setup Gradescope
+- [X] Publish Canvas
+  - [X] Add TAs and lab staff
+  - [X] Link syllabus
+- [WIP] Setup Pratt AV Panopto recording (https://it.pratt.duke.edu/av)
