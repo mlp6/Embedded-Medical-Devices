@@ -22,6 +22,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -122,13 +157,13 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="https://edstem.org/us/courses/81241/discussion" class="sidebar-item-text sidebar-link">
+  <a href="https://edstem.org/us/courses/90813/discussion" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Ed Discussion</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="ttps://canvas.duke.edu/courses/62452" class="sidebar-item-text sidebar-link">
+  <a href="https://canvas.duke.edu/courses/74002" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Canvas</span></a>
   </div>
 </li>
@@ -445,6 +480,7 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li>Eliminate any conditional logic (<code>if/else</code> statements) to test for elapsed time to toggle/set LED output states.</li>
 <li>Use timers for all LED illumination events.</li>
+<li>Implement finer resolution for timing than what <code>k_uptime_get()</code> can provide (ms) by using <code>k_uptime_ticks()</code> (<a href="https://docs.zephyrproject.org/latest/kernel/services/timing/clocks.html">documentation</a>) and <code>k_ticks_to_ns_near64()</code> (<a href="https://docs.zephyrproject.org/latest/doxygen/html/time__units_8h.html">documentation</a>).</li>
 <li>You do not have to use work queues if your timer handler functions run quickly and do not block. However, if your handler functions are more complex, you should use work queues to submit the work to the system work queue.</li>
 </ul>
 </section>
@@ -513,7 +549,7 @@ Note
 </div>
 <ul>
 <li>Given the latency of when a log message may be printed relative to the event you are trying to get the timing of, you should save the execution time of the timing handler to be log printed later.</li>
-<li>Save your logging output data to a CSV file to be read into your Jupyter notebook. There is no elegant way to directly save your data to a CSV file directly from the Terminal in VS Code.</li>
+<li>Save your logging output data to a CSV file to be read into your Jupyter notebook.</li>
 </ul>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -525,7 +561,38 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Two possible approaches: 1. You can save the entire Terminal output to a file and parse it in your Jupyter notebook, or 2. You can cut-and-paste the relevant values from the Terminal output to a CSV file.</p>
+<p>There is no elegant way to directly save your data to a CSV file directly from the Terminal in VS Code.</p>
+<p>Two possible approaches:</p>
+<ol type="1">
+<li><p>You can save the entire Terminal output to a file and parse it in your Jupyter notebook, or</p></li>
+<li><p>You can cut-and-paste the relevant values from the Terminal output to a CSV file.</p></li>
+</ol>
+<p>An example Terminal output might look like:</p>
+<pre><code>[00:01:00.009,429] &lt;inf&gt; timers_lab: action toggle period (ns): 100006104
+[00:01:00.109,436] &lt;inf&gt; timers_lab: action toggle period (ns): 100006104
+[00:01:00.209,442] &lt;inf&gt; timers_lab: action toggle period (ns): 100006104
+[00:01:00.254,333] &lt;inf&gt; timers_lab: heart toggle period (ns): 500000000
+[00:01:00.309,448] &lt;inf&gt; timers_lab: action toggle period (ns): 100006104
+[00:01:00.409,454] &lt;inf&gt; timers_lab: action toggle period (ns): 100006104
+[00:01:00.509,460] &lt;inf&gt; timers_lab: action toggle period (ns): 100006104
+[00:01:00.609,466] &lt;inf&gt; timers_lab: action toggle period (ns): 100006104
+[00:01:00.709,472] &lt;inf&gt; timers_lab: action toggle period (ns): 100006104
+[00:01:00.754,333] &lt;inf&gt; timers_lab: heart toggle period (ns): 500000000
+[00:01:00.809,478] &lt;inf&gt; timers_lab: action toggle period (ns): 100006104
+[00:01:00.909,484] &lt;inf&gt; timers_lab: action toggle period (ns): 100006104
+[00:01:01.009,490] &lt;inf&gt; timers_lab: action toggle period (ns): 100006104
+[00:01:01.109,497] &lt;inf&gt; timers_lab: action toggle period (ns): 100006104
+[00:01:01.209,503] &lt;inf&gt; timers_lab: action toggle period (ns): 100006104
+[00:01:01.254,333] &lt;inf&gt; timers_lab: heart toggle period (ns): 500000000</code></pre>
+<p>You could then leverage the following snippet in your Jupyter notebook to parse out the relevant data:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>log_5Hz <span class="op">=</span> pd.read_csv(<span class="st">'log_5Hz.txt'</span>, sep<span class="op">=</span><span class="st">" "</span>,header <span class="op">=</span><span class="va">None</span>, usecols<span class="op">=</span>[<span class="dv">0</span>,<span class="dv">3</span>,<span class="dv">7</span>], </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                      names <span class="op">=</span>[<span class="st">'timestamp'</span>,<span class="st">'type'</span>,<span class="st">'toggle duration (ns)'</span>])</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>log_5Hz[<span class="st">'frequency (Hz)'</span>] <span class="op">=</span> (<span class="fl">1e9</span><span class="op">/</span>(<span class="dv">2</span><span class="op">*</span>log_5Hz[<span class="st">'toggle duration (ns)'</span>]))</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Table with action LEDs nominally set to 5 Hz:'</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> pd.option_context(<span class="st">'display.max_rows'</span>, <span class="va">None</span>, </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>                       <span class="st">'display.max_columns'</span>, <span class="va">None</span>):</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(log_5Hz)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>If you run out of terminal output buffer, you can increase the buffer size in VS Code settings under <code>Terminal &gt; Integrated: Scrollback</code>.</p>
 </div>
 </div>
 <ul>
