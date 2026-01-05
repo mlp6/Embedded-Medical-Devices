@@ -1,6 +1,6 @@
 ---
 title: "Embedded Medical Devices"
-subtitle: "BME554L (Fall 2025)"
+subtitle: "BME554L (Spring 2026)"
 format:
   html: default
   pdf: default
@@ -13,14 +13,12 @@ format:
 Dr. Mark Palmeri (`mlp6`)
 
 * Email: [mark.palmeri@duke.edu](mailto:mark.palmeri@duke.edu)
-* [Ed Discussion](https://edstem.org/us/courses/81241/discussion) (private message, TAs included)
+* [Ed Discussion](https://edstem.org/us/courses/90813/discussion) (private message, TAs included)
 * Office Hours: Tues & Thurs, 14:30-15:30 (258 Hudson Hall Annex)
 
 ### Teaching Assistants
 
-* Ceci Schmidz (`cls157`)
-* Evan Smith (`jes114`)
-* Harvey Shi (`hys3`)
+* Sophie Pelton (`smp147`)
 
 For TA office hours (in the lab), please see the Canvas calendar.
 
@@ -33,7 +31,7 @@ posted on Ed Discussion.
 
 ### Lecture
 
-Monday & Wednesday, 08:30-09:45, Wilkinson 130 (Panopto recorded)
+Monday & Wednesday, 08:30-09:45, Hudson Hall 212 (Panopto recorded)
 
 ### Labs
 
@@ -67,18 +65,29 @@ experience with biosignal transduction into circuits.
 
 Upon completion of this course, students should be able to:
 
-* Version control software / firmware development using `git`.
-* Use an Integrated Development Environment (IDE) for firmware development.
-* Describe hardware using a Devicetree hierarchical data structure.
-* Develop firmware using Zephyr as a bare-metal super-loop and a Realtime Operating System (RTOS)
-* Implement state machines and generate state diagrams using the Unified Modeling Language (UML).
-* Utilize callbacks / interrupt service routines for realtime event detection and response.
-* Utilize threads and work queues.
-* Develop firmware to control common peripherals, including GPIO, ADC and PWM.
-* Use different serial communication protocols, including UART, I2C, SPI, and BLE.
-* Utilize firmware logging at different levels.
-* Test firmware implementation on the `nRF52833DK` using electronic bench equipment and generate technical reports with data analysis for device verification.
-* Develop firmware with workflows that adhere to relevant industry and safety standards (e.g., UL, IEC60601, IEC62304) for FDA 510k clearance.
+- Version control software / firmware development using `git`.
+
+- Use an Integrated Development Environment (IDE) for firmware development.
+
+- Describe hardware using a Devicetree hierarchical data structure.
+
+- Develop firmware using Zephyr as a bare-metal super-loop and a Realtime Operating System (RTOS)
+
+- Implement state machines and generate state diagrams using the Unified Modeling Language (UML).
+
+- Utilize callbacks / interrupt service routines for realtime event detection and response.
+
+- Utilize threads and work queues.
+
+- Develop firmware to control common peripherals, including GPIO, ADC and PWM.
+
+- Use different serial communication protocols, including UART, I2C, SPI, and BLE.
+
+- Utilize firmware logging at different levels.
+
+- Test firmware implementation on the `nRF52833DK` using electronic bench equipment and generate technical reports with data analysis for device verification.
+
+- Develop firmware with workflows that adhere to relevant industry and safety standards (e.g., UL, IEC60601, IEC62304) for FDA 510k clearance.
 
 ## Prerequisites
 
@@ -90,7 +99,7 @@ Upon completion of this course, students should be able to:
 
 ## Learning Management System
 
-We will be using [Canvas](https://canvas.duke.edu/courses/62452) as the learning management
+We will be using [Canvas](https://canvas.duke.edu/courses/74002) as the learning management
 system for this course.  Most resources will be linked to the course website.
 All grades will be posted via Canvas/Gradescope.
 
@@ -138,11 +147,15 @@ students in the class.  All lecture slides/presented content will be made
 availabe online (Canvas/Gitlab), and lectures will be recorded via Panopto and
 posted to Canvas.
 
-Participation on [Ed Discussion](https://edstem.org/us/courses/81241/discussion) is also encouraged, in the form of:
+Participation on [Ed Discussion](https://edstem.org/us/courses/90813/discussion)
+is also encouraged, in the form of:
 
-* Asking questions about the course material (ideally, publicly, so that others can benefit (Anonymous okay))
-* Answering questions from other students
-* Sharing interesting articles or resources related to the course material
+- Asking questions about the course material (ideally, publicly, so that others
+can benefit (Anonymous okay))
+
+- Answering questions from other students
+
+- Sharing interesting articles or resources related to the course material
 
 ## Assignments & Grading
 

@@ -3,10 +3,6 @@
 - [ ] Setup Canvas site with semester-long calendar
   (https://go.canvas.duke.edu/instructors/start-term-readiness-checklist/)
 
-- [ ] have everyone earn the Nordic DevAcademy certificate
-
-- [ ] upgrade SDK to `v3.2.1`
-
 ## Lecture
 
 - Update ADC lecture on what happens if `adc_read_async()` is called while
@@ -14,15 +10,10 @@
 
 ## Labs
 
-- [ ] Update timers lab to use `k_uptime_ticks()` instead of `k_uptime_get()`.
-
 - [ ] FUTURE: Unit tests w/ hardware emulators
 
-- [ ] Add Evan code on how to extract data from serial monitor
-  (https://edstem.org/us/courses/81241/discussion/7052125)
-
 - [ ] Improve the mechanics of giving code feedback to integrate with the git
-  repo and be more timely
+  repo and be more timely; consider using an autograder based on an LLM
 
 ## Quizzes
 

@@ -1,7 +1,7 @@
 ---
 title: Software Installation and Tutorials
-subtitle: "BME554L (Fall 2025)"
-date: 2025-08-25
+subtitle: "BME554L (Spring 2026)"
+date: 2026-01-24
 format:
   html: default
   pdf: default
@@ -42,24 +42,46 @@ semester.
 
 ## Zephyr SDK / nRF Connect / Nordic Dev Academy
 
-Please complete the following tutorial to get your environment setup for using the Nordic nRF Connect SDK: [Lesson 1 - nRF Connect SDK Introduction](https://academy.nordicsemi.com/lessons/lesson-1-nrf-connect-sdk-introduction/)  This will run you through the process of:
+- Sign up for an account on the [Nordic Semiconductor
+DevAcademy](https://academy.nordicsemi.com/courses/nrf-connect-sdk-fundamentals/)
+
+- Please complete the following tutorial to get your environment setup for using
+the Nordic nRF Connect SDK: [Lesson 1 - nRF Connect SDK
+Introduction](https://academy.nordicsemi.com/lessons/lesson-1-nrf-connect-sdk-introduction/)
+
+This will run you through the process of:
+
+- Installing the [nRF Connect for VS Code](https://nrfconnect.github.io/vscode-nrf-connect/index.html) extension
+pack.
+
+- Installing all of the associated `nRF Connect` tools for your laptop,
+including the `nRF Connect SDK` and associated `toolchain`.
   
-* Signing up for an account on the [Nordic Semiconductor DevAcademy](https://academy.nordicsemi.com/courses/nrf-connect-sdk-fundamentals/)
-* Installing the [nRF Connect for VS Code](https://nrfconnect.github.io/vscode-nrf-connect/index.html) extension pack.
-* Installing all of the associated `nRF Connect` tools for your laptop, including the `nRF Connect SDK` and associated `toolchain`.
-  * Be sure to use the `nRF Connect SDK v2.9.0` for this class.  `v3.x` may work, but may not.
-* Once you have the hardware you need to order described below, flash the `zephyr/samples/basic/blinky` to your `nRF52833DK`.  
-  
+::: callout-tip
+Be sure to use the `nRF Connect SDK v3.2.1` for this class.  The starter code
+provided throughout the semester will be based on this version of the SDK.
+:::
+
+- Once you have the hardware you need to order described below, flash the
+`zephyr/samples/basic/blinky` to your `nRF52833DK`.  
 
 ::: callout-tip
 Make sure you can successfully do this, as it will test your USB cable
 connection, USB serial port device permissions and your build/flash environment.
 :::
 
-## Nordic Hardware to Buy
+::: callout-important
+You will be doing all of the lessons in this Nordic Dev Academy fundamentals
+course and earning the online certification by the end of the semester will
+count towards your final grade.
+:::
 
-* **Order a [nRF52833DK](https://www.nordicsemi.com/Products/Development-hardware/nrf52833-dk)**. 
-* Make sure you have the appropriate USB cable to flash the device from your laptop.  This may require an adaptor for some laptops.
+## Hardware to Buy
+
+- Order a [nRF52833DK](https://www.nordicsemi.com/Products/Development-hardware/nrf52833-dk). 
+
+- Make sure you have the appropriate USB cable to flash the device from your
+laptop.  This may require an adaptor for some laptops.
 
 ::: callout-important
 Make sure that your USB cable supports data transfer and is not just a charging
@@ -70,9 +92,16 @@ cable.
 We will not have USB cables and adapters available in the lab.
 :::
 
+- Order a [MCP9808 High Accuracy I2C Temperature Sensor Breakout
+Board](https://www.adafruit.com/product/1782).  (Link is to Adafruit, but you
+can get it from other vendors as well.)
+
 ## Technical Reports: Jupyter Notebooks
 
-Lab exercises will require data analysis to be performed in Jupyter notebooks.  Please review the [Technical Report Preparation](resources/technical_report.qmd) page to make sure that you have all of the necessary tools to edit Jupyter notebooks and access to the necessary Python packages.
+Lab exercises will require data analysis to be performed in Jupyter notebooks.
+Please review the [Technical Report Preparation](resources/technical_report.qmd)
+page to make sure that you have all of the necessary tools to edit Jupyter
+notebooks and access to the necessary Python packages.
 
 ## What to Submit
 

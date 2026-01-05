@@ -1,12 +1,11 @@
 ---
 title: "C Programming Lab"
-date: "2025-08-25"
+date: "2026-01-04"
 format:
   html: default
   pdf: default
 ---
 
-<!-- TODO: have the students fork the c-programming-lab repository -->
 <!-- TODO: add debugging exercise -->
 
 ## Prelab
