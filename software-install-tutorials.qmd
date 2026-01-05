@@ -1,7 +1,7 @@
 ---
 title: Software Installation and Tutorials
 subtitle: "BME554L (Spring 2026)"
-date: 2026-01-24
+date: 2026-01-05
 format:
   html: default
   pdf: default
@@ -17,7 +17,9 @@ Please follow the instructions on this dedicated [git page](resources/git.qmd) t
 
 ## Visual Studio Code (IDE)
 
-We will be using [Visual Studio Code](https://code.visualstudio.com/) as the IDE for all projects in this class.  In addition to installing the base program, please install the following Extensions:
+We will be using [Visual Studio Code](https://code.visualstudio.com/) as the IDE
+for all projects in this class.  In addition to installing the base program,
+please install the following Extensions:
 
 * `nRF Connect for VS Code (Extension Pack)`
 * `GitLens` (help with `git` operations / visualization)
@@ -26,7 +28,6 @@ We will be using [Visual Studio Code](https://code.visualstudio.com/) as the IDE
 * Microsoft `IntelliCode` (assistance with C syntax)
 * State diagram software (see below)
 * [GitHub CoPilot](https://code.visualstudio.com/docs/copilot/overview) AI coding assistant (optional, but highly recommended)
-<!--    * [Codex (OpenAI)](https://developers.openai.com/codex/ide): this will work using your Duke ChatGPT EDU account -->
 
 ::: callout-tip
 You can get "Pro" status for GitHub CoPilot by signing up for a free [GitHub Education Student](https://github.com/education/students) account.  You will need a document to verify your student status that includes your dates of enrollment, which your DukeCard does not contain.  Instead, you can get an Enrollment Verification document through DukeHub (Academics Tab) and convert the downloaded PDF to a JPG or PNG file to upload to GitHub.
