@@ -1,6 +1,6 @@
 ---
 title: "State Diagrams"
-date: 2025-08-25
+date: 2026-01-05
 format:
   html: default
   pdf: default
@@ -8,23 +8,49 @@ format:
 
 ## State Diagram Software
 
-We will be generating state diagrams all semester, which can be done with a variety of different software packages:
+We will be generating state diagrams all semester, which can be done with a
+variety of different software packages:
 
-* [PlantUML](https://plantuml.com/)
-  * Text-based diagramming tool that can be integrated into VS Code
-  * A bit outdated, and a tad clunky in default layouts without some "nudging"
-  * What will be used in lecture and lab assignments
-* [Mermaid Markdown](https://mermaid-js.github.io/mermaid/#/)
-  * Markdown-based diagramming tool that can be integrated into VS Code
-  * More modern and easier to use than PlantUML
-  * Not as feature-rich as PlantUML
-* [draw.io](https://app.diagrams.net/)
-  * Web-based diagramming tool that can be integrated into VS Code (Draw.io Integration)
-  * Very feature-rich and easy to use
-  * Not text-based
-* [Lucidchart](https://www.lucidchart.com/)
-  * Web-based diagramming tool 
-  * Very feature-rich and easy to use
-  * Not text-based (less VCS friendly)
+- [PlantUML](https://plantuml.com/)
 
-You can use whatever software package you prefer for this class this semester, though PlantUML will be the only software supported by Dr. Palmeri and the teaching team.
+  - Text-based diagramming tool that can be integrated into VS Code
+
+  - A bit outdated, and a tad clunky in default layouts without some "nudging"
+
+  - What will be used in lecture and lab assignments
+
+::: callout-tip
+PlantUML uses Java, which may require you to install a Java Runtime Environment
+(JRE) on your laptop if you do not already have one.  If you would like to avoid
+installing that, you can use the [PlantUML Server](https://plantuml.com/server)
+option in the PlantUML VS Code extension settings.
+:::
+
+- [Mermaid Markdown](https://mermaid-js.github.io/mermaid/#/)
+
+  - Markdown-based diagramming tool that can be integrated into VS Code
+
+  - More modern and easier to use than PlantUML
+
+  - Not as feature-rich as PlantUML
+
+- [draw.io](https://app.diagrams.net/)
+
+  - Web-based diagramming tool that can be integrated into VS Code (Draw.io
+  Integration)
+
+  - Very feature-rich and easy to use
+
+  - Not text-based
+
+- [Lucidchart](https://www.lucidchart.com/)
+
+  - Web-based diagramming tool 
+
+  - Very feature-rich and easy to use
+
+  - Not text-based (less VCS friendly)
+
+You can use whatever software package you prefer for this class this semester,
+though PlantUML will be the only software supported by Dr. Palmeri and the
+teaching team.
