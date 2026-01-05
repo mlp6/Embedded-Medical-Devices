@@ -1,6 +1,6 @@
 ---
 title: "Zephyr: Analog-to-Digital Conversion"
-date: "2025-10-15"
+date: "2026-01-05"
 format: 
   live-html: 
     output-file: zephyr-adc.html
@@ -271,6 +271,10 @@ k_poll_signal_reset(&adc_signal);  // reset the signal for next use
 
 ::: callout-note
 Note that `k_poll` events/signals are similar to kernel events, but tend to be used for more specific use-cases (e.g., one thread waiting on a signal from another thread or peripheral).
+:::
+
+::: callout-tip
+What happens if you call `adc_read_async()` again before the previous sequence is complete?
 :::
 
 ## Logging Arrays
