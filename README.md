@@ -2,12 +2,12 @@
 
 # Embedded Medical Devices (BME554L)
 
-Dr. Mark Palmeri, M.D., Ph.D. <br> Fall 2025
+Dr. Mark Palmeri, M.D., Ph.D. <br> Spring 2026
 
 [Course Website](https://mlp6.github.io/Embedded-Medical-Devices/)
 
-[Canvas](https://canvas.duke.edu/courses/62452)
+[Canvas](https://canvas.duke.edu/courses/74002)
 
-[Ed Discussion](https://edstem.org/us/courses/81241/discussion)
+[Ed Discussion](https://edstem.org/us/courses/90813/discussion)
 
-[Gradescope](https://www.gradescope.com/courses/1075664)
+[Gradescope](https://www.gradescope.com/courses/1211060)
