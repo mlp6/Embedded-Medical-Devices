@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2025-08-25">
+<meta name="dcterms.date" content="2026-01-05">
 
 <title>Git: Getting Started – Embedded Medical Devices</title>
 <style>
@@ -444,7 +444,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">August 25, 2025</p>
+      <p class="date">January 5, 2026</p>
     </div>
   </div>
   
@@ -459,12 +459,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="installation-configuration" class="level2">
 <h2 class="anchored" data-anchor-id="installation-configuration">Installation &amp; Configuration</h2>
 <ul>
-<li><a href="https://git-scm.com/">Git</a> - version control software
+<li><a href="https://git-scm.com/">Git</a> - version control software</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>MacOS usually comes with <code>git</code> pre-installed, so there is no need to install anything else.</p>
+</div>
+</div>
 <ul>
-<li>Note - MacOS usually comes with <code>git</code> pre-installed, so there is no need to install anything else.</li>
-</ul></li>
-<li>After installing <code>git</code>, please configure it: <a href="https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup">Getting Started - First-Time Git Setup</a></li>
-<li>The setup steps above should create a <code>~/.gitconfig</code> file that has some barebones configuration options. We can expand that a bit by manually editing it with the following content:</li>
+<li><p>After installing <code>git</code>, please configure it: <a href="https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup">Getting Started - First-Time Git Setup</a></p></li>
+<li><p>The setup steps above should create a <code>~/.gitconfig</code> file that has some barebones configuration options. We can expand that a bit by manually editing it with the following content:</p></li>
 </ul>
 <div class="sourceCode" id="cb1"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[user]</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="ex">name</span> = your first and last name</span>
@@ -496,9 +508,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>Set your name and email address for commits</li>
 <li>Set up a <code>git lg</code> alias that will show a nice graph of the commit history</li>
-<li>Change the default editor for making commit messages from <code>vi</code> to <code>nano</code>. (Note, you can change this to something else.)</li>
-<li>Set the default branch name to <code>main</code> (instead of the legacy <code>master</code> name). <em>It is important to do this for our grading scripts to work properly.</em></li>
+<li>Change the default editor for making commit messages from <code>vi</code> to <code>nano</code>.</li>
 </ul></li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You can change this to something else, like VS Code!</p>
+</div>
+</div>
+<ul>
 <li>This is a good tutorial on using <code>git</code> within VS Code: <a href="https://code.visualstudio.com/docs/sourcecontrol/overview">Using Git source control in VS Code</a></li>
 </ul>
 </section>
@@ -552,9 +578,8 @@ Warning
 <ol type="1">
 <li><p><a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent">Generate a New SSH Key</a></p>
 <ul>
-<li>While your private key is most secure by encrypting it with a passphrase, you will need to either enter that passphrase everytime the key is used, or you will need to add it to your local credential manager (i.e., keychain) or <code>ssh-agent</code> to keep it unlocked.<br>
-</li>
-<li>If you are just using this SSH key for this class, you can use an empty passphrase and not need to worry about needing to deal with the password management.</li>
+<li><p>While your private key is most secure by encrypting it with a passphrase, you will need to either enter that passphrase everytime the key is used, or you will need to add it to your local credential manager (i.e., keychain) or <code>ssh-agent</code> to keep it unlocked.</p></li>
+<li><p>If you are just using this SSH key for this class, you can use an empty passphrase and not need to worry about needing to deal with the password management.</p></li>
 </ul></li>
 <li><p><a href="https://linuxhint.com/add-and-configure-ssh-key-on-gitlab">Add your SSH key to your GitLab Profile</a></p></li>
 </ol>
