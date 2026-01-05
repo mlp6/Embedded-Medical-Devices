@@ -14,7 +14,7 @@ Dr. Mark Palmeri (`mlp6`)
 
 * Email: [mark.palmeri@duke.edu](mailto:mark.palmeri@duke.edu)
 * [Ed Discussion](https://edstem.org/us/courses/90813/discussion) (private message, TAs included)
-* Office Hours: Tues & Thurs, 14:30-15:30 (258 Hudson Hall Annex)
+* Office Hours: [Sign Up](https://outlook.office.com/bookwithme/user/b65348e3d8d949d38306522cadcdb57b@duke.edu?anonymous&ismsaljsauthenabled&ep=plink)
 
 ### Teaching Assistants
 
@@ -169,7 +169,7 @@ working device (a wireless ECG and temperature sensor).  Each lab exercise will
 be evaluated with code reviews and technical reports that assess functionality.
 
 Testing of the final working device will be presented in a final technical
-report (~20%).
+report.
 
 All assignment grades will be posted to Gradescope/Canvas throughout the
 semester to track your performance.
