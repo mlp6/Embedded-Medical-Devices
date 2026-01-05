@@ -15,11 +15,9 @@
 
 - [ ] Create timers quiz
 
-- [ ] Setup assignments for dev academy certificates
-
 ## New Semester Tasks
 
-- [WIP] Update schedule & syllabus
+- [X] Update schedule & syllabus
 - [X] Setup Ed Discussion
   - [X] Discussion Categories
 - [X] Setup Gradescope
