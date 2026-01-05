@@ -326,12 +326,126 @@ Then, within a state:
     // remainder of state code
 }
 ```
-Because the default argument for states is a generic pointer (`void *o`), you will need to cast the input to a pointer for the `s_object struct` to safely access its members. If you're unfamiliar with the arrow operator (`->`), this allows you to access members of a struct via a pointer. This syntax is equivalent to `(*s).member` , where the `.` is how we would typically access a member directly (ie, not as a pointer). 
+Because the default argument for states is a generic pointer (`void *o`), you
+will need to cast the input to a pointer for the `s_object struct` to safely
+access its members. If you're unfamiliar with the arrow operator (`->`), this
+allows you to access members of a struct via a pointer. This syntax is
+equivalent to `(*s).member` , where the `.` is how we would typically access a
+member directly (ie, not as a pointer). 
 
+## Passing State Object Data to Timer Handlers
 
+In `main()`:
+
+```C
+k_timer_user_data_set(&my_timer, &s_obj); // make *s_obj available to my_timer
+```
+
+Docs for [`k_timer_user_data_set()`](https://docs.zephyrproject.org/latest/doxygen/html/group__timer__apis.html#gadba1884961e790dd9c5d567de91cc7e2)
+
+Within the timer handler:
+
+```C
+void timer_handler(struct k_timer *my_timer){
+    struct s_object *s = k_timer_user_data_get(my_timer);
+    // use s->member as needed
+}
+```
+
+So, we can make `*s_obj` available inside a timer handler. 
+
+## Passing State Object Data to Work Queue Handlers
+Now, what if we want to pass the same pointer to a work queue thread and what if
+we want to do so from inside the above timer handler?  (in the context where the
+timer submits work to be done). 
+
+One way to do this is to create a struct wrapped around `struct k_work` work and
+declare a placeholder pointer as a secondary member: 
+
+```C
+struct my_work {
+    struct k_work work;
+    void *s_obj_ptr;
+}; 
+```
+
+Note here that this just a template for a struct of this type (my_work) and does
+not constitute creating an instance of such a struct. We can create an instance
+of this wrapper struct from inside timer_handler() (or elsewhere, as needed):
+
+```C
+void timer_handler(struct k_timer *my_timer){
+    struct s_object *s = k_timer_user_data_get(my_timer); // from before
+    static struct my_work mw; // create a static instance of wrapper struct
+    mw.s_obj_ptr = s; // assign desired pointer to placeholder
+    k_work_init(&mw.work, my_work_handler); // use wrapper to init work
+    k_work_submit(&mw.work); // use wrapper to submit work
+}
+```
+
+Now, within `my_work_handler()`:
+
+```C
+void my_work_handler(struct k_work *work){
+    struct my_work *mw = CONTAINER_OF(work, struct my_work, work);
+    struct s_object *s = mw->s_obj_ptr;
+    // use s-> member as needed
+}
+```
+
+Here, we make use of the `CONTAINER_OF` macro
+([documentation](https://docs.zephyrproject.org/3.7.0/kernel/util/index.html#c.CONTAINER_OF))to
+obtain a pointer to the structure containing the element `work`, in this case
+`my_work`, the wrapper struct. From this, we can then recover a pointer to our
+`s_object` instance, `s_obj`, and use it as needed thereafter.  
+
+More generically, how can we pass a pointer to a user created thread? 
+
+```C
+void my_thread(void *p1, void *p2, void *p3); // forward declaration
+
+K_THREAD_STACK_DEFINE(thread_stack, 1024);
+struct k_thread thread_id;
+```
+
+Then from `main()`:
+
+```C
+int main(void){
+    static struct s_object s_obj; // create an instance of s_object called s_obj
+    int ret = init_s_object(&s_obj); // initialize s_obj using helper function
+    if (ret != 0) {
+        LOG_ERR("could not initialize s_object stuct (%d)", ret);
+    }
+    k_thread_create(&thread_id, thread_stack, 1024, my_thread, 
+                    &s_obj, NULL, NULL, // p1, p2, p3
+                    5, 0, K_NO_WAIT);
+    k_timer_user_data_set(&my_timer, &s_obj); // make *s_obj available to my_timer
+    smf_set_initial(SMF_CTX(&s_obj), &fsm_states[INIT]);
+    for (;;) {
+        ret = smf_run_state(SMF_CTX(&s_obj));
+        if (ret != 0) {
+            LOG_ERR("terminating state machine (%d)", ret);
+        }
+    }
+    return 0;
+}
+```
+
+In the call to `k_thread_create()` the 5th through 7th arguments are the
+pointers `*p1`, `*p2`, `*p3` that appear as arguments to the thread itself:
+
+```C
+void my_thread(void *p1, void *p2, void *p3) {
+    struct s_object *s = (struct s_object *)p1; // type cast generic pointer
+    while (1) {
+        // access s->members
+        // do things in thread
+    }
+}
+```
 
 ## Resources
 
 - [Zephyr Docs: State Machine Framework (SMF)](https://docs.zephyrproject.org/latest/services/smf/index.html)
 - [Zephyr Docs: Events](https://docs.zephyrproject.org/latest/kernel/services/synchronization/events.html#events)
->
