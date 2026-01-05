@@ -14,6 +14,8 @@ of the refactoring below on a new branch called `timers`.
 - Eliminate any conditional logic (`if/else` statements) to test for elapsed
 time to toggle/set LED output states.
 - Use timers for all LED illumination events.
+- Implement finer resolution for timing than what `k_uptime_get()` can provide
+(ms) by using `k_uptime_ticks()` ([documentation](https://docs.zephyrproject.org/latest/kernel/services/timing/clocks.html)) and `k_ticks_to_ns_near64()` ([documentation](https://docs.zephyrproject.org/latest/doxygen/html/time__units_8h.html)).
 - You do not have to use work queues if your timer handler functions run quickly
 and do not block.  However, if your handler functions are more complex, you
 should use work queues to submit the work to the system work queue.
@@ -59,15 +61,58 @@ Note that logging statements, by default, are low priority and non-blocking
 you are trying to get the timing of, you should save the execution time of the
 timing handler to be log printed later.
 - Save your logging output data to a CSV file to be read into your Jupyter
-notebook.  There is no elegant way to directly save your data to a CSV file
-directly from the Terminal in VS Code.  
+notebook.  
 
 ::: {.callout-note}
+There is no elegant way to directly save your data to a CSV file
+directly from the Terminal in VS Code.  
+
 Two possible approaches:
+
 1. You can save the entire Terminal output to a file and parse it in your
 Jupyter notebook, or
+
 2. You can cut-and-paste the relevant values from the Terminal output to a CSV
 file.
+
+
+An example Terminal output might look like:
+
+```
+[00:01:00.009,429] <inf> timers_lab: action toggle period (ns): 100006104
+[00:01:00.109,436] <inf> timers_lab: action toggle period (ns): 100006104
+[00:01:00.209,442] <inf> timers_lab: action toggle period (ns): 100006104
+[00:01:00.254,333] <inf> timers_lab: heart toggle period (ns): 500000000
+[00:01:00.309,448] <inf> timers_lab: action toggle period (ns): 100006104
+[00:01:00.409,454] <inf> timers_lab: action toggle period (ns): 100006104
+[00:01:00.509,460] <inf> timers_lab: action toggle period (ns): 100006104
+[00:01:00.609,466] <inf> timers_lab: action toggle period (ns): 100006104
+[00:01:00.709,472] <inf> timers_lab: action toggle period (ns): 100006104
+[00:01:00.754,333] <inf> timers_lab: heart toggle period (ns): 500000000
+[00:01:00.809,478] <inf> timers_lab: action toggle period (ns): 100006104
+[00:01:00.909,484] <inf> timers_lab: action toggle period (ns): 100006104
+[00:01:01.009,490] <inf> timers_lab: action toggle period (ns): 100006104
+[00:01:01.109,497] <inf> timers_lab: action toggle period (ns): 100006104
+[00:01:01.209,503] <inf> timers_lab: action toggle period (ns): 100006104
+[00:01:01.254,333] <inf> timers_lab: heart toggle period (ns): 500000000
+```
+
+You could then leverage the following snippet in your Jupyter notebook to parse
+out the relevant data:
+
+```python
+log_5Hz = pd.read_csv('log_5Hz.txt', sep=" ",header =None, usecols=[0,3,7], 
+                      names =['timestamp','type','toggle duration (ns)'])
+log_5Hz['frequency (Hz)'] = (1e9/(2*log_5Hz['toggle duration (ns)']))
+print('Table with action LEDs nominally set to 5 Hz:')
+with pd.option_context('display.max_rows', None, 
+                       'display.max_columns', None):
+    print(log_5Hz)
+```
+
+If you run out of terminal output buffer, you can increase the buffer size in VS
+Code settings under `Terminal > Integrated: Scrollback`.
+
 :::
 
 - Estimate the 95% confidence interval (2x standard deviation for
