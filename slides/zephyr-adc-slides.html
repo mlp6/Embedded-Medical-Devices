@@ -12,7 +12,7 @@
   <meta name="generator" content="quarto-1.7.31">
 
   <meta name="author" content="Dr.&nbsp;Mark Palmeri, M.D., Ph.D.">
-  <meta name="dcterms.date" content="2025-10-15">
+  <meta name="dcterms.date" content="2026-01-05">
   <title>Embedded Medical Devices – Zephyr: Analog-to-Digital Conversion</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -212,7 +212,7 @@ Dr.&nbsp;Mark Palmeri, M.D., Ph.D.
     </div>
 </div>
 
-  <p class="date">October 15, 2025</p>
+  <p class="date">January 5, 2026</p>
 </section>
 <section id="introduction" class="slide level2">
 <h2>Introduction</h2>
@@ -516,6 +516,19 @@ Dr.&nbsp;Mark Palmeri, M.D., Ph.D.
 </div>
 <div class="callout-content">
 <p>Note that <code>k_poll</code> events/signals are similar to kernel events, but tend to be used for more specific use-cases (e.g., one thread waiting on a signal from another thread or peripheral).</p>
+</div>
+</div>
+</div>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<p>What happens if you call <code>adc_read_async()</code> again before the previous sequence is complete?</p>
 </div>
 </div>
 </div>
