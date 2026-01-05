@@ -112,7 +112,7 @@ Ed Discussion will be used for general course questions and discussion.
 ## Class Schedule
 
 This class is organized in a sequence of modules.  Specific details surrounding
-dates for assignments associated with each module will be posted to Gradescope
+dates for assignments associated with each module will be posted to Canvas/Gradescope
 and linked below.
 
 This course uses a version of [Mastery Learning](https://en.wikipedia.org/wiki/Mastery_learning),
@@ -122,7 +122,7 @@ This course uses a version of [Mastery Learning](https://en.wikipedia.org/wiki/M
  modules depends on the successful completion of earlier modules.
 
 - [Zephyr & Nordic SoC Overview](slides/zephyr-nrf52833dk-intro.qmd)
-- [Event-Drive State Machines](slides/event-driven-state-machine.qmd)
+- [Event-Driven State Machines](slides/event-driven-state-machine.qmd)
 - [Version Control with Git](slides/git-fundamentals.qmd)
 - [C Programming Overview](slides/c-programming.qmd)
 - [Devicetree, GPIO, ISR, Callbacks](slides/zephyr-gpio-isr-callbacks.qmd)
@@ -161,36 +161,52 @@ can benefit (Anonymous okay))
 
 ### Grading
 
-Fundamental knowledge will be assessed with online quizzes (~30%).
+Fundamental knowledge will be assessed with online quizzes and the Nordic
+DevAcademy Fundamentals lessons.
 
 Lab exercises will focus on implementing key functionality towards the final
 working device (a wireless ECG and temperature sensor).  Each lab exercise will
-be evaluated with code reviews and technical reports that assess functionality
-(~50%).
+be evaluated with code reviews and technical reports that assess functionality.
 
 Testing of the final working device will be presented in a final technical
 report (~20%).
 
-All assignment grades will be posted to Gradescope (and linked to the Canvas
-gradebook) throughout the semester to track your performance.
+All assignment grades will be posted to Gradescope/Canvas throughout the
+semester to track your performance.
 
 | Grade Category   | Relative Percentage   |
 |:----------------|:---------------------|
-| Quizzes         | 30%                  |
-| Labs            | 50%                  |
-| Final Device    | 20%                  |
+| Quizzes         | 20%                  |
+| Nordic DevAcademy Fundamentals Certificate | 10% |
+| Code Reviews | 15% |
+| Technical Reports | 35%                  |
+| Final Device & Report    | 20%                  |
 
 : Grade Distribution
 
+
+### Extra Credit 
+
+Extra credit may be earned by completing:
+
+- [nRF Connect SDK Intermediate](https://academy.nordicsemi.com/courses/nrf-connect-sdk-intermediate)
+
+- [Bluetooth Low Energy Fundamentals](https://academy.nordicsemi.com/courses/bluetooth-low-energy-fundamentals/)
+
+This can be used to offset late assignments, missed quizzes, etc.
 
 ### Course Grade
 
 This course is not "curved" (i.e., a distribution of grades will not be
 enforced), and a traditional grading scheme will be used (e.g., 90-93 = A-,
-94-97 = A, 97-100 = A+).  Participation throughout the semester will influence
-rounding up/down for fractional grades.
+94-97 = A, 97-100 = A+).  
 
 Failing the course can happen with a cummulative score $<$ 70 (C-).
+
+::: callout-tip
+Participation throughout the semester will influence rounding up/down for
+fractional grades.
+:::
 
 ### Regrades
 
