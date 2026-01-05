@@ -445,6 +445,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#heirarchical-state-machine-example" id="toc-heirarchical-state-machine-example" class="nav-link" data-scroll-target="#heirarchical-state-machine-example">Heirarchical State Machine Example</a></li>
   <li><a href="#when-to-use-threads-vs.-states" id="toc-when-to-use-threads-vs.-states" class="nav-link" data-scroll-target="#when-to-use-threads-vs.-states">When to Use Threads vs.&nbsp;States</a></li>
   <li><a href="#avoiding-global-variables-with-s_object-struct" id="toc-avoiding-global-variables-with-s_object-struct" class="nav-link" data-scroll-target="#avoiding-global-variables-with-s_object-struct">Avoiding Global Variables with <code>s_object</code> Struct</a></li>
+  <li><a href="#passing-state-object-data-to-timer-handlers" id="toc-passing-state-object-data-to-timer-handlers" class="nav-link" data-scroll-target="#passing-state-object-data-to-timer-handlers">Passing State Object Data to Timer Handlers</a></li>
+  <li><a href="#passing-state-object-data-to-work-queue-handlers" id="toc-passing-state-object-data-to-work-queue-handlers" class="nav-link" data-scroll-target="#passing-state-object-data-to-work-queue-handlers">Passing State Object Data to Work Queue Handlers</a></li>
   <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a></li>
   </ul></li>
   </ul>
@@ -790,11 +792,80 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Because the default argument for states is a generic pointer (<code>void *o</code>), you will need to cast the input to a pointer for the <code>s_object struct</code> to safely access its members. If you’re unfamiliar with the arrow operator (<code>-&gt;</code>), this allows you to access members of a struct via a pointer. This syntax is equivalent to <code>(*s).member</code> , where the <code>.</code> is how we would typically access a member directly (ie, not as a pointer).</p>
 </section>
+<section id="passing-state-object-data-to-timer-handlers" class="level2">
+<h2 class="anchored" data-anchor-id="passing-state-object-data-to-timer-handlers">Passing State Object Data to Timer Handlers</h2>
+<p>In <code>main()</code>:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>k_timer_user_data_set<span class="op">(&amp;</span>my_timer<span class="op">,</span> <span class="op">&amp;</span>s_obj<span class="op">);</span> <span class="co">// make *s_obj available to my_timer</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Docs for <a href="https://docs.zephyrproject.org/latest/doxygen/html/group__timer__apis.html#gadba1884961e790dd9c5d567de91cc7e2"><code>k_timer_user_data_set()</code></a></p>
+<p>Within the timer handler:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> timer_handler<span class="op">(</span><span class="kw">struct</span> k_timer <span class="op">*</span>my_timer<span class="op">){</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> s_object <span class="op">*</span>s <span class="op">=</span> k_timer_user_data_get<span class="op">(</span>my_timer<span class="op">);</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">// use s-&gt;member as needed</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>So, we can make <code>*s_obj</code> available inside a timer handler.</p>
+</section>
+<section id="passing-state-object-data-to-work-queue-handlers" class="level2">
+<h2 class="anchored" data-anchor-id="passing-state-object-data-to-work-queue-handlers">Passing State Object Data to Work Queue Handlers</h2>
+<p>Now, what if we want to pass the same pointer to a work queue thread and what if we want to do so from inside the above timer handler? (in the context where the timer submits work to be done).</p>
+<p>One way to do this is to create a struct wrapped around <code>struct k_work</code> work and declare a placeholder pointer as a secondary member:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> my_work <span class="op">{</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> k_work work<span class="op">;</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> <span class="op">*</span>s_obj_ptr<span class="op">;</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="op">};</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Note here that this just a template for a struct of this type (my_work) and does not constitute creating an instance of such a struct. We can create an instance of this wrapper struct from inside timer_handler() (or elsewhere, as needed):</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> timer_handler<span class="op">(</span><span class="kw">struct</span> k_timer <span class="op">*</span>my_timer<span class="op">){</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> s_object <span class="op">*</span>s <span class="op">=</span> k_timer_user_data_get<span class="op">(</span>my_timer<span class="op">);</span> <span class="co">// from before</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">static</span> <span class="kw">struct</span> my_work mw<span class="op">;</span> <span class="co">// create a static instance of wrapper struct</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    mw<span class="op">.</span>s_obj_ptr <span class="op">=</span> s<span class="op">;</span> <span class="co">// assign desired pointer to placeholder</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    k_work_init<span class="op">(&amp;</span>mw<span class="op">.</span>work<span class="op">,</span> my_work_handler<span class="op">);</span> <span class="co">// use wrapper to init work</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    k_work_submit<span class="op">(&amp;</span>mw<span class="op">.</span>work<span class="op">);</span> <span class="co">// use wrapper to submit work</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Now, within <code>my_work_handler()</code>:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> my_work_handler<span class="op">(</span><span class="kw">struct</span> k_work <span class="op">*</span>work<span class="op">){</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> my_work <span class="op">*</span>mw <span class="op">=</span> CONTAINER_OF<span class="op">(</span>work<span class="op">,</span> <span class="kw">struct</span> my_work<span class="op">,</span> work<span class="op">);</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> s_object <span class="op">*</span>s <span class="op">=</span> mw<span class="op">-&gt;</span>s_obj_ptr<span class="op">;</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">// use s-&gt; member as needed</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Here, we make use of the <code>CONTAINER_OF</code> macro (<a href="https://docs.zephyrproject.org/3.7.0/kernel/util/index.html#c.CONTAINER_OF">documentation</a>)to obtain a pointer to the structure containing the element <code>work</code>, in this case <code>my_work</code>, the wrapper struct. From this, we can then recover a pointer to our <code>s_object</code> instance, <code>s_obj</code>, and use it as needed thereafter.</p>
+<p>More generically, how can we pass a pointer to a user created thread?</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> my_thread<span class="op">(</span><span class="dt">void</span> <span class="op">*</span>p1<span class="op">,</span> <span class="dt">void</span> <span class="op">*</span>p2<span class="op">,</span> <span class="dt">void</span> <span class="op">*</span>p3<span class="op">);</span> <span class="co">// forward declaration</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>K_THREAD_STACK_DEFINE<span class="op">(</span>thread_stack<span class="op">,</span> <span class="dv">1024</span><span class="op">);</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> k_thread thread_id<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Then from <code>main()</code>:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">){</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">static</span> <span class="kw">struct</span> s_object s_obj<span class="op">;</span> <span class="co">// create an instance of s_object called s_obj</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> ret <span class="op">=</span> init_s_object<span class="op">(&amp;</span>s_obj<span class="op">);</span> <span class="co">// initialize s_obj using helper function</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>ret <span class="op">!=</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>        LOG_ERR<span class="op">(</span><span class="st">"could not initialize s_object stuct (</span><span class="sc">%d</span><span class="st">)"</span><span class="op">,</span> ret<span class="op">);</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    k_thread_create<span class="op">(&amp;</span>thread_id<span class="op">,</span> thread_stack<span class="op">,</span> <span class="dv">1024</span><span class="op">,</span> my_thread<span class="op">,</span> </span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>                    <span class="op">&amp;</span>s_obj<span class="op">,</span> NULL<span class="op">,</span> NULL<span class="op">,</span> <span class="co">// p1, p2, p3</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>                    <span class="dv">5</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> K_NO_WAIT<span class="op">);</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>    k_timer_user_data_set<span class="op">(&amp;</span>my_timer<span class="op">,</span> <span class="op">&amp;</span>s_obj<span class="op">);</span> <span class="co">// make *s_obj available to my_timer</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    smf_set_initial<span class="op">(</span>SMF_CTX<span class="op">(&amp;</span>s_obj<span class="op">),</span> <span class="op">&amp;</span>fsm_states<span class="op">[</span>INIT<span class="op">]);</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(;;)</span> <span class="op">{</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>        ret <span class="op">=</span> smf_run_state<span class="op">(</span>SMF_CTX<span class="op">(&amp;</span>s_obj<span class="op">));</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>ret <span class="op">!=</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>            LOG_ERR<span class="op">(</span><span class="st">"terminating state machine (</span><span class="sc">%d</span><span class="st">)"</span><span class="op">,</span> ret<span class="op">);</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>In the call to <code>k_thread_create()</code> the 5th through 7th arguments are the pointers <code>*p1</code>, <code>*p2</code>, <code>*p3</code> that appear as arguments to the thread itself:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> my_thread<span class="op">(</span><span class="dt">void</span> <span class="op">*</span>p1<span class="op">,</span> <span class="dt">void</span> <span class="op">*</span>p2<span class="op">,</span> <span class="dt">void</span> <span class="op">*</span>p3<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> s_object <span class="op">*</span>s <span class="op">=</span> <span class="op">(</span><span class="kw">struct</span> s_object <span class="op">*)</span>p1<span class="op">;</span> <span class="co">// type cast generic pointer</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(</span><span class="dv">1</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>        <span class="co">// access s-&gt;members</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>        <span class="co">// do things in thread</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
 <section id="resources" class="level2">
 <h2 class="anchored" data-anchor-id="resources">Resources</h2>
 <ul>
 <li><a href="https://docs.zephyrproject.org/latest/services/smf/index.html">Zephyr Docs: State Machine Framework (SMF)</a></li>
-<li><a href="https://docs.zephyrproject.org/latest/kernel/services/synchronization/events.html#events">Zephyr Docs: Events</a> &gt;</li>
+<li><a href="https://docs.zephyrproject.org/latest/kernel/services/synchronization/events.html#events">Zephyr Docs: Events</a></li>
 </ul>
 
 
