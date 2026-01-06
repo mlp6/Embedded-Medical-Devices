@@ -1,7 +1,7 @@
 ---
 title: Frequently Asked Questions
-subtitle: "BME554L (Fall 2025)"
-date: 2025-XX-XX
+subtitle: "BME554L (Spring 2026)"
+date: 2026-01-06
 format:
   html: default
   pdf: default
@@ -18,14 +18,17 @@ storage device was not unmounted properly.  To avoid this, you can do the
 following:
 [https://docs.zephyrproject.org/latest/develop/flash_debug/nordic_segger.html#disabling-the-mass-storage-device-functionality](https://docs.zephyrproject.org/latest/develop/flash_debug/nordic_segger.html#disabling-the-mass-storage-device-functionality)
 
-### Permission Denied when Upgrading nrfutil 
+### Permission Denied when Upgrading `nrfutil`
 
-When attempting to run `nrfutil self-upgrade` or other subsequent commands detailed for nrfutil, on macOS, if you encounter `permission denied`, navigate to the directory where you saved the nrfutil binary (via terminal) and run `chmod u+x nrfutil` to adjust its permissions. You can verify the effect of this by running `ls -l` before and after.  
+When attempting to run `nrfutil self-upgrade` or other subsequent commands
+detailed for nrfutil, on macOS, if you encounter `permission denied`, navigate
+to the directory where you saved the nrfutil binary (via terminal) and run
+`chmod u+x nrfutil` to adjust its permissions. You can verify the effect of
+this by running `ls -l` before and after.  
 
 ### Permission Issues when Flashing
 
-The [nRF Command Line
-Tools](https://www.nordicsemi.com/Products/Development-tools/nrf-command-line-tools/)
+The [nRF Command Line Tools](https://www.nordicsemi.com/Products/Development-tools/nrf-command-line-tools/)
 are in the process of converting from using a legacy `nrfjprog` tool to
 `nrfutil`.  Some of the latest versions of the command line tools on the MacOS
 have bugs that prevent you from running the legacy tools without root
