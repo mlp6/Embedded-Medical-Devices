@@ -6,6 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="dcterms.date" content="2026-01-06">
 
 <title>Frequently Asked Questions – Embedded Medical Devices</title>
 <style>
@@ -388,7 +389,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#macos-troubleshooting" id="toc-macos-troubleshooting" class="nav-link active" data-scroll-target="#macos-troubleshooting">MacOS Troubleshooting</a>
   <ul class="collapse">
   <li><a href="#ejection-warnings-serial-communication-blocks" id="toc-ejection-warnings-serial-communication-blocks" class="nav-link" data-scroll-target="#ejection-warnings-serial-communication-blocks">Ejection Warnings &amp; Serial Communication Blocks</a></li>
-  <li><a href="#permission-denied-when-upgrading-nrfutil" id="toc-permission-denied-when-upgrading-nrfutil" class="nav-link" data-scroll-target="#permission-denied-when-upgrading-nrfutil">Permission Denied when Upgrading nrfutil</a></li>
+  <li><a href="#permission-denied-when-upgrading-nrfutil" id="toc-permission-denied-when-upgrading-nrfutil" class="nav-link" data-scroll-target="#permission-denied-when-upgrading-nrfutil">Permission Denied when Upgrading <code>nrfutil</code></a></li>
   <li><a href="#permission-issues-when-flashing" id="toc-permission-issues-when-flashing" class="nav-link" data-scroll-target="#permission-issues-when-flashing">Permission Issues when Flashing</a></li>
   </ul></li>
   </ul>
@@ -400,7 +401,7 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./course-syllabus.html">Course Information</a></li><li class="breadcrumb-item"><a href="./faq.html">FAQ</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Frequently Asked Questions</h1>
-<p class="subtitle lead">BME554L (Fall 2025)</p>
+<p class="subtitle lead">BME554L (Spring 2026)</p>
 </div>
 
 
@@ -411,7 +412,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">Invalid Date</p>
+      <p class="date">January 6, 2026</p>
     </div>
   </div>
   
@@ -430,7 +431,7 @@ ul.task-list li input[type="checkbox"] {
 <p>The MacOS can try to mount your development kit as a storage device, and this can (a) interfere with flashing the device, (b) prevent you from seeing <code>VCOM</code> port output, and (c) annoyingly pop up a warning dialog window saying that your storage device was not unmounted properly. To avoid this, you can do the following: <a href="https://docs.zephyrproject.org/latest/develop/flash_debug/nordic_segger.html#disabling-the-mass-storage-device-functionality">https://docs.zephyrproject.org/latest/develop/flash_debug/nordic_segger.html#disabling-the-mass-storage-device-functionality</a></p>
 </section>
 <section id="permission-denied-when-upgrading-nrfutil" class="level3">
-<h3 class="anchored" data-anchor-id="permission-denied-when-upgrading-nrfutil">Permission Denied when Upgrading nrfutil</h3>
+<h3 class="anchored" data-anchor-id="permission-denied-when-upgrading-nrfutil">Permission Denied when Upgrading <code>nrfutil</code></h3>
 <p>When attempting to run <code>nrfutil self-upgrade</code> or other subsequent commands detailed for nrfutil, on macOS, if you encounter <code>permission denied</code>, navigate to the directory where you saved the nrfutil binary (via terminal) and run <code>chmod u+x nrfutil</code> to adjust its permissions. You can verify the effect of this by running <code>ls -l</code> before and after.</p>
 </section>
 <section id="permission-issues-when-flashing" class="level3">
