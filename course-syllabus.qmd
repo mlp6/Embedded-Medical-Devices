@@ -144,8 +144,7 @@ time will provide you access to equipment and the TAs for assistance.
 
 Students are responsible for obtaining missed lecture content from other
 students in the class.  All lecture slides/presented content will be made
-availabe online (Canvas/Gitlab), and lectures will be recorded via Panopto and
-posted to Canvas.
+availabe online and lectures will be recorded via Panopto and posted to Canvas.
 
 Participation on [Ed Discussion](https://edstem.org/us/courses/90813/discussion)
 is also encouraged, in the form of:
@@ -177,7 +176,7 @@ semester to track your performance.
 | Grade Category   | Relative Percentage   |
 |:----------------|:---------------------|
 | Quizzes         | 20%                  |
-| Nordic DevAcademy Fundamentals Certificate | 10% |
+| Nordic DevAcademy Fundamentals Certificates | 10% |
 | Code Reviews | 15% |
 | Technical Reports | 35%                  |
 | Final Device & Report    | 20%                  |
@@ -187,11 +186,7 @@ semester to track your performance.
 
 ### Extra Credit 
 
-Extra credit may be earned by completing:
-
-- [nRF Connect SDK Intermediate](https://academy.nordicsemi.com/courses/nrf-connect-sdk-intermediate)
-
-- [Bluetooth Low Energy Fundamentals](https://academy.nordicsemi.com/courses/bluetooth-low-energy-fundamentals/)
+Extra credit may be earned by completing the Nordic DevAcademy [nRF Connect SDK Intermediate](https://academy.nordicsemi.com/courses/nrf-connect-sdk-intermediate) course.
 
 This can be used to offset late assignments, missed quizzes, etc.
 
