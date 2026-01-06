@@ -167,19 +167,15 @@ Lab exercises will focus on implementing key functionality towards the final
 working device (a wireless ECG and temperature sensor).  Each lab exercise will
 be evaluated with code reviews and technical reports that assess functionality.
 
-Testing of the final working device will be presented in a final technical
-report.
-
 All assignment grades will be posted to Gradescope/Canvas throughout the
 semester to track your performance.
 
 | Grade Category   | Relative Percentage   |
 |:----------------|:---------------------|
-| Quizzes         | 20%                  |
+| Quizzes         | 20% |
 | Nordic DevAcademy Fundamentals Certificates | 10% |
-| Code Reviews | 15% |
-| Technical Reports | 35%                  |
-| Final Device & Report    | 20%                  |
+| Code Reviews | 20% |
+| Technical Reports | 50% |
 
 : Grade Distribution
 
