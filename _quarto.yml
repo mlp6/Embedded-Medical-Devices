@@ -29,7 +29,7 @@ website:
           text: Canvas
         - href: https://www.gradescope.com/courses/1210835
           text: Gradescope
-        - href: https://duke.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx?folderID=7ce45649-7fe7-4549-9c8d-b33d00c57b38
+        - href: https://duke.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx?folderID=7dbf19e4-0b80-40dd-8748-b3c901309eec
           text: Panopto
         - href: software-install-tutorials.qmd
           text: "Software Installation & Tutorials"
