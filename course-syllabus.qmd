@@ -35,7 +35,7 @@ Monday & Wednesday, 08:30-09:45, Hudson Hall 212 (Panopto recorded)
 
 ### Labs
 
-Location: CIEMAS B209
+Location: CIEMAS B209 (Door Code: 4-1-5-2)
 
 There are no formally scheduled lab sections, but you will need to use the lab
 equipment to perform testing of your devices.  Your TAs will announce times when
@@ -49,12 +49,8 @@ the first time this semester.
 
 ::: callout-warning
 No food or drink is allowed in the lab!  Failure to adhere to this policy will
-have consequences on your lab grades.
+have consequences on your course participation grades.
 :::
-
-<!-- ::: callout-note
-B209 Door Code: 4-1-5-2
-::: -->
 
 ## Course Objectives
 
@@ -134,13 +130,12 @@ This course uses a version of [Mastery Learning](https://en.wikipedia.org/wiki/M
 - [Serial Communication Protocols: UART, I2C, SPI](slides/zephyr-serial-communication.qmd)
 - [Bluetooth Low Energy (BLE)](slides/zephyr-ble.qmd)
 
-
 ## Attendance & Participation
 
 Class participation in lecture and utilize lab time with your TAs is strongly
 encouraged.  Lecture will be used to provide skill overview and live
 demonstrations, many of while will kickstart your efforts for your project.  Lab
-time will provide you access to equipment and the TAs for assistance.
+time will be used to access bench lab equipment and the TAs for assistance.
 
 Students are responsible for obtaining missed lecture content from other
 students in the class.  All lecture slides/presented content will be made
@@ -175,7 +170,8 @@ semester to track your performance.
 | Quizzes         | 20% |
 | Nordic DevAcademy Fundamentals Certificates | 10% |
 | Code Reviews | 20% |
-| Technical Reports | 50% |
+| Technical Reports | 40% |
+| Participation | 10% |
 
 : Grade Distribution
 
@@ -212,17 +208,19 @@ feedback at the discretion of Dr. Palmeri.
 
 ### Late Policy / SDAO Accomodations
 
-Late submission windows will be available for all assignments, minus the final
-project, and should be used to accomodate acute illness, travel, high workload
-from other classes and other unforeseen circumstances.  This late submission
-window can be utilized without penalty and without prior approval.
+Late submission windows will be available for some assignments and should be
+used to accomodate acute illness, travel, high workload from other classes and
+other unforeseen circumstances.  When available, this late submission window can
+be utilized without penalty and without prior approval.
 
 Students with SDAO accomodations for extended time on assignments can use this
 extended late submission window for all assignments.
 
 Any assignments submitted after the late submission window will only be accepted
 for partial credit at the discretion of Dr. Palmeri or if prior approval was
-sought **before the original due date**.
+sought **before the original due date**.  Requests for late submission
+accomodation will be considered on a case-by-case basis and will result in a
+deduction in the course participation grade.
 
 ## Duke Community Standard
 
