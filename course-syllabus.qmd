@@ -12,13 +12,17 @@ format:
 
 Dr. Mark Palmeri (`mlp6`)
 
-* Email: [mark.palmeri@duke.edu](mailto:mark.palmeri@duke.edu)
-* [Ed Discussion](https://edstem.org/us/courses/90813/discussion) (private message, TAs included)
-* Office Hours: [Sign Up](https://outlook.office.com/bookwithme/user/b65348e3d8d949d38306522cadcdb57b@duke.edu?anonymous&ismsaljsauthenabled&ep=plink)
+- Email: [mark.palmeri@duke.edu](mailto:mark.palmeri@duke.edu)
+
+- [Ed Discussion](https://edstem.org/us/courses/90813/discussion) (private message, TAs included)
+
+- Office Hours: [Sign Up](https://outlook.office.com/bookwithme/user/b65348e3d8d949d38306522cadcdb57b@duke.edu?anonymous&ismsaljsauthenabled&ep=plink)
 
 ### Teaching Assistants
 
-* Sophie Pelton (`smp147`)
+- Sophie Pelton (`smp147`)
+
+- Amelia Cook (`arc138`)
 
 For TA office hours (in the lab), please see the Canvas calendar.
 
