@@ -3364,7 +3364,7 @@
     "href": "faq.html",
     "title": "Frequently Asked Questions",
     "section": "",
-    "text": "The MacOS can try to mount your development kit as a storage device, and this can (a) interfere with flashing the device, (b) prevent you from seeing VCOM port output, and (c) annoyingly pop up a warning dialog window saying that your storage device was not unmounted properly. To avoid this, you can do the following: https://docs.zephyrproject.org/latest/develop/flash_debug/nordic_segger.html#disabling-the-mass-storage-device-functionality\n\n\n\nWhen attempting to run nrfutil self-upgrade or other subsequent commands detailed for nrfutil, on macOS, if you encounter permission denied, navigate to the directory where you saved the nrfutil binary (via terminal) and run chmod u+x nrfutil to adjust its permissions. You can verify the effect of this by running ls -l before and after.\n\n\n\nThe nRF Command Line Tools are in the process of converting from using a legacy nrfjprog tool to nrfutil. Some of the latest versions of the command line tools on the MacOS have bugs that prevent you from running the legacy tools without root privileges. If you run into this issue, you can try downgrading your nRF Command Line Tools to an earlier version (specifically, v10.24.0).",
+    "text": "The MacOS can try to mount your development kit as a storage device, and this can (a) interfere with flashing the device, (b) prevent you from seeing VCOM port output, and (c) annoyingly pop up a warning dialog window saying that your storage device was not unmounted properly. To avoid this, you can do the following: https://docs.zephyrproject.org/latest/develop/flash_debug/nordic_segger.html#disabling-the-mass-storage-device-functionality\n\n\n\nWhen attempting to run nrfutil self-upgrade or other subsequent commands detailed for nrfutil, on macOS, if you encounter permission denied, navigate to the directory where you saved the nrfutil binary (via terminal) and run chmod u+x nrfutil to adjust its permissions. You can verify the effect of this by running ls -l before and after.\n\n\n\nThe nRF Command Line Tools are in the process of converting from using a legacy nrfjprog tool to nrfutil. Some of the latest versions of the command line tools on the MacOS have bugs that prevent you from running the legacy tools without root privileges. If you run into this issue, you can try downgrading your nRF Command Line Tools to an earlier version (specifically, v10.24.0).\n\n\n\nIf your Mac terminal doesn’t have tab autocompletion enabled when typing out your long branch name you created among other git commands, follow the steps from this link.\nThis will only work in your Mac terminal. If you’d like to enable this in VS Code as well, open up your preferences with Cmd + ,, and then navigate through this:\n\nUser -&gt; Extensions -&gt; Git.\nScroll down to the setting labeled Terminal Git Editor and check this box.\nYou will need to restart your existing terminal inside of VS Code if one is already open.",
     "crumbs": [
       "Course Information",
       "FAQ"
@@ -3375,7 +3375,7 @@
     "href": "faq.html#macos-troubleshooting",
     "title": "Frequently Asked Questions",
     "section": "",
-    "text": "The MacOS can try to mount your development kit as a storage device, and this can (a) interfere with flashing the device, (b) prevent you from seeing VCOM port output, and (c) annoyingly pop up a warning dialog window saying that your storage device was not unmounted properly. To avoid this, you can do the following: https://docs.zephyrproject.org/latest/develop/flash_debug/nordic_segger.html#disabling-the-mass-storage-device-functionality\n\n\n\nWhen attempting to run nrfutil self-upgrade or other subsequent commands detailed for nrfutil, on macOS, if you encounter permission denied, navigate to the directory where you saved the nrfutil binary (via terminal) and run chmod u+x nrfutil to adjust its permissions. You can verify the effect of this by running ls -l before and after.\n\n\n\nThe nRF Command Line Tools are in the process of converting from using a legacy nrfjprog tool to nrfutil. Some of the latest versions of the command line tools on the MacOS have bugs that prevent you from running the legacy tools without root privileges. If you run into this issue, you can try downgrading your nRF Command Line Tools to an earlier version (specifically, v10.24.0).",
+    "text": "The MacOS can try to mount your development kit as a storage device, and this can (a) interfere with flashing the device, (b) prevent you from seeing VCOM port output, and (c) annoyingly pop up a warning dialog window saying that your storage device was not unmounted properly. To avoid this, you can do the following: https://docs.zephyrproject.org/latest/develop/flash_debug/nordic_segger.html#disabling-the-mass-storage-device-functionality\n\n\n\nWhen attempting to run nrfutil self-upgrade or other subsequent commands detailed for nrfutil, on macOS, if you encounter permission denied, navigate to the directory where you saved the nrfutil binary (via terminal) and run chmod u+x nrfutil to adjust its permissions. You can verify the effect of this by running ls -l before and after.\n\n\n\nThe nRF Command Line Tools are in the process of converting from using a legacy nrfjprog tool to nrfutil. Some of the latest versions of the command line tools on the MacOS have bugs that prevent you from running the legacy tools without root privileges. If you run into this issue, you can try downgrading your nRF Command Line Tools to an earlier version (specifically, v10.24.0).\n\n\n\nIf your Mac terminal doesn’t have tab autocompletion enabled when typing out your long branch name you created among other git commands, follow the steps from this link.\nThis will only work in your Mac terminal. If you’d like to enable this in VS Code as well, open up your preferences with Cmd + ,, and then navigate through this:\n\nUser -&gt; Extensions -&gt; Git.\nScroll down to the setting labeled Terminal Git Editor and check this box.\nYou will need to restart your existing terminal inside of VS Code if one is already open.",
     "crumbs": [
       "Course Information",
       "FAQ"
@@ -4096,13 +4096,6 @@
     "text": "Add a Remote\n\nYou can add a remote using the following syntax:\n\n$ git remote add origin git@gitlab.oit.duke.edu:YOUR_NET_ID/YOUR_PROJECT_NAME.git\n\nYou can access the URL for a remote repository after you create it online.\nThe default remote name is origin. That name is arbitrary, but widely used.\nYou can have multiple remotes associated with a repository.\nURLs that start with git@ use SSH keys to authenticate you.\nYou can see the remotes associated with your local git repository as follows:\n\n$ git remote -v\norigin  git@gitlab.oit.duke.edu:YOUR_NET_ID/YOUR_PROJECT_NAME.git (fetch)\norigin  git@gitlab.oit.duke.edu:YOUR_NET_ID/YOUR_PROJECT_NAME.git (push)"
   },
   {
-    "objectID": "slides/git-fundamentals-slides.html#mac-users",
-    "href": "slides/git-fundamentals-slides.html#mac-users",
-    "title": "Git (Version Control) Fundamentals",
-    "section": "Mac Users",
-    "text": "Mac Users\nIf your Mac terminal doesn’t have tab autocompletion enabled when typing out your long branch name you created among other git commands, follow the steps from this link.\nThis will only work in your Mac terminal. If you’d like to enable this in VS Code as well, open up your preferences with Cmd + ,, and then navigate through this:\n\nUser -&gt; Extensions -&gt; Git.\nScroll down to the setting labeled Terminal Git Editor and check this box.\nYou will need to restart your existing terminal inside of VS Code if one is already open."
-  },
-  {
     "objectID": "slides/git-fundamentals-notes.html",
     "href": "slides/git-fundamentals-notes.html",
     "title": "Git (Version Control) Fundamentals",
@@ -4504,17 +4497,6 @@
     "title": "Git (Version Control) Fundamentals",
     "section": "Add a Remote",
     "text": "Add a Remote\n\nYou can add a remote using the following syntax:\n\n$ git remote add origin git@gitlab.oit.duke.edu:YOUR_NET_ID/YOUR_PROJECT_NAME.git\n\nYou can access the URL for a remote repository after you create it online.\nThe default remote name is origin. That name is arbitrary, but widely used.\nYou can have multiple remotes associated with a repository.\nURLs that start with git@ use SSH keys to authenticate you.\nYou can see the remotes associated with your local git repository as follows:\n\n$ git remote -v\norigin  git@gitlab.oit.duke.edu:YOUR_NET_ID/YOUR_PROJECT_NAME.git (fetch)\norigin  git@gitlab.oit.duke.edu:YOUR_NET_ID/YOUR_PROJECT_NAME.git (push)",
-    "crumbs": [
-      "Learning Modules",
-      "Git Fundamentals"
-    ]
-  },
-  {
-    "objectID": "slides/git-fundamentals-notes.html#mac-users",
-    "href": "slides/git-fundamentals-notes.html#mac-users",
-    "title": "Git (Version Control) Fundamentals",
-    "section": "Mac Users",
-    "text": "Mac Users\nIf your Mac terminal doesn’t have tab autocompletion enabled when typing out your long branch name you created among other git commands, follow the steps from this link.\nThis will only work in your Mac terminal. If you’d like to enable this in VS Code as well, open up your preferences with Cmd + ,, and then navigate through this:\n\nUser -&gt; Extensions -&gt; Git.\nScroll down to the setting labeled Terminal Git Editor and check this box.\nYou will need to restart your existing terminal inside of VS Code if one is already open.",
     "crumbs": [
       "Learning Modules",
       "Git Fundamentals"
