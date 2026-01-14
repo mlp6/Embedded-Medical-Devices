@@ -2344,7 +2344,7 @@
     "href": "resources/git.html#git-tutorials",
     "title": "Git: Getting Started",
     "section": "Git Tutorials",
-    "text": "Git Tutorials\nWe are going to cover git extensively in class, but it can really help to review some tutorials ahead of time to get familiar with the nomenclature and high-level overview of the workflow. If you have never used git before, I would recommend reviewing the following tutorials:\n\nGit Immersion\nLearn Git Branching\nThink Like (a) Git\nGit Tutorial for Beginners: Learn Git in 1 Hour\n\nMore comprehensive git documentation can be found at https://git-scm.com/doc.",
+    "text": "Git Tutorials\nWe are going to cover git extensively in class, but it can really help to review some tutorials ahead of time to get familiar with the nomenclature and high-level overview of the workflow. If you have never used git before, I would recommend reviewing the following tutorials:\n\nLearn Git: Commands, Tutorials and More\nGit Immersion\nLearn Git Branching\nThink Like (a) Git\nGit Tutorial for Beginners: Learn Git in 1 Hour\n\nMore comprehensive git documentation can be found at https://git-scm.com/doc.",
     "crumbs": [
       "Resources",
       "Git Version Control"
