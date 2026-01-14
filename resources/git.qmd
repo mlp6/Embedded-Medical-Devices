@@ -104,6 +104,7 @@ review some tutorials ahead of time to get familiar with the nomenclature and
 high-level overview of the workflow.  If you have never used `git` before, I
 would recommend reviewing the following tutorials:
 
+- [Learn Git: Commands, Tutorials and More](https://www.gitkraken.com/learn/git)
 - [Git Immersion](https://gitimmersion.com/)
 - [Learn Git Branching](https://learngitbranching.js.org/)
 - [Think Like (a) Git](https://think-like-a-git.net/)
