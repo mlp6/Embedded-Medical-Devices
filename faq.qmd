@@ -34,3 +34,13 @@ are in the process of converting from using a legacy `nrfjprog` tool to
 have bugs that prevent you from running the legacy tools without root
 privileges.  If you run into this issue, you can try  **downgrading** your `nRF
 Command Line Tools` to an earlier version (specifically, `v10.24.0`).
+
+### Tab Autocompletion
+
+If your Mac terminal doesn't have `tab` autocompletion enabled when typing out your long branch name you created among other git commands, follow the steps from this [link](https://www.macinstruct.com/tutorials/how-to-enable-git-tab-autocomplete-on-your-mac/). 
+
+This will only work in your Mac terminal. If you'd like to enable this in VS Code as well, open up your preferences with `Cmd + ,`, and then navigate through this: 
+
+- `User -> Extensions -> Git`. 
+- Scroll down to the setting labeled `Terminal Git Editor` and check this box. 
+- You will need to restart your existing terminal inside of VS Code if one is already open.
