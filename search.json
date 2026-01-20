@@ -2206,21 +2206,7 @@
     "href": "TODO.html",
     "title": "TODO",
     "section": "",
-    "text": "FUTURE: Unit tests w/ hardware emulators\nImprove the mechanics of giving code feedback to integrate with the git repo and be more timely; consider using an autograder based on an LLM\n\n\n\n\n\nCreate GPIO quiz\nCreate timers quiz\n\n\n\n\n\nUpdate schedule & syllabus\nSetup Ed Discussion\n\nDiscussion Categories\n\nSetup Gradescope\n\nDuplicate assignments\n\nPublish Canvas\n\nAdd TAs and lab staff\nLink syllabus\n\nSetup Pratt AV Panopto recording (https://it.pratt.duke.edu/av)"
-  },
-  {
-    "objectID": "TODO.html#labs",
-    "href": "TODO.html#labs",
-    "title": "TODO",
-    "section": "",
-    "text": "FUTURE: Unit tests w/ hardware emulators\nImprove the mechanics of giving code feedback to integrate with the git repo and be more timely; consider using an autograder based on an LLM"
-  },
-  {
-    "objectID": "TODO.html#quizzes",
-    "href": "TODO.html#quizzes",
-    "title": "TODO",
-    "section": "",
-    "text": "Create GPIO quiz\nCreate timers quiz"
+    "text": "Update schedule & syllabus\nSetup Ed Discussion\n\nDiscussion Categories\n\nSetup Gradescope\n\nDuplicate assignments\n\nPublish Canvas\n\nAdd TAs and lab staff\nLink syllabus\n\nSetup Pratt AV Panopto recording (https://it.pratt.duke.edu/av)"
   },
   {
     "objectID": "TODO.html#new-semester-tasks",
