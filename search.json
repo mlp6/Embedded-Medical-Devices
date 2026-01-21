@@ -5536,7 +5536,7 @@
     "href": "software-install-tutorials.html#hardware-to-buy",
     "title": "Software Installation and Tutorials",
     "section": "Hardware to Buy",
-    "text": "Hardware to Buy\n\nOrder a nRF52833DK.\nMake sure you have the appropriate USB cable to flash the device from your laptop. This may require an adaptor for some laptops.\n\n\n\n\n\n\n\nImportant\n\n\n\nMake sure that your USB cable supports data transfer and is not just a charging cable.\n\n\n\n\n\n\n\n\nWarning\n\n\n\nWe will not have USB cables and adapters available in the lab.\n\n\n\nOrder a MCP9808 High Accuracy I2C Temperature Sensor Breakout Board. (Link is to Adafruit, but you can get it from other vendors as well.)",
+    "text": "Hardware to Buy\n\nOrder a nRF52833DK.\nIf you want to 3D print an enclosure for your nRF52833DK, you can find a design here: 3D Printable Enclosure for nRF52833 DK.\nMake sure you have the appropriate USB cable to flash the device from your laptop. This may require an adaptor for some laptops.\n\n\n\n\n\n\n\nImportant\n\n\n\nMake sure that your USB cable supports data transfer and is not just a charging cable.\n\n\n\n\n\n\n\n\nWarning\n\n\n\nWe will not have USB cables and adapters available in the lab.\n\n\n\nOrder a MCP9808 High Accuracy I2C Temperature Sensor Breakout Board. (Link is to Adafruit, but you can get it from other vendors as well.)",
     "crumbs": [
       "Course Information",
       "Software Installation & Tutorials"
