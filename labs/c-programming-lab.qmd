@@ -39,7 +39,7 @@ format:
 
 ### Fork / Clone / Build / Flash / View Serial Output
 
-* Fork the C Programing lab repository on Duke's GitLab server: [https://gitlab.oit.duke.edu/kits/BME-554L-001-F25/c-programming-lab](https://gitlab.oit.duke.edu/kits/BME-554L-001-F25/c-programming-lab)
+* Fork the C Programing lab repository on Duke's GitLab server: [https://gitlab.oit.duke.edu/mlp6/c-programming-lab](https://gitlab.oit.duke.edu/mlp6/c-programming-lab)
 * Add Dr. Palmeri (`mlp6`) as a Maintainer in your forked repository.
 * Clone your forked repository to your local machine.
 * Build the Zephyr application "as is" (review [DevAcademy: Lesson 1](https://academy.nordicsemi.com/courses/nrf-connect-sdk-fundamentals/lessons/lesson-1-nrf-connect-sdk-introduction/)).
