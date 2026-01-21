@@ -101,6 +101,8 @@ website:
           text: "nRF52833 Product Specifications"
         - href: https://docs.nordicsemi.com/
           text: Nordic Semiconductor Documentation
+        - href: https://github.com/mlp6/nRF-DK-enclosure
+          text: "3D Printable Enclosure for nRF52833 DK"
 
     page-footer:
       right: 'This page is built with [Quarto](https://quarto.org/).'
