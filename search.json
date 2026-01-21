@@ -3203,7 +3203,7 @@
     "href": "labs/event-driven-state-machine-lab.html#generate-the-state-diagram",
     "title": "Event Driven State Machine Lab",
     "section": "Generate the State Diagram",
-    "text": "Generate the State Diagram\nFormally render your state diagram using one of the tools outlined on the State Diagram Tools page.",
+    "text": "Generate the State Diagram\nFormally render your state diagram using one of the tools outlined on the State Diagram Tools page.\n\n\n\n\n\n\nTip\n\n\n\nFor PlantUML-generated digrams, if the diagram’s layout is difficult to follow using the automated layout, consider manually specifying relative positions and length of arrows using the following annotation: https://crashedmind.github.io/PlantUMLHitchhikersGuide/layout/layout.html#:~:text=6.,Tip.",
     "crumbs": [
       "Labs",
       "Event-Driven State Machine Lab"
