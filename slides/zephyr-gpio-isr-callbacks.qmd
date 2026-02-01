@@ -1,14 +1,12 @@
 ---
 title: "GPIO / ISR / Callbacks"
-date: "2025-09;15"
+date: "2026-02-01"
 format:
   live-html: 
     output-file: zephyr-gpio-isr-callbacks.html
   live-revealjs: 
     output-file: zephyr-gpio-isr-callbacks-slides.html
 ---
-
-<!-- TODO: add more thoery from the product spec sheets -->
 
 # Why Callbacks?
 
@@ -30,12 +28,16 @@ void main() {
 ```
 
 - What if you press the button while the code is "sleeping"?
+
 - What if "do stuff" is time consuming / blocking?
 
 ## The phone call analogy...
 
-- Trying to read a button at a specific time is like only checking if you have an incoming phone call at a specific time interval (i.e., no ring).
-- Instead, think of the ringing phone as an event trigger that you allow to happen "whenever".
+- Trying to read a button at a specific time is like only checking if you have
+an incoming phone call at a specific time interval (i.e., no ring).
+
+- Instead, think of the ringing phone as an event trigger that you allow to
+happen "whenever".
 
 # Interrupts & Callbacks
 
@@ -45,19 +47,36 @@ void main() {
 
 ## What do you do when the phone rings?
 
-- You might not be able to take a 2-hour phone call right when your phone rings, but you can:
+- You might not be able to take a 2-hour phone call right when your phone rings,
+but you can:
+
   - Acknowledge that you received the call (e.g., thumbs-up emoji text message)
-  - Add an item to your "to do" list (i.e., "queue") to call the person back when you have time
-- What you do when the phone rings (the interrupt) is captured in a **callback** function.
+
+  - Add an item to your "to do" list (i.e., "queue") to call the person back
+  when you have time
+
+- What you do when the phone rings (the interrupt) is captured in a **callback**
+function.
 
 ## ISR -> Callback Function
 
-- An interrupt can be used to call a **callback** function ("callback" = a function executed in response to an interrupt or event).
-- Need to execute the callback / ISR quickly to not paralyze the rest of `main()` / other threads from running, otherwise device is paralyzed from acting.
+- An interrupt can be used to call a **callback** function ("callback" = a
+function executed in response to an interrupt or event).
+
+- Need to execute the callback / ISR quickly to not paralyze the rest of
+`main()` / other threads from running, otherwise device is paralyzed from
+acting.
+
   - Avoid calculations, significant IO, data Tx/Rx, etc.
+
   - Prefer simple actions, like toggling the state of a Boolean variable or posting an event.
-- Callback functions can be removed ([gpio_remove_callback_dt()](https://docs.zephyrproject.org/latest/hardware/peripherals/gpio.html#c.gpio_remove_callback_dt)) or re-assigned from an ISR.
+
+- Callback functions can be removed
+([gpio_remove_callback_dt()](https://docs.zephyrproject.org/latest/hardware/peripherals/gpio.html#c.gpio_remove_callback_dt))
+or re-assigned from an ISR.
+
   - Button function can change as a function of the state of the system.
+
   - Button can be disabled or re-enabled based on the state of the system.
 
 # Zephyr Implementation
@@ -65,8 +84,12 @@ void main() {
 ## Overview
 
 - `prj.conf` - enable GPIO, enable logging libraries
+
 - `devicetree.overlay` - define GPIO pin as an input, define callback function
-- `main.c` - initialize GPIO struct, initialize callback struct, associate callback with GPIO pin, define callback function, test for callback event state in your code
+
+- `main.c` - initialize GPIO struct, initialize callback struct, associate
+callback with GPIO pin, define callback function, test for callback event state
+in your code
 
 ![](images/gpio-isr-callbacks/zephyr_overview.png)
 
@@ -75,6 +98,7 @@ void main() {
 The Devicetree is used to separate hardware-specific definitions from the firmware logic.  Your development kit has a pre-defined devicetree in Zephyr that can be modified with an overlay file.  This overlay file can be:
 
 - Manually edited (YAML format), or
+
 - Edited/visualized with the [nRF DeviceTree](https://marketplace.visualstudio.com/items?itemName=nordic-semiconductor.nrf-devicetree) extension in VS Code
 
 ```sh
@@ -96,6 +120,7 @@ The Devicetree is used to separate hardware-specific definitions from the firmwa
 ## What is "ACTIVE" state?
 
 - `GPIO_ACTIVE_LOW` - button is active when pulled to low voltage (`GND`)
+
 - `GPIO_ACTIVE_HIGH` - button is active when pulled to high voltage (`VDD`)
 
 ![](images/gpio-isr-callbacks/active_low.png)
@@ -111,8 +136,11 @@ static const struct gpio_dt_spec sw0 = GPIO_DT_SPEC_GET(DT_ALIAS(sw0), gpios);
 ```
 
 - [GPIO_DT_SPEC_GET](https://docs.zephyrproject.org/apidoc/latest/group__gpio__interface.html#ga2fa6bb5880f46984f9fc29c70f7d503e): macro to get GPIO information from the DT
+
 - `DT_ALIAS`: reference the pin of interest by an alias (`sw0`) in the DT
+
 - [gpio_dt_spec](https://docs.zephyrproject.org/apidoc/latest/structgpio__dt__spec.html#details): struct prototype to store all of the information about this GPIO pin
+
 - `sw0`: name of the struct that will store the information about the GPIO pin
 
 # GPIO Input Functionality
@@ -130,6 +158,7 @@ static struct gpio_callback sw0_cb;
 ```
 
 - [gpio_callback](https://docs.zephyrproject.org/apidoc/latest/structgpio__callback.html#details): struct prototype is defined in gpio.h
+
 - `sw0_cb`: name of the struct based on the `gpio_callback` prototype that will store the information about the callback function
 
 ```C
@@ -143,8 +172,11 @@ void sw0_callback(const struct device *dev, struct gpio_callback *cb, uint32_t p
 
 ## Constraints on Callback Functions
 
-- The contents of this function should consume minimal resources / time (i.e., cannot "block").
-- Common action is to set an `event` or toggle the state of a Boolean, the value of which is reset after action is taken in the main code.
+- The contents of this function should consume minimal resources / time (i.e.,
+cannot "block").
+
+- Common action is to set an `event` or toggle the state of a Boolean, the value
+of which is reset after action is taken in the main code.
 
 ## Within `main()`
 
@@ -184,13 +216,17 @@ while () {
 ## Some useful API documentation
 
 - [gpio_pin_configure_dt()](https://docs.zephyrproject.org/apidoc/latest/group__gpio__interface.html#ga24f0b4ad30e6a8c81f51a2813478c793)
+
 - [gpio_init_callback()](https://docs.zephyrproject.org/apidoc/latest/group__gpio__interface.html#ga7a7dd7c1f3a2135a9f378e1c34b6232c)
+
 - [gpio_add_callback_dt()](https://docs.zephyrproject.org/latest/hardware/peripherals/gpio.html#c.gpio_add_callback_dt)
+
 - [The entire GPIO API](https://docs.zephyrproject.org/latest/doxygen/html/group__gpio__interface.html)
 
 ## Modifying Button Functionality
 
-- If you want a button to have multiple functionalities, you can do so by changing the callback associated with the button.
+- If you want a button to have multiple functionalities, you can do so by
+changing the callback associated with the button.
 
 - Next are the steps to set up a button with 2 different callbacks.
 
@@ -231,8 +267,12 @@ gpio_add_callback_dt(sw0, &sw0_cb_2);
 ## Deactivating the Button
 
 - Other times you'll wish to deactivate the button entirely. 
-- However, removing the callback like above will still cause the interrupt to trigger. 
-- Instead, it is best to remove the interrupt with [gpio_pin_configure_dt](https://docs.zephyrproject.org/apidoc/latest/group__gpio__interface.html#ga24f0b4ad30e6a8c81f51a2813478c793):
+
+- However, removing the callback like above will still cause the interrupt to
+trigger. 
+
+- Instead, it is best to remove the interrupt with
+[gpio_pin_configure_dt](https://docs.zephyrproject.org/apidoc/latest/group__gpio__interface.html#ga24f0b4ad30e6a8c81f51a2813478c793):
 
 ```C
 gpio_pin_interrupt_configure_dt(&sw0, GPIO_INT_DISABLE);
@@ -252,7 +292,9 @@ void callback_function(const struct device *dev, struct gpio_callback *cb, uint3
 ```
 
 - Instead, have state-specific callbacks for each ISR:
+
   - Detach a callback function in an exit transition state.
+
   - Attach a new state-specific callback function in an entry transition state.
 
 # GPIO Output Functionality
