@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Dr.&nbsp;Mark Palmeri, M.D., Ph.D.">
-<meta name="dcterms.date" content="2026-01-04">
+<meta name="dcterms.date" content="2026-02-01">
 
 <title>C Programming Lab – Embedded Medical Devices</title>
 <style>
@@ -394,6 +394,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#git-best-practices" id="toc-git-best-practices" class="nav-link" data-scroll-target="#git-best-practices">Git Best Practices</a>
   <ul class="collapse">
   <li><a href="#fork-clone-build-flash-view-serial-output" id="toc-fork-clone-build-flash-view-serial-output" class="nav-link" data-scroll-target="#fork-clone-build-flash-view-serial-output">Fork / Clone / Build / Flash / View Serial Output</a></li>
+  <li><a href="#update-the-gitlab-ci-pipeline-badge" id="toc-update-the-gitlab-ci-pipeline-badge" class="nav-link" data-scroll-target="#update-the-gitlab-ci-pipeline-badge">Update the GitLab CI Pipeline Badge</a></li>
   <li><a href="#modify-the-zephyr-application-datatypes-typecasting-formatted-printing" id="toc-modify-the-zephyr-application-datatypes-typecasting-formatted-printing" class="nav-link" data-scroll-target="#modify-the-zephyr-application-datatypes-typecasting-formatted-printing">Modify the Zephyr Application (DataTypes / Typecasting / Formatted Printing)</a></li>
   </ul></li>
   <li><a href="#library-refactor" id="toc-library-refactor" class="nav-link" data-scroll-target="#library-refactor">Library Refactor</a></li>
@@ -429,7 +430,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">January 4, 2026</p>
+      <p class="date">February 1, 2026</p>
     </div>
   </div>
   
@@ -511,11 +512,32 @@ Important
 </ul></li>
 </ul>
 </section>
+<section id="update-the-gitlab-ci-pipeline-badge" class="level3">
+<h3 class="anchored" data-anchor-id="update-the-gitlab-ci-pipeline-badge">Update the GitLab CI Pipeline Badge</h3>
+<ul>
+<li>Update the URLs in <code>README.md</code> for the GitLab CI pipeline badge to point to your forked repository.</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This badge represents the status of the CI pipeline for your repository, and will only showed <code>Passed</code> once you have completed all of the tasks in this lab.</p>
+</div>
+</div>
+<ul>
+<li>Commit this specific change to your <code>main</code> branch as its own commit.</li>
+</ul>
+</section>
 <section id="modify-the-zephyr-application-datatypes-typecasting-formatted-printing" class="level3">
 <h3 class="anchored" data-anchor-id="modify-the-zephyr-application-datatypes-typecasting-formatted-printing">Modify the Zephyr Application (DataTypes / Typecasting / Formatted Printing)</h3>
 <ul>
-<li>Inspect the code to see how variables <code>a</code>, <code>b</code> and <code>c</code> are declared and initialized.</li>
-<li>Flash the existing code and note the terminal output:</li>
+<li>Inspect the code to see how variables <code>a</code>, <code>b</code> and <code>c</code> are declared and initialized. 0 Flash the existing code and note the terminal output:</li>
 </ul>
 <p><img src="images/you_lose.png" class="img-fluid"></p>
 <ul>
@@ -525,7 +547,23 @@ Important
 <ul>
 <li>Push the <code>fix_division</code> branch to your GitLab repository.</li>
 <li>Create a <strong>Merge Request</strong> to merge the <code>fix_division</code> branch into your <code>main</code> branch.</li>
-<li>Make sure the GitLab CI pipeline is successful before merging the <code>fix_division</code> branch into <code>main</code>. If it isn’t passing, fix the problem locally on the same branch and push the changes to GitLab.</li>
+<li>Make sure the GitLab CI pipeline for <code>test_division</code> is successful before merging the <code>fix_division</code> branch into <code>main</code>.</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You can view the pipeline status in the Merge Request page on GitLab, or under the <code>Build -&gt; Pipelines</code> section of your repository. The entire pipeline will not pass until <em>all</em> of the tests pass, but you are just checking the test specific to fixing the division error here.</p>
+<p>If it isn’t passing, fix the problem locally on the same branch and push the changes to GitLab.</p>
+</div>
+</div>
+<ul>
 <li>Pull your updated <code>main</code> branch to your local machine.</li>
 <li>Create an annotated tag for the merged commit on main with the fixed division named <code>v1.0.0</code>.</li>
 <li>Push this annotated tag to your GitLab repository.</li>
