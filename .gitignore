@@ -2,3 +2,7 @@
 _site/
 
 **/*.quarto_ipynb
+
+build/
+
+**/__pycache__/
