@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Dr.&nbsp;Mark Palmeri, M.D., Ph.D.">
-<meta name="dcterms.date" content="2025-09-15">
+<meta name="dcterms.date" content="2026-02-01">
 
 <title>Zephyr: Devicetree, GPIO, ISR and Callbacks Lab – Embedded Medical Devices</title>
 <style>
@@ -426,7 +426,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">September 15, 2025</p>
+      <p class="date">February 1, 2026</p>
     </div>
   </div>
   
@@ -449,6 +449,19 @@ ul.task-list li input[type="checkbox"] {
 <li><a href="https://academy.nordicsemi.com/courses/nrf-connect-sdk-fundamentals/lessons/lesson-2-reading-buttons-and-controlling-leds/">Reading Buttons and Controlling LEDs</a></li>
 <li><a href="https://academy.nordicsemi.com/courses/nrf-connect-sdk-intermediate/lessons/lesson-2-debugging/">Debugging &amp; Troubleshooting</a></li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Remember that you will need to show completion of the entire Fundamentals course by the end of the semester, so be sure to be logged into your Nordic DevAcademy account to track your progress.</p>
+</div>
+</div>
 </section>
 <section id="git-version-control" class="level2">
 <h2 class="anchored" data-anchor-id="git-version-control">Git Version Control</h2>
@@ -476,11 +489,29 @@ Important
 <section id="repository-setup" class="level2">
 <h2 class="anchored" data-anchor-id="repository-setup">Repository Setup</h2>
 <ol type="1">
-<li>Fork the <a href="https://gitlab.oit.duke.edu/kits/BME-554L-001-F25/duke-bme554-ecg-temp-ble-lab">Duke-BME554-ECG-TEMP-BLE-Lab</a> template repository into your personal GitLab user space.</li>
-<li>Add Dr.&nbsp;Palmeri (<code>mlp6</code>) as a <code>Maintainer</code> of your project ASAP. This will allow him to add your TAs and some project labels to your repository.</li>
-<li>Clone your forked project to your local laptop.</li>
-<li>Run <code>west update</code> to setup the SDK to for your project.</li>
+<li><p>Fork the <a href="https://gitlab.oit.duke.edu/mlp6/duke-bme554-ecg-temp-ble-lab">Duke-BME554-ECG-TEMP-BLE-Lab</a> template repository into your personal GitLab user space.</p></li>
+<li><p>Add Dr.&nbsp;Palmeri (<code>mlp6</code>) as a <code>Maintainer</code> of your project ASAP. This will allow him to add your TAs and some project labels to your repository.</p></li>
+<li><p>Clone your forked project to your local laptop.</p></li>
+<li><p>Update the pipeline badge URLs in <code>README.md</code> to point to your forked repository instead of the upstream parent repository. (Do this as a discrete commit.)</p></li>
+<li><p>Make sure that you can can build the Zephyr application “as is” after your clone the repository to your local machine.</p>
+<ul>
+<li><p>You should be using the <code>v3.2.1</code> SDK and toolchain.</p></li>
+<li><p>The <code>CMakePresets.json</code> file in the repository should properly link to all of the appropriate project configuration and board files for you.</p></li>
+</ul></li>
 </ol>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Make sure that the SDK and toolchain are the same exact versions!!</p>
+</div>
+</div>
 </section>
 <section id="kernel-configuration" class="level2">
 <h2 class="anchored" data-anchor-id="kernel-configuration">Kernel Configuration</h2>
@@ -592,7 +623,7 @@ Important
 </tr>
 </tbody>
 </table>
-<p>Source: https://docs.nordicsemi.com/bundle/ug_nrf52833_dk/page/UG/dk/hw_buttons_leds.html</p>
+<p><a href="https://docs.nordicsemi.com/bundle/ug_nrf52833_dk/page/UG/dk/hw_buttons_leds.html">https://docs.nordicsemi.com/bundle/ug_nrf52833_dk/page/UG/dk/hw_buttons_leds.html</a></p>
 </section>
 <section id="firmware" class="level2">
 <h2 class="anchored" data-anchor-id="firmware">Firmware</h2>
@@ -673,8 +704,8 @@ Note
 <section id="state-diagram" class="level2">
 <h2 class="anchored" data-anchor-id="state-diagram">State Diagram</h2>
 <ol type="1">
-<li>Create a state diagram of your firmware using <a href="https://plantuml.com/">PlantUML</a>, or your diagraming program of choice.</li>
-<li>Include a PNG of your block diagram in your git repository called <code>state_diagram.png</code>.</li>
+<li><p>Create a state diagram of your firmware using <a href="https://plantuml.com/">PlantUML</a>, or your diagraming program of choice.</p></li>
+<li><p>Include a PNG of your block diagram in your git repository called <code>state_diagram.png</code>.</p></li>
 </ol>
 </section>
 <section id="how-do-i-ask-for-help" class="level2">
@@ -696,22 +727,36 @@ Note
 <section id="what-to-submit-grading" class="level2">
 <h2 class="anchored" data-anchor-id="what-to-submit-grading">What to Submit &amp; Grading</h2>
 <ul>
-<li>Make sure you are committing as you develop your code, and have all of those commits pushed to GitLab (i.e., do not “squash” them).</li>
-<li>Make sure all of the CI pipelines are passing.</li>
-<li>Create and annotated tag called <code>v1.0.0</code> at the commit that represents your completed lab.</li>
-<li>Push your final repository and the annotated tag to GitLab.</li>
-<li>Create an Issue assigned to Dr.&nbsp;Palmeri titled <code>v1.0.0 ready for feedback</code> and assign it the Label <code>Review</code>.</li>
-<li><strong>You do not need to upload anything to the Gradescope assignment; someone on the teaching team will upload your tagged code to the Gradescope assignment for you.</strong></li>
-<li>Grading feedback will be given on:
+<li><p>Make sure you are committing as you develop your code, and have all of those commits pushed to GitLab (i.e., do not “squash” them).</p></li>
+<li><p>Make sure all of the CI pipelines are passing.</p></li>
+<li><p>Create and annotated tag called <code>v1.0.0</code> at the commit that represents your completed lab.</p></li>
+<li><p>Push your final repository and the annotated tag to GitLab.</p></li>
+<li><p>Create an Issue assigned to Dr.&nbsp;Palmeri titled <code>v1.0.0 ready for feedback</code> and assign it the Label <code>Review</code>.</p></li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You do not need to upload anything to Canvas/Gradescope. You will be receiving feedback through your GitLab repository.</p>
+</div>
+</div>
 <ul>
-<li>Git Usage</li>
-<li>Code Functionality</li>
-<li>Efficieny of code logic</li>
-<li>State diagram completeness and matching the firmware implementation</li>
-<li>“Readability”
+<li><p>Grading feedback will be given on:</p>
 <ul>
-<li>“Readability” does not mean a lot of verbose comments</li>
-<li>“Readability” means that the structure of the code, the naming of variables, etc. convey meaning and logical flow.</li>
+<li><p>Git Usage</p></li>
+<li><p>Code Functionality</p></li>
+<li><p>Efficieny of code logic</p></li>
+<li><p>State diagram completeness and matching the firmware implementation</p></li>
+<li><p>“Readability”</p>
+<ul>
+<li><p>“Readability” does not mean a lot of verbose comments</p></li>
+<li><p>“Readability” means that the structure of the code, the naming of variables, etc. convey meaning and logical flow.</p></li>
 </ul></li>
 </ul></li>
 </ul>
