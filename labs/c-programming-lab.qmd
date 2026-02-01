@@ -47,23 +47,46 @@ format:
   * Connect the `VCOM` port on the `nrf52833DK` to your computer (using `Connected Devices` and the plug icon)
   * Look at the serial output in the VS Code `Terminal`
 
+### Update the GitLab CI Pipeline Badge
+
+- Update the URLs in `README.md` for the GitLab CI pipeline badge to point to
+your forked repository.  
+
+::: callout-note
+This badge represents the status of the CI pipeline for your repository, and
+will only showed `Passed` once you have completed all of the tasks in this lab.
+:::
+
+- Commit this specific change to your `main` branch as its own commit.
+
 ### Modify the Zephyr Application (DataTypes / Typecasting / Formatted Printing)
 
-* Inspect the code to see how variables `a`, `b` and `c` are declared and initialized.
-* Flash the existing code and note the terminal output:
+- Inspect the code to see how variables `a`, `b` and `c` are declared and initialized.
+0 Flash the existing code and note the terminal output:
 
 ![](images/you_lose.png)
 
-* On a development branch called `fix_division`, without changing the declared datatypes of `a`, `b`, or `c`, correct the code so that `c` is output in the terminal:
+- On a development branch called `fix_division`, without changing the declared datatypes of `a`, `b`, or `c`, correct the code so that `c` is output in the terminal:
 
 ![](images/you_win.png)
 
-* Push the `fix_division` branch to your GitLab repository.
-* Create a **Merge Request** to merge the `fix_division` branch into your `main` branch.
-* Make sure the GitLab CI pipeline is successful before merging the `fix_division` branch into `main`.  If it isn't passing, fix the problem locally on the same branch and push the changes to GitLab.
-* Pull your updated `main` branch to your local machine.
-* Create an annotated tag for the merged commit on main with the fixed division named `v1.0.0`.
-* Push this annotated tag to your GitLab repository.
+- Push the `fix_division` branch to your GitLab repository.
+- Create a **Merge Request** to merge the `fix_division` branch into your `main` branch.
+- Make sure the GitLab CI pipeline for `test_division` is successful before merging the `fix_division` branch into `main`.  
+
+::: callout-tip
+You can view the pipeline status in the Merge Request page on GitLab, or under
+the `Build -> Pipelines` section of your repository.  The entire pipeline will
+not pass until *all* of the tests pass, but you are just checking the test
+specific to fixing the division error here.
+
+If it isn't passing, fix the problem locally on the same branch and push the
+changes to GitLab.
+:::
+
+- Pull your updated `main` branch to your local machine.
+- Create an annotated tag for the merged commit on main with the fixed division named `v1.0.0`.
+- Push this annotated tag to your GitLab repository.
 
 ::: callout-tip
 Note that the CI pipelines running on the GitLab server can take a while to

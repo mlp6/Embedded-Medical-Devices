@@ -2,7 +2,7 @@
 
 # Embedded Medical Devices (BME554L)
 
-Dr. Mark Palmeri, M.D., Ph.D. <br> Spring 2026
+Dr. Mark Palmeri, M.D., Ph.D. (Spring 2026)
 
 [Course Website](https://mlp6.github.io/Embedded-Medical-Devices/)
 
