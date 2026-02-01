@@ -38,7 +38,7 @@ account to track your progress.
 template repository into your personal GitLab user space.
 
 1. Add Dr. Palmeri (`mlp6`) as a `Maintainer` of your project ASAP.  This will
-allow him to add your TAs and some project labels to your repository.
+allow him to add your TAs, a faster CI runner and some project labels to your repository.
 
 1. Clone your forked project to your local laptop.
 
