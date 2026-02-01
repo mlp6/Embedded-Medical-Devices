@@ -1,6 +1,6 @@
 ---
 title: "Zephyr: Devicetree, GPIO, ISR and Callbacks Lab"
-date: "2025-09-15"
+date: "2026-02-01"
 format:
   html: default
   pdf: default
@@ -21,6 +21,12 @@ Please complete the following Nordic DevAcademy modules:
 1. [Reading Buttons and Controlling LEDs](https://academy.nordicsemi.com/courses/nrf-connect-sdk-fundamentals/lessons/lesson-2-reading-buttons-and-controlling-leds/)
 1. [Debugging & Troubleshooting](https://academy.nordicsemi.com/courses/nrf-connect-sdk-intermediate/lessons/lesson-2-debugging/)
 
+::: callout-tip
+Remember that you will need to show completion of the entire Fundamentals course
+by the end of the semester, so be sure to be logged into your Nordic DevAcademy
+account to track your progress.
+:::
+
 ## Git Version Control
 
 {{< include _git_best_practices.qmd >}}
@@ -28,12 +34,27 @@ Please complete the following Nordic DevAcademy modules:
 ## Repository Setup
 
 1. Fork the
-[Duke-BME554-ECG-TEMP-BLE-Lab](https://gitlab.oit.duke.edu/kits/BME-554L-001-F25/duke-bme554-ecg-temp-ble-lab)
+[Duke-BME554-ECG-TEMP-BLE-Lab](https://gitlab.oit.duke.edu/mlp6/duke-bme554-ecg-temp-ble-lab)
 template repository into your personal GitLab user space.
+
 1. Add Dr. Palmeri (`mlp6`) as a `Maintainer` of your project ASAP.  This will
 allow him to add your TAs and some project labels to your repository.
+
 1. Clone your forked project to your local laptop.
-1. Run `west update` to setup the SDK to for your project.
+
+1. Update the pipeline badge URLs in `README.md` to point to your forked
+repository instead of the upstream parent repository. (Do this as a discrete
+commit.)
+
+1. Make sure that you can can build the Zephyr application "as is" after your clone the repository to your local machine.  
+
+    - You should be using the `v3.2.1` SDK and toolchain.
+
+    - The `CMakePresets.json` file in the repository should properly link to all of the appropriate project configuration and board files for you.
+
+::: callout-important
+Make sure that the SDK and toolchain are the same exact versions!!
+:::
 
 ## Kernel Configuration
 
@@ -71,7 +92,7 @@ pin struct names:
 | `freq_down_button` | `freqdownbutton` | `button2` | `P0.24` | `Button 3` |
 | `reset_button`     | `resetbutton`   | `button3` | `P0.25` | `Button 4` |
 
-Source: https://docs.nordicsemi.com/bundle/ug_nrf52833_dk/page/UG/dk/hw_buttons_leds.html
+[https://docs.nordicsemi.com/bundle/ug_nrf52833_dk/page/UG/dk/hw_buttons_leds.html](https://docs.nordicsemi.com/bundle/ug_nrf52833_dk/page/UG/dk/hw_buttons_leds.html)
 
 ## Firmware
 
@@ -153,7 +174,8 @@ frequency, etc.
 
 1. Create a state diagram of your firmware using
 [PlantUML](https://plantuml.com/), or your diagraming program of choice.
-2. Include a PNG of your block diagram in your git repository called
+
+1. Include a PNG of your block diagram in your git repository called
 `state_diagram.png`.
 
 ## How do I ask for help?
@@ -164,19 +186,35 @@ frequency, etc.
 
 - Make sure you are committing as you develop your code, and have all of those
 commits pushed to GitLab (i.e., do not "squash" them).
+
 - Make sure all of the CI pipelines are passing.
+
 - Create and annotated tag called `v1.0.0` at the commit that represents your
 completed lab.
+
 - Push your final repository and the annotated tag to GitLab.
+
 - Create an Issue assigned to Dr. Palmeri titled `v1.0.0 ready for feedback` and
 assign it the Label `Review`.
-- **You do not need to upload anything to the Gradescope assignment; someone on the teaching team will upload your tagged code to the Gradescope assignment for you.**
+
+::: callout-note
+You do not need to upload anything to Canvas/Gradescope.  You will be receiving
+feedback through your GitLab repository.
+:::
+
 - Grading feedback will be given on:
+
   - Git Usage
+
   - Code Functionality
+
   - Efficieny of code logic
+
   - State diagram completeness and matching the firmware implementation
+
   - "Readability"
+
     - "Readability" does not mean a lot of verbose comments
+
     - "Readability" means that the structure of the code, the naming of
     variables, etc.  convey meaning and logical flow.
