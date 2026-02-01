@@ -12,7 +12,7 @@
   <meta name="generator" content="quarto-1.7.31">
 
   <meta name="author" content="Dr.&nbsp;Mark Palmeri, M.D., Ph.D.">
-  <meta name="dcterms.date" content="2025-09-15">
+  <meta name="dcterms.date" content="2026-02-01">
   <title>Embedded Medical Devices – GPIO / ISR / Callbacks</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -212,11 +212,7 @@ Dr.&nbsp;Mark Palmeri, M.D., Ph.D.
     </div>
 </div>
 
-  <p class="date">September 15, 2025</p>
-</section>
-<section class="slide level2">
-
-<!-- TODO: add more thoery from the product spec sheets -->
+  <p class="date">February 1, 2026</p>
 </section>
 <section id="why-callbacks" class="title-slide slide level1 center">
 <h1>Why Callbacks?</h1>
@@ -241,15 +237,15 @@ Dr.&nbsp;Mark Palmeri, M.D., Ph.D.
 <span id="cb1-9"><a></a>    <span class="op">}</span></span>
 <span id="cb1-10"><a></a><span class="op">}</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
-<li>What if you press the button while the code is “sleeping”?</li>
-<li>What if “do stuff” is time consuming / blocking?</li>
+<li><p>What if you press the button while the code is “sleeping”?</p></li>
+<li><p>What if “do stuff” is time consuming / blocking?</p></li>
 </ul>
 </section>
 <section id="the-phone-call-analogy" class="slide level2">
 <h2>The phone call analogy…</h2>
 <ul>
-<li>Trying to read a button at a specific time is like only checking if you have an incoming phone call at a specific time interval (i.e., no ring).</li>
-<li>Instead, think of the ringing phone as an event trigger that you allow to happen “whenever”.</li>
+<li><p>Trying to read a button at a specific time is like only checking if you have an incoming phone call at a specific time interval (i.e., no ring).</p></li>
+<li><p>Instead, think of the ringing phone as an event trigger that you allow to happen “whenever”.</p></li>
 </ul>
 </section></section>
 <section>
@@ -264,27 +260,27 @@ Dr.&nbsp;Mark Palmeri, M.D., Ph.D.
 <section id="what-do-you-do-when-the-phone-rings" class="slide level2">
 <h2>What do you do when the phone rings?</h2>
 <ul>
-<li>You might not be able to take a 2-hour phone call right when your phone rings, but you can:
+<li><p>You might not be able to take a 2-hour phone call right when your phone rings, but you can:</p>
 <ul>
-<li>Acknowledge that you received the call (e.g., thumbs-up emoji text message)</li>
-<li>Add an item to your “to do” list (i.e., “queue”) to call the person back when you have time</li>
+<li><p>Acknowledge that you received the call (e.g., thumbs-up emoji text message)</p></li>
+<li><p>Add an item to your “to do” list (i.e., “queue”) to call the person back when you have time</p></li>
 </ul></li>
-<li>What you do when the phone rings (the interrupt) is captured in a <strong>callback</strong> function.</li>
+<li><p>What you do when the phone rings (the interrupt) is captured in a <strong>callback</strong> function.</p></li>
 </ul>
 </section>
 <section id="isr---callback-function" class="slide level2">
 <h2>ISR -&gt; Callback Function</h2>
 <ul>
-<li>An interrupt can be used to call a <strong>callback</strong> function (“callback” = a function executed in response to an interrupt or event).</li>
-<li>Need to execute the callback / ISR quickly to not paralyze the rest of <code>main()</code> / other threads from running, otherwise device is paralyzed from acting.
+<li><p>An interrupt can be used to call a <strong>callback</strong> function (“callback” = a function executed in response to an interrupt or event).</p></li>
+<li><p>Need to execute the callback / ISR quickly to not paralyze the rest of <code>main()</code> / other threads from running, otherwise device is paralyzed from acting.</p>
 <ul>
-<li>Avoid calculations, significant IO, data Tx/Rx, etc.</li>
-<li>Prefer simple actions, like toggling the state of a Boolean variable or posting an event.</li>
+<li><p>Avoid calculations, significant IO, data Tx/Rx, etc.</p></li>
+<li><p>Prefer simple actions, like toggling the state of a Boolean variable or posting an event.</p></li>
 </ul></li>
-<li>Callback functions can be removed (<a href="https://docs.zephyrproject.org/latest/hardware/peripherals/gpio.html#c.gpio_remove_callback_dt">gpio_remove_callback_dt()</a>) or re-assigned from an ISR.
+<li><p>Callback functions can be removed (<a href="https://docs.zephyrproject.org/latest/hardware/peripherals/gpio.html#c.gpio_remove_callback_dt">gpio_remove_callback_dt()</a>) or re-assigned from an ISR.</p>
 <ul>
-<li>Button function can change as a function of the state of the system.</li>
-<li>Button can be disabled or re-enabled based on the state of the system.</li>
+<li><p>Button function can change as a function of the state of the system.</p></li>
+<li><p>Button can be disabled or re-enabled based on the state of the system.</p></li>
 </ul></li>
 </ul>
 </section></section>
@@ -296,9 +292,9 @@ Dr.&nbsp;Mark Palmeri, M.D., Ph.D.
 <section id="overview" class="slide level2">
 <h2>Overview</h2>
 <ul>
-<li><code>prj.conf</code> - enable GPIO, enable logging libraries</li>
-<li><code>devicetree.overlay</code> - define GPIO pin as an input, define callback function</li>
-<li><code>main.c</code> - initialize GPIO struct, initialize callback struct, associate callback with GPIO pin, define callback function, test for callback event state in your code</li>
+<li><p><code>prj.conf</code> - enable GPIO, enable logging libraries</p></li>
+<li><p><code>devicetree.overlay</code> - define GPIO pin as an input, define callback function</p></li>
+<li><p><code>main.c</code> - initialize GPIO struct, initialize callback struct, associate callback with GPIO pin, define callback function, test for callback event state in your code</p></li>
 </ul>
 
 <img data-src="images/gpio-isr-callbacks/zephyr_overview.png" class="r-stretch"></section>
@@ -306,8 +302,8 @@ Dr.&nbsp;Mark Palmeri, M.D., Ph.D.
 <h2>Devicetree (overlay): gpio-keys</h2>
 <p>The Devicetree is used to separate hardware-specific definitions from the firmware logic. Your development kit has a pre-defined devicetree in Zephyr that can be modified with an overlay file. This overlay file can be:</p>
 <ul>
-<li>Manually edited (YAML format), or</li>
-<li>Edited/visualized with the <a href="https://marketplace.visualstudio.com/items?itemName=nordic-semiconductor.nrf-devicetree">nRF DeviceTree</a> extension in VS Code</li>
+<li><p>Manually edited (YAML format), or</p></li>
+<li><p>Edited/visualized with the <a href="https://marketplace.visualstudio.com/items?itemName=nordic-semiconductor.nrf-devicetree">nRF DeviceTree</a> extension in VS Code</p></li>
 </ul>
 <div class="sourceCode" id="cb2"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a></a><span class="ex">/</span> {</span>
 <span id="cb2-2"><a></a>    <span class="ex">aliases</span> {</span>
@@ -326,8 +322,8 @@ Dr.&nbsp;Mark Palmeri, M.D., Ph.D.
 <section id="what-is-active-state" class="slide level2">
 <h2>What is “ACTIVE” state?</h2>
 <ul>
-<li><code>GPIO_ACTIVE_LOW</code> - button is active when pulled to low voltage (<code>GND</code>)</li>
-<li><code>GPIO_ACTIVE_HIGH</code> - button is active when pulled to high voltage (<code>VDD</code>)</li>
+<li><p><code>GPIO_ACTIVE_LOW</code> - button is active when pulled to low voltage (<code>GND</code>)</p></li>
+<li><p><code>GPIO_ACTIVE_HIGH</code> - button is active when pulled to high voltage (<code>VDD</code>)</p></li>
 </ul>
 
 <img data-src="images/gpio-isr-callbacks/active_low.png" class="r-stretch"><p><a href="https://docs.nordicsemi.com/bundle/ug_nrf52833_dk/page/UG/dk/hw_buttons_leds.html">https://docs.nordicsemi.com/bundle/ug_nrf52833_dk/page/UG/dk/hw_buttons_leds.html</a></p>
@@ -338,10 +334,10 @@ Dr.&nbsp;Mark Palmeri, M.D., Ph.D.
 <span id="cb3-2"><a></a><span class="co">// initialize GPIO struct</span></span>
 <span id="cb3-3"><a></a><span class="dt">static</span> <span class="dt">const</span> <span class="kw">struct</span> gpio_dt_spec sw0 <span class="op">=</span> GPIO_DT_SPEC_GET<span class="op">(</span>DT_ALIAS<span class="op">(</span>sw0<span class="op">),</span> gpios<span class="op">);</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
-<li><a href="https://docs.zephyrproject.org/apidoc/latest/group__gpio__interface.html#ga2fa6bb5880f46984f9fc29c70f7d503e">GPIO_DT_SPEC_GET</a>: macro to get GPIO information from the DT</li>
-<li><code>DT_ALIAS</code>: reference the pin of interest by an alias (<code>sw0</code>) in the DT</li>
-<li><a href="https://docs.zephyrproject.org/apidoc/latest/structgpio__dt__spec.html#details">gpio_dt_spec</a>: struct prototype to store all of the information about this GPIO pin</li>
-<li><code>sw0</code>: name of the struct that will store the information about the GPIO pin</li>
+<li><p><a href="https://docs.zephyrproject.org/apidoc/latest/group__gpio__interface.html#ga2fa6bb5880f46984f9fc29c70f7d503e">GPIO_DT_SPEC_GET</a>: macro to get GPIO information from the DT</p></li>
+<li><p><code>DT_ALIAS</code>: reference the pin of interest by an alias (<code>sw0</code>) in the DT</p></li>
+<li><p><a href="https://docs.zephyrproject.org/apidoc/latest/structgpio__dt__spec.html#details">gpio_dt_spec</a>: struct prototype to store all of the information about this GPIO pin</p></li>
+<li><p><code>sw0</code>: name of the struct that will store the information about the GPIO pin</p></li>
 </ul>
 </section></section>
 <section>
@@ -356,8 +352,8 @@ Dr.&nbsp;Mark Palmeri, M.D., Ph.D.
 <div class="sourceCode" id="cb5"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb5-1"><a></a><span class="co">// initialize GPIO callback struct</span></span>
 <span id="cb5-2"><a></a><span class="dt">static</span> <span class="kw">struct</span> gpio_callback sw0_cb<span class="op">;</span>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
-<li><a href="https://docs.zephyrproject.org/apidoc/latest/structgpio__callback.html#details">gpio_callback</a>: struct prototype is defined in gpio.h</li>
-<li><code>sw0_cb</code>: name of the struct based on the <code>gpio_callback</code> prototype that will store the information about the callback function</li>
+<li><p><a href="https://docs.zephyrproject.org/apidoc/latest/structgpio__callback.html#details">gpio_callback</a>: struct prototype is defined in gpio.h</p></li>
+<li><p><code>sw0_cb</code>: name of the struct based on the <code>gpio_callback</code> prototype that will store the information about the callback function</p></li>
 </ul>
 <div class="sourceCode" id="cb6"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb6-1"><a></a><span class="co">// define callback function</span></span>
 <span id="cb6-2"><a></a><span class="dt">void</span> sw0_callback<span class="op">(</span><span class="dt">const</span> <span class="kw">struct</span> device <span class="op">*</span>dev<span class="op">,</span> <span class="kw">struct</span> gpio_callback <span class="op">*</span>cb<span class="op">,</span> <span class="dt">uint32_t</span> pins<span class="op">)</span></span>
@@ -369,8 +365,8 @@ Dr.&nbsp;Mark Palmeri, M.D., Ph.D.
 <section id="constraints-on-callback-functions" class="slide level2">
 <h2>Constraints on Callback Functions</h2>
 <ul>
-<li>The contents of this function should consume minimal resources / time (i.e., cannot “block”).</li>
-<li>Common action is to set an <code>event</code> or toggle the state of a Boolean, the value of which is reset after action is taken in the main code.</li>
+<li><p>The contents of this function should consume minimal resources / time (i.e., cannot “block”).</p></li>
+<li><p>Common action is to set an <code>event</code> or toggle the state of a Boolean, the value of which is reset after action is taken in the main code.</p></li>
 </ul>
 </section>
 <section id="within-main" class="slide level2">
@@ -409,10 +405,10 @@ Dr.&nbsp;Mark Palmeri, M.D., Ph.D.
 <section id="some-useful-api-documentation" class="slide level2">
 <h2>Some useful API documentation</h2>
 <ul>
-<li><a href="https://docs.zephyrproject.org/apidoc/latest/group__gpio__interface.html#ga24f0b4ad30e6a8c81f51a2813478c793">gpio_pin_configure_dt()</a></li>
-<li><a href="https://docs.zephyrproject.org/apidoc/latest/group__gpio__interface.html#ga7a7dd7c1f3a2135a9f378e1c34b6232c">gpio_init_callback()</a></li>
-<li><a href="https://docs.zephyrproject.org/latest/hardware/peripherals/gpio.html#c.gpio_add_callback_dt">gpio_add_callback_dt()</a></li>
-<li><a href="https://docs.zephyrproject.org/latest/doxygen/html/group__gpio__interface.html">The entire GPIO API</a></li>
+<li><p><a href="https://docs.zephyrproject.org/apidoc/latest/group__gpio__interface.html#ga24f0b4ad30e6a8c81f51a2813478c793">gpio_pin_configure_dt()</a></p></li>
+<li><p><a href="https://docs.zephyrproject.org/apidoc/latest/group__gpio__interface.html#ga7a7dd7c1f3a2135a9f378e1c34b6232c">gpio_init_callback()</a></p></li>
+<li><p><a href="https://docs.zephyrproject.org/latest/hardware/peripherals/gpio.html#c.gpio_add_callback_dt">gpio_add_callback_dt()</a></p></li>
+<li><p><a href="https://docs.zephyrproject.org/latest/doxygen/html/group__gpio__interface.html">The entire GPIO API</a></p></li>
 </ul>
 </section>
 <section id="modifying-button-functionality" class="slide level2">
@@ -450,9 +446,9 @@ Dr.&nbsp;Mark Palmeri, M.D., Ph.D.
 <section id="deactivating-the-button" class="slide level2">
 <h2>Deactivating the Button</h2>
 <ul>
-<li>Other times you’ll wish to deactivate the button entirely.</li>
-<li>However, removing the callback like above will still cause the interrupt to trigger.</li>
-<li>Instead, it is best to remove the interrupt with <a href="https://docs.zephyrproject.org/apidoc/latest/group__gpio__interface.html#ga24f0b4ad30e6a8c81f51a2813478c793">gpio_pin_configure_dt</a>:</li>
+<li><p>Other times you’ll wish to deactivate the button entirely.</p></li>
+<li><p>However, removing the callback like above will still cause the interrupt to trigger.</p></li>
+<li><p>Instead, it is best to remove the interrupt with <a href="https://docs.zephyrproject.org/apidoc/latest/group__gpio__interface.html#ga24f0b4ad30e6a8c81f51a2813478c793">gpio_pin_configure_dt</a>:</p></li>
 </ul>
 <div class="sourceCode" id="cb10"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb10-1"><a></a>gpio_pin_interrupt_configure_dt<span class="op">(&amp;</span>sw0<span class="op">,</span> GPIO_INT_DISABLE<span class="op">);</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
@@ -467,10 +463,10 @@ Dr.&nbsp;Mark Palmeri, M.D., Ph.D.
 <span id="cb11-7"><a></a>    <span class="op">}</span></span>
 <span id="cb11-8"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
-<li>Instead, have state-specific callbacks for each ISR:
+<li><p>Instead, have state-specific callbacks for each ISR:</p>
 <ul>
-<li>Detach a callback function in an exit transition state.</li>
-<li>Attach a new state-specific callback function in an entry transition state.</li>
+<li><p>Detach a callback function in an exit transition state.</p></li>
+<li><p>Attach a new state-specific callback function in an entry transition state.</p></li>
 </ul></li>
 </ul>
 </section></section>
