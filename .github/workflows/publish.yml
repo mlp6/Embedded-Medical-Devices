@@ -1,17 +1,24 @@
+name: Build Site
+
 on:
   push:
     branches: main
   pull_request:
     branches: main
   workflow_dispatch:
-name: Build Site
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build-website:
     runs-on: ubuntu-latest
-    env:
-      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Install Quarto CLI
         uses: quarto-dev/quarto-actions/setup@v2
@@ -19,16 +26,14 @@ jobs:
           tinytex: true
           version: 1.7.31
 
-      - name: Install libcurl
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y libcurl4-openssl-dev libudunits2-dev libproj-dev libgdal-dev libgeos-dev libharfbuzz-dev libfribidi-dev
+      - name: Render site
+        if: github.event_name == 'pull_request'
+        run: quarto render
 
-      - name: Publish to GitHub Pages (and render)
+      - name: Publish to GitHub Pages
+        if: github.event_name != 'pull_request'
         uses: quarto-dev/quarto-actions/publish@v2
         with:
           target: gh-pages
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # this secret is always available for github actions
-    permissions:
-      contents: write
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
