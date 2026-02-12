@@ -189,8 +189,11 @@ commits pushed to GitLab (i.e., do not "squash" them).
 
 - Make sure all of the CI pipelines are passing.
 
+- Merge all development branches into `main` and make sure that the `main`
+branch is up to date with all of your commits.
+
 - Create and annotated tag called `v1.0.0` at the commit that represents your
-completed lab.
+completed lab on the `main` branch.
 
 - Push your final repository and the annotated tag to GitLab.
 
