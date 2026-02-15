@@ -700,6 +700,19 @@ Note
 </ul>
 </div>
 </div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Be careful with how your check to see what button(s) have been pressed in your <code>ACTION</code> state. If multiple buttons have been pressed before you test for the Boolean values that represent whether a button has been pressed, then you might have some “unexpected” behavior. For example, if you check for <code>freq_up_button</code> being pressed before checking for <code>reset_button</code> being pressed, then if both buttons are pressed at the same time, you might end up increasing the frequency and then immediately resetting it back to default, which is not what you want. You will need to think carefully about the order of your conditional statements in your state machine.</p>
+</div>
+</div>
 </section>
 <section id="state-diagram" class="level2">
 <h2 class="anchored" data-anchor-id="state-diagram">State Diagram</h2>
