@@ -32,6 +32,42 @@ difficult to read and maintain.
 
 ![](images/timers/ex_1_thread_yielding_2.png){fig-align="center"}
 
+## Atomicity and Thread Safety
+::: callout-caution
+Wait, with multiple threads being able to operate on things, are variables being handled by ISRs "safe" to use if they can be called at any time?
+:::
+
+Solution: **Atomicity** and **thread safety**.
+
+## Atomic Operations
+
+- An atomic operation is an indivisible operation that either completes entirely or does not execute at all.
+- Atomic operations are used to prevent race conditions and ensure thread safety when multiple threads access shared resources.
+- In Zephyr, atomic operations can be performed using the `atomic` API, which provides functions for atomic read, write, and modify operations on variables.
+
+```C
+// Declare atomic variable
+static atomic_t button_pressed = ATOMIC_INIT(0);
+
+// ISR callback function
+void button_isr_handler(const struct device *dev, struct gpio_callback *cb, uint32_t pins)
+{
+    // Atomically set the flag to indicate button was pressed
+    atomic_set(&button_pressed, 1);
+}
+
+// In main thread or work queue handler
+void check_button_work_handler(struct k_work *work)
+{
+    // Atomically read and reset the flag
+    if (atomic_cas(&button_pressed, 1, 0)) {
+        // Button was pressed, do work here
+        LOG_INF("Button press detected!");
+        gpio_pin_toggle_dt(&led);
+    }
+}
+```
+
 ## Timer Threads
 
 In addition to ISR priority and thread priority yielding, the system also has
@@ -42,6 +78,8 @@ In addition to ISR priority and thread priority yielding, the system also has
 - Like ISR callback functions, **timer handler functions** should not consume significant resources / take much time to execute.
   - A handler function at the end of a timer interval (duration / period) must be defined.
   - A handler function at the end of a timer stop can optionally be defined.
+  - Timer handler functions should use **atomic operations** to set flags that
+  could be concurrently accessed by other threads or ISRs.
 - The kernel gives timing events relatively high priority.
 
 # Pseudo-Code
@@ -100,7 +138,8 @@ k_timer_start(&name_of_timer, K_MSEC(DURATION_OF_FIRST_INTERVAL), K_MSEC(DURATIO
 k_timer_stop(&name_of_timer);
 ```
 
-This will call `timer_stop_handler()` that you associated with the timer using the `K_TIMER_DEFINE` macro.
+This will call `timer_stop_handler()` that you associated with the timer using
+the `K_TIMER_DEFINE` macro.
 
 ## Timer Example
 
@@ -120,7 +159,9 @@ k_timer_start(&name_of_timer, K_MSEC(DURATION_OF_FIRST_INTERVAL), K_NO_WAIT);
 
 ## One-Shot Timer Example
 
-- In the example below, you can use the one-shot timer to toggle the LED state after 1 second.  Note that the LED is turned on seaprate from the timer and the timer handler is executed at the **end** of the timer interval to turn it off.
+- In the example below, you can use the one-shot timer to toggle the LED state
+after 1 second.  Note that the LED is turned on seaprate from the timer and the
+timer handler is executed at the **end** of the timer interval to turn it off.
 
 ```C
 gpio_pin_toggle_dt(&led);
@@ -159,15 +200,21 @@ specified duration / period.
 
 - A work queue is a way to execute a function when the system is not busy.
 - Work queues are managed by the kernel (system).
-  - System work queue exists by default (no need to include libraries or enable kernel options).
-  - User can create additional work queues, but need to be defined and initialized.
+  - System work queue exists by default (no need to include libraries or enable
+  kernel options).
+  - User can create additional work queues, but need to be defined and
+  initialized.
 
 ## How Work Queues Help Us
 
-- Callbacks and handler functions associated with ISRs and timers should not consume significant resource / take much time to execute.
-- **Pro:** Work queues allow us to execute functions that may take longer to execute.
-- **Con:** The specific timing of the execution of the function is not guaranteed.
-- No longer need to test for Boolean variables in the main loop to determine when to execute a function.
+- Callbacks and handler functions associated with ISRs and timers should not
+consume significant resource / take much time to execute.
+- **Pro:** Work queues allow us to execute functions that may take longer to
+execute.
+- **Con:** The specific timing of the execution of the function is not
+guaranteed.
+- No longer need to test for Boolean variables in the main loop to determine
+when to execute a function.
 
 ## Pseudo-Code
 
@@ -277,3 +324,4 @@ void oneshot_timer_handler(struct k_timer *oneshot_timer) {
 
 - [Zephyr Docs: Timers](https://docs.zephyrproject.org/latest/kernel/services/timing/timers.html)
 - [Zephyr Docs: Clocks](https://docs.zephyrproject.org/latest/kernel/services/timing/clocks.html)
+- [Zephyr Docs: Atomic Services](https://docs.zephyrproject.org/latest/kernel/services/other/atomic.html)
