@@ -25,6 +25,8 @@ jobs:
         with:
           tinytex: true
           version: 1.7.31
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Render site
         if: github.event_name == 'pull_request'
