@@ -17,6 +17,7 @@ time to toggle/set LED output states and refactor using timers.
 - Refactor all button press boolean variables that are modified in ISRs to use atomic operations.
 - Implement finer resolution for timing than what `k_uptime_get()` can provide
 (ms) by using `k_uptime_ticks()` ([documentation](https://docs.zephyrproject.org/latest/kernel/services/timing/clocks.html)) and `k_ticks_to_ns_near64()` ([documentation](https://docs.zephyrproject.org/latest/doxygen/html/time__units_8h.html)).
+- Make sure that when you put your device to sleep, that your code saves the partial period of the time that has elapsed for the action LEDs, so that when the device wakes up, the action LEDs will toggle at the correct time relative to when they were put to sleep.  You can use `k_timer_remaining_get()` ([documentation](https://docs.zephyrproject.org/latest/kernel/services/timing/timers.html#_CPPv4N5k_timer_remaining_getEPK7k_timer)) to get the remaining time until the next timer expiration.
 - You do not have to use work queues if your timer handler functions run quickly
 and do not block.  However, if your handler functions are more complex, you
 should use work queues to submit the work to the system work queue.
