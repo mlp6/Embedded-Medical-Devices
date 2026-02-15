@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Dr.&nbsp;Mark Palmeri, M.D., Ph.D.">
-<meta name="dcterms.date" content="2025-09-22">
+<meta name="dcterms.date" content="2026-02-15">
 
-<title>Zephyr: Timers Lab – Embedded Medical Devices</title>
+<title>Zephyr: Timers &amp; Atomic Operations Lab – Embedded Medical Devices</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -441,7 +441,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labs/event-driven-state-machine-lab.html">Labs</a></li><li class="breadcrumb-item"><a href="../labs/zephyr-timers-lab.html">Timers Lab</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Zephyr: Timers Lab</h1>
+<h1 class="title">Zephyr: Timers &amp; Atomic Operations Lab</h1>
 <p class="subtitle lead">BME554L - Spring 2026 - Palmeri</p>
   <div class="quarto-categories">
     <div class="quarto-category">Lab</div>
@@ -462,7 +462,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">September 22, 2025</p>
+      <p class="date">February 15, 2026</p>
     </div>
   </div>
   
@@ -476,10 +476,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="refactor-your-gpio-lab-code" class="level2">
 <h2 class="anchored" data-anchor-id="refactor-your-gpio-lab-code">Refactor your GPIO Lab Code</h2>
-<p>You will be refactoring your code from the GPIO lab to now use timers. Do all of the refactoring below on a new branch called <code>timers</code>.</p>
+<p>You will be refactoring your code from the GPIO lab to now use timers and atomic operations. Do all of the refactoring below on a new branch called <code>timers</code> branched from <code>main</code> and your last annotated tag for the previous assignment.</p>
 <ul>
-<li>Eliminate any conditional logic (<code>if/else</code> statements) to test for elapsed time to toggle/set LED output states.</li>
-<li>Use timers for all LED illumination events.</li>
+<li>Eliminate any conditional logic (<code>if/else</code> statements) to test for elapsed time to toggle/set LED output states and refactor using timers.</li>
+<li>Refactor all button press boolean variables that are modified in ISRs to use atomic operations.</li>
 <li>Implement finer resolution for timing than what <code>k_uptime_get()</code> can provide (ms) by using <code>k_uptime_ticks()</code> (<a href="https://docs.zephyrproject.org/latest/kernel/services/timing/clocks.html">documentation</a>) and <code>k_ticks_to_ns_near64()</code> (<a href="https://docs.zephyrproject.org/latest/doxygen/html/time__units_8h.html">documentation</a>).</li>
 <li>You do not have to use work queues if your timer handler functions run quickly and do not block. However, if your handler functions are more complex, you should use work queues to submit the work to the system work queue.</li>
 </ul>
@@ -504,6 +504,19 @@ Important
 </div>
 <div class="callout-body-container callout-body">
 <p>You do not want one, monolithic git commit right before you submit your project.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>For this lab, you should capture changes related to your different refactoring efforts in separate commits.</p>
 </div>
 </div>
 </section>
@@ -602,10 +615,21 @@ Note
 <section id="oscilloscope-measurements" class="level3">
 <h3 class="anchored" data-anchor-id="oscilloscope-measurements">Oscilloscope Measurements</h3>
 <ul>
-<li>Repeat your timing accuracy analysis you performed with logging statements using an oscilloscope directly measuring the GPIO pin signals. <em>Remember that all of the GPIO pins are accessible as female header sockets on the development kit; you do not need to try to directly connect to the pads of the LEDs and buttons!</em></li>
-<li>Save your oscilloscope measurements to a CSV file to be read into your Jupyter notebook.</li>
-<li>Use the oscilloscope cursors to measure the timing intervals.</li>
+<li>Repeat your timing accuracy analysis you performed with logging statements using an oscilloscope directly measuring the GPIO pin signals.</li>
 </ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Remember that all of the GPIO pins are accessible as female header sockets on the development kit; you do not need to try to directly connect to the pads of the LEDs and buttons! - Save your oscilloscope measurements to a CSV file to be read into your Jupyter notebook. - Use the oscilloscope cursors to measure the timing intervals.</p>
+</div>
+</div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">

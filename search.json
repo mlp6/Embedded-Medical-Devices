@@ -1151,7 +1151,7 @@
   {
     "objectID": "slides/zephyr-timers.html",
     "href": "slides/zephyr-timers.html",
-    "title": "Zephyr: Timers, Threads, Work Queues & Events",
+    "title": "Zephyr: Timers, Threads, Atomic Services & Work Queues",
     "section": "",
     "text": "Overall timing of the main loop hard to estimate with multiple ”tasks”.\nAdding / removing features can disrupt all of the timing.",
     "crumbs": [
@@ -1162,7 +1162,7 @@
   {
     "objectID": "slides/zephyr-timers.html#what-are-the-challenges-with-sleep-delay-statements",
     "href": "slides/zephyr-timers.html#what-are-the-challenges-with-sleep-delay-statements",
-    "title": "Zephyr: Timers, Threads, Work Queues & Events",
+    "title": "Zephyr: Timers, Threads, Atomic Services & Work Queues",
     "section": "",
     "text": "Overall timing of the main loop hard to estimate with multiple ”tasks”.\nAdding / removing features can disrupt all of the timing.",
     "crumbs": [
@@ -1173,7 +1173,7 @@
   {
     "objectID": "slides/zephyr-timers.html#what-are-the-challenges-with-super-loops",
     "href": "slides/zephyr-timers.html#what-are-the-challenges-with-super-loops",
-    "title": "Zephyr: Timers, Threads, Work Queues & Events",
+    "title": "Zephyr: Timers, Threads, Atomic Services & Work Queues",
     "section": "What are the challenges with super-loops?",
     "text": "What are the challenges with super-loops?\n\nNested conditional statements testing for timing of events can make the code difficult to read and maintain.\nLeads to “code spaghetti” and “spaghetti timing”.",
     "crumbs": [
@@ -1184,7 +1184,7 @@
   {
     "objectID": "slides/zephyr-timers.html#threads",
     "href": "slides/zephyr-timers.html#threads",
-    "title": "Zephyr: Timers, Threads, Work Queues & Events",
+    "title": "Zephyr: Timers, Threads, Atomic Services & Work Queues",
     "section": "Threads",
     "text": "Threads",
     "crumbs": [
@@ -1195,7 +1195,7 @@
   {
     "objectID": "slides/zephyr-timers.html#system-vs.-user-threads",
     "href": "slides/zephyr-timers.html#system-vs.-user-threads",
-    "title": "Zephyr: Timers, Threads, Work Queues & Events",
+    "title": "Zephyr: Timers, Threads, Atomic Services & Work Queues",
     "section": "System vs. User Threads",
     "text": "System vs. User Threads\n\nZephyr’s kernel starts a system thread and a user-space thread by default.\nUser can add tasks to the system thread and/or create user threads.",
     "crumbs": [
@@ -1206,7 +1206,7 @@
   {
     "objectID": "slides/zephyr-timers.html#thread-priority",
     "href": "slides/zephyr-timers.html#thread-priority",
-    "title": "Zephyr: Timers, Threads, Work Queues & Events",
+    "title": "Zephyr: Timers, Threads, Atomic Services & Work Queues",
     "section": "Thread Priority",
     "text": "Thread Priority",
     "crumbs": [
@@ -1215,11 +1215,33 @@
     ]
   },
   {
+    "objectID": "slides/zephyr-timers.html#atomicity-and-thread-safety",
+    "href": "slides/zephyr-timers.html#atomicity-and-thread-safety",
+    "title": "Zephyr: Timers, Threads, Atomic Services & Work Queues",
+    "section": "Atomicity and Thread Safety",
+    "text": "Atomicity and Thread Safety\n\n\n\n\n\n\nCaution\n\n\n\nWait, with multiple threads being able to operate on things, are variables being handled by ISRs “safe” to use if they can be called at any time?\n\n\nSolution: Atomicity and thread safety.",
+    "crumbs": [
+      "Learning Modules",
+      "Timers"
+    ]
+  },
+  {
+    "objectID": "slides/zephyr-timers.html#atomic-operations",
+    "href": "slides/zephyr-timers.html#atomic-operations",
+    "title": "Zephyr: Timers, Threads, Atomic Services & Work Queues",
+    "section": "Atomic Operations",
+    "text": "Atomic Operations\n\nAn atomic operation is an indivisible operation that either completes entirely or does not execute at all.\nAtomic operations are used to prevent race conditions and ensure thread safety when multiple threads access shared resources.\nIn Zephyr, atomic operations can be performed using the atomic API, which provides functions for atomic read, write, and modify operations on variables.\n\n// Declare atomic variable\nstatic atomic_t button_pressed = ATOMIC_INIT(0);\n\n// ISR callback function\nvoid button_isr_handler(const struct device *dev, struct gpio_callback *cb, uint32_t pins)\n{\n    // Atomically set the flag to indicate button was pressed\n    atomic_set(&button_pressed, 1);\n}\n\n// In main thread or work queue handler\nvoid check_button_work_handler(struct k_work *work)\n{\n    // Atomically read and reset the flag\n    if (atomic_cas(&button_pressed, 1, 0)) {\n        // Button was pressed, do work here\n        LOG_INF(\"Button press detected!\");\n        gpio_pin_toggle_dt(&led);\n    }\n}",
+    "crumbs": [
+      "Learning Modules",
+      "Timers"
+    ]
+  },
+  {
     "objectID": "slides/zephyr-timers.html#timer-threads",
     "href": "slides/zephyr-timers.html#timer-threads",
-    "title": "Zephyr: Timers, Threads, Work Queues & Events",
+    "title": "Zephyr: Timers, Threads, Atomic Services & Work Queues",
     "section": "Timer Threads",
-    "text": "Timer Threads\nIn addition to ISR priority and thread priority yielding, the system also has timers for high temporal accuracy tasks (one-time or repeated).\n\nTimers are managed by the kernel (system).\nTimers are always available (i.e., no need to include libraries or enable kernel configurations)\nLike ISR callback functions, timer handler functions should not consume significant resources / take much time to execute.\n\nA handler function at the end of a timer interval (duration / period) must be defined.\nA handler function at the end of a timer stop can optionally be defined.\n\nThe kernel gives timing events relatively high priority.",
+    "text": "Timer Threads\nIn addition to ISR priority and thread priority yielding, the system also has timers for high temporal accuracy tasks (one-time or repeated).\n\nTimers are managed by the kernel (system).\nTimers are always available (i.e., no need to include libraries or enable kernel configurations)\nLike ISR callback functions, timer handler functions should not consume significant resources / take much time to execute.\n\nA handler function at the end of a timer interval (duration / period) must be defined.\nA handler function at the end of a timer stop can optionally be defined.\nTimer handler functions should use atomic operations to set flags that could be concurrently accessed by other threads or ISRs.\n\nThe kernel gives timing events relatively high priority.",
     "crumbs": [
       "Learning Modules",
       "Timers"
@@ -1228,7 +1250,7 @@
   {
     "objectID": "slides/zephyr-timers.html#defining-the-timer-and-associated-handler-functions",
     "href": "slides/zephyr-timers.html#defining-the-timer-and-associated-handler-functions",
-    "title": "Zephyr: Timers, Threads, Work Queues & Events",
+    "title": "Zephyr: Timers, Threads, Atomic Services & Work Queues",
     "section": "Defining the Timer and Associated Handler Functions",
     "text": "Defining the Timer and Associated Handler Functions\n/* Declare timer start[/stop] handler functions */\nvoid timer_interval_expiry_handler(struct k_timer *name_of_timer);\nvoid timer_stop_handler(struct k_timer *name_of_timer); // optional \n\nK_TIMER_DEFINE(name_of_timer, timer_interval_expiry_handler, timer_stop_handler);\n\n// if the timer will run indefinitely or doesn't need an explicit action upon stopping\n// K_TIMER_DEFINE(name_of_timer, func_to_exec_on_timer_start, NULL);\n\n/* Define the timer handler functions */\nvoid timer_interval_expiry_handler(struct k_timer *name_of_timer)\n{\n    gpio_pin_toggle_dt(&somepin);\n    // in future assignments, could also post an event here\n}",
     "crumbs": [
@@ -1239,7 +1261,7 @@
   {
     "objectID": "slides/zephyr-timers.html#handler-functions-should-not-test-for-state",
     "href": "slides/zephyr-timers.html#handler-functions-should-not-test-for-state",
-    "title": "Zephyr: Timers, Threads, Work Queues & Events",
+    "title": "Zephyr: Timers, Threads, Atomic Services & Work Queues",
     "section": "Handler Functions Should Not Test for State",
     "text": "Handler Functions Should Not Test for State\nvoid timer_interval_expiry_handler(struct k_timer *name_of_timer)\n{\n    if (state == AWAKE) {\n        gpio_pin_toggle_dt(&somepin);\n    } else (state == SLEEP) {\n        gpio_pin_set_dt(&somepin, 0);\n    }\n}\n\nInstead, use a different timer/handler function for each state:\n\nStop one timer in an exit transition state.\nStart the other in an entry transition state.",
     "crumbs": [
@@ -1250,7 +1272,7 @@
   {
     "objectID": "slides/zephyr-timers.html#starting-a-repeating-timer",
     "href": "slides/zephyr-timers.html#starting-a-repeating-timer",
-    "title": "Zephyr: Timers, Threads, Work Queues & Events",
+    "title": "Zephyr: Timers, Threads, Atomic Services & Work Queues",
     "section": "Starting a Repeating Timer",
     "text": "Starting a Repeating Timer\nk_timer_start(&name_of_timer, K_MSEC(DURATION_OF_FIRST_INTERVAL), K_MSEC(DURATION_OF_REPEATED_INTERVALS));\n\nK_MSEC is a macro that converts a time, specified in ms (DURATION_OF_FIRST_EVENT) to whatever time unit the function requires.\nOther useful macros include K_SECONDS, K_MINUTES, K_HOURS, etc.\nTimer functions are executed at the end of each interval (duration / period).\nhttps://docs.zephyrproject.org/latest/kernel/services/timing/clocks.html",
     "crumbs": [
@@ -1261,7 +1283,7 @@
   {
     "objectID": "slides/zephyr-timers.html#stopping-a-timer",
     "href": "slides/zephyr-timers.html#stopping-a-timer",
-    "title": "Zephyr: Timers, Threads, Work Queues & Events",
+    "title": "Zephyr: Timers, Threads, Atomic Services & Work Queues",
     "section": "Stopping a Timer",
     "text": "Stopping a Timer\nk_timer_stop(&name_of_timer);\nThis will call timer_stop_handler() that you associated with the timer using the K_TIMER_DEFINE macro.",
     "crumbs": [
@@ -1272,7 +1294,7 @@
   {
     "objectID": "slides/zephyr-timers.html#timer-example",
     "href": "slides/zephyr-timers.html#timer-example",
-    "title": "Zephyr: Timers, Threads, Work Queues & Events",
+    "title": "Zephyr: Timers, Threads, Atomic Services & Work Queues",
     "section": "Timer Example",
     "text": "Timer Example\n\nThis timer toggles the LED state every 500 ms.\n\nNote that the timer handler is executed at the end of each timer interval.\n\nThe stop handler function turns off the LED.",
     "crumbs": [
@@ -1283,7 +1305,7 @@
   {
     "objectID": "slides/zephyr-timers.html#starting-a-one-shot-timer",
     "href": "slides/zephyr-timers.html#starting-a-one-shot-timer",
-    "title": "Zephyr: Timers, Threads, Work Queues & Events",
+    "title": "Zephyr: Timers, Threads, Atomic Services & Work Queues",
     "section": "Starting a One-Shot Timer",
     "text": "Starting a One-Shot Timer\nIf you want to do something once for a specified duration (one-shot behavior).\nk_timer_start(&name_of_timer, K_MSEC(DURATION_OF_FIRST_INTERVAL), K_NO_WAIT);",
     "crumbs": [
@@ -1294,7 +1316,7 @@
   {
     "objectID": "slides/zephyr-timers.html#one-shot-timer-example",
     "href": "slides/zephyr-timers.html#one-shot-timer-example",
-    "title": "Zephyr: Timers, Threads, Work Queues & Events",
+    "title": "Zephyr: Timers, Threads, Atomic Services & Work Queues",
     "section": "One-Shot Timer Example",
     "text": "One-Shot Timer Example\n\nIn the example below, you can use the one-shot timer to toggle the LED state after 1 second. Note that the LED is turned on seaprate from the timer and the timer handler is executed at the end of the timer interval to turn it off.\n\ngpio_pin_toggle_dt(&led);\nk_timer_start(&name_of_timer, K_MSEC(4000), K_NO_WAIT);\n\n\n\n\n\n\nThere is no need to stop the timer; it terminates after the specified interval.",
     "crumbs": [
@@ -1305,7 +1327,7 @@
   {
     "objectID": "slides/zephyr-timers.html#restarting-timers",
     "href": "slides/zephyr-timers.html#restarting-timers",
-    "title": "Zephyr: Timers, Threads, Work Queues & Events",
+    "title": "Zephyr: Timers, Threads, Atomic Services & Work Queues",
     "section": "Restarting Timers",
     "text": "Restarting Timers\n\nYou do not need to stop a timer that is already running to reset the timing interval.\nJust execute k_timer_start() again.\nNote that the timer will not be set to the new interval until it completes the interval it currently is ”in”.",
     "crumbs": [
@@ -1316,7 +1338,7 @@
   {
     "objectID": "slides/zephyr-timers.html#notes",
     "href": "slides/zephyr-timers.html#notes",
-    "title": "Zephyr: Timers, Threads, Work Queues & Events",
+    "title": "Zephyr: Timers, Threads, Atomic Services & Work Queues",
     "section": "Notes",
     "text": "Notes\n\n\n\n\n\n\nWarning\n\n\n\nIf you set a duration / period to 0, the timer will:\n\nExecute as fast as possible, and\nStop without running the optionally associated stop function!\n\n\n\n\nThe specified duration / period are the minimum times between executions of the timer function.\n\nOther blocking code may cause the timer function to execute later than the specified duration / period.",
     "crumbs": [
@@ -1327,7 +1349,7 @@
   {
     "objectID": "slides/zephyr-timers.html#what-is-a-work-queue",
     "href": "slides/zephyr-timers.html#what-is-a-work-queue",
-    "title": "Zephyr: Timers, Threads, Work Queues & Events",
+    "title": "Zephyr: Timers, Threads, Atomic Services & Work Queues",
     "section": "What is a Work Queue?",
     "text": "What is a Work Queue?\n\nA work queue is a way to execute a function when the system is not busy.\nWork queues are managed by the kernel (system).\n\nSystem work queue exists by default (no need to include libraries or enable kernel options).\nUser can create additional work queues, but need to be defined and initialized.",
     "crumbs": [
@@ -1338,7 +1360,7 @@
   {
     "objectID": "slides/zephyr-timers.html#how-work-queues-help-us",
     "href": "slides/zephyr-timers.html#how-work-queues-help-us",
-    "title": "Zephyr: Timers, Threads, Work Queues & Events",
+    "title": "Zephyr: Timers, Threads, Atomic Services & Work Queues",
     "section": "How Work Queues Help Us",
     "text": "How Work Queues Help Us\n\nCallbacks and handler functions associated with ISRs and timers should not consume significant resource / take much time to execute.\nPro: Work queues allow us to execute functions that may take longer to execute.\nCon: The specific timing of the execution of the function is not guaranteed.\nNo longer need to test for Boolean variables in the main loop to determine when to execute a function.",
     "crumbs": [
@@ -1349,7 +1371,7 @@
   {
     "objectID": "slides/zephyr-timers.html#pseudo-code-1",
     "href": "slides/zephyr-timers.html#pseudo-code-1",
-    "title": "Zephyr: Timers, Threads, Work Queues & Events",
+    "title": "Zephyr: Timers, Threads, Atomic Services & Work Queues",
     "section": "Pseudo-Code",
     "text": "Pseudo-Code\n/* declare work queue handler function */\nvoid blink_timer_work_handler(struct k_work *timer_work);\n\n/* define a work queue to associate with the handler function */\nK_WORK_DEFINE(blink_timer_work, blink_timer_work_handler);\n\n/* in your timer callback function, submit your task to the work queue */\nvoid blink_timer_handler(struct k_timer *blink_timer){\n    k_work_submit(&blink_timer_work);\n    LOG_INF(\"Submitted blinking work to the queue! (%lld)\", k_uptime_get());\n}\n\n/* define the work queue handler function */\nvoid blink_timer_work_handler(struct k_work *timer_work) {\n    LOG_INF(\"Doing blink work! (%lld)\", k_uptime_get());\n    gpio_pin_toggle_dt(&led_blink);\n    k_msleep(WORK_QUEUE_NAP_TIME_MS);\n    LOG_INF(\"Took a nap... just woke up. (%lld)\", k_uptime_get());\n}",
     "crumbs": [
@@ -1360,7 +1382,7 @@
   {
     "objectID": "slides/zephyr-timers.html#example-code",
     "href": "slides/zephyr-timers.html#example-code",
-    "title": "Zephyr: Timers, Threads, Work Queues & Events",
+    "title": "Zephyr: Timers, Threads, Atomic Services & Work Queues",
     "section": "Example Code",
     "text": "Example Code\n#include &lt;zephyr/kernel.h&gt;\n#include &lt;zephyr/drivers/gpio.h&gt;\n#include &lt;zephyr/logging/log.h&gt;\n\nLOG_MODULE_REGISTER(main, LOG_LEVEL_DBG);\n\n#define MAIN_SLEEP_TIME_MS   100000\n#define BLINK_TIMER_INTERVAL_MS 500\n#define WORK_QUEUE_NAP_TIME_MS 10\n#define ONESHOT_DURATION_MS 10000\n\nstatic const struct gpio_dt_spec led_blink = GPIO_DT_SPEC_GET(DT_ALIAS(led0), gpios);\nstatic const struct gpio_dt_spec led_oneshot = GPIO_DT_SPEC_GET(DT_ALIAS(led1), gpios);\n\nvoid blink_timer_handler(struct k_timer *blink_timer);\nvoid blink_timer_stop(struct k_timer *blink_timer);\nvoid oneshot_timer_handler(struct k_timer *blink_timer);\nvoid blink_timer_work_handler(struct k_work *timer_work);\n\nK_TIMER_DEFINE(blink_timer, blink_timer_handler, blink_timer_stop);\nK_TIMER_DEFINE(oneshot_timer, oneshot_timer_handler, NULL);\nK_WORK_DEFINE(blink_timer_work, blink_timer_work_handler);\n\nint main(void)\n{\n    int ret;\n\n    if (!gpio_is_ready_dt(&led_blink)) {\n        return -1;\n    }\n\n    ret = gpio_pin_configure_dt(&led_blink, GPIO_OUTPUT_ACTIVE);\n    if (ret &lt; 0) {\n        return -1;\n    }\n    ret = gpio_pin_configure_dt(&led_oneshot, GPIO_OUTPUT_ACTIVE);\n    if (ret &lt; 0) {\n        return -1;\n    }\n\n    k_timer_start(&blink_timer, K_MSEC(BLINK_TIMER_INTERVAL_MS), K_MSEC(BLINK_TIMER_INTERVAL_MS));\n    k_timer_start(&oneshot_timer, K_MSEC(ONESHOT_DURATION_MS), K_NO_WAIT);\n\n    while (1) {\n        k_msleep(MAIN_SLEEP_TIME_MS);\n    }\n\n    return 0;\n}\n\nvoid blink_timer_handler(struct k_timer *blink_timer){\n    k_work_submit(&blink_timer_work);\n    LOG_INF(\"Submitted blinking work to the queue! (%lld)\", k_uptime_get());\n}\n\nvoid blink_timer_stop(struct k_timer *blink_timer){\n    LOG_INF(\"Stopping the blinking LED.\");\n    gpio_pin_set_dt(&led_blink, 0);\n}\n\nvoid blink_timer_work_handler(struct k_work *timer_work) {\n    LOG_INF(\"Doing blink work! (%lld)\", k_uptime_get());\n    gpio_pin_toggle_dt(&led_blink);\n    k_msleep(WORK_QUEUE_NAP_TIME_MS);\n    LOG_INF(\"Took a nap... just woke up. (%lld)\", k_uptime_get());\n}\n\nvoid oneshot_timer_handler(struct k_timer *oneshot_timer) {\n    LOG_INF(\"Turn oneshot LED off (%lld)\", k_uptime_get());\n    gpio_pin_set_dt(&led_oneshot, 0);\n}",
     "crumbs": [
@@ -1371,7 +1393,7 @@
   {
     "objectID": "slides/zephyr-timers.html#high-level-flow-chart",
     "href": "slides/zephyr-timers.html#high-level-flow-chart",
-    "title": "Zephyr: Timers, Threads, Work Queues & Events",
+    "title": "Zephyr: Timers, Threads, Atomic Services & Work Queues",
     "section": "High-level Flow Chart",
     "text": "High-level Flow Chart",
     "crumbs": [
@@ -1382,9 +1404,9 @@
   {
     "objectID": "slides/zephyr-timers.html#resources",
     "href": "slides/zephyr-timers.html#resources",
-    "title": "Zephyr: Timers, Threads, Work Queues & Events",
+    "title": "Zephyr: Timers, Threads, Atomic Services & Work Queues",
     "section": "Resources",
-    "text": "Resources\n\nZephyr Docs: Timers\nZephyr Docs: Clocks",
+    "text": "Resources\n\nZephyr Docs: Timers\nZephyr Docs: Clocks\nZephyr Docs: Atomic Services",
     "crumbs": [
       "Learning Modules",
       "Timers"
@@ -1393,149 +1415,163 @@
   {
     "objectID": "slides/zephyr-timers-slides.html#what-are-the-challenges-with-sleep-delay-statements",
     "href": "slides/zephyr-timers-slides.html#what-are-the-challenges-with-sleep-delay-statements",
-    "title": "Zephyr: Timers, Threads, Work Queues & Events",
+    "title": "Zephyr: Timers, Threads, Atomic Services & Work Queues",
     "section": "What are the challenges with sleep / delay statements?",
     "text": "What are the challenges with sleep / delay statements?\n\nOverall timing of the main loop hard to estimate with multiple ”tasks”.\nAdding / removing features can disrupt all of the timing."
   },
   {
     "objectID": "slides/zephyr-timers-slides.html#what-are-the-challenges-with-super-loops",
     "href": "slides/zephyr-timers-slides.html#what-are-the-challenges-with-super-loops",
-    "title": "Zephyr: Timers, Threads, Work Queues & Events",
+    "title": "Zephyr: Timers, Threads, Atomic Services & Work Queues",
     "section": "What are the challenges with super-loops?",
     "text": "What are the challenges with super-loops?\n\nNested conditional statements testing for timing of events can make the code difficult to read and maintain.\nLeads to “code spaghetti” and “spaghetti timing”."
   },
   {
     "objectID": "slides/zephyr-timers-slides.html#threads",
     "href": "slides/zephyr-timers-slides.html#threads",
-    "title": "Zephyr: Timers, Threads, Work Queues & Events",
+    "title": "Zephyr: Timers, Threads, Atomic Services & Work Queues",
     "section": "Threads",
     "text": "Threads"
   },
   {
     "objectID": "slides/zephyr-timers-slides.html#system-vs.-user-threads",
     "href": "slides/zephyr-timers-slides.html#system-vs.-user-threads",
-    "title": "Zephyr: Timers, Threads, Work Queues & Events",
+    "title": "Zephyr: Timers, Threads, Atomic Services & Work Queues",
     "section": "System vs. User Threads",
     "text": "System vs. User Threads\n\nZephyr’s kernel starts a system thread and a user-space thread by default.\nUser can add tasks to the system thread and/or create user threads."
   },
   {
     "objectID": "slides/zephyr-timers-slides.html#thread-priority",
     "href": "slides/zephyr-timers-slides.html#thread-priority",
-    "title": "Zephyr: Timers, Threads, Work Queues & Events",
+    "title": "Zephyr: Timers, Threads, Atomic Services & Work Queues",
     "section": "Thread Priority",
     "text": "Thread Priority"
   },
   {
+    "objectID": "slides/zephyr-timers-slides.html#atomicity-and-thread-safety",
+    "href": "slides/zephyr-timers-slides.html#atomicity-and-thread-safety",
+    "title": "Zephyr: Timers, Threads, Atomic Services & Work Queues",
+    "section": "Atomicity and Thread Safety",
+    "text": "Atomicity and Thread Safety\n\n\n\n\n\n\nCaution\n\n\nWait, with multiple threads being able to operate on things, are variables being handled by ISRs “safe” to use if they can be called at any time?\n\n\n\nSolution: Atomicity and thread safety."
+  },
+  {
+    "objectID": "slides/zephyr-timers-slides.html#atomic-operations",
+    "href": "slides/zephyr-timers-slides.html#atomic-operations",
+    "title": "Zephyr: Timers, Threads, Atomic Services & Work Queues",
+    "section": "Atomic Operations",
+    "text": "Atomic Operations\n\nAn atomic operation is an indivisible operation that either completes entirely or does not execute at all.\nAtomic operations are used to prevent race conditions and ensure thread safety when multiple threads access shared resources.\nIn Zephyr, atomic operations can be performed using the atomic API, which provides functions for atomic read, write, and modify operations on variables.\n\n// Declare atomic variable\nstatic atomic_t button_pressed = ATOMIC_INIT(0);\n\n// ISR callback function\nvoid button_isr_handler(const struct device *dev, struct gpio_callback *cb, uint32_t pins)\n{\n    // Atomically set the flag to indicate button was pressed\n    atomic_set(&button_pressed, 1);\n}\n\n// In main thread or work queue handler\nvoid check_button_work_handler(struct k_work *work)\n{\n    // Atomically read and reset the flag\n    if (atomic_cas(&button_pressed, 1, 0)) {\n        // Button was pressed, do work here\n        LOG_INF(\"Button press detected!\");\n        gpio_pin_toggle_dt(&led);\n    }\n}"
+  },
+  {
     "objectID": "slides/zephyr-timers-slides.html#timer-threads",
     "href": "slides/zephyr-timers-slides.html#timer-threads",
-    "title": "Zephyr: Timers, Threads, Work Queues & Events",
+    "title": "Zephyr: Timers, Threads, Atomic Services & Work Queues",
     "section": "Timer Threads",
-    "text": "Timer Threads\nIn addition to ISR priority and thread priority yielding, the system also has timers for high temporal accuracy tasks (one-time or repeated).\n\nTimers are managed by the kernel (system).\nTimers are always available (i.e., no need to include libraries or enable kernel configurations)\nLike ISR callback functions, timer handler functions should not consume significant resources / take much time to execute.\n\nA handler function at the end of a timer interval (duration / period) must be defined.\nA handler function at the end of a timer stop can optionally be defined.\n\nThe kernel gives timing events relatively high priority."
+    "text": "Timer Threads\nIn addition to ISR priority and thread priority yielding, the system also has timers for high temporal accuracy tasks (one-time or repeated).\n\nTimers are managed by the kernel (system).\nTimers are always available (i.e., no need to include libraries or enable kernel configurations)\nLike ISR callback functions, timer handler functions should not consume significant resources / take much time to execute.\n\nA handler function at the end of a timer interval (duration / period) must be defined.\nA handler function at the end of a timer stop can optionally be defined.\nTimer handler functions should use atomic operations to set flags that could be concurrently accessed by other threads or ISRs.\n\nThe kernel gives timing events relatively high priority."
   },
   {
     "objectID": "slides/zephyr-timers-slides.html#defining-the-timer-and-associated-handler-functions",
     "href": "slides/zephyr-timers-slides.html#defining-the-timer-and-associated-handler-functions",
-    "title": "Zephyr: Timers, Threads, Work Queues & Events",
+    "title": "Zephyr: Timers, Threads, Atomic Services & Work Queues",
     "section": "Defining the Timer and Associated Handler Functions",
     "text": "Defining the Timer and Associated Handler Functions\n/* Declare timer start[/stop] handler functions */\nvoid timer_interval_expiry_handler(struct k_timer *name_of_timer);\nvoid timer_stop_handler(struct k_timer *name_of_timer); // optional \n\nK_TIMER_DEFINE(name_of_timer, timer_interval_expiry_handler, timer_stop_handler);\n\n// if the timer will run indefinitely or doesn't need an explicit action upon stopping\n// K_TIMER_DEFINE(name_of_timer, func_to_exec_on_timer_start, NULL);\n\n/* Define the timer handler functions */\nvoid timer_interval_expiry_handler(struct k_timer *name_of_timer)\n{\n    gpio_pin_toggle_dt(&somepin);\n    // in future assignments, could also post an event here\n}"
   },
   {
     "objectID": "slides/zephyr-timers-slides.html#handler-functions-should-not-test-for-state",
     "href": "slides/zephyr-timers-slides.html#handler-functions-should-not-test-for-state",
-    "title": "Zephyr: Timers, Threads, Work Queues & Events",
+    "title": "Zephyr: Timers, Threads, Atomic Services & Work Queues",
     "section": "Handler Functions Should Not Test for State",
     "text": "Handler Functions Should Not Test for State\nvoid timer_interval_expiry_handler(struct k_timer *name_of_timer)\n{\n    if (state == AWAKE) {\n        gpio_pin_toggle_dt(&somepin);\n    } else (state == SLEEP) {\n        gpio_pin_set_dt(&somepin, 0);\n    }\n}\n\nInstead, use a different timer/handler function for each state:\n\nStop one timer in an exit transition state.\nStart the other in an entry transition state."
   },
   {
     "objectID": "slides/zephyr-timers-slides.html#starting-a-repeating-timer",
     "href": "slides/zephyr-timers-slides.html#starting-a-repeating-timer",
-    "title": "Zephyr: Timers, Threads, Work Queues & Events",
+    "title": "Zephyr: Timers, Threads, Atomic Services & Work Queues",
     "section": "Starting a Repeating Timer",
     "text": "Starting a Repeating Timer\nk_timer_start(&name_of_timer, K_MSEC(DURATION_OF_FIRST_INTERVAL), K_MSEC(DURATION_OF_REPEATED_INTERVALS));\n\nK_MSEC is a macro that converts a time, specified in ms (DURATION_OF_FIRST_EVENT) to whatever time unit the function requires.\nOther useful macros include K_SECONDS, K_MINUTES, K_HOURS, etc.\nTimer functions are executed at the end of each interval (duration / period).\nhttps://docs.zephyrproject.org/latest/kernel/services/timing/clocks.html"
   },
   {
     "objectID": "slides/zephyr-timers-slides.html#stopping-a-timer",
     "href": "slides/zephyr-timers-slides.html#stopping-a-timer",
-    "title": "Zephyr: Timers, Threads, Work Queues & Events",
+    "title": "Zephyr: Timers, Threads, Atomic Services & Work Queues",
     "section": "Stopping a Timer",
     "text": "Stopping a Timer\nk_timer_stop(&name_of_timer);\nThis will call timer_stop_handler() that you associated with the timer using the K_TIMER_DEFINE macro."
   },
   {
     "objectID": "slides/zephyr-timers-slides.html#timer-example",
     "href": "slides/zephyr-timers-slides.html#timer-example",
-    "title": "Zephyr: Timers, Threads, Work Queues & Events",
+    "title": "Zephyr: Timers, Threads, Atomic Services & Work Queues",
     "section": "Timer Example",
     "text": "Timer Example\n\nThis timer toggles the LED state every 500 ms.\n\nNote that the timer handler is executed at the end of each timer interval.\n\nThe stop handler function turns off the LED."
   },
   {
     "objectID": "slides/zephyr-timers-slides.html#starting-a-one-shot-timer",
     "href": "slides/zephyr-timers-slides.html#starting-a-one-shot-timer",
-    "title": "Zephyr: Timers, Threads, Work Queues & Events",
+    "title": "Zephyr: Timers, Threads, Atomic Services & Work Queues",
     "section": "Starting a One-Shot Timer",
     "text": "Starting a One-Shot Timer\nIf you want to do something once for a specified duration (one-shot behavior).\nk_timer_start(&name_of_timer, K_MSEC(DURATION_OF_FIRST_INTERVAL), K_NO_WAIT);"
   },
   {
     "objectID": "slides/zephyr-timers-slides.html#one-shot-timer-example",
     "href": "slides/zephyr-timers-slides.html#one-shot-timer-example",
-    "title": "Zephyr: Timers, Threads, Work Queues & Events",
+    "title": "Zephyr: Timers, Threads, Atomic Services & Work Queues",
     "section": "One-Shot Timer Example",
     "text": "One-Shot Timer Example\n\nIn the example below, you can use the one-shot timer to toggle the LED state after 1 second. Note that the LED is turned on seaprate from the timer and the timer handler is executed at the end of the timer interval to turn it off.\n\ngpio_pin_toggle_dt(&led);\nk_timer_start(&name_of_timer, K_MSEC(4000), K_NO_WAIT);\n\n\nThere is no need to stop the timer; it terminates after the specified interval."
   },
   {
     "objectID": "slides/zephyr-timers-slides.html#restarting-timers",
     "href": "slides/zephyr-timers-slides.html#restarting-timers",
-    "title": "Zephyr: Timers, Threads, Work Queues & Events",
+    "title": "Zephyr: Timers, Threads, Atomic Services & Work Queues",
     "section": "Restarting Timers",
     "text": "Restarting Timers\n\nYou do not need to stop a timer that is already running to reset the timing interval.\nJust execute k_timer_start() again.\nNote that the timer will not be set to the new interval until it completes the interval it currently is ”in”."
   },
   {
     "objectID": "slides/zephyr-timers-slides.html#notes",
     "href": "slides/zephyr-timers-slides.html#notes",
-    "title": "Zephyr: Timers, Threads, Work Queues & Events",
+    "title": "Zephyr: Timers, Threads, Atomic Services & Work Queues",
     "section": "Notes",
     "text": "Notes\n\n\n\n\n\n\nWarning\n\n\nIf you set a duration / period to 0, the timer will:\n\nExecute as fast as possible, and\nStop without running the optionally associated stop function!\n\n\n\n\n\nThe specified duration / period are the minimum times between executions of the timer function.\n\nOther blocking code may cause the timer function to execute later than the specified duration / period."
   },
   {
     "objectID": "slides/zephyr-timers-slides.html#what-is-a-work-queue",
     "href": "slides/zephyr-timers-slides.html#what-is-a-work-queue",
-    "title": "Zephyr: Timers, Threads, Work Queues & Events",
+    "title": "Zephyr: Timers, Threads, Atomic Services & Work Queues",
     "section": "What is a Work Queue?",
     "text": "What is a Work Queue?\n\nA work queue is a way to execute a function when the system is not busy.\nWork queues are managed by the kernel (system).\n\nSystem work queue exists by default (no need to include libraries or enable kernel options).\nUser can create additional work queues, but need to be defined and initialized."
   },
   {
     "objectID": "slides/zephyr-timers-slides.html#how-work-queues-help-us",
     "href": "slides/zephyr-timers-slides.html#how-work-queues-help-us",
-    "title": "Zephyr: Timers, Threads, Work Queues & Events",
+    "title": "Zephyr: Timers, Threads, Atomic Services & Work Queues",
     "section": "How Work Queues Help Us",
     "text": "How Work Queues Help Us\n\nCallbacks and handler functions associated with ISRs and timers should not consume significant resource / take much time to execute.\nPro: Work queues allow us to execute functions that may take longer to execute.\nCon: The specific timing of the execution of the function is not guaranteed.\nNo longer need to test for Boolean variables in the main loop to determine when to execute a function."
   },
   {
     "objectID": "slides/zephyr-timers-slides.html#pseudo-code-1",
     "href": "slides/zephyr-timers-slides.html#pseudo-code-1",
-    "title": "Zephyr: Timers, Threads, Work Queues & Events",
+    "title": "Zephyr: Timers, Threads, Atomic Services & Work Queues",
     "section": "Pseudo-Code",
     "text": "Pseudo-Code\n/* declare work queue handler function */\nvoid blink_timer_work_handler(struct k_work *timer_work);\n\n/* define a work queue to associate with the handler function */\nK_WORK_DEFINE(blink_timer_work, blink_timer_work_handler);\n\n/* in your timer callback function, submit your task to the work queue */\nvoid blink_timer_handler(struct k_timer *blink_timer){\n    k_work_submit(&blink_timer_work);\n    LOG_INF(\"Submitted blinking work to the queue! (%lld)\", k_uptime_get());\n}\n\n/* define the work queue handler function */\nvoid blink_timer_work_handler(struct k_work *timer_work) {\n    LOG_INF(\"Doing blink work! (%lld)\", k_uptime_get());\n    gpio_pin_toggle_dt(&led_blink);\n    k_msleep(WORK_QUEUE_NAP_TIME_MS);\n    LOG_INF(\"Took a nap... just woke up. (%lld)\", k_uptime_get());\n}"
   },
   {
     "objectID": "slides/zephyr-timers-slides.html#example-code",
     "href": "slides/zephyr-timers-slides.html#example-code",
-    "title": "Zephyr: Timers, Threads, Work Queues & Events",
+    "title": "Zephyr: Timers, Threads, Atomic Services & Work Queues",
     "section": "Example Code",
     "text": "Example Code\n#include &lt;zephyr/kernel.h&gt;\n#include &lt;zephyr/drivers/gpio.h&gt;\n#include &lt;zephyr/logging/log.h&gt;\n\nLOG_MODULE_REGISTER(main, LOG_LEVEL_DBG);\n\n#define MAIN_SLEEP_TIME_MS   100000\n#define BLINK_TIMER_INTERVAL_MS 500\n#define WORK_QUEUE_NAP_TIME_MS 10\n#define ONESHOT_DURATION_MS 10000\n\nstatic const struct gpio_dt_spec led_blink = GPIO_DT_SPEC_GET(DT_ALIAS(led0), gpios);\nstatic const struct gpio_dt_spec led_oneshot = GPIO_DT_SPEC_GET(DT_ALIAS(led1), gpios);\n\nvoid blink_timer_handler(struct k_timer *blink_timer);\nvoid blink_timer_stop(struct k_timer *blink_timer);\nvoid oneshot_timer_handler(struct k_timer *blink_timer);\nvoid blink_timer_work_handler(struct k_work *timer_work);\n\nK_TIMER_DEFINE(blink_timer, blink_timer_handler, blink_timer_stop);\nK_TIMER_DEFINE(oneshot_timer, oneshot_timer_handler, NULL);\nK_WORK_DEFINE(blink_timer_work, blink_timer_work_handler);\n\nint main(void)\n{\n    int ret;\n\n    if (!gpio_is_ready_dt(&led_blink)) {\n        return -1;\n    }\n\n    ret = gpio_pin_configure_dt(&led_blink, GPIO_OUTPUT_ACTIVE);\n    if (ret &lt; 0) {\n        return -1;\n    }\n    ret = gpio_pin_configure_dt(&led_oneshot, GPIO_OUTPUT_ACTIVE);\n    if (ret &lt; 0) {\n        return -1;\n    }\n\n    k_timer_start(&blink_timer, K_MSEC(BLINK_TIMER_INTERVAL_MS), K_MSEC(BLINK_TIMER_INTERVAL_MS));\n    k_timer_start(&oneshot_timer, K_MSEC(ONESHOT_DURATION_MS), K_NO_WAIT);\n\n    while (1) {\n        k_msleep(MAIN_SLEEP_TIME_MS);\n    }\n\n    return 0;\n}\n\nvoid blink_timer_handler(struct k_timer *blink_timer){\n    k_work_submit(&blink_timer_work);\n    LOG_INF(\"Submitted blinking work to the queue! (%lld)\", k_uptime_get());\n}\n\nvoid blink_timer_stop(struct k_timer *blink_timer){\n    LOG_INF(\"Stopping the blinking LED.\");\n    gpio_pin_set_dt(&led_blink, 0);\n}\n\nvoid blink_timer_work_handler(struct k_work *timer_work) {\n    LOG_INF(\"Doing blink work! (%lld)\", k_uptime_get());\n    gpio_pin_toggle_dt(&led_blink);\n    k_msleep(WORK_QUEUE_NAP_TIME_MS);\n    LOG_INF(\"Took a nap... just woke up. (%lld)\", k_uptime_get());\n}\n\nvoid oneshot_timer_handler(struct k_timer *oneshot_timer) {\n    LOG_INF(\"Turn oneshot LED off (%lld)\", k_uptime_get());\n    gpio_pin_set_dt(&led_oneshot, 0);\n}"
   },
   {
     "objectID": "slides/zephyr-timers-slides.html#high-level-flow-chart",
     "href": "slides/zephyr-timers-slides.html#high-level-flow-chart",
-    "title": "Zephyr: Timers, Threads, Work Queues & Events",
+    "title": "Zephyr: Timers, Threads, Atomic Services & Work Queues",
     "section": "High-level Flow Chart",
     "text": "High-level Flow Chart"
   },
   {
     "objectID": "slides/zephyr-timers-slides.html#resources",
     "href": "slides/zephyr-timers-slides.html#resources",
-    "title": "Zephyr: Timers, Threads, Work Queues & Events",
+    "title": "Zephyr: Timers, Threads, Atomic Services & Work Queues",
     "section": "Resources",
-    "text": "Resources\n\nZephyr Docs: Timers\nZephyr Docs: Clocks"
+    "text": "Resources\n\nZephyr Docs: Timers\nZephyr Docs: Clocks\nZephyr Docs: Atomic Services"
   },
   {
     "objectID": "slides/zephyr-smf.html",
@@ -5253,9 +5289,9 @@
   {
     "objectID": "labs/zephyr-timers-lab.html",
     "href": "labs/zephyr-timers-lab.html",
-    "title": "Zephyr: Timers Lab",
+    "title": "Zephyr: Timers & Atomic Operations Lab",
     "section": "",
-    "text": "You will be refactoring your code from the GPIO lab to now use timers. Do all of the refactoring below on a new branch called timers.\n\nEliminate any conditional logic (if/else statements) to test for elapsed time to toggle/set LED output states.\nUse timers for all LED illumination events.\nImplement finer resolution for timing than what k_uptime_get() can provide (ms) by using k_uptime_ticks() (documentation) and k_ticks_to_ns_near64() (documentation).\nYou do not have to use work queues if your timer handler functions run quickly and do not block. However, if your handler functions are more complex, you should use work queues to submit the work to the system work queue.",
+    "text": "You will be refactoring your code from the GPIO lab to now use timers and atomic operations. Do all of the refactoring below on a new branch called timers branched from main and your last annotated tag for the previous assignment.\n\nEliminate any conditional logic (if/else statements) to test for elapsed time to toggle/set LED output states and refactor using timers.\nRefactor all button press boolean variables that are modified in ISRs to use atomic operations.\nImplement finer resolution for timing than what k_uptime_get() can provide (ms) by using k_uptime_ticks() (documentation) and k_ticks_to_ns_near64() (documentation).\nYou do not have to use work queues if your timer handler functions run quickly and do not block. However, if your handler functions are more complex, you should use work queues to submit the work to the system work queue.",
     "crumbs": [
       "Labs",
       "Timers Lab"
@@ -5264,9 +5300,9 @@
   {
     "objectID": "labs/zephyr-timers-lab.html#refactor-your-gpio-lab-code",
     "href": "labs/zephyr-timers-lab.html#refactor-your-gpio-lab-code",
-    "title": "Zephyr: Timers Lab",
+    "title": "Zephyr: Timers & Atomic Operations Lab",
     "section": "",
-    "text": "You will be refactoring your code from the GPIO lab to now use timers. Do all of the refactoring below on a new branch called timers.\n\nEliminate any conditional logic (if/else statements) to test for elapsed time to toggle/set LED output states.\nUse timers for all LED illumination events.\nImplement finer resolution for timing than what k_uptime_get() can provide (ms) by using k_uptime_ticks() (documentation) and k_ticks_to_ns_near64() (documentation).\nYou do not have to use work queues if your timer handler functions run quickly and do not block. However, if your handler functions are more complex, you should use work queues to submit the work to the system work queue.",
+    "text": "You will be refactoring your code from the GPIO lab to now use timers and atomic operations. Do all of the refactoring below on a new branch called timers branched from main and your last annotated tag for the previous assignment.\n\nEliminate any conditional logic (if/else statements) to test for elapsed time to toggle/set LED output states and refactor using timers.\nRefactor all button press boolean variables that are modified in ISRs to use atomic operations.\nImplement finer resolution for timing than what k_uptime_get() can provide (ms) by using k_uptime_ticks() (documentation) and k_ticks_to_ns_near64() (documentation).\nYou do not have to use work queues if your timer handler functions run quickly and do not block. However, if your handler functions are more complex, you should use work queues to submit the work to the system work queue.",
     "crumbs": [
       "Labs",
       "Timers Lab"
@@ -5275,9 +5311,9 @@
   {
     "objectID": "labs/zephyr-timers-lab.html#git-version-control",
     "href": "labs/zephyr-timers-lab.html#git-version-control",
-    "title": "Zephyr: Timers Lab",
+    "title": "Zephyr: Timers & Atomic Operations Lab",
     "section": "Git Version Control",
-    "text": "Git Version Control\n\nUse best practices for version control (branching, commit messages, etc.).\nDo all development on a dedicated branch that is merged into main once it is functional.\nCommits should be very specific to the changes/additions you are making to your code. This will help you and others understand what you did and why you did it.\n\nOn a given development branch, try to implement one small piece of functionality at a time, commit it, and then move on to the next piece of functionality.\n\n\n\n\n\n\n\nImportant\n\n\n\nYou do not want one, monolithic git commit right before you submit your project.",
+    "text": "Git Version Control\n\nUse best practices for version control (branching, commit messages, etc.).\nDo all development on a dedicated branch that is merged into main once it is functional.\nCommits should be very specific to the changes/additions you are making to your code. This will help you and others understand what you did and why you did it.\n\nOn a given development branch, try to implement one small piece of functionality at a time, commit it, and then move on to the next piece of functionality.\n\n\n\n\n\n\n\nImportant\n\n\n\nYou do not want one, monolithic git commit right before you submit your project.\n\n\n\n\n\n\n\n\nTip\n\n\n\nFor this lab, you should capture changes related to your different refactoring efforts in separate commits.",
     "crumbs": [
       "Labs",
       "Timers Lab"
@@ -5286,9 +5322,9 @@
   {
     "objectID": "labs/zephyr-timers-lab.html#test-the-accuracy-of-your-timing",
     "href": "labs/zephyr-timers-lab.html#test-the-accuracy-of-your-timing",
-    "title": "Zephyr: Timers Lab",
+    "title": "Zephyr: Timers & Atomic Operations Lab",
     "section": "Test the Accuracy of your Timing",
-    "text": "Test the Accuracy of your Timing\nFor the measurements below, record and analyze your data in the technical report captured in a Jupyter notebook called testing/timer_testing.ipynb. You can use the Jupyter notebook included in the lab repository (testing/technical_report.ipynb), which includes some example code, as a starting point, but be sure to rename the notebook in the testing/ directory.\nYour technical report should include:\n\nMethods\nA brief Methods section describing what you did (e.g., how you captured the timing via logging or how you measured timing on the oscilloscope).\nFor each section below, all raw data should be read in from a dedicated file (e.g., a CSV file).\n\n\n\n\n\n\nWarning\n\n\n\nDo not manually type in data in your Jupyter notebook.\n\n\n\n\nLogging Statements\n\nUse logging statements to test the accuracy of your heartbeat and action LED timing for the (a) default, (b) fastest and (c) slowest blink rate of your action LEDs.\n\n\n\n\n\n\n\nNote\n\n\n\nNote that logging statements, by default, are low priority and non-blocking (asynchronous).\n\n\n\nGiven the latency of when a log message may be printed relative to the event you are trying to get the timing of, you should save the execution time of the timing handler to be log printed later.\nSave your logging output data to a CSV file to be read into your Jupyter notebook.\n\n\n\n\n\n\n\nNote\n\n\n\nThere is no elegant way to directly save your data to a CSV file directly from the Terminal in VS Code.\nTwo possible approaches:\n\nYou can save the entire Terminal output to a file and parse it in your Jupyter notebook, or\nYou can cut-and-paste the relevant values from the Terminal output to a CSV file.\n\nAn example Terminal output might look like:\n[00:01:00.009,429] &lt;inf&gt; timers_lab: action toggle period (ns): 100006104\n[00:01:00.109,436] &lt;inf&gt; timers_lab: action toggle period (ns): 100006104\n[00:01:00.209,442] &lt;inf&gt; timers_lab: action toggle period (ns): 100006104\n[00:01:00.254,333] &lt;inf&gt; timers_lab: heart toggle period (ns): 500000000\n[00:01:00.309,448] &lt;inf&gt; timers_lab: action toggle period (ns): 100006104\n[00:01:00.409,454] &lt;inf&gt; timers_lab: action toggle period (ns): 100006104\n[00:01:00.509,460] &lt;inf&gt; timers_lab: action toggle period (ns): 100006104\n[00:01:00.609,466] &lt;inf&gt; timers_lab: action toggle period (ns): 100006104\n[00:01:00.709,472] &lt;inf&gt; timers_lab: action toggle period (ns): 100006104\n[00:01:00.754,333] &lt;inf&gt; timers_lab: heart toggle period (ns): 500000000\n[00:01:00.809,478] &lt;inf&gt; timers_lab: action toggle period (ns): 100006104\n[00:01:00.909,484] &lt;inf&gt; timers_lab: action toggle period (ns): 100006104\n[00:01:01.009,490] &lt;inf&gt; timers_lab: action toggle period (ns): 100006104\n[00:01:01.109,497] &lt;inf&gt; timers_lab: action toggle period (ns): 100006104\n[00:01:01.209,503] &lt;inf&gt; timers_lab: action toggle period (ns): 100006104\n[00:01:01.254,333] &lt;inf&gt; timers_lab: heart toggle period (ns): 500000000\nYou could then leverage the following snippet in your Jupyter notebook to parse out the relevant data:\nlog_5Hz = pd.read_csv('log_5Hz.txt', sep=\" \",header =None, usecols=[0,3,7], \n                      names =['timestamp','type','toggle duration (ns)'])\nlog_5Hz['frequency (Hz)'] = (1e9/(2*log_5Hz['toggle duration (ns)']))\nprint('Table with action LEDs nominally set to 5 Hz:')\nwith pd.option_context('display.max_rows', None, \n                       'display.max_columns', None):\n    print(log_5Hz)\nIf you run out of terminal output buffer, you can increase the buffer size in VS Code settings under Terminal &gt; Integrated: Scrollback.\n\n\n\nEstimate the 95% confidence interval (2x standard deviation for normally-distributed data) for your timing relative to the nominal specification.\n\n\n\nOscilloscope Measurements\n\nRepeat your timing accuracy analysis you performed with logging statements using an oscilloscope directly measuring the GPIO pin signals. Remember that all of the GPIO pins are accessible as female header sockets on the development kit; you do not need to try to directly connect to the pads of the LEDs and buttons!\nSave your oscilloscope measurements to a CSV file to be read into your Jupyter notebook.\nUse the oscilloscope cursors to measure the timing intervals.\n\n\n\n\n\n\n\nNote\n\n\n\nRemember that you will need multiple independent measurements to calculate confidence intervals.\n\n\n\nQuantify a 95% confidence interval for your timing relative to the nominal specification using these oscillosocpe measurements.\n\n\n\nDiscussion\nDiscuss how well the measurements match their nominal values, and if significant deviation has occurred, discuss why this may have happened and how it could be improved moving forward.",
+    "text": "Test the Accuracy of your Timing\nFor the measurements below, record and analyze your data in the technical report captured in a Jupyter notebook called testing/timer_testing.ipynb. You can use the Jupyter notebook included in the lab repository (testing/technical_report.ipynb), which includes some example code, as a starting point, but be sure to rename the notebook in the testing/ directory.\nYour technical report should include:\n\nMethods\nA brief Methods section describing what you did (e.g., how you captured the timing via logging or how you measured timing on the oscilloscope).\nFor each section below, all raw data should be read in from a dedicated file (e.g., a CSV file).\n\n\n\n\n\n\nWarning\n\n\n\nDo not manually type in data in your Jupyter notebook.\n\n\n\n\nLogging Statements\n\nUse logging statements to test the accuracy of your heartbeat and action LED timing for the (a) default, (b) fastest and (c) slowest blink rate of your action LEDs.\n\n\n\n\n\n\n\nNote\n\n\n\nNote that logging statements, by default, are low priority and non-blocking (asynchronous).\n\n\n\nGiven the latency of when a log message may be printed relative to the event you are trying to get the timing of, you should save the execution time of the timing handler to be log printed later.\nSave your logging output data to a CSV file to be read into your Jupyter notebook.\n\n\n\n\n\n\n\nNote\n\n\n\nThere is no elegant way to directly save your data to a CSV file directly from the Terminal in VS Code.\nTwo possible approaches:\n\nYou can save the entire Terminal output to a file and parse it in your Jupyter notebook, or\nYou can cut-and-paste the relevant values from the Terminal output to a CSV file.\n\nAn example Terminal output might look like:\n[00:01:00.009,429] &lt;inf&gt; timers_lab: action toggle period (ns): 100006104\n[00:01:00.109,436] &lt;inf&gt; timers_lab: action toggle period (ns): 100006104\n[00:01:00.209,442] &lt;inf&gt; timers_lab: action toggle period (ns): 100006104\n[00:01:00.254,333] &lt;inf&gt; timers_lab: heart toggle period (ns): 500000000\n[00:01:00.309,448] &lt;inf&gt; timers_lab: action toggle period (ns): 100006104\n[00:01:00.409,454] &lt;inf&gt; timers_lab: action toggle period (ns): 100006104\n[00:01:00.509,460] &lt;inf&gt; timers_lab: action toggle period (ns): 100006104\n[00:01:00.609,466] &lt;inf&gt; timers_lab: action toggle period (ns): 100006104\n[00:01:00.709,472] &lt;inf&gt; timers_lab: action toggle period (ns): 100006104\n[00:01:00.754,333] &lt;inf&gt; timers_lab: heart toggle period (ns): 500000000\n[00:01:00.809,478] &lt;inf&gt; timers_lab: action toggle period (ns): 100006104\n[00:01:00.909,484] &lt;inf&gt; timers_lab: action toggle period (ns): 100006104\n[00:01:01.009,490] &lt;inf&gt; timers_lab: action toggle period (ns): 100006104\n[00:01:01.109,497] &lt;inf&gt; timers_lab: action toggle period (ns): 100006104\n[00:01:01.209,503] &lt;inf&gt; timers_lab: action toggle period (ns): 100006104\n[00:01:01.254,333] &lt;inf&gt; timers_lab: heart toggle period (ns): 500000000\nYou could then leverage the following snippet in your Jupyter notebook to parse out the relevant data:\nlog_5Hz = pd.read_csv('log_5Hz.txt', sep=\" \",header =None, usecols=[0,3,7], \n                      names =['timestamp','type','toggle duration (ns)'])\nlog_5Hz['frequency (Hz)'] = (1e9/(2*log_5Hz['toggle duration (ns)']))\nprint('Table with action LEDs nominally set to 5 Hz:')\nwith pd.option_context('display.max_rows', None, \n                       'display.max_columns', None):\n    print(log_5Hz)\nIf you run out of terminal output buffer, you can increase the buffer size in VS Code settings under Terminal &gt; Integrated: Scrollback.\n\n\n\nEstimate the 95% confidence interval (2x standard deviation for normally-distributed data) for your timing relative to the nominal specification.\n\n\n\nOscilloscope Measurements\n\nRepeat your timing accuracy analysis you performed with logging statements using an oscilloscope directly measuring the GPIO pin signals.\n\n\n\n\n\n\n\nTip\n\n\n\nRemember that all of the GPIO pins are accessible as female header sockets on the development kit; you do not need to try to directly connect to the pads of the LEDs and buttons! - Save your oscilloscope measurements to a CSV file to be read into your Jupyter notebook. - Use the oscilloscope cursors to measure the timing intervals.\n\n\n\n\n\n\n\n\nNote\n\n\n\nRemember that you will need multiple independent measurements to calculate confidence intervals.\n\n\n\nQuantify a 95% confidence interval for your timing relative to the nominal specification using these oscillosocpe measurements.\n\n\n\nDiscussion\nDiscuss how well the measurements match their nominal values, and if significant deviation has occurred, discuss why this may have happened and how it could be improved moving forward.",
     "crumbs": [
       "Labs",
       "Timers Lab"
@@ -5297,7 +5333,7 @@
   {
     "objectID": "labs/zephyr-timers-lab.html#how-to-ask-for-help",
     "href": "labs/zephyr-timers-lab.html#how-to-ask-for-help",
-    "title": "Zephyr: Timers Lab",
+    "title": "Zephyr: Timers & Atomic Operations Lab",
     "section": "How to Ask for Help",
     "text": "How to Ask for Help\n\nIf you have a general / non-coding question, you should ask your TAs / Dr. Palmeri on Ed to allow any of them to respond in a timely manner.\nPush you code to your GitLab repository, ideally with your active development on a non-main branch.\nCreate an Issue in your repository.\n\nAdd as much detail as possible as to your problem, and add links to specific lines / section of code when possible.\nAssign the label “Bug” or “Question”, as appropriate.\nBe sure to specify what branch you are working on.\nAssign the Issue to one of the TAs.\nIf your TA cannot solve your Issue, they can escalate the Issue to Dr. Palmeri.\n\nYou will get a response to your Issue, and maybe a new branch of code will be pushed to help you with some example syntax that you can use git diff to visualize.",
     "crumbs": [
@@ -5308,7 +5344,7 @@
   {
     "objectID": "labs/zephyr-timers-lab.html#what-to-submit",
     "href": "labs/zephyr-timers-lab.html#what-to-submit",
-    "title": "Zephyr: Timers Lab",
+    "title": "Zephyr: Timers & Atomic Operations Lab",
     "section": "What to Submit",
     "text": "What to Submit\n\nMake sure that your complete timing_analysis.ipynb notebook is in your timers branch in a directory called testing/, which also includes all raw CSV data.\nMake sure that your Jupyter notebook reads in data from relative paths for the repository, not absolute paths on your local machine.\nPush your timers branch to GitLab.\nCreate a new Merge Request to merge timers into your forked repository’s main branch.\n\n\n\n\n\n\n\nWarning\n\n\n\nDo not create a Merge Request in to the parent repository that you forked from!\n\n\n\nMerge your timers branch into your main branch.\nCreate an annotated tag for that merge commit called v1.1.0.\nCreate a new Issue assigned to Dr. Palmeri to request a code review for v1.1.0.\n\n\n\n\n\n\n\nNote\n\n\n\nIf you fix any bugs after creating the original annotated tag, increment up the patch number with a new annotated tag version number, and update the Issue to reflect which annotated tag should be reviewed.",
     "crumbs": [

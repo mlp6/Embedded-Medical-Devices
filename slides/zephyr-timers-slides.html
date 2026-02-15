@@ -12,8 +12,8 @@
   <meta name="generator" content="quarto-1.7.31">
 
   <meta name="author" content="Dr.&nbsp;Mark Palmeri, M.D., Ph.D.">
-  <meta name="dcterms.date" content="2025-08-25">
-  <title>Embedded Medical Devices – Zephyr: Timers, Threads, Work Queues &amp; Events</title>
+  <meta name="dcterms.date" content="2026-02-15">
+  <title>Embedded Medical Devices – Zephyr: Timers, Threads, Atomic Services &amp; Work Queues</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -198,7 +198,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Zephyr: Timers, Threads, Work Queues &amp; Events</h1>
+  <h1 class="title">Zephyr: Timers, Threads, Atomic Services &amp; Work Queues</h1>
   <p class="subtitle">BME554L - Spring 2026</p>
 
 <div class="quarto-title-authors">
@@ -212,7 +212,7 @@ Dr.&nbsp;Mark Palmeri, M.D., Ph.D.
     </div>
 </div>
 
-  <p class="date">August 25, 2025</p>
+  <p class="date">February 15, 2026</p>
 </section>
 <section id="what-are-the-challenges-with-sleep-delay-statements" class="slide level2">
 <h2>What are the challenges with <code>sleep</code> / <code>delay</code> statements?</h2>
@@ -243,6 +243,51 @@ Dr.&nbsp;Mark Palmeri, M.D., Ph.D.
 <h2>Thread Priority</h2>
 
 <img data-src="images/timers/ex_1_thread_yielding_2.png" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="atomicity-and-thread-safety" class="slide level2">
+<h2>Atomicity and Thread Safety</h2>
+<div class="callout callout-caution callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Caution</strong></p>
+</div>
+<div class="callout-content">
+<p>Wait, with multiple threads being able to operate on things, are variables being handled by ISRs “safe” to use if they can be called at any time?</p>
+</div>
+</div>
+</div>
+<p>Solution: <strong>Atomicity</strong> and <strong>thread safety</strong>.</p>
+</section>
+<section id="atomic-operations" class="slide level2">
+<h2>Atomic Operations</h2>
+<ul>
+<li>An atomic operation is an indivisible operation that either completes entirely or does not execute at all.</li>
+<li>Atomic operations are used to prevent race conditions and ensure thread safety when multiple threads access shared resources.</li>
+<li>In Zephyr, atomic operations can be performed using the <code>atomic</code> API, which provides functions for atomic read, write, and modify operations on variables.</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb1-1"><a></a><span class="co">// Declare atomic variable</span></span>
+<span id="cb1-2"><a></a><span class="dt">static</span> atomic_t button_pressed <span class="op">=</span> ATOMIC_INIT<span class="op">(</span><span class="dv">0</span><span class="op">);</span></span>
+<span id="cb1-3"><a></a></span>
+<span id="cb1-4"><a></a><span class="co">// ISR callback function</span></span>
+<span id="cb1-5"><a></a><span class="dt">void</span> button_isr_handler<span class="op">(</span><span class="dt">const</span> <span class="kw">struct</span> device <span class="op">*</span>dev<span class="op">,</span> <span class="kw">struct</span> gpio_callback <span class="op">*</span>cb<span class="op">,</span> <span class="dt">uint32_t</span> pins<span class="op">)</span></span>
+<span id="cb1-6"><a></a><span class="op">{</span></span>
+<span id="cb1-7"><a></a>    <span class="co">// Atomically set the flag to indicate button was pressed</span></span>
+<span id="cb1-8"><a></a>    atomic_set<span class="op">(&amp;</span>button_pressed<span class="op">,</span> <span class="dv">1</span><span class="op">);</span></span>
+<span id="cb1-9"><a></a><span class="op">}</span></span>
+<span id="cb1-10"><a></a></span>
+<span id="cb1-11"><a></a><span class="co">// In main thread or work queue handler</span></span>
+<span id="cb1-12"><a></a><span class="dt">void</span> check_button_work_handler<span class="op">(</span><span class="kw">struct</span> k_work <span class="op">*</span>work<span class="op">)</span></span>
+<span id="cb1-13"><a></a><span class="op">{</span></span>
+<span id="cb1-14"><a></a>    <span class="co">// Atomically read and reset the flag</span></span>
+<span id="cb1-15"><a></a>    <span class="cf">if</span> <span class="op">(</span>atomic_cas<span class="op">(&amp;</span>button_pressed<span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">0</span><span class="op">))</span> <span class="op">{</span></span>
+<span id="cb1-16"><a></a>        <span class="co">// Button was pressed, do work here</span></span>
+<span id="cb1-17"><a></a>        LOG_INF<span class="op">(</span><span class="st">"Button press detected!"</span><span class="op">);</span></span>
+<span id="cb1-18"><a></a>        gpio_pin_toggle_dt<span class="op">(&amp;</span>led<span class="op">);</span></span>
+<span id="cb1-19"><a></a>    <span class="op">}</span></span>
+<span id="cb1-20"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
 <section id="timer-threads" class="slide level2">
 <h2>Timer Threads</h2>
 <p>In addition to ISR priority and thread priority yielding, the system also has <strong>timers</strong> for high temporal accuracy tasks (one-time or repeated).</p>
@@ -253,6 +298,7 @@ Dr.&nbsp;Mark Palmeri, M.D., Ph.D.
 <ul>
 <li>A handler function at the end of a timer interval (duration / period) must be defined.</li>
 <li>A handler function at the end of a timer stop can optionally be defined.</li>
+<li>Timer handler functions should use <strong>atomic operations</strong> to set flags that could be concurrently accessed by other threads or ISRs.</li>
 </ul></li>
 <li>The kernel gives timing events relatively high priority.</li>
 </ul>
@@ -264,32 +310,32 @@ Dr.&nbsp;Mark Palmeri, M.D., Ph.D.
 </section>
 <section id="defining-the-timer-and-associated-handler-functions" class="slide level2">
 <h2>Defining the Timer and Associated Handler Functions</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb1-1"><a></a><span class="co">/* Declare timer start[/stop] handler functions */</span></span>
-<span id="cb1-2"><a></a><span class="dt">void</span> timer_interval_expiry_handler<span class="op">(</span><span class="kw">struct</span> k_timer <span class="op">*</span>name_of_timer<span class="op">);</span></span>
-<span id="cb1-3"><a></a><span class="dt">void</span> timer_stop_handler<span class="op">(</span><span class="kw">struct</span> k_timer <span class="op">*</span>name_of_timer<span class="op">);</span> <span class="co">// optional </span></span>
-<span id="cb1-4"><a></a></span>
-<span id="cb1-5"><a></a>K_TIMER_DEFINE<span class="op">(</span>name_of_timer<span class="op">,</span> timer_interval_expiry_handler<span class="op">,</span> timer_stop_handler<span class="op">);</span></span>
-<span id="cb1-6"><a></a></span>
-<span id="cb1-7"><a></a><span class="co">// if the timer will run indefinitely or doesn't need an explicit action upon stopping</span></span>
-<span id="cb1-8"><a></a><span class="co">// K_TIMER_DEFINE(name_of_timer, func_to_exec_on_timer_start, NULL);</span></span>
-<span id="cb1-9"><a></a></span>
-<span id="cb1-10"><a></a><span class="co">/* Define the timer handler functions */</span></span>
-<span id="cb1-11"><a></a><span class="dt">void</span> timer_interval_expiry_handler<span class="op">(</span><span class="kw">struct</span> k_timer <span class="op">*</span>name_of_timer<span class="op">)</span></span>
-<span id="cb1-12"><a></a><span class="op">{</span></span>
-<span id="cb1-13"><a></a>    gpio_pin_toggle_dt<span class="op">(&amp;</span>somepin<span class="op">);</span></span>
-<span id="cb1-14"><a></a>    <span class="co">// in future assignments, could also post an event here</span></span>
-<span id="cb1-15"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb2-1"><a></a><span class="co">/* Declare timer start[/stop] handler functions */</span></span>
+<span id="cb2-2"><a></a><span class="dt">void</span> timer_interval_expiry_handler<span class="op">(</span><span class="kw">struct</span> k_timer <span class="op">*</span>name_of_timer<span class="op">);</span></span>
+<span id="cb2-3"><a></a><span class="dt">void</span> timer_stop_handler<span class="op">(</span><span class="kw">struct</span> k_timer <span class="op">*</span>name_of_timer<span class="op">);</span> <span class="co">// optional </span></span>
+<span id="cb2-4"><a></a></span>
+<span id="cb2-5"><a></a>K_TIMER_DEFINE<span class="op">(</span>name_of_timer<span class="op">,</span> timer_interval_expiry_handler<span class="op">,</span> timer_stop_handler<span class="op">);</span></span>
+<span id="cb2-6"><a></a></span>
+<span id="cb2-7"><a></a><span class="co">// if the timer will run indefinitely or doesn't need an explicit action upon stopping</span></span>
+<span id="cb2-8"><a></a><span class="co">// K_TIMER_DEFINE(name_of_timer, func_to_exec_on_timer_start, NULL);</span></span>
+<span id="cb2-9"><a></a></span>
+<span id="cb2-10"><a></a><span class="co">/* Define the timer handler functions */</span></span>
+<span id="cb2-11"><a></a><span class="dt">void</span> timer_interval_expiry_handler<span class="op">(</span><span class="kw">struct</span> k_timer <span class="op">*</span>name_of_timer<span class="op">)</span></span>
+<span id="cb2-12"><a></a><span class="op">{</span></span>
+<span id="cb2-13"><a></a>    gpio_pin_toggle_dt<span class="op">(&amp;</span>somepin<span class="op">);</span></span>
+<span id="cb2-14"><a></a>    <span class="co">// in future assignments, could also post an event here</span></span>
+<span id="cb2-15"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="handler-functions-should-not-test-for-state" class="slide level2">
 <h2>Handler Functions Should Not Test for State</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb2-1"><a></a><span class="dt">void</span> timer_interval_expiry_handler<span class="op">(</span><span class="kw">struct</span> k_timer <span class="op">*</span>name_of_timer<span class="op">)</span></span>
-<span id="cb2-2"><a></a><span class="op">{</span></span>
-<span id="cb2-3"><a></a>    <span class="cf">if</span> <span class="op">(</span>state <span class="op">==</span> AWAKE<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-4"><a></a>        gpio_pin_toggle_dt<span class="op">(&amp;</span>somepin<span class="op">);</span></span>
-<span id="cb2-5"><a></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">(</span>state <span class="op">==</span> SLEEP<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-6"><a></a>        gpio_pin_set_dt<span class="op">(&amp;</span>somepin<span class="op">,</span> <span class="dv">0</span><span class="op">);</span></span>
-<span id="cb2-7"><a></a>    <span class="op">}</span></span>
-<span id="cb2-8"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb3-1"><a></a><span class="dt">void</span> timer_interval_expiry_handler<span class="op">(</span><span class="kw">struct</span> k_timer <span class="op">*</span>name_of_timer<span class="op">)</span></span>
+<span id="cb3-2"><a></a><span class="op">{</span></span>
+<span id="cb3-3"><a></a>    <span class="cf">if</span> <span class="op">(</span>state <span class="op">==</span> AWAKE<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-4"><a></a>        gpio_pin_toggle_dt<span class="op">(&amp;</span>somepin<span class="op">);</span></span>
+<span id="cb3-5"><a></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">(</span>state <span class="op">==</span> SLEEP<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-6"><a></a>        gpio_pin_set_dt<span class="op">(&amp;</span>somepin<span class="op">,</span> <span class="dv">0</span><span class="op">);</span></span>
+<span id="cb3-7"><a></a>    <span class="op">}</span></span>
+<span id="cb3-8"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>Instead, use a different timer/handler function for each state:
 <ul>
@@ -300,7 +346,7 @@ Dr.&nbsp;Mark Palmeri, M.D., Ph.D.
 </section>
 <section id="starting-a-repeating-timer" class="slide level2">
 <h2>Starting a Repeating Timer</h2>
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb3-1"><a></a>k_timer_start<span class="op">(&amp;</span>name_of_timer<span class="op">,</span> K_MSEC<span class="op">(</span>DURATION_OF_FIRST_INTERVAL<span class="op">),</span> K_MSEC<span class="op">(</span>DURATION_OF_REPEATED_INTERVALS<span class="op">));</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb4-1"><a></a>k_timer_start<span class="op">(&amp;</span>name_of_timer<span class="op">,</span> K_MSEC<span class="op">(</span>DURATION_OF_FIRST_INTERVAL<span class="op">),</span> K_MSEC<span class="op">(</span>DURATION_OF_REPEATED_INTERVALS<span class="op">));</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li><code>K_MSEC</code> is a macro that converts a time, specified in ms (<code>DURATION_OF_FIRST_EVENT</code>) to whatever time unit the function requires.</li>
 <li>Other useful macros include <code>K_SECONDS</code>, <code>K_MINUTES</code>, <code>K_HOURS</code>, etc.</li>
@@ -310,7 +356,7 @@ Dr.&nbsp;Mark Palmeri, M.D., Ph.D.
 </section>
 <section id="stopping-a-timer" class="slide level2">
 <h2>Stopping a Timer</h2>
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb4-1"><a></a>k_timer_stop<span class="op">(&amp;</span>name_of_timer<span class="op">);</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb5-1"><a></a>k_timer_stop<span class="op">(&amp;</span>name_of_timer<span class="op">);</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This will call <code>timer_stop_handler()</code> that you associated with the timer using the <code>K_TIMER_DEFINE</code> macro.</p>
 </section>
 <section id="timer-example" class="slide level2">
@@ -327,15 +373,15 @@ Dr.&nbsp;Mark Palmeri, M.D., Ph.D.
 <section id="starting-a-one-shot-timer" class="slide level2">
 <h2>Starting a One-Shot Timer</h2>
 <p>If you want to do something once for a specified duration (one-shot behavior).</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb5-1"><a></a>k_timer_start<span class="op">(&amp;</span>name_of_timer<span class="op">,</span> K_MSEC<span class="op">(</span>DURATION_OF_FIRST_INTERVAL<span class="op">),</span> K_NO_WAIT<span class="op">);</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb6-1"><a></a>k_timer_start<span class="op">(&amp;</span>name_of_timer<span class="op">,</span> K_MSEC<span class="op">(</span>DURATION_OF_FIRST_INTERVAL<span class="op">),</span> K_NO_WAIT<span class="op">);</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="one-shot-timer-example" class="slide level2">
 <h2>One-Shot Timer Example</h2>
 <ul>
 <li>In the example below, you can use the one-shot timer to toggle the LED state after 1 second. Note that the LED is turned on seaprate from the timer and the timer handler is executed at the <strong>end</strong> of the timer interval to turn it off.</li>
 </ul>
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb6-1"><a></a>gpio_pin_toggle_dt<span class="op">(&amp;</span>led<span class="op">);</span></span>
-<span id="cb6-2"><a></a>k_timer_start<span class="op">(&amp;</span>name_of_timer<span class="op">,</span> K_MSEC<span class="op">(</span><span class="dv">4000</span><span class="op">),</span> K_NO_WAIT<span class="op">);</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb7-1"><a></a>gpio_pin_toggle_dt<span class="op">(&amp;</span>led<span class="op">);</span></span>
+<span id="cb7-2"><a></a>k_timer_start<span class="op">(&amp;</span>name_of_timer<span class="op">,</span> K_MSEC<span class="op">(</span><span class="dv">4000</span><span class="op">),</span> K_NO_WAIT<span class="op">);</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 <img data-src="images/timers/one_shot.png" class="quarto-figure quarto-figure-center r-stretch"><ul>
 <li>There is no need to stop the timer; it terminates after the specified interval.</li>
@@ -401,99 +447,99 @@ Dr.&nbsp;Mark Palmeri, M.D., Ph.D.
 </section>
 <section id="pseudo-code-1" class="slide level2">
 <h2>Pseudo-Code</h2>
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb7-1"><a></a><span class="co">/* declare work queue handler function */</span></span>
-<span id="cb7-2"><a></a><span class="dt">void</span> blink_timer_work_handler<span class="op">(</span><span class="kw">struct</span> k_work <span class="op">*</span>timer_work<span class="op">);</span></span>
-<span id="cb7-3"><a></a></span>
-<span id="cb7-4"><a></a><span class="co">/* define a work queue to associate with the handler function */</span></span>
-<span id="cb7-5"><a></a>K_WORK_DEFINE<span class="op">(</span>blink_timer_work<span class="op">,</span> blink_timer_work_handler<span class="op">);</span></span>
-<span id="cb7-6"><a></a></span>
-<span id="cb7-7"><a></a><span class="co">/* in your timer callback function, submit your task to the work queue */</span></span>
-<span id="cb7-8"><a></a><span class="dt">void</span> blink_timer_handler<span class="op">(</span><span class="kw">struct</span> k_timer <span class="op">*</span>blink_timer<span class="op">){</span></span>
-<span id="cb7-9"><a></a>    k_work_submit<span class="op">(&amp;</span>blink_timer_work<span class="op">);</span></span>
-<span id="cb7-10"><a></a>    LOG_INF<span class="op">(</span><span class="st">"Submitted blinking work to the queue! (</span><span class="sc">%lld</span><span class="st">)"</span><span class="op">,</span> k_uptime_get<span class="op">());</span></span>
-<span id="cb7-11"><a></a><span class="op">}</span></span>
-<span id="cb7-12"><a></a></span>
-<span id="cb7-13"><a></a><span class="co">/* define the work queue handler function */</span></span>
-<span id="cb7-14"><a></a><span class="dt">void</span> blink_timer_work_handler<span class="op">(</span><span class="kw">struct</span> k_work <span class="op">*</span>timer_work<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb7-15"><a></a>    LOG_INF<span class="op">(</span><span class="st">"Doing blink work! (</span><span class="sc">%lld</span><span class="st">)"</span><span class="op">,</span> k_uptime_get<span class="op">());</span></span>
-<span id="cb7-16"><a></a>    gpio_pin_toggle_dt<span class="op">(&amp;</span>led_blink<span class="op">);</span></span>
-<span id="cb7-17"><a></a>    k_msleep<span class="op">(</span>WORK_QUEUE_NAP_TIME_MS<span class="op">);</span></span>
-<span id="cb7-18"><a></a>    LOG_INF<span class="op">(</span><span class="st">"Took a nap... just woke up. (</span><span class="sc">%lld</span><span class="st">)"</span><span class="op">,</span> k_uptime_get<span class="op">());</span></span>
-<span id="cb7-19"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb8-1"><a></a><span class="co">/* declare work queue handler function */</span></span>
+<span id="cb8-2"><a></a><span class="dt">void</span> blink_timer_work_handler<span class="op">(</span><span class="kw">struct</span> k_work <span class="op">*</span>timer_work<span class="op">);</span></span>
+<span id="cb8-3"><a></a></span>
+<span id="cb8-4"><a></a><span class="co">/* define a work queue to associate with the handler function */</span></span>
+<span id="cb8-5"><a></a>K_WORK_DEFINE<span class="op">(</span>blink_timer_work<span class="op">,</span> blink_timer_work_handler<span class="op">);</span></span>
+<span id="cb8-6"><a></a></span>
+<span id="cb8-7"><a></a><span class="co">/* in your timer callback function, submit your task to the work queue */</span></span>
+<span id="cb8-8"><a></a><span class="dt">void</span> blink_timer_handler<span class="op">(</span><span class="kw">struct</span> k_timer <span class="op">*</span>blink_timer<span class="op">){</span></span>
+<span id="cb8-9"><a></a>    k_work_submit<span class="op">(&amp;</span>blink_timer_work<span class="op">);</span></span>
+<span id="cb8-10"><a></a>    LOG_INF<span class="op">(</span><span class="st">"Submitted blinking work to the queue! (</span><span class="sc">%lld</span><span class="st">)"</span><span class="op">,</span> k_uptime_get<span class="op">());</span></span>
+<span id="cb8-11"><a></a><span class="op">}</span></span>
+<span id="cb8-12"><a></a></span>
+<span id="cb8-13"><a></a><span class="co">/* define the work queue handler function */</span></span>
+<span id="cb8-14"><a></a><span class="dt">void</span> blink_timer_work_handler<span class="op">(</span><span class="kw">struct</span> k_work <span class="op">*</span>timer_work<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb8-15"><a></a>    LOG_INF<span class="op">(</span><span class="st">"Doing blink work! (</span><span class="sc">%lld</span><span class="st">)"</span><span class="op">,</span> k_uptime_get<span class="op">());</span></span>
+<span id="cb8-16"><a></a>    gpio_pin_toggle_dt<span class="op">(&amp;</span>led_blink<span class="op">);</span></span>
+<span id="cb8-17"><a></a>    k_msleep<span class="op">(</span>WORK_QUEUE_NAP_TIME_MS<span class="op">);</span></span>
+<span id="cb8-18"><a></a>    LOG_INF<span class="op">(</span><span class="st">"Took a nap... just woke up. (</span><span class="sc">%lld</span><span class="st">)"</span><span class="op">,</span> k_uptime_get<span class="op">());</span></span>
+<span id="cb8-19"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="example-code" class="slide level2">
 <h2>Example Code</h2>
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb8-1"><a></a><span class="pp">#include </span><span class="im">&lt;zephyr/kernel.h&gt;</span></span>
-<span id="cb8-2"><a></a><span class="pp">#include </span><span class="im">&lt;zephyr/drivers/gpio.h&gt;</span></span>
-<span id="cb8-3"><a></a><span class="pp">#include </span><span class="im">&lt;zephyr/logging/log.h&gt;</span></span>
-<span id="cb8-4"><a></a></span>
-<span id="cb8-5"><a></a>LOG_MODULE_REGISTER<span class="op">(</span>main<span class="op">,</span> LOG_LEVEL_DBG<span class="op">);</span></span>
-<span id="cb8-6"><a></a></span>
-<span id="cb8-7"><a></a><span class="pp">#define MAIN_SLEEP_TIME_MS   </span><span class="dv">100000</span></span>
-<span id="cb8-8"><a></a><span class="pp">#define BLINK_TIMER_INTERVAL_MS </span><span class="dv">500</span></span>
-<span id="cb8-9"><a></a><span class="pp">#define WORK_QUEUE_NAP_TIME_MS </span><span class="dv">10</span></span>
-<span id="cb8-10"><a></a><span class="pp">#define ONESHOT_DURATION_MS </span><span class="dv">10000</span></span>
-<span id="cb8-11"><a></a></span>
-<span id="cb8-12"><a></a><span class="dt">static</span> <span class="dt">const</span> <span class="kw">struct</span> gpio_dt_spec led_blink <span class="op">=</span> GPIO_DT_SPEC_GET<span class="op">(</span>DT_ALIAS<span class="op">(</span>led0<span class="op">),</span> gpios<span class="op">);</span></span>
-<span id="cb8-13"><a></a><span class="dt">static</span> <span class="dt">const</span> <span class="kw">struct</span> gpio_dt_spec led_oneshot <span class="op">=</span> GPIO_DT_SPEC_GET<span class="op">(</span>DT_ALIAS<span class="op">(</span>led1<span class="op">),</span> gpios<span class="op">);</span></span>
-<span id="cb8-14"><a></a></span>
-<span id="cb8-15"><a></a><span class="dt">void</span> blink_timer_handler<span class="op">(</span><span class="kw">struct</span> k_timer <span class="op">*</span>blink_timer<span class="op">);</span></span>
-<span id="cb8-16"><a></a><span class="dt">void</span> blink_timer_stop<span class="op">(</span><span class="kw">struct</span> k_timer <span class="op">*</span>blink_timer<span class="op">);</span></span>
-<span id="cb8-17"><a></a><span class="dt">void</span> oneshot_timer_handler<span class="op">(</span><span class="kw">struct</span> k_timer <span class="op">*</span>blink_timer<span class="op">);</span></span>
-<span id="cb8-18"><a></a><span class="dt">void</span> blink_timer_work_handler<span class="op">(</span><span class="kw">struct</span> k_work <span class="op">*</span>timer_work<span class="op">);</span></span>
-<span id="cb8-19"><a></a></span>
-<span id="cb8-20"><a></a>K_TIMER_DEFINE<span class="op">(</span>blink_timer<span class="op">,</span> blink_timer_handler<span class="op">,</span> blink_timer_stop<span class="op">);</span></span>
-<span id="cb8-21"><a></a>K_TIMER_DEFINE<span class="op">(</span>oneshot_timer<span class="op">,</span> oneshot_timer_handler<span class="op">,</span> NULL<span class="op">);</span></span>
-<span id="cb8-22"><a></a>K_WORK_DEFINE<span class="op">(</span>blink_timer_work<span class="op">,</span> blink_timer_work_handler<span class="op">);</span></span>
-<span id="cb8-23"><a></a></span>
-<span id="cb8-24"><a></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span></span>
-<span id="cb8-25"><a></a><span class="op">{</span></span>
-<span id="cb8-26"><a></a>    <span class="dt">int</span> ret<span class="op">;</span></span>
-<span id="cb8-27"><a></a></span>
-<span id="cb8-28"><a></a>    <span class="cf">if</span> <span class="op">(!</span>gpio_is_ready_dt<span class="op">(&amp;</span>led_blink<span class="op">))</span> <span class="op">{</span></span>
-<span id="cb8-29"><a></a>        <span class="cf">return</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span></span>
-<span id="cb8-30"><a></a>    <span class="op">}</span></span>
-<span id="cb8-31"><a></a></span>
-<span id="cb8-32"><a></a>    ret <span class="op">=</span> gpio_pin_configure_dt<span class="op">(&amp;</span>led_blink<span class="op">,</span> GPIO_OUTPUT_ACTIVE<span class="op">);</span></span>
-<span id="cb8-33"><a></a>    <span class="cf">if</span> <span class="op">(</span>ret <span class="op">&lt;</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb8-34"><a></a>        <span class="cf">return</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span></span>
-<span id="cb8-35"><a></a>    <span class="op">}</span></span>
-<span id="cb8-36"><a></a>    ret <span class="op">=</span> gpio_pin_configure_dt<span class="op">(&amp;</span>led_oneshot<span class="op">,</span> GPIO_OUTPUT_ACTIVE<span class="op">);</span></span>
-<span id="cb8-37"><a></a>    <span class="cf">if</span> <span class="op">(</span>ret <span class="op">&lt;</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb8-38"><a></a>        <span class="cf">return</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span></span>
-<span id="cb8-39"><a></a>    <span class="op">}</span></span>
-<span id="cb8-40"><a></a></span>
-<span id="cb8-41"><a></a>    k_timer_start<span class="op">(&amp;</span>blink_timer<span class="op">,</span> K_MSEC<span class="op">(</span>BLINK_TIMER_INTERVAL_MS<span class="op">),</span> K_MSEC<span class="op">(</span>BLINK_TIMER_INTERVAL_MS<span class="op">));</span></span>
-<span id="cb8-42"><a></a>    k_timer_start<span class="op">(&amp;</span>oneshot_timer<span class="op">,</span> K_MSEC<span class="op">(</span>ONESHOT_DURATION_MS<span class="op">),</span> K_NO_WAIT<span class="op">);</span></span>
-<span id="cb8-43"><a></a></span>
-<span id="cb8-44"><a></a>    <span class="cf">while</span> <span class="op">(</span><span class="dv">1</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb8-45"><a></a>        k_msleep<span class="op">(</span>MAIN_SLEEP_TIME_MS<span class="op">);</span></span>
-<span id="cb8-46"><a></a>    <span class="op">}</span></span>
-<span id="cb8-47"><a></a></span>
-<span id="cb8-48"><a></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb8-49"><a></a><span class="op">}</span></span>
-<span id="cb8-50"><a></a></span>
-<span id="cb8-51"><a></a><span class="dt">void</span> blink_timer_handler<span class="op">(</span><span class="kw">struct</span> k_timer <span class="op">*</span>blink_timer<span class="op">){</span></span>
-<span id="cb8-52"><a></a>    k_work_submit<span class="op">(&amp;</span>blink_timer_work<span class="op">);</span></span>
-<span id="cb8-53"><a></a>    LOG_INF<span class="op">(</span><span class="st">"Submitted blinking work to the queue! (</span><span class="sc">%lld</span><span class="st">)"</span><span class="op">,</span> k_uptime_get<span class="op">());</span></span>
-<span id="cb8-54"><a></a><span class="op">}</span></span>
-<span id="cb8-55"><a></a></span>
-<span id="cb8-56"><a></a><span class="dt">void</span> blink_timer_stop<span class="op">(</span><span class="kw">struct</span> k_timer <span class="op">*</span>blink_timer<span class="op">){</span></span>
-<span id="cb8-57"><a></a>    LOG_INF<span class="op">(</span><span class="st">"Stopping the blinking LED."</span><span class="op">);</span></span>
-<span id="cb8-58"><a></a>    gpio_pin_set_dt<span class="op">(&amp;</span>led_blink<span class="op">,</span> <span class="dv">0</span><span class="op">);</span></span>
-<span id="cb8-59"><a></a><span class="op">}</span></span>
-<span id="cb8-60"><a></a></span>
-<span id="cb8-61"><a></a><span class="dt">void</span> blink_timer_work_handler<span class="op">(</span><span class="kw">struct</span> k_work <span class="op">*</span>timer_work<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb8-62"><a></a>    LOG_INF<span class="op">(</span><span class="st">"Doing blink work! (</span><span class="sc">%lld</span><span class="st">)"</span><span class="op">,</span> k_uptime_get<span class="op">());</span></span>
-<span id="cb8-63"><a></a>    gpio_pin_toggle_dt<span class="op">(&amp;</span>led_blink<span class="op">);</span></span>
-<span id="cb8-64"><a></a>    k_msleep<span class="op">(</span>WORK_QUEUE_NAP_TIME_MS<span class="op">);</span></span>
-<span id="cb8-65"><a></a>    LOG_INF<span class="op">(</span><span class="st">"Took a nap... just woke up. (</span><span class="sc">%lld</span><span class="st">)"</span><span class="op">,</span> k_uptime_get<span class="op">());</span></span>
-<span id="cb8-66"><a></a><span class="op">}</span></span>
-<span id="cb8-67"><a></a></span>
-<span id="cb8-68"><a></a><span class="dt">void</span> oneshot_timer_handler<span class="op">(</span><span class="kw">struct</span> k_timer <span class="op">*</span>oneshot_timer<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb8-69"><a></a>    LOG_INF<span class="op">(</span><span class="st">"Turn oneshot LED off (</span><span class="sc">%lld</span><span class="st">)"</span><span class="op">,</span> k_uptime_get<span class="op">());</span></span>
-<span id="cb8-70"><a></a>    gpio_pin_set_dt<span class="op">(&amp;</span>led_oneshot<span class="op">,</span> <span class="dv">0</span><span class="op">);</span></span>
-<span id="cb8-71"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb9-1"><a></a><span class="pp">#include </span><span class="im">&lt;zephyr/kernel.h&gt;</span></span>
+<span id="cb9-2"><a></a><span class="pp">#include </span><span class="im">&lt;zephyr/drivers/gpio.h&gt;</span></span>
+<span id="cb9-3"><a></a><span class="pp">#include </span><span class="im">&lt;zephyr/logging/log.h&gt;</span></span>
+<span id="cb9-4"><a></a></span>
+<span id="cb9-5"><a></a>LOG_MODULE_REGISTER<span class="op">(</span>main<span class="op">,</span> LOG_LEVEL_DBG<span class="op">);</span></span>
+<span id="cb9-6"><a></a></span>
+<span id="cb9-7"><a></a><span class="pp">#define MAIN_SLEEP_TIME_MS   </span><span class="dv">100000</span></span>
+<span id="cb9-8"><a></a><span class="pp">#define BLINK_TIMER_INTERVAL_MS </span><span class="dv">500</span></span>
+<span id="cb9-9"><a></a><span class="pp">#define WORK_QUEUE_NAP_TIME_MS </span><span class="dv">10</span></span>
+<span id="cb9-10"><a></a><span class="pp">#define ONESHOT_DURATION_MS </span><span class="dv">10000</span></span>
+<span id="cb9-11"><a></a></span>
+<span id="cb9-12"><a></a><span class="dt">static</span> <span class="dt">const</span> <span class="kw">struct</span> gpio_dt_spec led_blink <span class="op">=</span> GPIO_DT_SPEC_GET<span class="op">(</span>DT_ALIAS<span class="op">(</span>led0<span class="op">),</span> gpios<span class="op">);</span></span>
+<span id="cb9-13"><a></a><span class="dt">static</span> <span class="dt">const</span> <span class="kw">struct</span> gpio_dt_spec led_oneshot <span class="op">=</span> GPIO_DT_SPEC_GET<span class="op">(</span>DT_ALIAS<span class="op">(</span>led1<span class="op">),</span> gpios<span class="op">);</span></span>
+<span id="cb9-14"><a></a></span>
+<span id="cb9-15"><a></a><span class="dt">void</span> blink_timer_handler<span class="op">(</span><span class="kw">struct</span> k_timer <span class="op">*</span>blink_timer<span class="op">);</span></span>
+<span id="cb9-16"><a></a><span class="dt">void</span> blink_timer_stop<span class="op">(</span><span class="kw">struct</span> k_timer <span class="op">*</span>blink_timer<span class="op">);</span></span>
+<span id="cb9-17"><a></a><span class="dt">void</span> oneshot_timer_handler<span class="op">(</span><span class="kw">struct</span> k_timer <span class="op">*</span>blink_timer<span class="op">);</span></span>
+<span id="cb9-18"><a></a><span class="dt">void</span> blink_timer_work_handler<span class="op">(</span><span class="kw">struct</span> k_work <span class="op">*</span>timer_work<span class="op">);</span></span>
+<span id="cb9-19"><a></a></span>
+<span id="cb9-20"><a></a>K_TIMER_DEFINE<span class="op">(</span>blink_timer<span class="op">,</span> blink_timer_handler<span class="op">,</span> blink_timer_stop<span class="op">);</span></span>
+<span id="cb9-21"><a></a>K_TIMER_DEFINE<span class="op">(</span>oneshot_timer<span class="op">,</span> oneshot_timer_handler<span class="op">,</span> NULL<span class="op">);</span></span>
+<span id="cb9-22"><a></a>K_WORK_DEFINE<span class="op">(</span>blink_timer_work<span class="op">,</span> blink_timer_work_handler<span class="op">);</span></span>
+<span id="cb9-23"><a></a></span>
+<span id="cb9-24"><a></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span></span>
+<span id="cb9-25"><a></a><span class="op">{</span></span>
+<span id="cb9-26"><a></a>    <span class="dt">int</span> ret<span class="op">;</span></span>
+<span id="cb9-27"><a></a></span>
+<span id="cb9-28"><a></a>    <span class="cf">if</span> <span class="op">(!</span>gpio_is_ready_dt<span class="op">(&amp;</span>led_blink<span class="op">))</span> <span class="op">{</span></span>
+<span id="cb9-29"><a></a>        <span class="cf">return</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span></span>
+<span id="cb9-30"><a></a>    <span class="op">}</span></span>
+<span id="cb9-31"><a></a></span>
+<span id="cb9-32"><a></a>    ret <span class="op">=</span> gpio_pin_configure_dt<span class="op">(&amp;</span>led_blink<span class="op">,</span> GPIO_OUTPUT_ACTIVE<span class="op">);</span></span>
+<span id="cb9-33"><a></a>    <span class="cf">if</span> <span class="op">(</span>ret <span class="op">&lt;</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb9-34"><a></a>        <span class="cf">return</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span></span>
+<span id="cb9-35"><a></a>    <span class="op">}</span></span>
+<span id="cb9-36"><a></a>    ret <span class="op">=</span> gpio_pin_configure_dt<span class="op">(&amp;</span>led_oneshot<span class="op">,</span> GPIO_OUTPUT_ACTIVE<span class="op">);</span></span>
+<span id="cb9-37"><a></a>    <span class="cf">if</span> <span class="op">(</span>ret <span class="op">&lt;</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb9-38"><a></a>        <span class="cf">return</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span></span>
+<span id="cb9-39"><a></a>    <span class="op">}</span></span>
+<span id="cb9-40"><a></a></span>
+<span id="cb9-41"><a></a>    k_timer_start<span class="op">(&amp;</span>blink_timer<span class="op">,</span> K_MSEC<span class="op">(</span>BLINK_TIMER_INTERVAL_MS<span class="op">),</span> K_MSEC<span class="op">(</span>BLINK_TIMER_INTERVAL_MS<span class="op">));</span></span>
+<span id="cb9-42"><a></a>    k_timer_start<span class="op">(&amp;</span>oneshot_timer<span class="op">,</span> K_MSEC<span class="op">(</span>ONESHOT_DURATION_MS<span class="op">),</span> K_NO_WAIT<span class="op">);</span></span>
+<span id="cb9-43"><a></a></span>
+<span id="cb9-44"><a></a>    <span class="cf">while</span> <span class="op">(</span><span class="dv">1</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb9-45"><a></a>        k_msleep<span class="op">(</span>MAIN_SLEEP_TIME_MS<span class="op">);</span></span>
+<span id="cb9-46"><a></a>    <span class="op">}</span></span>
+<span id="cb9-47"><a></a></span>
+<span id="cb9-48"><a></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb9-49"><a></a><span class="op">}</span></span>
+<span id="cb9-50"><a></a></span>
+<span id="cb9-51"><a></a><span class="dt">void</span> blink_timer_handler<span class="op">(</span><span class="kw">struct</span> k_timer <span class="op">*</span>blink_timer<span class="op">){</span></span>
+<span id="cb9-52"><a></a>    k_work_submit<span class="op">(&amp;</span>blink_timer_work<span class="op">);</span></span>
+<span id="cb9-53"><a></a>    LOG_INF<span class="op">(</span><span class="st">"Submitted blinking work to the queue! (</span><span class="sc">%lld</span><span class="st">)"</span><span class="op">,</span> k_uptime_get<span class="op">());</span></span>
+<span id="cb9-54"><a></a><span class="op">}</span></span>
+<span id="cb9-55"><a></a></span>
+<span id="cb9-56"><a></a><span class="dt">void</span> blink_timer_stop<span class="op">(</span><span class="kw">struct</span> k_timer <span class="op">*</span>blink_timer<span class="op">){</span></span>
+<span id="cb9-57"><a></a>    LOG_INF<span class="op">(</span><span class="st">"Stopping the blinking LED."</span><span class="op">);</span></span>
+<span id="cb9-58"><a></a>    gpio_pin_set_dt<span class="op">(&amp;</span>led_blink<span class="op">,</span> <span class="dv">0</span><span class="op">);</span></span>
+<span id="cb9-59"><a></a><span class="op">}</span></span>
+<span id="cb9-60"><a></a></span>
+<span id="cb9-61"><a></a><span class="dt">void</span> blink_timer_work_handler<span class="op">(</span><span class="kw">struct</span> k_work <span class="op">*</span>timer_work<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb9-62"><a></a>    LOG_INF<span class="op">(</span><span class="st">"Doing blink work! (</span><span class="sc">%lld</span><span class="st">)"</span><span class="op">,</span> k_uptime_get<span class="op">());</span></span>
+<span id="cb9-63"><a></a>    gpio_pin_toggle_dt<span class="op">(&amp;</span>led_blink<span class="op">);</span></span>
+<span id="cb9-64"><a></a>    k_msleep<span class="op">(</span>WORK_QUEUE_NAP_TIME_MS<span class="op">);</span></span>
+<span id="cb9-65"><a></a>    LOG_INF<span class="op">(</span><span class="st">"Took a nap... just woke up. (</span><span class="sc">%lld</span><span class="st">)"</span><span class="op">,</span> k_uptime_get<span class="op">());</span></span>
+<span id="cb9-66"><a></a><span class="op">}</span></span>
+<span id="cb9-67"><a></a></span>
+<span id="cb9-68"><a></a><span class="dt">void</span> oneshot_timer_handler<span class="op">(</span><span class="kw">struct</span> k_timer <span class="op">*</span>oneshot_timer<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb9-69"><a></a>    LOG_INF<span class="op">(</span><span class="st">"Turn oneshot LED off (</span><span class="sc">%lld</span><span class="st">)"</span><span class="op">,</span> k_uptime_get<span class="op">());</span></span>
+<span id="cb9-70"><a></a>    gpio_pin_set_dt<span class="op">(&amp;</span>led_oneshot<span class="op">,</span> <span class="dv">0</span><span class="op">);</span></span>
+<span id="cb9-71"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="high-level-flow-chart" class="slide level2">
 <h2>High-level Flow Chart</h2>
@@ -504,6 +550,7 @@ Dr.&nbsp;Mark Palmeri, M.D., Ph.D.
 <ul>
 <li><a href="https://docs.zephyrproject.org/latest/kernel/services/timing/timers.html">Zephyr Docs: Timers</a></li>
 <li><a href="https://docs.zephyrproject.org/latest/kernel/services/timing/clocks.html">Zephyr Docs: Clocks</a></li>
+<li><a href="https://docs.zephyrproject.org/latest/kernel/services/other/atomic.html">Zephyr Docs: Atomic Services</a></li>
 </ul>
 
 
