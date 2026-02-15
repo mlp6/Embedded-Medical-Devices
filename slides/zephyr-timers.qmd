@@ -1,6 +1,6 @@
 ---
 title: "Zephyr: Timers, Threads, Atomic Services & Work Queues"
-date: "2025-02-15"
+date: "2026-02-15"
 format: 
   live-html: 
     output-file: zephyr-timers.html
