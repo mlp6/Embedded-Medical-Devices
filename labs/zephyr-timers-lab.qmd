@@ -1,6 +1,6 @@
 ---
-title: "Zephyr: Timers Lab"
-date: "2025-09-22"
+title: "Zephyr: Timers & Atomic Operations Lab"
+date: "2026-02-15"
 format:
   html: default
   pdf: default
@@ -8,12 +8,13 @@ format:
 
 ## Refactor your GPIO Lab Code
 
-You will be refactoring your code from the GPIO lab to now use timers.  Do all
-of the refactoring below on a new branch called `timers`.
+You will be refactoring your code from the GPIO lab to now use timers and atomic
+operations.  Do all of the refactoring below on a new branch called `timers`
+branched from `main` and your last annotated tag for the previous assignment.
 
 - Eliminate any conditional logic (`if/else` statements) to test for elapsed
-time to toggle/set LED output states.
-- Use timers for all LED illumination events.
+time to toggle/set LED output states and refactor using timers.
+- Refactor all button press boolean variables that are modified in ISRs to use atomic operations.
 - Implement finer resolution for timing than what `k_uptime_get()` can provide
 (ms) by using `k_uptime_ticks()` ([documentation](https://docs.zephyrproject.org/latest/kernel/services/timing/clocks.html)) and `k_ticks_to_ns_near64()` ([documentation](https://docs.zephyrproject.org/latest/doxygen/html/time__units_8h.html)).
 - You do not have to use work queues if your timer handler functions run quickly
@@ -23,6 +24,11 @@ should use work queues to submit the work to the system work queue.
 ## Git Version Control
 
 {{< include _git_best_practices.qmd >}}
+
+::: callout-tip
+For this lab, you should capture changes related to your different refactoring
+efforts in separate commits.
+:::
 
 ## Test the Accuracy of your Timing
 
@@ -122,13 +128,17 @@ specification.
 ### Oscilloscope Measurements
 
 - Repeat your timing accuracy analysis you performed with logging statements
-using an oscilloscope directly measuring the GPIO pin signals.  *Remember that
-all of the GPIO pins are accessible as female header sockets on the development
-kit; you do not need to try to directly connect to the pads of the LEDs and
-buttons!*
+using an oscilloscope directly measuring the GPIO pin signals.  
+
+
+::: callout-tip
+Remember that all of the GPIO pins are accessible as female header sockets on
+the development kit; you do not need to try to directly connect to the pads of
+the LEDs and buttons!
 - Save your oscilloscope measurements to a CSV file to be read into your Jupyter
 notebook.
 - Use the oscilloscope cursors to measure the timing intervals.  
+:::
 
 ::: {.callout-note}
 Remember that you will need multiple independent measurements to calculate
