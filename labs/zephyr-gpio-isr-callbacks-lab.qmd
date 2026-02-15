@@ -170,6 +170,18 @@ error state), if the `sleep_button` is pressed:
 frequency, etc.
 :::
 
+::: callout-warning
+Be careful with how your check to see what button(s) have been pressed in your
+`ACTION` state.  If multiple buttons have been pressed before you test for the
+Boolean values that represent whether a button has been pressed, then you might
+have some "unexpected" behavior.  For example, if you check for `freq_up_button`
+being pressed before checking for `reset_button` being pressed, then if both
+buttons are pressed at the same time, you might end up increasing the frequency
+and then immediately resetting it back to default, which is not what you want.
+You will need to think carefully about the order of your conditional statements
+in your state machine.
+:::
+
 ## State Diagram
 
 1. Create a state diagram of your firmware using
