@@ -136,18 +136,7 @@
     "href": "labs/zephyr-threads-events-lab.html#test-the-accuracy-of-the-heartbeat-led-timing",
     "title": "Zephyr: Threads & Kernel Events Lab",
     "section": "Test the Accuracy of the Heartbeat LED Timing",
-    "text": "Test the Accuracy of the Heartbeat LED Timing\n\nCreate a new Jupyter notebook for this lab’s technical report called testing/thread_testing.ipynb that analyzes the accuracy of your 25% duty cycle heartbeat LED.\nPerform these measurements using the oscilloscope, and save all raw data in dedicated CSV files.\nChoose what to measure and how to analyze the data to verify that the heartbeat LED thread is working as expected.\nDiscuss the results of your measurements and how they compare to the nominal specifications for the heartbeat LED.",
-    "crumbs": [
-      "Labs",
-      "Threads and Kernel Events Lab"
-    ]
-  },
-  {
-    "objectID": "labs/zephyr-threads-events-lab.html#merge-n-tag-this-refactored-heartbeat-led-code-and-analysis",
-    "href": "labs/zephyr-threads-events-lab.html#merge-n-tag-this-refactored-heartbeat-led-code-and-analysis",
-    "title": "Zephyr: Threads & Kernel Events Lab",
-    "section": "Merge-n-Tag this Refactored Heartbeat LED Code and Analysis",
-    "text": "Merge-n-Tag this Refactored Heartbeat LED Code and Analysis\n\n\n\n\n\n\nTip\n\n\n\nMake sure that your Jupyter notebook reads in data from relative paths for the repository, not absolute paths on your local machine.\n\n\n\nPush your heartbeat_refactor branch to GitLab.\nCreate a new Merge Request to merge heartbeat_refactor into your forked repository’s main branch.\nMerge your heartbeat_refactor branch into your main branch, and create an annotated tag for that merged commit called v1.2.0.",
+    "text": "Test the Accuracy of the Heartbeat LED Timing\n\nCreate a new Jupyter notebook for this lab’s technical report called testing/thread_testing.ipynb that analyzes the accuracy of your 25% duty cycle heartbeat LED.\nPerform these measurements using the oscilloscope, and save all raw data in dedicated CSV files.\n\n\n\n\n\n\n\nTip\n\n\n\nMake sure that your Jupyter notebook reads in data from relative paths for the repository, not absolute paths on your local machine, so that your notebook can be run on any machine after cloning the repository.\n\n\n\nChoose what to measure and how to analyze the data to verify that the heartbeat LED thread is working as expected.\nDiscuss the results of your measurements and how they compare to the nominal specifications for the heartbeat LED.\n\n\nMerge-n-Tag this Refactored Heartbeat LED Code and Analysis\n\nPush your heartbeat_refactor branch to GitLab.\nCreate a new Merge Request to merge heartbeat_refactor into your forked repository’s main branch.\nMerge your heartbeat_refactor branch into your main branch, and create an annotated tag for that merged commit called v1.2.0.\n\n\n\nUpload a PDF of your Jupyter notebooks to Gradescope\n\nUpdate a PDF of your Jupyter notebook to the appropriate Gradescope assignment for this section of the lab.",
     "crumbs": [
       "Labs",
       "Threads and Kernel Events Lab"
@@ -169,18 +158,18 @@
     "href": "labs/zephyr-threads-events-lab.html#verify-that-your-led-timing-still-works",
     "title": "Zephyr: Threads & Kernel Events Lab",
     "section": "Verify that your LED Timing Still Works",
-    "text": "Verify that your LED Timing Still Works\n\nCreate a new Jupyter notebook called testing/kernel_events_validation.ipynb to verify that your refactored code still works as expected.\nIt is up to you to now determine how to verify that your LED timing is still working with regard to what data to collect, how to analyze it, and how to present it in your notebook.",
+    "text": "Verify that your LED Timing Still Works\n\nCreate a new Jupyter notebook called testing/kernel_events_validation.ipynb to verify that your refactored code still works as expected.\nIt is up to you to now determine how to verify that your LED timing is still working with regard to what data to collect, how to analyze it, and how to present it in your notebook.\n\n\nMerge-n-Tag this Refactored Kernel Events Code and Analysis\n\nCreate a Merge Request to merge kernel_events_refactor into your main branch.\nMerge your kernel_events_refactor branch into your main branch.\nCreate an annotated tag for that merge commit called v1.3.0.\n\n\n\nUpload a PDF of your Jupyter notebooks to Gradescope\n\nUpdate a PDF of your Jupyter notebook to the appropriate Gradescope assignment for this section of the lab.",
     "crumbs": [
       "Labs",
       "Threads and Kernel Events Lab"
     ]
   },
   {
-    "objectID": "labs/zephyr-threads-events-lab.html#merge-n-tag-this-refactored-kernel-events-code-and-analysis",
-    "href": "labs/zephyr-threads-events-lab.html#merge-n-tag-this-refactored-kernel-events-code-and-analysis",
+    "objectID": "labs/zephyr-threads-events-lab.html#new-functionality-double-button-press-detection",
+    "href": "labs/zephyr-threads-events-lab.html#new-functionality-double-button-press-detection",
     "title": "Zephyr: Threads & Kernel Events Lab",
-    "section": "Merge-n-Tag this Refactored Kernel Events Code and Analysis",
-    "text": "Merge-n-Tag this Refactored Kernel Events Code and Analysis\n\nCreate a Merge Request to merge kernel_events_refactor into your main branch.\nMerge your kernel_events_refactor branch into your main branch.\nCreate an annotated tag for that merge commit called v1.3.0.\nCreate an Issue assigned to Dr. Palmeri to review your code for both v1.2.0 and v1.3.0.",
+    "section": "New Functionality: Double-Button Press Detection",
+    "text": "New Functionality: Double-Button Press Detection\n\nAdd new functionality to you code to detect a double-button press of the freq_up_button or freq_down_button that will increase or decrease, respectively, the heartbeat LED frequency by 2 Hz (instead of the 1 Hz increment with a single button press).\nThe double-button press should be detected if two button presses occur within 500 ms of each other.\n\n\n\n\n\n\n\nTip\n\n\n\nOne implementation scheme for this functionality could include use of atomic variables, timers and kernel events.\nA new atomic function that may help you is atomic_inc().\n\n\n\nCreate an annotated tag for that merge commit called v1.4.0. Creation of this tag is a self-declaration that the double-press functionality is working as expected, so make sure to test it before creating the tag.\nCreate an Issue assigned to Dr. Palmeri to review your code for v1.2.0, v1.3.0, and v1.4.0 to provide feedback on your code.",
     "crumbs": [
       "Labs",
       "Threads and Kernel Events Lab"

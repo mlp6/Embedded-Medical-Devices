@@ -389,11 +389,18 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#git-version-control" id="toc-git-version-control" class="nav-link active" data-scroll-target="#git-version-control">Git Version Control</a></li>
   <li><a href="#refactor-heartbeat-led-25-duty-cycle" id="toc-refactor-heartbeat-led-25-duty-cycle" class="nav-link" data-scroll-target="#refactor-heartbeat-led-25-duty-cycle">Refactor: Heartbeat LED (25% Duty Cycle)</a></li>
-  <li><a href="#test-the-accuracy-of-the-heartbeat-led-timing" id="toc-test-the-accuracy-of-the-heartbeat-led-timing" class="nav-link" data-scroll-target="#test-the-accuracy-of-the-heartbeat-led-timing">Test the Accuracy of the Heartbeat LED Timing</a></li>
+  <li><a href="#test-the-accuracy-of-the-heartbeat-led-timing" id="toc-test-the-accuracy-of-the-heartbeat-led-timing" class="nav-link" data-scroll-target="#test-the-accuracy-of-the-heartbeat-led-timing">Test the Accuracy of the Heartbeat LED Timing</a>
+  <ul class="collapse">
   <li><a href="#merge-n-tag-this-refactored-heartbeat-led-code-and-analysis" id="toc-merge-n-tag-this-refactored-heartbeat-led-code-and-analysis" class="nav-link" data-scroll-target="#merge-n-tag-this-refactored-heartbeat-led-code-and-analysis">Merge-n-Tag this Refactored Heartbeat LED Code and Analysis</a></li>
+  <li><a href="#upload-a-pdf-of-your-jupyter-notebooks-to-gradescope" id="toc-upload-a-pdf-of-your-jupyter-notebooks-to-gradescope" class="nav-link" data-scroll-target="#upload-a-pdf-of-your-jupyter-notebooks-to-gradescope">Upload a PDF of your Jupyter notebooks to Gradescope</a></li>
+  </ul></li>
   <li><a href="#refactor-kernel-events" id="toc-refactor-kernel-events" class="nav-link" data-scroll-target="#refactor-kernel-events">Refactor: Kernel Events</a></li>
-  <li><a href="#verify-that-your-led-timing-still-works" id="toc-verify-that-your-led-timing-still-works" class="nav-link" data-scroll-target="#verify-that-your-led-timing-still-works">Verify that your LED Timing Still Works</a></li>
+  <li><a href="#verify-that-your-led-timing-still-works" id="toc-verify-that-your-led-timing-still-works" class="nav-link" data-scroll-target="#verify-that-your-led-timing-still-works">Verify that your LED Timing Still Works</a>
+  <ul class="collapse">
   <li><a href="#merge-n-tag-this-refactored-kernel-events-code-and-analysis" id="toc-merge-n-tag-this-refactored-kernel-events-code-and-analysis" class="nav-link" data-scroll-target="#merge-n-tag-this-refactored-kernel-events-code-and-analysis">Merge-n-Tag this Refactored Kernel Events Code and Analysis</a></li>
+  <li><a href="#upload-a-pdf-of-your-jupyter-notebooks-to-gradescope-1" id="toc-upload-a-pdf-of-your-jupyter-notebooks-to-gradescope-1" class="nav-link" data-scroll-target="#upload-a-pdf-of-your-jupyter-notebooks-to-gradescope-1">Upload a PDF of your Jupyter notebooks to Gradescope</a></li>
+  </ul></li>
+  <li><a href="#new-functionality-double-button-press-detection" id="toc-new-functionality-double-button-press-detection" class="nav-link" data-scroll-target="#new-functionality-double-button-press-detection">New Functionality: Double-Button Press Detection</a></li>
   <li><a href="#how-do-i-ask-for-help" id="toc-how-do-i-ask-for-help" class="nav-link" data-scroll-target="#how-do-i-ask-for-help">How do I ask for help?</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/mlp6/Embedded-Medical-Devices/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="zephyr-threads-events-lab.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
@@ -472,12 +479,7 @@ Important
 <ul>
 <li><p>Create a new Jupyter notebook for this lab’s technical report called <code>testing/thread_testing.ipynb</code> that analyzes the accuracy of your 25% duty cycle heartbeat LED.</p></li>
 <li><p>Perform these measurements using the oscilloscope, and save all raw data in dedicated CSV files.</p></li>
-<li><p>Choose what to measure and how to analyze the data to verify that the heartbeat LED thread is working as expected.</p></li>
-<li><p>Discuss the results of your measurements and how they compare to the nominal specifications for the heartbeat LED.</p></li>
 </ul>
-</section>
-<section id="merge-n-tag-this-refactored-heartbeat-led-code-and-analysis" class="level2">
-<h2 class="anchored" data-anchor-id="merge-n-tag-this-refactored-heartbeat-led-code-and-analysis">Merge-n-Tag this Refactored Heartbeat LED Code and Analysis</h2>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -488,14 +490,27 @@ Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Make sure that your Jupyter notebook reads in data from relative paths for the repository, <strong>not</strong> absolute paths on your local machine.</p>
+<p>Make sure that your Jupyter notebook reads in data from relative paths for the repository, <strong>not</strong> absolute paths on your local machine, so that your notebook can be run on any machine after cloning the repository.</p>
 </div>
 </div>
+<ul>
+<li><p>Choose what to measure and how to analyze the data to verify that the heartbeat LED thread is working as expected.</p></li>
+<li><p>Discuss the results of your measurements and how they compare to the nominal specifications for the heartbeat LED.</p></li>
+</ul>
+<section id="merge-n-tag-this-refactored-heartbeat-led-code-and-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="merge-n-tag-this-refactored-heartbeat-led-code-and-analysis">Merge-n-Tag this Refactored Heartbeat LED Code and Analysis</h3>
 <ul>
 <li><p>Push your <code>heartbeat_refactor</code> branch to GitLab.</p></li>
 <li><p>Create a new Merge Request to merge <code>heartbeat_refactor</code> into your forked repository’s <code>main</code> branch.</p></li>
 <li><p>Merge your <code>heartbeat_refactor</code> branch into your <code>main</code> branch, and create an annotated tag for that merged commit called <code>v1.2.0</code>.</p></li>
 </ul>
+</section>
+<section id="upload-a-pdf-of-your-jupyter-notebooks-to-gradescope" class="level3">
+<h3 class="anchored" data-anchor-id="upload-a-pdf-of-your-jupyter-notebooks-to-gradescope">Upload a PDF of your Jupyter notebooks to Gradescope</h3>
+<ul>
+<li>Update a PDF of your Jupyter notebook to the appropriate Gradescope assignment for this section of the lab.</li>
+</ul>
+</section>
 </section>
 <section id="refactor-kernel-events" class="level2">
 <h2 class="anchored" data-anchor-id="refactor-kernel-events">Refactor: Kernel Events</h2>
@@ -512,14 +527,44 @@ Tip
 <li><p>Create a new Jupyter notebook called <code>testing/kernel_events_validation.ipynb</code> to verify that your refactored code still works as expected.</p></li>
 <li><p>It is up to you to now determine how to verify that your LED timing is still working with regard to what data to collect, how to analyze it, and how to present it in your notebook.</p></li>
 </ul>
-</section>
-<section id="merge-n-tag-this-refactored-kernel-events-code-and-analysis" class="level2">
-<h2 class="anchored" data-anchor-id="merge-n-tag-this-refactored-kernel-events-code-and-analysis">Merge-n-Tag this Refactored Kernel Events Code and Analysis</h2>
+<section id="merge-n-tag-this-refactored-kernel-events-code-and-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="merge-n-tag-this-refactored-kernel-events-code-and-analysis">Merge-n-Tag this Refactored Kernel Events Code and Analysis</h3>
 <ul>
 <li><p>Create a Merge Request to merge <code>kernel_events_refactor</code> into your <code>main</code> branch.</p></li>
 <li><p>Merge your <code>kernel_events_refactor</code> branch into your <code>main</code> branch.</p></li>
 <li><p>Create an annotated tag for that merge commit called <code>v1.3.0</code>.</p></li>
-<li><p>Create an Issue assigned to Dr.&nbsp;Palmeri to review your code for both <code>v1.2.0</code> and <code>v1.3.0</code>.</p></li>
+</ul>
+</section>
+<section id="upload-a-pdf-of-your-jupyter-notebooks-to-gradescope-1" class="level3">
+<h3 class="anchored" data-anchor-id="upload-a-pdf-of-your-jupyter-notebooks-to-gradescope-1">Upload a PDF of your Jupyter notebooks to Gradescope</h3>
+<ul>
+<li>Update a PDF of your Jupyter notebook to the appropriate Gradescope assignment for this section of the lab.</li>
+</ul>
+</section>
+</section>
+<section id="new-functionality-double-button-press-detection" class="level2">
+<h2 class="anchored" data-anchor-id="new-functionality-double-button-press-detection">New Functionality: Double-Button Press Detection</h2>
+<ul>
+<li><p>Add new functionality to you code to detect a double-button press of the <code>freq_up_button</code> or <code>freq_down_button</code> that will increase or decrease, respectively, the heartbeat LED frequency by 2 Hz (instead of the 1 Hz increment with a single button press).</p></li>
+<li><p>The double-button press should be detected if two button presses occur within 500 ms of each other.</p></li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>One implementation scheme for this functionality could include use of atomic variables, timers and kernel events.</p>
+<p>A new atomic function that may help you is <a href="https://docs.zephyrproject.org/latest/doxygen/html/group__atomic__apis.html#gaae47a9cbe5a6534967b417f602b37ac2"><code>atomic_inc()</code></a>.</p>
+</div>
+</div>
+<ul>
+<li><p>Create an annotated tag for that merge commit called <code>v1.4.0</code>. Creation of this tag is a self-declaration that the double-press functionality is working as expected, so make sure to test it before creating the tag.</p></li>
+<li><p>Create an Issue assigned to Dr.&nbsp;Palmeri to review your code for <code>v1.2.0</code>, <code>v1.3.0</code>, and <code>v1.4.0</code> to provide feedback on your code.</p></li>
 </ul>
 </section>
 <section id="how-do-i-ask-for-help" class="level2">
