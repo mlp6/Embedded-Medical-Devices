@@ -235,7 +235,7 @@ in called `v2.2.0`.
 - Create an Issue **assigned to your teaching assistant** indicating that this
 tag is ready for review.
 
-## Timer-Based Single Sampling to Array
+<!-- ## Timer-Based Single Sampling to Array
 
 ### Firmware Functional Specifications
 
@@ -259,7 +259,7 @@ Request on Gitlab.
 in called `v2.3.0`.
 
 - Create an Issue **assigned to your teaching assistant** indicating that this
-tag is ready for review.
+tag is ready for review. -->
 
 ## How to Ask for Help
 
