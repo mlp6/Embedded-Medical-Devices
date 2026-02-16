@@ -5419,17 +5419,6 @@
     ]
   },
   {
-    "objectID": "labs/zephyr-adc-lab.html#timer-based-single-sampling-to-array",
-    "href": "labs/zephyr-adc-lab.html#timer-based-single-sampling-to-array",
-    "title": "Analog-to-Digital Conversion (ADC) Lab",
-    "section": "Timer-Based Single Sampling to Array",
-    "text": "Timer-Based Single Sampling to Array\n\nFirmware Functional Specifications\nIn a new development branch called timer_adc, add the following functionality to your firmware:\n\nRefactor your firmware to use a kernel timer to do single ADC samples that are sequentially stored in the array that was associated with the ADC sequence in the previous two sections.\n\n\n\nTesting\n\nRepeat the testing you performed in the asyncronous section for this timer-based implementation in a new Jupyter notebook named testing/testing_adc_timer.ipynb.\nDiscuss the benefits and drawbacks of using a timer-based ADC sampling scheme compared to the previous approaches when trying to accurately sample a sinusoidal signal.\n\n\n\nCommit-n-Merge Timer Sampling\n\nMerge your completed timer_adc branch into your main branch using a Merge Request on Gitlab.\nCreate an annotated tag of your main branch with all part of this lab merged in called v2.3.0.\nCreate an Issue assigned to your teaching assistant indicating that this tag is ready for review.",
-    "crumbs": [
-      "Labs",
-      "Analog-to-Digital Conversion (ADC) Lab"
-    ]
-  },
-  {
     "objectID": "labs/zephyr-adc-lab.html#how-to-ask-for-help",
     "href": "labs/zephyr-adc-lab.html#how-to-ask-for-help",
     "title": "Analog-to-Digital Conversion (ADC) Lab",

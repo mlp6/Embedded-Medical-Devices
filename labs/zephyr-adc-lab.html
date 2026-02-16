@@ -437,12 +437,6 @@ window.Quarto = {
   <li><a href="#testing-2" id="toc-testing-2" class="nav-link" data-scroll-target="#testing-2">Testing</a></li>
   <li><a href="#commit-n-merge-asynchronous-sampling" id="toc-commit-n-merge-asynchronous-sampling" class="nav-link" data-scroll-target="#commit-n-merge-asynchronous-sampling">Commit-n-Merge Asynchronous Sampling</a></li>
   </ul></li>
-  <li><a href="#timer-based-single-sampling-to-array" id="toc-timer-based-single-sampling-to-array" class="nav-link" data-scroll-target="#timer-based-single-sampling-to-array">Timer-Based Single Sampling to Array</a>
-  <ul class="collapse">
-  <li><a href="#firmware-functional-specifications-3" id="toc-firmware-functional-specifications-3" class="nav-link" data-scroll-target="#firmware-functional-specifications-3">Firmware Functional Specifications</a></li>
-  <li><a href="#testing-3" id="toc-testing-3" class="nav-link" data-scroll-target="#testing-3">Testing</a></li>
-  <li><a href="#commit-n-merge-timer-sampling" id="toc-commit-n-merge-timer-sampling" class="nav-link" data-scroll-target="#commit-n-merge-timer-sampling">Commit-n-Merge Timer Sampling</a></li>
-  </ul></li>
   <li><a href="#how-to-ask-for-help" id="toc-how-to-ask-for-help" class="nav-link" data-scroll-target="#how-to-ask-for-help">How to Ask for Help</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/mlp6/Embedded-Medical-Devices/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="zephyr-adc-lab.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
@@ -737,31 +731,31 @@ Warning
 <li><p>Create an annotated tag of your <code>main</code> branch with all part of this lab merged in called <code>v2.2.0</code>.</p></li>
 <li><p>Create an Issue <strong>assigned to your teaching assistant</strong> indicating that this tag is ready for review.</p></li>
 </ul>
-</section>
-</section>
-<section id="timer-based-single-sampling-to-array" class="level2">
-<h2 class="anchored" data-anchor-id="timer-based-single-sampling-to-array">Timer-Based Single Sampling to Array</h2>
-<section id="firmware-functional-specifications-3" class="level3">
-<h3 class="anchored" data-anchor-id="firmware-functional-specifications-3">Firmware Functional Specifications</h3>
-<p>In a new development branch called <code>timer_adc</code>, add the following functionality to your firmware:</p>
-<ul>
-<li>Refactor your firmware to use a kernel timer to do single ADC samples that are sequentially stored in the array that was associated with the ADC sequence in the previous two sections.</li>
-</ul>
-</section>
-<section id="testing-3" class="level3">
-<h3 class="anchored" data-anchor-id="testing-3">Testing</h3>
-<ul>
-<li><p>Repeat the testing you performed in the asyncronous section for this timer-based implementation in a new Jupyter notebook named <code>testing/testing_adc_timer.ipynb</code>.</p></li>
-<li><p>Discuss the benefits and drawbacks of using a timer-based ADC sampling scheme compared to the previous approaches when trying to accurately sample a sinusoidal signal.</p></li>
-</ul>
-</section>
-<section id="commit-n-merge-timer-sampling" class="level3">
-<h3 class="anchored" data-anchor-id="commit-n-merge-timer-sampling">Commit-n-Merge Timer Sampling</h3>
-<ul>
-<li><p>Merge your completed <code>timer_adc</code> branch into your <code>main</code> branch using a Merge Request on Gitlab.</p></li>
-<li><p>Create an annotated tag of your <code>main</code> branch with all part of this lab merged in called <code>v2.3.0</code>.</p></li>
-<li><p>Create an Issue <strong>assigned to your teaching assistant</strong> indicating that this tag is ready for review.</p></li>
-</ul>
+<!-- ## Timer-Based Single Sampling to Array
+
+### Firmware Functional Specifications
+
+In a new development branch called `timer_adc`, add the following
+functionality to your firmware:
+
+- Refactor your firmware to use a kernel timer to do single ADC samples that are sequentially stored in the array that was associated with the ADC sequence in the previous two sections.
+
+### Testing
+
+- Repeat the testing you performed in the asyncronous section for this timer-based implementation in a new Jupyter notebook named `testing/testing_adc_timer.ipynb`.
+
+- Discuss the benefits and drawbacks of using a timer-based ADC sampling scheme compared to the previous approaches when trying to accurately sample a sinusoidal signal.
+
+### Commit-n-Merge Timer Sampling
+
+- Merge your completed `timer_adc` branch into your `main` branch using a Merge
+Request on Gitlab.
+
+- Create an annotated tag of your `main` branch with all part of this lab merged
+in called `v2.3.0`.
+
+- Create an Issue **assigned to your teaching assistant** indicating that this
+tag is ready for review. -->
 </section>
 </section>
 <section id="how-to-ask-for-help" class="level2">
