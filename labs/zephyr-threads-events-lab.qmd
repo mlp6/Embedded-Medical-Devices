@@ -31,18 +31,19 @@ heartbeat LED.
 - Perform these measurements using the oscilloscope, and save all raw data in
 dedicated CSV files.
 
+::: callout-tip
+Make sure that your Jupyter notebook reads in data from relative paths for the
+repository, **not** absolute paths on your local machine, so that your notebook
+can be run on any machine after cloning the repository.
+:::
+
 - Choose what to measure and how to analyze the data to verify that the
 heartbeat LED thread is working as expected.
 
 - Discuss the results of your measurements and how they compare to the nominal
 specifications for the heartbeat LED.
 
-## Merge-n-Tag this Refactored Heartbeat LED Code and Analysis
-
-::: callout-tip
-Make sure that your Jupyter notebook reads in data from relative paths for the
-repository, **not** absolute paths on your local machine.
-:::
+### Merge-n-Tag this Refactored Heartbeat LED Code and Analysis
 
 - Push your `heartbeat_refactor` branch to GitLab.
 
@@ -51,6 +52,11 @@ repository's `main` branch.
 
 - Merge your `heartbeat_refactor` branch into your `main` branch, and create an
 annotated tag for that merged commit called `v1.2.0`.
+
+### Upload a PDF of your Jupyter notebooks to Gradescope
+
+- Update a PDF of your Jupyter notebook to the appropriate Gradescope assignment
+for this section of the lab.
 
 ## Refactor: Kernel Events
 
@@ -76,7 +82,7 @@ to verify that your refactored code still works as expected.
 working with regard to what data to collect, how to analyze it, and how to
 present it in your notebook.
 
-## Merge-n-Tag this Refactored Kernel Events Code and Analysis
+### Merge-n-Tag this Refactored Kernel Events Code and Analysis
 
 - Create a Merge Request to merge `kernel_events_refactor` into your `main`
 branch.
@@ -85,8 +91,33 @@ branch.
 
 - Create an annotated tag for that merge commit called `v1.3.0`.
 
-- Create an Issue assigned to Dr. Palmeri to review your code for both `v1.2.0`
-and `v1.3.0`.
+### Upload a PDF of your Jupyter notebooks to Gradescope
+
+- Update a PDF of your Jupyter notebook to the appropriate Gradescope assignment
+for this section of the lab.
+
+## New Functionality: Double-Button Press Detection
+
+- Add new functionality to you code to detect a double-button press of the
+`freq_up_button` or `freq_down_button` that will increase or decrease, respectively, the
+heartbeat LED frequency by 2 Hz (instead of the 1 Hz increment with a single
+button press).
+
+- The double-button press should be detected if two button presses occur within
+500 ms of each other.
+
+::: callout-tip
+One implementation scheme for this functionality could include use of atomic variables, timers and kernel events.
+
+A new atomic function that may help you is [`atomic_inc()`](https://docs.zephyrproject.org/latest/doxygen/html/group__atomic__apis.html#gaae47a9cbe5a6534967b417f602b37ac2).
+:::
+
+- Create an annotated tag for that merge commit called `v1.4.0`.  Creation of
+this tag is a self-declaration that the double-press functionality is working as
+expected, so make sure to test it before creating the tag.
+
+- Create an Issue assigned to Dr. Palmeri to review your code for `v1.2.0`,
+`v1.3.0`, and `v1.4.0` to provide feedback on your code.
 
 ## How do I ask for help?
 
