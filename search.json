@@ -1852,7 +1852,7 @@
     "href": "slides/zephyr-adc.html#how-does-an-saadc-work",
     "title": "Zephyr: Analog-to-Digital Conversion",
     "section": "How does an SAADC work?",
-    "text": "How does an SAADC work?\n\nNordic DevAcademy: SAADC",
+    "text": "How does an SAADC work?\nNordic DevAcademy: SAADC",
     "crumbs": [
       "Learning Modules",
       "Analog-to-Digital Conversion (ADC)"
@@ -1995,7 +1995,7 @@
     "href": "slides/zephyr-adc.html#resources",
     "title": "Zephyr: Analog-to-Digital Conversion",
     "section": "Resources",
-    "text": "Resources\n\nNordic DevAcademy: ADC\nZephyr Docs: ADC\nnRF52 ADC Examples",
+    "text": "Resources\n\nNordic DevAcademy: ADC\nZephyr Docs: ADC",
     "crumbs": [
       "Learning Modules",
       "Analog-to-Digital Conversion (ADC)"
@@ -2013,7 +2013,7 @@
     "href": "slides/zephyr-adc-slides.html#how-does-an-saadc-work",
     "title": "Zephyr: Analog-to-Digital Conversion",
     "section": "How does an SAADC work?",
-    "text": "How does an SAADC work?\n\nNordic DevAcademy: SAADC"
+    "text": "How does an SAADC work?\nNordic DevAcademy: SAADC"
   },
   {
     "objectID": "slides/zephyr-adc-slides.html#prj.conf",
@@ -2104,7 +2104,7 @@
     "href": "slides/zephyr-adc-slides.html#resources",
     "title": "Zephyr: Analog-to-Digital Conversion",
     "section": "Resources",
-    "text": "Resources\n\nNordic DevAcademy: ADC\nZephyr Docs: ADC\nnRF52 ADC Examples"
+    "text": "Resources\n\nNordic DevAcademy: ADC\nZephyr Docs: ADC"
   },
   {
     "objectID": "CLAUDE.html",
@@ -3337,7 +3337,7 @@
     "href": "slides/zephyr-pwm-slides.html#pwm-signal-generation",
     "title": "Zephyr: Pulse Width Modulation",
     "section": "PWM Signal Generation",
-    "text": "PWM Signal Generation\n\nNordic DevAcademy: PWM"
+    "text": "PWM Signal Generation\nNordic DevAcademy: PWM"
   },
   {
     "objectID": "slides/zephyr-pwm-slides.html#block-diagram",
@@ -3450,7 +3450,7 @@
     "href": "slides/zephyr-pwm.html#pwm-signal-generation",
     "title": "Zephyr: Pulse Width Modulation",
     "section": "PWM Signal Generation",
-    "text": "PWM Signal Generation\n\nNordic DevAcademy: PWM",
+    "text": "PWM Signal Generation\nNordic DevAcademy: PWM",
     "crumbs": [
       "Learning Modules",
       "Pulse Width Modulation (PWM)"
