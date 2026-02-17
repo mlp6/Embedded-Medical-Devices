@@ -1,6 +1,6 @@
 ---
 title: "Zephyr: State Machine Framework Refactor Lab"
-date: "2025-10-06"
+date: "2026-02-16"
 format:
   html: default
   pdf: default
@@ -14,16 +14,19 @@ format:
 
 1. Create a new development branch in your forked repository you have used the
 last few weeks called `refactor_smf`.
-1. Refactor your code to use the [Zephyr State Machine Framework
-(SMF)](https://docs.zephyrproject.org/latest/services/smf/index.html).
+1. Refactor your code to use the [Zephyr State Machine Framework (SMF)](https://docs.zephyrproject.org/latest/services/smf/index.html).
     - Use `entry` and `exit` substates to handle state transitions where
     something should be done "once" when entering or exiting a state.
     - Refactor code to make sure that state-specific things are done in that
     state.  For example, if an error LED should only be on in the `ERROR` state,
     then the code to turn on the LED should be in the `ERROR` entry state and
     not done in the exit of the previous state.
-    - Make sure that your device initialization is done in an `INIT` state (so that, in the future, a soft reset can allow the device to be completely re-initialized).
-1. Make sure that your state diagram is updated to reflect these entry / exit actions.  This diagram should exactly match your firmware implementation of the SMF.
+    - Make sure that your device initialization is done in an `INIT` state (so
+    that, in the future, a soft reset can allow the device to be completely
+    re-initialized).
+1. Make sure that your state diagram is updated to reflect these entry / exit
+actions.  This diagram should exactly match your firmware implementation of the
+SMF.
 1. Qualitatively make sure that your device continues to function as expected.
 
 ## How do I ask for help?
@@ -32,6 +35,8 @@ last few weeks called `refactor_smf`.
 
 ## What to Submit
 
-1. As with the previous labs, push this development branch to Gitlab and merge it into `main`.
-1. Create an annotated tag for that merged commit called `v1.4.0`.
-1. Create an Issue assigned to Dr. Palmeri to review your code for `v1.4.0`.  (Teaching team will upload a zip archive of your project to Gradescope.)
+1. As with the previous labs, push this development branch to Gitlab and merge
+it into `main`.
+1. Create an annotated tag for that merged commit called `v1.5.0`.
+1. Create an Issue assigned to Dr. Palmeri, labeled `Review`, to review your
+code for `v1.5.0`.

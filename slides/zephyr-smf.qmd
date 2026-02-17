@@ -1,6 +1,6 @@
 ---
 title: "Zephyr: State Machine Framework"
-date: "2025-10-06"
+date: "2026-02-16"
 format:
   live-html: 
     output-file: zephyr-smf.html
@@ -13,10 +13,13 @@ format:
 - Nested conditional logic main loops are hard to read and maintain.
 - State machines are a common way to implement complex logic.
 - States have transitions that are triggered by events or conditions.
-  - States can have entry / exit routines that are executed when the state is entered / exited.
-  - The "run" status of a state is commonly referred to as the "state machine tick" and recurrently loops.
+  - States can have entry / exit routines that are executed when the state is
+  entered / exited.
+  - The "run" status of a state is commonly referred to as the "state machine
+  tick" and recurrently loops.
 - State diagrams are used to visualize state machines. 
-- State structures are used to capture variables associated with describing the state.
+- State structures are used to capture variables associated with describing the
+state.
 
 # Implementation
 
@@ -255,15 +258,24 @@ If multiple states share the same entry / exit routines, they can be grouped int
 ## When to Use Threads vs. States
 
 - The state machine is the foundation of describing the behavior of a system.
-- Threads as a tool to help implement a function of the state machine that is not readily captured by an exclusive state.
-- Threads add overhead and complexity to the system, making debugging more difficult.
-- Threads are not readily captured in a state diagram, but are more commonly described using a sequence diagram.
+- Threads as a tool to help implement a function of the state machine that is
+not readily captured by an exclusive state.
+- Threads add overhead and complexity to the system, making debugging more
+difficult.
+- Threads are not readily captured in a state diagram, but are more commonly
+described using a sequence diagram.
 
 ## Avoiding Global Variables with `s_object` Struct
 
-As you implement functionality within the SMF, you may wonder how to make a variable available in two different states — which is a good question, because a natural instinct might be to utilize a global variable, which we want to avoid. 
+As you implement functionality within the SMF, you may wonder how to make a
+variable available in two different states — which is a good question, because a
+natural instinct might be to utilize a global variable, which we want to avoid. 
 
-Generally, you can leverage the fact that the `s_object` struct we create for `smf_ctx` (ie, state machine context) is passed to all states as a pointer and populate it with members for your own purpose. You can declare an `s_object` struct template in the global scope that contains anything you need to access between states. Something like: 
+Generally, you can leverage the fact that the `s_object` struct we create for
+`smf_ctx` (ie, state machine context) is passed to all states as a pointer and
+populate it with members for your own purpose. You can declare an `s_object`
+struct template in the global scope that contains anything you need to access
+between states. Something like: 
 
 ```C
 struct s_object {
@@ -274,7 +286,10 @@ struct s_object {
 };
 ```
 
-To be clear, this is merely defining a struct type and does not constitute creating a variable.  Then, within `main()`, you can create an instance of this struct (that will be local to main) and populate the members with initial values — here, this example shows how to do this with a helper function: 
+To be clear, this is merely defining a struct type and does not constitute
+creating a variable.  Then, within `main()`, you can create an instance of this
+struct (that will be local to main) and populate the members with initial values
+— here, this example shows how to do this with a helper function: 
 
 ```C
 #define S_OBJ_SUCCESS         0
@@ -394,7 +409,7 @@ void my_work_handler(struct k_work *work){
 ```
 
 Here, we make use of the `CONTAINER_OF` macro
-([documentation](https://docs.zephyrproject.org/3.7.0/kernel/util/index.html#c.CONTAINER_OF))to
+([documentation](https://docs.zephyrproject.org/3.7.0/kernel/util/index.html#c.CONTAINER_OF)) to
 obtain a pointer to the structure containing the element `work`, in this case
 `my_work`, the wrapper struct. From this, we can then recover a pointer to our
 `s_object` instance, `s_obj`, and use it as needed thereafter.  
