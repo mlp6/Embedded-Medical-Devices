@@ -1,6 +1,6 @@
 ---
 title: "Zephyr: Analog-to-Digital Conversion"
-date: "2026-01-05"
+date: "2026-02-16"
 format: 
   live-html: 
     output-file: zephyr-adc.html
@@ -17,8 +17,6 @@ format:
 ![](images/adc/ADC-Block-Diagram.png){fig-align="center"}
 
 ## How does an SAADC work?
-
-<!-- TODO: create slides on this; assign the DevAcademy lesson -->
 
 [Nordic DevAcademy: SAADC](https://academy.nordicsemi.com/courses/nrf-connect-sdk-intermediate/lessons/lesson-6-analog-to-digital-converter-adc/topic/adc-peripheral-on-nordic-devices/)
 
@@ -295,4 +293,3 @@ usage](https://docs.zephyrproject.org/latest/services/logging/index.html#stack-u
 
 - [Nordic DevAcademy: ADC](https://academy.nordicsemi.com/courses/nrf-connect-sdk-intermediate/lessons/lesson-6-analog-to-digital-converter-adc/)
 - [Zephyr Docs: ADC](https://docs.zephyrproject.org/latest/hardware/peripherals/adc.html)
-- [nRF52 ADC Examples](https://github.com/NordicPlayground/nRF52-ADC-examples)

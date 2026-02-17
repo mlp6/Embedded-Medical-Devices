@@ -1,6 +1,6 @@
 ---
 title: "Analog-to-Digital Conversion (ADC) Lab"
-date: "2025-10-15"
+date: "2026-02-15"
 format:
   html: default
   pdf: default
