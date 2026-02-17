@@ -12,7 +12,7 @@
   <meta name="generator" content="quarto-1.7.31">
 
   <meta name="author" content="Dr.&nbsp;Mark Palmeri, M.D., Ph.D.">
-  <meta name="dcterms.date" content="2025-10-06">
+  <meta name="dcterms.date" content="2026-02-16">
   <title>Embedded Medical Devices – Zephyr: State Machine Framework</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -212,7 +212,7 @@ Dr.&nbsp;Mark Palmeri, M.D., Ph.D.
     </div>
 </div>
 
-  <p class="date">October 6, 2025</p>
+  <p class="date">February 16, 2026</p>
 </section>
 <section id="state-machine-framework" class="slide level2">
 <h2>State Machine Framework</h2>
@@ -555,7 +555,7 @@ Dr.&nbsp;Mark Palmeri, M.D., Ph.D.
 <span id="cb14-3"><a></a>    <span class="kw">struct</span> s_object <span class="op">*</span>s <span class="op">=</span> mw<span class="op">-&gt;</span>s_obj_ptr<span class="op">;</span></span>
 <span id="cb14-4"><a></a>    <span class="co">// use s-&gt; member as needed</span></span>
 <span id="cb14-5"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Here, we make use of the <code>CONTAINER_OF</code> macro (<a href="https://docs.zephyrproject.org/3.7.0/kernel/util/index.html#c.CONTAINER_OF">documentation</a>)to obtain a pointer to the structure containing the element <code>work</code>, in this case <code>my_work</code>, the wrapper struct. From this, we can then recover a pointer to our <code>s_object</code> instance, <code>s_obj</code>, and use it as needed thereafter.</p>
+<p>Here, we make use of the <code>CONTAINER_OF</code> macro (<a href="https://docs.zephyrproject.org/3.7.0/kernel/util/index.html#c.CONTAINER_OF">documentation</a>) to obtain a pointer to the structure containing the element <code>work</code>, in this case <code>my_work</code>, the wrapper struct. From this, we can then recover a pointer to our <code>s_object</code> instance, <code>s_obj</code>, and use it as needed thereafter.</p>
 <p>More generically, how can we pass a pointer to a user created thread?</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb15-1"><a></a><span class="dt">void</span> my_thread<span class="op">(</span><span class="dt">void</span> <span class="op">*</span>p1<span class="op">,</span> <span class="dt">void</span> <span class="op">*</span>p2<span class="op">,</span> <span class="dt">void</span> <span class="op">*</span>p3<span class="op">);</span> <span class="co">// forward declaration</span></span>
 <span id="cb15-2"><a></a></span>
