@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Dr.&nbsp;Mark Palmeri, M.D., Ph.D.">
-<meta name="dcterms.date" content="2025-11-12">
+<meta name="dcterms.date" content="2026-02-16">
 
 <title>ECG &amp; Temperature Sensor with BLE Lab – Embedded Medical Devices</title>
 <style>
@@ -435,7 +435,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">November 12, 2025</p>
+      <p class="date">February 16, 2026</p>
     </div>
   </div>
   
@@ -496,6 +496,7 @@ Important
 <li><p>An error condition should post an error-related event that causes the device to enter the <code>ERROR</code> state.</p></li>
 <li><p>The error code should specify the error condition that caused the device to enter the <code>ERROR</code> state. For example, you may choose to have a bit array that can capture multiple error conditions.</p></li>
 <li><p>A BLE notification should be sent with the error code (see BLE custom service/characteristic below).</p></li>
+<li><p>If the device remains in the <code>ERROR</code> state for more than 2 minutes, this it should “gracefully” terminate the state machine function and go into a low-power mode.</p></li>
 </ul></li>
 <li><p>Implement states of your choosing for the following measurements, calculations and BLE communications.</p></li>
 </ul></li>
@@ -506,9 +507,11 @@ Important
 <li><p>Every 1 minute thereafter, but only when in the <code>IDLE</code> state.</p></li>
 <li><p>You won’t actually be connecting a battery to your device; you can use a power support or another voltage source to input a voltage to <code>AIN0</code> to simulate a battery level.</p></li>
 </ol></li>
+<li><p>If your battery level is &lt;75% of the nominal voltage (3.0 V), then your device should “gracefully” terminate the state machine function and go into a low-power mode.</p></li>
 <li><p>Have the brightness of <code>LED1</code> linearly modulated by the percentage of the battery level.</p></li>
 <li><p>Implement functionality to make a temperature measurement with your <a href="https://www.adafruit.com/product/1782"><code>MCP9808</code></a> sensor (in degrees Celsius) after pressing <code>BUTTON1</code>.</p></li>
-<li><p>When you press <code>BUTTON2</code>, the device should measure “instantaneous” heart rate, expected to range from 40-200 BPM, using an ECG signal (ranging from -500 - 500 mV, note this is bipolar) from the function generator (see video on how to setup the function generator to output an ECG signal).</p>
+<li><p>When you press <code>BUTTON2</code>, the device should measure “instantaneous” heart rate, expected to range from 40-200 BPM, using an ECG signal (ranging from -500</p></li>
+<li><p>500 mV, note this is bipolar) from the function generator (see video on how to setup the function generator to output an ECG signal).</p>
 <ul>
 <li><p>Pressing <code>BUTTON2</code> during ECG measurements will stop the “live” ECG measurements.</p></li>
 <li><p>Blink <code>LED2</code> with a 25% duty cycle (<code>ON:OFF</code> time) at the average heart rate you have calculated (updated as often as you feel is appropriate).</p></li>
@@ -517,9 +520,9 @@ Important
 </ul></li>
 <li><p>Have Bluetooth notifications after the measurements are complete/updated and data have been processed, using the BLE services and characteristics described below.</p>
 <ul>
-<li><p>Configure the <strong>DIS (Device Information Service)</strong> to report the device model as your Team Name (come up with something fun).</p></li>
+<li><p>Configure the <strong>DIS (Device Information Service)</strong> to report the device model as your name.</p></li>
 <li><p>Set the <strong>BAS (Battery Service)</strong> to report the battery level of your device. (This isn’t actually a battery level, but we’re using the <code>AIN0</code> measurement as a surrogate for a battery level.)</p></li>
-<li><p>Set the <strong>Heart Rate Service</strong> to report the average heart rate. (See Resources section below.)</p></li>
+<li><p>Set the <strong>Heart Rate Service</strong> to report the average heart rate (see Resources section below.)</p></li>
 <li><p>Setup a custom service with the following custom characterisitics:</p>
 <ul>
 <li><p><code>Temperature</code> for the I2C temperature sensor data in degrees Celcius.</p></li>
@@ -627,6 +630,7 @@ Important
 <li><p>If you fix any bugs after creating this tag, you can create another tag called <code>v4.0.1</code>, etc.</p></li>
 <li><p>Your latest tag will be the one that is graded up until the final due date/time of the project.</p></li>
 </ul></li>
+<li><p>Create an Issue assigned to Dr.&nbsp;Palmeri titled “Final Project Submission” and labelled <code>Review</code>.</p></li>
 </ul>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -638,10 +642,12 @@ Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>You do <em>not</em> need to create an Issue for this final submission.</p>
 <p>All repositories will be cloned with the latest tag at the due date/time for grading. No repository commits after the due date/time will be accepted.</p>
 </div>
 </div>
+<ul>
+<li>Upload a PDF of your final technical report Jupyter notebook to Gradescope.</li>
+</ul>
 </section>
 <section id="resources" class="level2">
 <h2 class="anchored" data-anchor-id="resources">Resources</h2>
