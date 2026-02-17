@@ -1,6 +1,6 @@
 ---
 title: "Zephyr: Pulse Width Modulation"
-date: "2025-11-03"
+date: "2026-02-16"
 format:
   live-html: 
     output-file: zephyr-pwm.html
@@ -12,14 +12,13 @@ format:
 
 - Most microcontrollers and SoCs do not have a native DAC.
 - Much easier to output digital `HIGH` or `LOW` signals.
-- Timing and duty cycle (pulse width) of `HIGH` and `LOW` signals can be used to approximate an analog voltage.
+- Timing and duty cycle (pulse width) of `HIGH` and `LOW` signals can be used to
+approximate an analog voltage.
 - LPF to smooth out the PWM signal.
 
 ![sine-from-pwm](images/pwm/sine-from-pwm.png){fig-align="center"}
 
 ## PWM Signal Generation
-
-<!-- TODO: create slides on this; assign the DevAcademy lesson -->
 
 [Nordic DevAcademy: PWM](https://academy.nordicsemi.com/courses/nrf-connect-sdk-intermediate/lessons/lesson-4-pulse-width-modulation-pwm/topic/pulse-width-modulation-pwm/)
 
@@ -129,15 +128,19 @@ if (err) {
 
 ## Changing PWM Duty Cycle
 
-- The pulse length (duty cycle) can be changed "on the fly", but only changes at the next period.
+- The pulse length (duty cycle) can be changed "on the fly", but only changes at
+the next period.
 
 - Can be done with a timer or triggered by an event or poll signal.
 
 ## How to Sinusoidally Module LED Brightness Using a PWM
 
-- Change the duty cycle of the PWM signal at a known timing interval.  Can be done with a timer, callback function run at a set interval (e.g., ADC async), etc.
+- Change the duty cycle of the PWM signal at a known timing interval.  Can be
+done with a timer, callback function run at a set interval (e.g., ADC async),
+etc.
 
-- Need to consider how often to update based on frequency content of the desired output signal.
+- Need to consider how often to update based on frequency content of the desired
+output signal.
 
 - PWM clock frequency should be much higher than the output signal frequency.
 
@@ -155,5 +158,5 @@ if (err) {
 - [Pulse Width Modulation](https://www.analogictips.com/pulse-width-modulation-pwm/)
 - [Zephyr: Blinky Sample](https://github.com/zephyrproject-rtos/zephyr/tree/main/samples/basic/blinky_pwm)
 - [Sine Wave Generation](https://deepbluembedded.com/stm32-change-pwm-duty-cycle-with-dma-for-sine-wave-generation/)
-- [Nordic Semiconductor: PinCtrl](https://developer.nordicsemi.com/nRF_Connect_SDK/doc/2.9.0/nrf/app_dev/pin_control/index.html)
+- [Nordic Semiconductor: PinCtrl](https://docs.zephyrproject.org/latest/hardware/pinctrl/index.html)
 - [Nordic DevAcademy: PWM](https://academy.nordicsemi.com/courses/nrf-connect-sdk-intermediate/lessons/lesson-4-pulse-width-modulation-pwm/)
