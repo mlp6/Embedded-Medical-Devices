@@ -126,24 +126,37 @@ Code settings under `Terminal > Integrated: Scrollback`.
 normally-distributed data) for your timing relative to the nominal
 specification.
 
+::: callout-tip
+When measuring your timing accuracy with a confidence interval, you need to make
+repeated measurements.  If your measured timing periods are identical, your a
+standard deviation of 0 and a confidence interval of 0.  But that apparent
+"identical" replicate measurement is a function of the finite resolution of your
+measurement system.  In this case, you can use the resolution of your timing
+measurement as the upper bound of an estimated confidence interval.
+
+For example, if your timing resolution is 1 ms, and you measure a period of 500
+ms repeatedly, you can say that your 95% confidence interval is < 1 ms (i.e.,
+500 +/- 0.5 ms).
+:::
+
 ### Oscilloscope Measurements
 
 - Repeat your timing accuracy analysis you performed with logging statements
-using an oscilloscope directly measuring the GPIO pin signals.  
+using an oscilloscope directly measuring the GPIO pin signals (using the
+`Measure` functionality for `Period` and `Frequency` metrics).  You can
+measurement the highest and lowest frequencies of your action LEDs (you don't
+have to measure each discrete frequency).
 
+- Demonstrate that your LEDs are perfectly out of phase with each other (i.e.,
+when one is on, the other is off).  You can do this with a cellphone picture of
+the oscilloscope screen showing both traces for the two action LEDs overlaid on
+top of each other.
 
 ::: callout-tip
 Remember that all of the GPIO pins are accessible as female header sockets on
 the development kit; you do not need to try to directly connect to the pads of
 the LEDs and buttons!
-- Save your oscilloscope measurements to a CSV file to be read into your Jupyter
-notebook.
 - Use the oscilloscope cursors to measure the timing intervals.  
-:::
-
-::: {.callout-note}
-Remember that you will need multiple independent measurements to calculate
-confidence intervals.
 :::
 
 - Quantify a 95% confidence interval for your timing relative to the nominal
