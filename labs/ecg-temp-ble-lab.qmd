@@ -248,7 +248,6 @@ graded.
   - Your latest tag will be the one that is graded up until the final due
   date/time of the project.
 
-
 - Create an Issue assigned to Dr. Palmeri titled "Final Project Submission" and
 labelled `Review`.
 
@@ -256,8 +255,6 @@ labelled `Review`.
 All repositories will be cloned with the latest tag at the due date/time for
 grading.  No repository commits after the due date/time will be accepted.
 :::
-
-- Upload a PDF of your final technical report Jupyter notebook to Gradescope.
 
 ## Resources
 
