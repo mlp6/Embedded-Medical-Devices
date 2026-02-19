@@ -1,6 +1,6 @@
 ---
 title: "Zephyr: Threads & Kernel Events Lab"
-date: "2026-02-16"
+date: "2026-02-18"
 format:
   html: default
   pdf: default
@@ -53,11 +53,6 @@ repository's `main` branch.
 - Merge your `heartbeat_refactor` branch into your `main` branch, and create an
 annotated tag for that merged commit called `v1.2.0`.
 
-### Upload a PDF of your Jupyter notebooks to Gradescope
-
-- Update a PDF of your Jupyter notebook to the appropriate Gradescope assignment
-for this section of the lab.
-
 ## Refactor: Kernel Events
 
 - Do the following refactoring on a new branch called `kernel_events_refactor`,
@@ -90,11 +85,6 @@ branch.
 - Merge your `kernel_events_refactor` branch into your `main` branch.
 
 - Create an annotated tag for that merge commit called `v1.3.0`.
-
-### Upload a PDF of your Jupyter notebooks to Gradescope
-
-- Update a PDF of your Jupyter notebook to the appropriate Gradescope assignment
-for this section of the lab.
 
 ## New Functionality: Double-Button Press Detection
 
