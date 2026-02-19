@@ -5258,7 +5258,7 @@
     "href": "labs/ecg-temp-ble-lab.html#what-to-submit",
     "title": "ECG & Temperature Sensor with BLE Lab",
     "section": "What to Submit",
-    "text": "What to Submit\n\nMake sure that all of your branches have been merged into the main branch.\nCreate an annotated tag called v4.0.0 to mark the commit that you want to be graded.\n\nIf you fix any bugs after creating this tag, you can create another tag called v4.0.1, etc.\nYour latest tag will be the one that is graded up until the final due date/time of the project.\n\nCreate an Issue assigned to Dr. Palmeri titled “Final Project Submission” and labelled Review.\n\n\n\n\n\n\n\nImportant\n\n\n\nAll repositories will be cloned with the latest tag at the due date/time for grading. No repository commits after the due date/time will be accepted.\n\n\n\nUpload a PDF of your final technical report Jupyter notebook to Gradescope.",
+    "text": "What to Submit\n\nMake sure that all of your branches have been merged into the main branch.\nCreate an annotated tag called v4.0.0 to mark the commit that you want to be graded.\n\nIf you fix any bugs after creating this tag, you can create another tag called v4.0.1, etc.\nYour latest tag will be the one that is graded up until the final due date/time of the project.\n\nCreate an Issue assigned to Dr. Palmeri titled “Final Project Submission” and labelled Review.\n\n\n\n\n\n\n\nImportant\n\n\n\nAll repositories will be cloned with the latest tag at the due date/time for grading. No repository commits after the due date/time will be accepted.",
     "crumbs": [
       "Labs",
       "ECG, Temperature Sensor, and BLE Lab"
