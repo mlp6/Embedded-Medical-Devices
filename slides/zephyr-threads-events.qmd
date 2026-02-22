@@ -201,6 +201,8 @@ Worker -> Worker : process event\n(e.g., change state)
 @enduml
 ```
 
+![Sequence Diagram Example](images/threads/sequence.png)
+
 ## Resources
 
 - [Nordic DevAcademy: Zephyr RTOS Advanced](https://academy.nordicsemi.com/courses/nrf-connect-sdk-intermediate/lessons/lesson-1-zephyr-rtos-advanced/)

@@ -1,0 +1,17 @@
+@startuml
+
+participant "Button ISR\nCallback" as ISR
+participant "Kernel Event\nBit Array / Main" as KEvents
+participant "Worker Thread" as Worker
+
+Worker -> KEvents : k_event_wait()\n[blocking]
+activate Worker #LightBlue
+
+note over ISR : Button Pressed
+ISR -> KEvents : k_event_post(BUTTON_EVENT)
+KEvents --> Worker : BUTTON_EVENT received
+deactivate Worker
+
+Worker -> Worker : process event\n(e.g., change state)
+
+@enduml
