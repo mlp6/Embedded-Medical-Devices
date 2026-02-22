@@ -528,20 +528,6 @@ Tip
 <section id="methods" class="level3">
 <h3 class="anchored" data-anchor-id="methods">Methods</h3>
 <p>A brief Methods section describing what you did (e.g., how you captured the timing via logging or how you measured timing on the oscilloscope).</p>
-<p>For each section below, all raw data should be read in from a dedicated file (e.g., a CSV file).</p>
-<div class="callout callout-style-default callout-warning callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Warning
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Do <em>not</em> manually type in data in your Jupyter notebook.</p>
-</div>
-</div>
 </section>
 <section id="logging-statements" class="level3">
 <h3 class="anchored" data-anchor-id="logging-statements">Logging Statements</h3>
@@ -630,8 +616,11 @@ Tip
 <section id="oscilloscope-measurements" class="level3">
 <h3 class="anchored" data-anchor-id="oscilloscope-measurements">Oscilloscope Measurements</h3>
 <ul>
-<li><p>Repeat your timing accuracy analysis you performed with logging statements using an oscilloscope directly measuring the GPIO pin signals (using the <code>Measure</code> functionality for <code>Period</code> and <code>Frequency</code> metrics). You can measurement the highest and lowest frequencies of your action LEDs (you don’t have to measure each discrete frequency).</p></li>
-<li><p>Demonstrate that your LEDs are perfectly out of phase with each other (i.e., when one is on, the other is off). You can do this with a cellphone picture of the oscilloscope screen showing both traces for the two action LEDs overlaid on top of each other.</p></li>
+<li><p>Repeat your timing accuracy analysis you performed with logging statements using an oscilloscope directly measuring the GPIO pin signals (using the <code>Measure</code> functionality for <code>Period</code> and <code>Frequency</code> metrics).</p>
+<ul>
+<li><p>You can measurement the highest and lowest frequencies of your action LEDs (you don’t have to measure each discrete frequency).</p></li>
+<li><p>You do not need to take multiple measurements to estimate a confidence interval with the oscilloscope, since the resolution of the oscilloscope will be the limiting factor for your reported confidence interval estimation (see tip above).</p></li>
+</ul></li>
 </ul>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -643,11 +632,27 @@ Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Remember that all of the GPIO pins are accessible as female header sockets on the development kit; you do not need to try to directly connect to the pads of the LEDs and buttons! - Use the oscilloscope cursors to measure the timing intervals.</p>
+<p>Be sure to have at least 5 cycles of your action LED toggling to get a good estimate of the period and frequency with the oscilloscope’s measurement tools.</p>
 </div>
 </div>
 <ul>
-<li>Quantify a 95% confidence interval for your timing relative to the nominal specification using these oscillosocpe measurements.</li>
+<li>Demonstrate that your LEDs are perfectly out of phase with each other (i.e., when one is on, the other is off). You can do this with an oscilloscope measurement or with a cellphone picture of the oscilloscope screen showing both traces for the two action LEDs overlaid on top of each other.</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Remember that all of the GPIO pins are accessible as female header sockets on the development kit; you do not need to try to directly connect to the pads of the LEDs and buttons!</p>
+</div>
+</div>
+<ul>
+<li>Quantify a 95% confidence interval for your timing relative to the nominal specification using these oscillosocpe measurements. (See the tip above for how to estimate a confidence interval when you have finite measurement resolution.)</li>
 </ul>
 </section>
 <section id="discussion" class="level3">
@@ -674,7 +679,7 @@ Tip
 <section id="what-to-submit" class="level2">
 <h2 class="anchored" data-anchor-id="what-to-submit">What to Submit</h2>
 <ul>
-<li>Make sure that your complete <code>timing_analysis.ipynb</code> notebook is in your <code>timers</code> branch in a directory called <code>testing/</code>, which also includes all raw CSV data.</li>
+<li>Make sure that your complete <code>timing_analysis.ipynb</code> notebook is in your <code>timers</code> branch in a directory called <code>testing/</code>, which also includes all raw CSV logging data.</li>
 <li>Make sure that your Jupyter notebook reads in data from relative paths for the repository, <strong>not</strong> absolute paths on your local machine.</li>
 <li>Push your <code>timers</code> branch to GitLab.</li>
 <li>Create a new Merge Request to merge <code>timers</code> into your forked repository’s <code>main</code> branch.</li>
