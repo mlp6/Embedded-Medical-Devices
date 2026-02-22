@@ -77,6 +77,20 @@ to verify that your refactored code still works as expected.
 working with regard to what data to collect, how to analyze it, and how to
 present it in your notebook.
 
+## Create a Sequence Diagram
+
+- Create a [PlantUML](https://plantuml.com/sequence-diagram) sequence diagram
+that documents the interaction between your button ISR callback(s), the kernel
+event bit array, and your state machine thread when a button press event is
+detected and processed.
+
+- Your sequence diagram should show all relevant participants and the
+chronological order of messages between them (refer to the sequence diagram
+covered in the Threads & Kernel Events lecture).
+
+- Commit both the PlantUML source file (`.puml`) and the rendered image to your
+repository under a `docs/` directory.
+
 ### Merge-n-Tag this Refactored Kernel Events Code and Analysis
 
 - Create a Merge Request to merge `kernel_events_refactor` into your `main`

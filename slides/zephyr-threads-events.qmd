@@ -162,8 +162,49 @@ extern void temp_too_high_thread(void *, void *, void *) {
 }
 ```
 
+## Sequence Diagrams for Thread Communication
+
+- Sequence diagrams visualize how components **interact over time**.
+
+- Useful for documenting the flow of messages between threads, ISR callbacks,
+and kernel services.
+
+- Participants in a Zephyr firmware application may include:
+
+  - Threads (e.g., `main`, worker threads)
+
+  - ISR Callbacks
+
+  - Kernel Event Bit Arrays
+
+  - Kernel Timers
+
+## PlantUML Sequence Diagram Example
+
+```plantuml
+@startuml
+
+participant "Button ISR\nCallback" as ISR
+participant "Kernel Event\nBit Array" as KEvents
+participant "Worker Thread" as Worker
+
+Worker -> KEvents : k_event_wait()\n[blocking]
+activate Worker #LightBlue
+
+note over ISR : Button Pressed
+ISR -> KEvents : k_event_post(BUTTON_EVENT)
+KEvents --> Worker : BUTTON_EVENT received
+deactivate Worker
+
+Worker -> Worker : process event\n(e.g., change state)
+
+@enduml
+```
+
 ## Resources
 
 - [Nordic DevAcademy: Zephyr RTOS Advanced](https://academy.nordicsemi.com/courses/nrf-connect-sdk-intermediate/lessons/lesson-1-zephyr-rtos-advanced/)
 
 - [Zephyr Documentation: Events](https://docs.zephyrproject.org/latest/kernel/services/synchronization/events.html#events)
+
+- [PlantUML: Sequence Diagrams](https://plantuml.com/sequence-diagram)
