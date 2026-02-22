@@ -46,13 +46,6 @@ Your technical report should include:
 A brief Methods section describing what you did (e.g., how you captured the timing via
 logging or how you measured timing on the oscilloscope).
 
-For each section below, all raw data should be read in from a dedicated file
-(e.g., a CSV file).  
-
-::: {.callout-warning}
-Do *not* manually type in data in your Jupyter notebook.
-:::
-
 ### Logging Statements
 
 - Use logging statements to test the accuracy of your heartbeat and action LED
@@ -143,24 +136,34 @@ ms repeatedly, you can say that your 95% confidence interval is < 1 ms (i.e.,
 
 - Repeat your timing accuracy analysis you performed with logging statements
 using an oscilloscope directly measuring the GPIO pin signals (using the
-`Measure` functionality for `Period` and `Frequency` metrics).  You can
-measurement the highest and lowest frequencies of your action LEDs (you don't
-have to measure each discrete frequency).
+`Measure` functionality for `Period` and `Frequency` metrics).  
+
+  - You can measurement the highest and lowest frequencies of your action LEDs
+  (you don't have to measure each discrete frequency).
+
+  - You do not need to take multiple measurements to estimate a confidence
+  interval with the oscilloscope, since the resolution of the oscilloscope will
+  be the limiting factor for your reported confidence interval estimation (see
+  tip above).
+
+::: callout-tip
+Be sure to have at least 5 cycles of your action LED toggling to get a good estimate of the period and frequency with the oscilloscope's measurement tools.
+:::
 
 - Demonstrate that your LEDs are perfectly out of phase with each other (i.e.,
-when one is on, the other is off).  You can do this with a cellphone picture of
-the oscilloscope screen showing both traces for the two action LEDs overlaid on
-top of each other.
+when one is on, the other is off).  You can do this with an oscilloscope
+measurement or with a cellphone picture of the oscilloscope screen showing both
+traces for the two action LEDs overlaid on top of each other.
 
 ::: callout-tip
 Remember that all of the GPIO pins are accessible as female header sockets on
 the development kit; you do not need to try to directly connect to the pads of
 the LEDs and buttons!
-- Use the oscilloscope cursors to measure the timing intervals.  
 :::
 
 - Quantify a 95% confidence interval for your timing relative to the nominal
-specification using these oscillosocpe measurements.
+specification using these oscillosocpe measurements.  (See the tip above for how
+to estimate a confidence interval when you have finite measurement resolution.)
 
 ### Discussion
 
@@ -176,7 +179,7 @@ improved moving forward.
 
 - Make sure that your complete `timing_analysis.ipynb` notebook is in your
 `timers` branch in a directory called `testing/`, which also includes all raw
-CSV data.
+CSV logging data.
 - Make sure that your Jupyter notebook reads in data from relative paths for the
 repository, **not** absolute paths on your local machine.
 - Push your `timers` branch to GitLab.
