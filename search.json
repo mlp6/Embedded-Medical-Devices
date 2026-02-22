@@ -5093,7 +5093,7 @@
     "href": "slides/zephyr-threads-events-slides.html#plantuml-sequence-diagram-example",
     "title": "Zephyr: Threads and Kernel Events",
     "section": "PlantUML Sequence Diagram Example",
-    "text": "PlantUML Sequence Diagram Example\n@startuml\n\nparticipant \"Button ISR\\nCallback\" as ISR\nparticipant \"Kernel Event\\nBit Array\" as KEvents\nparticipant \"Worker Thread\" as Worker\n\nWorker -&gt; KEvents : k_event_wait()\\n[blocking]\nactivate Worker #LightBlue\n\nnote over ISR : Button Pressed\nISR -&gt; KEvents : k_event_post(BUTTON_EVENT)\nKEvents --&gt; Worker : BUTTON_EVENT received\ndeactivate Worker\n\nWorker -&gt; Worker : process event\\n(e.g., change state)\n\n@enduml"
+    "text": "PlantUML Sequence Diagram Example\n@startuml\n\nparticipant \"Button ISR\\nCallback\" as ISR\nparticipant \"Kernel Event\\nBit Array\" as KEvents\nparticipant \"Worker Thread\" as Worker\n\nWorker -&gt; KEvents : k_event_wait()\\n[blocking]\nactivate Worker #LightBlue\n\nnote over ISR : Button Pressed\nISR -&gt; KEvents : k_event_post(BUTTON_EVENT)\nKEvents --&gt; Worker : BUTTON_EVENT received\ndeactivate Worker\n\nWorker -&gt; Worker : process event\\n(e.g., change state)\n\n@enduml\n\nSequence Diagram Example"
   },
   {
     "objectID": "slides/zephyr-threads-events-slides.html#resources",
@@ -5239,7 +5239,7 @@
     "href": "slides/zephyr-threads-events.html#plantuml-sequence-diagram-example",
     "title": "Zephyr: Threads and Kernel Events",
     "section": "PlantUML Sequence Diagram Example",
-    "text": "PlantUML Sequence Diagram Example\n@startuml\n\nparticipant \"Button ISR\\nCallback\" as ISR\nparticipant \"Kernel Event\\nBit Array\" as KEvents\nparticipant \"Worker Thread\" as Worker\n\nWorker -&gt; KEvents : k_event_wait()\\n[blocking]\nactivate Worker #LightBlue\n\nnote over ISR : Button Pressed\nISR -&gt; KEvents : k_event_post(BUTTON_EVENT)\nKEvents --&gt; Worker : BUTTON_EVENT received\ndeactivate Worker\n\nWorker -&gt; Worker : process event\\n(e.g., change state)\n\n@enduml",
+    "text": "PlantUML Sequence Diagram Example\n@startuml\n\nparticipant \"Button ISR\\nCallback\" as ISR\nparticipant \"Kernel Event\\nBit Array\" as KEvents\nparticipant \"Worker Thread\" as Worker\n\nWorker -&gt; KEvents : k_event_wait()\\n[blocking]\nactivate Worker #LightBlue\n\nnote over ISR : Button Pressed\nISR -&gt; KEvents : k_event_post(BUTTON_EVENT)\nKEvents --&gt; Worker : BUTTON_EVENT received\ndeactivate Worker\n\nWorker -&gt; Worker : process event\\n(e.g., change state)\n\n@enduml\n\n\n\nSequence Diagram Example",
     "crumbs": [
       "Learning Modules",
       "Threads and Kernel Events"
