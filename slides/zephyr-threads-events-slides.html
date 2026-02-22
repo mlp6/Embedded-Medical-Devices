@@ -352,11 +352,46 @@ Dr.&nbsp;Mark Palmeri, M.D., Ph.D.
 <span id="cb4-25"><a></a>    <span class="op">}</span></span>
 <span id="cb4-26"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
+<section id="sequence-diagrams-for-thread-communication" class="slide level2">
+<h2>Sequence Diagrams for Thread Communication</h2>
+<ul>
+<li><p>Sequence diagrams visualize how components <strong>interact over time</strong>.</p></li>
+<li><p>Useful for documenting the flow of messages between threads, ISR callbacks, and kernel services.</p></li>
+<li><p>Participants in a Zephyr firmware application may include:</p>
+<ul>
+<li><p>Threads (e.g., <code>main</code>, worker threads)</p></li>
+<li><p>ISR Callbacks</p></li>
+<li><p>Kernel Event Bit Arrays</p></li>
+<li><p>Kernel Timers</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="plantuml-sequence-diagram-example" class="slide level2">
+<h2>PlantUML Sequence Diagram Example</h2>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource plantuml number-lines code-with-copy"><code class="sourceCode"><span id="cb5-1"><a></a>@startuml</span>
+<span id="cb5-2"><a></a></span>
+<span id="cb5-3"><a></a>participant "Button ISR\nCallback" as ISR</span>
+<span id="cb5-4"><a></a>participant "Kernel Event\nBit Array" as KEvents</span>
+<span id="cb5-5"><a></a>participant "Worker Thread" as Worker</span>
+<span id="cb5-6"><a></a></span>
+<span id="cb5-7"><a></a>Worker -&gt; KEvents : k_event_wait()\n[blocking]</span>
+<span id="cb5-8"><a></a>activate Worker #LightBlue</span>
+<span id="cb5-9"><a></a></span>
+<span id="cb5-10"><a></a>note over ISR : Button Pressed</span>
+<span id="cb5-11"><a></a>ISR -&gt; KEvents : k_event_post(BUTTON_EVENT)</span>
+<span id="cb5-12"><a></a>KEvents --&gt; Worker : BUTTON_EVENT received</span>
+<span id="cb5-13"><a></a>deactivate Worker</span>
+<span id="cb5-14"><a></a></span>
+<span id="cb5-15"><a></a>Worker -&gt; Worker : process event\n(e.g., change state)</span>
+<span id="cb5-16"><a></a></span>
+<span id="cb5-17"><a></a>@enduml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
 <section id="resources" class="slide level2">
 <h2>Resources</h2>
 <ul>
 <li><p><a href="https://academy.nordicsemi.com/courses/nrf-connect-sdk-intermediate/lessons/lesson-1-zephyr-rtos-advanced/">Nordic DevAcademy: Zephyr RTOS Advanced</a></p></li>
 <li><p><a href="https://docs.zephyrproject.org/latest/kernel/services/synchronization/events.html#events">Zephyr Documentation: Events</a></p></li>
+<li><p><a href="https://plantuml.com/sequence-diagram">PlantUML: Sequence Diagrams</a></p></li>
 </ul>
 
 

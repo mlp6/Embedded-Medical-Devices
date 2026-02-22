@@ -75,7 +75,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-fced259a1985fd972ecb57c7cd45153f.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-fb2d0fda39336091a0195a18ba1464f9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-89abcb12e8852b82dab2915b19c79ac0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../site_libs/quarto-contrib/live-runtime/live-runtime.js" type="module"></script>
 <link href="../site_libs/quarto-contrib/live-runtime/live-runtime.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -436,6 +436,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#why-kernel-events-over-boolean-variables" id="toc-why-kernel-events-over-boolean-variables" class="nav-link" data-scroll-target="#why-kernel-events-over-boolean-variables">Why Kernel Events over Boolean Variables?</a></li>
   <li><a href="#how-to-define-kernel-events" id="toc-how-to-define-kernel-events" class="nav-link" data-scroll-target="#how-to-define-kernel-events">How to Define Kernel Events</a></li>
   <li><a href="#waiting-for-events" id="toc-waiting-for-events" class="nav-link" data-scroll-target="#waiting-for-events">Waiting for Events</a></li>
+  <li><a href="#sequence-diagrams-for-thread-communication" id="toc-sequence-diagrams-for-thread-communication" class="nav-link" data-scroll-target="#sequence-diagrams-for-thread-communication">Sequence Diagrams for Thread Communication</a></li>
+  <li><a href="#plantuml-sequence-diagram-example" id="toc-plantuml-sequence-diagram-example" class="nav-link" data-scroll-target="#plantuml-sequence-diagram-example">PlantUML Sequence Diagram Example</a></li>
   <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/mlp6/Embedded-Medical-Devices/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="zephyr-threads-events-slides.html"><i class="bi bi-file-slides"></i>RevealJS (live)</a></li></ul></div></nav>
@@ -620,11 +622,46 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
 <span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
+<section id="sequence-diagrams-for-thread-communication" class="level2">
+<h2 class="anchored" data-anchor-id="sequence-diagrams-for-thread-communication">Sequence Diagrams for Thread Communication</h2>
+<ul>
+<li><p>Sequence diagrams visualize how components <strong>interact over time</strong>.</p></li>
+<li><p>Useful for documenting the flow of messages between threads, ISR callbacks, and kernel services.</p></li>
+<li><p>Participants in a Zephyr firmware application may include:</p>
+<ul>
+<li><p>Threads (e.g., <code>main</code>, worker threads)</p></li>
+<li><p>ISR Callbacks</p></li>
+<li><p>Kernel Event Bit Arrays</p></li>
+<li><p>Kernel Timers</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="plantuml-sequence-diagram-example" class="level2">
+<h2 class="anchored" data-anchor-id="plantuml-sequence-diagram-example">PlantUML Sequence Diagram Example</h2>
+<pre class="plantuml"><code>@startuml
+
+participant "Button ISR\nCallback" as ISR
+participant "Kernel Event\nBit Array" as KEvents
+participant "Worker Thread" as Worker
+
+Worker -&gt; KEvents : k_event_wait()\n[blocking]
+activate Worker #LightBlue
+
+note over ISR : Button Pressed
+ISR -&gt; KEvents : k_event_post(BUTTON_EVENT)
+KEvents --&gt; Worker : BUTTON_EVENT received
+deactivate Worker
+
+Worker -&gt; Worker : process event\n(e.g., change state)
+
+@enduml</code></pre>
+</section>
 <section id="resources" class="level2">
 <h2 class="anchored" data-anchor-id="resources">Resources</h2>
 <ul>
 <li><p><a href="https://academy.nordicsemi.com/courses/nrf-connect-sdk-intermediate/lessons/lesson-1-zephyr-rtos-advanced/">Nordic DevAcademy: Zephyr RTOS Advanced</a></p></li>
 <li><p><a href="https://docs.zephyrproject.org/latest/kernel/services/synchronization/events.html#events">Zephyr Documentation: Events</a></p></li>
+<li><p><a href="https://plantuml.com/sequence-diagram">PlantUML: Sequence Diagrams</a></p></li>
 </ul>
 
 

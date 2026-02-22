@@ -40,7 +40,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-fced259a1985fd972ecb57c7cd45153f.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-07b04f0f9c29683b9b024e86b048fcc3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-13f007c1943c6d3711256cc1d3aa22a2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -394,7 +394,8 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#merge-n-tag-this-refactored-heartbeat-led-code-and-analysis" id="toc-merge-n-tag-this-refactored-heartbeat-led-code-and-analysis" class="nav-link" data-scroll-target="#merge-n-tag-this-refactored-heartbeat-led-code-and-analysis">Merge-n-Tag this Refactored Heartbeat LED Code and Analysis</a></li>
   </ul></li>
   <li><a href="#refactor-kernel-events" id="toc-refactor-kernel-events" class="nav-link" data-scroll-target="#refactor-kernel-events">Refactor: Kernel Events</a></li>
-  <li><a href="#verify-that-your-led-timing-still-works" id="toc-verify-that-your-led-timing-still-works" class="nav-link" data-scroll-target="#verify-that-your-led-timing-still-works">Verify that your LED Timing Still Works</a>
+  <li><a href="#verify-that-your-led-timing-still-works" id="toc-verify-that-your-led-timing-still-works" class="nav-link" data-scroll-target="#verify-that-your-led-timing-still-works">Verify that your LED Timing Still Works</a></li>
+  <li><a href="#create-a-sequence-diagram" id="toc-create-a-sequence-diagram" class="nav-link" data-scroll-target="#create-a-sequence-diagram">Create a Sequence Diagram</a>
   <ul class="collapse">
   <li><a href="#merge-n-tag-this-refactored-kernel-events-code-and-analysis" id="toc-merge-n-tag-this-refactored-kernel-events-code-and-analysis" class="nav-link" data-scroll-target="#merge-n-tag-this-refactored-kernel-events-code-and-analysis">Merge-n-Tag this Refactored Kernel Events Code and Analysis</a></li>
   </ul></li>
@@ -518,6 +519,14 @@ Tip
 <ul>
 <li><p>Create a new Jupyter notebook called <code>testing/kernel_events_validation.ipynb</code> to verify that your refactored code still works as expected.</p></li>
 <li><p>It is up to you to now determine how to verify that your LED timing is still working with regard to what data to collect, how to analyze it, and how to present it in your notebook.</p></li>
+</ul>
+</section>
+<section id="create-a-sequence-diagram" class="level2">
+<h2 class="anchored" data-anchor-id="create-a-sequence-diagram">Create a Sequence Diagram</h2>
+<ul>
+<li><p>Create a <a href="https://plantuml.com/sequence-diagram">PlantUML</a> sequence diagram that documents the interaction between your button ISR callback(s), the kernel event bit array, and your state machine thread when a button press event is detected and processed.</p></li>
+<li><p>Your sequence diagram should show all relevant participants and the chronological order of messages between them (refer to the sequence diagram covered in the Threads &amp; Kernel Events lecture).</p></li>
+<li><p>Commit both the PlantUML source file (<code>.puml</code>) and the rendered image to your repository under a <code>docs/</code> directory.</p></li>
 </ul>
 <section id="merge-n-tag-this-refactored-kernel-events-code-and-analysis" class="level3">
 <h3 class="anchored" data-anchor-id="merge-n-tag-this-refactored-kernel-events-code-and-analysis">Merge-n-Tag this Refactored Kernel Events Code and Analysis</h3>
