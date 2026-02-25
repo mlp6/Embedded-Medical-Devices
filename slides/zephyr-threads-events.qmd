@@ -125,6 +125,8 @@ K_EVENT_DEFINE(temp_events);
 k_event_post(&temp_events, TEMP_TOO_HIGH_EVENT);
 ```
 
+The `k_event` bit array is 32-bits long, so you can define up to 32 events in a single bit array.
+
 ## Waiting for Events
 
 - With kernel events, we can now implement a thread that waits for an event to
