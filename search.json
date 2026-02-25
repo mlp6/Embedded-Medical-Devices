@@ -5072,7 +5072,7 @@
     "href": "slides/zephyr-threads-events-slides.html#how-to-define-kernel-events",
     "title": "Zephyr: Threads and Kernel Events",
     "section": "How to Define Kernel Events",
-    "text": "How to Define Kernel Events\n\nKernel events are defined in a k_event structure.\n\nK_EVENT_DEFINE(temp_events);\n\n#define TEMP_TOO_HIGH_EVENT BIT(0)\n#define TEMP_TOO_LOW_EVENT BIT(1)\n\n// somewhere in your code, you can post an event\n\nk_event_post(&temp_events, TEMP_TOO_HIGH_EVENT);"
+    "text": "How to Define Kernel Events\n\nKernel events are defined in a k_event structure.\n\nK_EVENT_DEFINE(temp_events);\n\n#define TEMP_TOO_HIGH_EVENT BIT(0)\n#define TEMP_TOO_LOW_EVENT BIT(1)\n\n// somewhere in your code, you can post an event\n\nk_event_post(&temp_events, TEMP_TOO_HIGH_EVENT);\nThe k_event bit array is 32-bits long, so you can define up to 32 events in a single bit array."
   },
   {
     "objectID": "slides/zephyr-threads-events-slides.html#waiting-for-events",
@@ -5206,7 +5206,7 @@
     "href": "slides/zephyr-threads-events.html#how-to-define-kernel-events",
     "title": "Zephyr: Threads and Kernel Events",
     "section": "How to Define Kernel Events",
-    "text": "How to Define Kernel Events\n\nKernel events are defined in a k_event structure.\n\nK_EVENT_DEFINE(temp_events);\n\n#define TEMP_TOO_HIGH_EVENT BIT(0)\n#define TEMP_TOO_LOW_EVENT BIT(1)\n\n// somewhere in your code, you can post an event\n\nk_event_post(&temp_events, TEMP_TOO_HIGH_EVENT);",
+    "text": "How to Define Kernel Events\n\nKernel events are defined in a k_event structure.\n\nK_EVENT_DEFINE(temp_events);\n\n#define TEMP_TOO_HIGH_EVENT BIT(0)\n#define TEMP_TOO_LOW_EVENT BIT(1)\n\n// somewhere in your code, you can post an event\n\nk_event_post(&temp_events, TEMP_TOO_HIGH_EVENT);\nThe k_event bit array is 32-bits long, so you can define up to 32 events in a single bit array.",
     "crumbs": [
       "Learning Modules",
       "Threads and Kernel Events"
