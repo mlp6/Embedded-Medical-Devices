@@ -28,8 +28,7 @@ it to have a 25% duty cycle (i.e., on for 250 ms, off for 750 ms).
 `testing/thread_testing.ipynb` that analyzes the accuracy of your 25% duty cycle
 heartbeat LED.
 
-- Perform these measurements using the oscilloscope, and save all raw data in
-dedicated CSV files.
+- Perform these measurements using the oscilloscope. 
 
 ::: callout-tip
 Make sure that your Jupyter notebook reads in data from relative paths for the
