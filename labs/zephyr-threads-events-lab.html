@@ -553,7 +553,7 @@ Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>One implementation scheme for this functionality could include use of atomic variables, timers and kernel events.</p>
+<p>One implementation scheme for this functionality could include use of atomic variables, kernel events, and a finite timeout period for <code>k_event_wait()</code>. You may even want to leverage a dedicated thread for this operation.</p>
 <p>A new atomic function that may help you is <a href="https://docs.zephyrproject.org/latest/doxygen/html/group__atomic__apis.html#gaae47a9cbe5a6534967b417f602b37ac2"><code>atomic_inc()</code></a>.</p>
 </div>
 </div>
