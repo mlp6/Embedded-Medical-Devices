@@ -110,7 +110,7 @@ button press).
 500 ms of each other.
 
 ::: callout-tip
-One implementation scheme for this functionality could include use of atomic variables, timers and kernel events.
+One implementation scheme for this functionality could include use of atomic variables, kernel events, and a finite timeout period for `k_event_wait()`.  You may even want to leverage a dedicated thread for this operation.
 
 A new atomic function that may help you is [`atomic_inc()`](https://docs.zephyrproject.org/latest/doxygen/html/group__atomic__apis.html#gaae47a9cbe5a6534967b417f602b37ac2).
 :::
