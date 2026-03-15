@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Dr.&nbsp;Mark Palmeri, M.D., Ph.D.">
-<meta name="dcterms.date" content="2026-02-15">
+<meta name="dcterms.date" content="2026-03-15">
 
 <title>Analog-to-Digital Conversion (ADC) Lab – Embedded Medical Devices</title>
 <style>
@@ -467,7 +467,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">February 15, 2026</p>
+      <p class="date">March 15, 2026</p>
     </div>
   </div>
   
@@ -479,18 +479,6 @@ window.Quarto = {
 </header>
 
 
-<!-- 
-
-TODO: use dictionary-based log for HEXDUMP (?) 
-https://docs.zephyrproject.org/latest/samples/subsys/logging/dictionary/README.html#logging-dictionary
-
-TODO: Improvements to testing and analysis
-* Get rid of RMS calculation
-* Have students testing different sampling rates and resolutions; plot sine wave and do FFT
-* Conclude what is adequate sampling and resolution
-* Maybe do this for an ECG waveform instead of a sine wave?
-
--->
 <section id="learning-objectives" class="level2">
 <h2 class="anchored" data-anchor-id="learning-objectives">Learning Objectives</h2>
 <ul>
@@ -530,7 +518,7 @@ Important
 <li><p>Timers, work queues, callbacks, and interrupts should be used as appropriate.</p></li>
 <li><p>All good coding practices developed this semester should be followed.</p></li>
 <li><p>Use logging to display state information and other relevant information, warnings, and errors. Debugging log messages can remain in the code, but the logging level should be submitted at the <code>INF</code> level.</p></li>
-<li><p>Include a state diagram in your repository (<code>state_diagram.png</code>) using UML (<code>state_diagram.puml</code>) or some equivalent.</p></li>
+<li><p>Include state (<code>state_diagram.png</code>)and sequence (<code>sequence_diagram.png</code>) diagrams in the <code>docs/</code> directory in your repository (<code>state_diagram.png</code>) using UML or some equivalent. Be sure to also include the UML source code if you use that to generate the diagrams.</p></li>
 </ul>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -553,7 +541,7 @@ Note
 <section id="firmware-functional-specifications" class="level3">
 <h3 class="anchored" data-anchor-id="firmware-functional-specifications">Firmware Functional Specifications</h3>
 <ul>
-<li><p>Do all development and testing for Part I on a developnment branch called <code>adc_single_sample</code>.</p></li>
+<li><p>Do all development and testing for Part I on a development branch called <code>adc_single_sample</code>.</p></li>
 <li><p><code>LED</code> and <code>BUTTON</code> number references below are based on Devicetree labels (not the annotation on the DK board itself).</p></li>
 <li><p>There should be a heartbeat LED (<code>LED0</code>) that blinks at 1 Hz with a 25% duty cycle at all times when the firmware is running.</p></li>
 <li><p>When <code>BUTTON0</code> is pressed, make a measurement using the <code>AIN0</code> channel of the ADC.</p>
@@ -582,7 +570,7 @@ Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Remember that single data points for any single input voltage pair is not adequate; multiple measurements should be made and error bars presented on all plots.</p>
+<p>Remember that single data points for any single input voltage pair is not adequate; multiple measurements should be made, sweeping increasing and decreasing voltages to evaluate hysteresis, and error bars presented on all plots.</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
@@ -621,14 +609,28 @@ Tip
 <p>In a new development branch called <code>diff_adc</code>, add the following functionality to your firmware:</p>
 <ul>
 <li><p>When you press <code>BUTTON1</code> , add an additional differential ADC measurement using <code>AIN1</code> and <code>AIN2</code>.</p></li>
-<li><p>Choose the reference voltage, gain, bit depth and acquisition time to adequately sample at least 20 cycles of a 10 Hz sinusoidal signal (<span class="math inline">\(V_{pp}\)</span> = 2 V). 0 Implement the <code>extra_sampling</code> buffering of the ADC for this differential sinusoidal signal measurement so that all of the data are stored in an array in a single <code>adc_read()</code> call (i.e., you are not using a kernel call for every sample).</p></li>
-<li><p>Disable the <code>BUTTON1</code> while your device is reading <code>AIN1</code> and <code>AIN2</code> and performing calculations below. 0 Write a <strong>library</strong> called <code>calc_cycles</code> that calculates the number of sampled sinusoidal cycles in the buffered ADC samples.</p>
+<li><p>Choose the reference voltage, gain, bit depth, acquisition time and sampling interval to adequately sample at least 20 cycles of a 10 Hz sinusoidal signal (<span class="math inline">\(V_{pp}\)</span> = 2 V).</p></li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Have your sampling interval be configured using a macro definition so that you can easily adjust it for testing purposes.</p>
+<p>Choose your ideal sampling interval based on the fact that you are only sampling a finite number of cycles (i.e., Nyquist frequency is not the only consideration) but without clobbering your SRAM with an unnecessarily large buffer.</p>
+</div>
+</div>
 <ul>
-<li><p>This can be rounded to the nearest integer, depending on your algorithm.</p></li>
-<li><p>Have this calculated number of cycles displayed using <code>LOG_INF()</code> in the console.</p></li>
-</ul></li>
+<li><p>Implement the <code>extra_sampling</code> buffering of the ADC for this differential sinusoidal signal measurement so that all data are stored in an array in a single <code>adc_read()</code> call (i.e., you are not using a kernel call for every sample).</p></li>
+<li><p>Disable the <code>BUTTON1</code> while your device is reading <code>AIN1</code> and <code>AIN2</code> and performing calculations below.</p></li>
+<li><p>Write a <strong>library</strong> called <code>calc_freq</code> that calculates the frequency of the sinusoidal signal in your buffer, ignoring the spectral content associated with the finite temporal window. Have this frequency displayed using <code>LOG_INF()</code> in the console.</p></li>
 <li><p>Write log messages to your serial terminal that dsplay a HEX array of the buffered ADC samples.</p></li>
-<li><p>Update your state diagram for this new functionality.</p></li>
+<li><p>Update your state and sequence diagrams for this new functionality.</p></li>
 </ul>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -653,12 +655,14 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Remember that the data will be saved using <a href="https://en.wikipedia.org/wiki/Two's_complement">two’s complement</a>.</p>
+<p>Remember the data will be saved using <a href="https://en.wikipedia.org/wiki/Two's_complement">two’s complement</a>.</p>
 </div>
 </div>
 </section>
 <section id="testing-1" class="level3">
 <h3 class="anchored" data-anchor-id="testing-1">Testing</h3>
+<section id="nominal-sampling-interval" class="level4">
+<h4 class="anchored" data-anchor-id="nominal-sampling-interval">Nominal Sampling Interval</h4>
 <ul>
 <li><p>Input a 10 Hz sinusoidal signal with a 2 V <span class="math inline">\(V_{pp}\)</span> into the differential <code>AIN1</code> and <code>AIN2</code> inputs.</p></li>
 <li><p>Create a plot of your input signal and the buffered ADC samples (using the HEX array output).</p></li>
@@ -673,7 +677,8 @@ Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>There are helper functions in <code>bme554.py</code> called <code>read_hex_data()</code> and <code>unwrap_twos_completely()</code>.</p>
+<p>You will need to save your oscilloscope data to a USB drive and then read that data into your Jupyter notebook for plotting and frequency analysis.</p>
+<p>There are helper functions in <code>bme554.py</code> called <code>read_hex_data()</code> and <code>unwrap_twos_complement()</code>.</p>
 <p>The HEX data array from the terminal can be copied and pasted into a text file in your git repository to read into your Jupyter notebook for analysis.</p>
 </div>
 </div>
@@ -696,6 +701,15 @@ Warning
 </div>
 </div>
 </section>
+<section id="aliased-sampling" class="level4">
+<h4 class="anchored" data-anchor-id="aliased-sampling">Aliased Sampling</h4>
+<ul>
+<li><p>Reduce your sampling frequency to 5 Hz and repeat the Nominal Sampling Interval measurements and analysis.</p></li>
+<li><p>Comment on what you see in your sampled signal, what the resultant frequency looks like and why your signal looks so different than the input signal.</p></li>
+<li><p>Discuss the “ideal” sampling frequency relative to your input frequency for your device.</p></li>
+</ul>
+</section>
+</section>
 <section id="commit-n-merge-buffered-acquisition" class="level3">
 <h3 class="anchored" data-anchor-id="commit-n-merge-buffered-acquisition">Commit-n-Merge Buffered Acquisition</h3>
 <ul>
@@ -709,19 +723,32 @@ Warning
 <h2 class="anchored" data-anchor-id="asynchronous-adc-sampling">Asynchronous ADC Sampling</h2>
 <section id="firmware-functional-specifications-2" class="level3">
 <h3 class="anchored" data-anchor-id="firmware-functional-specifications-2">Firmware Functional Specifications</h3>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Make sure that you set your sampling interval back to the nominal value, not the value you set for demonstrating sampling aliasing.</p>
+</div>
+</div>
 <p>In a new development branch called <code>async_adc</code>, add the following functionality to your firmware:</p>
 <ul>
 <li><p>Refactor your blocking, synchronous buffered ADC sequence acquisition to an <strong>asynchronous</strong> acquisition that populates the same array that was populated with the synchronous approach.</p></li>
-<li><p>Utilize the 3 Zephyr enumerations presented in lecture to modulate the behaviour of the asynchronous callback function.</p></li>
-<li><p>Use a kernel poll (<code>k_poll</code>) to wait for the ADC sequence to complete.</p></li>
+<li><p>Utilize the Zephyr ADC async enumerations presented in lecture to modulate the behaviour of the asynchronous callback function.</p></li>
+<li><p>Detect the raised kernel poll (<code>k_poll</code>) signal to indicate when the ADC sequence is complete.</p></li>
 <li><p>Implement a timeout mechanism to handle the case where the ADC sequence does not complete within a reasonable time frame.</p></li>
 </ul>
 </section>
 <section id="testing-2" class="level3">
 <h3 class="anchored" data-anchor-id="testing-2">Testing</h3>
 <ul>
-<li><p>Repeat the testing you performed in a new Jupyter notebook named <code>testing/testing_adc_async.ipynb</code>.</p></li>
-<li><p>Discuss the benefits and drawbacks of the asyncronous ADC sequence sampling compared to the synchronous sampling.</p></li>
+<li><p>Compare your sampled signals using your asynchronous sampling approach to your buffered approach in a new Jupyter notebook named <code>testing/testing_adc_async.ipynb</code>.</p></li>
+<li><p>Discuss the benefits and drawbacks of the asynchronous ADC sequence sampling compared to the synchronous sampling.</p></li>
 </ul>
 </section>
 <section id="commit-n-merge-asynchronous-sampling" class="level3">
@@ -742,7 +769,7 @@ functionality to your firmware:
 
 ### Testing
 
-- Repeat the testing you performed in the asyncronous section for this timer-based implementation in a new Jupyter notebook named `testing/testing_adc_timer.ipynb`.
+- Repeat the testing you performed in the asynchronous section for this timer-based implementation in a new Jupyter notebook named `testing/testing_adc_timer.ipynb`.
 
 - Discuss the benefits and drawbacks of using a timer-based ADC sampling scheme compared to the previous approaches when trying to accurately sample a sinusoidal signal.
 
