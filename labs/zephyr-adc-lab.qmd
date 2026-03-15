@@ -1,23 +1,10 @@
 ---
 title: "Analog-to-Digital Conversion (ADC) Lab"
-date: "2026-02-15"
+date: "2026-03-15"
 format:
   html: default
   pdf: default
 ---
-
-<!-- 
-
-TODO: use dictionary-based log for HEXDUMP (?) 
-https://docs.zephyrproject.org/latest/samples/subsys/logging/dictionary/README.html#logging-dictionary
-
-TODO: Improvements to testing and analysis
-* Get rid of RMS calculation
-* Have students testing different sampling rates and resolutions; plot sine wave and do FFT
-* Conclude what is adequate sampling and resolution
-* Maybe do this for an ECG waveform instead of a sine wave?
-
--->
 
 ## Learning Objectives
 
@@ -46,8 +33,10 @@ have learned so far this semester.
 warnings, and errors.  Debugging log messages can remain in the code, but the
 logging level should be submitted at the `INF` level.
 
-- Include a state diagram in your repository (`state_diagram.png`) using UML
-(`state_diagram.puml`) or some equivalent.
+- Include state (`state_diagram.png`)and sequence (`sequence_diagram.png`)
+diagrams in the `docs/` directory in your repository (`state_diagram.png`) using
+UML or some equivalent.  Be sure to also include the UML source code if you use
+that to generate the diagrams.
 
 ::: callout-note
 You will continue to build upon the firmware from your previous labs, but you
@@ -63,7 +52,8 @@ changing to a new major version number starting at `v2.0.0`.
 
 ### Firmware Functional Specifications
 
-- Do all development and testing for Part I on a developnment branch called `adc_single_sample`.
+- Do all development and testing for Part I on a development branch called
+`adc_single_sample`.
 
 - `LED` and `BUTTON` number references below are based on Devicetree labels (not
 the annotation on the DK board itself).
@@ -88,7 +78,8 @@ exited by hitting a reset button.
 
 ### Testing
 
-For the following testing, you can use a power supply to provide known voltage input to `AIN0`.
+For the following testing, you can use a power supply to provide known voltage
+input to `AIN0`.
 
 - Quantify how linear the relationship is between the voltage applied to `AIN0`
 and the `LED1` blinking frequency by acquiring data to perform a linear
@@ -96,11 +87,15 @@ regression of these variables and analyzing the resultant $R^2$, slope and
 intercept.  
 
 ::: callout-tip
-Remember that single data points for any single input voltage pair is not adequate; multiple measurements should be made and error bars presented on all plots.
+Remember that single data points for any single input voltage pair is not
+adequate; multiple measurements should be made, sweeping increasing and
+decreasing voltages to evaluate hysteresis, and error bars presented on all
+plots.
 :::
 
 ::: callout-tip
-The `bme554.py` library has a functions called `plot_with_fit()` and `calculate_confidence_intervals()` that can help.
+The `bme554.py` library has a functions called `plot_with_fit()` and
+`calculate_confidence_intervals()` that can help.
 :::
 
 - Quantify the accuracy of the `LED1` 10% duty cycle for each frequency that you
@@ -134,25 +129,37 @@ functionality to your firmware:
 - When you press `BUTTON1` , add an additional differential ADC measurement
 using `AIN1` and `AIN2`. 
 
-- Choose the reference voltage, gain, bit depth and acquisition time to
-adequately sample at least 20 cycles of a 10 Hz sinusoidal signal ($V_{pp}$ = 2
-V).  0 Implement the `extra_sampling` buffering of the ADC for this differential
-sinusoidal signal measurement so that all of the data are stored in an array in
-a single `adc_read()` call (i.e., you are not using a kernel call for every
+- Choose the reference voltage, gain, bit depth, acquisition time and sampling
+interval to adequately sample at least 20 cycles of a 10 Hz sinusoidal signal
+($V_{pp}$ = 2 V).  
+
+::: callout-tip
+Have your sampling interval be configured using a macro definition so that you
+can easily adjust it for testing purposes.
+
+Choose your ideal sampling interval based on the fact that you are only sampling
+a finite number of cycles (i.e., Nyquist frequency is not the only
+consideration) but without clobbering your SRAM with an unnecessarily large
+buffer.
+:::
+
+- Implement the `extra_sampling` buffering of the ADC for this differential
+sinusoidal signal measurement so that all data are stored in an array in a
+single `adc_read()` call (i.e., you are not using a kernel call for every
 sample).
 
 - Disable the `BUTTON1` while your device is reading `AIN1` and `AIN2` and
-performing calculations below.  0 Write a **library** called `calc_cycles` that
-calculates the number of sampled sinusoidal cycles in the buffered ADC samples.
+performing calculations below.  
 
-  - This can be rounded to the nearest integer, depending on your algorithm.
-
-  - Have this calculated number of cycles displayed using `LOG_INF()` in the console.
+- Write a **library** called `calc_freq` that calculates the frequency of the
+sinusoidal signal in your buffer, ignoring the spectral content associated with
+the finite temporal window.  Have this frequency displayed using `LOG_INF()` in
+the console.
 
 - Write log messages to your serial terminal that dsplay a HEX array of the
 buffered ADC samples.  
 
-- Update your state diagram for this new functionality.
+- Update your state and sequence diagrams for this new functionality.
 
 ::: callout-warning
 Be careful for the log message memory consumption!  You may need to adjust the
@@ -160,19 +167,25 @@ stack size of the appopriate thread if you are getting memory-related firmware
 faults.
 :::
 
-
 ::: callout-note
-Remember that the data will be saved using [two's complement](https://en.wikipedia.org/wiki/Two's_complement).
+Remember the data will be saved using [two's complement](https://en.wikipedia.org/wiki/Two's_complement).
 :::
 
 ### Testing
 
-- Input a 10 Hz sinusoidal signal with a 2 V $V_{pp}$ into the differential `AIN1` and `AIN2` inputs.
+#### Nominal Sampling Interval
 
-- Create a plot of your input signal and the buffered ADC samples (using the HEX array output).  
+- Input a 10 Hz sinusoidal signal with a 2 V $V_{pp}$ into the differential
+`AIN1` and `AIN2` inputs.
+
+- Create a plot of your input signal and the buffered ADC samples (using the HEX
+array output).  
 
 ::: callout-tip
-There are helper functions in `bme554.py` called `read_hex_data()` and `unwrap_twos_completely()`.
+You will need to save your oscilloscope data to a USB drive and then read that
+data into your Jupyter notebook for plotting and frequency analysis.
+
+There are helper functions in `bme554.py` called `read_hex_data()` and `unwrap_twos_complement()`.
 
 The HEX data array from the terminal can be copied and pasted into a text file
 in your git repository to read into your Jupyter notebook for analysis.
@@ -185,8 +198,22 @@ in your git repository to read into your Jupyter notebook for analysis.
 - Add this analysis to a new Jupyter notebook named `testing/testing_adc_sync.ipynb`.
   
 ::: callout-warning
-Merging Jupyter notebooks from different branches can be tricky and usually requires some extra tools or manual intervention.  We are creating separate Jupyter notebooks for each part of this lab in case you jump to code development in a different part before finishing the testing for the previous part.
+Merging Jupyter notebooks from different branches can be tricky and usually
+requires some extra tools or manual intervention.  We are creating separate
+Jupyter notebooks for each part of this lab in case you jump to code development
+in a different part before finishing the testing for the previous part.
 :::
+
+#### Aliased Sampling
+
+- Reduce your sampling frequency to 5 Hz and repeat the Nominal Sampling
+Interval measurements and analysis.
+
+- Comment on what you see in your sampled signal, what the resultant frequency
+looks like and why your signal looks so different than the input signal.
+
+- Discuss the "ideal" sampling frequency relative to your input frequency for
+your device.
 
 ### Commit-n-Merge Buffered Acquisition
 
@@ -203,6 +230,11 @@ tag is ready for review.
 
 ### Firmware Functional Specifications
 
+::: callout-important
+Make sure that you set your sampling interval back to the nominal value, not the
+value you set for demonstrating sampling aliasing.
+:::
+
 In a new development branch called `async_adc`, add the following
 functionality to your firmware:
 
@@ -210,19 +242,23 @@ functionality to your firmware:
 **asynchronous** acquisition that populates the same array that was populated
 with the synchronous approach.
 
-- Utilize the 3 Zephyr enumerations presented in lecture to modulate the
+- Utilize the Zephyr ADC async enumerations presented in lecture to modulate the
 behaviour of the asynchronous callback function.
 
-- Use a kernel poll (`k_poll`) to wait for the ADC sequence to complete.
+- Detect the raised kernel poll (`k_poll`) signal to indicate when the ADC
+sequence is complete.
 
-- Implement a timeout mechanism to handle the case where the ADC sequence does not complete within a reasonable time frame.
+- Implement a timeout mechanism to handle the case where the ADC sequence does
+not complete within a reasonable time frame.
 
 ### Testing
 
-- Repeat the testing you performed in a new Jupyter notebook named `testing/testing_adc_async.ipynb`.
+- Compare your sampled signals using your asynchronous sampling approach to your
+buffered approach in a new Jupyter notebook named
+`testing/testing_adc_async.ipynb`.
 
-- Discuss the benefits and drawbacks of the asyncronous ADC sequence sampling compared to
-the synchronous sampling.
+- Discuss the benefits and drawbacks of the asynchronous ADC sequence sampling
+compared to the synchronous sampling.
 
 ### Commit-n-Merge Asynchronous Sampling
 
@@ -246,7 +282,7 @@ functionality to your firmware:
 
 ### Testing
 
-- Repeat the testing you performed in the asyncronous section for this timer-based implementation in a new Jupyter notebook named `testing/testing_adc_timer.ipynb`.
+- Repeat the testing you performed in the asynchronous section for this timer-based implementation in a new Jupyter notebook named `testing/testing_adc_timer.ipynb`.
 
 - Discuss the benefits and drawbacks of using a timer-based ADC sampling scheme compared to the previous approaches when trying to accurately sample a sinusoidal signal.
 
