@@ -145,7 +145,7 @@ buffer.
 
 - Implement the `extra_sampling` buffering of the ADC for this differential
 sinusoidal signal measurement so that all data are stored in an array in a
-single `adc_read()` call (i.e., you are not using a kernel call for every
+single `adc_read_dt()` call (i.e., you are not using a kernel call for every
 sample).
 
 - Disable the `BUTTON1` while your device is reading `AIN1` and `AIN2` and
