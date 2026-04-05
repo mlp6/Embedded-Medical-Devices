@@ -75,7 +75,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-fced259a1985fd972ecb57c7cd45153f.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-1c7d1e4fc3021b74b5bb1526cabe8147.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-72b3dc86fe314a961fcfa0bee83e8bd9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../site_libs/quarto-contrib/live-runtime/live-runtime.js" type="module"></script>
 <link href="../site_libs/quarto-contrib/live-runtime/live-runtime.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -636,12 +636,15 @@ Note
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="op">(</span><span class="dt">void</span><span class="op">)</span>adc_sequence_init_dt<span class="op">(&amp;</span>adc_vadc<span class="op">,</span> <span class="op">&amp;</span>sequence<span class="op">);</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> ret<span class="op">;</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>ret <span class="op">=</span> adc_read<span class="op">(</span>adc_vadc<span class="op">.</span>dev<span class="op">,</span> <span class="op">&amp;</span>sequence<span class="op">);</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>ret <span class="op">&lt;</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    LOG_ERR<span class="op">(</span><span class="st">"Could not read (</span><span class="sc">%d</span><span class="st">)"</span><span class="op">,</span> ret<span class="op">);</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    LOG_DBG<span class="op">(</span><span class="st">"Raw ADC Buffer: </span><span class="sc">%d</span><span class="st">"</span><span class="op">,</span> buf<span class="op">);</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">// adc_read_dt() takes the adc_dt_spec struct directly (no .dev member needed)</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">// Return values: 0 on success, -EINVAL (bad param), -ENOMEM (buffer too small),</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">//                -ENOTSUP (mode not supported), -EBUSY (previous sampling still in progress)</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>ret <span class="op">=</span> adc_read_dt<span class="op">(&amp;</span>adc_vadc<span class="op">,</span> <span class="op">&amp;</span>sequence<span class="op">);</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>ret <span class="op">&lt;</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    LOG_ERR<span class="op">(</span><span class="st">"Could not read (</span><span class="sc">%d</span><span class="st">)"</span><span class="op">,</span> ret<span class="op">);</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    LOG_DBG<span class="op">(</span><span class="st">"Raw ADC Buffer: </span><span class="sc">%d</span><span class="st">"</span><span class="op">,</span> buf<span class="op">);</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="converting-the-adc-buffer-to-millivolts" class="level2">
 <h2 class="anchored" data-anchor-id="converting-the-adc-buffer-to-millivolts">Converting the ADC Buffer to Millivolts</h2>
@@ -748,7 +751,7 @@ Note
 <section id="asynchronous-adc" class="level2">
 <h2 class="anchored" data-anchor-id="asynchronous-adc">Asynchronous ADC</h2>
 <ul>
-<li><code>adc_read()</code> is <strong>blocking</strong>, meaning that your kernel thread will wait for the ADC to complete before continuing.
+<li><code>adc_read_dt()</code> is <strong>blocking</strong>, meaning that your kernel thread will wait for the ADC to complete before continuing.
 <ul>
 <li>Timers and interrupts can be used to perform other tasks while the ADC is running.</li>
 <li>Interrupting threads can come at the expense of the acquisition time accuracy of the ADC.</li>
@@ -756,9 +759,16 @@ Note
 <li>If you want to perform other tasks while the ADC is running, you can use the <strong>asynchronous</strong> ADC API.
 <ul>
 <li>This functionality needs to be enabled in the <code>prj.conf</code> file: <code>CONFIG_ADC_ASYNC=y</code>.</li>
-<li><a href="https://docs.zephyrproject.org/latest/doxygen/html/group__adc__interface.html#ga009e3733b5b20eb6b26a201c9f9734fc">adc_read_async()</a> is the asynchronous version of <code>adc_read()</code>.</li>
+<li><a href="https://docs.zephyrproject.org/latest/doxygen/html/group__adc__interface.html#ga009e3733b5b20eb6b26a201c9f9734fc"><code>adc_read_async_dt()</code></a> is the asynchronous version of <code>adc_read_dt()</code>, and similarly takes the <code>adc_dt_spec</code> struct directly.</li>
 </ul></li>
-<li>The return code for <code>adc_read_async()</code> is immediate and indicates whether the ADC sequence was started successfully. (It is not the returned enumerations from the callback function described on the next slide.)</li>
+<li>The <strong>return value</strong> of <code>adc_read_async_dt()</code> is immediate and indicates whether the ADC sequence was <strong>started</strong> successfully — not whether sampling completed:
+<ul>
+<li><code>0</code>: sequence started successfully</li>
+<li><code>-EINVAL</code>: invalid parameter value</li>
+<li><code>-ENOMEM</code>: buffer too small for requested samplings</li>
+<li><code>-ENOTSUP</code>: requested mode of operation not supported</li>
+<li><code>-EBUSY</code>: another sampling was triggered while the previous one was still in progress</li>
+</ul></li>
 </ul>
 </section>
 <section id="asynchronous-adc-callback" class="level2">
@@ -777,7 +787,7 @@ Note
 <h3 class="anchored" data-anchor-id="async-adc-k_poll-signal">Async ADC <code>k_poll</code> Signal</h3>
 <ul>
 <li>The asynchronous ADC API uses a <code>k_poll</code> signal to notify the kernel thread when the ADC sequence is complete.</li>
-<li>The signal must be initialized and passed to the <code>adc_read_async()</code> function.</li>
+<li>The signal must be initialized and passed to the <code>adc_read_async_dt()</code> function.</li>
 </ul>
 <div class="sourceCode" id="cb8"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> k_poll_signal adc_signal<span class="op">;</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> k_poll_event  evt <span class="op">=</span> K_POLL_EVENT_INITIALIZER<span class="op">(</span></span>
@@ -786,7 +796,12 @@ Note
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>                                <span class="op">&amp;</span>adc_signal<span class="op">);</span></span>
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>k_poll_signal_init<span class="op">(&amp;</span>adc_signal<span class="op">);</span>    </span>
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>adc_read_async<span class="op">(</span>adc_dev<span class="op">,</span> <span class="op">&amp;</span>sequence<span class="op">,</span> <span class="op">&amp;</span>adc_signal<span class="op">);</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co">// adc_read_async_dt() takes the adc_dt_spec struct directly (no .dev member needed)</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co">// Returns 0 if the sequence was started, or a negative error code on failure</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> ret <span class="op">=</span> adc_read_async_dt<span class="op">(&amp;</span>adc_vadc<span class="op">,</span> <span class="op">&amp;</span>sequence<span class="op">,</span> <span class="op">&amp;</span>adc_signal<span class="op">);</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>ret <span class="op">&lt;</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    LOG_ERR<span class="op">(</span><span class="st">"Could not start async ADC read (</span><span class="sc">%d</span><span class="st">)"</span><span class="op">,</span> ret<span class="op">);</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>You can then wait/test for the <code>k_poll</code> event to be signaled in your thread:</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>k_poll<span class="op">(&amp;</span>evt<span class="op">,</span> <span class="dv">1</span><span class="op">,</span> K_FOREVER<span class="op">);</span>  <span class="co">// wait forever for the event</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>evt<span class="op">.</span>state <span class="op">==</span> K_POLL_STATE_SIGNALED<span class="op">)</span> <span class="op">{</span></span>
@@ -816,7 +831,7 @@ Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>What happens if you call <code>adc_read_async()</code> again before the previous sequence is complete?</p>
+<p>What happens if you call <code>adc_read_async_dt()</code> again before the previous sequence is complete?</p>
 </div>
 </div>
 </section>
