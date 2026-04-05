@@ -626,7 +626,7 @@ Tip
 </div>
 </div>
 <ul>
-<li><p>Implement the <code>extra_sampling</code> buffering of the ADC for this differential sinusoidal signal measurement so that all data are stored in an array in a single <code>adc_read()</code> call (i.e., you are not using a kernel call for every sample).</p></li>
+<li><p>Implement the <code>extra_sampling</code> buffering of the ADC for this differential sinusoidal signal measurement so that all data are stored in an array in a single <code>adc_read_dt()</code> call (i.e., you are not using a kernel call for every sample).</p></li>
 <li><p>Disable the <code>BUTTON1</code> while your device is reading <code>AIN1</code> and <code>AIN2</code> and performing calculations below.</p></li>
 <li><p>Write a <strong>library</strong> called <code>calc_freq</code> that calculates the frequency of the sinusoidal signal in your buffer, ignoring the spectral content associated with the finite temporal window. Have this frequency displayed using <code>LOG_INF()</code> in the console.</p></li>
 <li><p>Write log messages to your serial terminal that dsplay a HEX array of the buffered ADC samples.</p></li>
