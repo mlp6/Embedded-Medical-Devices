@@ -139,7 +139,10 @@ LOG_INF("Measuring %s (channel %d)... ", adc_vadc.dev->name, adc_vadc.channel_id
 (void)adc_sequence_init_dt(&adc_vadc, &sequence);
 
 int ret;
-ret = adc_read(adc_vadc.dev, &sequence);
+// adc_read_dt() takes the adc_dt_spec struct directly (no .dev member needed)
+// Return values: 0 on success, -EINVAL (bad param), -ENOMEM (buffer too small),
+//                -ENOTSUP (mode not supported), -EBUSY (previous sampling still in progress)
+ret = adc_read_dt(&adc_vadc, &sequence);
 if (ret < 0) {
     LOG_ERR("Could not read (%d)", ret);
 } else {
@@ -222,15 +225,19 @@ If you do not specify a sampling interval (`interval_us`) in the `adc_sequence_o
 
 ## Asynchronous ADC
 
-- `adc_read()` is **blocking**, meaning that your kernel thread will wait for the ADC to complete before continuing.
+- `adc_read_dt()` is **blocking**, meaning that your kernel thread will wait for the ADC to complete before continuing.
   - Timers and interrupts can be used to perform other tasks while the ADC is running.
   - Interrupting threads can come at the expense of the acquisition time accuracy of the ADC.
 - If you want to perform other tasks while the ADC is running, you can use the **asynchronous** ADC API.
   - This functionality needs to be enabled in the `prj.conf` file: `CONFIG_ADC_ASYNC=y`.
-  - [adc_read_async()](https://docs.zephyrproject.org/latest/doxygen/html/group__adc__interface.html#ga009e3733b5b20eb6b26a201c9f9734fc) is the asynchronous version of `adc_read()`.
-- The return code for `adc_read_async()` is immediate and indicates whether the
-ADC sequence was started successfully.  (It is not the returned enumerations
-from the callback function described on the next slide.)
+  - [`adc_read_async_dt()`](https://docs.zephyrproject.org/latest/doxygen/html/group__adc__interface.html#ga009e3733b5b20eb6b26a201c9f9734fc) is the asynchronous version of `adc_read_dt()`, and similarly takes the `adc_dt_spec` struct directly.
+- The **return value** of `adc_read_async_dt()` is immediate and indicates whether the
+ADC sequence was **started** successfully — not whether sampling completed:
+  - `0`: sequence started successfully
+  - `-EINVAL`: invalid parameter value
+  - `-ENOMEM`: buffer too small for requested samplings
+  - `-ENOTSUP`: requested mode of operation not supported
+  - `-EBUSY`: another sampling was triggered while the previous one was still in progress
 
 ## Asynchronous ADC Callback
 
@@ -244,7 +251,7 @@ from the callback function described on the next slide.)
 ### Async ADC `k_poll` Signal
 
 - The asynchronous ADC API uses a `k_poll` signal to notify the kernel thread when the ADC sequence is complete.
-- The signal must be initialized and passed to the `adc_read_async()` function.
+- The signal must be initialized and passed to the `adc_read_async_dt()` function.
 
 ```C
 struct k_poll_signal adc_signal;
@@ -254,7 +261,12 @@ struct k_poll_event  evt = K_POLL_EVENT_INITIALIZER(
                                 &adc_signal);
 k_poll_signal_init(&adc_signal);    
 
-adc_read_async(adc_dev, &sequence, &adc_signal);
+// adc_read_async_dt() takes the adc_dt_spec struct directly (no .dev member needed)
+// Returns 0 if the sequence was started, or a negative error code on failure
+int ret = adc_read_async_dt(&adc_vadc, &sequence, &adc_signal);
+if (ret < 0) {
+    LOG_ERR("Could not start async ADC read (%d)", ret);
+}
 ```
 
 You can then wait/test for the `k_poll` event to be signaled in your thread:
@@ -272,7 +284,7 @@ Note that `k_poll` events/signals are similar to kernel events, but tend to be u
 :::
 
 ::: callout-tip
-What happens if you call `adc_read_async()` again before the previous sequence is complete?
+What happens if you call `adc_read_async_dt()` again before the previous sequence is complete?
 :::
 
 ## Logging Arrays
