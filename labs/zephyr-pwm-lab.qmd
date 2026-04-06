@@ -32,8 +32,7 @@ have learned so far this semester.
 warnings, and errors.  Debugging log messages can remain in the code, but the
 logging level should be submitted at the `INF` level.
 
-- Include a state diagram in your repository (`state_diagram.png`) using UML
-(`state_diagram.puml`) or some equivalent.
+- Update your state and sequence diagrams to match your firmware implementation.
 
 ::: callout-tip
 Do all development for this lab on section-specific development branches.
