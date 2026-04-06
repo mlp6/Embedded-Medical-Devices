@@ -5454,7 +5454,7 @@
     "href": "labs/zephyr-pwm-lab.html#firmware-expectations",
     "title": "Pulse Width Modulation (PWM) Lab",
     "section": "Firmware Expectations",
-    "text": "Firmware Expectations\n\nAll firmware should be written using the State Machine Framework.\nChoose your states for each part as a firmware engineer would, using what you have learned so far this semester.\nTimers, work queues, callbacks, and interrupts should be used as appropriate.\nAll good coding practices developed this semester should be followed.\nUse logging to display state information and other relevant information, warnings, and errors. Debugging log messages can remain in the code, but the logging level should be submitted at the INF level.\nInclude a state diagram in your repository (state_diagram.png) using UML (state_diagram.puml) or some equivalent.\n\n\n\n\n\n\n\nTip\n\n\n\nDo all development for this lab on section-specific development branches.",
+    "text": "Firmware Expectations\n\nAll firmware should be written using the State Machine Framework.\nChoose your states for each part as a firmware engineer would, using what you have learned so far this semester.\nTimers, work queues, callbacks, and interrupts should be used as appropriate.\nAll good coding practices developed this semester should be followed.\nUse logging to display state information and other relevant information, warnings, and errors. Debugging log messages can remain in the code, but the logging level should be submitted at the INF level.\nUpdate your state and sequence diagrams to match your firmware implementation.\n\n\n\n\n\n\n\nTip\n\n\n\nDo all development for this lab on section-specific development branches.",
     "crumbs": [
       "Labs",
       "Pulse Width Modulation (PWM) Lab"
