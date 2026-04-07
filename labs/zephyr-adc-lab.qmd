@@ -134,6 +134,11 @@ interval to adequately sample at least 20 cycles of a 10 Hz sinusoidal signal
 ($V_{pp}$ = 2 V).  
 
 ::: callout-tip
+Be sure to add a DC offset of `VDD`/2 to your input signal so that the signal is
+within the common-mode voltage range of the ADC.
+:::
+
+::: callout-tip
 Have your sampling interval be configured using a macro definition so that you
 can easily adjust it for testing purposes.
 
