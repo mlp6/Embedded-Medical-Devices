@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Dr.&nbsp;Mark Palmeri, M.D., Ph.D.">
-<meta name="dcterms.date" content="2026-04-05">
+<meta name="dcterms.date" content="2026-04-06">
 
 <title>Pulse Width Modulation (PWM) Lab – Embedded Medical Devices</title>
 <style>
@@ -432,7 +432,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">April 5, 2026</p>
+      <p class="date">April 6, 2026</p>
     </div>
   </div>
   
@@ -588,8 +588,23 @@ Tip
 <section id="firmware-functional-specifications-1" class="level3">
 <h3 class="anchored" data-anchor-id="firmware-functional-specifications-1">Firmware Functional Specifications</h3>
 <ul>
-<li><p>Modulate the brighness of <code>LED3</code> to match sampling a 2-second, 10 Hz differential sinusoidal voltage on <code>AIN1</code> and <code>AIN2</code> after pressing <code>BUTTON2</code>.</p></li>
-<li><p><code>LED3</code> should have its brightness modulated with as little latency as possible with respect to the input voltage. In other words, the brightness of <code>LED3</code> should follow the input sinusoid as closely as possible in time.</p></li>
+<li>Modulate the brighness of <code>LED3</code> to match sampling a 2-second, 10 Hz, 2 V peak-to-peak differential sinusoidal voltage on <code>AIN1</code> and <code>AIN2</code> after pressing <code>BUTTON2</code>.</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Remember to add a DC offset of <code>VDD</code>/2 to your input signal so that the signal is within the common-mode voltage range of the ADC.</p>
+</div>
+</div>
+<ul>
+<li><code>LED3</code> should have its brightness modulated with as little latency as possible with respect to the input voltage. In other words, the brightness of <code>LED3</code> should follow the input sinusoid as closely as possible in time.</li>
 </ul>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
