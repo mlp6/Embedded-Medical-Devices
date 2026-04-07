@@ -1,6 +1,6 @@
 ---
 title: "Pulse Width Modulation (PWM) Lab"
-date: "2026-04-05"
+date: "2026-04-06"
 format:
   html: default
   pdf: default
@@ -89,8 +89,14 @@ Do this section on a development branch called `pwm-sinusoid`, branched off of
 
 ### Firmware Functional Specifications
 
-- Modulate the brighness of `LED3` to match sampling a 2-second, 10 Hz
-differential sinusoidal voltage on `AIN1` and `AIN2` after pressing `BUTTON2`.
+- Modulate the brighness of `LED3` to match sampling a 2-second, 10 Hz, 2 V
+peak-to-peak differential sinusoidal voltage on `AIN1` and `AIN2` after pressing
+`BUTTON2`.
+
+::: callout-tip
+Remember to add a DC offset of `VDD`/2 to your input signal so that the signal
+is within the common-mode voltage range of the ADC.
+:::
 
 - `LED3` should have its brightness modulated with as little latency as possible
 with respect to the input voltage.  In other words, the brightness of `LED3` should
