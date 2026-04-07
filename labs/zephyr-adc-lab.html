@@ -621,6 +621,19 @@ Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
+<p>Be sure to add a DC offset of <code>VDD</code>/2 to your input signal so that the signal is within the common-mode voltage range of the ADC.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>Have your sampling interval be configured using a macro definition so that you can easily adjust it for testing purposes.</p>
 <p>Choose your ideal sampling interval based on the fact that you are only sampling a finite number of cycles (i.e., Nyquist frequency is not the only consideration) but without clobbering your SRAM with an unnecessarily large buffer.</p>
 </div>
