@@ -1,6 +1,6 @@
 ---
 title: "ECG & Temperature Sensor with BLE Lab"
-date: "2026-02-16"
+date: "2026-04-15"
 format:
   html: default
   pdf: default
@@ -33,8 +33,7 @@ that is checked in the calling function, indicating success or failure.
 - Use the `LOGGING` module to log errors, warnings, information and debug
 messages.
 
-- You should not have any compiler/build warnings.  The CI script will build
-against `v3.2.1` of the Zephyr SDK.
+- You should not have any compiler/build warnings.
 
 ## Firmware Functional Specifications
 
@@ -148,7 +147,7 @@ discretion.
 - This app can be used to read the services and characteristics that your device
 is advertising.
 
-## State Diagram
+## State & Sequence Diagrams
 
 - Generate a detailed state diagram that all states, events and actions for your
 firmware.  
@@ -156,7 +155,7 @@ firmware.
 - You should add states, events and actions as needed to fully describe the
 functionality of your firmware.
 
-![State Diagram](images/state_diagram.png)
+- Generate a sequence diagram that describes how your threads, timer handlers, events, work queues and callbacks interact with each other to implement the functionality of your firmware.
 
 ## Testing & Verification
 
@@ -215,8 +214,9 @@ agreement.
 
 ## Grading
 
-- This final project is worth 20% of your grade.  *Absolutely no late
-submissions will be accepted.*
+::: callout-warning
+Absolutely no late submissions will be accepted.
+:::
 
 - Git version control will be graded based on best practices.
 
@@ -225,8 +225,8 @@ semester.
 
 - Code organization and coding best practices will be graded.
 
-- State diagram will be graded based on completeness, accuracy and ease of
-interpretation.
+- State and sequence diagrams will be graded based on completeness, accuracy and
+ease of interpretation.
 
 - Testing and analysis technical report will be graded based on presentation,
 completeness, and accuracy.

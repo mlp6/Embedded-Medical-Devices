@@ -1,6 +1,6 @@
 ---
 title: "Bluetooth Low Energy"
-date: "2025-11-17"
+date: "2026-04-15"
 format:
   live-html: 
     output-file: zephyr-ble.html
@@ -95,8 +95,8 @@ The following library is used as a skeleton for BLE communication in your final 
 
 <!-- TODO: update this links after migrating to GitHub -->
 
-- [ble-lib.h](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/ecg-temp-ble-project/-/blob/main/application/src/ble-lib.h?ref_type=heads)
-- [ble-lib.c](https://gitlab.oit.duke.edu/EmbeddedMedicalDevices/ecg-temp-ble-project/-/blob/main/application/src/ble-lib.c?ref_type=heads)
+- [ble-lib.h](https://gitlab.oit.duke.edu/mlp6/duke-bme554-ecg-temp-ble-lab/-/blob/main/application/src/ble-lib.h?ref_type=heads)
+- [ble-lib.c](https://gitlab.oit.duke.edu/mlp6/duke-bme554-ecg-temp-ble-lab/-/blob/main/application/src/ble-lib.c?ref_type=heads)
 
 ## Resources
 
