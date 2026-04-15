@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Dr.&nbsp;Mark Palmeri, M.D., Ph.D.">
-<meta name="dcterms.date" content="2026-02-16">
+<meta name="dcterms.date" content="2026-04-15">
 
 <title>ECG &amp; Temperature Sensor with BLE Lab – Embedded Medical Devices</title>
 <style>
@@ -391,7 +391,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#best-coding-practices" id="toc-best-coding-practices" class="nav-link" data-scroll-target="#best-coding-practices">Best Coding Practices</a></li>
   <li><a href="#firmware-functional-specifications" id="toc-firmware-functional-specifications" class="nav-link" data-scroll-target="#firmware-functional-specifications">Firmware Functional Specifications</a></li>
   <li><a href="#ble-server-mobile-app" id="toc-ble-server-mobile-app" class="nav-link" data-scroll-target="#ble-server-mobile-app">BLE Server (Mobile App)</a></li>
-  <li><a href="#state-diagram" id="toc-state-diagram" class="nav-link" data-scroll-target="#state-diagram">State Diagram</a></li>
+  <li><a href="#state-sequence-diagrams" id="toc-state-sequence-diagrams" class="nav-link" data-scroll-target="#state-sequence-diagrams">State &amp; Sequence Diagrams</a></li>
   <li><a href="#testing-verification" id="toc-testing-verification" class="nav-link" data-scroll-target="#testing-verification">Testing &amp; Verification</a>
   <ul class="collapse">
   <li><a href="#battery-voltage-measurement" id="toc-battery-voltage-measurement" class="nav-link" data-scroll-target="#battery-voltage-measurement">Battery Voltage Measurement</a></li>
@@ -435,7 +435,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">February 16, 2026</p>
+      <p class="date">April 15, 2026</p>
     </div>
   </div>
   
@@ -480,7 +480,7 @@ Important
 <li><p>Use structs to organize related data.</p></li>
 <li><p>Use libraries for code that is self-contained.</p></li>
 <li><p>Use the <code>LOGGING</code> module to log errors, warnings, information and debug messages.</p></li>
-<li><p>You should not have any compiler/build warnings. The CI script will build against <code>v3.2.1</code> of the Zephyr SDK.</p></li>
+<li><p>You should not have any compiler/build warnings.</p></li>
 </ul>
 </section>
 <section id="firmware-functional-specifications" class="level2">
@@ -542,18 +542,13 @@ Important
 <li><p>This app can be used to read the services and characteristics that your device is advertising.</p></li>
 </ul>
 </section>
-<section id="state-diagram" class="level2">
-<h2 class="anchored" data-anchor-id="state-diagram">State Diagram</h2>
+<section id="state-sequence-diagrams" class="level2">
+<h2 class="anchored" data-anchor-id="state-sequence-diagrams">State &amp; Sequence Diagrams</h2>
 <ul>
 <li><p>Generate a detailed state diagram that all states, events and actions for your firmware.</p></li>
 <li><p>You should add states, events and actions as needed to fully describe the functionality of your firmware.</p></li>
+<li><p>Generate a sequence diagram that describes how your threads, timer handlers, events, work queues and callbacks interact with each other to implement the functionality of your firmware.</p></li>
 </ul>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/state_diagram.png" class="img-fluid figure-img"></p>
-<figcaption>State Diagram</figcaption>
-</figure>
-</div>
 </section>
 <section id="testing-verification" class="level2">
 <h2 class="anchored" data-anchor-id="testing-verification">Testing &amp; Verification</h2>
@@ -596,12 +591,24 @@ Important
 </section>
 <section id="grading" class="level2">
 <h2 class="anchored" data-anchor-id="grading">Grading</h2>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Absolutely no late submissions will be accepted.</p>
+</div>
+</div>
 <ul>
-<li><p>This final project is worth 20% of your grade. <em>Absolutely no late submissions will be accepted.</em></p></li>
 <li><p>Git version control will be graded based on best practices.</p></li>
 <li><p>Firmware will be graded based on all best practices taught throughout the semester.</p></li>
 <li><p>Code organization and coding best practices will be graded.</p></li>
-<li><p>State diagram will be graded based on completeness, accuracy and ease of interpretation.</p></li>
+<li><p>State and sequence diagrams will be graded based on completeness, accuracy and ease of interpretation.</p></li>
 <li><p>Testing and analysis technical report will be graded based on presentation, completeness, and accuracy.</p></li>
 </ul>
 </section>

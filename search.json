@@ -230,7 +230,7 @@
     "href": "labs/ecg-temp-ble-lab.html#best-coding-practices",
     "title": "ECG & Temperature Sensor with BLE Lab",
     "section": "Best Coding Practices",
-    "text": "Best Coding Practices\nYou should refactor your code from all of the previous labs to demonstrate your mastery of best coding practices from this semester. Some reminders:\n\nFunctions should be short and do one thing. They should return an exit code that is checked in the calling function, indicating success or failure.\nMACROS! Avoid hard-coded values in your code.\nUse structs to organize related data.\nUse libraries for code that is self-contained.\nUse the LOGGING module to log errors, warnings, information and debug messages.\nYou should not have any compiler/build warnings. The CI script will build against v3.2.1 of the Zephyr SDK.",
+    "text": "Best Coding Practices\nYou should refactor your code from all of the previous labs to demonstrate your mastery of best coding practices from this semester. Some reminders:\n\nFunctions should be short and do one thing. They should return an exit code that is checked in the calling function, indicating success or failure.\nMACROS! Avoid hard-coded values in your code.\nUse structs to organize related data.\nUse libraries for code that is self-contained.\nUse the LOGGING module to log errors, warnings, information and debug messages.\nYou should not have any compiler/build warnings.",
     "crumbs": [
       "Labs",
       "ECG, Temperature Sensor, and BLE Lab"
@@ -259,11 +259,11 @@
     ]
   },
   {
-    "objectID": "labs/ecg-temp-ble-lab.html#state-diagram",
-    "href": "labs/ecg-temp-ble-lab.html#state-diagram",
+    "objectID": "labs/ecg-temp-ble-lab.html#state-sequence-diagrams",
+    "href": "labs/ecg-temp-ble-lab.html#state-sequence-diagrams",
     "title": "ECG & Temperature Sensor with BLE Lab",
-    "section": "State Diagram",
-    "text": "State Diagram\n\nGenerate a detailed state diagram that all states, events and actions for your firmware.\nYou should add states, events and actions as needed to fully describe the functionality of your firmware.\n\n\n\n\nState Diagram",
+    "section": "State & Sequence Diagrams",
+    "text": "State & Sequence Diagrams\n\nGenerate a detailed state diagram that all states, events and actions for your firmware.\nYou should add states, events and actions as needed to fully describe the functionality of your firmware.\nGenerate a sequence diagram that describes how your threads, timer handlers, events, work queues and callbacks interact with each other to implement the functionality of your firmware.",
     "crumbs": [
       "Labs",
       "ECG, Temperature Sensor, and BLE Lab"
@@ -296,7 +296,7 @@
     "href": "labs/ecg-temp-ble-lab.html#grading",
     "title": "ECG & Temperature Sensor with BLE Lab",
     "section": "Grading",
-    "text": "Grading\n\nThis final project is worth 20% of your grade. Absolutely no late submissions will be accepted.\nGit version control will be graded based on best practices.\nFirmware will be graded based on all best practices taught throughout the semester.\nCode organization and coding best practices will be graded.\nState diagram will be graded based on completeness, accuracy and ease of interpretation.\nTesting and analysis technical report will be graded based on presentation, completeness, and accuracy.",
+    "text": "Grading\n\n\n\n\n\n\nWarning\n\n\n\nAbsolutely no late submissions will be accepted.\n\n\n\nGit version control will be graded based on best practices.\nFirmware will be graded based on all best practices taught throughout the semester.\nCode organization and coding best practices will be graded.\nState and sequence diagrams will be graded based on completeness, accuracy and ease of interpretation.\nTesting and analysis technical report will be graded based on presentation, completeness, and accuracy.",
     "crumbs": [
       "Labs",
       "ECG, Temperature Sensor, and BLE Lab"
