@@ -122,9 +122,11 @@ functionality.
 - Set the minumum and maximum sinusoidal brightnesses to be PWM duty cycles of 0
 and 100%, respectively.
 
-- Update your state diagram to include the new functionality.
+- Update your state and sequence diagrams to include the new functionality.
 
 ### Testing
+
+- Add the following testing to your `testing/testing_pwm.ipynb` Jupyter notebook.
 
 - Using the oscilloscope, concurrently measure your input sinusoidal signal
 (what is differentially input to `AIN1` and `AIN2`) and the output PWM signal on
