@@ -271,4 +271,4 @@ int read_temperature_sensor(const struct device *temp_sensor, float *temperature
 - [DevAcademy: I2C](https://academy.nordicsemi.com/lessons/lesson-6-serial-com-i2c/)
 - [All About Circuits: Master / Slave Terminology Reexamind](https://www.allaboutcircuits.com/news/how-master-slave-terminology-reexamined-in-electrical-engineering/)
 - [Zephyr: Sensors](https://docs.zephyrproject.org/latest/hardware/peripherals/sensor.html)
-- [GitHub: Zephyr MPR Sensor Sample](https://github.com/zephyrproject-rtos/zephyr/tree/main/samples/sensor/mpr)
+- [GitHub: Zephyr MPR Sensor Sample](https://github.com/zephyrproject-rtos/zephyr/tree/main/samples/sensor/jc42)
