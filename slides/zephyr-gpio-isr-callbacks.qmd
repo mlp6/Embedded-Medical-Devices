@@ -182,23 +182,27 @@ of which is reset after action is taken in the main code.
 
 ```C
 // check if interface is ready
-if (!device_is_ready(sw0.port)) {
+if (!gpio_is_ready_dt(&sw0)) {
     LOG_ERR("gpio0 interface not ready.");  // logging module output
-    return -1;  // exit code that will exit main()
+    return -ENODEV;  // exit code that will exit main()
 }
 
 // configure GPIO pin
 int err;
 err = gpio_pin_configure_dt(&sw0, GPIO_INPUT);
 if (err < 0) {
-    LOG_ERR("Cannot configure sw0 pin.");
+    LOG_ERR("Cannot configure sw0 pin [%d].", err);
     return err;
+    // -ENOTSUP	if any of the configuration options is not supported
+    // -EINVAL	Invalid argument
+    // -EIO	I/O error when accessing an external GPIO chip
+    // -EWOULDBLOCK	if operation would block
 }
 // associate callback with GPIO pin
 err = gpio_pin_interrupt_configure_dt(&sw0, GPIO_INT_EDGE_TO_ACTIVE); // trigger on transition from INACTIVE -> ACTIVE	
                                                                       // ACTIVE could be HIGH or LOW
 if (err < 0) {
-    LOG_ERR("Cannot attach callback to sw0.");
+    LOG_ERR("Cannot attach callback to sw0 [%d].", err);
 }
 gpio_init_callback(&sw0_cb, sw0_callback, BIT(sw0.pin)); // populate CB struct with information about the CB function and pin
 gpio_add_callback_dt(sw0, &sw0_cb); // associate callback with GPIO pin
@@ -305,9 +309,9 @@ void callback_function(const struct device *dev, struct gpio_callback *cb, uint3
 // led is a gpio struct you have already created from the devicetree
 
 // check if interface is ready
-if (!device_is_ready(led.port)) {
+if (!gpio_is_ready_dt(&led)) {
     LOG_ERR("gpio0 interface not ready.");  // logging module output
-    return -1;  // exit code that will exit main()
+    return -ENODEV;  // exit code that will exit main()
 }
 
 // configure GPIO pin
