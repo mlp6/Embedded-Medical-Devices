@@ -213,7 +213,7 @@ int main(void) {
  
 	if (!device_is_ready(temp_sensor)) {
 		LOG_ERR("Temperature sensor %s is not ready", temp_sensor->name);
-		return -1;
+		return -ENODEV;
 	}
     else {
         LOG_INF("Temperature sensor %s is ready", temp_sensor->name);
@@ -248,8 +248,6 @@ int read_temperature_sensor(const struct device *temp_sensor, float *temperature
         return err;
     }
     else {
-        // sensor channels: https://docs.zephyrproject.org/latest/doxygen/html/group__sensor__interface.html#gaaa1b502bc029b10d7b23b0a25ef4e934
-
         err = sensor_channel_get(temp_sensor, SENSOR_CHAN_AMBIENT_TEMP, &sensor_vals);
         if (err != 0) {
             LOG_ERR("Temperature sensor get(): %d", err);
@@ -271,4 +269,5 @@ int read_temperature_sensor(const struct device *temp_sensor, float *temperature
 - [DevAcademy: I2C](https://academy.nordicsemi.com/lessons/lesson-6-serial-com-i2c/)
 - [All About Circuits: Master / Slave Terminology Reexamind](https://www.allaboutcircuits.com/news/how-master-slave-terminology-reexamined-in-electrical-engineering/)
 - [Zephyr: Sensors](https://docs.zephyrproject.org/latest/hardware/peripherals/sensor.html)
+- [Zephyr: Sensor Channels](https://docs.zephyrproject.org/latest/doxygen/html/group__sensor__interface.html#gaaa1b502bc029b10d7b23b0a25ef4e934)
 - [GitHub: Zephyr MPR Sensor Sample](https://github.com/zephyrproject-rtos/zephyr/tree/main/samples/sensor/jc42)
