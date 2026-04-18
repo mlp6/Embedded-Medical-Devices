@@ -456,12 +456,12 @@ Dr.&nbsp;Mark Palmeri, M.D., Ph.D.
 <span id="cb3-17"><a></a> </span>
 <span id="cb3-18"><a></a>    <span class="dt">int</span> ret<span class="op">;</span></span>
 <span id="cb3-19"><a></a> </span>
-<span id="cb3-20"><a></a>    <span class="cf">if</span> <span class="op">(!</span>device_is_ready<span class="op">(</span>temp_sensor<span class="op">))</span> <span class="op">{</span></span>
-<span id="cb3-21"><a></a>        LOG_ERR<span class="op">(</span><span class="st">"Temperature sensor </span><span class="sc">%s</span><span class="st"> is not ready"</span><span class="op">,</span> temp_sensor<span class="op">-&gt;</span>name<span class="op">);</span></span>
+<span id="cb3-20"><a></a>    <span class="cf">if</span> <span class="op">(!</span>sensor_is_ready_dt<span class="op">(&amp;</span>temp_sensor<span class="op">))</span> <span class="op">{</span></span>
+<span id="cb3-21"><a></a>        LOG_ERR<span class="op">(</span><span class="st">"Temperature sensor is not ready"</span><span class="op">);</span></span>
 <span id="cb3-22"><a></a>        <span class="cf">return</span> <span class="op">-</span>ENODEV<span class="op">;</span></span>
 <span id="cb3-23"><a></a>    <span class="op">}</span></span>
 <span id="cb3-24"><a></a>    <span class="cf">else</span> <span class="op">{</span></span>
-<span id="cb3-25"><a></a>        LOG_INF<span class="op">(</span><span class="st">"Temperature sensor </span><span class="sc">%s</span><span class="st"> is ready"</span><span class="op">,</span> temp_sensor<span class="op">-&gt;</span>name<span class="op">);</span></span>
+<span id="cb3-25"><a></a>        LOG_INF<span class="op">(</span><span class="st">"Temperature sensor is ready"</span><span class="op">);</span></span>
 <span id="cb3-26"><a></a>    <span class="op">}</span></span>
 <span id="cb3-27"><a></a>    <span class="co">// read the temperature every MEASUREMENT_DELAY_MS</span></span>
 <span id="cb3-28"><a></a>    <span class="cf">while</span> <span class="op">(</span><span class="dv">1</span><span class="op">)</span> <span class="op">{</span></span>
