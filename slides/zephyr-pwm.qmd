@@ -113,15 +113,15 @@ static const struct pwm_dt_spec pwm1 = PWM_DT_SPEC_GET(DT_ALIAS(pwm1));
 static const struct pwm_dt_spec pwm2 = PWM_DT_SPEC_GET(DT_ALIAS(pwm2));
 
 // check that the PWM controller is ready
-if (!device_is_ready(pwm1.dev))  {
-    LOG_ERR("PWM device %s is not ready.", pwm1.dev->name);
-    return -1;
+if (!pwm_is_ready_dt(&pwm1))  {
+    LOG_ERR("PWM device is not ready.");
+    return -ENODEV;
 }
 
 // set the PWM duty cycle (pulse length)
 err = pwm_set_pulse_dt(&pwm1, pwm1.period/2); // 50% duty cycle (be careful with integer division)
 if (err) {
-    LOG_ERR("Could not set pwm1 driver.");
+    LOG_ERR("Could not set pwm1 driver [%d].", err);
     // maybe change to an ERROR state
 }
 ```

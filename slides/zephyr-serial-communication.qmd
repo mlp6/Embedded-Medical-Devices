@@ -211,12 +211,12 @@ int main(void) {
  
     int ret;
  
-	if (!device_is_ready(temp_sensor)) {
-		LOG_ERR("Temperature sensor %s is not ready", temp_sensor->name);
+	if (!sensor_is_ready_dt(&temp_sensor)) {
+		LOG_ERR("Temperature sensor is not ready");
 		return -ENODEV;
 	}
     else {
-        LOG_INF("Temperature sensor %s is ready", temp_sensor->name);
+        LOG_INF("Temperature sensor is ready");
     }
     // read the temperature every MEASUREMENT_DELAY_MS
     while (1) {

@@ -97,7 +97,7 @@ macro is not available in adc.h) */
 static const struct adc_dt_spec adc_vadc = ADC_DT_SPEC_GET_BY_ALIAS(vadc);
 
 /* Check that the ADC interface is ready */
-if (!device_is_ready(adc_vadc.dev)) {
+if (!adc_is_ready_dt(&adc_vadc)) {
     LOG_ERR("ADC controller device(s) not ready");
     return -1;
 }
