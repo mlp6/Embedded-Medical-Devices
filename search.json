@@ -4856,7 +4856,7 @@
     "href": "slides/zephyr-serial-communication.html#example-connection-of-mcp9808-temperature-sensor",
     "title": "Zephyr: Serial Communication",
     "section": "Example Connection of MCP9808 Temperature Sensor",
-    "text": "Example Connection of MCP9808 Temperature Sensor\n\n\n\n\n\n\n\nBreakout Board\nDK GPIO Pin\n\n\n\n\nSDA\nP0.26\n\n\nSCL\nP0.27\n\n\nVdd\nVDD\n\n\nGND\nGND\n\n\n\n\n\nMCP9808 Temperature Sensor\n\n\nprf.conf\nCONFIG_SENSOR=y\n\n\nnrf52833dk_nrf52833.overlay\n/* I2C Pin Mapping\nSCK: P0.27\nSDA: P0.26\n*/\n&i2c0 {\n    mcp9808@18{\n        compatible = \"jedec,jc-42.4-temp\";\n        reg = &lt;0x18&gt;;\n        status = \"okay\";\n    };\n\n};",
+    "text": "Example Connection of MCP9808 Temperature Sensor\n\n\n\n\n\n\n\nBreakout Board\nDK GPIO Pin\n\n\n\n\nSDA\nP0.26\n\n\nSCL\nP0.27\n\n\nVdd\nVDD\n\n\nGND\nGND\n\n\n\n\n\nMCP9808 Temperature Sensor\n\n\nprf.conf\nCONFIG_SENSOR=y\n\n\nnrf52833dk_nrf52833.overlay\n/* I2C Pin Mapping\nSCL: P0.27\nSDA: P0.26\n*/\n&i2c0 {\n    mcp9808@18{\n        compatible = \"jedec,jc-42.4-temp\";\n        reg = &lt;0x18&gt;;\n        status = \"okay\";\n    };\n\n};",
     "crumbs": [
       "Learning Modules",
       "Serial Communication (UART, I2C, SPI)"
