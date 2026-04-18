@@ -372,35 +372,39 @@ Dr.&nbsp;Mark Palmeri, M.D., Ph.D.
 <section id="within-main" class="slide level2">
 <h2>Within <code>main()</code></h2>
 <div class="sourceCode" id="cb7"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb7-1"><a></a><span class="co">// check if interface is ready</span></span>
-<span id="cb7-2"><a></a><span class="cf">if</span> <span class="op">(!</span>device_is_ready<span class="op">(</span>sw0<span class="op">.</span>port<span class="op">))</span> <span class="op">{</span></span>
+<span id="cb7-2"><a></a><span class="cf">if</span> <span class="op">(!</span>gpio_is_ready_dt<span class="op">(&amp;</span>sw0<span class="op">))</span> <span class="op">{</span></span>
 <span id="cb7-3"><a></a>    LOG_ERR<span class="op">(</span><span class="st">"gpio0 interface not ready."</span><span class="op">);</span>  <span class="co">// logging module output</span></span>
-<span id="cb7-4"><a></a>    <span class="cf">return</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span>  <span class="co">// exit code that will exit main()</span></span>
+<span id="cb7-4"><a></a>    <span class="cf">return</span> <span class="op">-</span>ENODEV<span class="op">;</span>  <span class="co">// exit code that will exit main()</span></span>
 <span id="cb7-5"><a></a><span class="op">}</span></span>
 <span id="cb7-6"><a></a></span>
 <span id="cb7-7"><a></a><span class="co">// configure GPIO pin</span></span>
 <span id="cb7-8"><a></a><span class="dt">int</span> err<span class="op">;</span></span>
 <span id="cb7-9"><a></a>err <span class="op">=</span> gpio_pin_configure_dt<span class="op">(&amp;</span>sw0<span class="op">,</span> GPIO_INPUT<span class="op">);</span></span>
 <span id="cb7-10"><a></a><span class="cf">if</span> <span class="op">(</span>err <span class="op">&lt;</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb7-11"><a></a>    LOG_ERR<span class="op">(</span><span class="st">"Cannot configure sw0 pin."</span><span class="op">);</span></span>
+<span id="cb7-11"><a></a>    LOG_ERR<span class="op">(</span><span class="st">"Cannot configure sw0 pin [</span><span class="sc">%d</span><span class="st">]."</span><span class="op">,</span> err<span class="op">);</span></span>
 <span id="cb7-12"><a></a>    <span class="cf">return</span> err<span class="op">;</span></span>
-<span id="cb7-13"><a></a><span class="op">}</span></span>
-<span id="cb7-14"><a></a><span class="co">// associate callback with GPIO pin</span></span>
-<span id="cb7-15"><a></a>err <span class="op">=</span> gpio_pin_interrupt_configure_dt<span class="op">(&amp;</span>sw0<span class="op">,</span> GPIO_INT_EDGE_TO_ACTIVE<span class="op">);</span> <span class="co">// trigger on transition from INACTIVE -&gt; ACTIVE  </span></span>
-<span id="cb7-16"><a></a>                                                                      <span class="co">// ACTIVE could be HIGH or LOW</span></span>
-<span id="cb7-17"><a></a><span class="cf">if</span> <span class="op">(</span>err <span class="op">&lt;</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb7-18"><a></a>    LOG_ERR<span class="op">(</span><span class="st">"Cannot attach callback to sw0."</span><span class="op">);</span></span>
-<span id="cb7-19"><a></a><span class="op">}</span></span>
-<span id="cb7-20"><a></a>gpio_init_callback<span class="op">(&amp;</span>sw0_cb<span class="op">,</span> sw0_callback<span class="op">,</span> BIT<span class="op">(</span>sw0<span class="op">.</span>pin<span class="op">));</span> <span class="co">// populate CB struct with information about the CB function and pin</span></span>
-<span id="cb7-21"><a></a>gpio_add_callback_dt<span class="op">(</span>sw0<span class="op">,</span> <span class="op">&amp;</span>sw0_cb<span class="op">);</span> <span class="co">// associate callback with GPIO pin</span></span>
-<span id="cb7-22"><a></a></span>
-<span id="cb7-23"><a></a></span>
-<span id="cb7-24"><a></a><span class="co">// test for the callback event state in your code...</span></span>
-<span id="cb7-25"><a></a><span class="cf">while</span> <span class="op">()</span> <span class="op">{</span></span>
-<span id="cb7-26"><a></a>    <span class="cf">if</span> <span class="op">(</span>sw0_event<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb7-27"><a></a>        do_something_less_trivial<span class="op">();</span>  <span class="co">// this can take more time than the callback function</span></span>
-<span id="cb7-28"><a></a>        sw0_event <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb7-29"><a></a>    <span class="op">}</span> </span>
-<span id="cb7-30"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-13"><a></a>    <span class="co">// -ENOTSUP if any of the configuration options is not supported</span></span>
+<span id="cb7-14"><a></a>    <span class="co">// -EINVAL  Invalid argument</span></span>
+<span id="cb7-15"><a></a>    <span class="co">// -EIO I/O error when accessing an external GPIO chip</span></span>
+<span id="cb7-16"><a></a>    <span class="co">// -EWOULDBLOCK if operation would block</span></span>
+<span id="cb7-17"><a></a><span class="op">}</span></span>
+<span id="cb7-18"><a></a><span class="co">// associate callback with GPIO pin</span></span>
+<span id="cb7-19"><a></a>err <span class="op">=</span> gpio_pin_interrupt_configure_dt<span class="op">(&amp;</span>sw0<span class="op">,</span> GPIO_INT_EDGE_TO_ACTIVE<span class="op">);</span> <span class="co">// trigger on transition from INACTIVE -&gt; ACTIVE  </span></span>
+<span id="cb7-20"><a></a>                                                                      <span class="co">// ACTIVE could be HIGH or LOW</span></span>
+<span id="cb7-21"><a></a><span class="cf">if</span> <span class="op">(</span>err <span class="op">&lt;</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb7-22"><a></a>    LOG_ERR<span class="op">(</span><span class="st">"Cannot attach callback to sw0 [</span><span class="sc">%d</span><span class="st">]."</span><span class="op">,</span> err<span class="op">);</span></span>
+<span id="cb7-23"><a></a><span class="op">}</span></span>
+<span id="cb7-24"><a></a>gpio_init_callback<span class="op">(&amp;</span>sw0_cb<span class="op">,</span> sw0_callback<span class="op">,</span> BIT<span class="op">(</span>sw0<span class="op">.</span>pin<span class="op">));</span> <span class="co">// populate CB struct with information about the CB function and pin</span></span>
+<span id="cb7-25"><a></a>gpio_add_callback_dt<span class="op">(</span>sw0<span class="op">,</span> <span class="op">&amp;</span>sw0_cb<span class="op">);</span> <span class="co">// associate callback with GPIO pin</span></span>
+<span id="cb7-26"><a></a></span>
+<span id="cb7-27"><a></a></span>
+<span id="cb7-28"><a></a><span class="co">// test for the callback event state in your code...</span></span>
+<span id="cb7-29"><a></a><span class="cf">while</span> <span class="op">()</span> <span class="op">{</span></span>
+<span id="cb7-30"><a></a>    <span class="cf">if</span> <span class="op">(</span>sw0_event<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb7-31"><a></a>        do_something_less_trivial<span class="op">();</span>  <span class="co">// this can take more time than the callback function</span></span>
+<span id="cb7-32"><a></a>        sw0_event <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb7-33"><a></a>    <span class="op">}</span> </span>
+<span id="cb7-34"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="some-useful-api-documentation" class="slide level2">
 <h2>Some useful API documentation</h2>
@@ -480,9 +484,9 @@ Dr.&nbsp;Mark Palmeri, M.D., Ph.D.
 <div class="sourceCode" id="cb12"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb12-1"><a></a><span class="co">// led is a gpio struct you have already created from the devicetree</span></span>
 <span id="cb12-2"><a></a></span>
 <span id="cb12-3"><a></a><span class="co">// check if interface is ready</span></span>
-<span id="cb12-4"><a></a><span class="cf">if</span> <span class="op">(!</span>device_is_ready<span class="op">(</span>led<span class="op">.</span>port<span class="op">))</span> <span class="op">{</span></span>
+<span id="cb12-4"><a></a><span class="cf">if</span> <span class="op">(!</span>gpio_is_ready_dt<span class="op">(&amp;</span>led<span class="op">))</span> <span class="op">{</span></span>
 <span id="cb12-5"><a></a>    LOG_ERR<span class="op">(</span><span class="st">"gpio0 interface not ready."</span><span class="op">);</span>  <span class="co">// logging module output</span></span>
-<span id="cb12-6"><a></a>    <span class="cf">return</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span>  <span class="co">// exit code that will exit main()</span></span>
+<span id="cb12-6"><a></a>    <span class="cf">return</span> <span class="op">-</span>ENODEV<span class="op">;</span>  <span class="co">// exit code that will exit main()</span></span>
 <span id="cb12-7"><a></a><span class="op">}</span></span>
 <span id="cb12-8"><a></a></span>
 <span id="cb12-9"><a></a><span class="co">// configure GPIO pin</span></span>
