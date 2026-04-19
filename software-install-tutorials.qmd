@@ -73,7 +73,7 @@ pack.
 including the `nRF Connect SDK` and associated `toolchain`.
   
 ::: callout-tip
-Be sure to use the `nRF Connect SDK v3.2.1` for this class.  The starter code
+Be sure to use the `nRF Connect SDK v3.2.4` for this class.  The code snippets
 provided throughout the semester will be based on this version of the SDK.
 :::
 
