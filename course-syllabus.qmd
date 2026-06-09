@@ -95,7 +95,7 @@ Upon completion of this course, students should be able to:
 ### Mandatory
 
 * EGR105L or equivalent experience [git, Python]
-* Intrumentation (BME354L) / Mechatronics
+* Instrumentation (BME354L) / Mechatronics
 * Signals & Systems (BME271/671 or equivalent experience [filtering, FFTs])
 
 ## Learning Management System
@@ -144,7 +144,7 @@ time will be used to access bench lab equipment and the TAs for assistance.
 
 Students are responsible for obtaining missed lecture content from other
 students in the class.  All lecture slides/presented content will be made
-availabe online and lectures will be recorded via Panopto and posted to Canvas.
+available online and lectures will be recorded via Panopto and posted to Canvas.
 
 Participation on [Ed Discussion](https://edstem.org/us/courses/90813/discussion)
 is also encouraged, in the form of:
@@ -193,7 +193,7 @@ This course is not "curved" (i.e., a distribution of grades will not be
 enforced), and a traditional grading scheme will be used (e.g., 90-93 = A-,
 94-97 = A, 97-100 = A+).  
 
-Failing the course can happen with a cummulative score $<$ 70 (C-).
+Failing the course can happen with a cumulative score $<$ 70 (C-).
 
 ::: callout-tip
 Participation throughout the semester will influence rounding up/down for
@@ -254,7 +254,7 @@ reports.
 ### Can I use AI?
 
 The use of artificial intelligence is a rapidly developing resource / tool in
-engineering.  In software development, there are many levels of AI-assitance
+engineering.  In software development, there are many levels of AI-assistance
 available.  Such form of assistance include the
 [IntelliCode](https://visualstudio.microsoft.com/services/intellicode/) tools
 and [GitHub CoPilot](https://github.com/features/copilot) (free to students
