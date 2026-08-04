@@ -141,7 +141,7 @@ Nordic's I2C implementation is called TWI (Two-Wire Interface).
 ## Helper Functions
 
 - Helper functions exist to convert values (units, struct -> float, etc.)
-- [`sensor_value_to_float()`](https://docs.zephyrproject.org/latest/hardware/peripherals/sensor.html#c.sensor_value_to_float)
+- [`sensor_value_to_float()`](https://docs.zephyrproject.org/latest/doxygen/html/group__sensor__interface.html#ga2ad1fc2abd1c8c38e7de6e99fa5c1f20)
 
 # Example Firmware
 
