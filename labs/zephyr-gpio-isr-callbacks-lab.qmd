@@ -134,7 +134,7 @@ pressed, which indicates the new blink frequency.
     - `freq_up_button`, `freq_down_button`, and `sleep_button` should be
     disabled (interrupts disabled).
     - The only way to exit the "error state" is to press the `reset` button.
-- Define each of these min/max blinking frequencylimits using preprocessor
+- Define each of these min/max blinking frequency limits using preprocessor
 macros (you can choose appropriate names).
 - Pressing the `reset` button resets the "action" LEDs to blink at their
 default 2 Hz rate, out of phase with one another, and re-enables the
@@ -223,7 +223,7 @@ feedback through your GitLab repository.
 
   - Code Functionality
 
-  - Efficieny of code logic
+  - Efficiency of code logic
 
   - State diagram completeness and matching the firmware implementation
 

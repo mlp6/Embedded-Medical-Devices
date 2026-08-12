@@ -196,7 +196,7 @@ Quantitative analysis should include:
 
   - Verification that the duty cycle of out output is 25% for all heart rates.
 
-### Temperature Sensor Measurment
+### Temperature Sensor Measurement
 
 - Demonstrate that your temperature sensor can have a room temperature
 measurement read through `LOG_INF()` output and the nRF Connect app.  

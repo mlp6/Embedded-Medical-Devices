@@ -106,7 +106,7 @@ Nordic's I2C implementation is called TWI (Two-Wire Interface).
 - Dynamic address assignment
 - "Hot" peripheral connection
 
-## Serial Passing Interface (SPI)
+## Serial Peripheral Interface (SPI)
 
 ![](images/serial-comm/SPI.png)
 
