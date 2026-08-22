@@ -84,7 +84,7 @@ website:
         - href: resources/technical_report.qmd
           text: "Technical Report Guidelines"
         - href: resources/state_diagram.qmd
-          text: "State Diagram Preparation Tools"
+          text: "State Diagrams"
         - href: resources/how-to-generate-ecg-waveforms.qmd
           text: "How to Generate ECG Waveforms"
         - href: resources/debugging.qmd
