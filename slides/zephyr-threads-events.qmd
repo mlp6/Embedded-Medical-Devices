@@ -181,29 +181,41 @@ and kernel services.
 
   - Kernel Timers
 
-## PlantUML Sequence Diagram Example
+## Mermaid Sequence Diagram Example
 
-```plantuml
-@startuml
+```mermaid
+sequenceDiagram
+    participant ISR as Button ISR<br/>Callback
+    participant KEvents as Kernel Event<br/>Bit Array
+    participant Worker as Worker Thread
 
-participant "Button ISR\nCallback" as ISR
-participant "Kernel Event\nBit Array" as KEvents
-participant "Worker Thread" as Worker
+    Worker->>KEvents: k_event_wait()<br/>[blocking]
+    activate Worker
 
-Worker -> KEvents : k_event_wait()\n[blocking]
-activate Worker #LightBlue
+    Note over ISR: Button Pressed
+    ISR->>KEvents: k_event_post(BUTTON_EVENT)
+    KEvents-->>Worker: BUTTON_EVENT received
+    deactivate Worker
 
-note over ISR : Button Pressed
-ISR -> KEvents : k_event_post(BUTTON_EVENT)
-KEvents --> Worker : BUTTON_EVENT received
-deactivate Worker
-
-Worker -> Worker : process event\n(e.g., change state)
-
-@enduml
+    Worker->>Worker: process event<br/>(e.g., change state)
 ```
 
-![Sequence Diagram Example](images/threads/sequence.png)
+```{mermaid}
+sequenceDiagram
+    participant ISR as Button ISR<br/>Callback
+    participant KEvents as Kernel Event<br/>Bit Array
+    participant Worker as Worker Thread
+
+    Worker->>KEvents: k_event_wait()<br/>[blocking]
+    activate Worker
+
+    Note over ISR: Button Pressed
+    ISR->>KEvents: k_event_post(BUTTON_EVENT)
+    KEvents-->>Worker: BUTTON_EVENT received
+    deactivate Worker
+
+    Worker->>Worker: process event<br/>(e.g., change state)
+```
 
 ## Resources
 

@@ -147,7 +147,27 @@ the `K_TIMER_DEFINE` macro.
 - Note that the timer handler is executed at the **end** of each timer interval.  
 - The stop handler function turns off the LED.
 
-![](images/timers/repeat_timer.png){fig-align="center"}
+```{mermaid}
+gantt
+    title Repeating Timer Example (time in seconds)
+    dateFormat x
+    axisFormat %S
+    todayMarker off
+
+    section TIMER
+    NOT STARTED                    :done, 0, 1000
+    k_timer_start(500, 500)        :active, 1000, 3750
+    k_timer_stop()                 :crit, 3750, 4500
+
+    section LED
+    low                             :done, 0, 1500
+    high                            :active, 1500, 2000
+    low                             :done, 2000, 2500
+    high                            :active, 2500, 3000
+    low                             :done, 3000, 3500
+    high                            :active, 3500, 3750
+    low                             :done, 3750, 4500
+```
 
 ## Starting a One-Shot Timer
 
@@ -168,7 +188,23 @@ gpio_pin_toggle_dt(&led);
 k_timer_start(&name_of_timer, K_MSEC(4000), K_NO_WAIT);
 ```
 
-![](images/timers/one_shot.png){fig-align="center"}
+```{mermaid}
+gantt
+    title One-Shot Timer Example (time in seconds)
+    dateFormat x
+    axisFormat %S
+    todayMarker off
+
+    section LED
+    low                            :done, 0, 2500
+    high                           :active, 2500, 6500
+    low                            :done, 6500, 9000
+
+    section TIMER
+    NOT STARTED                          :done, 0, 2500
+    k_timer_start(4000, K_NO_WAIT)       :active, 2500, 6500
+    TIMER STOPS                          :crit, 6500, 9000
+```
 
 - There is no need to stop the timer; it terminates after the specified interval.
 

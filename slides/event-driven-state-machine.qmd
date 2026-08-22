@@ -25,7 +25,37 @@ format:
   - What are your "events"?
 - ICD
 
-![](images/edsm/icd_state_diagram.png){fig-align="center"}
+```{mermaid}
+stateDiagram-v2
+    direction LR
+    [*] --> Init
+
+    Init : Do Stuff
+    RhythmDetect : Detect Rhythm
+    Sleep : Save Power
+    Pace : Pace
+    Error : Put device into safe mode
+
+    state OTA {
+        direction LR
+        [*] --> ota_init
+        ota_init --> ota_run
+        ota_run --> ota_exit
+        ota_init : Download Update
+        ota_run : Over The Air Update
+        ota_exit : Post Successful OTA
+    }
+
+    Init --> RhythmDetect : Successful Init
+    Init --> Error : Init Fault Error Code
+    RhythmDetect --> Pace : Arrhythmia Detected
+    Pace --> RhythmDetect : Pacing Timer Expired
+    RhythmDetect --> Sleep : NSR
+    Sleep --> RhythmDetect : Sleep Timer Expired
+    Sleep --> OTA : OTA Button Pressed
+    OTA --> RhythmDetect : OTA Success Kernel Event Posted
+    Error --> [*]
+```
 
 # Implementation
 

@@ -1,6 +1,6 @@
 ---
 title: "Embedded Medical Devices"
-subtitle: "BME554L (Spring 2026)"
+subtitle: "BME554L (Fall 2026)"
 format:
   html: default
   pdf: default
@@ -14,32 +14,32 @@ Dr. Mark Palmeri (`mlp6`)
 
 - Email: [mark.palmeri@duke.edu](mailto:mark.palmeri@duke.edu)
 
-- [Ed Discussion](https://edstem.org/us/courses/90813/discussion) (private message, TAs included)
-
-- Office Hours: Please email Dr. Palmeri to set up an appointment for individual office hours.
+- [Office Hours](https://calendly.com/mark-palmeri)
 
 ### Teaching Assistants
 
-- Sophie Pelton (`smp147`)
+- Emily Song
 
-- Amelia Cook (`arc138`)
+- Jack Rinaldi
 
-For TA office hours (in the lab), please see the Canvas calendar.
+- Kaden Bock
+
+TA office hours (in the lab), will be posted on the Canvas calendar.
 
 ::: callout-tip
-Questions that can be answered by Dr. Palmeri or a teaching assistant should be
-posted on Ed Discussion.
+Any questions related to code, data analysis, etc. should be asked as GitLab
+Issues assigned to a TA and Dr. Palmeri.
 :::
 
 ## Course Times & Locations
 
 ### Lecture
 
-Monday & Wednesday, 08:30-09:45, Hudson Hall 212 (Panopto recorded)
+Monday & Wednesday, 08:30-09:45, Wilkinson 132 (Panopto recorded)
 
 ### Labs
 
-Location: CIEMAS B209 (Door Code: 1-4-2)
+Location: CIEMAS B209 (Door Code: TBA)
 
 There are no formally scheduled lab sections, but you will need to use the lab
 equipment to perform testing of your devices.  Your TAs will announce times when
@@ -94,21 +94,21 @@ Upon completion of this course, students should be able to:
 
 ### Mandatory
 
-* EGR105L or equivalent experience [git, Python]
-* Intrumentation (BME354L) / Mechatronics
-* Signals & Systems (BME271/671 or equivalent experience [filtering, FFTs])
+- EGR105L or equivalent experience [git, Python]
+
+- Intrumentation (BME354L) / Mechatronics
+
+- Signals & Systems (BME271/671 or equivalent experience [filtering, FFTs])
 
 ## Learning Management System
 
-We will be using [Canvas](https://canvas.duke.edu/courses/74002) as the learning management
+We will be using [Canvas](https://canvas.duke.edu) as the learning management
 system for this course.  Most resources will be linked to the course website.
 All grades will be posted via Canvas/Gradescope.
 
 Duke's [GitLab](https://gitlab.oit.duke.edu) server will be used for most course
 lab exercises, and code-related questions will be submitted to Dr. Palmeri / TAs
 using GitLab Issues.
-
-Ed Discussion will be used for general course questions and discussion.
 
 ## Class Schedule
 
@@ -146,16 +146,6 @@ Students are responsible for obtaining missed lecture content from other
 students in the class.  All lecture slides/presented content will be made
 availabe online and lectures will be recorded via Panopto and posted to Canvas.
 
-Participation on [Ed Discussion](https://edstem.org/us/courses/90813/discussion)
-is also encouraged, in the form of:
-
-- Asking questions about the course material (ideally, publicly, so that others
-can benefit (Anonymous okay))
-
-- Answering questions from other students
-
-- Sharing interesting articles or resources related to the course material
-
 ## Assignments & Grading
 
 ### Grading
@@ -167,25 +157,19 @@ Lab exercises will focus on implementing key functionality towards the final
 working device (a wireless ECG and temperature sensor).  Each lab exercise will
 be evaluated with code reviews and technical reports that assess functionality.
 
-All assignment grades will be posted to Gradescope/Canvas throughout the
-semester to track your performance.
+All assignment feedback will be posted to your GitLab repository and grades will
+be posted to Canvas throughout the semester to track your performance.
 
 | Grade Category   | Relative Percentage   |
 |:----------------|:---------------------|
-| Quizzes         | 20% |
-| Nordic DevAcademy Fundamentals Certificates | 10% |
-| Code Reviews | 20% |
-| Technical Reports | 40% |
-| Participation | 10% |
+| Quizzes & Nordic DevAcademy Modules | 20% |
+| Code Reviews | 15% |
+| Lab Technical Reports | 25% |
+| Final Device Code Review, Presentation & Report | 35% |
+| Participation | 5% |
 
 : Grade Distribution
 
-
-### Extra Credit 
-
-Extra credit may be earned by completing the Nordic DevAcademy [nRF Connect SDK Intermediate](https://academy.nordicsemi.com/courses/nrf-connect-sdk-intermediate) course.
-
-This can be used to offset late assignments, missed quizzes, etc.
 
 ### Course Grade
 
@@ -262,5 +246,6 @@ through the [GitHub Education](https://github.com/education/students) program).
 These tools can be leveraged to help with syntax.  
 
 ::: callout-caution
-You are strongly cautioned to not rely on these tools for logical implementation.
+You are strongly cautioned to not rely on these tools for logical
+implementation, and they cannot be used during the in-person code reviews.
 :::

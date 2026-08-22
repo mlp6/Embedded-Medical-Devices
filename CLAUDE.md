@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is the course website repository for **BME554L - Embedded Medical Devices** at Duke University (Spring 2026). The site is built with Quarto and published to GitHub Pages. It contains lecture slides, lab assignments, and resources for teaching embedded medical device development using Nordic nRF52833DK microcontrollers with Zephyr RTOS.
+This is the course website repository for **BME554L - Embedded Medical Devices** at Duke University (Fall 2026). The site is built with Quarto and published to GitHub Pages. It contains lecture slides, lab assignments, and resources for teaching embedded medical device development using Nordic nRF52833DK microcontrollers with Zephyr RTOS.
 
 ## Build Commands
 
