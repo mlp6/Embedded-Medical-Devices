@@ -192,6 +192,9 @@
   </style>
   <script type="module" src="../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
   <link href="../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
+  <script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+  <script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+  <link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -199,7 +202,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">GPIO / ISR / Callbacks</h1>
-  <p class="subtitle">BME554L - Spring 2026</p>
+  <p class="subtitle">BME554L - Fall 2026</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -296,8 +299,55 @@ Dr.&nbsp;Mark Palmeri, M.D., Ph.D.
 <li><p><code>devicetree.overlay</code> - define GPIO pin as an input, define callback function</p></li>
 <li><p><code>main.c</code> - initialize GPIO struct, initialize callback struct, associate callback with GPIO pin, define callback function, test for callback event state in your code</p></li>
 </ul>
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">stateDiagram-v2
+    direction LR
 
-<img data-src="images/gpio-isr-callbacks/zephyr_overview.png" class="r-stretch"></section>
+    prj_conf : CONFIG_GPIO=y
+    note right of prj_conf : This enables gpio.h to be included
+
+    overlay : nrf52833dk_nrf52833.overlay
+    overlay : Enable the GPIO ports/pins
+    overlay : Create aliases
+
+    state "main.c" as mainc {
+        Preamble : Create GPIO struct from DT alias
+        Preamble : Declare and define callback function
+
+        state "main()" as main {
+            state "Configure port &amp; pin" as config {
+                direction LR
+                [*] --&gt; configA
+                configA : Check GPIO port is ready
+                configA --&gt; configB
+                configB : Configure/initialize GPIO pin
+            }
+            state "Associate GPIO pin with ISR/CB" as isrcb {
+                direction LR
+                [*] --&gt; isrcbA
+                isrcbA : Attach interrupt to pin
+                isrcbA --&gt; isrcbB
+                isrcbB : Declare and initialize callback function
+                isrcbB --&gt; isrcbC
+                isrcbC : Activate (add) the callback
+            }
+            config --&gt; isrcb
+        }
+    }
+
+    prj_conf --&gt; overlay
+    overlay --&gt; mainc
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
 <section id="devicetree-overlay-gpio-keys" class="slide level2">
 <h2>Devicetree (overlay): gpio-keys</h2>
 <p>The Devicetree is used to separate hardware-specific definitions from the firmware logic. Your development kit has a pre-defined devicetree in Zephyr that can be modified with an overlay file. This overlay file can be:</p>

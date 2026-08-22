@@ -192,6 +192,9 @@
   </style>
   <script type="module" src="../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
   <link href="../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
+  <script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+  <script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+  <link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -199,7 +202,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Zephyr: Threads and Kernel Events</h1>
-  <p class="subtitle">BME554L - Spring 2026</p>
+  <p class="subtitle">BME554L - Fall 2026</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -367,27 +370,48 @@ Dr.&nbsp;Mark Palmeri, M.D., Ph.D.
 </ul></li>
 </ul>
 </section>
-<section id="plantuml-sequence-diagram-example" class="slide level2">
-<h2>PlantUML Sequence Diagram Example</h2>
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource plantuml number-lines code-with-copy"><code class="sourceCode"><span id="cb5-1"><a></a>@startuml</span>
-<span id="cb5-2"><a></a></span>
-<span id="cb5-3"><a></a>participant "Button ISR\nCallback" as ISR</span>
-<span id="cb5-4"><a></a>participant "Kernel Event\nBit Array" as KEvents</span>
-<span id="cb5-5"><a></a>participant "Worker Thread" as Worker</span>
-<span id="cb5-6"><a></a></span>
-<span id="cb5-7"><a></a>Worker -&gt; KEvents : k_event_wait()\n[blocking]</span>
-<span id="cb5-8"><a></a>activate Worker #LightBlue</span>
-<span id="cb5-9"><a></a></span>
-<span id="cb5-10"><a></a>note over ISR : Button Pressed</span>
-<span id="cb5-11"><a></a>ISR -&gt; KEvents : k_event_post(BUTTON_EVENT)</span>
-<span id="cb5-12"><a></a>KEvents --&gt; Worker : BUTTON_EVENT received</span>
-<span id="cb5-13"><a></a>deactivate Worker</span>
-<span id="cb5-14"><a></a></span>
-<span id="cb5-15"><a></a>Worker -&gt; Worker : process event\n(e.g., change state)</span>
-<span id="cb5-16"><a></a></span>
-<span id="cb5-17"><a></a>@enduml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="mermaid-sequence-diagram-example" class="slide level2">
+<h2>Mermaid Sequence Diagram Example</h2>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource mermaid number-lines code-with-copy"><code class="sourceCode"><span id="cb5-1"><a></a>sequenceDiagram</span>
+<span id="cb5-2"><a></a>    participant ISR as Button ISR&lt;br/&gt;Callback</span>
+<span id="cb5-3"><a></a>    participant KEvents as Kernel Event&lt;br/&gt;Bit Array</span>
+<span id="cb5-4"><a></a>    participant Worker as Worker Thread</span>
+<span id="cb5-5"><a></a></span>
+<span id="cb5-6"><a></a>    Worker-&gt;&gt;KEvents: k_event_wait()&lt;br/&gt;[blocking]</span>
+<span id="cb5-7"><a></a>    activate Worker</span>
+<span id="cb5-8"><a></a></span>
+<span id="cb5-9"><a></a>    Note over ISR: Button Pressed</span>
+<span id="cb5-10"><a></a>    ISR-&gt;&gt;KEvents: k_event_post(BUTTON_EVENT)</span>
+<span id="cb5-11"><a></a>    KEvents--&gt;&gt;Worker: BUTTON_EVENT received</span>
+<span id="cb5-12"><a></a>    deactivate Worker</span>
+<span id="cb5-13"><a></a></span>
+<span id="cb5-14"><a></a>    Worker-&gt;&gt;Worker: process event&lt;br/&gt;(e.g., change state)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">sequenceDiagram
+    participant ISR as Button ISR&lt;br/&gt;Callback
+    participant KEvents as Kernel Event&lt;br/&gt;Bit Array
+    participant Worker as Worker Thread
 
-<img data-src="images/threads/sequence.png" class="r-stretch quarto-figure-center"><p class="caption">Sequence Diagram Example</p></section>
+    Worker-&gt;&gt;KEvents: k_event_wait()&lt;br/&gt;[blocking]
+    activate Worker
+
+    Note over ISR: Button Pressed
+    ISR-&gt;&gt;KEvents: k_event_post(BUTTON_EVENT)
+    KEvents--&gt;&gt;Worker: BUTTON_EVENT received
+    deactivate Worker
+
+    Worker-&gt;&gt;Worker: process event&lt;br/&gt;(e.g., change state)
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
 <section id="resources" class="slide level2">
 <h2>Resources</h2>
 <ul>

@@ -75,7 +75,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-fced259a1985fd972ecb57c7cd45153f.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-bd822bda3b97e42f988a04714add1194.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-63fadd43d59a8a3540661fcb2a7bfcd0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../site_libs/quarto-contrib/live-runtime/live-runtime.js" type="module"></script>
 <link href="../site_libs/quarto-contrib/live-runtime/live-runtime.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -107,6 +107,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 <script type="module" src="../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
 <link href="../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 <link rel="stylesheet" href="styles.css">
@@ -161,26 +164,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="https://edstem.org/us/courses/90813/discussion" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Ed Discussion</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="https://canvas.duke.edu/courses/74002" class="sidebar-item-text sidebar-link">
+  <a href="https://canvas.duke.edu" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Canvas</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="https://www.gradescope.com/courses/1210835" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Gradescope</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="https://duke.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx?folderID=7dbf19e4-0b80-40dd-8748-b3c901309eec" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Panopto</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -375,7 +360,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../resources/state_diagram.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">State Diagram Preparation Tools</span></a>
+ <span class="menu-text">State Diagrams</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -446,7 +431,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../slides/zephyr-nrf52833dk-intro.html">Learning Modules</a></li><li class="breadcrumb-item"><a href="../slides/event-driven-state-machine.html">Event-Driven State Machines</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Event-Driven State Machine</h1>
-<p class="subtitle lead">BME554L - Spring 2026</p>
+<p class="subtitle lead">BME554L - Fall 2026</p>
 </div>
 
 
@@ -506,10 +491,45 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul></li>
 <li>ICD</li>
 </ul>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/edsm/icd_state_diagram.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
-</figure>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">stateDiagram-v2
+    direction LR
+    [*] --&gt; Init
+
+    Init : Do Stuff
+    RhythmDetect : Detect Rhythm
+    Sleep : Save Power
+    Pace : Pace
+    Error : Put device into safe mode
+
+    state OTA {
+        direction LR
+        [*] --&gt; ota_init
+        ota_init --&gt; ota_run
+        ota_run --&gt; ota_exit
+        ota_init : Download Update
+        ota_run : Over The Air Update
+        ota_exit : Post Successful OTA
+    }
+
+    Init --&gt; RhythmDetect : Successful Init
+    Init --&gt; Error : Init Fault Error Code
+    RhythmDetect --&gt; Pace : Arrhythmia Detected
+    Pace --&gt; RhythmDetect : Pacing Timer Expired
+    RhythmDetect --&gt; Sleep : NSR
+    Sleep --&gt; RhythmDetect : Sleep Timer Expired
+    Sleep --&gt; OTA : OTA Button Pressed
+    OTA --&gt; RhythmDetect : OTA Success Kernel Event Posted
+    Error --&gt; [*]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
 </div>
 </section>
 <section id="implementation" class="level1">

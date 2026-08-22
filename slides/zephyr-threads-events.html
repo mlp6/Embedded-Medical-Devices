@@ -75,7 +75,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-fced259a1985fd972ecb57c7cd45153f.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-bd822bda3b97e42f988a04714add1194.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-63fadd43d59a8a3540661fcb2a7bfcd0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../site_libs/quarto-contrib/live-runtime/live-runtime.js" type="module"></script>
 <link href="../site_libs/quarto-contrib/live-runtime/live-runtime.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -107,6 +107,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 <script type="module" src="../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
 <link href="../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 <link rel="stylesheet" href="styles.css">
@@ -161,26 +164,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="https://edstem.org/us/courses/90813/discussion" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Ed Discussion</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="https://canvas.duke.edu/courses/74002" class="sidebar-item-text sidebar-link">
+  <a href="https://canvas.duke.edu" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Canvas</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="https://www.gradescope.com/courses/1210835" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Gradescope</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="https://duke.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx?folderID=7dbf19e4-0b80-40dd-8748-b3c901309eec" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Panopto</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -375,7 +360,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../resources/state_diagram.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">State Diagram Preparation Tools</span></a>
+ <span class="menu-text">State Diagrams</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -437,7 +422,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#how-to-define-kernel-events" id="toc-how-to-define-kernel-events" class="nav-link" data-scroll-target="#how-to-define-kernel-events">How to Define Kernel Events</a></li>
   <li><a href="#waiting-for-events" id="toc-waiting-for-events" class="nav-link" data-scroll-target="#waiting-for-events">Waiting for Events</a></li>
   <li><a href="#sequence-diagrams-for-thread-communication" id="toc-sequence-diagrams-for-thread-communication" class="nav-link" data-scroll-target="#sequence-diagrams-for-thread-communication">Sequence Diagrams for Thread Communication</a></li>
-  <li><a href="#plantuml-sequence-diagram-example" id="toc-plantuml-sequence-diagram-example" class="nav-link" data-scroll-target="#plantuml-sequence-diagram-example">PlantUML Sequence Diagram Example</a></li>
+  <li><a href="#mermaid-sequence-diagram-example" id="toc-mermaid-sequence-diagram-example" class="nav-link" data-scroll-target="#mermaid-sequence-diagram-example">Mermaid Sequence Diagram Example</a></li>
   <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/mlp6/Embedded-Medical-Devices/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="zephyr-threads-events-slides.html"><i class="bi bi-file-slides"></i>RevealJS (live)</a></li></ul></div></nav>
@@ -448,7 +433,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../slides/zephyr-nrf52833dk-intro.html">Learning Modules</a></li><li class="breadcrumb-item"><a href="../slides/zephyr-threads-events.html">Threads and Kernel Events</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Zephyr: Threads and Kernel Events</h1>
-<p class="subtitle lead">BME554L - Spring 2026</p>
+<p class="subtitle lead">BME554L - Fall 2026</p>
 </div>
 
 
@@ -637,30 +622,46 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul></li>
 </ul>
 </section>
-<section id="plantuml-sequence-diagram-example" class="level2">
-<h2 class="anchored" data-anchor-id="plantuml-sequence-diagram-example">PlantUML Sequence Diagram Example</h2>
-<pre class="plantuml"><code>@startuml
+<section id="mermaid-sequence-diagram-example" class="level2">
+<h2 class="anchored" data-anchor-id="mermaid-sequence-diagram-example">Mermaid Sequence Diagram Example</h2>
+<pre class="mermaid"><code>sequenceDiagram
+    participant ISR as Button ISR&lt;br/&gt;Callback
+    participant KEvents as Kernel Event&lt;br/&gt;Bit Array
+    participant Worker as Worker Thread
 
-participant "Button ISR\nCallback" as ISR
-participant "Kernel Event\nBit Array" as KEvents
-participant "Worker Thread" as Worker
+    Worker-&gt;&gt;KEvents: k_event_wait()&lt;br/&gt;[blocking]
+    activate Worker
 
-Worker -&gt; KEvents : k_event_wait()\n[blocking]
-activate Worker #LightBlue
+    Note over ISR: Button Pressed
+    ISR-&gt;&gt;KEvents: k_event_post(BUTTON_EVENT)
+    KEvents--&gt;&gt;Worker: BUTTON_EVENT received
+    deactivate Worker
 
-note over ISR : Button Pressed
-ISR -&gt; KEvents : k_event_post(BUTTON_EVENT)
-KEvents --&gt; Worker : BUTTON_EVENT received
-deactivate Worker
+    Worker-&gt;&gt;Worker: process event&lt;br/&gt;(e.g., change state)</code></pre>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">sequenceDiagram
+    participant ISR as Button ISR&lt;br/&gt;Callback
+    participant KEvents as Kernel Event&lt;br/&gt;Bit Array
+    participant Worker as Worker Thread
 
-Worker -&gt; Worker : process event\n(e.g., change state)
+    Worker-&gt;&gt;KEvents: k_event_wait()&lt;br/&gt;[blocking]
+    activate Worker
 
-@enduml</code></pre>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/threads/sequence.png" class="img-fluid figure-img"></p>
-<figcaption>Sequence Diagram Example</figcaption>
-</figure>
+    Note over ISR: Button Pressed
+    ISR-&gt;&gt;KEvents: k_event_post(BUTTON_EVENT)
+    KEvents--&gt;&gt;Worker: BUTTON_EVENT received
+    deactivate Worker
+
+    Worker-&gt;&gt;Worker: process event&lt;br/&gt;(e.g., change state)
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
 </div>
 </section>
 <section id="resources" class="level2">

@@ -192,6 +192,9 @@
   </style>
   <script type="module" src="../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
   <link href="../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
+  <script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+  <script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+  <link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -199,7 +202,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Event-Driven State Machine</h1>
-  <p class="subtitle">BME554L - Spring 2026</p>
+  <p class="subtitle">BME554L - Fall 2026</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -238,8 +241,47 @@ Dr.&nbsp;Mark Palmeri, M.D., Ph.D.
 </ul></li>
 <li>ICD</li>
 </ul>
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">stateDiagram-v2
+    direction LR
+    [*] --&gt; Init
 
-<img data-src="images/edsm/icd_state_diagram.png" class="quarto-figure quarto-figure-center r-stretch"></section>
+    Init : Do Stuff
+    RhythmDetect : Detect Rhythm
+    Sleep : Save Power
+    Pace : Pace
+    Error : Put device into safe mode
+
+    state OTA {
+        direction LR
+        [*] --&gt; ota_init
+        ota_init --&gt; ota_run
+        ota_run --&gt; ota_exit
+        ota_init : Download Update
+        ota_run : Over The Air Update
+        ota_exit : Post Successful OTA
+    }
+
+    Init --&gt; RhythmDetect : Successful Init
+    Init --&gt; Error : Init Fault Error Code
+    RhythmDetect --&gt; Pace : Arrhythmia Detected
+    Pace --&gt; RhythmDetect : Pacing Timer Expired
+    RhythmDetect --&gt; Sleep : NSR
+    Sleep --&gt; RhythmDetect : Sleep Timer Expired
+    Sleep --&gt; OTA : OTA Button Pressed
+    OTA --&gt; RhythmDetect : OTA Success Kernel Event Posted
+    Error --&gt; [*]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
 <section>
 <section id="implementation" class="title-slide slide level1 center">
 <h1>Implementation</h1>

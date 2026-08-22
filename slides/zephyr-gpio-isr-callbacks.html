@@ -75,7 +75,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-fced259a1985fd972ecb57c7cd45153f.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-bd822bda3b97e42f988a04714add1194.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-63fadd43d59a8a3540661fcb2a7bfcd0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../site_libs/quarto-contrib/live-runtime/live-runtime.js" type="module"></script>
 <link href="../site_libs/quarto-contrib/live-runtime/live-runtime.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -107,6 +107,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 <script type="module" src="../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
 <link href="../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 <link rel="stylesheet" href="styles.css">
@@ -161,26 +164,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="https://edstem.org/us/courses/90813/discussion" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Ed Discussion</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="https://canvas.duke.edu/courses/74002" class="sidebar-item-text sidebar-link">
+  <a href="https://canvas.duke.edu" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Canvas</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="https://www.gradescope.com/courses/1210835" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Gradescope</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="https://duke.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx?folderID=7dbf19e4-0b80-40dd-8748-b3c901309eec" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Panopto</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -375,7 +360,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../resources/state_diagram.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">State Diagram Preparation Tools</span></a>
+ <span class="menu-text">State Diagrams</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -473,7 +458,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../slides/zephyr-nrf52833dk-intro.html">Learning Modules</a></li><li class="breadcrumb-item"><a href="../slides/zephyr-gpio-isr-callbacks.html">GPIO, ISR, and Callbacks</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">GPIO / ISR / Callbacks</h1>
-<p class="subtitle lead">BME554L - Spring 2026</p>
+<p class="subtitle lead">BME554L - Fall 2026</p>
 </div>
 
 
@@ -586,7 +571,54 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p><code>devicetree.overlay</code> - define GPIO pin as an input, define callback function</p></li>
 <li><p><code>main.c</code> - initialize GPIO struct, initialize callback struct, associate callback with GPIO pin, define callback function, test for callback event state in your code</p></li>
 </ul>
-<p><img src="images/gpio-isr-callbacks/zephyr_overview.png" class="img-fluid"></p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">stateDiagram-v2
+    direction LR
+
+    prj_conf : CONFIG_GPIO=y
+    note right of prj_conf : This enables gpio.h to be included
+
+    overlay : nrf52833dk_nrf52833.overlay
+    overlay : Enable the GPIO ports/pins
+    overlay : Create aliases
+
+    state "main.c" as mainc {
+        Preamble : Create GPIO struct from DT alias
+        Preamble : Declare and define callback function
+
+        state "main()" as main {
+            state "Configure port &amp; pin" as config {
+                direction LR
+                [*] --&gt; configA
+                configA : Check GPIO port is ready
+                configA --&gt; configB
+                configB : Configure/initialize GPIO pin
+            }
+            state "Associate GPIO pin with ISR/CB" as isrcb {
+                direction LR
+                [*] --&gt; isrcbA
+                isrcbA : Attach interrupt to pin
+                isrcbA --&gt; isrcbB
+                isrcbB : Declare and initialize callback function
+                isrcbB --&gt; isrcbC
+                isrcbC : Activate (add) the callback
+            }
+            config --&gt; isrcb
+        }
+    }
+
+    prj_conf --&gt; overlay
+    overlay --&gt; mainc
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
 </section>
 <section id="devicetree-overlay-gpio-keys" class="level2">
 <h2 class="anchored" data-anchor-id="devicetree-overlay-gpio-keys">Devicetree (overlay): gpio-keys</h2>

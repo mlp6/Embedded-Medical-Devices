@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2026-01-05">
+<meta name="dcterms.date" content="2026-08-22">
 
 <title>Software Installation and Tutorials – Embedded Medical Devices</title>
 <style>
@@ -39,7 +39,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-fced259a1985fd972ecb57c7cd45153f.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-948918b09a888212960b5372ee4f7598.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-01c556599088c82c94152a644edac82f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -121,26 +121,8 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="https://edstem.org/us/courses/90813/discussion" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Ed Discussion</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="https://canvas.duke.edu/courses/74002" class="sidebar-item-text sidebar-link">
+  <a href="https://canvas.duke.edu" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Canvas</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="https://www.gradescope.com/courses/1210835" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Gradescope</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="https://duke.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx?folderID=7dbf19e4-0b80-40dd-8748-b3c901309eec" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Panopto</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -335,7 +317,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./resources/state_diagram.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">State Diagram Preparation Tools</span></a>
+ <span class="menu-text">State Diagrams</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -402,7 +384,7 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./course-syllabus.html">Course Information</a></li><li class="breadcrumb-item"><a href="./software-install-tutorials.html">Software Installation &amp; Tutorials</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Software Installation and Tutorials</h1>
-<p class="subtitle lead">BME554L (Spring 2026)</p>
+<p class="subtitle lead">BME554L (Fall 2026)</p>
 </div>
 
 
@@ -413,7 +395,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">January 5, 2026</p>
+      <p class="date">August 22, 2026</p>
     </div>
   </div>
   
@@ -441,8 +423,23 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li><p><code>nRF Connect for VS Code (Extension Pack)</code></p></li>
 <li><p><code>GitLens</code> (help with <code>git</code> operations / visualization)</p></li>
-<li><p><code>C/C++</code> (not the extension pack, since it include <code>CMake Tools</code> that has some incompatibilities with the Zephyr build tools)</p></li>
+<li><p><code>C/C++</code></p></li>
 <li><p><code>Cmake</code></p></li>
+</ul>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Do not install the <code>cmake</code> extension pack because it includes <code>CMake Tools</code> that has some incompatibilities with the Zephyr build tools.</p>
+</div>
+</div>
+<ul>
 <li><p>State diagram software (see below)</p></li>
 <li><p><a href="https://code.visualstudio.com/docs/copilot/overview">GitHub CoPilot Chat</a> AI coding assistant (optional, but highly recommended)</p></li>
 </ul>
@@ -485,7 +482,7 @@ Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Be sure to use the <code>nRF Connect SDK v3.2.4</code> for this class. The code snippets provided throughout the semester will be based on this version of the SDK.</p>
+<p>Be sure to use the <code>nRF Connect SDK v3.4.0 (LTS)</code> for this class. The code snippets provided throughout the semester will be based on this version of the SDK.</p>
 </div>
 </div>
 <ul>
