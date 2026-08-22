@@ -1,7 +1,7 @@
 ---
 title: Software Installation and Tutorials
-subtitle: "BME554L (Spring 2026)"
-date: 2026-01-05
+subtitle: "BME554L (Fall 2026)"
+date: 2026-08-22
 format:
   html: default
   pdf: default
@@ -28,10 +28,14 @@ please install the following Extensions:
 
 - `GitLens` (help with `git` operations / visualization)
 
-- `C/C++` (not the extension pack, since it include `CMake Tools` that has some
-incompatibilities with the Zephyr build tools)
+- `C/C++` 
 
 - `Cmake`
+
+::: callout-warning
+Do not install the `cmake` extension pack because it includes `CMake Tools` that
+has some incompatibilities with the Zephyr build tools.
+:::
 
 - State diagram software (see below)
 
@@ -57,12 +61,10 @@ semester.
 
 ## Zephyr SDK / nRF Connect / Nordic Dev Academy
 
-- Sign up for an account on the [Nordic Semiconductor
-DevAcademy](https://academy.nordicsemi.com/courses/nrf-connect-sdk-fundamentals/)
+- Sign up for an account on the [Nordic Semiconductor DevAcademy](https://academy.nordicsemi.com/courses/nrf-connect-sdk-fundamentals/)
 
 - Please complete the following tutorial to get your environment setup for using
-the Nordic nRF Connect SDK: [Lesson 1 - nRF Connect SDK
-Introduction](https://academy.nordicsemi.com/lessons/lesson-1-nrf-connect-sdk-introduction/)
+the Nordic nRF Connect SDK: [Lesson 1 - nRF Connect SDK Introduction](https://academy.nordicsemi.com/lessons/lesson-1-nrf-connect-sdk-introduction/)
 
 This will run you through the process of:
 
@@ -73,8 +75,9 @@ pack.
 including the `nRF Connect SDK` and associated `toolchain`.
   
 ::: callout-tip
-Be sure to use the `nRF Connect SDK v3.2.4` for this class.  The code snippets
-provided throughout the semester will be based on this version of the SDK.
+Be sure to use the `nRF Connect SDK v3.4.0 (LTS)` for this class.  The code
+snippets provided throughout the semester will be based on this version of the
+SDK.
 :::
 
 - Once you have the hardware you need to order described below, flash the
