@@ -1869,7 +1869,7 @@
     "href": "slides/git-fundamentals-notes.html#git-remotes",
     "title": "Git (Version Control) Fundamentals",
     "section": "Git Remotes",
-    "text": "Git Remotes\n\nA remote is another location where your git repository history exists.\nRemotes can be:\n\nOn your local computer\nOn a networked computer (e.g., server)\nOn a cloud-based service (e.g., GitHub, GitLab, BitBucket)\n\nWhen starting a new git repository that will be shared (i.e., will have at least one remote), you have a few ways to start things:\n\n\nCreate a local git repository and then add a remote.\nCreate a remote git repository and then clone it to your local computer.\n:balloon: For this class, all of your assignment repositories will need to be shared via GitLab, so I will recommend you create them on GitLab first, and then clone them to your local computer.",
+    "text": "Git Remotes\n\nA remote is another location where your git repository history exists.\nRemotes can be:\n\nOn your local computer\nOn a networked computer (e.g., server)\nOn a cloud-based service (e.g., GitHub, GitLab, BitBucket)\n\nWhen starting a new git repository that will be shared (i.e., will have at least one remote), you have a few ways to start things:\n\n\nCreate a local git repository and then add a remote.\nCreate a remote git repository and then clone it to your local computer.\nFor this class, all of your assignment repositories will need to be shared via GitLab, so I will recommend you create them on GitLab first, and then clone them to your local computer.\n\n\n\n\n\n\n%%{init: {\"theme\": \"base\", \"themeVariables\": {\"primaryColor\": \"#eef3fb\", \"primaryBorderColor\": \"#2d63ba\", \"primaryTextColor\": \"#1e1e1e\", \"lineColor\": \"#2d63ba\", \"clusterBkg\": \"#f7f9fc\", \"clusterBorder\": \"#2d63ba\", \"edgeLabelBackground\": \"#ffffff\"}}}%%\nflowchart LR\n    subgraph shared[\"Class Group Space (GitLab)\"]\n        Central[(\"Shared Project Repo\")]\n    end\n\n    subgraph forkspace[\"Student User Space (GitLab)\"]\n        Fork[(\"Forked Repo\")]\n    end\n\n    LocalA[(\"Local Clone A\")]\n    LocalB[(\"Local Clone B\")]\n    StudentLocal[(\"Student Local Clone\")]\n\n    LocalA -- \"git push (origin)\" --&gt; Central\n    Central -- \"git pull (origin)\" --&gt; LocalA\n\n    Central -- \"git clone\" --&gt; LocalB\n    LocalB -- \"git push (origin)\" --&gt; Central\n    Central -- \"git pull (origin)\" --&gt; LocalB\n\n    Central -- \"fork\" --&gt; Fork\n    Fork -- \"git clone\" --&gt; StudentLocal\n    StudentLocal -- \"git push (origin)\" --&gt; Fork\n    Fork -- \"git pull (origin)\" --&gt; StudentLocal\n    Central -. \"git pull (upstream)\" .-&gt; StudentLocal",
     "crumbs": [
       "Learning Modules",
       "Git Fundamentals"
@@ -1880,7 +1880,7 @@
     "href": "slides/git-fundamentals-notes.html#creating-a-new-repository-on-gitlab",
     "title": "Git (Version Control) Fundamentals",
     "section": "Creating a new repository on GitLab",
-    "text": "Creating a new repository on GitLab\n\n:white_check_mark: Create a new repository on GitLab, named my_first_git_repo.\n\n:warning: Spaces are not allowed in repository names and create problems when working on the commandline, so use underscores or dashes instead.\n\n+ icon in the upper left :arrow_right: New project/repository\n\n\n\n\nChoose: Create Blank Project\nChoose Project Name: my_first_git_repo\n\n\n\n\n\n\n\nWarning\n\n\n\nIf this is a new repository that doesn’t already exist locally on your laptop, then you can choose to have GitLab create a README.md file; otherwise, deselect that default option.\n\n\n\n\nChoose: Create Project",
+    "text": "Creating a new repository on GitLab\n\nCreate a new repository on GitLab, named my_first_git_repo.\n\n\n\n\n\n\n\nWarning\n\n\n\nSpaces are not allowed in repository names and create problems when working on the commandline, so use underscores or dashes instead.\n\n\n\n+ icon in the upper left :arrow_right: New project/repository\n\n\n\n\nChoose: Create Blank Project\nChoose Project Name: my_first_git_repo\n\n\n\n\n\n\n\nWarning\n\n\n\nIf this is a new repository that doesn’t already exist locally on your laptop, then you can choose to have GitLab create a README.md file; otherwise, deselect that default option.\n\n\n\n\nChoose: Create Project",
     "crumbs": [
       "Learning Modules",
       "Git Fundamentals"
@@ -1903,17 +1903,6 @@
     "title": "Git (Version Control) Fundamentals",
     "section": "Success will look like:",
     "text": "Success will look like:\nCloning into 'my_first_git_repo'...\nwarning: You appear to have cloned an empty repository.\n\nYou will not see that warning if you chose to have GitLab create a README.md file when you created the repository.",
-    "crumbs": [
-      "Learning Modules",
-      "Git Fundamentals"
-    ]
-  },
-  {
-    "objectID": "slides/git-fundamentals-notes.html#git-remotelocal-workflow",
-    "href": "slides/git-fundamentals-notes.html#git-remotelocal-workflow",
-    "title": "Git (Version Control) Fundamentals",
-    "section": "Git Remote/Local Workflow",
-    "text": "Git Remote/Local Workflow",
     "crumbs": [
       "Learning Modules",
       "Git Fundamentals"
@@ -2245,14 +2234,14 @@
     "href": "slides/git-fundamentals-slides.html#git-remotes",
     "title": "Git (Version Control) Fundamentals",
     "section": "Git Remotes",
-    "text": "Git Remotes\n\nA remote is another location where your git repository history exists.\nRemotes can be:\n\nOn your local computer\nOn a networked computer (e.g., server)\nOn a cloud-based service (e.g., GitHub, GitLab, BitBucket)\n\nWhen starting a new git repository that will be shared (i.e., will have at least one remote), you have a few ways to start things:\n\n\nCreate a local git repository and then add a remote.\nCreate a remote git repository and then clone it to your local computer.\n:balloon: For this class, all of your assignment repositories will need to be shared via GitLab, so I will recommend you create them on GitLab first, and then clone them to your local computer."
+    "text": "Git Remotes\n\nA remote is another location where your git repository history exists.\nRemotes can be:\n\nOn your local computer\nOn a networked computer (e.g., server)\nOn a cloud-based service (e.g., GitHub, GitLab, BitBucket)\n\nWhen starting a new git repository that will be shared (i.e., will have at least one remote), you have a few ways to start things:\n\n\nCreate a local git repository and then add a remote.\nCreate a remote git repository and then clone it to your local computer.\nFor this class, all of your assignment repositories will need to be shared via GitLab, so I will recommend you create them on GitLab first, and then clone them to your local computer.\n\n\n\n\n\n\n%%{init: {\"theme\": \"base\", \"themeVariables\": {\"primaryColor\": \"#eef3fb\", \"primaryBorderColor\": \"#2d63ba\", \"primaryTextColor\": \"#1e1e1e\", \"lineColor\": \"#2d63ba\", \"clusterBkg\": \"#f7f9fc\", \"clusterBorder\": \"#2d63ba\", \"edgeLabelBackground\": \"#ffffff\"}}}%%\nflowchart LR\n    subgraph shared[\"Class Group Space (GitLab)\"]\n        Central[(\"Shared Project Repo\")]\n    end\n\n    subgraph forkspace[\"Student User Space (GitLab)\"]\n        Fork[(\"Forked Repo\")]\n    end\n\n    LocalA[(\"Local Clone A\")]\n    LocalB[(\"Local Clone B\")]\n    StudentLocal[(\"Student Local Clone\")]\n\n    LocalA -- \"git push (origin)\" --&gt; Central\n    Central -- \"git pull (origin)\" --&gt; LocalA\n\n    Central -- \"git clone\" --&gt; LocalB\n    LocalB -- \"git push (origin)\" --&gt; Central\n    Central -- \"git pull (origin)\" --&gt; LocalB\n\n    Central -- \"fork\" --&gt; Fork\n    Fork -- \"git clone\" --&gt; StudentLocal\n    StudentLocal -- \"git push (origin)\" --&gt; Fork\n    Fork -- \"git pull (origin)\" --&gt; StudentLocal\n    Central -. \"git pull (upstream)\" .-&gt; StudentLocal"
   },
   {
     "objectID": "slides/git-fundamentals-slides.html#creating-a-new-repository-on-gitlab",
     "href": "slides/git-fundamentals-slides.html#creating-a-new-repository-on-gitlab",
     "title": "Git (Version Control) Fundamentals",
     "section": "Creating a new repository on GitLab",
-    "text": "Creating a new repository on GitLab\n\n:white_check_mark: Create a new repository on GitLab, named my_first_git_repo.\n\n:warning: Spaces are not allowed in repository names and create problems when working on the commandline, so use underscores or dashes instead.\n\n+ icon in the upper left :arrow_right: New project/repository"
+    "text": "Creating a new repository on GitLab\n\nCreate a new repository on GitLab, named my_first_git_repo.\n\n\n\n\n\n\n\nWarning\n\n\nSpaces are not allowed in repository names and create problems when working on the commandline, so use underscores or dashes instead.\n\n\n\n\n+ icon in the upper left :arrow_right: New project/repository"
   },
   {
     "objectID": "slides/git-fundamentals-slides.html#clone-a-repository",
@@ -2267,13 +2256,6 @@
     "title": "Git (Version Control) Fundamentals",
     "section": "Success will look like:",
     "text": "Success will look like:\nCloning into 'my_first_git_repo'...\nwarning: You appear to have cloned an empty repository.\n\nYou will not see that warning if you chose to have GitLab create a README.md file when you created the repository."
-  },
-  {
-    "objectID": "slides/git-fundamentals-slides.html#git-remotelocal-workflow",
-    "href": "slides/git-fundamentals-slides.html#git-remotelocal-workflow",
-    "title": "Git (Version Control) Fundamentals",
-    "section": "Git Remote/Local Workflow",
-    "text": "Git Remote/Local Workflow"
   },
   {
     "objectID": "slides/git-fundamentals-slides.html#initialize-a-project-directory-not-already-on-a-remote",

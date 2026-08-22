@@ -12,7 +12,7 @@
   <meta name="generator" content="quarto-1.7.31">
 
   <meta name="author" content="Dr.&nbsp;Mark Palmeri, M.D., Ph.D.">
-  <meta name="dcterms.date" content="2025-08-25">
+  <meta name="dcterms.date" content="2026-08-22">
   <title>Embedded Medical Devices – Git (Version Control) Fundamentals</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -192,6 +192,9 @@
   </style>
   <script type="module" src="../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
   <link href="../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
+  <script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+  <script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+  <link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -212,7 +215,7 @@ Dr.&nbsp;Mark Palmeri, M.D., Ph.D.
     </div>
 </div>
 
-  <p class="date">August 25, 2025</p>
+  <p class="date">August 22, 2026</p>
 </section>
 <section id="why-version-control" class="slide level2">
 <h2>Why Version Control?</h2>
@@ -242,7 +245,6 @@ Dr.&nbsp;Mark Palmeri, M.D., Ph.D.
 <li>Doesn’t work well with binary (non-text) data</li>
 <li>Doesn’t work well with large files (e.g., audio, video)</li>
 </ul>
-<!--- TODO: create flowcharts and state diagrams -->
 </section>
 <section id="remotes" class="slide level2">
 <h2>Remotes</h2>
@@ -269,16 +271,65 @@ Dr.&nbsp;Mark Palmeri, M.D., Ph.D.
 <ol type="1">
 <li>Create a local git repository and then add a remote.</li>
 <li>Create a remote git repository and then <code>clone</code> it to your local computer.</li>
-<li>:balloon: For this class, all of your assignment repositories will need to be shared via GitLab, so I will recommend you create them on GitLab first, and then clone them to your local computer.</li>
+<li>For this class, all of your assignment repositories will need to be shared via GitLab, so I will recommend you create them on GitLab first, and then clone them to your local computer.</li>
 </ol>
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#eef3fb", "primaryBorderColor": "#2d63ba", "primaryTextColor": "#1e1e1e", "lineColor": "#2d63ba", "clusterBkg": "#f7f9fc", "clusterBorder": "#2d63ba", "edgeLabelBackground": "#ffffff"}}}%%
+flowchart LR
+    subgraph shared["Class Group Space (GitLab)"]
+        Central[("Shared Project Repo")]
+    end
+
+    subgraph forkspace["Student User Space (GitLab)"]
+        Fork[("Forked Repo")]
+    end
+
+    LocalA[("Local Clone A")]
+    LocalB[("Local Clone B")]
+    StudentLocal[("Student Local Clone")]
+
+    LocalA -- "git push (origin)" --&gt; Central
+    Central -- "git pull (origin)" --&gt; LocalA
+
+    Central -- "git clone" --&gt; LocalB
+    LocalB -- "git push (origin)" --&gt; Central
+    Central -- "git pull (origin)" --&gt; LocalB
+
+    Central -- "fork" --&gt; Fork
+    Fork -- "git clone" --&gt; StudentLocal
+    StudentLocal -- "git push (origin)" --&gt; Fork
+    Fork -- "git pull (origin)" --&gt; StudentLocal
+    Central -. "git pull (upstream)" .-&gt; StudentLocal
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
 </section>
 <section id="creating-a-new-repository-on-gitlab" class="slide level2">
 <h2>Creating a new repository on GitLab</h2>
 <ul>
-<li>:white_check_mark: Create a new repository on GitLab, named <code>my_first_git_repo</code>.
+<li>Create a new repository on GitLab, named <code>my_first_git_repo</code>.</li>
+</ul>
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Warning</strong></p>
+</div>
+<div class="callout-content">
+<p>Spaces are not allowed in repository names and create problems when working on the commandline, so use underscores or dashes instead.</p>
+</div>
+</div>
+</div>
 <ul>
-<li>:warning: Spaces are not allowed in repository names and create problems when working on the commandline, so use underscores or dashes instead.</li>
-</ul></li>
 <li><code>+</code> icon in the upper left :arrow_right: <code>New project/repository</code></li>
 </ul>
 
@@ -330,10 +381,6 @@ Dr.&nbsp;Mark Palmeri, M.D., Ph.D.
 <li>You will not see that warning if you chose to have GitLab create a <code>README.md</code> file when you created the repository.</li>
 </ul>
 </section>
-<section id="git-remotelocal-workflow" class="slide level2">
-<h2>Git Remote/Local Workflow</h2>
-
-<img data-src="images/git/git_workflow_local_remote.png" class="quarto-figure quarto-figure-center r-stretch"></section>
 <section id="initialize-a-project-directory-not-already-on-a-remote" class="slide level2">
 <h2>Initialize a Project Directory (not already on a remote)</h2>
 <ul>

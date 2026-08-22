@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Dr.&nbsp;Mark Palmeri, M.D., Ph.D.">
-<meta name="dcterms.date" content="2025-08-25">
+<meta name="dcterms.date" content="2026-08-22">
 
 <title>Git (Version Control) Fundamentals – Embedded Medical Devices</title>
 <style>
@@ -107,6 +107,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 <script type="module" src="../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
 <link href="../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 <link rel="stylesheet" href="styles.css">
@@ -196,14 +199,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../slides/event-driven-state-machine.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Event-Driven State Machines</span></a>
+  <a href="../slides/git-fundamentals-notes.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Git Fundamentals</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../slides/git-fundamentals-notes.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Git Fundamentals</span></a>
+  <a href="../slides/event-driven-state-machine.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Event-Driven State Machines</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -417,7 +420,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#creating-a-new-repository-on-gitlab" id="toc-creating-a-new-repository-on-gitlab" class="nav-link" data-scroll-target="#creating-a-new-repository-on-gitlab">Creating a new repository on GitLab</a></li>
   <li><a href="#clone-a-repository" id="toc-clone-a-repository" class="nav-link" data-scroll-target="#clone-a-repository">Clone a Repository</a></li>
   <li><a href="#success-will-look-like" id="toc-success-will-look-like" class="nav-link" data-scroll-target="#success-will-look-like">Success will look like:</a></li>
-  <li><a href="#git-remotelocal-workflow" id="toc-git-remotelocal-workflow" class="nav-link" data-scroll-target="#git-remotelocal-workflow">Git Remote/Local Workflow</a></li>
   <li><a href="#initialize-a-project-directory-not-already-on-a-remote" id="toc-initialize-a-project-directory-not-already-on-a-remote" class="nav-link" data-scroll-target="#initialize-a-project-directory-not-already-on-a-remote">Initialize a Project Directory (not already on a remote)</a></li>
   <li><a href="#local-workflow" id="toc-local-workflow" class="nav-link" data-scroll-target="#local-workflow">Local Workflow</a></li>
   <li><a href="#git-status" id="toc-git-status" class="nav-link" data-scroll-target="#git-status">Git Status</a></li>
@@ -477,7 +479,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">August 25, 2025</p>
+      <p class="date">August 22, 2026</p>
     </div>
   </div>
   
@@ -517,7 +519,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Doesn’t work well with binary (non-text) data</li>
 <li>Doesn’t work well with large files (e.g., audio, video)</li>
 </ul>
-<!--- TODO: create flowcharts and state diagrams -->
 </section>
 <section id="remotes" class="level2">
 <h2 class="anchored" data-anchor-id="remotes">Remotes</h2>
@@ -544,16 +545,65 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol type="1">
 <li>Create a local git repository and then add a remote.</li>
 <li>Create a remote git repository and then <code>clone</code> it to your local computer.</li>
-<li>:balloon: For this class, all of your assignment repositories will need to be shared via GitLab, so I will recommend you create them on GitLab first, and then clone them to your local computer.</li>
+<li>For this class, all of your assignment repositories will need to be shared via GitLab, so I will recommend you create them on GitLab first, and then clone them to your local computer.</li>
 </ol>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#eef3fb", "primaryBorderColor": "#2d63ba", "primaryTextColor": "#1e1e1e", "lineColor": "#2d63ba", "clusterBkg": "#f7f9fc", "clusterBorder": "#2d63ba", "edgeLabelBackground": "#ffffff"}}}%%
+flowchart LR
+    subgraph shared["Class Group Space (GitLab)"]
+        Central[("Shared Project Repo")]
+    end
+
+    subgraph forkspace["Student User Space (GitLab)"]
+        Fork[("Forked Repo")]
+    end
+
+    LocalA[("Local Clone A")]
+    LocalB[("Local Clone B")]
+    StudentLocal[("Student Local Clone")]
+
+    LocalA -- "git push (origin)" --&gt; Central
+    Central -- "git pull (origin)" --&gt; LocalA
+
+    Central -- "git clone" --&gt; LocalB
+    LocalB -- "git push (origin)" --&gt; Central
+    Central -- "git pull (origin)" --&gt; LocalB
+
+    Central -- "fork" --&gt; Fork
+    Fork -- "git clone" --&gt; StudentLocal
+    StudentLocal -- "git push (origin)" --&gt; Fork
+    Fork -- "git pull (origin)" --&gt; StudentLocal
+    Central -. "git pull (upstream)" .-&gt; StudentLocal
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
 </section>
 <section id="creating-a-new-repository-on-gitlab" class="level2">
 <h2 class="anchored" data-anchor-id="creating-a-new-repository-on-gitlab">Creating a new repository on GitLab</h2>
 <ul>
-<li>:white_check_mark: Create a new repository on GitLab, named <code>my_first_git_repo</code>.
+<li>Create a new repository on GitLab, named <code>my_first_git_repo</code>.</li>
+</ul>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Spaces are not allowed in repository names and create problems when working on the commandline, so use underscores or dashes instead.</p>
+</div>
+</div>
 <ul>
-<li>:warning: Spaces are not allowed in repository names and create problems when working on the commandline, so use underscores or dashes instead.</li>
-</ul></li>
 <li><code>+</code> icon in the upper left :arrow_right: <code>New project/repository</code></li>
 </ul>
 <p><img src="images/git/image.png" class="img-fluid"></p>
@@ -602,14 +652,6 @@ Warning
 <ul>
 <li>You will not see that warning if you chose to have GitLab create a <code>README.md</code> file when you created the repository.</li>
 </ul>
-</section>
-<section id="git-remotelocal-workflow" class="level2">
-<h2 class="anchored" data-anchor-id="git-remotelocal-workflow">Git Remote/Local Workflow</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/git/git_workflow_local_remote.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
-</figure>
-</div>
 </section>
 <section id="initialize-a-project-directory-not-already-on-a-remote" class="level2">
 <h2 class="anchored" data-anchor-id="initialize-a-project-directory-not-already-on-a-remote">Initialize a Project Directory (not already on a remote)</h2>
