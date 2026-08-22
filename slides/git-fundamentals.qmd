@@ -1,6 +1,6 @@
 ---
 title: "Git (Version Control) Fundamentals"
-date: "2025-08-25"
+date: "2026-08-22"
 format:
   live-html: 
     output-file: git-fundamentals-notes.html
@@ -31,8 +31,6 @@ format:
 - Doesn't work well with binary (non-text) data
 - Doesn't work well with large files (e.g., audio, video) 
 
-<!--- TODO: create flowcharts and state diagrams -->
-
 ## Remotes
 
 ## Git Collaboration
@@ -51,12 +49,45 @@ format:
 
 1. Create a local git repository and then add a remote.
 1. Create a remote git repository and then `clone` it to your local computer.
-1. :balloon: For this class, all of your assignment repositories will need to be shared via GitLab, so I will recommend you create them on GitLab first, and then clone them to your local computer.
+1. For this class, all of your assignment repositories will need to be shared via GitLab, so I will recommend you create them on GitLab first, and then clone them to your local computer.
+
+
+```{mermaid}
+%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#eef3fb", "primaryBorderColor": "#2d63ba", "primaryTextColor": "#1e1e1e", "lineColor": "#2d63ba", "clusterBkg": "#f7f9fc", "clusterBorder": "#2d63ba", "edgeLabelBackground": "#ffffff"}}}%%
+flowchart LR
+    subgraph shared["Class Group Space (GitLab)"]
+        Central[("Shared Project Repo")]
+    end
+
+    subgraph forkspace["Student User Space (GitLab)"]
+        Fork[("Forked Repo")]
+    end
+
+    LocalA[("Local Clone A")]
+    LocalB[("Local Clone B")]
+    StudentLocal[("Student Local Clone")]
+
+    LocalA -- "git push (origin)" --> Central
+    Central -- "git pull (origin)" --> LocalA
+
+    Central -- "git clone" --> LocalB
+    LocalB -- "git push (origin)" --> Central
+    Central -- "git pull (origin)" --> LocalB
+
+    Central -- "fork" --> Fork
+    Fork -- "git clone" --> StudentLocal
+    StudentLocal -- "git push (origin)" --> Fork
+    Fork -- "git pull (origin)" --> StudentLocal
+    Central -. "git pull (upstream)" .-> StudentLocal
+```
 
 ## Creating a new repository on GitLab
 
-- :white_check_mark: Create a new repository on GitLab, named `my_first_git_repo`.
-  -  :warning: Spaces are not allowed in repository names and create problems when working on the commandline, so use underscores or dashes instead.
+- Create a new repository on GitLab, named `my_first_git_repo`.
+
+::: callout-warning
+Spaces are not allowed in repository names and create problems when working on the commandline, so use underscores or dashes instead.
+:::
 - `+` icon in the upper left :arrow_right: `New project/repository`
 
 ![](images/git/image.png)
@@ -97,10 +128,6 @@ warning: You appear to have cloned an empty repository.
 ```
 
 - You will not see that warning if you chose to have GitLab create a `README.md` file when you created the repository.
-
-## Git Remote/Local Workflow
-
-![](images/git/git_workflow_local_remote.png){fig-align="center"}
 
 ## Initialize a Project Directory (not already on a remote)
 
