@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Dr.&nbsp;Mark Palmeri, M.D., Ph.D.">
-<meta name="dcterms.date" content="2026-01-05">
+<meta name="dcterms.date" content="2026-08-23">
 
 <title>Event Driven State Machine Lab – Embedded Medical Devices</title>
 <style>
@@ -369,10 +369,9 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#digital-kitchen-timer" id="toc-digital-kitchen-timer" class="nav-link active" data-scroll-target="#digital-kitchen-timer">Digital Kitchen Timer</a></li>
-  <li><a href="#functional-states" id="toc-functional-states" class="nav-link" data-scroll-target="#functional-states">Functional States</a></li>
+  <li><a href="#state-specifications" id="toc-state-specifications" class="nav-link active" data-scroll-target="#state-specifications">State Specifications</a></li>
   <li><a href="#generate-the-state-diagram" id="toc-generate-the-state-diagram" class="nav-link" data-scroll-target="#generate-the-state-diagram">Generate the State Diagram</a></li>
-  <li><a href="#gradescope" id="toc-gradescope" class="nav-link" data-scroll-target="#gradescope">Gradescope</a></li>
+  <li><a href="#submission" id="toc-submission" class="nav-link" data-scroll-target="#submission">Submission</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/mlp6/Embedded-Medical-Devices/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="event-driven-state-machine-lab.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
@@ -402,7 +401,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">January 5, 2026</p>
+      <p class="date">August 23, 2026</p>
     </div>
   </div>
   
@@ -427,66 +426,10 @@ Tip
 <p>I would recommend doing this with pencil and paper first, not immediately jumping into a tool. Err on the side of more detail than not.</p>
 </div>
 </div>
-<section id="digital-kitchen-timer" class="level2">
-<h2 class="anchored" data-anchor-id="digital-kitchen-timer">Digital Kitchen Timer</h2>
-<p>Generate a state diagram for a simple digital kitchen timer that has the following buttons:</p>
-<ul>
-<li><code>Start/Stop</code> Button</li>
-<li><code>Reset</code> Button</li>
-<li><code>Pause</code> Button</li>
-<li><code>Up</code>/<code>Down</code>/<code>Left</code>/<code>Right</code> Arrow Buttons (4)</li>
-</ul>
-<p>The timer outputs time intervals in the format: <code>HH:MM:SS</code></p>
-</section>
-<section id="functional-states" class="level2">
-<h2 class="anchored" data-anchor-id="functional-states">Functional States</h2>
-<ul>
-<li>The kitchen timer has an “Idle” state when it isn’t actively counting down time. In this state:
-<ul>
-<li>The <code>Up</code>/<code>Down</code> buttons increment the time for the <code>HH</code>, <code>MM</code> or <code>SS</code> values.</li>
-<li>The <code>Left</code>/<code>Right</code> buttons let you move between <code>HH</code>, <code>MM</code> and <code>SS</code>.</li>
-<li>Time intervals will wrap around to <code>00</code> when a reasonable max value is exceeded.</li>
-<li>The <code>Reset</code> button sets all of the time values to <code>00</code>.</li>
-<li>The <code>Pause</code> button is inactive.</li>
-</ul></li>
-<li><code>Start/Stop</code> will start the timer countdown when in <code>Idle</code>.</li>
-<li>In the <code>Countdown</code> state:
-<ul>
-<li>The <code>Start/Stop</code> button will stop and reset the countdown interval.</li>
-<li>The <code>Pause</code> button will pause, but not reset, the countdown time.</li>
-</ul></li>
-<li>When the countdown is done, the timer enters an <code>Alarm</code> state, where:
-<ul>
-<li>The <code>Up</code>/<code>Down</code>/<code>Right</code>/<code>Left</code> arrow buttons, <code>Reset</code> and <code>Pause</code> buttons are inactive.</li>
-<li><code>Start/Stop</code> will stop the alarm and return the timer to <code>Idle</code> with the previously set countdown time.</li>
-</ul></li>
-</ul>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>If any functional state expectation isn’t explicitly described above, please implement something reasonable.</p>
-</div>
-</div>
-<p>Make sure that your state diagram:</p>
-<ul>
-<li>Has initialization (i.e., batteries put in) and termination (i.e., completely powered off) dots.</li>
-<li>Includes all functional states, including (but not limited to):
-<ul>
-<li><code>Idle</code></li>
-<li><code>Countdown</code></li>
-<li><code>Paused</code></li>
-<li><code>Alarm</code></li>
-</ul></li>
-<li>Consider if states should have entry and exit actions.</li>
-<li>Make sure all transitions between states are annotated with associated triggering events.</li>
-</ul>
+<section id="state-specifications" class="level2">
+<h2 class="anchored" data-anchor-id="state-specifications">State Specifications</h2>
+<p>The final project for this class will be a heart rate and temperature monitor that will send metrics to a mobile phone using Bluetooth Low Energy (BLE). The device states are described in <a href="../labs/ecg-temp-ble-lab.html">ecg-temp-ble-lab.qmd</a>.</p>
+<p>This assigment will be the starting point to get feedback on creating a complete and descriptive state diagram for the device.</p>
 </section>
 <section id="generate-the-state-diagram" class="level2">
 <h2 class="anchored" data-anchor-id="generate-the-state-diagram">Generate the State Diagram</h2>
@@ -501,13 +444,13 @@ Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>For PlantUML-generated digrams, if the diagram’s layout is difficult to follow using the automated layout, consider manually specifying relative positions and length of arrows using the following annotation: <a href="https://crashedmind.github.io/PlantUMLHitchhikersGuide/layout/layout.html#:~:text=6.,Tip">https://crashedmind.github.io/PlantUMLHitchhikersGuide/layout/layout.html#:~:text=6.,Tip</a>.</p>
+<p>For UML digrams, if the diagram’s layout is difficult to follow using the automated layout, consider manually specifying relative positions and length of arrows using the following annotation guidelines: <a href="https://mermaid.ai/open-source/syntax/stateDiagram.html">https://mermaid.ai/open-source/syntax/stateDiagram.html</a>.</p>
 </div>
 </div>
 </section>
-<section id="gradescope" class="level2">
-<h2 class="anchored" data-anchor-id="gradescope">Gradescope</h2>
-<p>Upload your rendered state diagram to the associated Gradescope assignment.</p>
+<section id="submission" class="level2">
+<h2 class="anchored" data-anchor-id="submission">Submission</h2>
+<p>Upload your rendered state diagram to the associated Canvas assignment.</p>
 
 
 </section>
