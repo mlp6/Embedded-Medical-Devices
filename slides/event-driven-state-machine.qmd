@@ -70,52 +70,96 @@ stateDiagram-v2
   - What are the entry / exit routines for each state?
 - UML (Universal Modeling Language) is a common way to represent state diagrams.
 
-## PlantUML Example
+## Mermaid Example
 
-```plantuml
-@startuml
+```mermaid
+stateDiagram-v2
+    direction LR
+    [*] --> Init
 
-[*] -> Init
+    state Init {
+        init_run: Do Stuff
+    }
 
-state Init {
-    init_run: Do Stuff
-}
+    state RhythmDetect {
+        rhythm_detect_run: Detect Rhythm
+    }
 
-state RhythmDetect {
-    rhythm_detect_run: Detect Rhythm
-}
+    state Sleep {
+        sleep_run: Save Power
+    }
 
-state Sleep {
-    sleep_run: Save Power
-}
+    state Pace {
+        pace_run: Pace
+    }
 
-state Pace {
-    pace_run: Pace
-}
+    state OTA {
+        ota_init: Download Update
+        ota_init --> ota_run
+        ota_run: Over The Air Update
+        ota_run --> ota_exit
+        ota_exit: Post Successful OTA
+    }
 
-state OTA {
-    ota_init: Download Update
-    ota_init -> ota_run
-    ota_run: Over The Air Update
-    ota_run -> ota_exit
-    ota_exit: Post Successful OTA
-}
+    state Error {
+        error_run: Put device into safe mode
+    }
 
-state Error {
-    error_run: Put device into safe mode
-}
+    Init --> RhythmDetect : Successful Init
+    Init --> Error : Init Fault Error Code
+    RhythmDetect --> Pace : Arrhythmia Detected
+    Pace --> RhythmDetect : Pacing Timer Expired
+    RhythmDetect --> Sleep : NSR
+    Sleep --> RhythmDetect : Sleep Timer Expired
+    Sleep --> OTA : OTA Button Pressed
+    OTA --> RhythmDetect : OTA Success Kernel Event Posted
+    Error --> [*]
+```
 
-Init -> RhythmDetect : Successful Init
-Init -d-> Error : Init Fault Error Code
-RhythmDetect -> Pace : Arrhythmia Detected
-Pace -> RhythmDetect : Pacing Timer Expired
-RhythmDetect -d-> Sleep : NSR
-Sleep -> RhythmDetect: Sleep Timer Expired
-Sleep -> OTA : OTA Button Pressed
-OTA -> RhythmDetect : OTA Success Kernel Event Posted
-Error -> [*]
+### Rendered Diagram
 
-@enduml
+```{mermaid}
+stateDiagram-v2
+    direction LR
+    [*] --> Init
+
+    state Init {
+        init_run: Do Stuff
+    }
+
+    state RhythmDetect {
+        rhythm_detect_run: Detect Rhythm
+    }
+
+    state Sleep {
+        sleep_run: Save Power
+    }
+
+    state Pace {
+        pace_run: Pace
+    }
+
+    state OTA {
+        ota_init: Download Update
+        ota_init --> ota_run
+        ota_run: Over The Air Update
+        ota_run --> ota_exit
+        ota_exit: Post Successful OTA
+    }
+
+    state Error {
+        error_run: Put device into safe mode
+    }
+
+    Init --> RhythmDetect : Successful Init
+    Init --> Error : Init Fault Error Code
+    RhythmDetect --> Pace : Arrhythmia Detected
+    Pace --> RhythmDetect : Pacing Timer Expired
+    RhythmDetect --> Sleep : NSR
+    Sleep --> RhythmDetect : Sleep Timer Expired
+    Sleep --> OTA : OTA Button Pressed
+    OTA --> RhythmDetect : OTA Success Kernel Event Posted
+    Error --> [*]
 ```
 
 ## Kernel Events
@@ -176,7 +220,7 @@ while (1) {
 }
 ```
 
-The switch-case approach loses some of its elegance when there are many states and many transitions and states have entry / exit routines.
+The `switch-case` approach loses some of its elegance when there are many states and many transitions and states have entry / exit routines.
 
 ## Resources
 
