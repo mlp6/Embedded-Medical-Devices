@@ -13,7 +13,7 @@ variety of different software packages.  You can use whatever software package
 you prefer for this class this semester, though Mermaid will be the only
 software supported by Dr. Palmeri and the teaching team.
 
-- [Mermaid Markdown](https://mermaid-js.github.io/mermaid/#/)
+- [Mermaid Markdown](https://github.com/mermaid-js/mermaid)
 
   - Markdown-based diagramming tool that can be integrated into VS Code IDE with
   extension.
@@ -24,6 +24,8 @@ software supported by Dr. Palmeri and the teaching team.
   - Ammenable to version control systems (VCS) since it is text-based.
 
   - More modern and easier to use than PlantUML.
+
+  - State digram-specific syntax: [https://mermaid.ai/open-source/syntax/stateDiagram.html](https://mermaid.ai/open-source/syntax/stateDiagram.html)
 
 - [PlantUML](https://plantuml.com/)
 
