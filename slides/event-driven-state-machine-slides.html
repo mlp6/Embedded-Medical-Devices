@@ -302,51 +302,102 @@ Dr.&nbsp;Mark Palmeri, M.D., Ph.D.
 <li>UML (Universal Modeling Language) is a common way to represent state diagrams.</li>
 </ul>
 </section>
-<section id="plantuml-example" class="slide level2">
-<h2>PlantUML Example</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource plantuml number-lines code-with-copy"><code class="sourceCode"><span id="cb1-1"><a></a>@startuml</span>
-<span id="cb1-2"><a></a></span>
-<span id="cb1-3"><a></a>[*] -&gt; Init</span>
+<section id="mermaid-example" class="slide level2">
+<h2>Mermaid Example</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource mermaid number-lines code-with-copy"><code class="sourceCode"><span id="cb1-1"><a></a>stateDiagram-v2</span>
+<span id="cb1-2"><a></a>    direction LR</span>
+<span id="cb1-3"><a></a>    [*] --&gt; Init</span>
 <span id="cb1-4"><a></a></span>
-<span id="cb1-5"><a></a>state Init {</span>
-<span id="cb1-6"><a></a>    init_run: Do Stuff</span>
-<span id="cb1-7"><a></a>}</span>
+<span id="cb1-5"><a></a>    state Init {</span>
+<span id="cb1-6"><a></a>        init_run: Do Stuff</span>
+<span id="cb1-7"><a></a>    }</span>
 <span id="cb1-8"><a></a></span>
-<span id="cb1-9"><a></a>state RhythmDetect {</span>
-<span id="cb1-10"><a></a>    rhythm_detect_run: Detect Rhythm</span>
-<span id="cb1-11"><a></a>}</span>
+<span id="cb1-9"><a></a>    state RhythmDetect {</span>
+<span id="cb1-10"><a></a>        rhythm_detect_run: Detect Rhythm</span>
+<span id="cb1-11"><a></a>    }</span>
 <span id="cb1-12"><a></a></span>
-<span id="cb1-13"><a></a>state Sleep {</span>
-<span id="cb1-14"><a></a>    sleep_run: Save Power</span>
-<span id="cb1-15"><a></a>}</span>
+<span id="cb1-13"><a></a>    state Sleep {</span>
+<span id="cb1-14"><a></a>        sleep_run: Save Power</span>
+<span id="cb1-15"><a></a>    }</span>
 <span id="cb1-16"><a></a></span>
-<span id="cb1-17"><a></a>state Pace {</span>
-<span id="cb1-18"><a></a>    pace_run: Pace</span>
-<span id="cb1-19"><a></a>}</span>
+<span id="cb1-17"><a></a>    state Pace {</span>
+<span id="cb1-18"><a></a>        pace_run: Pace</span>
+<span id="cb1-19"><a></a>    }</span>
 <span id="cb1-20"><a></a></span>
-<span id="cb1-21"><a></a>state OTA {</span>
-<span id="cb1-22"><a></a>    ota_init: Download Update</span>
-<span id="cb1-23"><a></a>    ota_init -&gt; ota_run</span>
-<span id="cb1-24"><a></a>    ota_run: Over The Air Update</span>
-<span id="cb1-25"><a></a>    ota_run -&gt; ota_exit</span>
-<span id="cb1-26"><a></a>    ota_exit: Post Successful OTA</span>
-<span id="cb1-27"><a></a>}</span>
+<span id="cb1-21"><a></a>    state OTA {</span>
+<span id="cb1-22"><a></a>        ota_init: Download Update</span>
+<span id="cb1-23"><a></a>        ota_init --&gt; ota_run</span>
+<span id="cb1-24"><a></a>        ota_run: Over The Air Update</span>
+<span id="cb1-25"><a></a>        ota_run --&gt; ota_exit</span>
+<span id="cb1-26"><a></a>        ota_exit: Post Successful OTA</span>
+<span id="cb1-27"><a></a>    }</span>
 <span id="cb1-28"><a></a></span>
-<span id="cb1-29"><a></a>state Error {</span>
-<span id="cb1-30"><a></a>    error_run: Put device into safe mode</span>
-<span id="cb1-31"><a></a>}</span>
+<span id="cb1-29"><a></a>    state Error {</span>
+<span id="cb1-30"><a></a>        error_run: Put device into safe mode</span>
+<span id="cb1-31"><a></a>    }</span>
 <span id="cb1-32"><a></a></span>
-<span id="cb1-33"><a></a>Init -&gt; RhythmDetect : Successful Init</span>
-<span id="cb1-34"><a></a>Init -d-&gt; Error : Init Fault Error Code</span>
-<span id="cb1-35"><a></a>RhythmDetect -&gt; Pace : Arrhythmia Detected</span>
-<span id="cb1-36"><a></a>Pace -&gt; RhythmDetect : Pacing Timer Expired</span>
-<span id="cb1-37"><a></a>RhythmDetect -d-&gt; Sleep : NSR</span>
-<span id="cb1-38"><a></a>Sleep -&gt; RhythmDetect: Sleep Timer Expired</span>
-<span id="cb1-39"><a></a>Sleep -&gt; OTA : OTA Button Pressed</span>
-<span id="cb1-40"><a></a>OTA -&gt; RhythmDetect : OTA Success Kernel Event Posted</span>
-<span id="cb1-41"><a></a>Error -&gt; [*]</span>
-<span id="cb1-42"><a></a></span>
-<span id="cb1-43"><a></a>@enduml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-33"><a></a>    Init --&gt; RhythmDetect : Successful Init</span>
+<span id="cb1-34"><a></a>    Init --&gt; Error : Init Fault Error Code</span>
+<span id="cb1-35"><a></a>    RhythmDetect --&gt; Pace : Arrhythmia Detected</span>
+<span id="cb1-36"><a></a>    Pace --&gt; RhythmDetect : Pacing Timer Expired</span>
+<span id="cb1-37"><a></a>    RhythmDetect --&gt; Sleep : NSR</span>
+<span id="cb1-38"><a></a>    Sleep --&gt; RhythmDetect : Sleep Timer Expired</span>
+<span id="cb1-39"><a></a>    Sleep --&gt; OTA : OTA Button Pressed</span>
+<span id="cb1-40"><a></a>    OTA --&gt; RhythmDetect : OTA Success Kernel Event Posted</span>
+<span id="cb1-41"><a></a>    Error --&gt; [*]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<h3 id="rendered-diagram">Rendered Diagram</h3>
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">stateDiagram-v2
+    direction LR
+    [*] --&gt; Init
+
+    state Init {
+        init_run: Do Stuff
+    }
+
+    state RhythmDetect {
+        rhythm_detect_run: Detect Rhythm
+    }
+
+    state Sleep {
+        sleep_run: Save Power
+    }
+
+    state Pace {
+        pace_run: Pace
+    }
+
+    state OTA {
+        ota_init: Download Update
+        ota_init --&gt; ota_run
+        ota_run: Over The Air Update
+        ota_run --&gt; ota_exit
+        ota_exit: Post Successful OTA
+    }
+
+    state Error {
+        error_run: Put device into safe mode
+    }
+
+    Init --&gt; RhythmDetect : Successful Init
+    Init --&gt; Error : Init Fault Error Code
+    RhythmDetect --&gt; Pace : Arrhythmia Detected
+    Pace --&gt; RhythmDetect : Pacing Timer Expired
+    RhythmDetect --&gt; Sleep : NSR
+    Sleep --&gt; RhythmDetect : Sleep Timer Expired
+    Sleep --&gt; OTA : OTA Button Pressed
+    OTA --&gt; RhythmDetect : OTA Success Kernel Event Posted
+    Error --&gt; [*]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
 </section>
 <section id="kernel-events" class="slide level2">
 <h2>Kernel Events</h2>
@@ -413,7 +464,7 @@ Dr.&nbsp;Mark Palmeri, M.D., Ph.D.
 <span id="cb2-31"><a></a>            <span class="cf">break</span><span class="op">;</span></span>
 <span id="cb2-32"><a></a>    <span class="op">}</span></span>
 <span id="cb2-33"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The switch-case approach loses some of its elegance when there are many states and many transitions and states have entry / exit routines.</p>
+<p>The <code>switch-case</code> approach loses some of its elegance when there are many states and many transitions and states have entry / exit routines.</p>
 </section>
 <section id="resources" class="slide level2">
 <h2>Resources</h2>

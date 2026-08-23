@@ -416,7 +416,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#implementation" id="toc-implementation" class="nav-link" data-scroll-target="#implementation">Implementation</a>
   <ul class="collapse">
   <li><a href="#state-diagram" id="toc-state-diagram" class="nav-link" data-scroll-target="#state-diagram">State Diagram</a></li>
-  <li><a href="#plantuml-example" id="toc-plantuml-example" class="nav-link" data-scroll-target="#plantuml-example">PlantUML Example</a></li>
+  <li><a href="#mermaid-example" id="toc-mermaid-example" class="nav-link" data-scroll-target="#mermaid-example">Mermaid Example</a>
+  <ul class="collapse">
+  <li><a href="#rendered-diagram" id="toc-rendered-diagram" class="nav-link" data-scroll-target="#rendered-diagram">Rendered Diagram</a></li>
+  </ul></li>
   <li><a href="#kernel-events" id="toc-kernel-events" class="nav-link" data-scroll-target="#kernel-events">Kernel Events</a></li>
   <li><a href="#code-switch-case" id="toc-code-switch-case" class="nav-link" data-scroll-target="#code-switch-case">Code: Switch-Case</a></li>
   <li><a href="#pseudo-code" id="toc-pseudo-code" class="nav-link" data-scroll-target="#pseudo-code">Pseudo-Code</a></li>
@@ -549,51 +552,104 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>UML (Universal Modeling Language) is a common way to represent state diagrams.</li>
 </ul>
 </section>
-<section id="plantuml-example" class="level2">
-<h2 class="anchored" data-anchor-id="plantuml-example">PlantUML Example</h2>
-<pre class="plantuml"><code>@startuml
+<section id="mermaid-example" class="level2">
+<h2 class="anchored" data-anchor-id="mermaid-example">Mermaid Example</h2>
+<pre class="mermaid"><code>stateDiagram-v2
+    direction LR
+    [*] --&gt; Init
 
-[*] -&gt; Init
+    state Init {
+        init_run: Do Stuff
+    }
 
-state Init {
-    init_run: Do Stuff
-}
+    state RhythmDetect {
+        rhythm_detect_run: Detect Rhythm
+    }
 
-state RhythmDetect {
-    rhythm_detect_run: Detect Rhythm
-}
+    state Sleep {
+        sleep_run: Save Power
+    }
 
-state Sleep {
-    sleep_run: Save Power
-}
+    state Pace {
+        pace_run: Pace
+    }
 
-state Pace {
-    pace_run: Pace
-}
+    state OTA {
+        ota_init: Download Update
+        ota_init --&gt; ota_run
+        ota_run: Over The Air Update
+        ota_run --&gt; ota_exit
+        ota_exit: Post Successful OTA
+    }
 
-state OTA {
-    ota_init: Download Update
-    ota_init -&gt; ota_run
-    ota_run: Over The Air Update
-    ota_run -&gt; ota_exit
-    ota_exit: Post Successful OTA
-}
+    state Error {
+        error_run: Put device into safe mode
+    }
 
-state Error {
-    error_run: Put device into safe mode
-}
+    Init --&gt; RhythmDetect : Successful Init
+    Init --&gt; Error : Init Fault Error Code
+    RhythmDetect --&gt; Pace : Arrhythmia Detected
+    Pace --&gt; RhythmDetect : Pacing Timer Expired
+    RhythmDetect --&gt; Sleep : NSR
+    Sleep --&gt; RhythmDetect : Sleep Timer Expired
+    Sleep --&gt; OTA : OTA Button Pressed
+    OTA --&gt; RhythmDetect : OTA Success Kernel Event Posted
+    Error --&gt; [*]</code></pre>
+<section id="rendered-diagram" class="level3">
+<h3 class="anchored" data-anchor-id="rendered-diagram">Rendered Diagram</h3>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">stateDiagram-v2
+    direction LR
+    [*] --&gt; Init
 
-Init -&gt; RhythmDetect : Successful Init
-Init -d-&gt; Error : Init Fault Error Code
-RhythmDetect -&gt; Pace : Arrhythmia Detected
-Pace -&gt; RhythmDetect : Pacing Timer Expired
-RhythmDetect -d-&gt; Sleep : NSR
-Sleep -&gt; RhythmDetect: Sleep Timer Expired
-Sleep -&gt; OTA : OTA Button Pressed
-OTA -&gt; RhythmDetect : OTA Success Kernel Event Posted
-Error -&gt; [*]
+    state Init {
+        init_run: Do Stuff
+    }
 
-@enduml</code></pre>
+    state RhythmDetect {
+        rhythm_detect_run: Detect Rhythm
+    }
+
+    state Sleep {
+        sleep_run: Save Power
+    }
+
+    state Pace {
+        pace_run: Pace
+    }
+
+    state OTA {
+        ota_init: Download Update
+        ota_init --&gt; ota_run
+        ota_run: Over The Air Update
+        ota_run --&gt; ota_exit
+        ota_exit: Post Successful OTA
+    }
+
+    state Error {
+        error_run: Put device into safe mode
+    }
+
+    Init --&gt; RhythmDetect : Successful Init
+    Init --&gt; Error : Init Fault Error Code
+    RhythmDetect --&gt; Pace : Arrhythmia Detected
+    Pace --&gt; RhythmDetect : Pacing Timer Expired
+    RhythmDetect --&gt; Sleep : NSR
+    Sleep --&gt; RhythmDetect : Sleep Timer Expired
+    Sleep --&gt; OTA : OTA Button Pressed
+    OTA --&gt; RhythmDetect : OTA Success Kernel Event Posted
+    Error --&gt; [*]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
 </section>
 <section id="kernel-events" class="level2">
 <h2 class="anchored" data-anchor-id="kernel-events">Kernel Events</h2>
@@ -660,7 +716,7 @@ Error -&gt; [*]
 <span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span><span class="op">;</span></span>
 <span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
 <span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The switch-case approach loses some of its elegance when there are many states and many transitions and states have entry / exit routines.</p>
+<p>The <code>switch-case</code> approach loses some of its elegance when there are many states and many transitions and states have entry / exit routines.</p>
 </section>
 <section id="resources" class="level2">
 <h2 class="anchored" data-anchor-id="resources">Resources</h2>
