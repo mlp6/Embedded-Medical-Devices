@@ -12,7 +12,9 @@ format:
 
 Dr. Mark Palmeri (`mlp6`)
 
-- Email: [mark.palmeri@duke.edu](mailto:mark.palmeri@duke.edu)
+- [Teams](https://teams.microsoft.com) (fastest response time)
+
+- [Email](mailto:mark.palmeri@duke.edu) (24-48 hour response time)
 
 - [Office Hours](https://calendly.com/mark-palmeri)
 
