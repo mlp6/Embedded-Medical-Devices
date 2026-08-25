@@ -27,6 +27,8 @@ software supported by Dr. Palmeri and the teaching team.
 
   - State digram-specific syntax: [https://mermaid.ai/open-source/syntax/stateDiagram.html](https://mermaid.ai/open-source/syntax/stateDiagram.html)
 
+  - VS Code Extension: `Markdown Preview Mermaid Support`
+
 - [PlantUML](https://plantuml.com/)
 
   - Text-based diagramming tool with very long history.
