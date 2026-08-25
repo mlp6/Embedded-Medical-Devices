@@ -1,6 +1,6 @@
 ---
 title: "Event-Driven State Machine"
-date: "2025-08-25"
+date: "2026-08-25"
 format:
   live-html: 
     output-file: event-driven-state-machine.html

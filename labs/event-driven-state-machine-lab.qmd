@@ -1,15 +1,10 @@
 ---
 title: "Event Driven State Machine Lab"
-date: "2026-08-23"
+date: "2026-08-25"
 format:
   html: default
   pdf: default
 ---
-
-::: callout-tip
-I would recommend doing this with pencil and paper first, not immediately
-jumping into a tool.  Err on the side of more detail than not.
-:::
 
 ## State Specifications
 
@@ -22,7 +17,14 @@ and descriptive state diagram for the device.
 
 ## Generate the State Diagram
 
-Formally render your state diagram using one of the tools outlined on the [State Diagram Tools](../resources/state_diagram.qmd) page.
+::: callout-tip
+- For each state in your diagram, consider if a state would benefit from having entry/exit substates.
+- Err on the side of more detail than not at this stage.
+:::
+
+1. Generate a hand-drawn (electronic or scan of paper) state diagram for the device.  Include all states, transitions, and
+   events that trigger transitions.  Include any entry/exit actions for each state.
+2. Electronically render your state diagram using one of the tools outlined on the [State Diagram Tools](../resources/state_diagram.qmd) page.
 
 ::: callout-tip
 For UML digrams, if the diagram's layout is difficult to follow using the
@@ -33,4 +35,9 @@ arrows using the following annotation guidelines:
 
 ## Submission
 
-Upload your rendered state diagram to the associated Canvas assignment.
+Upload both renderings of your state diagram to the associated Canvas
+assignment.
+
+## Expectations
+
+A "perfect" state diagram should not be the expectation for this assignment; constructive feedback on a thoughtful first-pass at a state diagram is the goal.  The state diagram will be used to guide the implementation of the device in future labs.
