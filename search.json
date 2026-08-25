@@ -364,28 +364,55 @@
     "href": "labs/event-driven-state-machine-lab.html",
     "title": "Event Driven State Machine Lab",
     "section": "",
-    "text": "Tip\n\n\n\nI would recommend doing this with pencil and paper first, not immediately jumping into a tool. Err on the side of more detail than not."
+    "text": "The final project for this class will be a heart rate and temperature monitor that will send metrics to a mobile phone using Bluetooth Low Energy (BLE). The device states are described in ecg-temp-ble-lab.qmd.\nThis assigment will be the starting point to get feedback on creating a complete and descriptive state diagram for the device.",
+    "crumbs": [
+      "Labs",
+      "Event-Driven State Machine Lab"
+    ]
   },
   {
     "objectID": "labs/event-driven-state-machine-lab.html#state-specifications",
     "href": "labs/event-driven-state-machine-lab.html#state-specifications",
     "title": "Event Driven State Machine Lab",
-    "section": "State Specifications",
-    "text": "State Specifications\nThe final project for this class will be a heart rate and temperature monitor that will send metrics to a mobile phone using Bluetooth Low Energy (BLE). The device states are described in ecg-temp-ble-lab.qmd.\nThis assigment will be the starting point to get feedback on creating a complete and descriptive state diagram for the device."
+    "section": "",
+    "text": "The final project for this class will be a heart rate and temperature monitor that will send metrics to a mobile phone using Bluetooth Low Energy (BLE). The device states are described in ecg-temp-ble-lab.qmd.\nThis assigment will be the starting point to get feedback on creating a complete and descriptive state diagram for the device.",
+    "crumbs": [
+      "Labs",
+      "Event-Driven State Machine Lab"
+    ]
   },
   {
     "objectID": "labs/event-driven-state-machine-lab.html#generate-the-state-diagram",
     "href": "labs/event-driven-state-machine-lab.html#generate-the-state-diagram",
     "title": "Event Driven State Machine Lab",
     "section": "Generate the State Diagram",
-    "text": "Generate the State Diagram\nFormally render your state diagram using one of the tools outlined on the State Diagram Tools page.\n\n\n\n\n\n\nTip\n\n\n\nFor UML digrams, if the diagram’s layout is difficult to follow using the automated layout, consider manually specifying relative positions and length of arrows using the following annotation guidelines: https://mermaid.ai/open-source/syntax/stateDiagram.html."
+    "text": "Generate the State Diagram\n\n\n\n\n\n\nTip\n\n\n\n\nFor each state in your diagram, consider if a state would benefit from having entry/exit substates.\nErr on the side of more detail than not at this stage.\n\n\n\n\nGenerate a hand-drawn (electronic or scan of paper) state diagram for the device. Include all states, transitions, and events that trigger transitions. Include any entry/exit actions for each state.\nElectronically render your state diagram using one of the tools outlined on the State Diagram Tools page.\n\n\n\n\n\n\n\nTip\n\n\n\nFor UML digrams, if the diagram’s layout is difficult to follow using the automated layout, consider manually specifying relative positions and length of arrows using the following annotation guidelines: https://mermaid.ai/open-source/syntax/stateDiagram.html.",
+    "crumbs": [
+      "Labs",
+      "Event-Driven State Machine Lab"
+    ]
   },
   {
     "objectID": "labs/event-driven-state-machine-lab.html#submission",
     "href": "labs/event-driven-state-machine-lab.html#submission",
     "title": "Event Driven State Machine Lab",
     "section": "Submission",
-    "text": "Submission\nUpload your rendered state diagram to the associated Canvas assignment."
+    "text": "Submission\nUpload both renderings of your state diagram to the associated Canvas assignment.",
+    "crumbs": [
+      "Labs",
+      "Event-Driven State Machine Lab"
+    ]
+  },
+  {
+    "objectID": "labs/event-driven-state-machine-lab.html#expectations",
+    "href": "labs/event-driven-state-machine-lab.html#expectations",
+    "title": "Event Driven State Machine Lab",
+    "section": "Expectations",
+    "text": "Expectations\nA “perfect” state diagram should not be the expectation for this assignment; constructive feedback on a thoughtful first-pass at a state diagram is the goal. The state diagram will be used to guide the implementation of the device in future labs.",
+    "crumbs": [
+      "Labs",
+      "Event-Driven State Machine Lab"
+    ]
   },
   {
     "objectID": "labs/timers-lab-testing-notebook/timing_analysis.html",

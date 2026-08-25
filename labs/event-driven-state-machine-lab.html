@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Dr.&nbsp;Mark Palmeri, M.D., Ph.D.">
-<meta name="dcterms.date" content="2026-08-23">
+<meta name="dcterms.date" content="2026-08-25">
 
 <title>Event Driven State Machine Lab – Embedded Medical Devices</title>
 <style>
@@ -82,9 +82,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
-      Embedded Medical Devices
-      </li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labs/event-driven-state-machine-lab.html">Labs</a></li><li class="breadcrumb-item"><a href="../labs/event-driven-state-machine-lab.html">Event-Driven State Machine Lab</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -159,14 +157,14 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../slides/git-fundamentals-notes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Git Fundamentals</span></a>
+  <a href="../slides/event-driven-state-machine.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Event-Driven State Machines</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../slides/event-driven-state-machine.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Event-Driven State Machines</span></a>
+  <a href="../slides/git-fundamentals-notes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Git Fundamentals</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -240,10 +238,12 @@ ul.task-list li input[type="checkbox"] {
           </a> 
       </div>
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">Event-Driven State Machine Lab</span></span>
-  </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../labs/event-driven-state-machine-lab.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Event-Driven State Machine Lab</span></a>
+  </div>
+</li>
           <li class="sidebar-item sidebar-item-section">
       <span class="sidebar-item-text sidebar-link text-start">
  <span class="menu-text">C Programming Lab</span></span>
@@ -280,13 +280,13 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="true">
  <span class="menu-text">Resources</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../resources/git.html" class="sidebar-item-text sidebar-link">
@@ -356,13 +356,14 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#state-specifications" id="toc-state-specifications" class="nav-link active" data-scroll-target="#state-specifications">State Specifications</a></li>
   <li><a href="#generate-the-state-diagram" id="toc-generate-the-state-diagram" class="nav-link" data-scroll-target="#generate-the-state-diagram">Generate the State Diagram</a></li>
   <li><a href="#submission" id="toc-submission" class="nav-link" data-scroll-target="#submission">Submission</a></li>
+  <li><a href="#expectations" id="toc-expectations" class="nav-link" data-scroll-target="#expectations">Expectations</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/mlp6/Embedded-Medical-Devices/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="event-driven-state-machine-lab.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labs/event-driven-state-machine-lab.html">Labs</a></li><li class="breadcrumb-item"><a href="../labs/event-driven-state-machine-lab.html">Event-Driven State Machine Lab</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Event Driven State Machine Lab</h1>
 <p class="subtitle lead">BME554L - Fall 2026 - Palmeri</p>
@@ -385,7 +386,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">August 23, 2026</p>
+      <p class="date">August 25, 2026</p>
     </div>
   </div>
   
@@ -397,6 +398,13 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="state-specifications" class="level2">
+<h2 class="anchored" data-anchor-id="state-specifications">State Specifications</h2>
+<p>The final project for this class will be a heart rate and temperature monitor that will send metrics to a mobile phone using Bluetooth Low Energy (BLE). The device states are described in <a href="../labs/ecg-temp-ble-lab.html">ecg-temp-ble-lab.qmd</a>.</p>
+<p>This assigment will be the starting point to get feedback on creating a complete and descriptive state diagram for the device.</p>
+</section>
+<section id="generate-the-state-diagram" class="level2">
+<h2 class="anchored" data-anchor-id="generate-the-state-diagram">Generate the State Diagram</h2>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -407,17 +415,16 @@ Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>I would recommend doing this with pencil and paper first, not immediately jumping into a tool. Err on the side of more detail than not.</p>
+<ul>
+<li>For each state in your diagram, consider if a state would benefit from having entry/exit substates.</li>
+<li>Err on the side of more detail than not at this stage.</li>
+</ul>
 </div>
 </div>
-<section id="state-specifications" class="level2">
-<h2 class="anchored" data-anchor-id="state-specifications">State Specifications</h2>
-<p>The final project for this class will be a heart rate and temperature monitor that will send metrics to a mobile phone using Bluetooth Low Energy (BLE). The device states are described in <a href="../labs/ecg-temp-ble-lab.html">ecg-temp-ble-lab.qmd</a>.</p>
-<p>This assigment will be the starting point to get feedback on creating a complete and descriptive state diagram for the device.</p>
-</section>
-<section id="generate-the-state-diagram" class="level2">
-<h2 class="anchored" data-anchor-id="generate-the-state-diagram">Generate the State Diagram</h2>
-<p>Formally render your state diagram using one of the tools outlined on the <a href="../resources/state_diagram.html">State Diagram Tools</a> page.</p>
+<ol type="1">
+<li>Generate a hand-drawn (electronic or scan of paper) state diagram for the device. Include all states, transitions, and events that trigger transitions. Include any entry/exit actions for each state.</li>
+<li>Electronically render your state diagram using one of the tools outlined on the <a href="../resources/state_diagram.html">State Diagram Tools</a> page.</li>
+</ol>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -434,7 +441,11 @@ Tip
 </section>
 <section id="submission" class="level2">
 <h2 class="anchored" data-anchor-id="submission">Submission</h2>
-<p>Upload your rendered state diagram to the associated Canvas assignment.</p>
+<p>Upload both renderings of your state diagram to the associated Canvas assignment.</p>
+</section>
+<section id="expectations" class="level2">
+<h2 class="anchored" data-anchor-id="expectations">Expectations</h2>
+<p>A “perfect” state diagram should not be the expectation for this assignment; constructive feedback on a thoughtful first-pass at a state diagram is the goal. The state diagram will be used to guide the implementation of the device in future labs.</p>
 
 
 </section>
