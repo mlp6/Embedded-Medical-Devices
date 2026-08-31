@@ -172,6 +172,7 @@ be posted to Canvas throughout the semester to track your performance.
 
 : Grade Distribution
 
+TODO: ADD CDDEX LANGUAGE
 
 ### Course Grade
 
