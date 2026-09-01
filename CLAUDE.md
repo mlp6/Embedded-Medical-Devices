@@ -43,3 +43,4 @@ jupyter notebook timing_analysis.ipynb
 - **Lab code lives elsewhere:** Students implement labs in separate Duke GitLab repositories with their own CI pipelines.
 - **Hardware focus:** Content assumes Nordic nRF52833DK, Zephyr RTOS, devicetree, and embedded C knowledge.
 - **The Jupyter notebook** in `labs/timers-lab-testing-notebook/` is a template showing students how to analyze lab data with NumPy, SciPy, Pandas, and Matplotlib.
+- **Task tracking:** Tasks related to this repo/course should go to Todoist under the **Duke** project, **BME554L** section (via the `td` CLI), not into `TODO.md`, unless explicitly asked to add them to `TODO.md`.
