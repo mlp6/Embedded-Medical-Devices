@@ -1,0 +1,64 @@
+---
+title: "State Diagram Git Lab"
+date: "2026-09-01"
+format:
+  html: default
+  pdf: default
+---
+
+## Git Practice
+
+This week we will go through a very simple git workflow to get you familiar with the process and to confirm that your toolchain works for future assignments.
+
+### Initial `main` Branch Development
+
+1. Make sure that you have git installed, ssh keys configured, and your Duke GitLab account is setup, as detailed [here](../resources/git.qmd) 
+1. Be sure to review the tutorials outlined on the [git setup page](../resources/git.qmd), as needed, to complete the tasks below.
+1. Create a **fork**--*not a **clone***--of the [state-diagram-lab](https://gitlab.oit.duke.edu/mlp6/state-diagram-lab) in your userspace.
+1. Add Dr. Palmeri (`mlp6`) as a `Maintainer` of your forked repository (Left Sidebar: `Manage -> Members -> Invite members`)
+1. Clone your forked repository to your laptop using the URL available under the blue Code button: `Clone with SSH`.
+
+::: callout-important
+You want to clone your forked repository, not the parent repository you forked from!
+:::
+
+### Working on a Branch (Local)
+
+1. Create a development branch called `update_state_diagram` and switch into it.
+1. Update `README.md` to include the state diagram that you worked on in the [Event-Drive State Machine lab](event-driven-state-machine-lab.qmd).   There is a section in the `README.md` file that has a placeholder for this diagram.
+1. Add and commit these changes in the git repository with a meaningful commit message.
+1. Push this new branch to the `remote (origin)` of your GitLab repository.  
+1. Confirm that you can see your latest commit on this branch on the GitLab website.
+
+### Merge Request Time!
+
+1. Create a new Merge Request on the GitLab to merge the `update_state_diagram` branch into the `main` branch.  
+    * Assign the Merge Request to yourself.
+    * You do not need a Reviewer.
+    * You do **not** want to *squash* or *rebase* your branch commits
+    * You do not want to delete the source branch.
+1. Check that the CI pipline jobs have passed.
+    * `Build -> Pipelines`
+    * Click on the latest pipeline (the colored rounded rectangle button in the status column).
+1. If the pipeline jobs for this branch have failed, you will need to fix the issue(s) and push the changes to your `update_state_diagram` branch.
+    * If you are not sure what the issue is, click on the failed job to see the output of the test.
+    * If you are not sure how to fix it, ask for help!
+1. Once your CI jobs pass, approve your Merge Request on the GitLab website and `Merge` your `update_state_diagram` branch into `main`.
+1. Checkout the `main` branch on your laptop and pull the latest changes from the GitLab server.
+1. Confirm that you can see the updated `README.md` file in your `main` branch, along with its associated commit in your git commit history.
+
+### Create an Annotated Tag
+
+1. On the `main` branch on your local machine, create an annotated tag for this commit associated with your merged `update_state_diagram` branch called `v1.0.0`, with the message `"include the state diagram info"`.
+1. Push this annotated tag to the GitLab server (`origin`).
+1. Confirm that you can see your latest commit and tag on the GitLab website.
+1. You should see that the `check_v1_0_0_tag` pipeline job has passed if this was successful.
+
+## How to Ask for Help
+
+{{< include _ask_for_help.qmd >}}
+
+## What to Submit
+
+- Create an Issue on your GitLab repository called `Git Fundamentals Lab Submission`. 
+- Assign the issue to Dr. Palmeri.

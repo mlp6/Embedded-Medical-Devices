@@ -63,6 +63,8 @@ website:
         # Links are disabled below (plain text only) until each lab is revised.
         - href: labs/event-driven-state-machine-lab.qmd
           text: "Event-Driven State Machine Lab"
+        - href: labs/state-diagram-git-lab.qmd
+          text: "State Diagram Git Lab"
         # - href: labs/c-programming-lab.qmd
         #   text: "C Programming Lab"
         - section: "C Programming Lab"
