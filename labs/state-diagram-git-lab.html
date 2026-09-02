@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Dr.&nbsp;Mark Palmeri, M.D., Ph.D.">
-<meta name="dcterms.date" content="2026-01-05">
+<meta name="dcterms.date" content="2026-09-01">
 
-<title>Git Fundamentals Lab – Embedded Medical Devices</title>
+<title>State Diagram Git Lab – Embedded Medical Devices</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -82,9 +82,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
-      Embedded Medical Devices
-      </li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labs/event-driven-state-machine-lab.html">Labs</a></li><li class="breadcrumb-item"><a href="../labs/state-diagram-git-lab.html">State Diagram Git Lab</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -246,6 +244,12 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Event-Driven State Machine Lab</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../labs/state-diagram-git-lab.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">State Diagram Git Lab</span></a>
+  </div>
+</li>
           <li class="sidebar-item sidebar-item-section">
       <span class="sidebar-item-text sidebar-link text-start">
  <span class="menu-text">C Programming Lab</span></span>
@@ -361,19 +365,18 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#working-on-a-branch-local" id="toc-working-on-a-branch-local" class="nav-link" data-scroll-target="#working-on-a-branch-local">Working on a Branch (Local)</a></li>
   <li><a href="#merge-request-time" id="toc-merge-request-time" class="nav-link" data-scroll-target="#merge-request-time">Merge Request Time!</a></li>
   <li><a href="#create-an-annotated-tag" id="toc-create-an-annotated-tag" class="nav-link" data-scroll-target="#create-an-annotated-tag">Create an Annotated Tag</a></li>
-  <li><a href="#fix-a-merge-conflict-locally" id="toc-fix-a-merge-conflict-locally" class="nav-link" data-scroll-target="#fix-a-merge-conflict-locally">Fix a Merge Conflict (Locally)</a></li>
   </ul></li>
   <li><a href="#how-to-ask-for-help" id="toc-how-to-ask-for-help" class="nav-link" data-scroll-target="#how-to-ask-for-help">How to Ask for Help</a></li>
   <li><a href="#what-to-submit" id="toc-what-to-submit" class="nav-link" data-scroll-target="#what-to-submit">What to Submit</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/mlp6/Embedded-Medical-Devices/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="git-fundamentals-lab.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/mlp6/Embedded-Medical-Devices/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="state-diagram-git-lab.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labs/event-driven-state-machine-lab.html">Labs</a></li><li class="breadcrumb-item"><a href="../labs/state-diagram-git-lab.html">State Diagram Git Lab</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Git Fundamentals Lab</h1>
+<h1 class="title">State Diagram Git Lab</h1>
 <p class="subtitle lead">BME554L - Fall 2026 - Palmeri</p>
   <div class="quarto-categories">
     <div class="quarto-category">Lab</div>
@@ -394,7 +397,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">January 5, 2026</p>
+      <p class="date">September 1, 2026</p>
     </div>
   </div>
   
@@ -414,17 +417,17 @@ ul.task-list li input[type="checkbox"] {
 <ol type="1">
 <li>Make sure that you have git installed, ssh keys configured, and your Duke GitLab account is setup, as detailed <a href="../resources/git.html">here</a></li>
 <li>Be sure to review the tutorials outlined on the <a href="../resources/git.html">git setup page</a>, as needed, to complete the tasks below.</li>
-<li>Create a <strong>fork</strong>–<em>not a <strong>clone</strong></em>–of the <a href="https://gitlab.oit.duke.edu/mlp6/git-fundamentals-lab">git-fundamentals-lab</a> in your userspace.</li>
+<li>Create a <strong>fork</strong>–<em>not a <strong>clone</strong></em>–of the <a href="https://gitlab.oit.duke.edu/mlp6/state-diagram-lab">state-diagram-lab</a> in your userspace.</li>
 <li>Add Dr.&nbsp;Palmeri (<code>mlp6</code>) as a <code>Maintainer</code> of your forked repository (Left Sidebar: <code>Manage -&gt; Members -&gt; Invite members</code>)</li>
 <li>Clone your forked repository to your laptop using the URL available under the blue Code button: <code>Clone with SSH</code>.</li>
 </ol>
-<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Warning
+Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -435,11 +438,10 @@ Warning
 <section id="working-on-a-branch-local" class="level3">
 <h3 class="anchored" data-anchor-id="working-on-a-branch-local">Working on a Branch (Local)</h3>
 <ol type="1">
-<li>Switch to the <code>about_me</code> branch.</li>
-<li>Edit <code>AboutMe.md</code> to replace all of the <code>FILL_ME_IN</code> placeholders with your own information.</li>
-<li>Add and commit these text changes with a meaningful commit message.</li>
-<li>Add and commit a new image file named <code>fun_picture.png</code> in a directory called <code>images/</code> to complete that section of the <code>AboutMe.md</code> file.</li>
-<li>Push this updated branch to the remote of your GitLab repository.<br>
+<li>Create a development branch called <code>update_state_diagram</code> and switch into it.</li>
+<li>Update <code>README.md</code> to include the state diagram that you worked on in the <a href="../labs/event-driven-state-machine-lab.html">Event-Drive State Machine lab</a>. There is a section in the <code>README.md</code> file that has a placeholder for this diagram.</li>
+<li>Add and commit these changes in the git repository with a meaningful commit message.</li>
+<li>Push this new branch to the <code>remote (origin)</code> of your GitLab repository.<br>
 </li>
 <li>Confirm that you can see your latest commit on this branch on the GitLab website.</li>
 </ol>
@@ -447,72 +449,35 @@ Warning
 <section id="merge-request-time" class="level3">
 <h3 class="anchored" data-anchor-id="merge-request-time">Merge Request Time!</h3>
 <ol type="1">
-<li>Create a new Merge Request on the GitLab to merge the <code>about_me</code> branch into the <code>main</code> branch.
+<li>Create a new Merge Request on the GitLab to merge the <code>update_state_diagram</code> branch into the <code>main</code> branch.
 <ul>
 <li>Assign the Merge Request to yourself.</li>
 <li>You do not need a Reviewer.</li>
 <li>You do <strong>not</strong> want to <em>squash</em> or <em>rebase</em> your branch commits</li>
 <li>You do not want to delete the source branch.</li>
 </ul></li>
-<li>Check that the <code>check_image</code> and <code>check_about_me</code> pipline jobs have passed.
+<li>Check that the CI pipline jobs have passed.
 <ul>
 <li><code>Build -&gt; Pipelines</code></li>
 <li>Click on the latest pipeline (the colored rounded rectangle button in the status column).</li>
-<li>Click on the <code>check_image</code> or <code>check_about_me</code> job to see the output of the test if it <code>Failed</code>.</li>
 </ul></li>
-<li>If the pipeline jobs for this branch have failed, you will need to fix the issue(s) and push the changes to your <code>about_me</code> branch.
+<li>If the pipeline jobs for this branch have failed, you will need to fix the issue(s) and push the changes to your <code>update_state_diagram</code> branch.
 <ul>
 <li>If you are not sure what the issue is, click on the failed job to see the output of the test.</li>
 <li>If you are not sure how to fix it, ask for help!</li>
 </ul></li>
-<li>Once your CI jobs pass, approve your Merge Request on the GitLab website and <code>Merge</code> your <code>about_me</code> branch into <code>main</code>.</li>
+<li>Once your CI jobs pass, approve your Merge Request on the GitLab website and <code>Merge</code> your <code>update_state_diagram</code> branch into <code>main</code>.</li>
 <li>Checkout the <code>main</code> branch on your laptop and pull the latest changes from the GitLab server.</li>
-<li>Confirm that you can see the updated <code>AboutMe.md</code> file in your <code>main</code> branch, along with its associated commit in your git commit history.</li>
+<li>Confirm that you can see the updated <code>README.md</code> file in your <code>main</code> branch, along with its associated commit in your git commit history.</li>
 </ol>
 </section>
 <section id="create-an-annotated-tag" class="level3">
 <h3 class="anchored" data-anchor-id="create-an-annotated-tag">Create an Annotated Tag</h3>
 <ol type="1">
-<li>On <code>main</code>, create an annotated tag for this commit associated with your merged <code>about_me</code> branch called <code>v1.0.0</code>, with the message <code>"include the about me info"</code>.</li>
+<li>On the <code>main</code> branch on your local machine, create an annotated tag for this commit associated with your merged <code>update_state_diagram</code> branch called <code>v1.0.0</code>, with the message <code>"include the state diagram info"</code>.</li>
 <li>Push this annotated tag to the GitLab server (<code>origin</code>).</li>
 <li>Confirm that you can see your latest commit and tag on the GitLab website.</li>
 <li>You should see that the <code>check_v1_0_0_tag</code> pipeline job has passed if this was successful.</li>
-</ol>
-</section>
-<section id="fix-a-merge-conflict-locally" class="level3">
-<h3 class="anchored" data-anchor-id="fix-a-merge-conflict-locally">Fix a Merge Conflict (Locally)</h3>
-<ol type="1">
-<li>Inspect the contents of <code>AboutDrPalmeri.md</code> in <code>main</code>.</li>
-<li>Switch to the <code>about_dr_p</code> branch, and look at the content (slightly different) of <code>AboutDrPalmeri.md</code>.</li>
-<li>Switch back to the <code>main</code> branch, and merge the <code>about_dr_p</code> branch into <code>main</code>.
-<ul>
-<li>You will be told that there is a <code>Merge Conflict</code>:</li>
-</ul>
-<pre class="text"><code>$ git merge about_dr_p
-CONFLICT (content): Merge conflict in AboutDrPalmeri.md
-Automatic merge failed; fix conflicts and then commit the result.</code></pre>
-<ul>
-<li><code>git status</code> will show you the files that are in conflict, and what your next likely steps will be to resolve this conflict:</li>
-</ul>
-<pre class="text"><code>$ git status
-Your branch is up to date with 'origin/main'.
-
-You have unmerged paths.
-(fix conflicts and run "git commit")
-(use "git merge --abort" to abort the merge)
-
-Unmerged paths:
-(use "git add &lt;file&gt;..." to mark resolution)
-        both modified:   AboutDrPalmeri.md
-
-no changes added to commit (use "git add" and/or "git commit -a") </code></pre></li>
-<li>Staying on the <code>main</code> branch, open <code>AboutDrPalmeri.md</code> in your text editor, and inspect the <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>, <code>=======</code>, and <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code> markers that indicate the conflicting lines.</li>
-<li>Keep the version of the conflicting line that is in <code>main</code>, and delete the line that was incoming from <code>about_dr_p</code>.</li>
-<li>Be sure to delete the <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>, <code>=======</code>, and <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code> markers (lines).</li>
-<li>Add and commit this merge conflict resolution.</li>
-<li>Create an annotated tag called <code>v1.0.1</code> with the message <code>"fix Dr. P's age"</code>.</li>
-<li>Push your latest commits and tags to <code>main</code> on the GitLab server (<code>origin</code>).</li>
-<li>All of your CI jobs should pass if everything was successful.</li>
 </ol>
 </section>
 </section>
@@ -534,20 +499,10 @@ no changes added to commit (use "git add" and/or "git commit -a") </code></pre><
 </section>
 <section id="what-to-submit" class="level2">
 <h2 class="anchored" data-anchor-id="what-to-submit">What to Submit</h2>
-<p>Your fork of this GitLab repository will be running this CI script: <a href=".gitlab-ci.yml"><code>.gitlab-ci.yml</code></a></p>
-<ol type="1">
-<li>Go to the <code>Build -&gt; Pipelines</code> page of your GitLab repository.</li>
-<li>Take a screenshot of the latest pipeline that shows all of the tests passing, along with your repository information, as shown below (except all of those <code>Failed</code> tests should report <code>Passed</code>).</li>
-</ol>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/ci_pipeline.png" class="img-fluid figure-img"></p>
-<figcaption>ci_pipeline</figcaption>
-</figure>
-</div>
-<ol type="1">
-<li>Submit this screenshot to Gradescope assignment, along with completing the prompted questions.</li>
-</ol>
+<ul>
+<li>Create an Issue on your GitLab repository called <code>Git Fundamentals Lab Submission</code>.</li>
+<li>Assign the issue to Dr.&nbsp;Palmeri.</li>
+</ul>
 
 
 </section>
