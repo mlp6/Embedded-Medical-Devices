@@ -9,9 +9,10 @@ format:
 ## State Diagram Software
 
 We will be generating state diagrams all semester, which can be done with a
-variety of different software packages.  You can use whatever software package
-you prefer for this class this semester, though Mermaid will be the only
-software supported by Dr. Palmeri and the teaching team.
+variety of different software packages.  Mermaid will be the only software UML
+toolsupported by Dr. Palmeri and the teaching team in this course; the other
+tools are included for completeness of what you might encounter in professional
+settings.
 
 - [Mermaid Markdown](https://github.com/mermaid-js/mermaid)
 
@@ -27,7 +28,12 @@ software supported by Dr. Palmeri and the teaching team.
 
   - State digram-specific syntax: [https://mermaid.ai/open-source/syntax/stateDiagram.html](https://mermaid.ai/open-source/syntax/stateDiagram.html)
 
-  - VS Code Extension: `Markdown Preview Mermaid Support`
+::: callout-note
+VS Code has built-in support for Mermaid diagrams and diagrams can be rendered
+by GitLab, so no extensions have to be installed to support these diagrams.  You
+will need an extension or other tools to export diagrams to image files (e.g.,
+PNG, SVG) if you want to use them in other documents or presentations.
+:::
 
 - [PlantUML](https://plantuml.com/)
 
