@@ -1,6 +1,6 @@
 ---
 title: "C Programming Lab"
-date: "2026-02-01"
+date: "2026-09-09"
 format:
   html: default
   pdf: default
@@ -46,18 +46,6 @@ format:
 * Flash the Zephyr application to your development kit.
   * Connect the `VCOM` port on the `nrf52833DK` to your computer (using `Connected Devices` and the plug icon)
   * Look at the serial output in the VS Code `Terminal`
-
-### Update the GitLab CI Pipeline Badge
-
-- Update the URLs in `README.md` for the GitLab CI pipeline badge to point to
-your forked repository.  
-
-::: callout-note
-This badge represents the status of the CI pipeline for your repository, and
-will only showed `Passed` once you have completed all of the tasks in this lab.
-:::
-
-- Commit this specific change to your `main` branch as its own commit.
 
 ### Modify the Zephyr Application (DataTypes / Typecasting / Formatted Printing)
 
@@ -106,14 +94,6 @@ a final check before merging code into `main`.
 * Make sure all of your commits are pushed to your `main` branch, along with both annotated tags.
 * Confirm that the GitLab CI pipeline is successful.
 * Create an Issue titled `C Programming Lab Complete` and assign it to Dr. Palmeri (`mlp6`).
-
-## Gradescope
-
-Complete the Gradescope assignment for this lab that is a few simple tasks:
-
-1. Confirm that you created the Issue above
-1. Confirm that you completed both of the Nordic DevAcademy lessons
-1. Upload a screenshot of your CI pipeline jobs passing
 
 ## How to Ask for Help
 
