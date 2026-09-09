@@ -65,8 +65,8 @@ website:
           text: "Event-Driven State Machine Lab"
         - href: labs/state-diagram-git-lab.qmd
           text: "State Diagram Git Lab"
-        # - href: labs/c-programming-lab.qmd
-        #   text: "C Programming Lab"
+        - href: labs/c-programming-lab.qmd
+          text: "C Programming Lab"
         - section: "C Programming Lab"
         # - href: labs/zephyr-gpio-isr-callbacks-lab.qmd
         #   text: "GPIO, ISR, and Callbacks Lab"
