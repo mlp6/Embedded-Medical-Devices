@@ -75,7 +75,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-fced259a1985fd972ecb57c7cd45153f.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-63fadd43d59a8a3540661fcb2a7bfcd0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-e47ebcb68fa592729e5486c22e0f1d56.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../site_libs/quarto-contrib/live-runtime/live-runtime.js" type="module"></script>
 <link href="../site_libs/quarto-contrib/live-runtime/live-runtime.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -292,6 +292,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">State Diagram Git Lab</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../labs/c-programming-lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">C Programming Lab</span></a>
+  </div>
+</li>
           <li class="sidebar-item sidebar-item-section">
       <span class="sidebar-item-text sidebar-link text-start">
  <span class="menu-text">C Programming Lab</span></span>
@@ -412,6 +418,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#interrupts" id="toc-interrupts" class="nav-link" data-scroll-target="#interrupts">Interrupts</a></li>
   <li><a href="#what-do-you-do-when-the-phone-rings" id="toc-what-do-you-do-when-the-phone-rings" class="nav-link" data-scroll-target="#what-do-you-do-when-the-phone-rings">What do you do when the phone rings?</a></li>
   <li><a href="#isr---callback-function" id="toc-isr---callback-function" class="nav-link" data-scroll-target="#isr---callback-function">ISR -&gt; Callback Function</a></li>
+  <li><a href="#atomicity-and-thread-safety" id="toc-atomicity-and-thread-safety" class="nav-link" data-scroll-target="#atomicity-and-thread-safety">Atomicity and Thread Safety</a></li>
+  <li><a href="#atomic-operations" id="toc-atomic-operations" class="nav-link" data-scroll-target="#atomic-operations">Atomic Operations</a></li>
   </ul></li>
   <li><a href="#zephyr-implementation" id="toc-zephyr-implementation" class="nav-link" data-scroll-target="#zephyr-implementation">Zephyr Implementation</a>
   <ul class="collapse">
@@ -551,6 +559,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul></li>
 </ul>
 </section>
+<section id="atomicity-and-thread-safety" class="level2">
+<h2 class="anchored" data-anchor-id="atomicity-and-thread-safety">Atomicity and Thread Safety</h2>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Caution
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Wait, with multiple threads being able to operate on things, are variables being handled by ISRs “safe” to use if they can be called at any time?</p>
+</div>
+</div>
+<p>Solution: <strong>Atomicity</strong> and <strong>thread safety</strong>.</p>
+</section>
+<section id="atomic-operations" class="level2">
+<h2 class="anchored" data-anchor-id="atomic-operations">Atomic Operations</h2>
+<ul>
+<li>An atomic operation is an indivisible operation that either completes entirely or does not execute at all.</li>
+<li>Atomic operations are used to prevent race conditions and ensure thread safety when multiple threads access shared resources.</li>
+<li>In Zephyr, atomic operations can be performed using the <code>atomic</code> API, which provides functions for atomic read, write, and modify operations on variables.</li>
+</ul>
+</section>
 </section>
 <section id="zephyr-implementation" class="level1">
 <h1>Zephyr Implementation</h1>
@@ -665,12 +698,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p><a href="https://docs.zephyrproject.org/apidoc/latest/structgpio__callback.html#details">gpio_callback</a>: struct prototype is defined in gpio.h</p></li>
 <li><p><code>sw0_cb</code>: name of the struct based on the <code>gpio_callback</code> prototype that will store the information about the callback function</p></li>
 </ul>
-<div class="sourceCode" id="cb6"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">// define callback function</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> sw0_callback<span class="op">(</span><span class="dt">const</span> <span class="kw">struct</span> device <span class="op">*</span>dev<span class="op">,</span> <span class="kw">struct</span> gpio_callback <span class="op">*</span>cb<span class="op">,</span> <span class="dt">uint32_t</span> pins<span class="op">)</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    sw0_event <span class="op">=</span> <span class="dv">1</span><span class="op">;</span>  <span class="co">// conditional statement in main() can now do something based on the event detection</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>                    <span class="co">// we can also use actual system kernel event flags, but this is simpler (for now)</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Declare atomic variable</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="dt">static</span> atomic_t sw0_event <span class="op">=</span> ATOMIC_INIT<span class="op">(</span><span class="dv">0</span><span class="op">);</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">// define callback function</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> sw0_callback<span class="op">(</span><span class="dt">const</span> <span class="kw">struct</span> device <span class="op">*</span>dev<span class="op">,</span> <span class="kw">struct</span> gpio_callback <span class="op">*</span>cb<span class="op">,</span> <span class="dt">uint32_t</span> pins<span class="op">)</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Set the event flag when the button is pressed</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    atomic_set<span class="op">(&amp;</span>sw0_event<span class="op">,</span> <span class="dv">1</span><span class="op">);</span> <span class="co">// conditional statement in main() can now do something based on the </span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>                               <span class="co">// event detection we can also use actual system kernel event flags, </span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>                               <span class="co">// but this is simpler (for now)</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="constraints-on-callback-functions" class="level2">
 <h2 class="anchored" data-anchor-id="constraints-on-callback-functions">Constraints on Callback Functions</h2>
@@ -710,11 +748,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a><span class="co">// test for the callback event state in your code...</span></span>
 <span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="op">()</span> <span class="op">{</span></span>
-<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>sw0_event<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>        do_something_less_trivial<span class="op">();</span>  <span class="co">// this can take more time than the callback function</span></span>
-<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>        sw0_event <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> </span>
-<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Check if the button was pressed</span></span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>atomic_cas<span class="op">(&amp;</span>sw0_event<span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">0</span><span class="op">))</span> <span class="op">{</span></span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Button was pressed, do work here</span></span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>        LOG_INF<span class="op">(</span><span class="st">"Button press detected!"</span><span class="op">);</span></span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>        gpio_pin_toggle_dt<span class="op">(&amp;</span>led<span class="op">);</span></span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="some-useful-api-documentation" class="level2">
 <h2 class="anchored" data-anchor-id="some-useful-api-documentation">Some useful API documentation</h2>
@@ -743,7 +783,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">// define second callback function.</span></span>
 <span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> sw0_callback_2<span class="op">(</span><span class="dt">const</span> <span class="kw">struct</span> device <span class="op">*</span>dev<span class="op">,</span> <span class="kw">struct</span> gpio_callback <span class="op">*</span>cb<span class="op">,</span> <span class="dt">uint32_t</span> pins<span class="op">)</span></span>
 <span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    different_event <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    atomic_set<span class="op">(&amp;</span>different_event<span class="op">,</span> <span class="dv">1</span><span class="op">)</span> <span class="op">;</span></span>
 <span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">//This callback now toggles a different event trigger</span></span>
 <span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
 <span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>

@@ -286,6 +286,31 @@ Dr.&nbsp;Mark Palmeri, M.D., Ph.D.
 <li><p>Button can be disabled or re-enabled based on the state of the system.</p></li>
 </ul></li>
 </ul>
+</section>
+<section id="atomicity-and-thread-safety" class="slide level2">
+<h2>Atomicity and Thread Safety</h2>
+<div class="callout callout-caution callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Caution</strong></p>
+</div>
+<div class="callout-content">
+<p>Wait, with multiple threads being able to operate on things, are variables being handled by ISRs “safe” to use if they can be called at any time?</p>
+</div>
+</div>
+</div>
+<p>Solution: <strong>Atomicity</strong> and <strong>thread safety</strong>.</p>
+</section>
+<section id="atomic-operations" class="slide level2">
+<h2>Atomic Operations</h2>
+<ul>
+<li>An atomic operation is an indivisible operation that either completes entirely or does not execute at all.</li>
+<li>Atomic operations are used to prevent race conditions and ensure thread safety when multiple threads access shared resources.</li>
+<li>In Zephyr, atomic operations can be performed using the <code>atomic</code> API, which provides functions for atomic read, write, and modify operations on variables.</li>
+</ul>
 </section></section>
 <section>
 <section id="zephyr-implementation" class="title-slide slide level1 center">
@@ -405,12 +430,17 @@ Dr.&nbsp;Mark Palmeri, M.D., Ph.D.
 <li><p><a href="https://docs.zephyrproject.org/apidoc/latest/structgpio__callback.html#details">gpio_callback</a>: struct prototype is defined in gpio.h</p></li>
 <li><p><code>sw0_cb</code>: name of the struct based on the <code>gpio_callback</code> prototype that will store the information about the callback function</p></li>
 </ul>
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb6-1"><a></a><span class="co">// define callback function</span></span>
-<span id="cb6-2"><a></a><span class="dt">void</span> sw0_callback<span class="op">(</span><span class="dt">const</span> <span class="kw">struct</span> device <span class="op">*</span>dev<span class="op">,</span> <span class="kw">struct</span> gpio_callback <span class="op">*</span>cb<span class="op">,</span> <span class="dt">uint32_t</span> pins<span class="op">)</span></span>
-<span id="cb6-3"><a></a><span class="op">{</span></span>
-<span id="cb6-4"><a></a>    sw0_event <span class="op">=</span> <span class="dv">1</span><span class="op">;</span>  <span class="co">// conditional statement in main() can now do something based on the event detection</span></span>
-<span id="cb6-5"><a></a>                    <span class="co">// we can also use actual system kernel event flags, but this is simpler (for now)</span></span>
-<span id="cb6-6"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb6-1"><a></a><span class="co">// Declare atomic variable</span></span>
+<span id="cb6-2"><a></a><span class="dt">static</span> atomic_t sw0_event <span class="op">=</span> ATOMIC_INIT<span class="op">(</span><span class="dv">0</span><span class="op">);</span></span>
+<span id="cb6-3"><a></a></span>
+<span id="cb6-4"><a></a><span class="co">// define callback function</span></span>
+<span id="cb6-5"><a></a><span class="dt">void</span> sw0_callback<span class="op">(</span><span class="dt">const</span> <span class="kw">struct</span> device <span class="op">*</span>dev<span class="op">,</span> <span class="kw">struct</span> gpio_callback <span class="op">*</span>cb<span class="op">,</span> <span class="dt">uint32_t</span> pins<span class="op">)</span></span>
+<span id="cb6-6"><a></a><span class="op">{</span></span>
+<span id="cb6-7"><a></a>    <span class="co">// Set the event flag when the button is pressed</span></span>
+<span id="cb6-8"><a></a>    atomic_set<span class="op">(&amp;</span>sw0_event<span class="op">,</span> <span class="dv">1</span><span class="op">);</span> <span class="co">// conditional statement in main() can now do something based on the </span></span>
+<span id="cb6-9"><a></a>                               <span class="co">// event detection we can also use actual system kernel event flags, </span></span>
+<span id="cb6-10"><a></a>                               <span class="co">// but this is simpler (for now)</span></span>
+<span id="cb6-11"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="constraints-on-callback-functions" class="slide level2">
 <h2>Constraints on Callback Functions</h2>
@@ -450,11 +480,13 @@ Dr.&nbsp;Mark Palmeri, M.D., Ph.D.
 <span id="cb7-27"><a></a></span>
 <span id="cb7-28"><a></a><span class="co">// test for the callback event state in your code...</span></span>
 <span id="cb7-29"><a></a><span class="cf">while</span> <span class="op">()</span> <span class="op">{</span></span>
-<span id="cb7-30"><a></a>    <span class="cf">if</span> <span class="op">(</span>sw0_event<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb7-31"><a></a>        do_something_less_trivial<span class="op">();</span>  <span class="co">// this can take more time than the callback function</span></span>
-<span id="cb7-32"><a></a>        sw0_event <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb7-33"><a></a>    <span class="op">}</span> </span>
-<span id="cb7-34"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-30"><a></a>    <span class="co">// Check if the button was pressed</span></span>
+<span id="cb7-31"><a></a>    <span class="cf">if</span> <span class="op">(</span>atomic_cas<span class="op">(&amp;</span>sw0_event<span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">0</span><span class="op">))</span> <span class="op">{</span></span>
+<span id="cb7-32"><a></a>        <span class="co">// Button was pressed, do work here</span></span>
+<span id="cb7-33"><a></a>        LOG_INF<span class="op">(</span><span class="st">"Button press detected!"</span><span class="op">);</span></span>
+<span id="cb7-34"><a></a>        gpio_pin_toggle_dt<span class="op">(&amp;</span>led<span class="op">);</span></span>
+<span id="cb7-35"><a></a>    <span class="op">}</span></span>
+<span id="cb7-36"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="some-useful-api-documentation" class="slide level2">
 <h2>Some useful API documentation</h2>
@@ -483,7 +515,7 @@ Dr.&nbsp;Mark Palmeri, M.D., Ph.D.
 <span id="cb8-7"><a></a><span class="co">// define second callback function.</span></span>
 <span id="cb8-8"><a></a><span class="dt">void</span> sw0_callback_2<span class="op">(</span><span class="dt">const</span> <span class="kw">struct</span> device <span class="op">*</span>dev<span class="op">,</span> <span class="kw">struct</span> gpio_callback <span class="op">*</span>cb<span class="op">,</span> <span class="dt">uint32_t</span> pins<span class="op">)</span></span>
 <span id="cb8-9"><a></a><span class="op">{</span></span>
-<span id="cb8-10"><a></a>    different_event <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb8-10"><a></a>    atomic_set<span class="op">(&amp;</span>different_event<span class="op">,</span> <span class="dv">1</span><span class="op">)</span> <span class="op">;</span></span>
 <span id="cb8-11"><a></a>    <span class="co">//This callback now toggles a different event trigger</span></span>
 <span id="cb8-12"><a></a><span class="op">}</span></span>
 <span id="cb8-13"><a></a></span>
