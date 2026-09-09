@@ -67,7 +67,6 @@ website:
           text: "State Diagram Git Lab"
         - href: labs/c-programming-lab.qmd
           text: "C Programming Lab"
-        - section: "C Programming Lab"
         # - href: labs/zephyr-gpio-isr-callbacks-lab.qmd
         #   text: "GPIO, ISR, and Callbacks Lab"
         - section: "GPIO, ISR, and Callbacks Lab"
