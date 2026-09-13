@@ -26,6 +26,8 @@ please install the following Extensions:
 
 - `nRF Connect for VS Code (Extension Pack)`
 
+- TODO: add info about CODEX
+
 - `GitLens` (help with `git` operations / visualization)
 
 - `C/C++` 
