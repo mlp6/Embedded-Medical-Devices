@@ -1,6 +1,6 @@
 ---
 title: "GPIO / ISR / Callbacks"
-date: "2026-02-01"
+date: "2026-09-15"
 format:
   live-html: 
     output-file: zephyr-gpio-isr-callbacks.html
