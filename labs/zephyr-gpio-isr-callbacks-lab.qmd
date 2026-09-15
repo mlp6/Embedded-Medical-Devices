@@ -1,6 +1,6 @@
 ---
 title: "Zephyr: Devicetree, GPIO, ISR and Callbacks Lab"
-date: "2026-02-01"
+date: "2026-09-15"
 format:
   html: default
   pdf: default
@@ -10,7 +10,7 @@ format:
 
 This week we will start programming the firmware that will be controlling your
 `nRF52833DK`.  We will be using buttons to trigger device events and LEDs will
-be used to visualize output activity for the device.  While LEDs might seem
+be used to visualize output activity for the device.  While LEDs might seet chm
 underwhelming, they are a universal way to represent how digital ouput signals
 could be used to control other devices (e.g., motors, actuators, etc.).
 
@@ -38,17 +38,13 @@ account to track your progress.
 template repository into your personal GitLab user space.
 
 1. Add Dr. Palmeri (`mlp6`) as a `Maintainer` of your project ASAP.  This will
-allow him to add your TAs, a faster CI runner and some project labels to your repository.
+allow him to add your TAs and project labels to your repository.
 
 1. Clone your forked project to your local laptop.
 
-1. Update the pipeline badge URLs in `README.md` to point to your forked
-repository instead of the upstream parent repository. (Do this as a discrete
-commit.)
-
 1. Make sure that you can can build the Zephyr application "as is" after your clone the repository to your local machine.  
 
-    - You should be using the `v3.2.1` SDK and toolchain.
+    - You should be using the `>=v3.4.0` SDK and toolchain.
 
     - The `CMakePresets.json` file in the repository should properly link to all of the appropriate project configuration and board files for you.
 
@@ -184,11 +180,7 @@ in your state machine.
 
 ## State Diagram
 
-1. Create a state diagram of your firmware using
-[PlantUML](https://plantuml.com/), or your diagraming program of choice.
-
-1. Include a PNG of your block diagram in your git repository called
-`state_diagram.png`.
+1. Create a UML state diagram of your firmware using Mermaid in `state_sequence_diagram.md`.  (Don't worry, we'll be populating the sequence diagram section soon when we get to threads.)
 
 ## How do I ask for help?
 
@@ -213,8 +205,8 @@ completed lab on the `main` branch.
 assign it the Label `Review`.
 
 ::: callout-note
-You do not need to upload anything to Canvas/Gradescope.  You will be receiving
-feedback through your GitLab repository.
+You do not need to upload anything to Canvas.  You will be receiving feedback
+through your GitLab repository.
 :::
 
 - Grading feedback will be given on:
