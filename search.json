@@ -1948,77 +1948,121 @@
     "href": "labs/zephyr-gpio-isr-callbacks-lab.html",
     "title": "Zephyr: Devicetree, GPIO, ISR and Callbacks Lab",
     "section": "",
-    "text": "This week we will start programming the firmware that will be controlling your nRF52833DK. We will be using buttons to trigger device events and LEDs will be used to visualize output activity for the device. While LEDs might seem underwhelming, they are a universal way to represent how digital ouput signals could be used to control other devices (e.g., motors, actuators, etc.)."
+    "text": "This week we will start programming the firmware that will be controlling your nRF52833DK. We will be using buttons to trigger device events and LEDs will be used to visualize output activity for the device. While LEDs might seem underwhelming, they are a universal way to represent how digital ouput signals could be used to control other devices (e.g., motors, actuators, etc.).",
+    "crumbs": [
+      "Labs",
+      "GPIO, ISR, and Callbacks Lab"
+    ]
   },
   {
     "objectID": "labs/zephyr-gpio-isr-callbacks-lab.html#overview",
     "href": "labs/zephyr-gpio-isr-callbacks-lab.html#overview",
     "title": "Zephyr: Devicetree, GPIO, ISR and Callbacks Lab",
     "section": "",
-    "text": "This week we will start programming the firmware that will be controlling your nRF52833DK. We will be using buttons to trigger device events and LEDs will be used to visualize output activity for the device. While LEDs might seem underwhelming, they are a universal way to represent how digital ouput signals could be used to control other devices (e.g., motors, actuators, etc.)."
+    "text": "This week we will start programming the firmware that will be controlling your nRF52833DK. We will be using buttons to trigger device events and LEDs will be used to visualize output activity for the device. While LEDs might seem underwhelming, they are a universal way to represent how digital ouput signals could be used to control other devices (e.g., motors, actuators, etc.).",
+    "crumbs": [
+      "Labs",
+      "GPIO, ISR, and Callbacks Lab"
+    ]
   },
   {
     "objectID": "labs/zephyr-gpio-isr-callbacks-lab.html#nordic-devacademy-modules",
     "href": "labs/zephyr-gpio-isr-callbacks-lab.html#nordic-devacademy-modules",
     "title": "Zephyr: Devicetree, GPIO, ISR and Callbacks Lab",
     "section": "Nordic DevAcademy Modules",
-    "text": "Nordic DevAcademy Modules\nPlease complete the following Nordic DevAcademy modules:\n\nReading Buttons and Controlling LEDs\nDebugging & Troubleshooting\n\n\n\n\n\n\n\nTip\n\n\n\nRemember that you will need to show completion of the entire Fundamentals course by the end of the semester, so be sure to be logged into your Nordic DevAcademy account to track your progress."
+    "text": "Nordic DevAcademy Modules\nPlease complete the following Nordic DevAcademy modules:\n\nReading Buttons and Controlling LEDs\nDebugging & Troubleshooting\n\n\n\n\n\n\n\nTip\n\n\n\nRemember that you will need to show completion of the entire Fundamentals course by the end of the semester, so be sure to be logged into your Nordic DevAcademy account to track your progress.",
+    "crumbs": [
+      "Labs",
+      "GPIO, ISR, and Callbacks Lab"
+    ]
   },
   {
     "objectID": "labs/zephyr-gpio-isr-callbacks-lab.html#git-version-control",
     "href": "labs/zephyr-gpio-isr-callbacks-lab.html#git-version-control",
     "title": "Zephyr: Devicetree, GPIO, ISR and Callbacks Lab",
     "section": "Git Version Control",
-    "text": "Git Version Control\n\nUse best practices for version control (branching, commit messages, etc.).\nDo all development on a dedicated branch that is merged into main once it is functional.\nCommits should be very specific to the changes/additions you are making to your code. This will help you and others understand what you did and why you did it.\n\nOn a given development branch, try to implement one small piece of functionality at a time, commit it, and then move on to the next piece of functionality.\n\n\n\n\n\n\n\nImportant\n\n\n\nYou do not want one, monolithic git commit right before you submit your project."
+    "text": "Git Version Control\n\nUse best practices for version control (branching, commit messages, etc.).\nDo all development on a dedicated branch that is merged into main once it is functional.\nCommits should be very specific to the changes/additions you are making to your code. This will help you and others understand what you did and why you did it.\n\nOn a given development branch, try to implement one small piece of functionality at a time, commit it, and then move on to the next piece of functionality.\n\n\n\n\n\n\n\nImportant\n\n\n\nYou do not want one, monolithic git commit right before you submit your project.",
+    "crumbs": [
+      "Labs",
+      "GPIO, ISR, and Callbacks Lab"
+    ]
   },
   {
     "objectID": "labs/zephyr-gpio-isr-callbacks-lab.html#repository-setup",
     "href": "labs/zephyr-gpio-isr-callbacks-lab.html#repository-setup",
     "title": "Zephyr: Devicetree, GPIO, ISR and Callbacks Lab",
     "section": "Repository Setup",
-    "text": "Repository Setup\n\nFork the Duke-BME554-ECG-TEMP-BLE-Lab template repository into your personal GitLab user space.\nAdd Dr. Palmeri (mlp6) as a Maintainer of your project ASAP. This will allow him to add your TAs, a faster CI runner and some project labels to your repository.\nClone your forked project to your local laptop.\nUpdate the pipeline badge URLs in README.md to point to your forked repository instead of the upstream parent repository. (Do this as a discrete commit.)\nMake sure that you can can build the Zephyr application “as is” after your clone the repository to your local machine.\n\nYou should be using the v3.2.1 SDK and toolchain.\nThe CMakePresets.json file in the repository should properly link to all of the appropriate project configuration and board files for you.\n\n\n\n\n\n\n\n\nImportant\n\n\n\nMake sure that the SDK and toolchain are the same exact versions!!"
+    "text": "Repository Setup\n\nFork the Duke-BME554-ECG-TEMP-BLE-Lab template repository into your personal GitLab user space.\nAdd Dr. Palmeri (mlp6) as a Maintainer of your project ASAP. This will allow him to add your TAs, a faster CI runner and some project labels to your repository.\nClone your forked project to your local laptop.\nUpdate the pipeline badge URLs in README.md to point to your forked repository instead of the upstream parent repository. (Do this as a discrete commit.)\nMake sure that you can can build the Zephyr application “as is” after your clone the repository to your local machine.\n\nYou should be using the v3.2.1 SDK and toolchain.\nThe CMakePresets.json file in the repository should properly link to all of the appropriate project configuration and board files for you.\n\n\n\n\n\n\n\n\nImportant\n\n\n\nMake sure that the SDK and toolchain are the same exact versions!!",
+    "crumbs": [
+      "Labs",
+      "GPIO, ISR, and Callbacks Lab"
+    ]
   },
   {
     "objectID": "labs/zephyr-gpio-isr-callbacks-lab.html#kernel-configuration",
     "href": "labs/zephyr-gpio-isr-callbacks-lab.html#kernel-configuration",
     "title": "Zephyr: Devicetree, GPIO, ISR and Callbacks Lab",
     "section": "Kernel Configuration",
-    "text": "Kernel Configuration\nTake note of kernel configurations enabled in application/prj.conf."
+    "text": "Kernel Configuration\nTake note of kernel configurations enabled in application/prj.conf.",
+    "crumbs": [
+      "Labs",
+      "GPIO, ISR, and Callbacks Lab"
+    ]
   },
   {
     "objectID": "labs/zephyr-gpio-isr-callbacks-lab.html#devicetree",
     "href": "labs/zephyr-gpio-isr-callbacks-lab.html#devicetree",
     "title": "Zephyr: Devicetree, GPIO, ISR and Callbacks Lab",
     "section": "Devicetree",
-    "text": "Devicetree\n\nWe have introduced the concept of the Devicetree (DT) for the nRF52833DK. The development kit has a preconfigured DT (nrf52833dk_nrf52833.dts), which is selected when we create a board configuration (the present selected in CMakePresents.json).\nTo make changes or additions to this DT, we will create a DT overlay file that will be compiled into the firmware. The default name of this file is nrf52833dk_nrf52833.overlay and it is located in the application/boards/ directory.\nThe nRF52833DK has 4 integrated LEDs. Edit the DT overlay file for your project to create alias for 4 LEDs on the following pins (all 4 of which are the integrated LEDs), which will then be associated with the specified firmware GPIO pin struct names:\n\n\n\n\n\n\n\n\n\n\n\nFirmware gpio_dt_spec Struct Name\nDT Alias\nDT Default Node Name\nPhysical GPIO Pin\nDK Part Label\n\n\n\n\nheartbeat_led\nheartbeat\nled0\nP0.13\nLED1\n\n\niv_pump_led\nivpump\nled1\nP0.14\nLED2\n\n\nbuzzer_led\nbuzzer\nled2\nP0.15\nLED3\n\n\nerror_led\nerror\nled3\nP0.16\nLED4\n\n\n\n\nThe nRF52833DK also has 4 integrated buttons. Edit the DT overlay file for your project to create aliases for these 4 buttons that are the same as their default DTS node names:\n\n\n\n\n\n\n\n\n\n\n\nFirmware gpio_dt_spec Struct Name\nDT Alias\nDT Default Node Name\nPhysical GPIO Pin\nDK Part Label\n\n\n\n\nsleep_button\nsleepbutton\nbutton0\nP0.11\nButton 1\n\n\nfreq_up_button\nfrequpbutton\nbutton1\nP0.12\nButton 2\n\n\nfreq_down_button\nfreqdownbutton\nbutton2\nP0.24\nButton 3\n\n\nreset_button\nresetbutton\nbutton3\nP0.25\nButton 4\n\n\n\nhttps://docs.nordicsemi.com/bundle/ug_nrf52833_dk/page/UG/dk/hw_buttons_leds.html"
+    "text": "Devicetree\n\nWe have introduced the concept of the Devicetree (DT) for the nRF52833DK. The development kit has a preconfigured DT (nrf52833dk_nrf52833.dts), which is selected when we create a board configuration (the present selected in CMakePresents.json).\nTo make changes or additions to this DT, we will create a DT overlay file that will be compiled into the firmware. The default name of this file is nrf52833dk_nrf52833.overlay and it is located in the application/boards/ directory.\nThe nRF52833DK has 4 integrated LEDs. Edit the DT overlay file for your project to create alias for 4 LEDs on the following pins (all 4 of which are the integrated LEDs), which will then be associated with the specified firmware GPIO pin struct names:\n\n\n\n\n\n\n\n\n\n\n\nFirmware gpio_dt_spec Struct Name\nDT Alias\nDT Default Node Name\nPhysical GPIO Pin\nDK Part Label\n\n\n\n\nheartbeat_led\nheartbeat\nled0\nP0.13\nLED1\n\n\niv_pump_led\nivpump\nled1\nP0.14\nLED2\n\n\nbuzzer_led\nbuzzer\nled2\nP0.15\nLED3\n\n\nerror_led\nerror\nled3\nP0.16\nLED4\n\n\n\n\nThe nRF52833DK also has 4 integrated buttons. Edit the DT overlay file for your project to create aliases for these 4 buttons that are the same as their default DTS node names:\n\n\n\n\n\n\n\n\n\n\n\nFirmware gpio_dt_spec Struct Name\nDT Alias\nDT Default Node Name\nPhysical GPIO Pin\nDK Part Label\n\n\n\n\nsleep_button\nsleepbutton\nbutton0\nP0.11\nButton 1\n\n\nfreq_up_button\nfrequpbutton\nbutton1\nP0.12\nButton 2\n\n\nfreq_down_button\nfreqdownbutton\nbutton2\nP0.24\nButton 3\n\n\nreset_button\nresetbutton\nbutton3\nP0.25\nButton 4\n\n\n\nhttps://docs.nordicsemi.com/bundle/ug_nrf52833_dk/page/UG/dk/hw_buttons_leds.html",
+    "crumbs": [
+      "Labs",
+      "GPIO, ISR, and Callbacks Lab"
+    ]
   },
   {
     "objectID": "labs/zephyr-gpio-isr-callbacks-lab.html#firmware",
     "href": "labs/zephyr-gpio-isr-callbacks-lab.html#firmware",
     "title": "Zephyr: Devicetree, GPIO, ISR and Callbacks Lab",
     "section": "Firmware",
-    "text": "Firmware\nImplement the following firmware functionality as a state machine (switch/case):\n\nCheck that the GPIO0 interface is ready.\nInitialize all LED output pins as GPIO_OUTPUT_ACTIVE or GPIO_OUTPUT_INACTIVE, as dictated by the functional specifications below. Note that ACTIVE for the LEDs on this DK corresponds to driving them LOW.\nBe sure to capture all function exit codes and have conditional statements to capture any returned error codes.\n\nImplement the following control logic:\n\nThe heartbeat LED blinks at a fixed 1 Hz while main() is being executed. Issue a LOG_INF() statement each time the heartbeat LED is toggled.\nThe 2 “action” LEDs (buzzer_led and iv_pump_led) blink out of phase with one another at 2 Hz by default.\n\nThis 2 Hz default blink frequency should be defined using a preprocessor macro: #define LED_BLINK_FREQ_HZ 2.\n\nIssue a LOG_INF() statement each time the “action” LEDs are toggled.\nfreq_up_button increases the blink frequency of the “action” LEDs by 1 Hz each time it is pressed.\nThis incremental increase in blink frequency should be defined by the preprocessor macro: #define FREQ_UP_INC_HZ 1.\n\nIssue a descriptive LOG_INF() statement each time this button is pressed, which indicates the new blink frequency.\nfreq_down_button decreases the blink frequency of the “action” LEDs by 1 Hz each time it is pressed.\nThis incremental increase in blink frequency should be defined by the preprocessor macro: #define FREQ_DOWN_INC_HZ 1.\n\nIssue a descriptive LOG_INF() statement each time this button is pressed, which indicates the new blink frequency.\nIf the blink frequency for the “action” LEDs is &lt; 1 Hz or &gt; 5 Hz, then:\n\nThe “action” LEDs should both be off, and\nThe error LED is continuously illuminated.\n\nIssue a descriptive LOG_ERR() statement.\nThe heartbeat LED should continue to blink at 1 Hz.\nfreq_up_button, freq_down_button, and sleep_button should be disabled (interrupts disabled).\nThe only way to exit the “error state” is to press the reset button.\n\nDefine each of these min/max blinking frequencylimits using preprocessor macros (you can choose appropriate names).\nPressing the reset button resets the “action” LEDs to blink at their default 2 Hz rate, out of phase with one another, and re-enables the freq_up_button, freq_down_button, and sleep_button.\nThe reset_button can be pressed from any state and resets the device back to the default state.\n\nA descriptive LOG_INF() statement should be issued each time the reset button is pressed.\nAt any point in time when the “action” LEDs are blinking (i.e., not the error state), if the sleep_button is pressed:\n\nThe current blink frequency for the “action” LEDs is stored,\nBoth “action” LEDs are turned off,\nThe heartbeat LED continues to blink,\nA descriptive LOG_INF() statement is issued,\nThe “sleep state” can be exited by:\nPressing the sleep button again, at which time the device returns to blinking the “action” LEDs at the same frequency and relative phase before being put to sleep. Relative phase means the appropriate relative timing between the different “action” LEDs.\nPressing the reset_button, at which time the device returns to blinking the “action” LEDs at their default 2 Hz rate, out of phase with one another.\n\n\n\n\n\n\n\n\nNote\n\n\n\n\nYou may want to make your state diagram before writing any code.\nDo not use k_msleep() in your code to control LED blink timing.\n\nSleep is blocking and paralyzes a single-threaded application.\n\nInstead, have your main while loop run as fast as possible and use the k_uptime_get() function to determine when to toggle the LEDs.\n\nSpoiler alert: We will be system kernel timers / threads to control the LED blink timing in the next lab.\n\n\nConsider using a struct for each LED to bookkeep the LED state, phase, blink frequency, etc.\n\n\n\n\n\n\n\n\n\nWarning\n\n\n\nBe careful with how your check to see what button(s) have been pressed in your ACTION state. If multiple buttons have been pressed before you test for the Boolean values that represent whether a button has been pressed, then you might have some “unexpected” behavior. For example, if you check for freq_up_button being pressed before checking for reset_button being pressed, then if both buttons are pressed at the same time, you might end up increasing the frequency and then immediately resetting it back to default, which is not what you want. You will need to think carefully about the order of your conditional statements in your state machine."
+    "text": "Firmware\nImplement the following firmware functionality as a state machine (switch/case):\n\nCheck that the GPIO0 interface is ready.\nInitialize all LED output pins as GPIO_OUTPUT_ACTIVE or GPIO_OUTPUT_INACTIVE, as dictated by the functional specifications below. Note that ACTIVE for the LEDs on this DK corresponds to driving them LOW.\nBe sure to capture all function exit codes and have conditional statements to capture any returned error codes.\n\nImplement the following control logic:\n\nThe heartbeat LED blinks at a fixed 1 Hz while main() is being executed. Issue a LOG_INF() statement each time the heartbeat LED is toggled.\nThe 2 “action” LEDs (buzzer_led and iv_pump_led) blink out of phase with one another at 2 Hz by default.\n\nThis 2 Hz default blink frequency should be defined using a preprocessor macro: #define LED_BLINK_FREQ_HZ 2.\n\nIssue a LOG_INF() statement each time the “action” LEDs are toggled.\nfreq_up_button increases the blink frequency of the “action” LEDs by 1 Hz each time it is pressed.\nThis incremental increase in blink frequency should be defined by the preprocessor macro: #define FREQ_UP_INC_HZ 1.\n\nIssue a descriptive LOG_INF() statement each time this button is pressed, which indicates the new blink frequency.\nfreq_down_button decreases the blink frequency of the “action” LEDs by 1 Hz each time it is pressed.\nThis incremental increase in blink frequency should be defined by the preprocessor macro: #define FREQ_DOWN_INC_HZ 1.\n\nIssue a descriptive LOG_INF() statement each time this button is pressed, which indicates the new blink frequency.\nIf the blink frequency for the “action” LEDs is &lt; 1 Hz or &gt; 5 Hz, then:\n\nThe “action” LEDs should both be off, and\nThe error LED is continuously illuminated.\n\nIssue a descriptive LOG_ERR() statement.\nThe heartbeat LED should continue to blink at 1 Hz.\nfreq_up_button, freq_down_button, and sleep_button should be disabled (interrupts disabled).\nThe only way to exit the “error state” is to press the reset button.\n\nDefine each of these min/max blinking frequencylimits using preprocessor macros (you can choose appropriate names).\nPressing the reset button resets the “action” LEDs to blink at their default 2 Hz rate, out of phase with one another, and re-enables the freq_up_button, freq_down_button, and sleep_button.\nThe reset_button can be pressed from any state and resets the device back to the default state.\n\nA descriptive LOG_INF() statement should be issued each time the reset button is pressed.\nAt any point in time when the “action” LEDs are blinking (i.e., not the error state), if the sleep_button is pressed:\n\nThe current blink frequency for the “action” LEDs is stored,\nBoth “action” LEDs are turned off,\nThe heartbeat LED continues to blink,\nA descriptive LOG_INF() statement is issued,\nThe “sleep state” can be exited by:\nPressing the sleep button again, at which time the device returns to blinking the “action” LEDs at the same frequency and relative phase before being put to sleep. Relative phase means the appropriate relative timing between the different “action” LEDs.\nPressing the reset_button, at which time the device returns to blinking the “action” LEDs at their default 2 Hz rate, out of phase with one another.\n\n\n\n\n\n\n\n\nNote\n\n\n\n\nYou may want to make your state diagram before writing any code.\nDo not use k_msleep() in your code to control LED blink timing.\n\nSleep is blocking and paralyzes a single-threaded application.\n\nInstead, have your main while loop run as fast as possible and use the k_uptime_get() function to determine when to toggle the LEDs.\n\nSpoiler alert: We will be system kernel timers / threads to control the LED blink timing in the next lab.\n\n\nConsider using a struct for each LED to bookkeep the LED state, phase, blink frequency, etc.\n\n\n\n\n\n\n\n\n\nWarning\n\n\n\nBe careful with how your check to see what button(s) have been pressed in your ACTION state. If multiple buttons have been pressed before you test for the Boolean values that represent whether a button has been pressed, then you might have some “unexpected” behavior. For example, if you check for freq_up_button being pressed before checking for reset_button being pressed, then if both buttons are pressed at the same time, you might end up increasing the frequency and then immediately resetting it back to default, which is not what you want. You will need to think carefully about the order of your conditional statements in your state machine.",
+    "crumbs": [
+      "Labs",
+      "GPIO, ISR, and Callbacks Lab"
+    ]
   },
   {
     "objectID": "labs/zephyr-gpio-isr-callbacks-lab.html#state-diagram",
     "href": "labs/zephyr-gpio-isr-callbacks-lab.html#state-diagram",
     "title": "Zephyr: Devicetree, GPIO, ISR and Callbacks Lab",
     "section": "State Diagram",
-    "text": "State Diagram\n\nCreate a state diagram of your firmware using PlantUML, or your diagraming program of choice.\nInclude a PNG of your block diagram in your git repository called state_diagram.png."
+    "text": "State Diagram\n\nCreate a state diagram of your firmware using PlantUML, or your diagraming program of choice.\nInclude a PNG of your block diagram in your git repository called state_diagram.png.",
+    "crumbs": [
+      "Labs",
+      "GPIO, ISR, and Callbacks Lab"
+    ]
   },
   {
     "objectID": "labs/zephyr-gpio-isr-callbacks-lab.html#how-do-i-ask-for-help",
     "href": "labs/zephyr-gpio-isr-callbacks-lab.html#how-do-i-ask-for-help",
     "title": "Zephyr: Devicetree, GPIO, ISR and Callbacks Lab",
     "section": "How do I ask for help?",
-    "text": "How do I ask for help?\n\nIf you have a general / non-coding question, you should ask your TAs / Dr. Palmeri on Ed to allow any of them to respond in a timely manner.\nPush you code to your GitLab repository, ideally with your active development on a non-main branch.\nCreate an Issue in your repository.\n\nAdd as much detail as possible as to your problem, and add links to specific lines / section of code when possible.\nAssign the label “Bug” or “Question”, as appropriate.\nBe sure to specify what branch you are working on.\nAssign the Issue to one of the TAs.\nIf your TA cannot solve your Issue, they can escalate the Issue to Dr. Palmeri.\n\nYou will get a response to your Issue, and maybe a new branch of code will be pushed to help you with some example syntax that you can use git diff to visualize."
+    "text": "How do I ask for help?\n\nIf you have a general / non-coding question, you should ask your TAs / Dr. Palmeri on Ed to allow any of them to respond in a timely manner.\nPush you code to your GitLab repository, ideally with your active development on a non-main branch.\nCreate an Issue in your repository.\n\nAdd as much detail as possible as to your problem, and add links to specific lines / section of code when possible.\nAssign the label “Bug” or “Question”, as appropriate.\nBe sure to specify what branch you are working on.\nAssign the Issue to one of the TAs.\nIf your TA cannot solve your Issue, they can escalate the Issue to Dr. Palmeri.\n\nYou will get a response to your Issue, and maybe a new branch of code will be pushed to help you with some example syntax that you can use git diff to visualize.",
+    "crumbs": [
+      "Labs",
+      "GPIO, ISR, and Callbacks Lab"
+    ]
   },
   {
     "objectID": "labs/zephyr-gpio-isr-callbacks-lab.html#what-to-submit-grading",
     "href": "labs/zephyr-gpio-isr-callbacks-lab.html#what-to-submit-grading",
     "title": "Zephyr: Devicetree, GPIO, ISR and Callbacks Lab",
     "section": "What to Submit & Grading",
-    "text": "What to Submit & Grading\n\nMake sure you are committing as you develop your code, and have all of those commits pushed to GitLab (i.e., do not “squash” them).\nMake sure all of the CI pipelines are passing.\nMerge all development branches into main and make sure that the main branch is up to date with all of your commits.\nCreate and annotated tag called v1.0.0 at the commit that represents your completed lab on the main branch.\nPush your final repository and the annotated tag to GitLab.\nCreate an Issue assigned to Dr. Palmeri titled v1.0.0 ready for feedback and assign it the Label Review.\n\n\n\n\n\n\n\nNote\n\n\n\nYou do not need to upload anything to Canvas/Gradescope. You will be receiving feedback through your GitLab repository.\n\n\n\nGrading feedback will be given on:\n\nGit Usage\nCode Functionality\nEfficieny of code logic\nState diagram completeness and matching the firmware implementation\n“Readability”\n\n“Readability” does not mean a lot of verbose comments\n“Readability” means that the structure of the code, the naming of variables, etc. convey meaning and logical flow."
+    "text": "What to Submit & Grading\n\nMake sure you are committing as you develop your code, and have all of those commits pushed to GitLab (i.e., do not “squash” them).\nMake sure all of the CI pipelines are passing.\nMerge all development branches into main and make sure that the main branch is up to date with all of your commits.\nCreate and annotated tag called v1.0.0 at the commit that represents your completed lab on the main branch.\nPush your final repository and the annotated tag to GitLab.\nCreate an Issue assigned to Dr. Palmeri titled v1.0.0 ready for feedback and assign it the Label Review.\n\n\n\n\n\n\n\nNote\n\n\n\nYou do not need to upload anything to Canvas/Gradescope. You will be receiving feedback through your GitLab repository.\n\n\n\nGrading feedback will be given on:\n\nGit Usage\nCode Functionality\nEfficieny of code logic\nState diagram completeness and matching the firmware implementation\n“Readability”\n\n“Readability” does not mean a lot of verbose comments\n“Readability” means that the structure of the code, the naming of variables, etc. convey meaning and logical flow.",
+    "crumbs": [
+      "Labs",
+      "GPIO, ISR, and Callbacks Lab"
+    ]
   },
   {
     "objectID": "labs/c-programming-lab.html",
