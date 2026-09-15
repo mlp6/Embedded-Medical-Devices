@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Dr.&nbsp;Mark Palmeri, M.D., Ph.D.">
-<meta name="dcterms.date" content="2026-02-01">
+<meta name="dcterms.date" content="2026-09-15">
 
 <title>Zephyr: Devicetree, GPIO, ISR and Callbacks Lab – Embedded Medical Devices</title>
 <style>
@@ -406,7 +406,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">February 1, 2026</p>
+      <p class="date">September 15, 2026</p>
     </div>
   </div>
   
@@ -420,7 +420,7 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="overview" class="level2">
 <h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<p>This week we will start programming the firmware that will be controlling your <code>nRF52833DK</code>. We will be using buttons to trigger device events and LEDs will be used to visualize output activity for the device. While LEDs might seem underwhelming, they are a universal way to represent how digital ouput signals could be used to control other devices (e.g., motors, actuators, etc.).</p>
+<p>This week we will start programming the firmware that will be controlling your <code>nRF52833DK</code>. We will be using buttons to trigger device events and LEDs will be used to visualize output activity for the device. While LEDs might seet chm underwhelming, they are a universal way to represent how digital ouput signals could be used to control other devices (e.g., motors, actuators, etc.).</p>
 </section>
 <section id="nordic-devacademy-modules" class="level2">
 <h2 class="anchored" data-anchor-id="nordic-devacademy-modules">Nordic DevAcademy Modules</h2>
@@ -470,12 +470,11 @@ Important
 <h2 class="anchored" data-anchor-id="repository-setup">Repository Setup</h2>
 <ol type="1">
 <li><p>Fork the <a href="https://gitlab.oit.duke.edu/mlp6/duke-bme554-ecg-temp-ble-lab">Duke-BME554-ECG-TEMP-BLE-Lab</a> template repository into your personal GitLab user space.</p></li>
-<li><p>Add Dr.&nbsp;Palmeri (<code>mlp6</code>) as a <code>Maintainer</code> of your project ASAP. This will allow him to add your TAs, a faster CI runner and some project labels to your repository.</p></li>
+<li><p>Add Dr.&nbsp;Palmeri (<code>mlp6</code>) as a <code>Maintainer</code> of your project ASAP. This will allow him to add your TAs and project labels to your repository.</p></li>
 <li><p>Clone your forked project to your local laptop.</p></li>
-<li><p>Update the pipeline badge URLs in <code>README.md</code> to point to your forked repository instead of the upstream parent repository. (Do this as a discrete commit.)</p></li>
 <li><p>Make sure that you can can build the Zephyr application “as is” after your clone the repository to your local machine.</p>
 <ul>
-<li><p>You should be using the <code>v3.2.1</code> SDK and toolchain.</p></li>
+<li><p>You should be using the <code>&gt;=v3.4.0</code> SDK and toolchain.</p></li>
 <li><p>The <code>CMakePresets.json</code> file in the repository should properly link to all of the appropriate project configuration and board files for you.</p></li>
 </ul></li>
 </ol>
@@ -697,8 +696,7 @@ Warning
 <section id="state-diagram" class="level2">
 <h2 class="anchored" data-anchor-id="state-diagram">State Diagram</h2>
 <ol type="1">
-<li><p>Create a state diagram of your firmware using <a href="https://plantuml.com/">PlantUML</a>, or your diagraming program of choice.</p></li>
-<li><p>Include a PNG of your block diagram in your git repository called <code>state_diagram.png</code>.</p></li>
+<li>Create a UML state diagram of your firmware using Mermaid in <code>state_sequence_diagram.md</code>. (Don’t worry, we’ll be populating the sequence diagram section soon when we get to threads.)</li>
 </ol>
 </section>
 <section id="how-do-i-ask-for-help" class="level2">
@@ -737,7 +735,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>You do not need to upload anything to Canvas/Gradescope. You will be receiving feedback through your GitLab repository.</p>
+<p>You do not need to upload anything to Canvas. You will be receiving feedback through your GitLab repository.</p>
 </div>
 </div>
 <ul>
