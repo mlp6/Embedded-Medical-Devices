@@ -100,6 +100,9 @@ Implement the following firmware functionality as a **state machine** (`switch/c
 Note that `ACTIVE` for the LEDs on this DK corresponds to driving them `LOW`.
 - Be sure to capture all function exit codes and have conditional statements to
 capture any returned error codes.
+- The example code uses `bool` variables to track events (e.g., button presses).
+Replace these with `atomic` variables to ensure that the button press events are
+not lost if the main loop is executing when the button is pressed.
 
 Implement the following control logic:
 
@@ -118,7 +121,7 @@ preprocessor macro: `#define FREQ_UP_INC_HZ 1`.
 pressed, which indicates the new blink frequency.
 - `freq_down_button` decreases the blink frequency of the "action" LEDs by 1 Hz
 each time it is pressed. 
-- This incremental increase in blink frequency should be defined by the
+- This incremental decrease in blink frequency should be defined by the
 preprocessor macro: `#define FREQ_DOWN_INC_HZ 1`.  
 - Issue a descriptive `LOG_INF()` statement each time this button is
 pressed, which indicates the new blink frequency.
