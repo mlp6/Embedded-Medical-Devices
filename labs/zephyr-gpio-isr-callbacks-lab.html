@@ -607,6 +607,7 @@ Important
 <li>Check that the <code>GPIO0</code> interface is ready.</li>
 <li>Initialize all LED output pins as <code>GPIO_OUTPUT_ACTIVE</code> or <code>GPIO_OUTPUT_INACTIVE</code>, as dictated by the functional specifications below. Note that <code>ACTIVE</code> for the LEDs on this DK corresponds to driving them <code>LOW</code>.</li>
 <li>Be sure to capture all function exit codes and have conditional statements to capture any returned error codes.</li>
+<li>The example code uses <code>bool</code> variables to track events (e.g., button presses). Replace these with <code>atomic</code> variables to ensure that the button press events are not lost if the main loop is executing when the button is pressed.</li>
 </ul>
 <p>Implement the following control logic:</p>
 <ul>
@@ -621,7 +622,7 @@ Important
 </li>
 <li>Issue a descriptive <code>LOG_INF()</code> statement each time this button is pressed, which indicates the new blink frequency.</li>
 <li><code>freq_down_button</code> decreases the blink frequency of the “action” LEDs by 1 Hz each time it is pressed.</li>
-<li>This incremental increase in blink frequency should be defined by the preprocessor macro: <code>#define FREQ_DOWN_INC_HZ 1</code>.<br>
+<li>This incremental decrease in blink frequency should be defined by the preprocessor macro: <code>#define FREQ_DOWN_INC_HZ 1</code>.<br>
 </li>
 <li>Issue a descriptive <code>LOG_INF()</code> statement each time this button is pressed, which indicates the new blink frequency.</li>
 <li>If the blink frequency for the “action” LEDs is &lt; 1 Hz or &gt; 5 Hz, then:
