@@ -244,12 +244,16 @@ reports.
 The use of artificial intelligence is a rapidly developing resource / tool in
 engineering.  In software development, there are many levels of AI-assitance
 available.  Such form of assistance include the
-[IntelliCode](https://visualstudio.microsoft.com/services/intellicode/) tools
-and [GitHub CoPilot](https://github.com/features/copilot) (free to students
-through the [GitHub Education](https://github.com/education/students) program).
-These tools can be leveraged to help with syntax.  
+[IntelliCode](https://visualstudio.microsoft.com/services/intellicode/) ,
+[GitHub CoPilot](https://github.com/features/copilot) (free to students through
+the [GitHub Education](https://github.com/education/students) program), and
+Codex/Claude Code.  These tools can be leveraged to help with syntax.  
 
 ::: callout-caution
 You are strongly cautioned to not rely on these tools for logical
-implementation, and they cannot be used during the in-person code reviews.
+implementation, and they cannot be used during the in-person code reviews.  You
+should not "blindly" feed the assignments into these tools to have them attempt
+to perform all of the coding for you.  If Dr. Palmeri suspects that this has
+occurred, he reserves the right to question you about your understanding of your
+submission and will grade that submission based on that evaluation.
 :::
