@@ -213,6 +213,8 @@ static struct gpio_callback sw0_cb;
 - `sw0_cb`: name of the struct based on the `gpio_callback` prototype that will store the information about the callback function
 
 ```C
+#include <zephyr/sys/atomic.h>
+
 // Declare atomic variable
 static atomic_t sw0_event = ATOMIC_INIT(0);
 
@@ -267,7 +269,7 @@ gpio_add_callback_dt(sw0, &sw0_cb); // associate callback with GPIO pin
 // test for the callback event state in your code...
 while () {
     // Check if the button was pressed
-    if (atomic_cas(&sw0_event, 1, 0)) {
+    if (atomic_clear(&sw0_event)) {
         // Button was pressed, do work here
         LOG_INF("Button press detected!");
         gpio_pin_toggle_dt(&led);
