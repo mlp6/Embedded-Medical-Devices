@@ -4835,63 +4835,99 @@
     "href": "labs/zephyr-threads-events-lab.html",
     "title": "Zephyr: Threads & Kernel Events Lab",
     "section": "",
-    "text": "Use best practices for version control (branching, commit messages, etc.).\nDo all development on a dedicated branch that is merged into main once it is functional.\nCommits should be very specific to the changes/additions you are making to your code. This will help you and others understand what you did and why you did it.\n\nOn a given development branch, try to implement one small piece of functionality at a time, commit it, and then move on to the next piece of functionality.\n\n\n\n\n\n\n\nImportant\n\n\n\nYou do not want one, monolithic git commit right before you submit your project."
+    "text": "Use best practices for version control (branching, commit messages, etc.).\nDo all development on a dedicated branch that is merged into main once it is functional.\nCommits should be very specific to the changes/additions you are making to your code. This will help you and others understand what you did and why you did it.\n\nOn a given development branch, try to implement one small piece of functionality at a time, commit it, and then move on to the next piece of functionality.\n\n\n\n\n\n\n\nImportant\n\n\n\nYou do not want one, monolithic git commit right before you submit your project.",
+    "crumbs": [
+      "Labs",
+      "Threads and Kernel Events Lab"
+    ]
   },
   {
     "objectID": "labs/zephyr-threads-events-lab.html#git-version-control",
     "href": "labs/zephyr-threads-events-lab.html#git-version-control",
     "title": "Zephyr: Threads & Kernel Events Lab",
     "section": "",
-    "text": "Use best practices for version control (branching, commit messages, etc.).\nDo all development on a dedicated branch that is merged into main once it is functional.\nCommits should be very specific to the changes/additions you are making to your code. This will help you and others understand what you did and why you did it.\n\nOn a given development branch, try to implement one small piece of functionality at a time, commit it, and then move on to the next piece of functionality.\n\n\n\n\n\n\n\nImportant\n\n\n\nYou do not want one, monolithic git commit right before you submit your project."
+    "text": "Use best practices for version control (branching, commit messages, etc.).\nDo all development on a dedicated branch that is merged into main once it is functional.\nCommits should be very specific to the changes/additions you are making to your code. This will help you and others understand what you did and why you did it.\n\nOn a given development branch, try to implement one small piece of functionality at a time, commit it, and then move on to the next piece of functionality.\n\n\n\n\n\n\n\nImportant\n\n\n\nYou do not want one, monolithic git commit right before you submit your project.",
+    "crumbs": [
+      "Labs",
+      "Threads and Kernel Events Lab"
+    ]
   },
   {
     "objectID": "labs/zephyr-threads-events-lab.html#refactor-heartbeat-led-25-duty-cycle",
     "href": "labs/zephyr-threads-events-lab.html#refactor-heartbeat-led-25-duty-cycle",
     "title": "Zephyr: Threads & Kernel Events Lab",
     "section": "Refactor: Heartbeat LED (25% Duty Cycle)",
-    "text": "Refactor: Heartbeat LED (25% Duty Cycle)\nYou will be refactoring your code from the timers lab to use a thread to control the heartbeat LED. Do all of the refactoring below on a new branch called heartbeat_refactor.\n\nRefactor your code to use a thread instead of a kernel timer to control the heartbeat LED.\nInstead of having your heartbeat blink at 1 Hz with a 50% duty cycle, change it to have a 25% duty cycle (i.e., on for 250 ms, off for 750 ms)."
+    "text": "Refactor: Heartbeat LED (25% Duty Cycle)\nYou will be refactoring your code from the timers lab to use a thread to control the heartbeat LED. Do all of the refactoring below on a new branch called heartbeat_refactor.\n\nRefactor your code to use a thread instead of a kernel timer to control the heartbeat LED.\nInstead of having your heartbeat blink at 1 Hz with a 50% duty cycle, change it to have a 25% duty cycle (i.e., on for 250 ms, off for 750 ms).",
+    "crumbs": [
+      "Labs",
+      "Threads and Kernel Events Lab"
+    ]
   },
   {
     "objectID": "labs/zephyr-threads-events-lab.html#test-the-accuracy-of-the-heartbeat-led-timing",
     "href": "labs/zephyr-threads-events-lab.html#test-the-accuracy-of-the-heartbeat-led-timing",
     "title": "Zephyr: Threads & Kernel Events Lab",
     "section": "Test the Accuracy of the Heartbeat LED Timing",
-    "text": "Test the Accuracy of the Heartbeat LED Timing\n\nCreate a new Jupyter notebook for this lab’s technical report called testing/thread_testing.ipynb that analyzes the accuracy of your 25% duty cycle heartbeat LED.\nPerform these measurements using the oscilloscope.\n\n\n\n\n\n\n\nTip\n\n\n\nMake sure that your Jupyter notebook reads in data from relative paths for the repository, not absolute paths on your local machine, so that your notebook can be run on any machine after cloning the repository.\n\n\n\nChoose what to measure and how to analyze the data to verify that the heartbeat LED thread is working as expected.\nDiscuss the results of your measurements and how they compare to the nominal specifications for the heartbeat LED.\n\n\nMerge-n-Tag this Refactored Heartbeat LED Code and Analysis\n\nPush your heartbeat_refactor branch to GitLab.\nCreate a new Merge Request to merge heartbeat_refactor into your forked repository’s main branch.\nMerge your heartbeat_refactor branch into your main branch, and create an annotated tag for that merged commit called v1.2.0."
+    "text": "Test the Accuracy of the Heartbeat LED Timing\n\nCreate a new Jupyter notebook for this lab’s technical report called testing/thread_testing.ipynb that analyzes the accuracy of your 25% duty cycle heartbeat LED.\nPerform these measurements using the oscilloscope.\n\n\n\n\n\n\n\nTip\n\n\n\nMake sure that your Jupyter notebook reads in data from relative paths for the repository, not absolute paths on your local machine, so that your notebook can be run on any machine after cloning the repository.\n\n\n\nChoose what to measure and how to analyze the data to verify that the heartbeat LED thread is working as expected.\nDiscuss the results of your measurements and how they compare to the nominal specifications for the heartbeat LED.\n\n\nMerge-n-Tag this Refactored Heartbeat LED Code and Analysis\n\nPush your heartbeat_refactor branch to GitLab.\nCreate a new Merge Request to merge heartbeat_refactor into your forked repository’s main branch.\nMerge your heartbeat_refactor branch into your main branch, and create an annotated tag for that merged commit called v1.2.0.",
+    "crumbs": [
+      "Labs",
+      "Threads and Kernel Events Lab"
+    ]
   },
   {
     "objectID": "labs/zephyr-threads-events-lab.html#refactor-kernel-events",
     "href": "labs/zephyr-threads-events-lab.html#refactor-kernel-events",
     "title": "Zephyr: Threads & Kernel Events Lab",
     "section": "Refactor: Kernel Events",
-    "text": "Refactor: Kernel Events\n\nDo the following refactoring on a new branch called kernel_events_refactor, branched after the v1.2.0 commit.\nRefactor all of your code to remove Boolean variables being used in your ISR callback functions to indicate that buttons have been pressed to now use kernel events in a single bit array called button_events.\nYou should use 1-bit for each button, meaning the bit array is 4-bits.\nImplement a k_event_wait() in the appropriate state(s) of your main thread to wait for button events to occur. This will be a blocking wait, meaning the main thread while loop will not be running while waiting for button events."
+    "text": "Refactor: Kernel Events\n\nDo the following refactoring on a new branch called kernel_events_refactor, branched after the v1.2.0 commit.\nRefactor all of your code to remove Boolean variables being used in your ISR callback functions to indicate that buttons have been pressed to now use kernel events in a single bit array called button_events.\nYou should use 1-bit for each button, meaning the bit array is 4-bits.\nImplement a k_event_wait() in the appropriate state(s) of your main thread to wait for button events to occur. This will be a blocking wait, meaning the main thread while loop will not be running while waiting for button events.",
+    "crumbs": [
+      "Labs",
+      "Threads and Kernel Events Lab"
+    ]
   },
   {
     "objectID": "labs/zephyr-threads-events-lab.html#verify-that-your-led-timing-still-works",
     "href": "labs/zephyr-threads-events-lab.html#verify-that-your-led-timing-still-works",
     "title": "Zephyr: Threads & Kernel Events Lab",
     "section": "Verify that your LED Timing Still Works",
-    "text": "Verify that your LED Timing Still Works\n\nCreate a new Jupyter notebook called testing/kernel_events_validation.ipynb to verify that your refactored code still works as expected.\nIt is up to you to now determine how to verify that your LED timing is still working with regard to what data to collect, how to analyze it, and how to present it in your notebook."
+    "text": "Verify that your LED Timing Still Works\n\nCreate a new Jupyter notebook called testing/kernel_events_validation.ipynb to verify that your refactored code still works as expected.\nIt is up to you to now determine how to verify that your LED timing is still working with regard to what data to collect, how to analyze it, and how to present it in your notebook.",
+    "crumbs": [
+      "Labs",
+      "Threads and Kernel Events Lab"
+    ]
   },
   {
     "objectID": "labs/zephyr-threads-events-lab.html#create-a-sequence-diagram",
     "href": "labs/zephyr-threads-events-lab.html#create-a-sequence-diagram",
     "title": "Zephyr: Threads & Kernel Events Lab",
     "section": "Create a Sequence Diagram",
-    "text": "Create a Sequence Diagram\n\nCreate a PlantUML sequence diagram that documents the interaction between your button ISR callback(s), the kernel event bit array, and your state machine thread when a button press event is detected and processed.\nYour sequence diagram should show all relevant participants and the chronological order of messages between them (refer to the sequence diagram covered in the Threads & Kernel Events lecture).\nCommit both the PlantUML source file (.puml) and the rendered image to your repository under a docs/ directory.\n\n\nMerge-n-Tag this Refactored Kernel Events Code and Analysis\n\nCreate a Merge Request to merge kernel_events_refactor into your main branch.\nMerge your kernel_events_refactor branch into your main branch.\nCreate an annotated tag for that merge commit called v1.3.0."
+    "text": "Create a Sequence Diagram\n\nCreate a PlantUML sequence diagram that documents the interaction between your button ISR callback(s), the kernel event bit array, and your state machine thread when a button press event is detected and processed.\nYour sequence diagram should show all relevant participants and the chronological order of messages between them (refer to the sequence diagram covered in the Threads & Kernel Events lecture).\nCommit both the PlantUML source file (.puml) and the rendered image to your repository under a docs/ directory.\n\n\nMerge-n-Tag this Refactored Kernel Events Code and Analysis\n\nCreate a Merge Request to merge kernel_events_refactor into your main branch.\nMerge your kernel_events_refactor branch into your main branch.\nCreate an annotated tag for that merge commit called v1.3.0.",
+    "crumbs": [
+      "Labs",
+      "Threads and Kernel Events Lab"
+    ]
   },
   {
     "objectID": "labs/zephyr-threads-events-lab.html#new-functionality-double-button-press-detection",
     "href": "labs/zephyr-threads-events-lab.html#new-functionality-double-button-press-detection",
     "title": "Zephyr: Threads & Kernel Events Lab",
     "section": "New Functionality: Double-Button Press Detection",
-    "text": "New Functionality: Double-Button Press Detection\n\nAdd new functionality to you code to detect a double-button press of the freq_up_button or freq_down_button that will increase or decrease, respectively, the heartbeat LED frequency by 2 Hz (instead of the 1 Hz increment with a single button press).\nThe double-button press should be detected if two button presses occur within 500 ms of each other.\n\n\n\n\n\n\n\nTip\n\n\n\nOne implementation scheme for this functionality could include use of atomic variables, kernel events, and a finite timeout period for k_event_wait(). You may even want to leverage a dedicated thread for this operation.\nA new atomic function that may help you is atomic_inc().\n\n\n\nCreate an annotated tag for that merge commit called v1.4.0. Creation of this tag is a self-declaration that the double-press functionality is working as expected, so make sure to test it before creating the tag.\nCreate an Issue assigned to Dr. Palmeri to review your code for v1.2.0, v1.3.0, and v1.4.0 to provide feedback on your code."
+    "text": "New Functionality: Double-Button Press Detection\n\nAdd new functionality to you code to detect a double-button press of the freq_up_button or freq_down_button that will increase or decrease, respectively, the heartbeat LED frequency by 2 Hz (instead of the 1 Hz increment with a single button press).\nThe double-button press should be detected if two button presses occur within 500 ms of each other.\n\n\n\n\n\n\n\nTip\n\n\n\nOne implementation scheme for this functionality could include use of atomic variables, kernel events, and a finite timeout period for k_event_wait(). You may even want to leverage a dedicated thread for this operation.\nA new atomic function that may help you is atomic_inc().\n\n\n\nCreate an annotated tag for that merge commit called v1.4.0. Creation of this tag is a self-declaration that the double-press functionality is working as expected, so make sure to test it before creating the tag.\nCreate an Issue assigned to Dr. Palmeri to review your code for v1.2.0, v1.3.0, and v1.4.0 to provide feedback on your code.",
+    "crumbs": [
+      "Labs",
+      "Threads and Kernel Events Lab"
+    ]
   },
   {
     "objectID": "labs/zephyr-threads-events-lab.html#how-do-i-ask-for-help",
     "href": "labs/zephyr-threads-events-lab.html#how-do-i-ask-for-help",
     "title": "Zephyr: Threads & Kernel Events Lab",
     "section": "How do I ask for help?",
-    "text": "How do I ask for help?\n\nIf you have a general / non-coding question, you should ask your TAs / Dr. Palmeri on Ed to allow any of them to respond in a timely manner.\nPush you code to your GitLab repository, ideally with your active development on a non-main branch.\nCreate an Issue in your repository.\n\nAdd as much detail as possible as to your problem, and add links to specific lines / section of code when possible.\nAssign the label “Bug” or “Question”, as appropriate.\nBe sure to specify what branch you are working on.\nAssign the Issue to one of the TAs.\nIf your TA cannot solve your Issue, they can escalate the Issue to Dr. Palmeri.\n\nYou will get a response to your Issue, and maybe a new branch of code will be pushed to help you with some example syntax that you can use git diff to visualize."
+    "text": "How do I ask for help?\n\nIf you have a general / non-coding question, you should ask your TAs / Dr. Palmeri on Ed to allow any of them to respond in a timely manner.\nPush you code to your GitLab repository, ideally with your active development on a non-main branch.\nCreate an Issue in your repository.\n\nAdd as much detail as possible as to your problem, and add links to specific lines / section of code when possible.\nAssign the label “Bug” or “Question”, as appropriate.\nBe sure to specify what branch you are working on.\nAssign the Issue to one of the TAs.\nIf your TA cannot solve your Issue, they can escalate the Issue to Dr. Palmeri.\n\nYou will get a response to your Issue, and maybe a new branch of code will be pushed to help you with some example syntax that you can use git diff to visualize.",
+    "crumbs": [
+      "Labs",
+      "Threads and Kernel Events Lab"
+    ]
   },
   {
     "objectID": "labs/zephyr-gpio-isr-callbacks-lab.html",
