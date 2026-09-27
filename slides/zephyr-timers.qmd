@@ -1,6 +1,6 @@
 ---
 title: "Zephyr: Timers, Threads, Atomic Services & Work Queues"
-date: "2026-02-15"
+date: "2026-09-27"
 format: 
   live-html: 
     output-file: zephyr-timers.html
@@ -23,6 +23,12 @@ difficult to read and maintain.
 
 ![](images/timers/bare-metal-vs-rtos.png){fig-align="center"}
 
+:::callout-important
+The use of threads **does not** change the state machine implementation of your
+code.  It simply allows you to implement the state machine in a more modular
+way.
+:::
+
 ## System vs. User Threads
 
 - Zephyr's **kernel** starts a system thread and a user-space thread by default.
@@ -32,41 +38,24 @@ difficult to read and maintain.
 
 ![](images/timers/ex_1_thread_yielding_2.png){fig-align="center"}
 
+- Threads can also **wait** for events to post and for other threads to complete processes.
+
 ## Atomicity and Thread Safety
-::: callout-caution
-Wait, with multiple threads being able to operate on things, are variables being handled by ISRs "safe" to use if they can be called at any time?
-:::
 
-Solution: **Atomicity** and **thread safety**.
-
-## Atomic Operations
-
-- An atomic operation is an indivisible operation that either completes entirely or does not execute at all.
-- Atomic operations are used to prevent race conditions and ensure thread safety when multiple threads access shared resources.
-- In Zephyr, atomic operations can be performed using the `atomic` API, which provides functions for atomic read, write, and modify operations on variables.
-
-```C
-// Declare atomic variable
-static atomic_t button_pressed = ATOMIC_INIT(0);
-
-// ISR callback function
-void button_isr_handler(const struct device *dev, struct gpio_callback *cb, uint32_t pins)
-{
-    // Atomically set the flag to indicate button was pressed
-    atomic_set(&button_pressed, 1);
-}
-
-// In main thread or work queue handler
-void check_button_work_handler(struct k_work *work)
-{
-    // Atomically read and reset the flag
-    if (atomic_cas(&button_pressed, 1, 0)) {
-        // Button was pressed, do work here
-        LOG_INF("Button press detected!");
-        gpio_pin_toggle_dt(&led);
-    }
-}
-```
+- If multiple threads being able to operate on common resources (e.g.,
+variables), how do we make sure that one thread doesn't interrupt another thread
+in the middle of its operation on that resource?  This is where **atomic
+operations** come in. 
+    - An atomic operation is an indivisible operation that either completes
+    entirely or does not execute at all.
+    - Atomic operations are used to prevent race conditions and ensure thread
+    safety when multiple threads access shared resources.
+    - In Zephyr, atomic operations can be performed using the `atomic` API,
+    which provides functions for atomic read, write, and modify operations on
+    variables.
+- We have already used atomic operations in the GPIO lab to set and clear flags
+in ISRs.  In this upcoming lab, we will use atomic operations to set and clear
+flags in timer handler functions as well.
 
 ## Timer Threads
 
@@ -106,6 +95,9 @@ void timer_interval_expiry_handler(struct k_timer *name_of_timer)
 
 ## Handler Functions Should Not Test for State
 
+::: callout-warning
+Do not do the following:
+
 ```C
 void timer_interval_expiry_handler(struct k_timer *name_of_timer)
 {
@@ -116,6 +108,7 @@ void timer_interval_expiry_handler(struct k_timer *name_of_timer)
     }
 }
 ```
+:::
 
 - Instead, use a different timer/handler function for each state:
   - Stop one timer in an exit transition state.
@@ -130,7 +123,7 @@ k_timer_start(&name_of_timer, K_MSEC(DURATION_OF_FIRST_INTERVAL), K_MSEC(DURATIO
 - `K_MSEC` is a macro that converts a time, specified in ms (`DURATION_OF_FIRST_EVENT`) to whatever time unit the function requires.
 - Other useful macros include `K_SECONDS`, `K_MINUTES`, `K_HOURS`, etc.
 - **Timer functions are executed at the end of each interval (duration / period).**
-- https://docs.zephyrproject.org/latest/kernel/services/timing/clocks.html
+- [https://docs.zephyrproject.org/latest/kernel/services/timing/clocks.html](https://docs.zephyrproject.org/latest/kernel/services/timing/clocks.html)
 
 ## Stopping a Timer
 
