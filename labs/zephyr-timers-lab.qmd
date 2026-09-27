@@ -1,6 +1,6 @@
 ---
 title: "Zephyr: Timers & Atomic Operations Lab"
-date: "2026-02-15"
+date: "2026-09-27"
 format:
   html: default
   pdf: default
