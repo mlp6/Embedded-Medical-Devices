@@ -1,6 +1,6 @@
 ---
 title: "Zephyr: Threads & Kernel Events Lab"
-date: "2026-02-18"
+date: "2026-09-27"
 format:
   html: default
   pdf: default

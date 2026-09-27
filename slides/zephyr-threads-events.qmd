@@ -1,6 +1,6 @@
 ---
 title: "Zephyr: Threads and Kernel Events"
-date: "2026-02-16"
+date: "2026-09-27"
 format: 
   live-html: 
     output-file: zephyr-threads-events.html
