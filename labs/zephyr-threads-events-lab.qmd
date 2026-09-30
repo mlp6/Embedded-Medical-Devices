@@ -1,6 +1,6 @@
 ---
 title: "Zephyr: Threads & Kernel Events Lab"
-date: "2026-09-27"
+date: "2026-09-30"
 format:
   html: default
   pdf: default
@@ -108,6 +108,10 @@ button press).
 
 - The double-button press should be detected if two button presses occur within
 500 ms of each other.
+
+- If a second button press occurs within 500 ms of the first, action on that
+double-press should be taken immediately and not wait for the expiration of the
+remaining part of the 500 ms period.
 
 ::: callout-tip
 One implementation scheme for this functionality could include use of atomic variables, kernel events, and a finite timeout period for `k_event_wait()`.  You may even want to leverage a dedicated thread for this operation.
