@@ -41,14 +41,16 @@ Issues assigned to a TA and Dr. Palmeri.
 
 Monday & Wednesday, 08:30-09:45, Wilkinson 132 (Panopto recorded)
 
-### Labs
+### Lab
 
 Location: CIEMAS B209 (Door Code: 2-5-1)
 
 There are no formally scheduled lab sections, but you will need to use the lab
-equipment to perform testing of your devices.  Your TAs will announce times when
-they will hold lab hours.  Lab is available whenever classes are not scheduled
-in the space (posted on the lab door).
+equipment to perform testing of your devices.  Some lectures will be held in the
+lab to allow you to test your hardware.  Your TAs will announce times when they
+will hold additional lab hours.  
+
+The lab is available whenever classes are not scheduled in the space ([lab calendar](https://duke.is/b209-calendar)).
 
 
 ::: callout-important
