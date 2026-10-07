@@ -103,7 +103,7 @@ branch.
 
 - Add new functionality to you code to detect a double-button press of the
 `freq_up_button` or `freq_down_button` that will increase or decrease, respectively, the
-heartbeat LED frequency by 2 Hz (instead of the 1 Hz increment with a single
+action LED frequencies by 2 Hz (instead of the 1 Hz increment with a single
 button press).
 
 - The double-button press should be detected if two button presses occur within
