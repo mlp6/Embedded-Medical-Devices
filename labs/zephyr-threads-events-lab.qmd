@@ -78,17 +78,13 @@ present it in your notebook.
 
 ## Create a Sequence Diagram
 
-- Create a [PlantUML](https://plantuml.com/sequence-diagram) sequence diagram
-that documents the interaction between your button ISR callback(s), the kernel
-event bit array, and your state machine thread when a button press event is
-detected and processed.
+- Create a sequence diagram that documents the interaction between your button
+ISR callback(s), the kernel event bit array, and your state machine thread when
+a button press event is detected and processed.
 
 - Your sequence diagram should show all relevant participants and the
 chronological order of messages between them (refer to the sequence diagram
 covered in the Threads & Kernel Events lecture).
-
-- Commit both the PlantUML source file (`.puml`) and the rendered image to your
-repository under a `docs/` directory.
 
 ### Merge-n-Tag this Refactored Kernel Events Code and Analysis
 
