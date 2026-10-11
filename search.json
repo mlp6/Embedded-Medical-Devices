@@ -514,7 +514,7 @@
     "href": "labs/zephyr-adc-lab.html#firmware-expectations",
     "title": "Analog-to-Digital Conversion (ADC) Lab",
     "section": "Firmware Expectations",
-    "text": "Firmware Expectations\n\nAll firmware should be written using the State Machine Framework.\nChoose your states for each part as a firmware engineer would, using what you have learned so far this semester.\nTimers, work queues, callbacks, and interrupts should be used as appropriate.\nAll good coding practices developed this semester should be followed.\nUse logging to display state information and other relevant information, warnings, and errors. Debugging log messages can remain in the code, but the logging level should be submitted at the INF level.\nInclude state (state_diagram.png)and sequence (sequence_diagram.png) diagrams in the docs/ directory in your repository (state_diagram.png) using UML or some equivalent. Be sure to also include the UML source code if you use that to generate the diagrams.\n\n\n\n\n\n\n\nNote\n\n\n\nYou will continue to build upon the firmware from your previous labs, but you are replacing all functional specifications with those in this lab.\nAll states should be reconsidered given the new functional specifications.\nThis significant change in functionality is represented with the version tags changing to a new major version number starting at v2.0.0."
+    "text": "Firmware Expectations\n\nAll firmware should be written using the State Machine Framework.\nChoose your states for each part as a firmware engineer would, using what you have learned so far this semester.\nTimers, work queues, callbacks, and interrupts should be used as appropriate.\nAll good coding practices developed this semester should be followed.\nUse logging to display state information and other relevant information, warnings, and errors. Debugging log messages can remain in the code, but the logging level should be submitted at the INF level.\nInclude state and sequence diagrams that represent your firmware’s functionality.\n\n\n\n\n\n\n\nNote\n\n\n\nYou will continue to build upon the firmware from your previous labs, but you are replacing all functional specifications with those in this lab.\nAll states should be reconsidered given the new functional specifications.\nThis significant change in functionality is represented with the version tags changing to a new major version number starting at v2.0.0."
   },
   {
     "objectID": "labs/zephyr-adc-lab.html#adc-single-sampling",
@@ -3788,7 +3788,7 @@
     "href": "slides/zephyr-threads-events-slides.html#resources",
     "title": "Zephyr: Threads and Kernel Events",
     "section": "Resources",
-    "text": "Resources\n\nNordic DevAcademy: Zephyr RTOS Advanced\nZephyr Documentation: Events\nPlantUML: Sequence Diagrams"
+    "text": "Resources\n\nNordic DevAcademy: Zephyr RTOS Advanced\nZephyr Documentation: Events\nMermaid: Sequence Diagrams"
   },
   {
     "objectID": "slides/zephyr-threads-events.html",
@@ -3938,7 +3938,7 @@
     "href": "slides/zephyr-threads-events.html#resources",
     "title": "Zephyr: Threads and Kernel Events",
     "section": "Resources",
-    "text": "Resources\n\nNordic DevAcademy: Zephyr RTOS Advanced\nZephyr Documentation: Events\nPlantUML: Sequence Diagrams",
+    "text": "Resources\n\nNordic DevAcademy: Zephyr RTOS Advanced\nZephyr Documentation: Events\nMermaid: Sequence Diagrams",
     "crumbs": [
       "Learning Modules",
       "Threads and Kernel Events"
