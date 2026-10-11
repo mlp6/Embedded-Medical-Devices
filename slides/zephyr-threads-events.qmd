@@ -223,4 +223,4 @@ sequenceDiagram
 
 - [Zephyr Documentation: Events](https://docs.zephyrproject.org/latest/kernel/services/synchronization/events.html#events)
 
-- [PlantUML: Sequence Diagrams](https://plantuml.com/sequence-diagram)
+- [Mermaid: Sequence Diagrams](https://mermaid.ai/open-source/syntax/sequenceDiagram.html)
