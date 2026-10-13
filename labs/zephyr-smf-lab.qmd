@@ -40,11 +40,17 @@ SMF.
 
 1. Your firmware from the previous lab should have detected a double button press to increment/decrement the action LED blinking frequency.  Using `LOGGING` functionality:
 
-    a. Show that a double button press to decrease the default frequency (2 Hz) results in entering the `ERROR` state.
+    a. Show that a double button press to decrease the default frequency (2 Hz)
+    results in entering the `ERROR` state.
 
-    b. Show that a double button press to increase the default frequency (2 Hz) results in directly changing to 4 Hz.
+    b. Show that a double button press to increase the default frequency (2 Hz)
+    results in directly changing to 4 Hz.
 
-2. Using `LOGGING` and oscilloscope measurements, measure the latency between the second button press and the change in frequency as a function of the current frequency.  You should choose what has to be measured, how many measurements, and how to present the results.  You should also discuss the results and what they mean in your technical report.
+    c. Measure the latency between the second button press and the change in
+    frequency as a function of the current frequency.  You should choose what
+    has to be measured, how many measurements, and how to present the results.
+    You should also discuss the results and what they mean in your technical
+    report.
 
 ## How do I ask for help?
 
