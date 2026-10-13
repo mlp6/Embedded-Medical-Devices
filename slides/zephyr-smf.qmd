@@ -1,6 +1,6 @@
 ---
 title: "Zephyr: State Machine Framework"
-date: "2026-02-16"
+date: "2026-10-13"
 format:
   live-html: 
     output-file: zephyr-smf.html
