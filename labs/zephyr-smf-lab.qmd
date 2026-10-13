@@ -1,6 +1,6 @@
 ---
 title: "Zephyr: State Machine Framework Refactor Lab"
-date: "2026-02-16"
+date: "2026-10-13"
 format:
   html: default
   pdf: default
@@ -28,6 +28,29 @@ last few weeks called `refactor_smf`.
 actions.  This diagram should exactly match your firmware implementation of the
 SMF.
 1. Qualitatively make sure that your device continues to function as expected.
+
+
+## Additional Testing
+
+### Preserving Action Timer Fractional-Period Across Sleep
+
+1. Your firmware from the previous lab should have preserved the remaining time on the action timers when you enter the `SLEEP` state.  Add a section to your previous technical report that demonstrates the functionality of this feature.  This can be done via `LOGGING` by showing the remaining time on the action timers before entering `SLEEP` and then showing that the remaining time is preserved for the first timing period after exiting `SLEEP`.
+
+### Double-Press Button Detection
+
+1. Your firmware from the previous lab should have detected a double button press to increment/decrement the action LED blinking frequency.  Using `LOGGING` functionality:
+
+    a. Show that a double button press to decrease the default frequency (2 Hz)
+    results in entering the `ERROR` state.
+
+    b. Show that a double button press to increase the default frequency (2 Hz)
+    results in directly changing to 4 Hz.
+
+    c. Measure the latency between the second button press and the change in
+    frequency as a function of the current frequency.  You should choose what
+    has to be measured, how many measurements, and how to present the results.
+    You should also discuss the results and what they mean in your technical
+    report.
 
 ## How do I ask for help?
 
