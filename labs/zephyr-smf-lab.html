@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Dr.&nbsp;Mark Palmeri, M.D., Ph.D.">
-<meta name="dcterms.date" content="2026-02-16">
+<meta name="dcterms.date" content="2026-10-13">
 
 <title>Zephyr: State Machine Framework Refactor Lab – Embedded Medical Devices</title>
 <style>
@@ -82,9 +82,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
-      Embedded Medical Devices
-      </li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labs/event-driven-state-machine-lab.html">Labs</a></li><li class="breadcrumb-item"><a href="../labs/zephyr-smf-lab.html">State Machine Framework (SMF) Refactor Lab</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -276,10 +274,12 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Threads and Kernel Events Lab</span></a>
   </div>
 </li>
-          <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">State Machine Framework (SMF) Refactor Lab</span></span>
-  </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../labs/zephyr-smf-lab.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">State Machine Framework (SMF) Refactor Lab</span></a>
+  </div>
+</li>
           <li class="sidebar-item sidebar-item-section">
       <span class="sidebar-item-text sidebar-link text-start">
  <span class="menu-text">Analog-to-Digital Conversion (ADC) Lab</span></span>
@@ -296,13 +296,13 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
  <span class="menu-text">Resources</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../resources/git.html" class="sidebar-item-text sidebar-link">
@@ -371,6 +371,11 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#git-version-control" id="toc-git-version-control" class="nav-link active" data-scroll-target="#git-version-control">Git Version Control</a></li>
   <li><a href="#refactor-state-machine-framework" id="toc-refactor-state-machine-framework" class="nav-link" data-scroll-target="#refactor-state-machine-framework">Refactor: State Machine Framework</a></li>
+  <li><a href="#additional-testing" id="toc-additional-testing" class="nav-link" data-scroll-target="#additional-testing">Additional Testing</a>
+  <ul class="collapse">
+  <li><a href="#preserving-action-timer-fractional-period-across-sleep" id="toc-preserving-action-timer-fractional-period-across-sleep" class="nav-link" data-scroll-target="#preserving-action-timer-fractional-period-across-sleep">Preserving Action Timer Fractional-Period Across Sleep</a></li>
+  <li><a href="#double-press-button-detection" id="toc-double-press-button-detection" class="nav-link" data-scroll-target="#double-press-button-detection">Double-Press Button Detection</a></li>
+  </ul></li>
   <li><a href="#how-do-i-ask-for-help" id="toc-how-do-i-ask-for-help" class="nav-link" data-scroll-target="#how-do-i-ask-for-help">How do I ask for help?</a></li>
   <li><a href="#what-to-submit" id="toc-what-to-submit" class="nav-link" data-scroll-target="#what-to-submit">What to Submit</a></li>
   </ul>
@@ -379,7 +384,7 @@ ul.task-list li input[type="checkbox"] {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labs/event-driven-state-machine-lab.html">Labs</a></li><li class="breadcrumb-item"><a href="../labs/zephyr-smf-lab.html">State Machine Framework (SMF) Refactor Lab</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Zephyr: State Machine Framework Refactor Lab</h1>
 <p class="subtitle lead">BME554L - Fall 2026 - Palmeri</p>
@@ -402,7 +407,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">February 16, 2026</p>
+      <p class="date">October 13, 2026</p>
     </div>
   </div>
   
@@ -450,6 +455,26 @@ Important
 <li>Make sure that your state diagram is updated to reflect these entry / exit actions. This diagram should exactly match your firmware implementation of the SMF.</li>
 <li>Qualitatively make sure that your device continues to function as expected.</li>
 </ol>
+</section>
+<section id="additional-testing" class="level2">
+<h2 class="anchored" data-anchor-id="additional-testing">Additional Testing</h2>
+<section id="preserving-action-timer-fractional-period-across-sleep" class="level3">
+<h3 class="anchored" data-anchor-id="preserving-action-timer-fractional-period-across-sleep">Preserving Action Timer Fractional-Period Across Sleep</h3>
+<ol type="1">
+<li>Your firmware from the previous lab should have preserved the remaining time on the action timers when you enter the <code>SLEEP</code> state. Add a section to your previous technical report that demonstrates the functionality of this feature. This can be done via <code>LOGGING</code> by showing the remaining time on the action timers before entering <code>SLEEP</code> and then showing that the remaining time is preserved for the first timing period after exiting <code>SLEEP</code>.</li>
+</ol>
+</section>
+<section id="double-press-button-detection" class="level3">
+<h3 class="anchored" data-anchor-id="double-press-button-detection">Double-Press Button Detection</h3>
+<ol type="1">
+<li><p>Your firmware from the previous lab should have detected a double button press to increment/decrement the action LED blinking frequency. Using <code>LOGGING</code> functionality:</p>
+<ol type="a">
+<li><p>Show that a double button press to decrease the default frequency (2 Hz) results in entering the <code>ERROR</code> state.</p></li>
+<li><p>Show that a double button press to increase the default frequency (2 Hz) results in directly changing to 4 Hz.</p></li>
+<li><p>Measure the latency between the second button press and the change in frequency as a function of the current frequency. You should choose what has to be measured, how many measurements, and how to present the results. You should also discuss the results and what they mean in your technical report.</p></li>
+</ol></li>
+</ol>
+</section>
 </section>
 <section id="how-do-i-ask-for-help" class="level2">
 <h2 class="anchored" data-anchor-id="how-do-i-ask-for-help">How do I ask for help?</h2>

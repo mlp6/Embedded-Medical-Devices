@@ -458,35 +458,66 @@
     "href": "labs/zephyr-smf-lab.html",
     "title": "Zephyr: State Machine Framework Refactor Lab",
     "section": "",
-    "text": "Use best practices for version control (branching, commit messages, etc.).\nDo all development on a dedicated branch that is merged into main once it is functional.\nCommits should be very specific to the changes/additions you are making to your code. This will help you and others understand what you did and why you did it.\n\nOn a given development branch, try to implement one small piece of functionality at a time, commit it, and then move on to the next piece of functionality.\n\n\n\n\n\n\n\nImportant\n\n\n\nYou do not want one, monolithic git commit right before you submit your project."
+    "text": "Use best practices for version control (branching, commit messages, etc.).\nDo all development on a dedicated branch that is merged into main once it is functional.\nCommits should be very specific to the changes/additions you are making to your code. This will help you and others understand what you did and why you did it.\n\nOn a given development branch, try to implement one small piece of functionality at a time, commit it, and then move on to the next piece of functionality.\n\n\n\n\n\n\n\nImportant\n\n\n\nYou do not want one, monolithic git commit right before you submit your project.",
+    "crumbs": [
+      "Labs",
+      "State Machine Framework (SMF) Refactor Lab"
+    ]
   },
   {
     "objectID": "labs/zephyr-smf-lab.html#git-version-control",
     "href": "labs/zephyr-smf-lab.html#git-version-control",
     "title": "Zephyr: State Machine Framework Refactor Lab",
     "section": "",
-    "text": "Use best practices for version control (branching, commit messages, etc.).\nDo all development on a dedicated branch that is merged into main once it is functional.\nCommits should be very specific to the changes/additions you are making to your code. This will help you and others understand what you did and why you did it.\n\nOn a given development branch, try to implement one small piece of functionality at a time, commit it, and then move on to the next piece of functionality.\n\n\n\n\n\n\n\nImportant\n\n\n\nYou do not want one, monolithic git commit right before you submit your project."
+    "text": "Use best practices for version control (branching, commit messages, etc.).\nDo all development on a dedicated branch that is merged into main once it is functional.\nCommits should be very specific to the changes/additions you are making to your code. This will help you and others understand what you did and why you did it.\n\nOn a given development branch, try to implement one small piece of functionality at a time, commit it, and then move on to the next piece of functionality.\n\n\n\n\n\n\n\nImportant\n\n\n\nYou do not want one, monolithic git commit right before you submit your project.",
+    "crumbs": [
+      "Labs",
+      "State Machine Framework (SMF) Refactor Lab"
+    ]
   },
   {
     "objectID": "labs/zephyr-smf-lab.html#refactor-state-machine-framework",
     "href": "labs/zephyr-smf-lab.html#refactor-state-machine-framework",
     "title": "Zephyr: State Machine Framework Refactor Lab",
     "section": "Refactor: State Machine Framework",
-    "text": "Refactor: State Machine Framework\n\nCreate a new development branch in your forked repository you have used the last few weeks called refactor_smf.\nRefactor your code to use the Zephyr State Machine Framework (SMF).\n\nUse entry and exit substates to handle state transitions where something should be done “once” when entering or exiting a state.\nRefactor code to make sure that state-specific things are done in that state. For example, if an error LED should only be on in the ERROR state, then the code to turn on the LED should be in the ERROR entry state and not done in the exit of the previous state.\nMake sure that your device initialization is done in an INIT state (so that, in the future, a soft reset can allow the device to be completely re-initialized).\n\nMake sure that your state diagram is updated to reflect these entry / exit actions. This diagram should exactly match your firmware implementation of the SMF.\nQualitatively make sure that your device continues to function as expected."
+    "text": "Refactor: State Machine Framework\n\nCreate a new development branch in your forked repository you have used the last few weeks called refactor_smf.\nRefactor your code to use the Zephyr State Machine Framework (SMF).\n\nUse entry and exit substates to handle state transitions where something should be done “once” when entering or exiting a state.\nRefactor code to make sure that state-specific things are done in that state. For example, if an error LED should only be on in the ERROR state, then the code to turn on the LED should be in the ERROR entry state and not done in the exit of the previous state.\nMake sure that your device initialization is done in an INIT state (so that, in the future, a soft reset can allow the device to be completely re-initialized).\n\nMake sure that your state diagram is updated to reflect these entry / exit actions. This diagram should exactly match your firmware implementation of the SMF.\nQualitatively make sure that your device continues to function as expected.",
+    "crumbs": [
+      "Labs",
+      "State Machine Framework (SMF) Refactor Lab"
+    ]
+  },
+  {
+    "objectID": "labs/zephyr-smf-lab.html#additional-testing",
+    "href": "labs/zephyr-smf-lab.html#additional-testing",
+    "title": "Zephyr: State Machine Framework Refactor Lab",
+    "section": "Additional Testing",
+    "text": "Additional Testing\n\nPreserving Action Timer Fractional-Period Across Sleep\n\nYour firmware from the previous lab should have preserved the remaining time on the action timers when you enter the SLEEP state. Add a section to your previous technical report that demonstrates the functionality of this feature. This can be done via LOGGING by showing the remaining time on the action timers before entering SLEEP and then showing that the remaining time is preserved for the first timing period after exiting SLEEP.\n\n\n\nDouble-Press Button Detection\n\nYour firmware from the previous lab should have detected a double button press to increment/decrement the action LED blinking frequency. Using LOGGING functionality:\n\nShow that a double button press to decrease the default frequency (2 Hz) results in entering the ERROR state.\nShow that a double button press to increase the default frequency (2 Hz) results in directly changing to 4 Hz.\nMeasure the latency between the second button press and the change in frequency as a function of the current frequency. You should choose what has to be measured, how many measurements, and how to present the results. You should also discuss the results and what they mean in your technical report.",
+    "crumbs": [
+      "Labs",
+      "State Machine Framework (SMF) Refactor Lab"
+    ]
   },
   {
     "objectID": "labs/zephyr-smf-lab.html#how-do-i-ask-for-help",
     "href": "labs/zephyr-smf-lab.html#how-do-i-ask-for-help",
     "title": "Zephyr: State Machine Framework Refactor Lab",
     "section": "How do I ask for help?",
-    "text": "How do I ask for help?\n\nIf you have a general / non-coding question, you should ask your TAs / Dr. Palmeri on Ed to allow any of them to respond in a timely manner.\nPush you code to your GitLab repository, ideally with your active development on a non-main branch.\nCreate an Issue in your repository.\n\nAdd as much detail as possible as to your problem, and add links to specific lines / section of code when possible.\nAssign the label “Bug” or “Question”, as appropriate.\nBe sure to specify what branch you are working on.\nAssign the Issue to one of the TAs.\nIf your TA cannot solve your Issue, they can escalate the Issue to Dr. Palmeri.\n\nYou will get a response to your Issue, and maybe a new branch of code will be pushed to help you with some example syntax that you can use git diff to visualize."
+    "text": "How do I ask for help?\n\nIf you have a general / non-coding question, you should ask your TAs / Dr. Palmeri on Ed to allow any of them to respond in a timely manner.\nPush you code to your GitLab repository, ideally with your active development on a non-main branch.\nCreate an Issue in your repository.\n\nAdd as much detail as possible as to your problem, and add links to specific lines / section of code when possible.\nAssign the label “Bug” or “Question”, as appropriate.\nBe sure to specify what branch you are working on.\nAssign the Issue to one of the TAs.\nIf your TA cannot solve your Issue, they can escalate the Issue to Dr. Palmeri.\n\nYou will get a response to your Issue, and maybe a new branch of code will be pushed to help you with some example syntax that you can use git diff to visualize.",
+    "crumbs": [
+      "Labs",
+      "State Machine Framework (SMF) Refactor Lab"
+    ]
   },
   {
     "objectID": "labs/zephyr-smf-lab.html#what-to-submit",
     "href": "labs/zephyr-smf-lab.html#what-to-submit",
     "title": "Zephyr: State Machine Framework Refactor Lab",
     "section": "What to Submit",
-    "text": "What to Submit\n\nAs with the previous labs, push this development branch to Gitlab and merge it into main.\nCreate an annotated tag for that merged commit called v1.5.0.\nCreate an Issue assigned to Dr. Palmeri, labeled Review, to review your code for v1.5.0."
+    "text": "What to Submit\n\nAs with the previous labs, push this development branch to Gitlab and merge it into main.\nCreate an annotated tag for that merged commit called v1.5.0.\nCreate an Issue assigned to Dr. Palmeri, labeled Review, to review your code for v1.5.0.",
+    "crumbs": [
+      "Labs",
+      "State Machine Framework (SMF) Refactor Lab"
+    ]
   },
   {
     "objectID": "labs/zephyr-adc-lab.html",
