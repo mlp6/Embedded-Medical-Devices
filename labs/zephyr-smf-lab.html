@@ -449,9 +449,14 @@ Important
 <li>Refactor your code to use the <a href="https://docs.zephyrproject.org/latest/services/smf/index.html">Zephyr State Machine Framework (SMF)</a>.
 <ul>
 <li>Use <code>entry</code> and <code>exit</code> substates to handle state transitions where something should be done “once” when entering or exiting a state.</li>
-<li>Refactor code to make sure that state-specific things are done in that state. For example, if an error LED should only be on in the <code>ERROR</code> state, then the code to turn on the LED should be in the <code>ERROR</code> entry state and not done in the exit of the previous state.</li>
+<li>Refactor code to make sure that state-specific things are done in that state. For example:
+<ul>
+<li>If an error LED should only be on in the <code>ERROR</code> state, then the code to turn on the LED should be in the <code>ERROR</code> entry state and not done in the exit of the previous state.</li>
+<li>If a button should only be active in a certain state, it should be enabled/disabled in the entry/exit of that state.</li>
+</ul></li>
 <li>Make sure that your device initialization is done in an <code>INIT</code> state (so that, in the future, a soft reset can allow the device to be completely re-initialized).</li>
 </ul></li>
+<li>Refactor your <code>ACTION</code> (blinking) state to use a heirachical state machine (HSM) to handle the blinking LED. The <code>ACTION</code> state should have substates for each of the blinking frequencies (2 Hz, 3 Hz, etc.). The <code>ACTION</code> state should also have an <code>entry</code> substate that initializes the action timer to the correct period for the current frequency.</li>
 <li>Make sure that your state diagram is updated to reflect these entry / exit actions. This diagram should exactly match your firmware implementation of the SMF.</li>
 <li>Qualitatively make sure that your device continues to function as expected.</li>
 </ol>
