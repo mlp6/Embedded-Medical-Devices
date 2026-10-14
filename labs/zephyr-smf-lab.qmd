@@ -18,12 +18,15 @@ last few weeks called `refactor_smf`.
     - Use `entry` and `exit` substates to handle state transitions where
     something should be done "once" when entering or exiting a state.
     - Refactor code to make sure that state-specific things are done in that
-    state.  For example, if an error LED should only be on in the `ERROR` state,
-    then the code to turn on the LED should be in the `ERROR` entry state and
-    not done in the exit of the previous state.
+    state.  For example: 
+      - If an error LED should only be on in the `ERROR` state, then the code to
+      turn on the LED should be in the `ERROR` entry state and not done in the
+      exit of the previous state.
+      - If a button should only be active in a certain state, it should be enabled/disabled in the entry/exit of that state.
     - Make sure that your device initialization is done in an `INIT` state (so
     that, in the future, a soft reset can allow the device to be completely
     re-initialized).
+1. Refactor your `ACTION` (blinking) state to use a heirachical state machine (HSM) to handle the blinking LED.  The `ACTION` state should have substates for each of the blinking frequencies (2 Hz, 3 Hz, etc.).  The `ACTION` state should also have an `entry` substate that initializes the action timer to the correct period for the current frequency.
 1. Make sure that your state diagram is updated to reflect these entry / exit
 actions.  This diagram should exactly match your firmware implementation of the
 SMF.
