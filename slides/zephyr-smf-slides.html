@@ -12,7 +12,7 @@
   <meta name="generator" content="quarto-1.7.31">
 
   <meta name="author" content="Dr.&nbsp;Mark Palmeri, M.D., Ph.D.">
-  <meta name="dcterms.date" content="2026-10-13">
+  <meta name="dcterms.date" content="2026-10-18">
   <title>Embedded Medical Devices – Zephyr: State Machine Framework</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -212,7 +212,7 @@ Dr.&nbsp;Mark Palmeri, M.D., Ph.D.
     </div>
 </div>
 
-  <p class="date">October 13, 2026</p>
+  <p class="date">October 18, 2026</p>
 </section>
 <section id="state-machine-framework" class="slide level2">
 <h2>State Machine Framework</h2>
@@ -360,99 +360,110 @@ Dr.&nbsp;Mark Palmeri, M.D., Ph.D.
 </section>
 <section class="slide level2">
 
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb5-1"><a></a><span class="dt">static</span> <span class="dt">void</span> init_run<span class="op">(</span><span class="dt">void</span> <span class="op">*</span>o<span class="op">)</span></span>
-<span id="cb5-2"><a></a><span class="op">{</span></span>
-<span id="cb5-3"><a></a>    <span class="dt">int</span> ret<span class="op">;</span></span>
-<span id="cb5-4"><a></a></span>
-<span id="cb5-5"><a></a>    <span class="cf">if</span> <span class="op">(!</span>gpio_is_ready_dt<span class="op">(&amp;</span>button<span class="op">))</span> <span class="op">{</span></span>
-<span id="cb5-6"><a></a>            printk<span class="op">(</span><span class="st">"Error: button device </span><span class="sc">%s</span><span class="st"> is not ready</span><span class="sc">\n</span><span class="st">"</span><span class="op">,</span></span>
-<span id="cb5-7"><a></a>                    button<span class="op">.</span>port<span class="op">-&gt;</span>name<span class="op">);</span></span>
-<span id="cb5-8"><a></a>            <span class="cf">return</span><span class="op">;</span></span>
-<span id="cb5-9"><a></a>    <span class="op">}</span></span>
-<span id="cb5-10"><a></a></span>
-<span id="cb5-11"><a></a>    ret <span class="op">=</span> gpio_pin_configure_dt<span class="op">(&amp;</span>button<span class="op">,</span> GPIO_INPUT<span class="op">);</span></span>
-<span id="cb5-12"><a></a>    <span class="cf">if</span> <span class="op">(</span>ret <span class="op">!=</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb5-13"><a></a>            printk<span class="op">(</span><span class="st">"Error </span><span class="sc">%d</span><span class="st">: failed to configure </span><span class="sc">%s</span><span class="st"> pin </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span></span>
-<span id="cb5-14"><a></a>                    ret<span class="op">,</span> button<span class="op">.</span>port<span class="op">-&gt;</span>name<span class="op">,</span> button<span class="op">.</span>pin<span class="op">);</span></span>
-<span id="cb5-15"><a></a>            <span class="cf">return</span><span class="op">;</span></span>
-<span id="cb5-16"><a></a>    <span class="op">}</span></span>
-<span id="cb5-17"><a></a></span>
-<span id="cb5-18"><a></a>    ret <span class="op">=</span> gpio_pin_interrupt_configure_dt<span class="op">(&amp;</span>button<span class="op">,</span></span>
-<span id="cb5-19"><a></a>            GPIO_INT_EDGE_TO_ACTIVE<span class="op">);</span></span>
-<span id="cb5-20"><a></a>    <span class="cf">if</span> <span class="op">(</span>ret <span class="op">!=</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb5-21"><a></a>            printk<span class="op">(</span><span class="st">"Error </span><span class="sc">%d</span><span class="st">: failed to configure interrupt on </span><span class="sc">%s</span><span class="st"> pin </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span></span>
-<span id="cb5-22"><a></a>                    ret<span class="op">,</span> button<span class="op">.</span>port<span class="op">-&gt;</span>name<span class="op">,</span> button<span class="op">.</span>pin<span class="op">);</span></span>
-<span id="cb5-23"><a></a>            <span class="cf">return</span><span class="op">;</span></span>
-<span id="cb5-24"><a></a>    <span class="op">}</span></span>
-<span id="cb5-25"><a></a></span>
-<span id="cb5-26"><a></a>    gpio_init_callback<span class="op">(&amp;</span>button_cb_data<span class="op">,</span> button_pressed<span class="op">,</span> BIT<span class="op">(</span>button<span class="op">.</span>pin<span class="op">));</span></span>
-<span id="cb5-27"><a></a>    gpio_add_callback<span class="op">(</span>button<span class="op">.</span>port<span class="op">,</span> <span class="op">&amp;</span>button_cb_data<span class="op">);</span></span>
-<span id="cb5-28"><a></a></span>
-<span id="cb5-29"><a></a>    smf_set_state<span class="op">(</span>SMF_CTX<span class="op">(&amp;</span>s_obj<span class="op">),</span> <span class="op">&amp;</span>demo_states<span class="op">[</span>S0<span class="op">]);</span></span>
-<span id="cb5-30"><a></a></span>
-<span id="cb5-31"><a></a><span class="op">}</span></span>
-<span id="cb5-32"><a></a></span>
-<span id="cb5-33"><a></a><span class="co">/* State S0 */</span></span>
-<span id="cb5-34"><a></a><span class="dt">static</span> <span class="dt">void</span> s0_entry<span class="op">(</span><span class="dt">void</span> <span class="op">*</span>o<span class="op">)</span></span>
-<span id="cb5-35"><a></a><span class="op">{</span></span>
-<span id="cb5-36"><a></a>        printk<span class="op">(</span><span class="st">"STATE0</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
-<span id="cb5-37"><a></a><span class="op">}</span></span>
-<span id="cb5-38"><a></a></span>
-<span id="cb5-39"><a></a><span class="dt">static</span> <span class="dt">void</span> s0_run<span class="op">(</span><span class="dt">void</span> <span class="op">*</span>o<span class="op">)</span></span>
-<span id="cb5-40"><a></a><span class="op">{</span></span>
-<span id="cb5-41"><a></a>        <span class="co">/* Change states on Button Press Event */</span></span>
-<span id="cb5-42"><a></a>        <span class="dt">int32_t</span> events <span class="op">=</span> k_event_wait<span class="op">(&amp;</span>button_events<span class="op">,</span> FREQ_UP_BTN_PRESS<span class="op">,</span> <span class="kw">true</span><span class="op">,</span> K_FOREVER<span class="op">);</span></span>
-<span id="cb5-43"><a></a>        <span class="cf">if</span> <span class="op">(</span>events <span class="op">&amp;</span> FREQ_UP_BTN_PRESS<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb5-44"><a></a>                smf_set_state<span class="op">(</span>SMF_CTX<span class="op">(&amp;</span>s_obj<span class="op">),</span> <span class="op">&amp;</span>demo_states<span class="op">[</span>S1<span class="op">]);</span></span>
-<span id="cb5-45"><a></a>        <span class="op">}</span></span>
-<span id="cb5-46"><a></a><span class="op">}</span></span>
-<span id="cb5-47"><a></a></span>
-<span id="cb5-48"><a></a><span class="co">/* State S1 */</span></span>
-<span id="cb5-49"><a></a><span class="dt">static</span> <span class="dt">void</span> s1_entry<span class="op">(</span><span class="dt">void</span> <span class="op">*</span>o<span class="op">)</span></span>
-<span id="cb5-50"><a></a><span class="op">{</span></span>
-<span id="cb5-51"><a></a>        printk<span class="op">(</span><span class="st">"STATE1</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
-<span id="cb5-52"><a></a><span class="op">}</span></span>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb5-1"><a></a><span class="co">// SMF Function Prototypes</span></span>
+<span id="cb5-2"><a></a><span class="co">// </span><span class="al">NOTE</span><span class="co">: return type for run functions is enum; the entry/exit functions return void</span></span>
+<span id="cb5-3"><a></a><span class="dt">static</span> <span class="kw">enum</span> smf_state_result init_run<span class="op">(</span><span class="dt">void</span> <span class="op">*</span>o<span class="op">);</span></span>
+<span id="cb5-4"><a></a><span class="dt">static</span> <span class="dt">void</span> s0_entry<span class="op">(</span><span class="dt">void</span> <span class="op">*</span>o<span class="op">);</span></span>
+<span id="cb5-5"><a></a><span class="dt">static</span> <span class="kw">enum</span> smf_state_result s0_run<span class="op">(</span><span class="dt">void</span> <span class="op">*</span>o<span class="op">);</span></span>
+<span id="cb5-6"><a></a><span class="dt">static</span> <span class="dt">void</span> s1_entry<span class="op">(</span><span class="dt">void</span> <span class="op">*</span>o<span class="op">);</span></span>
+<span id="cb5-7"><a></a><span class="dt">static</span> <span class="kw">enum</span> smf_state_result s1_run<span class="op">(</span><span class="dt">void</span> <span class="op">*</span>o<span class="op">);</span></span>
+<span id="cb5-8"><a></a></span>
+<span id="cb5-9"><a></a><span class="dt">static</span> <span class="kw">enum</span> smf_state_result init_run<span class="op">(</span><span class="dt">void</span> <span class="op">*</span>o<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-10"><a></a>    <span class="dt">int</span> ret<span class="op">;</span></span>
+<span id="cb5-11"><a></a></span>
+<span id="cb5-12"><a></a>    <span class="cf">if</span> <span class="op">(!</span>gpio_is_ready_dt<span class="op">(&amp;</span>button<span class="op">))</span> <span class="op">{</span></span>
+<span id="cb5-13"><a></a>            printk<span class="op">(</span><span class="st">"Error: button device </span><span class="sc">%s</span><span class="st"> is not ready</span><span class="sc">\n</span><span class="st">"</span><span class="op">,</span></span>
+<span id="cb5-14"><a></a>                    button<span class="op">.</span>port<span class="op">-&gt;</span>name<span class="op">);</span></span>
+<span id="cb5-15"><a></a>    <span class="op">}</span></span>
+<span id="cb5-16"><a></a></span>
+<span id="cb5-17"><a></a>    ret <span class="op">=</span> gpio_pin_configure_dt<span class="op">(&amp;</span>button<span class="op">,</span> GPIO_INPUT<span class="op">);</span></span>
+<span id="cb5-18"><a></a>    <span class="cf">if</span> <span class="op">(</span>ret <span class="op">!=</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-19"><a></a>            printk<span class="op">(</span><span class="st">"Error </span><span class="sc">%d</span><span class="st">: failed to configure </span><span class="sc">%s</span><span class="st"> pin </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span></span>
+<span id="cb5-20"><a></a>                    ret<span class="op">,</span> button<span class="op">.</span>port<span class="op">-&gt;</span>name<span class="op">,</span> button<span class="op">.</span>pin<span class="op">);</span></span>
+<span id="cb5-21"><a></a>            <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb5-22"><a></a>    <span class="op">}</span></span>
+<span id="cb5-23"><a></a></span>
+<span id="cb5-24"><a></a>    ret <span class="op">=</span> gpio_pin_interrupt_configure_dt<span class="op">(&amp;</span>button<span class="op">,</span></span>
+<span id="cb5-25"><a></a>            GPIO_INT_EDGE_TO_ACTIVE<span class="op">);</span></span>
+<span id="cb5-26"><a></a>    <span class="cf">if</span> <span class="op">(</span>ret <span class="op">!=</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-27"><a></a>            printk<span class="op">(</span><span class="st">"Error </span><span class="sc">%d</span><span class="st">: failed to configure interrupt on </span><span class="sc">%s</span><span class="st"> pin </span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span></span>
+<span id="cb5-28"><a></a>                    ret<span class="op">,</span> button<span class="op">.</span>port<span class="op">-&gt;</span>name<span class="op">,</span> button<span class="op">.</span>pin<span class="op">);</span></span>
+<span id="cb5-29"><a></a>            <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb5-30"><a></a>    <span class="op">}</span></span>
+<span id="cb5-31"><a></a></span>
+<span id="cb5-32"><a></a>    gpio_init_callback<span class="op">(&amp;</span>button_cb_data<span class="op">,</span> button_pressed<span class="op">,</span> BIT<span class="op">(</span>button<span class="op">.</span>pin<span class="op">));</span></span>
+<span id="cb5-33"><a></a>    gpio_add_callback<span class="op">(</span>button<span class="op">.</span>port<span class="op">,</span> <span class="op">&amp;</span>button_cb_data<span class="op">);</span></span>
+<span id="cb5-34"><a></a></span>
+<span id="cb5-35"><a></a>    smf_set_state<span class="op">(</span>SMF_CTX<span class="op">(&amp;</span>s_obj<span class="op">),</span> <span class="op">&amp;</span>demo_states<span class="op">[</span>S0<span class="op">]);</span></span>
+<span id="cb5-36"><a></a></span>
+<span id="cb5-37"><a></a>    <span class="cf">return</span> SMF_EVENT_ERROR<span class="op">;</span></span>
+<span id="cb5-38"><a></a><span class="op">}</span></span>
+<span id="cb5-39"><a></a></span>
+<span id="cb5-40"><a></a><span class="co">/* State S0 */</span></span>
+<span id="cb5-41"><a></a><span class="dt">static</span> <span class="dt">void</span> s0_entry<span class="op">(</span><span class="dt">void</span> <span class="op">*</span>o<span class="op">)</span></span>
+<span id="cb5-42"><a></a><span class="op">{</span></span>
+<span id="cb5-43"><a></a>    printk<span class="op">(</span><span class="st">"STATE0</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb5-44"><a></a><span class="op">}</span></span>
+<span id="cb5-45"><a></a></span>
+<span id="cb5-46"><a></a><span class="dt">static</span> <span class="kw">enum</span> smf_state_result s0_run<span class="op">(</span><span class="dt">void</span> <span class="op">*</span>o<span class="op">)</span></span>
+<span id="cb5-47"><a></a><span class="op">{</span></span>
+<span id="cb5-48"><a></a>    <span class="co">/* Change states on Button Press Event */</span></span>
+<span id="cb5-49"><a></a>    <span class="dt">int32_t</span> events <span class="op">=</span> k_event_wait<span class="op">(&amp;</span>button_events<span class="op">,</span> FREQ_UP_BTN_PRESS<span class="op">,</span> <span class="kw">true</span><span class="op">,</span> K_FOREVER<span class="op">);</span></span>
+<span id="cb5-50"><a></a>    <span class="cf">if</span> <span class="op">(</span>events <span class="op">&amp;</span> FREQ_UP_BTN_PRESS<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-51"><a></a>            smf_set_state<span class="op">(</span>SMF_CTX<span class="op">(&amp;</span>s_obj<span class="op">),</span> <span class="op">&amp;</span>demo_states<span class="op">[</span>S1<span class="op">]);</span></span>
+<span id="cb5-52"><a></a>    <span class="op">}</span></span>
 <span id="cb5-53"><a></a></span>
-<span id="cb5-54"><a></a><span class="dt">static</span> <span class="dt">void</span> s1_run<span class="op">(</span><span class="dt">void</span> <span class="op">*</span>o<span class="op">)</span></span>
-<span id="cb5-55"><a></a><span class="op">{</span></span>
-<span id="cb5-56"><a></a>        <span class="co">/* Change states on Button Press Event */</span></span>
-<span id="cb5-57"><a></a>        <span class="dt">int32_t</span> events <span class="op">=</span> k_event_wait<span class="op">(&amp;</span>button_events<span class="op">,</span> FREQ_DOWN_BTN_PRESS<span class="op">,</span> <span class="kw">true</span><span class="op">,</span> K_FOREVER<span class="op">);</span></span>
-<span id="cb5-58"><a></a>        <span class="cf">if</span> <span class="op">(</span>events <span class="op">&amp;</span> FREQ_DOWN_BTN_PRESS<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb5-59"><a></a>                smf_set_state<span class="op">(</span>SMF_CTX<span class="op">(&amp;</span>s_obj<span class="op">),</span> <span class="op">&amp;</span>demo_states<span class="op">[</span>S0<span class="op">]);</span></span>
-<span id="cb5-60"><a></a>        <span class="op">}</span></span>
+<span id="cb5-54"><a></a>    <span class="cf">return</span> SMF_EVENT_HANDLED<span class="op">;</span></span>
+<span id="cb5-55"><a></a><span class="op">}</span></span>
+<span id="cb5-56"><a></a></span>
+<span id="cb5-57"><a></a><span class="co">/* State S1 */</span></span>
+<span id="cb5-58"><a></a><span class="dt">static</span> <span class="dt">void</span> s1_entry<span class="op">(</span><span class="dt">void</span> <span class="op">*</span>o<span class="op">)</span></span>
+<span id="cb5-59"><a></a><span class="op">{</span></span>
+<span id="cb5-60"><a></a>    printk<span class="op">(</span><span class="st">"STATE1</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
 <span id="cb5-61"><a></a><span class="op">}</span></span>
 <span id="cb5-62"><a></a></span>
-<span id="cb5-63"><a></a><span class="co">/* Populate state table */</span></span>
-<span id="cb5-64"><a></a><span class="dt">static</span> <span class="dt">const</span> <span class="kw">struct</span> smf_state demo_states<span class="op">[]</span> <span class="op">=</span> <span class="op">{</span></span>
-<span id="cb5-65"><a></a>        <span class="op">[</span>INIT<span class="op">]</span> <span class="op">=</span> SMF_CREATE_STATE<span class="op">(</span>NULL<span class="op">,</span> init_run<span class="op">,</span> NULL<span class="op">,</span> NULL<span class="op">,</span> NULL<span class="op">),</span></span>
-<span id="cb5-66"><a></a>        <span class="op">[</span>S0<span class="op">]</span> <span class="op">=</span> SMF_CREATE_STATE<span class="op">(</span>s0_entry<span class="op">,</span> s0_run<span class="op">,</span> NULL<span class="op">,</span> NULL<span class="op">,</span> NULL<span class="op">),</span></span>
-<span id="cb5-67"><a></a>        <span class="op">[</span>S1<span class="op">]</span> <span class="op">=</span> SMF_CREATE_STATE<span class="op">(</span>s1_entry<span class="op">,</span> s1_run<span class="op">,</span> NULL<span class="op">,</span> NULL<span class="op">,</span> NULL<span class="op">),</span></span>
-<span id="cb5-68"><a></a><span class="op">};</span></span>
-<span id="cb5-69"><a></a></span>
-<span id="cb5-70"><a></a><span class="dt">void</span> button_pressed<span class="op">(</span><span class="dt">const</span> <span class="kw">struct</span> device <span class="op">*</span>dev<span class="op">,</span> <span class="kw">struct</span> gpio_callback <span class="op">*</span>cb<span class="op">,</span> <span class="dt">uint32_t</span> pins<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb5-71"><a></a>        <span class="co">/* Generate Button Press Event */</span></span>
-<span id="cb5-72"><a></a>        k_event_post<span class="op">(&amp;</span>button_events<span class="op">,</span> FREQ_UP_BTN_PRESS<span class="op">);</span></span>
-<span id="cb5-73"><a></a><span class="op">}</span></span>
-<span id="cb5-74"><a></a></span>
-<span id="cb5-75"><a></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span></span>
-<span id="cb5-76"><a></a><span class="op">{</span></span>
-<span id="cb5-77"><a></a>    <span class="co">/* Set initial state */</span></span>
-<span id="cb5-78"><a></a>    smf_set_initial<span class="op">(</span>SMF_CTX<span class="op">(&amp;</span>s_obj<span class="op">),</span> <span class="op">&amp;</span>demo_states<span class="op">[</span>INIT<span class="op">]);</span></span>
-<span id="cb5-79"><a></a></span>
-<span id="cb5-80"><a></a>    <span class="co">/* Run the state machine */</span></span>
-<span id="cb5-81"><a></a>    <span class="cf">while</span><span class="op">(</span><span class="dv">1</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb5-82"><a></a>        <span class="co">/* Block until an event is detected */</span></span>
-<span id="cb5-83"><a></a>        <span class="dt">int</span> events <span class="op">=</span> k_event_wait<span class="op">(</span>button_events<span class="op">,</span> EVENT_BTN_PRESS<span class="op">,</span> <span class="kw">true</span><span class="op">,</span> K_FOREVER<span class="op">);</span></span>
-<span id="cb5-84"><a></a></span>
-<span id="cb5-85"><a></a>        <span class="co">/* State machine terminates if a non-zero value is returned */</span></span>
-<span id="cb5-86"><a></a>        ret <span class="op">=</span> smf_run_state<span class="op">(</span>SMF_CTX<span class="op">(&amp;</span>s_obj<span class="op">));</span></span>
-<span id="cb5-87"><a></a>        <span class="cf">if</span> <span class="op">(</span>ret<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb5-88"><a></a>            <span class="co">/* handle return code and terminate state machine */</span></span>
-<span id="cb5-89"><a></a>            smf_set_terminate<span class="op">(</span>SMF_CTX<span class="op">(&amp;</span>s_obj<span class="op">),</span> ret<span class="op">);</span></span>
-<span id="cb5-90"><a></a>            <span class="cf">break</span><span class="op">;</span></span>
-<span id="cb5-91"><a></a>        <span class="op">}</span></span>
-<span id="cb5-92"><a></a>    <span class="op">}</span></span>
-<span id="cb5-93"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-63"><a></a><span class="dt">static</span> <span class="kw">enum</span> smf_state_result s1_run<span class="op">(</span><span class="dt">void</span> <span class="op">*</span>o<span class="op">)</span></span>
+<span id="cb5-64"><a></a><span class="op">{</span></span>
+<span id="cb5-65"><a></a>    <span class="co">/* Change states on Button Press Event */</span></span>
+<span id="cb5-66"><a></a>    <span class="dt">int32_t</span> events <span class="op">=</span> k_event_wait<span class="op">(&amp;</span>button_events<span class="op">,</span> FREQ_DOWN_BTN_PRESS<span class="op">,</span> <span class="kw">true</span><span class="op">,</span> K_FOREVER<span class="op">);</span></span>
+<span id="cb5-67"><a></a>    <span class="cf">if</span> <span class="op">(</span>events <span class="op">&amp;</span> FREQ_DOWN_BTN_PRESS<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-68"><a></a>            smf_set_state<span class="op">(</span>SMF_CTX<span class="op">(&amp;</span>s_obj<span class="op">),</span> <span class="op">&amp;</span>demo_states<span class="op">[</span>S0<span class="op">]);</span></span>
+<span id="cb5-69"><a></a>    <span class="op">}</span></span>
+<span id="cb5-70"><a></a></span>
+<span id="cb5-71"><a></a>    <span class="cf">return</span> SMF_EVENT_HANDLED<span class="op">;</span></span>
+<span id="cb5-72"><a></a><span class="op">}</span></span>
+<span id="cb5-73"><a></a></span>
+<span id="cb5-74"><a></a><span class="co">/* Populate state table */</span></span>
+<span id="cb5-75"><a></a><span class="dt">static</span> <span class="dt">const</span> <span class="kw">struct</span> smf_state demo_states<span class="op">[]</span> <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb5-76"><a></a>    <span class="op">[</span>INIT<span class="op">]</span> <span class="op">=</span> SMF_CREATE_STATE<span class="op">(</span>NULL<span class="op">,</span> init_run<span class="op">,</span> NULL<span class="op">,</span> NULL<span class="op">,</span> NULL<span class="op">),</span></span>
+<span id="cb5-77"><a></a>    <span class="op">[</span>S0<span class="op">]</span> <span class="op">=</span> SMF_CREATE_STATE<span class="op">(</span>s0_entry<span class="op">,</span> s0_run<span class="op">,</span> NULL<span class="op">,</span> NULL<span class="op">,</span> NULL<span class="op">),</span></span>
+<span id="cb5-78"><a></a>    <span class="op">[</span>S1<span class="op">]</span> <span class="op">=</span> SMF_CREATE_STATE<span class="op">(</span>s1_entry<span class="op">,</span> s1_run<span class="op">,</span> NULL<span class="op">,</span> NULL<span class="op">,</span> NULL<span class="op">),</span></span>
+<span id="cb5-79"><a></a><span class="op">};</span></span>
+<span id="cb5-80"><a></a></span>
+<span id="cb5-81"><a></a><span class="dt">void</span> button_pressed<span class="op">(</span><span class="dt">const</span> <span class="kw">struct</span> device <span class="op">*</span>dev<span class="op">,</span> <span class="kw">struct</span> gpio_callback <span class="op">*</span>cb<span class="op">,</span> <span class="dt">uint32_t</span> pins<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-82"><a></a>    <span class="co">/* Generate Button Press Event */</span></span>
+<span id="cb5-83"><a></a>    k_event_post<span class="op">(&amp;</span>button_events<span class="op">,</span> FREQ_UP_BTN_PRESS<span class="op">);</span></span>
+<span id="cb5-84"><a></a><span class="op">}</span></span>
+<span id="cb5-85"><a></a></span>
+<span id="cb5-86"><a></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span></span>
+<span id="cb5-87"><a></a><span class="op">{</span></span>
+<span id="cb5-88"><a></a>    <span class="co">/* Set initial state */</span></span>
+<span id="cb5-89"><a></a>    smf_set_initial<span class="op">(</span>SMF_CTX<span class="op">(&amp;</span>s_obj<span class="op">),</span> <span class="op">&amp;</span>demo_states<span class="op">[</span>INIT<span class="op">]);</span></span>
+<span id="cb5-90"><a></a></span>
+<span id="cb5-91"><a></a>    <span class="co">/* Run the state machine */</span></span>
+<span id="cb5-92"><a></a>    <span class="cf">while</span><span class="op">(</span><span class="dv">1</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-93"><a></a>        <span class="co">/* Block until an event is detected */</span></span>
+<span id="cb5-94"><a></a>        <span class="dt">int</span> events <span class="op">=</span> k_event_wait<span class="op">(</span>button_events<span class="op">,</span> EVENT_BTN_PRESS<span class="op">,</span> <span class="kw">true</span><span class="op">,</span> K_FOREVER<span class="op">);</span></span>
+<span id="cb5-95"><a></a></span>
+<span id="cb5-96"><a></a>        <span class="co">/* State machine terminates if a non-zero value is returned */</span></span>
+<span id="cb5-97"><a></a>        ret <span class="op">=</span> smf_run_state<span class="op">(</span>SMF_CTX<span class="op">(&amp;</span>s_obj<span class="op">));</span></span>
+<span id="cb5-98"><a></a>        <span class="cf">if</span> <span class="op">(</span>ret<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-99"><a></a>            <span class="co">/* handle return code and terminate state machine */</span></span>
+<span id="cb5-100"><a></a>            smf_set_terminate<span class="op">(</span>SMF_CTX<span class="op">(&amp;</span>s_obj<span class="op">),</span> ret<span class="op">);</span></span>
+<span id="cb5-101"><a></a>            <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb5-102"><a></a>        <span class="op">}</span></span>
+<span id="cb5-103"><a></a>    <span class="op">}</span></span>
+<span id="cb5-104"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="heirarchical-state-machine-example" class="slide level2">
 <h2>Heirarchical State Machine Example</h2>
