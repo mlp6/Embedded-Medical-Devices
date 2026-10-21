@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Dr.&nbsp;Mark Palmeri, M.D., Ph.D.">
-<meta name="dcterms.date" content="2026-03-15">
+<meta name="dcterms.date" content="2026-10-20">
 
 <title>Analog-to-Digital Conversion (ADC) Lab – Embedded Medical Devices</title>
 <style>
@@ -40,7 +40,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-fced259a1985fd972ecb57c7cd45153f.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-e7efdc2e9ac91303fbdff92f272c1253.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-1e6682750ff6284228e074486cdd25e3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -111,9 +111,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
-      Embedded Medical Devices
-      </li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labs/event-driven-state-machine-lab.html">Labs</a></li><li class="breadcrumb-item"><a href="../labs/zephyr-adc-lab.html">Analog-to-Digital Conversion (ADC) Lab</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -311,10 +309,12 @@ window.Quarto = {
  <span class="menu-text">State Machine Framework (SMF) Refactor Lab</span></a>
   </div>
 </li>
-          <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">Analog-to-Digital Conversion (ADC) Lab</span></span>
-  </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../labs/zephyr-adc-lab.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Analog-to-Digital Conversion (ADC) Lab</span></a>
+  </div>
+</li>
           <li class="sidebar-item sidebar-item-section">
       <span class="sidebar-item-text sidebar-link text-start">
  <span class="menu-text">Pulse Width Modulation (PWM) Lab</span></span>
@@ -327,13 +327,13 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
  <span class="menu-text">Resources</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../resources/git.html" class="sidebar-item-text sidebar-link">
@@ -402,6 +402,7 @@ window.Quarto = {
   <ul>
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning Objectives</a></li>
   <li><a href="#git-best-practices" id="toc-git-best-practices" class="nav-link" data-scroll-target="#git-best-practices">Git Best Practices</a></li>
+  <li><a href="#teamwork" id="toc-teamwork" class="nav-link" data-scroll-target="#teamwork">Teamwork</a></li>
   <li><a href="#firmware-expectations" id="toc-firmware-expectations" class="nav-link" data-scroll-target="#firmware-expectations">Firmware Expectations</a></li>
   <li><a href="#adc-single-sampling" id="toc-adc-single-sampling" class="nav-link" data-scroll-target="#adc-single-sampling">ADC Single Sampling</a>
   <ul class="collapse">
@@ -428,7 +429,7 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labs/event-driven-state-machine-lab.html">Labs</a></li><li class="breadcrumb-item"><a href="../labs/zephyr-adc-lab.html">Analog-to-Digital Conversion (ADC) Lab</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Analog-to-Digital Conversion (ADC) Lab</h1>
 <p class="subtitle lead">BME554L - Fall 2026 - Palmeri</p>
@@ -451,7 +452,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">March 15, 2026</p>
+      <p class="date">October 20, 2026</p>
     </div>
   </div>
   
@@ -494,6 +495,42 @@ Important
 </div>
 </div>
 </section>
+<section id="teamwork" class="level2">
+<h2 class="anchored" data-anchor-id="teamwork">Teamwork</h2>
+<ul>
+<li><p>You will work with your assigned lab partner for this lab.</p></li>
+<li><p>You will be expected to work together to complete the lab, using git and Gitlab to manage your code development and testing.</p></li>
+<li><p>Each person should add their lab partner as a <code>Developer</code> to their Gitlab repository so that they can push and pull code to the repository.</p></li>
+<li><p>Each person should be commiting and pushing code to their own repositories on their own development branches and use Merge Requests to merge their code into the <code>main</code> branch, which may be the only “common” branch between each person’s repositories.</p></li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Consider using libraries instead of writing all code in <code>main.c</code> to make it easier for each person to work on different parts of the firmware and avoid merge conflicts.</p>
+<p>Remember to include your libraries in your <code>CMakeLists.txt</code> file so that they are compiled and linked into your firmware.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You cannot have all of the commits be made by one person and then say “but we worked together on it”. Each person should be contributing to the code development and testing as represented with individual commits on their own branches, and this will be evaluated during grading.</p>
+</div>
+</div>
+</section>
 <section id="firmware-expectations" class="level2">
 <h2 class="anchored" data-anchor-id="firmware-expectations">Firmware Expectations</h2>
 <ul>
@@ -514,9 +551,9 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>You will continue to build upon the firmware from your previous labs, but you are replacing all functional specifications with those in this lab.</p>
+<p>You will continue to build upon the firmware from your previous labs, but you are replacing all functional specifications with those in this lab. If you want to use a “clean slate”, you can start with a fresh <code>main.c</code> file.</p>
 <p>All states should be reconsidered given the new functional specifications.</p>
-<p>This significant change in functionality is represented with the version tags changing to a new major version number starting at <code>v2.0.0</code>.</p>
+<p>This significant change in functionality is represented with the version tags changing to a new major version number starting at <code>v2.x</code>.</p>
 </div>
 </div>
 </section>
@@ -535,7 +572,7 @@ Note
 <li><p><code>LED1</code> should remaining blinking for 5 seconds after the button has been pressed.</p></li>
 </ul></li>
 <li><p><code>BUTTON0</code> should be disabled while the ADC measurement and <code>LED1</code> blinking.</p></li>
-<li><p>All errors should result in a transition to an <code>ERROR</code> state that can only be exited by hitting a reset button.</p></li>
+<li><p>All errors should result in a transition to an <code>ERROR</code> state that can only be exited by hitting a reset button (<code>BUTTON3</code>).</p></li>
 </ul>
 </section>
 <section id="testing" class="level3">
@@ -579,10 +616,10 @@ Tip
 <section id="commit-n-merge-single-sample-acquisition" class="level3">
 <h3 class="anchored" data-anchor-id="commit-n-merge-single-sample-acquisition">Commit-n-Merge Single Sample Acquisition</h3>
 <ul>
-<li><p>Update your state diagram.</p></li>
-<li><p>Merge your completed <code>adc_single_sample</code> branch into your <code>main</code> branch using a Merge Request on Gitlab.</p></li>
-<li><p>Create an annotated tag of your <code>main</code> branch with all part of this lab merged in called <code>v2.0.0</code>.</p></li>
-<li><p>Create an Issue <strong>assigned to your teaching assistant</strong> indicating that this tag is ready for review.</p></li>
+<li><p>Update your state and sequence diagrams.</p></li>
+<li><p>Once your firmware development and testing are done, merge your completed <code>adc_single_sample</code> branch into your <code>main</code> branch using a Merge Request on Gitlab.</p></li>
+<li><p>Create an annotated tag (<code>v2.0.0</code>) on your <code>main</code> branch of this merged branch.</p></li>
+<li><p>Create an Issue assigned to Dr.&nbsp;Palmeri indicating that this tag is ready for review.</p></li>
 </ul>
 </section>
 </section>
@@ -590,9 +627,22 @@ Tip
 <h2 class="anchored" data-anchor-id="buffered-differential-adc-sampling">Buffered Differential ADC Sampling</h2>
 <section id="firmware-functional-specifications-1" class="level3">
 <h3 class="anchored" data-anchor-id="firmware-functional-specifications-1">Firmware Functional Specifications</h3>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you are working on this part before the previous part is complete, you can use the <code>adc_single_sample</code> branch as your starting point for this branch.</p>
+</div>
+</div>
 <p>In a new development branch called <code>diff_adc</code>, add the following functionality to your firmware:</p>
 <ul>
-<li><p>When you press <code>BUTTON1</code> , add an additional differential ADC measurement using <code>AIN1</code> and <code>AIN2</code>.</p></li>
+<li><p>When you press <code>BUTTON1</code>, add an additional differential ADC measurement using <code>AIN1</code> and <code>AIN2</code>.</p></li>
 <li><p>Choose the reference voltage, gain, bit depth, acquisition time and sampling interval to adequately sample at least 20 cycles of a 10 Hz sinusoidal signal (<span class="math inline">\(V_{pp}\)</span> = 2 V).</p></li>
 </ul>
 <div class="callout callout-style-default callout-tip callout-titled">
@@ -618,15 +668,16 @@ Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Have your sampling interval be configured using a macro definition so that you can easily adjust it for testing purposes.</p>
+<p>Have your sampling interval be configured using a macro so that you can easily adjust it for testing purposes.</p>
 <p>Choose your ideal sampling interval based on the fact that you are only sampling a finite number of cycles (i.e., Nyquist frequency is not the only consideration) but without clobbering your SRAM with an unnecessarily large buffer.</p>
 </div>
 </div>
 <ul>
 <li><p>Implement the <code>extra_sampling</code> buffering of the ADC for this differential sinusoidal signal measurement so that all data are stored in an array in a single <code>adc_read_dt()</code> call (i.e., you are not using a kernel call for every sample).</p></li>
 <li><p>Disable the <code>BUTTON1</code> while your device is reading <code>AIN1</code> and <code>AIN2</code> and performing calculations below.</p></li>
-<li><p>Write a <strong>library</strong> called <code>calc_freq</code> that calculates the frequency of the sinusoidal signal in your buffer, ignoring the spectral content associated with the finite temporal window. Have this frequency displayed using <code>LOG_INF()</code> in the console.</p></li>
-<li><p>Write log messages to your serial terminal that dsplay a HEX array of the buffered ADC samples.</p></li>
+<li><p>Write a <strong>library</strong> called <code>calc_freq.[h/c]</code> that calculates the frequency of the sinusoidal signal in your buffer, ignoring the spectral content associated with the finite temporal window. Have this frequency displayed using <code>LOG_INF()</code> in the console.</p></li>
+<li><p>Write log messages to your serial terminal that displays a HEX array of the buffered ADC samples.</p></li>
+<li><p>Turn on <code>LED2</code> for 1 second after the buffered ADC sequence is complete.</p></li>
 <li><p>Update your state and sequence diagrams for this new functionality.</p></li>
 </ul>
 <div class="callout callout-style-default callout-warning callout-titled">
@@ -674,9 +725,8 @@ Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>You will need to save your oscilloscope data to a USB drive and then read that data into your Jupyter notebook for plotting and frequency analysis.</p>
 <p>There are helper functions in <code>bme554.py</code> called <code>read_hex_data()</code> and <code>unwrap_twos_complement()</code>.</p>
-<p>The HEX data array from the terminal can be copied and pasted into a text file in your git repository to read into your Jupyter notebook for analysis.</p>
+<p>The HEX data array from the terminal can be saved to a text file in your git repository to read into your Jupyter notebook for analysis. Remember to not use absolute paths to your data file in your Jupyter notebook so that your lab partner (and teaching team) can run the notebook on their computer without having to change the path.</p>
 </div>
 </div>
 <ul>
@@ -712,7 +762,7 @@ Warning
 <ul>
 <li><p>Merge your completed <code>diff_adc</code> branch into your <code>main</code> branch using a Merge Request on Gitlab.</p></li>
 <li><p>Create an annotated tag of your <code>main</code> branch with all part of this lab merged in called <code>v2.1.0</code>.</p></li>
-<li><p>Create an Issue <strong>assigned to your teaching assistant</strong> indicating that this tag is ready for review.</p></li>
+<li><p>Create an Issue assigned to Dr.&nbsp;Palmeri indicating that this tag is ready for review.</p></li>
 </ul>
 </section>
 </section>
@@ -735,7 +785,9 @@ Important
 </div>
 <p>In a new development branch called <code>async_adc</code>, add the following functionality to your firmware:</p>
 <ul>
-<li><p>Refactor your blocking, synchronous buffered ADC sequence acquisition to an <strong>asynchronous</strong> acquisition that populates the same array that was populated with the synchronous approach.</p></li>
+<li><p>Replicate the functionality of your blocking, synchronous buffered ADC sequence acquisition now using an <strong>asynchronous</strong> acquisition that populates the same array that was populated with the synchronous approach.</p></li>
+<li><p>Use <code>AIN3</code> and <code>AIN4</code> for the differential ADC input that will be read using this asynchronous approach.</p></li>
+<li><p>Use <code>BUTTON2</code> to trigger the asynchronous ADC sequence acquisition and illuminate <code>LED3</code> for 1 second after the sequence is complete.</p></li>
 <li><p>Utilize the Zephyr ADC async enumerations presented in lecture to modulate the behaviour of the asynchronous callback function.</p></li>
 <li><p>Detect the raised kernel poll (<code>k_poll</code>) signal to indicate when the ADC sequence is complete.</p></li>
 <li><p>Implement a timeout mechanism to handle the case where the ADC sequence does not complete within a reasonable time frame.</p></li>
@@ -753,7 +805,7 @@ Important
 <ul>
 <li><p>Merge your completed <code>async_adc</code> branch into your <code>main</code> branch using a Merge Request on Gitlab.</p></li>
 <li><p>Create an annotated tag of your <code>main</code> branch with all part of this lab merged in called <code>v2.2.0</code>.</p></li>
-<li><p>Create an Issue <strong>assigned to your teaching assistant</strong> indicating that this tag is ready for review.</p></li>
+<li><p>Create an Issue assigned to Dr.&nbsp;Palmeri indicating that this tag is ready for review.</p></li>
 </ul>
 <!-- ## Timer-Based Single Sampling to Array
 
@@ -762,13 +814,19 @@ Important
 In a new development branch called `timer_adc`, add the following
 functionality to your firmware:
 
-- Refactor your firmware to use a kernel timer to do single ADC samples that are sequentially stored in the array that was associated with the ADC sequence in the previous two sections.
+- Refactor your firmware to use a kernel timer to do single ADC samples that are
+sequentially stored in the array that was associated with the ADC sequence in
+the previous two sections.
 
 ### Testing
 
-- Repeat the testing you performed in the asynchronous section for this timer-based implementation in a new Jupyter notebook named `testing/testing_adc_timer.ipynb`.
+- Repeat the testing you performed in the asynchronous section for this
+timer-based implementation in a new Jupyter notebook named
+`testing/testing_adc_timer.ipynb`.
 
-- Discuss the benefits and drawbacks of using a timer-based ADC sampling scheme compared to the previous approaches when trying to accurately sample a sinusoidal signal.
+- Discuss the benefits and drawbacks of using a timer-based ADC sampling scheme
+compared to the previous approaches when trying to accurately sample a
+sinusoidal signal.
 
 ### Commit-n-Merge Timer Sampling
 
@@ -778,8 +836,9 @@ Request on Gitlab.
 - Create an annotated tag of your `main` branch with all part of this lab merged
 in called `v2.3.0`.
 
-- Create an Issue **assigned to your teaching assistant** indicating that this
-tag is ready for review. -->
+- Create an Issue assigned to Dr. Palmeri indicating that this tag is ready for
+review. 
+-->
 </section>
 </section>
 <section id="how-to-ask-for-help" class="level2">
