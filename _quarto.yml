@@ -75,9 +75,8 @@ website:
           text: "Threads and Kernel Events Lab"
         - href: labs/zephyr-smf-lab.qmd
           text: "State Machine Framework (SMF) Refactor Lab"
-        # - href: labs/zephyr-adc-lab.qmd
-        #   text: "Analog-to-Digital Conversion (ADC) Lab"
-        - section: "Analog-to-Digital Conversion (ADC) Lab"
+        - href: labs/zephyr-adc-lab.qmd
+          text: "Analog-to-Digital Conversion (ADC) Lab"
         # - href: labs/zephyr-pwm-lab.qmd
         #   text: "Pulse Width Modulation (PWM) Lab"
         - section: "Pulse Width Modulation (PWM) Lab"
