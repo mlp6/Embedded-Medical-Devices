@@ -1,6 +1,6 @@
 ---
 title: "Zephyr: Threads & Kernel Events Lab"
-date: "2026-02-18"
+date: "2026-09-30"
 format:
   html: default
   pdf: default
@@ -78,17 +78,13 @@ present it in your notebook.
 
 ## Create a Sequence Diagram
 
-- Create a [PlantUML](https://plantuml.com/sequence-diagram) sequence diagram
-that documents the interaction between your button ISR callback(s), the kernel
-event bit array, and your state machine thread when a button press event is
-detected and processed.
+- Create a sequence diagram that documents the interaction between your button
+ISR callback(s), the kernel event bit array, and your state machine thread when
+a button press event is detected and processed.
 
 - Your sequence diagram should show all relevant participants and the
 chronological order of messages between them (refer to the sequence diagram
 covered in the Threads & Kernel Events lecture).
-
-- Commit both the PlantUML source file (`.puml`) and the rendered image to your
-repository under a `docs/` directory.
 
 ### Merge-n-Tag this Refactored Kernel Events Code and Analysis
 
@@ -103,11 +99,15 @@ branch.
 
 - Add new functionality to you code to detect a double-button press of the
 `freq_up_button` or `freq_down_button` that will increase or decrease, respectively, the
-heartbeat LED frequency by 2 Hz (instead of the 1 Hz increment with a single
+action LED frequencies by 2 Hz (instead of the 1 Hz increment with a single
 button press).
 
 - The double-button press should be detected if two button presses occur within
 500 ms of each other.
+
+- If a second button press occurs within 500 ms of the first, action on that
+double-press should be taken immediately and not wait for the expiration of the
+remaining part of the 500 ms period.
 
 ::: callout-tip
 One implementation scheme for this functionality could include use of atomic variables, kernel events, and a finite timeout period for `k_event_wait()`.  You may even want to leverage a dedicated thread for this operation.

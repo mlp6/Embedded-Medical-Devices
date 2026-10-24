@@ -1,7 +1,7 @@
 ---
 title: Software Installation and Tutorials
-subtitle: "BME554L (Spring 2026)"
-date: 2026-01-05
+subtitle: "BME554L (Fall 2026)"
+date: 2026-09-17
 format:
   html: default
   pdf: default
@@ -28,24 +28,29 @@ please install the following Extensions:
 
 - `GitLens` (help with `git` operations / visualization)
 
-- `C/C++` (not the extension pack, since it include `CMake Tools` that has some
-incompatibilities with the Zephyr build tools)
+- `C/C++` 
 
 - `Cmake`
 
-- State diagram software (see below)
+::: callout-warning
+Do not install the `cmake` extension pack because it includes `CMake Tools` that
+has some incompatibilities with the Zephyr build tools.
+:::
 
 - [GitHub CoPilot Chat](https://code.visualstudio.com/docs/copilot/overview) AI
-coding assistant (optional, but highly recommended)
+coding assistant (optional, but highly recommended for inline autocompletion)
 
 ::: callout-tip
-You can get "Pro" status for GitHub CoPilot by signing up for a free [GitHub
-Education Student](https://github.com/education/students) account.  You will
-need a document to verify your student status that includes your dates of
-enrollment, which your DukeCard does not contain.  Instead, you can get an
+You can get "Pro" status for GitHub CoPilot by signing up for a free 
+[GitHub Education Student](https://github.com/education/students) account.  
+You will need a document to verify your student status that includes your dates
+of enrollment, which your DukeCard does not contain.  Instead, you can get an
 Enrollment Verification document through DukeHub (Academics Tab) and convert the
 downloaded PDF to a JPG or PNG file to upload to GitHub.
 :::
+
+- `Codex` for agentic AI (you can enroll in ChatGPT EDU through Duke's [Software Manager](https://software-manager.oit.duke.edu/))
+
 
 ## State Diagram Software
 
@@ -57,12 +62,10 @@ semester.
 
 ## Zephyr SDK / nRF Connect / Nordic Dev Academy
 
-- Sign up for an account on the [Nordic Semiconductor
-DevAcademy](https://academy.nordicsemi.com/courses/nrf-connect-sdk-fundamentals/)
+- Sign up for an account on the [Nordic Semiconductor DevAcademy](https://academy.nordicsemi.com/courses/nrf-connect-sdk-fundamentals/)
 
 - Please complete the following tutorial to get your environment setup for using
-the Nordic nRF Connect SDK: [Lesson 1 - nRF Connect SDK
-Introduction](https://academy.nordicsemi.com/lessons/lesson-1-nrf-connect-sdk-introduction/)
+the Nordic nRF Connect SDK: [Lesson 1 - nRF Connect SDK Introduction](https://academy.nordicsemi.com/lessons/lesson-1-nrf-connect-sdk-introduction/)
 
 This will run you through the process of:
 
@@ -73,8 +76,9 @@ pack.
 including the `nRF Connect SDK` and associated `toolchain`.
   
 ::: callout-tip
-Be sure to use the `nRF Connect SDK v3.2.4` for this class.  The code snippets
-provided throughout the semester will be based on this version of the SDK.
+Be sure to use the `nRF Connect SDK v3.4.0 (LTS)` for this class.  The code
+snippets provided throughout the semester will be based on this version of the
+SDK.
 :::
 
 - Once you have the hardware you need to order described below, flash the
@@ -107,11 +111,14 @@ cable.
 :::
 
 ::: callout-warning
-We will not have USB cables and adapters available in the lab.
+We will not have USB cables, memory keys and adapters available in the lab.
 :::
 
-- Order a [MCP9808 High Accuracy I2C Temperature Sensor Breakout
-Board](https://www.adafruit.com/product/1782).  (Link is to Adafruit, but you
+- You will also need a USB memory key to transfer data from the lab
+oscillopscopes to your laptop.  These oscilloscopes use a USB-A port, so if your
+laptop only has USB-C ports, you will need an adaptor.
+
+- Order a [MCP9808 High Accuracy I2C Temperature Sensor Breakout Board](https://www.adafruit.com/product/1782).  (Link is to Adafruit, but you
 can get it from other vendors as well.)
 
 ## Technical Reports: Jupyter Notebooks

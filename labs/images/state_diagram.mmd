@@ -1,0 +1,25 @@
+stateDiagram-v2
+    direction LR
+    [*] --> INIT
+
+    INIT : Do initty things
+
+    state IDLE {
+        direction LR
+        [*] --> idle_entry
+        idle_entry --> idle_run
+        idle_entry : Do idle entry things
+        idle_run : Do idle things
+    }
+
+    state ERROR {
+        direction LR
+        [*] --> error_entry
+        error_entry --> error_run
+        error_run --> error_exit
+        error_entry : Do error entry things
+        error_run : Do error things
+        error_exit : Do error exit things
+    }
+
+    INIT --> IDLE : Successful initialization

@@ -1,6 +1,6 @@
 ---
 title: "Zephyr: State Machine Framework"
-date: "2026-02-16"
+date: "2026-10-18"
 format:
   live-html: 
     output-file: zephyr-smf.html
@@ -134,6 +134,7 @@ enum demo_state { INIT, S0, S1 };
 
 ```
 
+
 ## SMF Context Struct
 
 ```C
@@ -154,14 +155,20 @@ struct s_object {
 ---
 
 ```C
-static void init_run(void *o)
-{
+// SMF Function Prototypes
+// NOTE: return type for run functions is enum; the entry/exit functions return void
+static enum smf_state_result init_run(void *o);
+static void s0_entry(void *o);
+static enum smf_state_result s0_run(void *o);
+static void s1_entry(void *o);
+static enum smf_state_result s1_run(void *o);
+
+static enum smf_state_result init_run(void *o) {
     int ret;
 
     if (!gpio_is_ready_dt(&button)) {
             printk("Error: button device %s is not ready\n",
                     button.port->name);
-            return;
     }
 
     ret = gpio_pin_configure_dt(&button, GPIO_INPUT);
@@ -184,48 +191,53 @@ static void init_run(void *o)
 
     smf_set_state(SMF_CTX(&s_obj), &demo_states[S0]);
 
+    return SMF_EVENT_ERROR;
 }
 
 /* State S0 */
 static void s0_entry(void *o)
 {
-        printk("STATE0\n");
+    printk("STATE0\n");
 }
 
-static void s0_run(void *o)
+static enum smf_state_result s0_run(void *o)
 {
-        /* Change states on Button Press Event */
-        int32_t events = k_event_wait(&button_events, FREQ_UP_BTN_PRESS, true, K_FOREVER);
-        if (events & FREQ_UP_BTN_PRESS) {
-                smf_set_state(SMF_CTX(&s_obj), &demo_states[S1]);
-        }
+    /* Change states on Button Press Event */
+    int32_t events = k_event_wait(&button_events, FREQ_UP_BTN_PRESS, true, K_FOREVER);
+    if (events & FREQ_UP_BTN_PRESS) {
+            smf_set_state(SMF_CTX(&s_obj), &demo_states[S1]);
+    }
+
+    return SMF_EVENT_HANDLED;
 }
 
 /* State S1 */
 static void s1_entry(void *o)
 {
-        printk("STATE1\n");
+    printk("STATE1\n");
 }
 
-static void s1_run(void *o)
+static enum smf_state_result s1_run(void *o)
 {
-        /* Change states on Button Press Event */
-        int32_t events = k_event_wait(&button_events, FREQ_DOWN_BTN_PRESS, true, K_FOREVER);
-        if (events & FREQ_DOWN_BTN_PRESS) {
-                smf_set_state(SMF_CTX(&s_obj), &demo_states[S0]);
-        }
+    /* Change states on Button Press Event */
+    int32_t events = k_event_wait(&button_events, FREQ_DOWN_BTN_PRESS, true, K_FOREVER);
+    if (events & FREQ_DOWN_BTN_PRESS) {
+            smf_set_state(SMF_CTX(&s_obj), &demo_states[S0]);
+    }
+
+    return SMF_EVENT_HANDLED;
 }
 
 /* Populate state table */
 static const struct smf_state demo_states[] = {
-        [INIT] = SMF_CREATE_STATE(NULL, init_run, NULL, NULL, NULL),
-        [S0] = SMF_CREATE_STATE(s0_entry, s0_run, NULL, NULL, NULL),
-        [S1] = SMF_CREATE_STATE(s1_entry, s1_run, NULL, NULL, NULL),
+    [INIT] = SMF_CREATE_STATE(NULL, init_run, NULL, NULL, NULL),
+    [S0] = SMF_CREATE_STATE(s0_entry, s0_run, NULL, NULL, NULL),
+    [S1] = SMF_CREATE_STATE(s1_entry, s1_run, NULL, NULL, NULL),
 };
 
 void button_pressed(const struct device *dev, struct gpio_callback *cb, uint32_t pins) {
-        /* Generate Button Press Event */
-        k_event_post(&button_events, FREQ_UP_BTN_PRESS);
+    /* Generate Button Press Event */
+    k_event_post(&button_events, FREQ_UP_BTN_PRESS);
 }
 
 int main(void)

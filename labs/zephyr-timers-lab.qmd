@@ -1,6 +1,6 @@
 ---
 title: "Zephyr: Timers & Atomic Operations Lab"
-date: "2026-02-15"
+date: "2026-09-27"
 format:
   html: default
   pdf: default
@@ -69,8 +69,7 @@ directly from the Terminal in VS Code.
 
 Two possible approaches:
 
-1. You can save the entire Terminal output to a file and parse it in your
-Jupyter notebook, or
+1. You can save the entire Terminal output to a file using the `Save Terminal Output` button (disk icon) in the device serial console and parse it in your Jupyter notebook, or
 
 2. You can cut-and-paste the relevant values from the Terminal output to a CSV
 file.

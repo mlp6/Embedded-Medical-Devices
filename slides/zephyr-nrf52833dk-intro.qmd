@@ -1,6 +1,6 @@
 ---
 title: "Introduction to Zephyr & Nordic SoC"
-date: "2025-08-25"
+date: "2026-08-22"
 format:
   live-html: 
     output-file: zephyr-nrf52833dk-intro.html
