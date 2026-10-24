@@ -103,10 +103,10 @@ with respect to the input voltage.  In other words, the brightness of `LED3` sho
 follow the input sinusoid as closely as possible in time.
 
 ::: callout-important
-The blocking nature of a syncronous buffered acquisition scheme is not ameable
+The blocking nature of a syncronous buffered acquisition scheme is not amenable
 to realtime modulation of the PWM output.  Consider using the aynchronous ADC
 sampling approach with a callback to update the PWM duty cycle after each
-sampling event or a timer-based, single-sample acqusition approach. 
+sampling event or a timer-based, single-sample acquisition approach. 
 :::
 
 ::: callout-tip

@@ -25,7 +25,7 @@ format:
 ## Zephyr Application Git Repository Overview
 
 * `src/main.c` - main application code
-* `.gitingore` - ignore files that are not needed in the git repository
+* `.gitignore` - ignore files that are not needed in the git repository
 * `CMakeLists.txt` - build system configuration file
 * `prj.conf` - Zephyr configuration file
 * `README.md` - this file
