@@ -1,6 +1,6 @@
 ---
 title: "Git (Version Control) Fundamentals"
-date: "2026-08-22"
+date: "2026-10-24"
 format:
   live-html: 
     output-file: git-fundamentals-notes.html
@@ -432,3 +432,79 @@ $ git remote -v
 origin  git@gitlab.oit.duke.edu:YOUR_NET_ID/YOUR_PROJECT_NAME.git (fetch)
 origin  git@gitlab.oit.duke.edu:YOUR_NET_ID/YOUR_PROJECT_NAME.git (push)
 ```
+
+## Git Team Workflow
+
+```{mermaid}
+%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#eef3fb", "primaryBorderColor": "#2d63ba", "primaryTextColor": "#1e1e1e", "lineColor": "#2d63ba", "edgeLabelBackground": "#ffffff"}}}%%
+flowchart TB
+    accTitle: Two-student fork and clone setup
+    accDescr: Student A forks the instructor's repository. Student B forks Student A's fork. Each student clones their own fork to their local machine.
+    Upstream["Instructor's parent repository"]
+    AFork["Student A's fork (GitLab)"]
+    BFork["Student B's fork (GitLab)"]
+    ALocal["Student A's local clone"]
+    BLocal["Student B's local clone"]
+
+    Upstream -->|"Student A forks"| AFork
+    AFork -->|"Student B forks A's repository"| BFork
+    AFork -->|"git clone"| ALocal
+    BFork -->|"git clone"| BLocal
+```
+
+- Each student uses `origin` for **their own fork**, `upstream` for the **instructor's repository**, and `teammate` for the **other student's fork**.
+- Remote names are configured in each local clone. Add `upstream` and `teammate` with `git remote add NAME URL`.
+
+## Git Team Workflow: Local Development
+
+Each student follows this workflow in **their own local clone**.
+
+```{mermaid}
+%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#eef3fb", "primaryBorderColor": "#2d63ba", "primaryTextColor": "#1e1e1e", "lineColor": "#2d63ba", "edgeLabelBackground": "#ffffff"}}}%%
+flowchart LR
+    accTitle: Local development branches for each student
+    accDescr: Each student creates single-sample-adc from main, creates adc-config and adc-tests from single-sample-adc, and merges both sub-branches locally back into single-sample-adc.
+    Main["main"]
+    Dev["single-sample-adc"]
+    FeatureA["adc-config<br/>work and commit"]
+    FeatureB["adc-tests<br/>work and commit"]
+    Integrated["single-sample-adc<br/>combined local work"]
+
+    Main -->|"create development branch"| Dev
+    Dev -->|"create sub-branch"| FeatureA
+    Dev -->|"create sub-branch"| FeatureB
+    FeatureA -->|"merge locally"| Integrated
+    FeatureB -->|"merge locally"| Integrated
+```
+
+- `adc-config` and `adc-tests` both branch from `single-sample-adc`.
+- To integrate a sub-branch, switch back to `single-sample-adc` and run `git merge BRANCH_NAME`; resolve any conflicts and test locally.
+- The two `single-sample-adc` boxes show the **same branch before and after** the local merges.
+- Initially, each student publishes `single-sample-adc` with `git push -u origin single-sample-adc` so their teammate can pull it.
+
+## Git Team Workflow: Share with Your Teammate
+
+Example: **Student A shares with Student B**, starting on A's local `single-sample-adc` branch.
+
+```{mermaid}
+%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#eef3fb", "primaryBorderColor": "#2d63ba", "primaryTextColor": "#1e1e1e", "lineColor": "#2d63ba", "edgeLabelBackground": "#ffffff"}}}%%
+sequenceDiagram
+    accTitle: Share Student A's development work with Student B
+    accDescr: A pulls B's single-sample-adc changes, resolves conflicts locally, pushes to A's fork, and opens a Merge Request into B's single-sample-adc. After review, B merges the request. Only completed development is merged into main. Reverse the roles for B to share with A.
+    participant A as Student A (local)
+    participant AF as A's fork (GitLab)
+    participant BF as B's fork (GitLab)
+
+    Note over A,BF: Development branch: single-sample-adc
+    A->>BF: 1. git pull --no-rebase teammate single-sample-adc
+    BF-->>A: B's published development commits
+    A->>A: 2. Resolve conflicts,<br/>complete merge, test
+    A->>AF: 3. git push -u origin single-sample-adc
+    AF->>BF: 4. Create Merge Request<br/>A:single-sample-adc → B:single-sample-adc
+    BF->>BF: 5. Review and merge MR<br/>into single-sample-adc
+    Note over AF,BF: Repeat steps 1–5 while developing
+    BF->>BF: 6. Only when development<br/>is complete:<br/>single-sample-adc → main
+```
+
+- Repeat steps 1–5 as work progresses. For **B to share with A**, reverse the student roles.
+- A Merge Request targets the teammate's **development branch**; merge that branch into `main` only when the feature is complete.
