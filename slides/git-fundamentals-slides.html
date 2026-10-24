@@ -847,6 +847,54 @@ sequenceDiagram
 <li>Repeat steps 1–5 as work progresses. For <strong>B to share with A</strong>, reverse the student roles.</li>
 <li>A Merge Request targets the teammate’s <strong>development branch</strong>; merge that branch into <code>main</code> only when the feature is complete.</li>
 </ul>
+</section>
+<section id="cherry-pick-an-upstream-update" class="slide level2">
+<h2>Cherry-pick an Upstream Update</h2>
+<div class="columns">
+<div class="column" style="width:65%;">
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">%%{init: {"theme": "base", "flowchart": {"nodeSpacing": 20, "rankSpacing": 20, "padding": 8}, "themeVariables": {"primaryColor": "#eef3fb", "primaryBorderColor": "#2d63ba", "primaryTextColor": "#1e1e1e", "lineColor": "#2d63ba", "edgeLabelBackground": "#ffffff"}}}%%
+flowchart TB
+    accTitle: Apply one instructor commit to a student's fork
+    accDescr: From a clean local branch, fetch the instructor's upstream repository, cherry-pick the selected commit, resolve and stage any conflicts and continue, inspect the resulting commit and status, then push the current branch to the student's own fork. Fetching does not change working files; cherry-picking creates a new commit with its own hash.
+    Upstream[("Instructor's repository&lt;br/&gt;upstream")]
+    Fork[("Your GitLab fork&lt;br/&gt;origin")]
+
+    Fetch["1. In your local clone:&lt;br/&gt;git fetch upstream"]
+    Pick["2. On your current branch:&lt;br/&gt;git cherry-pick COMMIT_HASH"]
+    Resolve["Resolve conflicts&lt;br/&gt;git add RESOLVED_FILE&lt;br/&gt;git cherry-pick --continue"]
+    Verify["3. Verify changes&lt;br/&gt;git show HEAD&lt;br/&gt;git status"]
+
+    Upstream --&gt; Fetch
+    Fetch --&gt; Pick
+    Pick --&gt;|"success"| Verify
+    Pick --&gt;|"conflicts"| Resolve
+    Resolve --&gt; Verify
+    Verify --&gt;|"4. git push origin HEAD"| Fork
+
+    classDef step fill:#eef3fb,stroke:#2d63ba,color:#1e1e1e
+    class Upstream,Fetch,Pick,Resolve,Verify,Fork step
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:35%;">
+<div style="font-size: 0.75em;">
+<ul>
+<li>Start on your target branch with a <strong>clean working tree</strong> (commit or stash changes).</li>
+<li><code>origin</code>: <strong>your fork</strong>. <code>upstream</code>: <strong>instructor’s repository</strong>.</li>
+<li>Fetch leaves working files unchanged. Cherry-pick applies <strong>one commit’s changes</strong>, creating a <strong>new commit with a new hash</strong>.</li>
+<li>Use the instructor’s <code>COMMIT_HASH</code>; stage each <code>RESOLVED_FILE</code> after resolving conflicts.</li>
+<li>To cancel after conflicts: <code>git cherry-pick --abort</code>.</li>
+</ul>
+</div>
+</div></div>
 
 
 <script type="ojs-module-contents">
