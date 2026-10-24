@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Dr.&nbsp;Mark Palmeri, M.D., Ph.D.">
-<meta name="dcterms.date" content="2026-08-22">
+<meta name="dcterms.date" content="2026-10-24">
 
 <title>Git (Version Control) Fundamentals – Embedded Medical Devices</title>
 <style>
@@ -448,6 +448,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#issues" id="toc-issues" class="nav-link" data-scroll-target="#issues">Issues</a></li>
   <li><a href="#miscellaneous-topics" id="toc-miscellaneous-topics" class="nav-link" data-scroll-target="#miscellaneous-topics">Miscellaneous Topics</a></li>
   <li><a href="#add-a-remote" id="toc-add-a-remote" class="nav-link" data-scroll-target="#add-a-remote">Add a Remote</a></li>
+  <li><a href="#git-team-workflow" id="toc-git-team-workflow" class="nav-link" data-scroll-target="#git-team-workflow">Git Team Workflow</a></li>
+  <li><a href="#git-team-workflow-local-development" id="toc-git-team-workflow-local-development" class="nav-link" data-scroll-target="#git-team-workflow-local-development">Git Team Workflow: Local Development</a></li>
+  <li><a href="#git-team-workflow-share-with-your-teammate" id="toc-git-team-workflow-share-with-your-teammate" class="nav-link" data-scroll-target="#git-team-workflow-share-with-your-teammate">Git Team Workflow: Share with Your Teammate</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/mlp6/Embedded-Medical-Devices/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="git-fundamentals-slides.html"><i class="bi bi-file-slides"></i>RevealJS (live)</a></li></ul></div></nav>
     </div>
@@ -481,7 +484,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">August 22, 2026</p>
+      <p class="date">October 24, 2026</p>
     </div>
   </div>
   
@@ -1012,6 +1015,110 @@ Tip
 <div class="sourceCode" id="cb23"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git remote <span class="at">-v</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="ex">origin</span>  git@gitlab.oit.duke.edu:YOUR_NET_ID/YOUR_PROJECT_NAME.git <span class="er">(</span><span class="ex">fetch</span><span class="kw">)</span></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="ex">origin</span>  git@gitlab.oit.duke.edu:YOUR_NET_ID/YOUR_PROJECT_NAME.git <span class="er">(</span><span class="ex">push</span><span class="kw">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="git-team-workflow" class="level2">
+<h2 class="anchored" data-anchor-id="git-team-workflow">Git Team Workflow</h2>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#eef3fb", "primaryBorderColor": "#2d63ba", "primaryTextColor": "#1e1e1e", "lineColor": "#2d63ba", "edgeLabelBackground": "#ffffff"}}}%%
+flowchart TB
+    accTitle: Two-student fork and clone setup
+    accDescr: Student A forks the instructor's repository. Student B forks Student A's fork. Each student clones their own fork to their local machine.
+    Upstream["Instructor's parent repository"]
+    AFork["Student A's fork (GitLab)"]
+    BFork["Student B's fork (GitLab)"]
+    ALocal["Student A's local clone"]
+    BLocal["Student B's local clone"]
+
+    Upstream --&gt;|"Student A forks"| AFork
+    AFork --&gt;|"Student B forks A's repository"| BFork
+    AFork --&gt;|"git clone"| ALocal
+    BFork --&gt;|"git clone"| BLocal
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<ul>
+<li>Each student uses <code>origin</code> for <strong>their own fork</strong>, <code>upstream</code> for the <strong>instructor’s repository</strong>, and <code>teammate</code> for the <strong>other student’s fork</strong>.</li>
+<li>Remote names are configured in each local clone. Add <code>upstream</code> and <code>teammate</code> with <code>git remote add NAME URL</code>.</li>
+</ul>
+</section>
+<section id="git-team-workflow-local-development" class="level2">
+<h2 class="anchored" data-anchor-id="git-team-workflow-local-development">Git Team Workflow: Local Development</h2>
+<p>Each student follows this workflow in <strong>their own local clone</strong>.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#eef3fb", "primaryBorderColor": "#2d63ba", "primaryTextColor": "#1e1e1e", "lineColor": "#2d63ba", "edgeLabelBackground": "#ffffff"}}}%%
+flowchart LR
+    accTitle: Local development branches for each student
+    accDescr: Each student creates single-sample-adc from main, creates adc-config and adc-tests from single-sample-adc, and merges both sub-branches locally back into single-sample-adc.
+    Main["main"]
+    Dev["single-sample-adc"]
+    FeatureA["adc-config&lt;br/&gt;work and commit"]
+    FeatureB["adc-tests&lt;br/&gt;work and commit"]
+    Integrated["single-sample-adc&lt;br/&gt;combined local work"]
+
+    Main --&gt;|"create development branch"| Dev
+    Dev --&gt;|"create sub-branch"| FeatureA
+    Dev --&gt;|"create sub-branch"| FeatureB
+    FeatureA --&gt;|"merge locally"| Integrated
+    FeatureB --&gt;|"merge locally"| Integrated
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<ul>
+<li><code>adc-config</code> and <code>adc-tests</code> both branch from <code>single-sample-adc</code>.</li>
+<li>To integrate a sub-branch, switch back to <code>single-sample-adc</code> and run <code>git merge BRANCH_NAME</code>; resolve any conflicts and test locally.</li>
+<li>The two <code>single-sample-adc</code> boxes show the <strong>same branch before and after</strong> the local merges.</li>
+<li>Initially, each student publishes <code>single-sample-adc</code> with <code>git push -u origin single-sample-adc</code> so their teammate can pull it.</li>
+</ul>
+</section>
+<section id="git-team-workflow-share-with-your-teammate" class="level2">
+<h2 class="anchored" data-anchor-id="git-team-workflow-share-with-your-teammate">Git Team Workflow: Share with Your Teammate</h2>
+<p>Example: <strong>Student A shares with Student B</strong>, starting on A’s local <code>single-sample-adc</code> branch.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#eef3fb", "primaryBorderColor": "#2d63ba", "primaryTextColor": "#1e1e1e", "lineColor": "#2d63ba", "edgeLabelBackground": "#ffffff"}}}%%
+sequenceDiagram
+    accTitle: Share Student A's development work with Student B
+    accDescr: A pulls B's single-sample-adc changes, resolves conflicts locally, pushes to A's fork, and opens a Merge Request into B's single-sample-adc. After review, B merges the request. Only completed development is merged into main. Reverse the roles for B to share with A.
+    participant A as Student A (local)
+    participant AF as A's fork (GitLab)
+    participant BF as B's fork (GitLab)
+
+    Note over A,BF: Development branch: single-sample-adc
+    A-&gt;&gt;BF: 1. git pull --no-rebase teammate single-sample-adc
+    BF--&gt;&gt;A: B's published development commits
+    A-&gt;&gt;A: 2. Resolve conflicts,&lt;br/&gt;complete merge, test
+    A-&gt;&gt;AF: 3. git push -u origin single-sample-adc
+    AF-&gt;&gt;BF: 4. Create Merge Request&lt;br/&gt;A:single-sample-adc → B:single-sample-adc
+    BF-&gt;&gt;BF: 5. Review and merge MR&lt;br/&gt;into single-sample-adc
+    Note over AF,BF: Repeat steps 1–5 while developing
+    BF-&gt;&gt;BF: 6. Only when development&lt;br/&gt;is complete:&lt;br/&gt;single-sample-adc → main
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<ul>
+<li>Repeat steps 1–5 as work progresses. For <strong>B to share with A</strong>, reverse the student roles.</li>
+<li>A Merge Request targets the teammate’s <strong>development branch</strong>; merge that branch into <code>main</code> only when the feature is complete.</li>
+</ul>
 
 
 <script type="ojs-module-contents">

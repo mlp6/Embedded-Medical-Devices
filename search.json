@@ -2114,6 +2114,39 @@
     ]
   },
   {
+    "objectID": "slides/git-fundamentals-notes.html#git-team-workflow",
+    "href": "slides/git-fundamentals-notes.html#git-team-workflow",
+    "title": "Git (Version Control) Fundamentals",
+    "section": "Git Team Workflow",
+    "text": "Git Team Workflow\n\n\n\n\n\n%%{init: {\"theme\": \"base\", \"themeVariables\": {\"primaryColor\": \"#eef3fb\", \"primaryBorderColor\": \"#2d63ba\", \"primaryTextColor\": \"#1e1e1e\", \"lineColor\": \"#2d63ba\", \"edgeLabelBackground\": \"#ffffff\"}}}%%\nflowchart TB\n    accTitle: Two-student fork and clone setup\n    accDescr: Student A forks the instructor's repository. Student B forks Student A's fork. Each student clones their own fork to their local machine.\n    Upstream[\"Instructor's parent repository\"]\n    AFork[\"Student A's fork (GitLab)\"]\n    BFork[\"Student B's fork (GitLab)\"]\n    ALocal[\"Student A's local clone\"]\n    BLocal[\"Student B's local clone\"]\n\n    Upstream --&gt;|\"Student A forks\"| AFork\n    AFork --&gt;|\"Student B forks A's repository\"| BFork\n    AFork --&gt;|\"git clone\"| ALocal\n    BFork --&gt;|\"git clone\"| BLocal\n\n\n\n\n\n\n\nEach student uses origin for their own fork, upstream for the instructor’s repository, and teammate for the other student’s fork.\nRemote names are configured in each local clone. Add upstream and teammate with git remote add NAME URL.",
+    "crumbs": [
+      "Learning Modules",
+      "Git Fundamentals"
+    ]
+  },
+  {
+    "objectID": "slides/git-fundamentals-notes.html#git-team-workflow-local-development",
+    "href": "slides/git-fundamentals-notes.html#git-team-workflow-local-development",
+    "title": "Git (Version Control) Fundamentals",
+    "section": "Git Team Workflow: Local Development",
+    "text": "Git Team Workflow: Local Development\nEach student follows this workflow in their own local clone.\n\n\n\n\n\n%%{init: {\"theme\": \"base\", \"themeVariables\": {\"primaryColor\": \"#eef3fb\", \"primaryBorderColor\": \"#2d63ba\", \"primaryTextColor\": \"#1e1e1e\", \"lineColor\": \"#2d63ba\", \"edgeLabelBackground\": \"#ffffff\"}}}%%\nflowchart LR\n    accTitle: Local development branches for each student\n    accDescr: Each student creates single-sample-adc from main, creates adc-config and adc-tests from single-sample-adc, and merges both sub-branches locally back into single-sample-adc.\n    Main[\"main\"]\n    Dev[\"single-sample-adc\"]\n    FeatureA[\"adc-config&lt;br/&gt;work and commit\"]\n    FeatureB[\"adc-tests&lt;br/&gt;work and commit\"]\n    Integrated[\"single-sample-adc&lt;br/&gt;combined local work\"]\n\n    Main --&gt;|\"create development branch\"| Dev\n    Dev --&gt;|\"create sub-branch\"| FeatureA\n    Dev --&gt;|\"create sub-branch\"| FeatureB\n    FeatureA --&gt;|\"merge locally\"| Integrated\n    FeatureB --&gt;|\"merge locally\"| Integrated\n\n\n\n\n\n\n\nadc-config and adc-tests both branch from single-sample-adc.\nTo integrate a sub-branch, switch back to single-sample-adc and run git merge BRANCH_NAME; resolve any conflicts and test locally.\nThe two single-sample-adc boxes show the same branch before and after the local merges.\nInitially, each student publishes single-sample-adc with git push -u origin single-sample-adc so their teammate can pull it.",
+    "crumbs": [
+      "Learning Modules",
+      "Git Fundamentals"
+    ]
+  },
+  {
+    "objectID": "slides/git-fundamentals-notes.html#git-team-workflow-share-with-your-teammate",
+    "href": "slides/git-fundamentals-notes.html#git-team-workflow-share-with-your-teammate",
+    "title": "Git (Version Control) Fundamentals",
+    "section": "Git Team Workflow: Share with Your Teammate",
+    "text": "Git Team Workflow: Share with Your Teammate\nExample: Student A shares with Student B, starting on A’s local single-sample-adc branch.\n\n\n\n\n\n%%{init: {\"theme\": \"base\", \"themeVariables\": {\"primaryColor\": \"#eef3fb\", \"primaryBorderColor\": \"#2d63ba\", \"primaryTextColor\": \"#1e1e1e\", \"lineColor\": \"#2d63ba\", \"edgeLabelBackground\": \"#ffffff\"}}}%%\nsequenceDiagram\n    accTitle: Share Student A's development work with Student B\n    accDescr: A pulls B's single-sample-adc changes, resolves conflicts locally, pushes to A's fork, and opens a Merge Request into B's single-sample-adc. After review, B merges the request. Only completed development is merged into main. Reverse the roles for B to share with A.\n    participant A as Student A (local)\n    participant AF as A's fork (GitLab)\n    participant BF as B's fork (GitLab)\n\n    Note over A,BF: Development branch: single-sample-adc\n    A-&gt;&gt;BF: 1. git pull --no-rebase teammate single-sample-adc\n    BF--&gt;&gt;A: B's published development commits\n    A-&gt;&gt;A: 2. Resolve conflicts,&lt;br/&gt;complete merge, test\n    A-&gt;&gt;AF: 3. git push -u origin single-sample-adc\n    AF-&gt;&gt;BF: 4. Create Merge Request&lt;br/&gt;A:single-sample-adc → B:single-sample-adc\n    BF-&gt;&gt;BF: 5. Review and merge MR&lt;br/&gt;into single-sample-adc\n    Note over AF,BF: Repeat steps 1–5 while developing\n    BF-&gt;&gt;BF: 6. Only when development&lt;br/&gt;is complete:&lt;br/&gt;single-sample-adc → main\n\n\n\n\n\n\n\nRepeat steps 1–5 as work progresses. For B to share with A, reverse the student roles.\nA Merge Request targets the teammate’s development branch; merge that branch into main only when the feature is complete.",
+    "crumbs": [
+      "Learning Modules",
+      "Git Fundamentals"
+    ]
+  },
+  {
     "objectID": "slides/git-fundamentals-slides.html#why-version-control",
     "href": "slides/git-fundamentals-slides.html#why-version-control",
     "title": "Git (Version Control) Fundamentals",
@@ -2357,6 +2390,27 @@
     "title": "Git (Version Control) Fundamentals",
     "section": "Add a Remote",
     "text": "Add a Remote\n\nYou can add a remote using the following syntax:\n\n$ git remote add origin git@gitlab.oit.duke.edu:YOUR_NET_ID/YOUR_PROJECT_NAME.git\n\nYou can access the URL for a remote repository after you create it online.\nThe default remote name is origin. That name is arbitrary, but widely used.\nYou can have multiple remotes associated with a repository.\nURLs that start with git@ use SSH keys to authenticate you.\nYou can see the remotes associated with your local git repository as follows:\n\n$ git remote -v\norigin  git@gitlab.oit.duke.edu:YOUR_NET_ID/YOUR_PROJECT_NAME.git (fetch)\norigin  git@gitlab.oit.duke.edu:YOUR_NET_ID/YOUR_PROJECT_NAME.git (push)"
+  },
+  {
+    "objectID": "slides/git-fundamentals-slides.html#git-team-workflow",
+    "href": "slides/git-fundamentals-slides.html#git-team-workflow",
+    "title": "Git (Version Control) Fundamentals",
+    "section": "Git Team Workflow",
+    "text": "Git Team Workflow\n\n\n\n\n\n%%{init: {\"theme\": \"base\", \"themeVariables\": {\"primaryColor\": \"#eef3fb\", \"primaryBorderColor\": \"#2d63ba\", \"primaryTextColor\": \"#1e1e1e\", \"lineColor\": \"#2d63ba\", \"edgeLabelBackground\": \"#ffffff\"}}}%%\nflowchart TB\n    accTitle: Two-student fork and clone setup\n    accDescr: Student A forks the instructor's repository. Student B forks Student A's fork. Each student clones their own fork to their local machine.\n    Upstream[\"Instructor's parent repository\"]\n    AFork[\"Student A's fork (GitLab)\"]\n    BFork[\"Student B's fork (GitLab)\"]\n    ALocal[\"Student A's local clone\"]\n    BLocal[\"Student B's local clone\"]\n\n    Upstream --&gt;|\"Student A forks\"| AFork\n    AFork --&gt;|\"Student B forks A's repository\"| BFork\n    AFork --&gt;|\"git clone\"| ALocal\n    BFork --&gt;|\"git clone\"| BLocal\n\n\n\n\n\n\n\nEach student uses origin for their own fork, upstream for the instructor’s repository, and teammate for the other student’s fork.\nRemote names are configured in each local clone. Add upstream and teammate with git remote add NAME URL."
+  },
+  {
+    "objectID": "slides/git-fundamentals-slides.html#git-team-workflow-local-development",
+    "href": "slides/git-fundamentals-slides.html#git-team-workflow-local-development",
+    "title": "Git (Version Control) Fundamentals",
+    "section": "Git Team Workflow: Local Development",
+    "text": "Git Team Workflow: Local Development\nEach student follows this workflow in their own local clone.\n\n\n\n\n\n%%{init: {\"theme\": \"base\", \"themeVariables\": {\"primaryColor\": \"#eef3fb\", \"primaryBorderColor\": \"#2d63ba\", \"primaryTextColor\": \"#1e1e1e\", \"lineColor\": \"#2d63ba\", \"edgeLabelBackground\": \"#ffffff\"}}}%%\nflowchart LR\n    accTitle: Local development branches for each student\n    accDescr: Each student creates single-sample-adc from main, creates adc-config and adc-tests from single-sample-adc, and merges both sub-branches locally back into single-sample-adc.\n    Main[\"main\"]\n    Dev[\"single-sample-adc\"]\n    FeatureA[\"adc-config&lt;br/&gt;work and commit\"]\n    FeatureB[\"adc-tests&lt;br/&gt;work and commit\"]\n    Integrated[\"single-sample-adc&lt;br/&gt;combined local work\"]\n\n    Main --&gt;|\"create development branch\"| Dev\n    Dev --&gt;|\"create sub-branch\"| FeatureA\n    Dev --&gt;|\"create sub-branch\"| FeatureB\n    FeatureA --&gt;|\"merge locally\"| Integrated\n    FeatureB --&gt;|\"merge locally\"| Integrated\n\n\n\n\n\n\n\nadc-config and adc-tests both branch from single-sample-adc.\nTo integrate a sub-branch, switch back to single-sample-adc and run git merge BRANCH_NAME; resolve any conflicts and test locally.\nThe two single-sample-adc boxes show the same branch before and after the local merges.\nInitially, each student publishes single-sample-adc with git push -u origin single-sample-adc so their teammate can pull it."
+  },
+  {
+    "objectID": "slides/git-fundamentals-slides.html#git-team-workflow-share-with-your-teammate",
+    "href": "slides/git-fundamentals-slides.html#git-team-workflow-share-with-your-teammate",
+    "title": "Git (Version Control) Fundamentals",
+    "section": "Git Team Workflow: Share with Your Teammate",
+    "text": "Git Team Workflow: Share with Your Teammate\nExample: Student A shares with Student B, starting on A’s local single-sample-adc branch.\n\n\n\n\n\n%%{init: {\"theme\": \"base\", \"themeVariables\": {\"primaryColor\": \"#eef3fb\", \"primaryBorderColor\": \"#2d63ba\", \"primaryTextColor\": \"#1e1e1e\", \"lineColor\": \"#2d63ba\", \"edgeLabelBackground\": \"#ffffff\"}}}%%\nsequenceDiagram\n    accTitle: Share Student A's development work with Student B\n    accDescr: A pulls B's single-sample-adc changes, resolves conflicts locally, pushes to A's fork, and opens a Merge Request into B's single-sample-adc. After review, B merges the request. Only completed development is merged into main. Reverse the roles for B to share with A.\n    participant A as Student A (local)\n    participant AF as A's fork (GitLab)\n    participant BF as B's fork (GitLab)\n\n    Note over A,BF: Development branch: single-sample-adc\n    A-&gt;&gt;BF: 1. git pull --no-rebase teammate single-sample-adc\n    BF--&gt;&gt;A: B's published development commits\n    A-&gt;&gt;A: 2. Resolve conflicts,&lt;br/&gt;complete merge, test\n    A-&gt;&gt;AF: 3. git push -u origin single-sample-adc\n    AF-&gt;&gt;BF: 4. Create Merge Request&lt;br/&gt;A:single-sample-adc → B:single-sample-adc\n    BF-&gt;&gt;BF: 5. Review and merge MR&lt;br/&gt;into single-sample-adc\n    Note over AF,BF: Repeat steps 1–5 while developing\n    BF-&gt;&gt;BF: 6. Only when development&lt;br/&gt;is complete:&lt;br/&gt;single-sample-adc → main\n\n\n\n\n\n\n\nRepeat steps 1–5 as work progresses. For B to share with A, reverse the student roles.\nA Merge Request targets the teammate’s development branch; merge that branch into main only when the feature is complete."
   },
   {
     "objectID": "index.html",
