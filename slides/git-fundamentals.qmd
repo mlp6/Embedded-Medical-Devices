@@ -508,3 +508,45 @@ sequenceDiagram
 
 - Repeat steps 1–5 as work progresses. For **B to share with A**, reverse the student roles.
 - A Merge Request targets the teammate's **development branch**; merge that branch into `main` only when the feature is complete.
+
+## Cherry-pick an Upstream Update
+
+:::: {.columns}
+::: {.column width="65%"}
+
+```{mermaid}
+%%{init: {"theme": "base", "flowchart": {"nodeSpacing": 20, "rankSpacing": 20, "padding": 8}, "themeVariables": {"primaryColor": "#eef3fb", "primaryBorderColor": "#2d63ba", "primaryTextColor": "#1e1e1e", "lineColor": "#2d63ba", "edgeLabelBackground": "#ffffff"}}}%%
+flowchart TB
+    accTitle: Apply one instructor commit to a student's fork
+    accDescr: From a clean local branch, fetch the instructor's upstream repository, cherry-pick the selected commit, resolve and stage any conflicts and continue, inspect the resulting commit and status, then push the current branch to the student's own fork. Fetching does not change working files; cherry-picking creates a new commit with its own hash.
+    Upstream[("Instructor's repository<br/>upstream")]
+    Fork[("Your GitLab fork<br/>origin")]
+
+    Fetch["1. In your local clone:<br/>git fetch upstream"]
+    Pick["2. On your current branch:<br/>git cherry-pick COMMIT_HASH"]
+    Resolve["Resolve conflicts<br/>git add RESOLVED_FILE<br/>git cherry-pick --continue"]
+    Verify["3. Verify changes<br/>git show HEAD<br/>git status"]
+
+    Upstream --> Fetch
+    Fetch --> Pick
+    Pick -->|"success"| Verify
+    Pick -->|"conflicts"| Resolve
+    Resolve --> Verify
+    Verify -->|"4. git push origin HEAD"| Fork
+
+    classDef step fill:#eef3fb,stroke:#2d63ba,color:#1e1e1e
+    class Upstream,Fetch,Pick,Resolve,Verify,Fork step
+```
+
+:::
+::: {.column width="35%"}
+::: {style="font-size: 0.75em;"}
+
+- Start on your target branch with a **clean working tree** (commit or stash changes).
+- `origin`: **your fork**. `upstream`: **instructor's repository**.
+- Fetch leaves working files unchanged. Cherry-pick applies **one commit's changes**, creating a **new commit with a new hash**.
+- Use the instructor's `COMMIT_HASH`; stage each `RESOLVED_FILE` after resolving conflicts.
+- To cancel after conflicts: `git cherry-pick --abort`.
+:::
+:::
+::::
