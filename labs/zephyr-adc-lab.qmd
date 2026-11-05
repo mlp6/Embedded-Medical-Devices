@@ -285,7 +285,7 @@ sequence acquisition now using an
 **asynchronous** acquisition that populates the same array that was populated
 with the synchronous approach.
 
-- Use `AIN3` and `AIN4` for the differential ADC input that will be read using
+- Use `AIN4` and `AIN5` for the differential ADC input that will be read using
 this asynchronous approach.
 
 - Use `BUTTON2` to trigger the asynchronous ADC sequence acquisition and
