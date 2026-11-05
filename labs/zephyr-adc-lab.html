@@ -40,7 +40,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-fced259a1985fd972ecb57c7cd45153f.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-1e6682750ff6284228e074486cdd25e3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-c6afeb1f8928e9216c68ef3d8ba55faf.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -786,7 +786,7 @@ Important
 <p>In a new development branch called <code>async_adc</code>, add the following functionality to your firmware:</p>
 <ul>
 <li><p>Replicate the functionality of your blocking, synchronous buffered ADC sequence acquisition now using an <strong>asynchronous</strong> acquisition that populates the same array that was populated with the synchronous approach.</p></li>
-<li><p>Use <code>AIN3</code> and <code>AIN4</code> for the differential ADC input that will be read using this asynchronous approach.</p></li>
+<li><p>Use <code>AIN4</code> and <code>AIN5</code> for the differential ADC input that will be read using this asynchronous approach.</p></li>
 <li><p>Use <code>BUTTON2</code> to trigger the asynchronous ADC sequence acquisition and illuminate <code>LED3</code> for 1 second after the sequence is complete.</p></li>
 <li><p>Utilize the Zephyr ADC async enumerations presented in lecture to modulate the behaviour of the asynchronous callback function.</p></li>
 <li><p>Detect the raised kernel poll (<code>k_poll</code>) signal to indicate when the ADC sequence is complete.</p></li>
