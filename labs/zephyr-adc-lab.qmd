@@ -1,6 +1,6 @@
 ---
 title: "Analog-to-Digital Conversion (ADC) Lab"
-date: "2026-10-20"
+date: "2026-11-08"
 format:
   html: default
   pdf: default
@@ -26,12 +26,14 @@ format:
 Gitlab to manage your code development and testing.
 
 - Each person should add their lab partner as a `Developer` to their Gitlab
-repository so that they can push and pull code to the repository.
+repository so that they can push and pull code to the repository.  Now each of
+you can clone that one repository, making sure to do individual work on
+development branches and only merge them into common branches (overall lab
+development or `main`) through `Merge Requests` do your teammate can easily
+audit what has been contributed.
 
-- Each person should be commiting and pushing code to their own repositories on
-their own development branches and use Merge Requests to merge their code into
-the `main` branch, which may be the only "common" branch between each person's
-repositories.
+- You can review some example `git` collaboration workflow in the [`git` lecture slides](../slides/git-fundamentals.qmd#git-team-workflow).
+
 
 :::callout-tip
 Consider using libraries instead of writing all code in `main.c` to make it

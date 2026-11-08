@@ -1,6 +1,6 @@
 ---
 title: "Git (Version Control) Fundamentals"
-date: "2026-10-24"
+date: "2026-11-08"
 format:
   live-html: 
     output-file: git-fundamentals-notes.html
@@ -264,7 +264,7 @@ venv/
 ## Live Demo
 
 Live demo time!
-
+>
 ## More Git Basics 
 
 ## How do a undo changes to a file?
@@ -321,7 +321,7 @@ $ git checkout -b BRANCHNAME
 OR
 
 $ git switch -c BRANCHNAME
-```
+``>`
 :::
 
 ---
@@ -438,39 +438,38 @@ origin  git@gitlab.oit.duke.edu:YOUR_NET_ID/YOUR_PROJECT_NAME.git (push)
 ```{mermaid}
 %%{init: {"theme": "base", "themeVariables": {"primaryColor": "#eef3fb", "primaryBorderColor": "#2d63ba", "primaryTextColor": "#1e1e1e", "lineColor": "#2d63ba", "edgeLabelBackground": "#ffffff"}}}%%
 flowchart TB
-    accTitle: Two-student fork and clone setup
-    accDescr: Student A forks the instructor's repository. Student B forks Student A's fork. Each student clones their own fork to their local machine.
+    accTitle: Two students sharing one GitLab repository
+    accDescr: Student A forks the instructor's repository and adds Student B as a Developer to that project. Both students clone Student A's repository to their own local machines and use it as origin.
     Upstream["Instructor's parent repository"]
-    AFork["Student A's fork (GitLab)"]
-    BFork["Student B's fork (GitLab)"]
+    AFork["Student A's fork (GitLab)<br/>Shared team repository"]
     ALocal["Student A's local clone"]
     BLocal["Student B's local clone"]
 
     Upstream -->|"Student A forks"| AFork
-    AFork -->|"Student B forks A's repository"| BFork
-    AFork -->|"git clone"| ALocal
-    BFork -->|"git clone"| BLocal
+    AFork -->|"A clones"| ALocal
+    AFork -->|"A adds B as Developer; B clones"| BLocal
 ```
 
-- Each student uses `origin` for **their own fork**, `upstream` for the **instructor's repository**, and `teammate` for the **other student's fork**.
-- Remote names are configured in each local clone. Add `upstream` and `teammate` with `git remote add NAME URL`.
+- Student A adds Student B as a project member with the **Developer** role before B clones A's repository.
+- Both students use `origin` for **A's shared repository** and `upstream` for the **instructor's repository**.
+- Cloning configures `origin`; each student adds `upstream` in their local clone with `git remote add upstream INSTRUCTOR_REPO_URL`.
 
 ## Git Team Workflow: Local Development
 
-Each student follows this workflow in **their own local clone**.
+Each student works in **their own local clone of A's repository**, using the shared `single-sample-adc` development branch.
 
 ```{mermaid}
 %%{init: {"theme": "base", "themeVariables": {"primaryColor": "#eef3fb", "primaryBorderColor": "#2d63ba", "primaryTextColor": "#1e1e1e", "lineColor": "#2d63ba", "edgeLabelBackground": "#ffffff"}}}%%
 flowchart LR
     accTitle: Local development branches for each student
-    accDescr: Each student creates single-sample-adc from main, creates adc-config and adc-tests from single-sample-adc, and merges both sub-branches locally back into single-sample-adc.
+    accDescr: Student A creates and publishes single-sample-adc from main, and Student B clones that published branch. In their own local clones, students create task sub-branches such as adc-config and adc-tests from single-sample-adc and merge their sub-branches locally back into single-sample-adc before sharing changes.
     Main["main"]
     Dev["single-sample-adc"]
     FeatureA["adc-config<br/>work and commit"]
     FeatureB["adc-tests<br/>work and commit"]
     Integrated["single-sample-adc<br/>combined local work"]
 
-    Main -->|"create development branch"| Dev
+    Main -->|"A creates and publishes;<br/>B clones branch"| Dev
     Dev -->|"create sub-branch"| FeatureA
     Dev -->|"create sub-branch"| FeatureB
     FeatureA -->|"merge locally"| Integrated
@@ -480,34 +479,40 @@ flowchart LR
 - `adc-config` and `adc-tests` both branch from `single-sample-adc`.
 - To integrate a sub-branch, switch back to `single-sample-adc` and run `git merge BRANCH_NAME`; resolve any conflicts and test locally.
 - The two `single-sample-adc` boxes show the **same branch before and after** the local merges.
-- Initially, each student publishes `single-sample-adc` with `git push -u origin single-sample-adc` so their teammate can pull it.
+- Initially, Student A publishes `single-sample-adc` with `git push -u origin single-sample-adc` so Student B can clone that branch.
 
 ## Git Team Workflow: Share with Your Teammate
 
-Example: **Student A shares with Student B**, starting on A's local `single-sample-adc` branch.
+Example: **Both students work in Student A's repository**, starting on A's local `single-sample-adc` branch.
+
+- A adds B as a project member in GitLab with the **Developer** role.
+- B clones **A's repository**; both students use that repository as `origin`.
 
 ```{mermaid}
 %%{init: {"theme": "base", "themeVariables": {"primaryColor": "#eef3fb", "primaryBorderColor": "#2d63ba", "primaryTextColor": "#1e1e1e", "lineColor": "#2d63ba", "edgeLabelBackground": "#ffffff"}}}%%
 sequenceDiagram
     accTitle: Share Student A's development work with Student B
-    accDescr: A pulls B's single-sample-adc changes, resolves conflicts locally, pushes to A's fork, and opens a Merge Request into B's single-sample-adc. After review, B merges the request. Only completed development is merged into main. Reverse the roles for B to share with A.
+    accDescr: A adds B as a Developer to A's GitLab repository and publishes single-sample-adc. B clones that branch from A's repository, commits local work, pulls shared changes, resolves conflicts and tests, then pushes to the same branch. Both students repeat this cycle. When development is complete, they open a Merge Request into main for review.
     participant A as Student A (local)
-    participant AF as A's fork (GitLab)
-    participant BF as B's fork (GitLab)
+    participant Repo as A's repository (GitLab)
+    participant B as Student B (local)
 
-    Note over A,BF: Development branch: single-sample-adc
-    A->>BF: 1. git pull --no-rebase teammate single-sample-adc
-    BF-->>A: B's published development commits
-    A->>A: 2. Resolve conflicts,<br/>complete merge, test
-    A->>AF: 3. git push -u origin single-sample-adc
-    AF->>BF: 4. Create Merge Request<br/>A:single-sample-adc → B:single-sample-adc
-    BF->>BF: 5. Review and merge MR<br/>into single-sample-adc
-    Note over AF,BF: Repeat steps 1–5 while developing
-    BF->>BF: 6. Only when development<br/>is complete:<br/>single-sample-adc → main
+    Note over A,B: B has Developer access to A's repository
+    A->>Repo: 1. git push -u origin single-sample-adc
+    B->>Repo: 2. git clone -b single-sample-adc A_REPO_URL
+    Repo-->>B: Local clone of A's repository
+    B->>B: 3. Edit, git add, git commit
+    B->>Repo: 4. git pull --no-rebase origin single-sample-adc
+    Repo-->>B: Teammate's published commits
+    B->>B: Resolve conflicts,<br/>complete merge, test
+    B->>Repo: 5. git push origin single-sample-adc
+    Note over A,B: Both students repeat steps 3–5 on single-sample-adc
+    Repo->>Repo: 6. When development is complete:<br/>MR single-sample-adc → main<br/>Review and merge
 ```
 
-- Repeat steps 1–5 as work progresses. For **B to share with A**, reverse the student roles.
-- A Merge Request targets the teammate's **development branch**; merge that branch into `main` only when the feature is complete.
+- Replace `A_REPO_URL` with A's GitLab clone URL; B then enters the cloned directory.
+- Commit before pulling; resolve any conflicts and test before pushing. If a push is rejected because the branch advanced, repeat steps 4–5.
+- Open a Merge Request from `single-sample-adc` into `main` in A's repository only when the feature is complete.
 
 ## Cherry-pick an Upstream Update
 
