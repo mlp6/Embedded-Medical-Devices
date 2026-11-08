@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Dr.&nbsp;Mark Palmeri, M.D., Ph.D.">
-<meta name="dcterms.date" content="2026-10-24">
+<meta name="dcterms.date" content="2026-11-08">
 
 <title>Git (Version Control) Fundamentals – Embedded Medical Devices</title>
 <style>
@@ -433,25 +433,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#can-certain-filesdirectories-be-ignored" id="toc-can-certain-filesdirectories-be-ignored" class="nav-link" data-scroll-target="#can-certain-filesdirectories-be-ignored">Can certain files/directories be “ignored”?</a></li>
   <li><a href="#example-.gitignore" id="toc-example-.gitignore" class="nav-link" data-scroll-target="#example-.gitignore">Example <code>.gitignore</code>:</a></li>
   <li><a href="#live-demo" id="toc-live-demo" class="nav-link" data-scroll-target="#live-demo">Live Demo</a></li>
-  <li><a href="#more-git-basics" id="toc-more-git-basics" class="nav-link" data-scroll-target="#more-git-basics">More Git Basics</a></li>
   <li><a href="#how-do-a-undo-changes-to-a-file" id="toc-how-do-a-undo-changes-to-a-file" class="nav-link" data-scroll-target="#how-do-a-undo-changes-to-a-file">How do a undo changes to a file?</a></li>
   <li><a href="#pushingpulling-git-commits" id="toc-pushingpulling-git-commits" class="nav-link" data-scroll-target="#pushingpulling-git-commits">Pushing/Pulling Git Commits</a></li>
   <li><a href="#more-advanced-git-workflows" id="toc-more-advanced-git-workflows" class="nav-link" data-scroll-target="#more-advanced-git-workflows">More Advanced Git Workflows</a></li>
   <li><a href="#branching" id="toc-branching" class="nav-link" data-scroll-target="#branching">Branching</a></li>
   <li><a href="#steps-to-create-and-use-a-development-branch" id="toc-steps-to-create-and-use-a-development-branch" class="nav-link" data-scroll-target="#steps-to-create-and-use-a-development-branch">Steps to Create and Use a Development Branch</a></li>
-  <li><a href="#naming-branches" id="toc-naming-branches" class="nav-link" data-scroll-target="#naming-branches">Naming Branches</a></li>
-  <li><a href="#branches-on-remotes" id="toc-branches-on-remotes" class="nav-link" data-scroll-target="#branches-on-remotes">Branches on Remotes</a></li>
-  <li><a href="#merging-a-branch" id="toc-merging-a-branch" class="nav-link" data-scroll-target="#merging-a-branch">Merging a Branch</a></li>
-  <li><a href="#merging-approaches" id="toc-merging-approaches" class="nav-link" data-scroll-target="#merging-approaches">Merging Approaches</a></li>
-  <li><a href="#pullmerge-requests" id="toc-pullmerge-requests" class="nav-link" data-scroll-target="#pullmerge-requests">Pull/Merge Requests</a></li>
-  <li><a href="#annotated-tags" id="toc-annotated-tags" class="nav-link" data-scroll-target="#annotated-tags">[Annotated] Tags</a></li>
-  <li><a href="#issues" id="toc-issues" class="nav-link" data-scroll-target="#issues">Issues</a></li>
-  <li><a href="#miscellaneous-topics" id="toc-miscellaneous-topics" class="nav-link" data-scroll-target="#miscellaneous-topics">Miscellaneous Topics</a></li>
-  <li><a href="#add-a-remote" id="toc-add-a-remote" class="nav-link" data-scroll-target="#add-a-remote">Add a Remote</a></li>
-  <li><a href="#git-team-workflow" id="toc-git-team-workflow" class="nav-link" data-scroll-target="#git-team-workflow">Git Team Workflow</a></li>
-  <li><a href="#git-team-workflow-local-development" id="toc-git-team-workflow-local-development" class="nav-link" data-scroll-target="#git-team-workflow-local-development">Git Team Workflow: Local Development</a></li>
-  <li><a href="#git-team-workflow-share-with-your-teammate" id="toc-git-team-workflow-share-with-your-teammate" class="nav-link" data-scroll-target="#git-team-workflow-share-with-your-teammate">Git Team Workflow: Share with Your Teammate</a></li>
-  <li><a href="#cherry-pick-an-upstream-update" id="toc-cherry-pick-an-upstream-update" class="nav-link" data-scroll-target="#cherry-pick-an-upstream-update">Cherry-pick an Upstream Update</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/mlp6/Embedded-Medical-Devices/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="git-fundamentals-slides.html"><i class="bi bi-file-slides"></i>RevealJS (live)</a></li></ul></div></nav>
     </div>
@@ -485,7 +471,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 24, 2026</p>
+      <p class="date">November 8, 2026</p>
     </div>
   </div>
   
@@ -818,10 +804,7 @@ Warning
 </section>
 <section id="live-demo" class="level2">
 <h2 class="anchored" data-anchor-id="live-demo">Live Demo</h2>
-<p>Live demo time!</p>
-</section>
-<section id="more-git-basics" class="level2">
-<h2 class="anchored" data-anchor-id="more-git-basics">More Git Basics</h2>
+<p>Live demo time! &gt; ## More Git Basics</p>
 </section>
 <section id="how-do-a-undo-changes-to-a-file" class="level2">
 <h2 class="anchored" data-anchor-id="how-do-a-undo-changes-to-a-file">How do a undo changes to a file?</h2>
@@ -905,39 +888,37 @@ Tip
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a> </span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="ex">OR</span></span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git switch <span class="at">-c</span> BRANCHNAME</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-<hr>
-</section>
-<section id="naming-branches" class="level2">
-<h2 class="anchored" data-anchor-id="naming-branches">Naming Branches</h2>
-<ul>
-<li>It is important to use good branch names! This will be helpful for you when breaking up your tasks, and knowing what you should focus on developing in the specified branch.</li>
-<li>There isn’t a <strong>best</strong> practice for naming branches, but consider using the template: <code>functionality-in-my-project</code>.</li>
-<li>For example, if you are developing a library to calculate heart rate from an ECG signal, a good branch name would be <code>dev-calc-ecg-hr</code>.</li>
-</ul>
-</section>
-<section id="branches-on-remotes" class="level2">
-<h2 class="anchored" data-anchor-id="branches-on-remotes">Branches on Remotes</h2>
-<ul>
-<li>You can push a branch to your remote just like you would <code>main</code>.</li>
-<li>Git may prompt you to have to create the branch on <code>origin</code> with the same name as the local branch:</li>
-</ul>
-<div class="sourceCode" id="cb15"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git push <span class="at">--set-upstream</span> origin BRANCHNAME</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git switch <span class="at">-c</span> BRANCHNAME</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="kw">``</span><span class="op">&gt;</span><span class="kw">`</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="ex">:::</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="ex">---</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="co">## Naming Branches</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="ex">-</span> It is important to use good branch names! This will be helpful for you when breaking up your tasks, and knowing what you should focus on developing in the specified branch. </span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="ex">-</span> There isn<span class="st">'t a **best** practice for naming branches, but consider using the template: `functionality-in-my-project`. </span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="st">- For example, if you are developing a library to calculate heart rate from an ECG signal, a good branch name would be `dev-calc-ecg-hr`.</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a><span class="st">## Branches on Remotes</span></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a><span class="st">- You can push a branch to your remote just like you would `main`.</span></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a><span class="st">- Git may prompt you to have to create the branch on `origin` with the same name as the local branch:</span></span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a><span class="st">```sh</span></span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a><span class="st">$ git push --set-upstream origin BRANCHNAME</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>If you want to avoid having to manually set the upstream branch, you can set a configuration option to always do that for you. You probably set this up in the first week of class in your <code>.gitconfig</code> file, but if not:</li>
 </ul>
-<div class="sourceCode" id="cb16"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git config <span class="at">--global</span> push.autoSetupRemote true</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
+<div class="sourceCode" id="cb15"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git config <span class="at">--global</span> push.autoSetupRemote true</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <section id="merging-a-branch" class="level2">
 <h2 class="anchored" data-anchor-id="merging-a-branch">Merging a Branch</h2>
 <ul>
 <li>Once you are “done” developing on a branch, you can <code>merge</code> your changes back into your <code>main</code> branch (or another branch).</li>
 <li>Merging is also the way that you can incorporate another developer’s code into your branches.</li>
 </ul>
-<div class="sourceCode" id="cb17"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git checkout main  <span class="co"># switch to the branch you want to merge into</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git merge BRANCHNAME  <span class="co"># merge the branch into the current branch</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git checkout main  <span class="co"># switch to the branch you want to merge into</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git merge BRANCHNAME  <span class="co"># merge the branch into the current branch</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="merging-approaches" class="level2">
 <h2 class="anchored" data-anchor-id="merging-approaches">Merging Approaches</h2>
@@ -971,20 +952,20 @@ Tip
 <li><strong>Annotated tags</strong> are usually used to tags a <a href="https://semver.org/">semantic version number</a>–along with a message–to a specific commit.</li>
 <li>Example syntax to create a tag for the current commit checked out:</li>
 </ul>
-<div class="sourceCode" id="cb18"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git tag <span class="at">-a</span> <span class="st">'v1.0.0'</span> <span class="at">-m</span> <span class="st">'version of code for submission'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git tag <span class="at">-a</span> <span class="st">'v1.0.0'</span> <span class="at">-m</span> <span class="st">'version of code for submission'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>Example syntax to create a tag for a specified commit:</li>
 </ul>
-<div class="sourceCode" id="cb19"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git tag <span class="at">-a</span> <span class="st">'v1.0.0'</span> <span class="at">-m</span> <span class="st">'version of code for submission'</span> COMMIT_HASH</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git tag <span class="at">-a</span> <span class="st">'v1.0.0'</span> <span class="at">-m</span> <span class="st">'version of code for submission'</span> COMMIT_HASH</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <hr>
 <ul>
 <li>Locally-created tags have to be specifically pushed to remotes using:</li>
 </ul>
-<div class="sourceCode" id="cb20"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git push <span class="at">--tags</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git push <span class="at">--tags</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>You can see what tags exist locally using:</li>
 </ul>
-<div class="sourceCode" id="cb21"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git tag <span class="at">--list</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git tag <span class="at">--list</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>Tags are available via the GitLab/GitHub web UI (and can be used to create Releases).</li>
 </ul>
@@ -1005,7 +986,7 @@ Tip
 <ul>
 <li>You can add a remote using the following syntax:</li>
 </ul>
-<div class="sourceCode" id="cb22"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git remote add origin git@gitlab.oit.duke.edu:YOUR_NET_ID/YOUR_PROJECT_NAME.git</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git remote add origin git@gitlab.oit.duke.edu:YOUR_NET_ID/YOUR_PROJECT_NAME.git</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>You can access the URL for a remote repository after you create it online.</li>
 <li>The default remote name is <code>origin</code>. That name is arbitrary, but widely used.</li>
@@ -1013,9 +994,9 @@ Tip
 <li>URLs that start with <code>git@</code> use SSH keys to authenticate you.</li>
 <li>You can see the remotes associated with your local git repository as follows:</li>
 </ul>
-<div class="sourceCode" id="cb23"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git remote <span class="at">-v</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="ex">origin</span>  git@gitlab.oit.duke.edu:YOUR_NET_ID/YOUR_PROJECT_NAME.git <span class="er">(</span><span class="ex">fetch</span><span class="kw">)</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="ex">origin</span>  git@gitlab.oit.duke.edu:YOUR_NET_ID/YOUR_PROJECT_NAME.git <span class="er">(</span><span class="ex">push</span><span class="kw">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git remote <span class="at">-v</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="ex">origin</span>  git@gitlab.oit.duke.edu:YOUR_NET_ID/YOUR_PROJECT_NAME.git <span class="er">(</span><span class="ex">fetch</span><span class="kw">)</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="ex">origin</span>  git@gitlab.oit.duke.edu:YOUR_NET_ID/YOUR_PROJECT_NAME.git <span class="er">(</span><span class="ex">push</span><span class="kw">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="git-team-workflow" class="level2">
 <h2 class="anchored" data-anchor-id="git-team-workflow">Git Team Workflow</h2>
@@ -1026,18 +1007,16 @@ Tip
 <div>
 <pre class="mermaid mermaid-js">%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#eef3fb", "primaryBorderColor": "#2d63ba", "primaryTextColor": "#1e1e1e", "lineColor": "#2d63ba", "edgeLabelBackground": "#ffffff"}}}%%
 flowchart TB
-    accTitle: Two-student fork and clone setup
-    accDescr: Student A forks the instructor's repository. Student B forks Student A's fork. Each student clones their own fork to their local machine.
+    accTitle: Two students sharing one GitLab repository
+    accDescr: Student A forks the instructor's repository and adds Student B as a Developer to that project. Both students clone Student A's repository to their own local machines and use it as origin.
     Upstream["Instructor's parent repository"]
-    AFork["Student A's fork (GitLab)"]
-    BFork["Student B's fork (GitLab)"]
+    AFork["Student A's fork (GitLab)&lt;br/&gt;Shared team repository"]
     ALocal["Student A's local clone"]
     BLocal["Student B's local clone"]
 
     Upstream --&gt;|"Student A forks"| AFork
-    AFork --&gt;|"Student B forks A's repository"| BFork
-    AFork --&gt;|"git clone"| ALocal
-    BFork --&gt;|"git clone"| BLocal
+    AFork --&gt;|"A clones"| ALocal
+    AFork --&gt;|"A adds B as Developer; B clones"| BLocal
 </pre>
 </div>
 <p></p></figure><p></p>
@@ -1045,13 +1024,14 @@ flowchart TB
 </div>
 </div>
 <ul>
-<li>Each student uses <code>origin</code> for <strong>their own fork</strong>, <code>upstream</code> for the <strong>instructor’s repository</strong>, and <code>teammate</code> for the <strong>other student’s fork</strong>.</li>
-<li>Remote names are configured in each local clone. Add <code>upstream</code> and <code>teammate</code> with <code>git remote add NAME URL</code>.</li>
+<li>Student A adds Student B as a project member with the <strong>Developer</strong> role before B clones A’s repository.</li>
+<li>Both students use <code>origin</code> for <strong>A’s shared repository</strong> and <code>upstream</code> for the <strong>instructor’s repository</strong>.</li>
+<li>Cloning configures <code>origin</code>; each student adds <code>upstream</code> in their local clone with <code>git remote add upstream INSTRUCTOR_REPO_URL</code>.</li>
 </ul>
 </section>
 <section id="git-team-workflow-local-development" class="level2">
 <h2 class="anchored" data-anchor-id="git-team-workflow-local-development">Git Team Workflow: Local Development</h2>
-<p>Each student follows this workflow in <strong>their own local clone</strong>.</p>
+<p>Each student works in <strong>their own local clone of A’s repository</strong>, using the shared <code>single-sample-adc</code> development branch.</p>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -1060,14 +1040,14 @@ flowchart TB
 <pre class="mermaid mermaid-js">%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#eef3fb", "primaryBorderColor": "#2d63ba", "primaryTextColor": "#1e1e1e", "lineColor": "#2d63ba", "edgeLabelBackground": "#ffffff"}}}%%
 flowchart LR
     accTitle: Local development branches for each student
-    accDescr: Each student creates single-sample-adc from main, creates adc-config and adc-tests from single-sample-adc, and merges both sub-branches locally back into single-sample-adc.
+    accDescr: Student A creates and publishes single-sample-adc from main, and Student B clones that published branch. In their own local clones, students create task sub-branches such as adc-config and adc-tests from single-sample-adc and merge their sub-branches locally back into single-sample-adc before sharing changes.
     Main["main"]
     Dev["single-sample-adc"]
     FeatureA["adc-config&lt;br/&gt;work and commit"]
     FeatureB["adc-tests&lt;br/&gt;work and commit"]
     Integrated["single-sample-adc&lt;br/&gt;combined local work"]
 
-    Main --&gt;|"create development branch"| Dev
+    Main --&gt;|"A creates and publishes;&lt;br/&gt;B clones branch"| Dev
     Dev --&gt;|"create sub-branch"| FeatureA
     Dev --&gt;|"create sub-branch"| FeatureB
     FeatureA --&gt;|"merge locally"| Integrated
@@ -1082,12 +1062,16 @@ flowchart LR
 <li><code>adc-config</code> and <code>adc-tests</code> both branch from <code>single-sample-adc</code>.</li>
 <li>To integrate a sub-branch, switch back to <code>single-sample-adc</code> and run <code>git merge BRANCH_NAME</code>; resolve any conflicts and test locally.</li>
 <li>The two <code>single-sample-adc</code> boxes show the <strong>same branch before and after</strong> the local merges.</li>
-<li>Initially, each student publishes <code>single-sample-adc</code> with <code>git push -u origin single-sample-adc</code> so their teammate can pull it.</li>
+<li>Initially, Student A publishes <code>single-sample-adc</code> with <code>git push -u origin single-sample-adc</code> so Student B can clone that branch.</li>
 </ul>
 </section>
 <section id="git-team-workflow-share-with-your-teammate" class="level2">
 <h2 class="anchored" data-anchor-id="git-team-workflow-share-with-your-teammate">Git Team Workflow: Share with Your Teammate</h2>
-<p>Example: <strong>Student A shares with Student B</strong>, starting on A’s local <code>single-sample-adc</code> branch.</p>
+<p>Example: <strong>Both students work in Student A’s repository</strong>, starting on A’s local <code>single-sample-adc</code> branch.</p>
+<ul>
+<li>A adds B as a project member in GitLab with the <strong>Developer</strong> role.</li>
+<li>B clones <strong>A’s repository</strong>; both students use that repository as <code>origin</code>.</li>
+</ul>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -1096,20 +1080,22 @@ flowchart LR
 <pre class="mermaid mermaid-js">%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#eef3fb", "primaryBorderColor": "#2d63ba", "primaryTextColor": "#1e1e1e", "lineColor": "#2d63ba", "edgeLabelBackground": "#ffffff"}}}%%
 sequenceDiagram
     accTitle: Share Student A's development work with Student B
-    accDescr: A pulls B's single-sample-adc changes, resolves conflicts locally, pushes to A's fork, and opens a Merge Request into B's single-sample-adc. After review, B merges the request. Only completed development is merged into main. Reverse the roles for B to share with A.
+    accDescr: A adds B as a Developer to A's GitLab repository and publishes single-sample-adc. B clones that branch from A's repository, commits local work, pulls shared changes, resolves conflicts and tests, then pushes to the same branch. Both students repeat this cycle. When development is complete, they open a Merge Request into main for review.
     participant A as Student A (local)
-    participant AF as A's fork (GitLab)
-    participant BF as B's fork (GitLab)
+    participant Repo as A's repository (GitLab)
+    participant B as Student B (local)
 
-    Note over A,BF: Development branch: single-sample-adc
-    A-&gt;&gt;BF: 1. git pull --no-rebase teammate single-sample-adc
-    BF--&gt;&gt;A: B's published development commits
-    A-&gt;&gt;A: 2. Resolve conflicts,&lt;br/&gt;complete merge, test
-    A-&gt;&gt;AF: 3. git push -u origin single-sample-adc
-    AF-&gt;&gt;BF: 4. Create Merge Request&lt;br/&gt;A:single-sample-adc → B:single-sample-adc
-    BF-&gt;&gt;BF: 5. Review and merge MR&lt;br/&gt;into single-sample-adc
-    Note over AF,BF: Repeat steps 1–5 while developing
-    BF-&gt;&gt;BF: 6. Only when development&lt;br/&gt;is complete:&lt;br/&gt;single-sample-adc → main
+    Note over A,B: B has Developer access to A's repository
+    A-&gt;&gt;Repo: 1. git push -u origin single-sample-adc
+    B-&gt;&gt;Repo: 2. git clone -b single-sample-adc A_REPO_URL
+    Repo--&gt;&gt;B: Local clone of A's repository
+    B-&gt;&gt;B: 3. Edit, git add, git commit
+    B-&gt;&gt;Repo: 4. git pull --no-rebase origin single-sample-adc
+    Repo--&gt;&gt;B: Teammate's published commits
+    B-&gt;&gt;B: Resolve conflicts,&lt;br/&gt;complete merge, test
+    B-&gt;&gt;Repo: 5. git push origin single-sample-adc
+    Note over A,B: Both students repeat steps 3–5 on single-sample-adc
+    Repo-&gt;&gt;Repo: 6. When development is complete:&lt;br/&gt;MR single-sample-adc → main&lt;br/&gt;Review and merge
 </pre>
 </div>
 <p></p></figure><p></p>
@@ -1117,8 +1103,9 @@ sequenceDiagram
 </div>
 </div>
 <ul>
-<li>Repeat steps 1–5 as work progresses. For <strong>B to share with A</strong>, reverse the student roles.</li>
-<li>A Merge Request targets the teammate’s <strong>development branch</strong>; merge that branch into <code>main</code> only when the feature is complete.</li>
+<li>Replace <code>A_REPO_URL</code> with A’s GitLab clone URL; B then enters the cloned directory.</li>
+<li>Commit before pulling; resolve any conflicts and test before pushing. If a push is rejected because the branch advanced, repeat steps 4–5.</li>
+<li>Open a Merge Request from <code>single-sample-adc</code> into <code>main</code> in A’s repository only when the feature is complete.</li>
 </ul>
 </section>
 <section id="cherry-pick-an-upstream-update" class="level2">
@@ -1171,6 +1158,9 @@ flowchart TB
 </div>
 
 
+</section>
+</div>
+</div>
 <script type="ojs-module-contents">
 eyJjb250ZW50cyI6W119
 </script>
