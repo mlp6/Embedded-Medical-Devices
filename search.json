@@ -114,49 +114,88 @@
     "href": "labs/zephyr-pwm-lab.html",
     "title": "Pulse Width Modulation (PWM) Lab",
     "section": "",
-    "text": "Implement a steady-state PWM output to control “intensity” over a finite dynamic range.\nImplement a time-series-modulated PWM output."
+    "text": "Implement a steady-state PWM output to control “intensity” over a finite dynamic range.\nImplement a time-series-modulated PWM output.",
+    "crumbs": [
+      "Labs",
+      "Pulse Width Modulation (PWM) Lab"
+    ]
   },
   {
     "objectID": "labs/zephyr-pwm-lab.html#learning-objectives",
     "href": "labs/zephyr-pwm-lab.html#learning-objectives",
     "title": "Pulse Width Modulation (PWM) Lab",
     "section": "",
-    "text": "Implement a steady-state PWM output to control “intensity” over a finite dynamic range.\nImplement a time-series-modulated PWM output."
+    "text": "Implement a steady-state PWM output to control “intensity” over a finite dynamic range.\nImplement a time-series-modulated PWM output.",
+    "crumbs": [
+      "Labs",
+      "Pulse Width Modulation (PWM) Lab"
+    ]
   },
   {
     "objectID": "labs/zephyr-pwm-lab.html#git-best-practices",
     "href": "labs/zephyr-pwm-lab.html#git-best-practices",
     "title": "Pulse Width Modulation (PWM) Lab",
     "section": "Git Best Practices",
-    "text": "Git Best Practices\n\nUse best practices for version control (branching, commit messages, etc.).\nDo all development on a dedicated branch that is merged into main once it is functional.\nCommits should be very specific to the changes/additions you are making to your code. This will help you and others understand what you did and why you did it.\n\nOn a given development branch, try to implement one small piece of functionality at a time, commit it, and then move on to the next piece of functionality.\n\n\n\n\n\n\n\nImportant\n\n\n\nYou do not want one, monolithic git commit right before you submit your project."
+    "text": "Git Best Practices\n\nUse best practices for version control (branching, commit messages, etc.).\nDo all development on a dedicated branch that is merged into main once it is functional.\nCommits should be very specific to the changes/additions you are making to your code. This will help you and others understand what you did and why you did it.\n\nOn a given development branch, try to implement one small piece of functionality at a time, commit it, and then move on to the next piece of functionality.\n\n\n\n\n\n\n\nImportant\n\n\n\nYou do not want one, monolithic git commit right before you submit your project.",
+    "crumbs": [
+      "Labs",
+      "Pulse Width Modulation (PWM) Lab"
+    ]
+  },
+  {
+    "objectID": "labs/zephyr-pwm-lab.html#teamwork",
+    "href": "labs/zephyr-pwm-lab.html#teamwork",
+    "title": "Pulse Width Modulation (PWM) Lab",
+    "section": "Teamwork",
+    "text": "Teamwork\nUse the same git workflow with your teammate that was described in the ADC Lab: Teamwork section.",
+    "crumbs": [
+      "Labs",
+      "Pulse Width Modulation (PWM) Lab"
+    ]
   },
   {
     "objectID": "labs/zephyr-pwm-lab.html#firmware-expectations",
     "href": "labs/zephyr-pwm-lab.html#firmware-expectations",
     "title": "Pulse Width Modulation (PWM) Lab",
     "section": "Firmware Expectations",
-    "text": "Firmware Expectations\n\nAll firmware should be written using the State Machine Framework.\nChoose your states for each part as a firmware engineer would, using what you have learned so far this semester.\nTimers, work queues, callbacks, and interrupts should be used as appropriate.\nAll good coding practices developed this semester should be followed.\nUse logging to display state information and other relevant information, warnings, and errors. Debugging log messages can remain in the code, but the logging level should be submitted at the INF level.\nUpdate your state and sequence diagrams to match your firmware implementation.\n\n\n\n\n\n\n\nTip\n\n\n\nDo all development for this lab on section-specific development branches."
+    "text": "Firmware Expectations\n\nAll firmware should be written using the State Machine Framework.\nChoose your states for each part as a firmware engineer would, using what you have learned so far this semester.\nTimers, work queues, callbacks, and interrupts should be used as appropriate.\nAll good coding practices developed this semester should be followed.\nUse logging to display state information and other relevant information, warnings, and errors. Debugging log messages can remain in the code, but the logging level should be submitted at the INF level.\nUpdate your state and sequence diagrams to match your firmware implementation.\n\n\n\n\n\n\n\nTip\n\n\n\nDo all development for this lab on section-specific development branches.",
+    "crumbs": [
+      "Labs",
+      "Pulse Width Modulation (PWM) Lab"
+    ]
   },
   {
     "objectID": "labs/zephyr-pwm-lab.html#steady-state-pwm-output",
     "href": "labs/zephyr-pwm-lab.html#steady-state-pwm-output",
     "title": "Pulse Width Modulation (PWM) Lab",
     "section": "Steady-State PWM Output",
-    "text": "Steady-State PWM Output\nDo this section on a development branch called pwm-steady-state.\n\nFirmware Functional Specifications\n\n\n\n\n\n\nNote\n\n\n\nSelectively keep ADC lab functionality to help complete the tasks below, but you do not have to keep any ADC lab functionality that isn’t necessary for this lab.\n\n\n\nUsing the ADC lab functionality to read a DC voltage on AIN0, map this read DC voltage to scale the maximum brightness of LED2 using a PWM output.\n\n\n\n\n\n\n\nExample\n\n\n\n\nIf AIN0 = 0 V, then LED2 should be off (0% duty cycle).\n\nIf AIN0 = 1.5 V, then LED2 should be at 50% brightness (50% duty cycle).\nIf AIN0 = 3 V, then LED2 should be at maximum brightness (100% duty cycle).\n\n\n\n\n\nUpdate your state diagram to include the new functionality.\n\n\n\nTesting\n\nQuantify the linearity of the maximum brightness of LED2 as a function of AIN0 voltage ranging from 0-3 V.\nPresent your data and analysis in the technical report Jupyter notebook called testing/testing_pwm.ipynb.\n\n\n\n\n\n\n\nDo Things Looks Inverted?\n\n\n\nRemember that LEDs on the DK are ACTIVE_LOW.\n\n\n\n\nCommit-n-Merge Steady-State PWM\n\nMerge your completed pwm-steady-state branch into your main branch using a Merge Request on Gitlab.\nCreate an annotated tag of your main branch with all part of this lab merged in called v3.0.0."
+    "text": "Steady-State PWM Output\nDo this section on a development branch called pwm-steady-state.\n\nFirmware Functional Specifications\n\n\n\n\n\n\nNote\n\n\n\nSelectively keep ADC lab functionality to help complete the tasks below, but you do not have to keep any ADC lab functionality that isn’t necessary for this lab.\n\n\n\nUsing the ADC lab functionality to read a DC voltage on AIN0, map this read DC voltage to scale the maximum brightness of LED2 using a PWM output.\n\n\n\n\n\n\n\nExample\n\n\n\n\nIf AIN0 = 0 V, then LED2 should be off (0% duty cycle).\n\nIf AIN0 = 1.5 V, then LED2 should be at 50% brightness (50% duty cycle).\nIf AIN0 = 3 V, then LED2 should be at maximum brightness (100% duty cycle).\n\n\n\n\n\nUpdate your state diagram to include the new functionality.\n\n\n\nTesting\n\nQuantify the linearity of the maximum brightness of LED2 as a function of AIN0 voltage ranging from 0-3 V.\nPresent your data and analysis in the technical report Jupyter notebook called testing/testing_pwm.ipynb.\n\n\n\n\n\n\n\nDo Things Looks Inverted?\n\n\n\nRemember that LEDs on the DK are ACTIVE_LOW.\n\n\n\n\nCommit-n-Merge Steady-State PWM\n\nMerge your completed pwm-steady-state branch into your main branch using a Merge Request on Gitlab.\nCreate an annotated tag of your main branch with all part of this lab merged in called v3.0.0.",
+    "crumbs": [
+      "Labs",
+      "Pulse Width Modulation (PWM) Lab"
+    ]
   },
   {
     "objectID": "labs/zephyr-pwm-lab.html#sinusoidal-modulation-of-pwm-output",
     "href": "labs/zephyr-pwm-lab.html#sinusoidal-modulation-of-pwm-output",
     "title": "Pulse Width Modulation (PWM) Lab",
     "section": "Sinusoidal Modulation of PWM Output",
-    "text": "Sinusoidal Modulation of PWM Output\n\n\n\n\n\n\nTip\n\n\n\nDo this section on a development branch called pwm-sinusoid, branched off of main after pwm-steady-state was merged.\n\n\n\nFirmware Functional Specifications\n\nModulate the brighness of LED3 to match sampling a 2-second, 10 Hz, 2 V peak-to-peak differential sinusoidal voltage on AIN1 and AIN2 after pressing BUTTON2.\n\n\n\n\n\n\n\nTip\n\n\n\nRemember to add a DC offset of VDD/2 to your input signal so that the signal is within the common-mode voltage range of the ADC.\n\n\n\nLED3 should have its brightness modulated with as little latency as possible with respect to the input voltage. In other words, the brightness of LED3 should follow the input sinusoid as closely as possible in time.\n\n\n\n\n\n\n\nImportant\n\n\n\nThe blocking nature of a syncronous buffered acquisition scheme is not amenable to realtime modulation of the PWM output. Consider using the aynchronous ADC sampling approach with a callback to update the PWM duty cycle after each sampling event or a timer-based, single-sample acquisition approach.\n\n\n\n\n\n\n\n\nTip\n\n\n\n\nBe cognizant of your sampling rate, PWM on-time period update rate and the PWM clock period relative to your input signal.\nThere are several ways to implement the 2-second sampling period, including using a monostable timer or counting the number of samples taken at a known sampling rate. Make a purposeful decision in how you implement this functionality.\n\n\n\n\nSet the minumum and maximum sinusoidal brightnesses to be PWM duty cycles of 0 and 100%, respectively.\nUpdate your state and sequence diagrams to include the new functionality.\n\n\n\nTesting\n\nAdd the following testing to your testing/testing_pwm.ipynb Jupyter notebook.\nUsing the oscilloscope, concurrently measure your input sinusoidal signal (what is differentially input to AIN1 and AIN2) and the output PWM signal on LED3.\n\n\n\n\n\n\n\nTip\n\n\n\nYou will need to low pass filter your modulated PWM output to see a smooth sinusoidal output. You can do this using the LPF Math mode on the oscilloscope with an appropriate cutoff frequency (relative to the frequency of the input sinusoid) and sampling window (capturing multiple cycles of the sinusoid). Remember to also adjust the offset to match the offset of the PWM signal.\n\n\n\nOn the oscilloscope, measure:\n\nThe frequency of your low-pass-filtered PWM signal, and\nThe phase difference between the PWM sinusoid and your input signal.\nCapture a screen shot of the oscilloscope showing both signals and these two measured quantities.\n\nPresent your data and analysis in your Jupyter notebook.\nDiscuss the accuracy of your PWM frequency and the latency (phase lag) of your system and how you could improve it in the future.\n\n\n\n\n\n\n\nTip\n\n\n\nRemember that your PWM signal is inverted from the input signal when interpreting your phase lag measurement.\n\n\n\n\nCommit-n-Merge Modulated PWM\n\nMerge your completed pwm-sinusoid branch into your main branch using a Merge Request on Gitlab.\nCreate an annotated tag of your main branch with all part of this lab merged in called v3.1.0.\nCreate an Issue for Dr. Palmeri to review this PWM lab, assigning it the Review label."
+    "text": "Sinusoidal Modulation of PWM Output\n\n\n\n\n\n\nTip\n\n\n\nDo this section on a development branch called pwm-sinusoid, branched off of main after pwm-steady-state was merged.\n\n\n\nFirmware Functional Specifications\n\nModulate the brighness of LED3 to match sampling a 2-second, 10 Hz, 2 V peak-to-peak differential sinusoidal voltage on AIN1 and AIN2 after pressing BUTTON2.\n\n\n\n\n\n\n\nTip\n\n\n\nRemember to add a DC offset of VDD/2 to your input signal so that the signal is within the common-mode voltage range of the ADC.\n\n\n\nLED3 should have its brightness modulated with as little latency as possible with respect to the input voltage. In other words, the brightness of LED3 should follow the input sinusoid as closely as possible in time.\n\n\n\n\n\n\n\nImportant\n\n\n\nThe blocking nature of a syncronous buffered acquisition scheme is not amenable to realtime modulation of the PWM output. Consider using the aynchronous ADC sampling approach with a callback to update the PWM duty cycle after each sampling event or a timer-based, single-sample acquisition approach.\n\n\n\n\n\n\n\n\nTip\n\n\n\n\nBe cognizant of your sampling rate, PWM on-time period update rate and the PWM clock period relative to your input signal.\nThere are several ways to implement the 2-second sampling period, including using a monostable timer or counting the number of samples taken at a known sampling rate. Make a purposeful decision in how you implement this functionality.\n\n\n\n\nSet the minumum and maximum sinusoidal brightnesses to be PWM duty cycles of 0 and 100%, respectively.\nUpdate your state and sequence diagrams to include the new functionality.\n\n\n\nTesting\n\nAdd the following testing to your testing/testing_pwm.ipynb Jupyter notebook.\nUsing the oscilloscope, concurrently measure your input sinusoidal signal (what is differentially input to AIN1 and AIN2) and the output PWM signal on LED3.\n\n\n\n\n\n\n\nTip\n\n\n\nYou will need to low pass filter your modulated PWM output to see a smooth sinusoidal output. You can do this using the LPF Math mode on the oscilloscope with an appropriate cutoff frequency (relative to the frequency of the input sinusoid) and sampling window (capturing multiple cycles of the sinusoid). Remember to also adjust the offset to match the offset of the PWM signal.\n\n\n\nOn the oscilloscope, measure:\n\nThe frequency of your low-pass-filtered PWM signal, and\nThe phase difference between the PWM sinusoid and your input signal.\nCapture a screen shot of the oscilloscope showing both signals and these two measured quantities.\n\nPresent your data and analysis in your Jupyter notebook.\nDiscuss the accuracy of your PWM frequency and the latency (phase lag) of your system and how you could improve it in the future.\n\n\n\n\n\n\n\nTip\n\n\n\nRemember that your PWM signal is inverted from the input signal when interpreting your phase lag measurement.\n\n\n\n\nCommit-n-Merge Modulated PWM\n\nMerge your completed pwm-sinusoid branch into your main branch using a Merge Request on Gitlab.\nCreate an annotated tag of your main branch with all part of this lab merged in called v3.1.0.\nCreate an Issue for Dr. Palmeri to review this PWM lab, assigning it the Review label.",
+    "crumbs": [
+      "Labs",
+      "Pulse Width Modulation (PWM) Lab"
+    ]
   },
   {
     "objectID": "labs/zephyr-pwm-lab.html#how-to-ask-for-help",
     "href": "labs/zephyr-pwm-lab.html#how-to-ask-for-help",
     "title": "Pulse Width Modulation (PWM) Lab",
     "section": "How to Ask for Help",
-    "text": "How to Ask for Help\n\nIf you have a general / non-coding question, you should ask your TAs / Dr. Palmeri on Ed to allow any of them to respond in a timely manner.\nPush you code to your GitLab repository, ideally with your active development on a non-main branch.\nCreate an Issue in your repository.\n\nAdd as much detail as possible as to your problem, and add links to specific lines / section of code when possible.\nAssign the label “Bug” or “Question”, as appropriate.\nBe sure to specify what branch you are working on.\nAssign the Issue to one of the TAs.\nIf your TA cannot solve your Issue, they can escalate the Issue to Dr. Palmeri.\n\nYou will get a response to your Issue, and maybe a new branch of code will be pushed to help you with some example syntax that you can use git diff to visualize."
+    "text": "How to Ask for Help\n\nIf you have a general / non-coding question, you should ask your TAs / Dr. Palmeri on Ed to allow any of them to respond in a timely manner.\nPush you code to your GitLab repository, ideally with your active development on a non-main branch.\nCreate an Issue in your repository.\n\nAdd as much detail as possible as to your problem, and add links to specific lines / section of code when possible.\nAssign the label “Bug” or “Question”, as appropriate.\nBe sure to specify what branch you are working on.\nAssign the Issue to one of the TAs.\nIf your TA cannot solve your Issue, they can escalate the Issue to Dr. Palmeri.\n\nYou will get a response to your Issue, and maybe a new branch of code will be pushed to help you with some example syntax that you can use git diff to visualize.",
+    "crumbs": [
+      "Labs",
+      "Pulse Width Modulation (PWM) Lab"
+    ]
   },
   {
     "objectID": "labs/zephyr-timers-lab.html",
