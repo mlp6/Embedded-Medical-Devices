@@ -12,7 +12,7 @@
   <meta name="generator" content="quarto-1.7.31">
 
   <meta name="author" content="Dr.&nbsp;Mark Palmeri, M.D., Ph.D.">
-  <meta name="dcterms.date" content="2026-04-07">
+  <meta name="dcterms.date" content="2026-11-08">
   <title>Embedded Medical Devices – Zephyr: Serial Communication</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -212,7 +212,7 @@ Dr.&nbsp;Mark Palmeri, M.D., Ph.D.
     </div>
 </div>
 
-  <p class="date">April 7, 2026</p>
+  <p class="date">November 8, 2026</p>
 </section>
 <section>
 <section id="serial-vs.-parallel" class="title-slide slide level1 center">
@@ -416,6 +416,10 @@ Dr.&nbsp;Mark Palmeri, M.D., Ph.D.
 </table>
 </div></div>
 <p><a href="https://www.adafruit.com/product/1782">MCP9808 Temperature Sensor</a></p>
+<ul>
+<li><code>A0</code>, <code>A1</code>, <code>A2</code> are address pins, which can be used to set the I2C address of the device. In this example, they are all connected to <code>GND</code>, so the I2C address is <code>0x18</code>.</li>
+<li><code>Alert</code> can be used to trigger an interrupt when the temperature exceeds a threshold.</li>
+</ul>
 </section>
 <section class="slide level2">
 
@@ -505,6 +509,47 @@ Dr.&nbsp;Mark Palmeri, M.D., Ph.D.
 <span id="cb3-66"><a></a>        LOG_INF<span class="op">(</span><span class="st">"Temperature (deg C): </span><span class="sc">%f</span><span class="st">"</span><span class="op">,</span> <span class="op">(</span><span class="dt">double</span><span class="op">)*</span>temperature_degC<span class="op">);</span></span>
 <span id="cb3-67"><a></a>        <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
 <span id="cb3-68"><a></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="sensor-threshold-alerts" class="slide level2">
+<h2>Sensor Threshold Alerts</h2>
+<h3 id="firmware">Firmware</h3>
+<p><a href="https://docs.zephyrproject.org/latest/hardware/peripherals/sensor/attributes.html">Sensor attributes</a> can be used to set thresholds for alerts. For example, the MCP9808 has <code>SENSOR_ATTR_UPPER_THRESH</code> and <code>SENSOR_ATTR_LOWER_THRESH</code> attributes, which can be set to a temperature values.</p>
+<h3 id="hardware-interrupt">Hardware Interrupt</h3>
+<p>The <code>MCP9808</code> has an <code>Alert</code> pin, which can be used to trigger an interrupt when the temperature exceeds a threshold. This pin can be connected to a GPIO pin on the DK, and an ISR can be used to handle the interrupt.</p>
+<p>Example firmware for setting the upper threshold and handling the interrupt is shown below.</p>
+<p>Devicetree overlay for the MCP9808 with the <code>Alert</code> pin connected to <code>P0.11</code>:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb4-1"><a></a><span class="op">&amp;</span>i2c0 <span class="op">{</span></span>
+<span id="cb4-2"><a></a> &nbsp; &nbsp;status <span class="op">=</span> <span class="st">"okay"</span><span class="op">;</span></span>
+<span id="cb4-3"><a></a></span>
+<span id="cb4-4"><a></a> &nbsp; &nbsp;mcp9808<span class="op">:</span> mcp9808@<span class="dv">18</span> <span class="op">{</span></span>
+<span id="cb4-5"><a></a> &nbsp; &nbsp; &nbsp; &nbsp;compatible <span class="op">=</span> <span class="st">"microchip,mcp9808"</span><span class="op">;</span></span>
+<span id="cb4-6"><a></a> &nbsp; &nbsp; &nbsp; &nbsp;reg <span class="op">=</span> <span class="op">&lt;</span><span class="bn">0x18</span><span class="op">&gt;;</span></span>
+<span id="cb4-7"><a></a> &nbsp; &nbsp; &nbsp; &nbsp;status <span class="op">=</span> <span class="st">"okay"</span><span class="op">;</span></span>
+<span id="cb4-8"><a></a> &nbsp; &nbsp; &nbsp; &nbsp;int<span class="op">-</span>gpios <span class="op">=</span> <span class="op">&lt;&amp;</span>gpio0 <span class="dv">11</span> GPIO_ACTIVE_LOW<span class="op">&gt;;</span></span>
+<span id="cb4-9"><a></a> &nbsp; &nbsp;<span class="op">};</span></span>
+<span id="cb4-10"><a></a><span class="op">};</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>In <code>prj.conf</code>:</p>
+<pre><code>CONFIG_I2C=y
+CONFIG_SENSOR=y
+CONFIG_GPIO=y
+CONFIG_MCP9808=y
+CONFIG_MCP9808_TRIGGER=y</code></pre>
+<p>Firmware:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource c number-lines code-with-copy"><code class="sourceCode c"><span id="cb6-1"><a></a><span class="dt">static</span> <span class="dt">void</span> temp_alert_handler<span class="op">(</span></span>
+<span id="cb6-2"><a></a> &nbsp; &nbsp;const <span class="kw">struct</span> device <span class="op">*</span>dev<span class="op">,</span></span>
+<span id="cb6-3"><a></a> &nbsp; &nbsp;const <span class="kw">struct</span> sensor_trigger <span class="op">*</span>trigger<span class="op">)</span></span>
+<span id="cb6-4"><a></a><span class="op">{</span></span>
+<span id="cb6-5"><a></a> &nbsp; &nbsp;printk<span class="op">(</span><span class="st">"MCP9808 temperature alert!</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb6-6"><a></a><span class="op">}</span></span>
+<span id="cb6-7"><a></a></span>
+<span id="cb6-8"><a></a><span class="dt">static</span> <span class="dt">const</span> <span class="kw">struct</span> sensor_trigger temp_trigger <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb6-9"><a></a> &nbsp; &nbsp;<span class="op">.</span>type <span class="op">=</span> SENSOR_TRIG_THRESHOLD<span class="op">,</span></span>
+<span id="cb6-10"><a></a> &nbsp; &nbsp;<span class="op">.</span>chan <span class="op">=</span> SENSOR_CHAN_AMBIENT_TEMP<span class="op">,</span></span>
+<span id="cb6-11"><a></a><span class="op">};</span></span>
+<span id="cb6-12"><a></a></span>
+<span id="cb6-13"><a></a><span class="dt">int</span> ret <span class="op">=</span> sensor_trigger_set<span class="op">(</span>sensor<span class="op">,</span></span>
+<span id="cb6-14"><a></a> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="op">&amp;</span>temp_trigger<span class="op">,</span></span>
+<span id="cb6-15"><a></a> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; temp_alert_handler<span class="op">);</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="resources" class="slide level2">
 <h2>Resources</h2>

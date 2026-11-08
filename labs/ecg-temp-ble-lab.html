@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Dr.&nbsp;Mark Palmeri, M.D., Ph.D.">
-<meta name="dcterms.date" content="2026-04-15">
+<meta name="dcterms.date" content="2026-11-08">
 
 <title>ECG &amp; Temperature Sensor with BLE Lab – Embedded Medical Devices</title>
 <style>
@@ -69,6 +69,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -82,9 +111,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
-      Embedded Medical Devices
-      </li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labs/event-driven-state-machine-lab.html">Labs</a></li><li class="breadcrumb-item"><a href="../labs/ecg-temp-ble-lab.html">ECG, Temperature Sensor, and BLE Lab</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -294,21 +321,23 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Pulse Width Modulation (PWM) Lab</span></a>
   </div>
 </li>
-          <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">ECG, Temperature Sensor, and BLE Lab</span></span>
-  </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../labs/ecg-temp-ble-lab.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">ECG, Temperature Sensor, and BLE Lab</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
  <span class="menu-text">Resources</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../resources/git.html" class="sidebar-item-text sidebar-link">
@@ -376,6 +405,7 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#git-version-control" id="toc-git-version-control" class="nav-link active" data-scroll-target="#git-version-control">Git Version Control</a></li>
+  <li><a href="#teamwork" id="toc-teamwork" class="nav-link" data-scroll-target="#teamwork">Teamwork</a></li>
   <li><a href="#best-coding-practices" id="toc-best-coding-practices" class="nav-link" data-scroll-target="#best-coding-practices">Best Coding Practices</a></li>
   <li><a href="#firmware-functional-specifications" id="toc-firmware-functional-specifications" class="nav-link" data-scroll-target="#firmware-functional-specifications">Firmware Functional Specifications</a></li>
   <li><a href="#ble-server-mobile-app" id="toc-ble-server-mobile-app" class="nav-link" data-scroll-target="#ble-server-mobile-app">BLE Server (Mobile App)</a></li>
@@ -400,7 +430,7 @@ ul.task-list li input[type="checkbox"] {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../labs/event-driven-state-machine-lab.html">Labs</a></li><li class="breadcrumb-item"><a href="../labs/ecg-temp-ble-lab.html">ECG, Temperature Sensor, and BLE Lab</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">ECG &amp; Temperature Sensor with BLE Lab</h1>
 <p class="subtitle lead">BME554L - Fall 2026 - Palmeri</p>
@@ -423,7 +453,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">April 15, 2026</p>
+      <p class="date">November 8, 2026</p>
     </div>
   </div>
   
@@ -456,6 +486,24 @@ Important
 </div>
 <div class="callout-body-container callout-body">
 <p>You do not want one, monolithic git commit right before you submit your project.</p>
+</div>
+</div>
+</section>
+<section id="teamwork" class="level2">
+<h2 class="anchored" data-anchor-id="teamwork">Teamwork</h2>
+<p>All work should be done with your teammate using the same git workflow as the previous ADC and PWM labs.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Make sure to sign up for a time to present your final projecto to Dr.&nbsp;Palmeri using this <a href="https://calendly.com/mark-palmeri/bme554l-final-project-presentation">Calendly link</a>.<br>
+Your final firmware must be tagged and pushed to the <code>main</code> branch of your repository before your presentation. You will be graded on your device functionality and answers to questions about your firmware development decisions.</p>
 </div>
 </div>
 </section>
@@ -498,6 +546,17 @@ Important
 <li><p>If your battery level is &lt;75% of the nominal voltage (3.0 V), then your device should “gracefully” terminate the state machine function and go into a low-power mode.</p></li>
 <li><p>Have the brightness of <code>LED1</code> linearly modulated by the percentage of the battery level.</p></li>
 <li><p>Implement functionality to make a temperature measurement with your <a href="https://www.adafruit.com/product/1782"><code>MCP9808</code></a> sensor (in degrees Celsius) after pressing <code>BUTTON1</code>.</p></li>
+<li><p>Implement firmware-based low- and high-temperature thresholds for the temperature sensor when making the temperature measurement.</p>
+<ul>
+<li><p>These should be triggered at <span class="math inline">\(\pm 5^\circ\)</span>F from the room temperature (70°F) measurement.</p></li>
+<li><p>Your device should transition to a <code>SAFETY</code> state if the temperature is outside of this range.</p>
+<ul>
+<li><p>In the <code>SAFETY</code> state, all 4 LEDs should blink at a 50% duty cycle (<code>ON:OFF</code> time), in sequence with each other, in a clockwise direction.</p></li>
+<li><p>All buttons, except for the <code>RESET</code> button, should be disabled in the <code>SAFETY</code> state.</p></li>
+<li><p>A BLE notification should be sent with the temperature measurement (see BLE custom service/characteristic below).</p></li>
+</ul></li>
+</ul></li>
+<li><p>Implement the a hardware-triggered interrupt from the temperature sensor to trigger the same transition to the <code>SAFETY</code> state if the temperature is greater than 80°F. This interrupt should be valid in all other states, except for <code>ERROR</code>.</p></li>
 <li><p>When you press <code>BUTTON2</code>, the device should measure “instantaneous” heart rate, expected to range from 40-200 BPM, using an ECG signal (ranging from -500</p></li>
 <li><p>500 mV, note this is bipolar) from the function generator (see video on how to setup the function generator to output an ECG signal).</p>
 <ul>
@@ -514,6 +573,7 @@ Important
 <li><p>Setup a custom service with the following custom characterisitics:</p>
 <ul>
 <li><p><code>Temperature</code> for the I2C temperature sensor data in degrees Celcius.</p></li>
+<li><p><code>Temperature Thresholds</code> for the low and high temperature thresholds (firmware and interrupt triggered).</p></li>
 <li><p><code>Error Code</code> for the error code that caused the device to enter the <code>ERROR</code> state.</p></li>
 </ul></li>
 </ul></li>
@@ -565,8 +625,8 @@ Important
 <h3 class="anchored" data-anchor-id="temperature-sensor-measurement">Temperature Sensor Measurement</h3>
 <ul>
 <li><p>Demonstrate that your temperature sensor can have a room temperature measurement read through <code>LOG_INF()</code> output and the nRF Connect app.</p></li>
-<li><p>Do this in 3 locations with different temperatures.</p></li>
-<li><p>You do not need to verify accuracy, just a reasonable measurements with agreement.</p></li>
+<li><p>Test both your firmware-based and interrupt-based temperature thresholds to verify that they are working correctly.</p></li>
+<li><p>You do not need to verify accuracy with high precision; just a reasonable measurements with agreement.</p></li>
 </ul>
 </section>
 </section>

@@ -4584,7 +4584,7 @@
     "href": "slides/zephyr-serial-communication-slides.html#example-connection-of-mcp9808-temperature-sensor",
     "title": "Zephyr: Serial Communication",
     "section": "Example Connection of MCP9808 Temperature Sensor",
-    "text": "Example Connection of MCP9808 Temperature Sensor\n\n\n\n\n\n\n\nBreakout Board\nDK GPIO Pin\n\n\n\n\nSDA\nP0.26\n\n\nSCL\nP0.27\n\n\nVdd\nVDD\n\n\nGND\nGND\n\n\n\n\nMCP9808 Temperature Sensor"
+    "text": "Example Connection of MCP9808 Temperature Sensor\n\n\n\n\n\n\n\nBreakout Board\nDK GPIO Pin\n\n\n\n\nSDA\nP0.26\n\n\nSCL\nP0.27\n\n\nVdd\nVDD\n\n\nGND\nGND\n\n\n\n\nMCP9808 Temperature Sensor\n\nA0, A1, A2 are address pins, which can be used to set the I2C address of the device. In this example, they are all connected to GND, so the I2C address is 0x18.\nAlert can be used to trigger an interrupt when the temperature exceeds a threshold."
   },
   {
     "objectID": "slides/zephyr-serial-communication-slides.html#main.c",
@@ -4592,6 +4592,13 @@
     "title": "Zephyr: Serial Communication",
     "section": "main.c",
     "text": "main.c\n#include &lt;zephyr/kernel.h&gt;\n#include &lt;zephyr/device.h&gt;\n#include &lt;zephyr/logging/log.h&gt;\n#include &lt;zephyr/drivers/sensor.h&gt;  // prf.conf -&gt; CONFIG_SENSOR=y\n#define MEASUREMENT_DELAY_MS 1000 \nLOG_MODULE_REGISTER(main, LOG_LEVEL_DBG);\n\nint read_temperature_sensor(const struct device *temp_sensor, float *temperature_degC);\n\n// the microchip,mcp9808 cannot be accessed in the DT by alias\n// instead, have to directly access the node name, with comma replaced by underscore\nconst struct device *const temp_sensor = DEVICE_DT_GET_ONE(jedec_jc_42_4_temp);\n\nstatic float temperature_degC;\n\nint main(void) {\n \n    int ret;\n \n    if (!sensor_is_ready_dt(&temp_sensor)) {\n        LOG_ERR(\"Temperature sensor is not ready\");\n        return -ENODEV;\n    }\n    else {\n        LOG_INF(\"Temperature sensor is ready\");\n    }\n    // read the temperature every MEASUREMENT_DELAY_MS\n    while (1) {\n        ret = read_temperature_sensor(temp_sensor, &temperature_degC);\n        if (ret != 0) {\n            LOG_ERR(\"There was a problem reading the temperature sensor (%d)\", ret);\n            return ret;\n        }\n        \n        // make sure CONFIG_CBPRINTF_FP_SUPPORT=y is set in `prf.conf` for float support\n        LOG_INF(\"Temperature: %f\", (double)temperature_degC);\n        k_msleep(MEASUREMENT_DELAY_MS);\n    }\n    return 0;\n}\nint read_temperature_sensor(const struct device *temp_sensor, float *temperature_degC) {\n    /*  Fetch-n-get temperature sensor data\n        INPUTS:\n            temp_sensor (const struct device *) - temperature sensor device\n            temperature_degC (float *) - pointer to store temperature in degrees Celsius\n        RETURNS:\n            0 - success\n            Otherwise, error code\n    */\n    struct sensor_value sensor_vals = {.val1 = 0, .val2 = 0};\n    int err = sensor_sample_fetch(temp_sensor);\n    if (err != 0) {\n        LOG_ERR(\"Temperature sensor fetch(): %d\", err);\n        return err;\n    }\n    else {\n        err = sensor_channel_get(temp_sensor, SENSOR_CHAN_AMBIENT_TEMP, &sensor_vals);\n        if (err != 0) {\n            LOG_ERR(\"Temperature sensor get(): %d\", err);\n            return err;\n        }\n    }\n        \n        // data returned in kPa\n        *temperature_degC = sensor_value_to_float(&sensor_vals);\n        LOG_INF(\"Temperature (deg C): %f\", (double)*temperature_degC);\n        return 0;\n}"
+  },
+  {
+    "objectID": "slides/zephyr-serial-communication-slides.html#sensor-threshold-alerts",
+    "href": "slides/zephyr-serial-communication-slides.html#sensor-threshold-alerts",
+    "title": "Zephyr: Serial Communication",
+    "section": "Sensor Threshold Alerts",
+    "text": "Sensor Threshold Alerts\nFirmware\nSensor attributes can be used to set thresholds for alerts. For example, the MCP9808 has SENSOR_ATTR_UPPER_THRESH and SENSOR_ATTR_LOWER_THRESH attributes, which can be set to a temperature values.\nHardware Interrupt\nThe MCP9808 has an Alert pin, which can be used to trigger an interrupt when the temperature exceeds a threshold. This pin can be connected to a GPIO pin on the DK, and an ISR can be used to handle the interrupt.\nExample firmware for setting the upper threshold and handling the interrupt is shown below.\nDevicetree overlay for the MCP9808 with the Alert pin connected to P0.11:\n&i2c0 {\n    status = \"okay\";\n\n    mcp9808: mcp9808@18 {\n        compatible = \"microchip,mcp9808\";\n        reg = &lt;0x18&gt;;\n        status = \"okay\";\n        int-gpios = &lt;&gpio0 11 GPIO_ACTIVE_LOW&gt;;\n    };\n};\nIn prj.conf:\nCONFIG_I2C=y\nCONFIG_SENSOR=y\nCONFIG_GPIO=y\nCONFIG_MCP9808=y\nCONFIG_MCP9808_TRIGGER=y\nFirmware:\nstatic void temp_alert_handler(\n    const struct device *dev,\n    const struct sensor_trigger *trigger)\n{\n    printk(\"MCP9808 temperature alert!\\n\");\n}\n\nstatic const struct sensor_trigger temp_trigger = {\n    .type = SENSOR_TRIG_THRESHOLD,\n    .chan = SENSOR_CHAN_AMBIENT_TEMP,\n};\n\nint ret = sensor_trigger_set(sensor,\n                             &temp_trigger,\n                             temp_alert_handler);"
   },
   {
     "objectID": "slides/zephyr-serial-communication-slides.html#resources",
@@ -4781,7 +4788,7 @@
     "href": "slides/zephyr-serial-communication.html#example-connection-of-mcp9808-temperature-sensor",
     "title": "Zephyr: Serial Communication",
     "section": "Example Connection of MCP9808 Temperature Sensor",
-    "text": "Example Connection of MCP9808 Temperature Sensor\n\n\n\n\n\n\n\nBreakout Board\nDK GPIO Pin\n\n\n\n\nSDA\nP0.26\n\n\nSCL\nP0.27\n\n\nVdd\nVDD\n\n\nGND\nGND\n\n\n\n\n\nMCP9808 Temperature Sensor\n\n\nprf.conf\nCONFIG_SENSOR=y\n\n\nnrf52833dk_nrf52833.overlay\n/* I2C Pin Mapping\nSCL: P0.27\nSDA: P0.26\n*/\n&i2c0 {\n    mcp9808@18{\n        compatible = \"jedec,jc-42.4-temp\";\n        reg = &lt;0x18&gt;;\n        status = \"okay\";\n    };\n\n};",
+    "text": "Example Connection of MCP9808 Temperature Sensor\n\n\n\n\n\n\n\nBreakout Board\nDK GPIO Pin\n\n\n\n\nSDA\nP0.26\n\n\nSCL\nP0.27\n\n\nVdd\nVDD\n\n\nGND\nGND\n\n\n\n\n\nMCP9808 Temperature Sensor\n\nA0, A1, A2 are address pins, which can be used to set the I2C address of the device. In this example, they are all connected to GND, so the I2C address is 0x18.\nAlert can be used to trigger an interrupt when the temperature exceeds a threshold.\n\n\n\nprf.conf\nCONFIG_SENSOR=y\n\n\nnrf52833dk_nrf52833.overlay\n/* I2C Pin Mapping\nSCL: P0.27\nSDA: P0.26\n*/\n&i2c0 {\n    mcp9808@18{\n        compatible = \"jedec,jc-42.4-temp\";\n        reg = &lt;0x18&gt;;\n        status = \"okay\";\n    };\n\n};",
     "crumbs": [
       "Learning Modules",
       "Serial Communication (UART, I2C, SPI)"
@@ -4793,6 +4800,17 @@
     "title": "Zephyr: Serial Communication",
     "section": "main.c",
     "text": "main.c\n#include &lt;zephyr/kernel.h&gt;\n#include &lt;zephyr/device.h&gt;\n#include &lt;zephyr/logging/log.h&gt;\n#include &lt;zephyr/drivers/sensor.h&gt;  // prf.conf -&gt; CONFIG_SENSOR=y\n#define MEASUREMENT_DELAY_MS 1000 \nLOG_MODULE_REGISTER(main, LOG_LEVEL_DBG);\n\nint read_temperature_sensor(const struct device *temp_sensor, float *temperature_degC);\n\n// the microchip,mcp9808 cannot be accessed in the DT by alias\n// instead, have to directly access the node name, with comma replaced by underscore\nconst struct device *const temp_sensor = DEVICE_DT_GET_ONE(jedec_jc_42_4_temp);\n\nstatic float temperature_degC;\n\nint main(void) {\n \n    int ret;\n \n    if (!sensor_is_ready_dt(&temp_sensor)) {\n        LOG_ERR(\"Temperature sensor is not ready\");\n        return -ENODEV;\n    }\n    else {\n        LOG_INF(\"Temperature sensor is ready\");\n    }\n    // read the temperature every MEASUREMENT_DELAY_MS\n    while (1) {\n        ret = read_temperature_sensor(temp_sensor, &temperature_degC);\n        if (ret != 0) {\n            LOG_ERR(\"There was a problem reading the temperature sensor (%d)\", ret);\n            return ret;\n        }\n        \n        // make sure CONFIG_CBPRINTF_FP_SUPPORT=y is set in `prf.conf` for float support\n        LOG_INF(\"Temperature: %f\", (double)temperature_degC);\n        k_msleep(MEASUREMENT_DELAY_MS);\n    }\n    return 0;\n}\nint read_temperature_sensor(const struct device *temp_sensor, float *temperature_degC) {\n    /*  Fetch-n-get temperature sensor data\n        INPUTS:\n            temp_sensor (const struct device *) - temperature sensor device\n            temperature_degC (float *) - pointer to store temperature in degrees Celsius\n        RETURNS:\n            0 - success\n            Otherwise, error code\n    */\n    struct sensor_value sensor_vals = {.val1 = 0, .val2 = 0};\n    int err = sensor_sample_fetch(temp_sensor);\n    if (err != 0) {\n        LOG_ERR(\"Temperature sensor fetch(): %d\", err);\n        return err;\n    }\n    else {\n        err = sensor_channel_get(temp_sensor, SENSOR_CHAN_AMBIENT_TEMP, &sensor_vals);\n        if (err != 0) {\n            LOG_ERR(\"Temperature sensor get(): %d\", err);\n            return err;\n        }\n    }\n        \n        // data returned in kPa\n        *temperature_degC = sensor_value_to_float(&sensor_vals);\n        LOG_INF(\"Temperature (deg C): %f\", (double)*temperature_degC);\n        return 0;\n}",
+    "crumbs": [
+      "Learning Modules",
+      "Serial Communication (UART, I2C, SPI)"
+    ]
+  },
+  {
+    "objectID": "slides/zephyr-serial-communication.html#sensor-threshold-alerts",
+    "href": "slides/zephyr-serial-communication.html#sensor-threshold-alerts",
+    "title": "Zephyr: Serial Communication",
+    "section": "Sensor Threshold Alerts",
+    "text": "Sensor Threshold Alerts\n\nFirmware\nSensor attributes can be used to set thresholds for alerts. For example, the MCP9808 has SENSOR_ATTR_UPPER_THRESH and SENSOR_ATTR_LOWER_THRESH attributes, which can be set to a temperature values.\n\n\nHardware Interrupt\nThe MCP9808 has an Alert pin, which can be used to trigger an interrupt when the temperature exceeds a threshold. This pin can be connected to a GPIO pin on the DK, and an ISR can be used to handle the interrupt.\nExample firmware for setting the upper threshold and handling the interrupt is shown below.\nDevicetree overlay for the MCP9808 with the Alert pin connected to P0.11:\n&i2c0 {\n    status = \"okay\";\n\n    mcp9808: mcp9808@18 {\n        compatible = \"microchip,mcp9808\";\n        reg = &lt;0x18&gt;;\n        status = \"okay\";\n        int-gpios = &lt;&gpio0 11 GPIO_ACTIVE_LOW&gt;;\n    };\n};\nIn prj.conf:\nCONFIG_I2C=y\nCONFIG_SENSOR=y\nCONFIG_GPIO=y\nCONFIG_MCP9808=y\nCONFIG_MCP9808_TRIGGER=y\nFirmware:\nstatic void temp_alert_handler(\n    const struct device *dev,\n    const struct sensor_trigger *trigger)\n{\n    printk(\"MCP9808 temperature alert!\\n\");\n}\n\nstatic const struct sensor_trigger temp_trigger = {\n    .type = SENSOR_TRIG_THRESHOLD,\n    .chan = SENSOR_CHAN_AMBIENT_TEMP,\n};\n\nint ret = sensor_trigger_set(sensor,\n                             &temp_trigger,\n                             temp_alert_handler);",
     "crumbs": [
       "Learning Modules",
       "Serial Communication (UART, I2C, SPI)"
@@ -5382,84 +5400,143 @@
     "href": "labs/ecg-temp-ble-lab.html",
     "title": "ECG & Temperature Sensor with BLE Lab",
     "section": "",
-    "text": "This lab will be the final addition of functionality to your course firmware repository. You should take all functional specifications below to override and replace any previous lab functionality. You should refactor your code from all of the previous labs to demonstrate your mastery of best coding practices from this semester."
+    "text": "This lab will be the final addition of functionality to your course firmware repository. You should take all functional specifications below to override and replace any previous lab functionality. You should refactor your code from all of the previous labs to demonstrate your mastery of best coding practices from this semester.",
+    "crumbs": [
+      "Labs",
+      "ECG, Temperature Sensor, and BLE Lab"
+    ]
   },
   {
     "objectID": "labs/ecg-temp-ble-lab.html#git-version-control",
     "href": "labs/ecg-temp-ble-lab.html#git-version-control",
     "title": "ECG & Temperature Sensor with BLE Lab",
     "section": "Git Version Control",
-    "text": "Git Version Control\n\nUse best practices for version control (branching, commit messages, etc.).\nDo all development on a dedicated branch that is merged into main once it is functional.\nCommits should be very specific to the changes/additions you are making to your code. This will help you and others understand what you did and why you did it.\n\nOn a given development branch, try to implement one small piece of functionality at a time, commit it, and then move on to the next piece of functionality.\n\n\n\n\n\n\n\nImportant\n\n\n\nYou do not want one, monolithic git commit right before you submit your project."
+    "text": "Git Version Control\n\nUse best practices for version control (branching, commit messages, etc.).\nDo all development on a dedicated branch that is merged into main once it is functional.\nCommits should be very specific to the changes/additions you are making to your code. This will help you and others understand what you did and why you did it.\n\nOn a given development branch, try to implement one small piece of functionality at a time, commit it, and then move on to the next piece of functionality.\n\n\n\n\n\n\n\nImportant\n\n\n\nYou do not want one, monolithic git commit right before you submit your project.",
+    "crumbs": [
+      "Labs",
+      "ECG, Temperature Sensor, and BLE Lab"
+    ]
+  },
+  {
+    "objectID": "labs/ecg-temp-ble-lab.html#teamwork",
+    "href": "labs/ecg-temp-ble-lab.html#teamwork",
+    "title": "ECG & Temperature Sensor with BLE Lab",
+    "section": "Teamwork",
+    "text": "Teamwork\nAll work should be done with your teammate using the same git workflow as the previous ADC and PWM labs.\n\n\n\n\n\n\nImportant\n\n\n\nMake sure to sign up for a time to present your final projecto to Dr. Palmeri using this Calendly link.\nYour final firmware must be tagged and pushed to the main branch of your repository before your presentation. You will be graded on your device functionality and answers to questions about your firmware development decisions.",
+    "crumbs": [
+      "Labs",
+      "ECG, Temperature Sensor, and BLE Lab"
+    ]
   },
   {
     "objectID": "labs/ecg-temp-ble-lab.html#best-coding-practices",
     "href": "labs/ecg-temp-ble-lab.html#best-coding-practices",
     "title": "ECG & Temperature Sensor with BLE Lab",
     "section": "Best Coding Practices",
-    "text": "Best Coding Practices\nYou should refactor your code from all of the previous labs to demonstrate your mastery of best coding practices from this semester. Some reminders:\n\nFunctions should be short and do one thing. They should return an exit code that is checked in the calling function, indicating success or failure.\nMACROS! Avoid hard-coded values in your code.\nUse structs to organize related data.\nUse libraries for code that is self-contained.\nUse the LOGGING module to log errors, warnings, information and debug messages.\nYou should not have any compiler/build warnings."
+    "text": "Best Coding Practices\nYou should refactor your code from all of the previous labs to demonstrate your mastery of best coding practices from this semester. Some reminders:\n\nFunctions should be short and do one thing. They should return an exit code that is checked in the calling function, indicating success or failure.\nMACROS! Avoid hard-coded values in your code.\nUse structs to organize related data.\nUse libraries for code that is self-contained.\nUse the LOGGING module to log errors, warnings, information and debug messages.\nYou should not have any compiler/build warnings.",
+    "crumbs": [
+      "Labs",
+      "ECG, Temperature Sensor, and BLE Lab"
+    ]
   },
   {
     "objectID": "labs/ecg-temp-ble-lab.html#firmware-functional-specifications",
     "href": "labs/ecg-temp-ble-lab.html#firmware-functional-specifications",
     "title": "ECG & Temperature Sensor with BLE Lab",
     "section": "Firmware Functional Specifications",
-    "text": "Firmware Functional Specifications\n\nWrite all firmware using the state machine framework.\n\nDo all device initialization in an INIT state.\nHave an IDLE state when the device isn’t making any measurements.\nHave an ERROR state if any error exit codes are returned from any functions.\n\nAll 4 LEDs should blink at a 50% duty cycle (ON:OFF time), in-phase with each other, in the ERROR state.\nAn error condition should post an error-related event that causes the device to enter the ERROR state.\nThe error code should specify the error condition that caused the device to enter the ERROR state. For example, you may choose to have a bit array that can capture multiple error conditions.\nA BLE notification should be sent with the error code (see BLE custom service/characteristic below).\nIf the device remains in the ERROR state for more than 2 minutes, this it should “gracefully” terminate the state machine function and go into a low-power mode.\n\nImplement states of your choosing for the following measurements, calculations and BLE communications.\n\nHave a heartbeat LED0 that blinks every 1 second with a 50% duty cycle (ON:OFF time) in all states.\nImplement functionality to measure a battery voltage (0-3.0 V) using AIN0:\n\nWhen the device first powers on, and then\nEvery 1 minute thereafter, but only when in the IDLE state.\nYou won’t actually be connecting a battery to your device; you can use a power support or another voltage source to input a voltage to AIN0 to simulate a battery level.\n\nIf your battery level is &lt;75% of the nominal voltage (3.0 V), then your device should “gracefully” terminate the state machine function and go into a low-power mode.\nHave the brightness of LED1 linearly modulated by the percentage of the battery level.\nImplement functionality to make a temperature measurement with your MCP9808 sensor (in degrees Celsius) after pressing BUTTON1.\nWhen you press BUTTON2, the device should measure “instantaneous” heart rate, expected to range from 40-200 BPM, using an ECG signal (ranging from -500\n500 mV, note this is bipolar) from the function generator (see video on how to setup the function generator to output an ECG signal).\n\nPressing BUTTON2 during ECG measurements will stop the “live” ECG measurements.\nBlink LED2 with a 25% duty cycle (ON:OFF time) at the average heart rate you have calculated (updated as often as you feel is appropriate).\nYou should decide how often the heart rate is updated in the blinking rate of LED2 (e.g., every 1 second, every 5 seconds, etc.).\nBUTTON1 is allowed to be pressed during ECG measurements to take temperature measurements.\n\nHave Bluetooth notifications after the measurements are complete/updated and data have been processed, using the BLE services and characteristics described below.\n\nConfigure the DIS (Device Information Service) to report the device model as your name.\nSet the BAS (Battery Service) to report the battery level of your device. (This isn’t actually a battery level, but we’re using the AIN0 measurement as a surrogate for a battery level.)\nSet the Heart Rate Service to report the average heart rate (see Resources section below.)\nSetup a custom service with the following custom characterisitics:\n\nTemperature for the I2C temperature sensor data in degrees Celcius.\nError Code for the error code that caused the device to enter the ERROR state.\n\n\nBUTTON3 should be used to reset the device from the ERROR state or any measurement state and return to the IDLE state.\nBUTTON0 should be used to return the device to the IDLE state from any measurement state without resetting the device (i.e., preserve all measured values that are stored in memory).\nUse timers, kernel events, work queues, threads and any other Zephyr RTOS features as needed to implement the above functionality.\nAny functionality not explicitly described above is left to your design discretion."
+    "text": "Firmware Functional Specifications\n\nWrite all firmware using the state machine framework.\n\nDo all device initialization in an INIT state.\nHave an IDLE state when the device isn’t making any measurements.\nHave an ERROR state if any error exit codes are returned from any functions.\n\nAll 4 LEDs should blink at a 50% duty cycle (ON:OFF time), in-phase with each other, in the ERROR state.\nAn error condition should post an error-related event that causes the device to enter the ERROR state.\nThe error code should specify the error condition that caused the device to enter the ERROR state. For example, you may choose to have a bit array that can capture multiple error conditions.\nA BLE notification should be sent with the error code (see BLE custom service/characteristic below).\nIf the device remains in the ERROR state for more than 2 minutes, this it should “gracefully” terminate the state machine function and go into a low-power mode.\n\nImplement states of your choosing for the following measurements, calculations and BLE communications.\n\nHave a heartbeat LED0 that blinks every 1 second with a 50% duty cycle (ON:OFF time) in all states.\nImplement functionality to measure a battery voltage (0-3.0 V) using AIN0:\n\nWhen the device first powers on, and then\nEvery 1 minute thereafter, but only when in the IDLE state.\nYou won’t actually be connecting a battery to your device; you can use a power support or another voltage source to input a voltage to AIN0 to simulate a battery level.\n\nIf your battery level is &lt;75% of the nominal voltage (3.0 V), then your device should “gracefully” terminate the state machine function and go into a low-power mode.\nHave the brightness of LED1 linearly modulated by the percentage of the battery level.\nImplement functionality to make a temperature measurement with your MCP9808 sensor (in degrees Celsius) after pressing BUTTON1.\nImplement firmware-based low- and high-temperature thresholds for the temperature sensor when making the temperature measurement.\n\nThese should be triggered at \\(\\pm 5^\\circ\\)F from the room temperature (70°F) measurement.\nYour device should transition to a SAFETY state if the temperature is outside of this range.\n\nIn the SAFETY state, all 4 LEDs should blink at a 50% duty cycle (ON:OFF time), in sequence with each other, in a clockwise direction.\nAll buttons, except for the RESET button, should be disabled in the SAFETY state.\nA BLE notification should be sent with the temperature measurement (see BLE custom service/characteristic below).\n\n\nImplement the a hardware-triggered interrupt from the temperature sensor to trigger the same transition to the SAFETY state if the temperature is greater than 80°F. This interrupt should be valid in all other states, except for ERROR.\nWhen you press BUTTON2, the device should measure “instantaneous” heart rate, expected to range from 40-200 BPM, using an ECG signal (ranging from -500\n500 mV, note this is bipolar) from the function generator (see video on how to setup the function generator to output an ECG signal).\n\nPressing BUTTON2 during ECG measurements will stop the “live” ECG measurements.\nBlink LED2 with a 25% duty cycle (ON:OFF time) at the average heart rate you have calculated (updated as often as you feel is appropriate).\nYou should decide how often the heart rate is updated in the blinking rate of LED2 (e.g., every 1 second, every 5 seconds, etc.).\nBUTTON1 is allowed to be pressed during ECG measurements to take temperature measurements.\n\nHave Bluetooth notifications after the measurements are complete/updated and data have been processed, using the BLE services and characteristics described below.\n\nConfigure the DIS (Device Information Service) to report the device model as your name.\nSet the BAS (Battery Service) to report the battery level of your device. (This isn’t actually a battery level, but we’re using the AIN0 measurement as a surrogate for a battery level.)\nSet the Heart Rate Service to report the average heart rate (see Resources section below.)\nSetup a custom service with the following custom characterisitics:\n\nTemperature for the I2C temperature sensor data in degrees Celcius.\nTemperature Thresholds for the low and high temperature thresholds (firmware and interrupt triggered).\nError Code for the error code that caused the device to enter the ERROR state.\n\n\nBUTTON3 should be used to reset the device from the ERROR state or any measurement state and return to the IDLE state.\nBUTTON0 should be used to return the device to the IDLE state from any measurement state without resetting the device (i.e., preserve all measured values that are stored in memory).\nUse timers, kernel events, work queues, threads and any other Zephyr RTOS features as needed to implement the above functionality.\nAny functionality not explicitly described above is left to your design discretion.",
+    "crumbs": [
+      "Labs",
+      "ECG, Temperature Sensor, and BLE Lab"
+    ]
   },
   {
     "objectID": "labs/ecg-temp-ble-lab.html#ble-server-mobile-app",
     "href": "labs/ecg-temp-ble-lab.html#ble-server-mobile-app",
     "title": "ECG & Temperature Sensor with BLE Lab",
     "section": "BLE Server (Mobile App)",
-    "text": "BLE Server (Mobile App)\n\nYour device can connect via BLE to a mobile app called nRF Connect.\nThis app can be used to read the services and characteristics that your device is advertising."
+    "text": "BLE Server (Mobile App)\n\nYour device can connect via BLE to a mobile app called nRF Connect.\nThis app can be used to read the services and characteristics that your device is advertising.",
+    "crumbs": [
+      "Labs",
+      "ECG, Temperature Sensor, and BLE Lab"
+    ]
   },
   {
     "objectID": "labs/ecg-temp-ble-lab.html#state-sequence-diagrams",
     "href": "labs/ecg-temp-ble-lab.html#state-sequence-diagrams",
     "title": "ECG & Temperature Sensor with BLE Lab",
     "section": "State & Sequence Diagrams",
-    "text": "State & Sequence Diagrams\n\nGenerate a detailed state diagram that all states, events and actions for your firmware.\nYou should add states, events and actions as needed to fully describe the functionality of your firmware.\nGenerate a sequence diagram that describes how your threads, timer handlers, events, work queues and callbacks interact with each other to implement the functionality of your firmware."
+    "text": "State & Sequence Diagrams\n\nGenerate a detailed state diagram that all states, events and actions for your firmware.\nYou should add states, events and actions as needed to fully describe the functionality of your firmware.\nGenerate a sequence diagram that describes how your threads, timer handlers, events, work queues and callbacks interact with each other to implement the functionality of your firmware.",
+    "crumbs": [
+      "Labs",
+      "ECG, Temperature Sensor, and BLE Lab"
+    ]
   },
   {
     "objectID": "labs/ecg-temp-ble-lab.html#testing-verification",
     "href": "labs/ecg-temp-ble-lab.html#testing-verification",
     "title": "ECG & Temperature Sensor with BLE Lab",
     "section": "Testing & Verification",
-    "text": "Testing & Verification\nCreate a new Jupyter notebook named final_technical_report.ipynb for your testing and verification technical report. The notebook should include the following sections:\n\nBattery Voltage Measurement\nVerify the accuracy of your battery level measurement (AIN0) for 0-3 V, as read through the nRF Connect app Bluetooth Battery Level GATT. Quantitative analysis should include:\n\nLinear regression analysis of the input voltage versus the battery level for both the LOG_INF() output, the oscilloscope measurement of the PWM duty cycle, and the nRF Connect app.\n95% confidence intervals for the slope and intercept of the linear regression.\n\n\n\nECG Heart Rate Measurement\n\nDescribe your method for calculating average heart rate from the ECG signal input. This should include any filtering, peak detection, and averaging methods used.\nDemonstrate that your average heart rate measurement is accurate, as recorded through LOG_INF() output, the oscilloscope measurements, and the nRF Connect app, relative to what was set on the function generator. This should be done for 40, 60, 120, 150, and 180 bpm. The 25% duty cycle should also be verified. Quantitative analysis should include:\n\nLinear regression analysis of the recorded heart rate versus the set heart rate for both the LOG_INF() output, oscilloscope measurements, and the nRF Connect app.\n95% confidence intervals for the slope and intercept of the linear regression.\nVerification that the duty cycle of out output is 25% for all heart rates.\n\n\n\n\nTemperature Sensor Measurement\n\nDemonstrate that your temperature sensor can have a room temperature measurement read through LOG_INF() output and the nRF Connect app.\nDo this in 3 locations with different temperatures.\nYou do not need to verify accuracy, just a reasonable measurements with agreement."
+    "text": "Testing & Verification\nCreate a new Jupyter notebook named final_technical_report.ipynb for your testing and verification technical report. The notebook should include the following sections:\n\nBattery Voltage Measurement\nVerify the accuracy of your battery level measurement (AIN0) for 0-3 V, as read through the nRF Connect app Bluetooth Battery Level GATT. Quantitative analysis should include:\n\nLinear regression analysis of the input voltage versus the battery level for both the LOG_INF() output, the oscilloscope measurement of the PWM duty cycle, and the nRF Connect app.\n95% confidence intervals for the slope and intercept of the linear regression.\n\n\n\nECG Heart Rate Measurement\n\nDescribe your method for calculating average heart rate from the ECG signal input. This should include any filtering, peak detection, and averaging methods used.\nDemonstrate that your average heart rate measurement is accurate, as recorded through LOG_INF() output, the oscilloscope measurements, and the nRF Connect app, relative to what was set on the function generator. This should be done for 40, 60, 120, 150, and 180 bpm. The 25% duty cycle should also be verified. Quantitative analysis should include:\n\nLinear regression analysis of the recorded heart rate versus the set heart rate for both the LOG_INF() output, oscilloscope measurements, and the nRF Connect app.\n95% confidence intervals for the slope and intercept of the linear regression.\nVerification that the duty cycle of out output is 25% for all heart rates.\n\n\n\n\nTemperature Sensor Measurement\n\nDemonstrate that your temperature sensor can have a room temperature measurement read through LOG_INF() output and the nRF Connect app.\nTest both your firmware-based and interrupt-based temperature thresholds to verify that they are working correctly.\nYou do not need to verify accuracy with high precision; just a reasonable measurements with agreement.",
+    "crumbs": [
+      "Labs",
+      "ECG, Temperature Sensor, and BLE Lab"
+    ]
   },
   {
     "objectID": "labs/ecg-temp-ble-lab.html#how-to-generate-an-ecg-signal",
     "href": "labs/ecg-temp-ble-lab.html#how-to-generate-an-ecg-signal",
     "title": "ECG & Temperature Sensor with BLE Lab",
     "section": "How to Generate an ECG Signal",
-    "text": "How to Generate an ECG Signal\n\nWaveStation 2012 AWG\nDigilent Waveforms Script"
+    "text": "How to Generate an ECG Signal\n\nWaveStation 2012 AWG\nDigilent Waveforms Script",
+    "crumbs": [
+      "Labs",
+      "ECG, Temperature Sensor, and BLE Lab"
+    ]
   },
   {
     "objectID": "labs/ecg-temp-ble-lab.html#grading",
     "href": "labs/ecg-temp-ble-lab.html#grading",
     "title": "ECG & Temperature Sensor with BLE Lab",
     "section": "Grading",
-    "text": "Grading\n\n\n\n\n\n\nWarning\n\n\n\nAbsolutely no late submissions will be accepted.\n\n\n\nGit version control will be graded based on best practices.\nFirmware will be graded based on all best practices taught throughout the semester.\nCode organization and coding best practices will be graded.\nState and sequence diagrams will be graded based on completeness, accuracy and ease of interpretation.\nTesting and analysis technical report will be graded based on presentation, completeness, and accuracy."
+    "text": "Grading\n\n\n\n\n\n\nWarning\n\n\n\nAbsolutely no late submissions will be accepted.\n\n\n\nGit version control will be graded based on best practices.\nFirmware will be graded based on all best practices taught throughout the semester.\nCode organization and coding best practices will be graded.\nState and sequence diagrams will be graded based on completeness, accuracy and ease of interpretation.\nTesting and analysis technical report will be graded based on presentation, completeness, and accuracy.",
+    "crumbs": [
+      "Labs",
+      "ECG, Temperature Sensor, and BLE Lab"
+    ]
   },
   {
     "objectID": "labs/ecg-temp-ble-lab.html#how-to-ask-for-help",
     "href": "labs/ecg-temp-ble-lab.html#how-to-ask-for-help",
     "title": "ECG & Temperature Sensor with BLE Lab",
     "section": "How to Ask for Help",
-    "text": "How to Ask for Help\n\nIf you have a general / non-coding question, you should ask your TAs / Dr. Palmeri on Ed to allow any of them to respond in a timely manner.\nPush you code to your GitLab repository, ideally with your active development on a non-main branch.\nCreate an Issue in your repository.\n\nAdd as much detail as possible as to your problem, and add links to specific lines / section of code when possible.\nAssign the label “Bug” or “Question”, as appropriate.\nBe sure to specify what branch you are working on.\nAssign the Issue to one of the TAs.\nIf your TA cannot solve your Issue, they can escalate the Issue to Dr. Palmeri.\n\nYou will get a response to your Issue, and maybe a new branch of code will be pushed to help you with some example syntax that you can use git diff to visualize."
+    "text": "How to Ask for Help\n\nIf you have a general / non-coding question, you should ask your TAs / Dr. Palmeri on Ed to allow any of them to respond in a timely manner.\nPush you code to your GitLab repository, ideally with your active development on a non-main branch.\nCreate an Issue in your repository.\n\nAdd as much detail as possible as to your problem, and add links to specific lines / section of code when possible.\nAssign the label “Bug” or “Question”, as appropriate.\nBe sure to specify what branch you are working on.\nAssign the Issue to one of the TAs.\nIf your TA cannot solve your Issue, they can escalate the Issue to Dr. Palmeri.\n\nYou will get a response to your Issue, and maybe a new branch of code will be pushed to help you with some example syntax that you can use git diff to visualize.",
+    "crumbs": [
+      "Labs",
+      "ECG, Temperature Sensor, and BLE Lab"
+    ]
   },
   {
     "objectID": "labs/ecg-temp-ble-lab.html#what-to-submit",
     "href": "labs/ecg-temp-ble-lab.html#what-to-submit",
     "title": "ECG & Temperature Sensor with BLE Lab",
     "section": "What to Submit",
-    "text": "What to Submit\n\nMake sure that all of your branches have been merged into the main branch.\nCreate an annotated tag called v4.0.0 to mark the commit that you want to be graded.\n\nIf you fix any bugs after creating this tag, you can create another tag called v4.0.1, etc.\nYour latest tag will be the one that is graded up until the final due date/time of the project.\n\nCreate an Issue assigned to Dr. Palmeri titled “Final Project Submission” and labelled Review.\n\n\n\n\n\n\n\nImportant\n\n\n\nAll repositories will be cloned with the latest tag at the due date/time for grading. No repository commits after the due date/time will be accepted."
+    "text": "What to Submit\n\nMake sure that all of your branches have been merged into the main branch.\nCreate an annotated tag called v4.0.0 to mark the commit that you want to be graded.\n\nIf you fix any bugs after creating this tag, you can create another tag called v4.0.1, etc.\nYour latest tag will be the one that is graded up until the final due date/time of the project.\n\nCreate an Issue assigned to Dr. Palmeri titled “Final Project Submission” and labelled Review.\n\n\n\n\n\n\n\nImportant\n\n\n\nAll repositories will be cloned with the latest tag at the due date/time for grading. No repository commits after the due date/time will be accepted.",
+    "crumbs": [
+      "Labs",
+      "ECG, Temperature Sensor, and BLE Lab"
+    ]
   },
   {
     "objectID": "labs/ecg-temp-ble-lab.html#resources",
     "href": "labs/ecg-temp-ble-lab.html#resources",
     "title": "ECG & Temperature Sensor with BLE Lab",
     "section": "Resources",
-    "text": "Resources\n\nHeart Rate Service (GATT)\n\nBLE Sample: Peripheral Heartrate\nZephyr Docs: BT Heartrate Service"
+    "text": "Resources\n\nHeart Rate Service (GATT)\n\nBLE Sample: Peripheral Heartrate\nZephyr Docs: BT Heartrate Service",
+    "crumbs": [
+      "Labs",
+      "ECG, Temperature Sensor, and BLE Lab"
+    ]
   },
   {
     "objectID": "labs/timers-lab-testing-notebook/timing_analysis.html",

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Dr.&nbsp;Mark Palmeri, M.D., Ph.D.">
-<meta name="dcterms.date" content="2026-04-07">
+<meta name="dcterms.date" content="2026-11-08">
 
 <title>Zephyr: Serial Communication – Embedded Medical Devices</title>
 <style>
@@ -331,21 +331,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Pulse Width Modulation (PWM) Lab</span></a>
   </div>
 </li>
-          <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">ECG, Temperature Sensor, and BLE Lab</span></span>
-  </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../labs/ecg-temp-ble-lab.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ECG, Temperature Sensor, and BLE Lab</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
  <span class="menu-text">Resources</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../resources/git.html" class="sidebar-item-text sidebar-link">
@@ -439,6 +441,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#nrf52833dk_nrf52833.overlay" id="toc-nrf52833dk_nrf52833.overlay" class="nav-link" data-scroll-target="#nrf52833dk_nrf52833.overlay"><code>nrf52833dk_nrf52833.overlay</code></a></li>
   </ul></li>
   <li><a href="#main.c" id="toc-main.c" class="nav-link" data-scroll-target="#main.c"><code>main.c</code></a></li>
+  <li><a href="#sensor-threshold-alerts" id="toc-sensor-threshold-alerts" class="nav-link" data-scroll-target="#sensor-threshold-alerts">Sensor Threshold Alerts</a>
+  <ul class="collapse">
+  <li><a href="#firmware" id="toc-firmware" class="nav-link" data-scroll-target="#firmware">Firmware</a></li>
+  <li><a href="#hardware-interrupt" id="toc-hardware-interrupt" class="nav-link" data-scroll-target="#hardware-interrupt">Hardware Interrupt</a></li>
+  </ul></li>
   <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a></li>
   </ul></li>
   </ul>
@@ -474,7 +481,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">April 7, 2026</p>
+      <p class="date">November 8, 2026</p>
     </div>
   </div>
   
@@ -706,6 +713,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p><a href="https://www.adafruit.com/product/1782">MCP9808 Temperature Sensor</a></p>
+<ul>
+<li><code>A0</code>, <code>A1</code>, <code>A2</code> are address pins, which can be used to set the I2C address of the device. In this example, they are all connected to <code>GND</code>, so the I2C address is <code>0x18</code>.</li>
+<li><code>Alert</code> can be used to trigger an interrupt when the temperature exceeds a threshold.</li>
+</ul>
 <hr>
 <section id="prf.conf" class="level3">
 <h3 class="anchored" data-anchor-id="prf.conf"><code>prf.conf</code></h3>
@@ -797,6 +808,51 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a>        LOG_INF<span class="op">(</span><span class="st">"Temperature (deg C): </span><span class="sc">%f</span><span class="st">"</span><span class="op">,</span> <span class="op">(</span><span class="dt">double</span><span class="op">)*</span>temperature_degC<span class="op">);</span></span>
 <span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
 <span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="sensor-threshold-alerts" class="level2">
+<h2 class="anchored" data-anchor-id="sensor-threshold-alerts">Sensor Threshold Alerts</h2>
+<section id="firmware" class="level3">
+<h3 class="anchored" data-anchor-id="firmware">Firmware</h3>
+<p><a href="https://docs.zephyrproject.org/latest/hardware/peripherals/sensor/attributes.html">Sensor attributes</a> can be used to set thresholds for alerts. For example, the MCP9808 has <code>SENSOR_ATTR_UPPER_THRESH</code> and <code>SENSOR_ATTR_LOWER_THRESH</code> attributes, which can be set to a temperature values.</p>
+</section>
+<section id="hardware-interrupt" class="level3">
+<h3 class="anchored" data-anchor-id="hardware-interrupt">Hardware Interrupt</h3>
+<p>The <code>MCP9808</code> has an <code>Alert</code> pin, which can be used to trigger an interrupt when the temperature exceeds a threshold. This pin can be connected to a GPIO pin on the DK, and an ISR can be used to handle the interrupt.</p>
+<p>Example firmware for setting the upper threshold and handling the interrupt is shown below.</p>
+<p>Devicetree overlay for the MCP9808 with the <code>Alert</code> pin connected to <code>P0.11</code>:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="op">&amp;</span>i2c0 <span class="op">{</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a> &nbsp; &nbsp;status <span class="op">=</span> <span class="st">"okay"</span><span class="op">;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a> &nbsp; &nbsp;mcp9808<span class="op">:</span> mcp9808@<span class="dv">18</span> <span class="op">{</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a> &nbsp; &nbsp; &nbsp; &nbsp;compatible <span class="op">=</span> <span class="st">"microchip,mcp9808"</span><span class="op">;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a> &nbsp; &nbsp; &nbsp; &nbsp;reg <span class="op">=</span> <span class="op">&lt;</span><span class="bn">0x18</span><span class="op">&gt;;</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a> &nbsp; &nbsp; &nbsp; &nbsp;status <span class="op">=</span> <span class="st">"okay"</span><span class="op">;</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a> &nbsp; &nbsp; &nbsp; &nbsp;int<span class="op">-</span>gpios <span class="op">=</span> <span class="op">&lt;&amp;</span>gpio0 <span class="dv">11</span> GPIO_ACTIVE_LOW<span class="op">&gt;;</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a> &nbsp; &nbsp;<span class="op">};</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>In <code>prj.conf</code>:</p>
+<pre><code>CONFIG_I2C=y
+CONFIG_SENSOR=y
+CONFIG_GPIO=y
+CONFIG_MCP9808=y
+CONFIG_MCP9808_TRIGGER=y</code></pre>
+<p>Firmware:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="dt">static</span> <span class="dt">void</span> temp_alert_handler<span class="op">(</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a> &nbsp; &nbsp;const <span class="kw">struct</span> device <span class="op">*</span>dev<span class="op">,</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a> &nbsp; &nbsp;const <span class="kw">struct</span> sensor_trigger <span class="op">*</span>trigger<span class="op">)</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a> &nbsp; &nbsp;printk<span class="op">(</span><span class="st">"MCP9808 temperature alert!</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="dt">static</span> <span class="dt">const</span> <span class="kw">struct</span> sensor_trigger temp_trigger <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a> &nbsp; &nbsp;<span class="op">.</span>type <span class="op">=</span> SENSOR_TRIG_THRESHOLD<span class="op">,</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a> &nbsp; &nbsp;<span class="op">.</span>chan <span class="op">=</span> SENSOR_CHAN_AMBIENT_TEMP<span class="op">,</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> ret <span class="op">=</span> sensor_trigger_set<span class="op">(</span>sensor<span class="op">,</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="op">&amp;</span>temp_trigger<span class="op">,</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; temp_alert_handler<span class="op">);</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
 </section>
 <section id="resources" class="level2">
 <h2 class="anchored" data-anchor-id="resources">Resources</h2>
