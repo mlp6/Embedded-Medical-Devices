@@ -1,6 +1,6 @@
 ---
 title: "ECG & Temperature Sensor with BLE Lab"
-date: "2026-04-15"
+date: "2026-11-08"
 format:
   html: default
   pdf: default
@@ -15,6 +15,20 @@ this semester.
 ## Git Version Control 
 
 {{< include _git_best_practices.qmd >}}
+
+## Teamwork
+
+All work should be done with your teammate using the same git workflow as the
+previous ADC and PWM labs.
+
+::: callout-important
+Make sure to sign up for a time to present your final projecto to Dr. Palmeri
+using this [Calendly link](https://calendly.com/mark-palmeri/bme554l-final-project-presentation).  
+Your final firmware must be tagged and pushed to the `main` branch of your
+repository before your presentation.  You will be graded on your device
+functionality and answers to questions about your firmware development
+decisions.
+:::
 
 ## Best Coding Practices
 
@@ -89,6 +103,29 @@ battery level.
 [`MCP9808`](https://www.adafruit.com/product/1782) sensor (in degrees Celsius)
 after pressing `BUTTON1`.
 
+- Implement firmware-based low- and high-temperature thresholds for the
+temperature sensor when making the temperature measurement.  
+
+  - These should be triggered at $\pm 5^\circ$F from the room
+temperature (70°F) measurement.   
+
+  - Your device should transition to a `SAFETY` state if the temperature is
+  outside of this range.  
+
+    - In the `SAFETY` state, all 4 LEDs should blink at a 50% duty cycle
+    (`ON:OFF` time), in sequence with each other, in a clockwise direction.  
+
+    - All buttons, except for the `RESET` button, should be disabled in the
+    `SAFETY` state.  
+
+    - A BLE notification should be sent with the temperature measurement (see
+    BLE custom service/characteristic below).
+
+- Implement the a hardware-triggered interrupt from the temperature sensor to
+trigger the same transition to the `SAFETY` state if the temperature is greater
+than 80°F.  This interrupt should be valid in all other states, except for
+`ERROR`.
+
 - When you press `BUTTON2`, the device should measure "instantaneous" heart
 rate, expected to range from 40-200 BPM, using an ECG signal (ranging from -500
 - 500 mV, note this is bipolar) from the function generator (see video on how to
@@ -124,6 +161,9 @@ below.
 
     - `Temperature` for the I2C temperature sensor data in degrees Celcius.
 
+    - `Temperature Thresholds` for the low and high temperature thresholds
+    (firmware and interrupt triggered).
+
     - `Error Code` for the error code that caused the device to enter the
     `ERROR` state.
 
@@ -155,7 +195,9 @@ firmware.
 - You should add states, events and actions as needed to fully describe the
 functionality of your firmware.
 
-- Generate a sequence diagram that describes how your threads, timer handlers, events, work queues and callbacks interact with each other to implement the functionality of your firmware.
+- Generate a sequence diagram that describes how your threads, timer handlers,
+events, work queues and callbacks interact with each other to implement the
+functionality of your firmware.
 
 ## Testing & Verification
 
@@ -201,10 +243,11 @@ Quantitative analysis should include:
 - Demonstrate that your temperature sensor can have a room temperature
 measurement read through `LOG_INF()` output and the nRF Connect app.  
 
-- Do this in 3 locations with different temperatures.  
+- Test both your firmware-based and interrupt-based temperature thresholds to
+verify that they are working correctly. 
 
-- You do not need to verify accuracy, just a reasonable measurements with
-agreement.
+- You do not need to verify accuracy with high precision; just a reasonable
+measurements with agreement.
 
 ## How to Generate an ECG Signal
 

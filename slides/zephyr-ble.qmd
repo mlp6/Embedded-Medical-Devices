@@ -1,6 +1,6 @@
 ---
 title: "Bluetooth Low Energy"
-date: "2026-04-15"
+date: "2026-11-08"
 format:
   live-html: 
     output-file: zephyr-ble.html
