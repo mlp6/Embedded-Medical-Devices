@@ -1,6 +1,6 @@
 ---
 title: "Pulse Width Modulation (PWM) Lab"
-date: "2026-04-06"
+date: "2026-11-08"
 format:
   html: default
   pdf: default
@@ -16,6 +16,10 @@ dynamic range.
 ## Git Best Practices
 
 {{< include _git_best_practices.qmd >}}
+
+## Teamwork
+
+Use the same git workflow with your teammate that was described in the [ADC Lab: Teamwork](labs/zephyr-adc-lab.qmd#Teamwork) section.
 
 ## Firmware Expectations
 
