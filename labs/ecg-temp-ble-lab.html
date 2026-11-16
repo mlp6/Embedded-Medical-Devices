@@ -551,7 +551,7 @@ Your final firmware must be tagged and pushed to the <code>main</code> branch of
 <li><p>These should be triggered at <span class="math inline">\(\pm 5^\circ\)</span>F from the room temperature (70°F) measurement.</p></li>
 <li><p>Your device should transition to a <code>SAFETY</code> state if the temperature is outside of this range.</p>
 <ul>
-<li><p>In the <code>SAFETY</code> state, all 4 LEDs should blink at a 50% duty cycle (<code>ON:OFF</code> time), in sequence with each other, in a clockwise direction.</p></li>
+<li><p>In the <code>SAFETY</code> state, all 4 LEDs should blink at a 25% duty cycle (<code>ON:OFF</code> time), in sequence with each other, in a clockwise direction (i.e., only 1 LED is ON at any given time).</p></li>
 <li><p>All buttons, except for the <code>RESET</code> button, should be disabled in the <code>SAFETY</code> state.</p></li>
 <li><p>A BLE notification should be sent with the temperature measurement (see BLE custom service/characteristic below).</p></li>
 </ul></li>
