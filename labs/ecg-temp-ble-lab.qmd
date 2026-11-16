@@ -112,8 +112,9 @@ temperature (70°F) measurement.
   - Your device should transition to a `SAFETY` state if the temperature is
   outside of this range.  
 
-    - In the `SAFETY` state, all 4 LEDs should blink at a 50% duty cycle
-    (`ON:OFF` time), in sequence with each other, in a clockwise direction.  
+    - In the `SAFETY` state, all 4 LEDs should blink at a 25% duty cycle
+    (`ON:OFF` time), in sequence with each other, in a clockwise direction
+    (i.e., only 1 LED is ON at any given time).
 
     - All buttons, except for the `RESET` button, should be disabled in the
     `SAFETY` state.  
