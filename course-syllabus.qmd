@@ -164,6 +164,15 @@ be evaluated with code reviews and technical reports that assess functionality.
 All assignment feedback will be posted to your GitLab repository and grades will
 be posted to Canvas throughout the semester to track your performance.
 
+::: callout-note
+Dr. Palmeri and the teaching assistants will be leveraging scripts and AI tools
+to assist with providing timely, thorough and unbiased code and technical report
+feedback.  Dr. Palmeri and the teaching assistants will review all feedback and
+grades before they are posted.
+:::
+
+
+
 | Grade Category   | Relative Percentage   |
 |:----------------|:---------------------|
 | Quizzes & Nordic DevAcademy Modules | 20% |
