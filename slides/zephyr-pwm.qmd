@@ -16,6 +16,22 @@ format:
 approximate an analog voltage.
 - LPF to smooth out the PWM signal.
 
+## Thought Exercise
+
+How can you drive a car at 30 mph if you can only floor the gas pedal or let it coast?
+
+Answer: Press the gas pedal for part of the time, and let it coast for the rest of the time.  That is the **duty cycle**.
+
+How long do you press the gas pedal for each cycle of "on"/"off"?  
+
+- Too long, and you'll go too fast.
+
+- Too short, and you can't modulate that on time realistically with your leg.
+
+This is the **period** of the gas on/off cycle.
+
+## Generating a Sine Wave from a PWM Signal
+
 ![sine-from-pwm](images/pwm/sine-from-pwm.png){fig-align="center"}
 
 ## PWM Signal Generation
