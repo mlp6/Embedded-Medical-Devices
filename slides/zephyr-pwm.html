@@ -415,6 +415,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#thought-exercise" id="toc-thought-exercise" class="nav-link" data-scroll-target="#thought-exercise">Thought Exercise</a></li>
+  <li><a href="#generating-a-sine-wave-from-a-pwm-signal" id="toc-generating-a-sine-wave-from-a-pwm-signal" class="nav-link" data-scroll-target="#generating-a-sine-wave-from-a-pwm-signal">Generating a Sine Wave from a PWM Signal</a></li>
   <li><a href="#pwm-signal-generation" id="toc-pwm-signal-generation" class="nav-link" data-scroll-target="#pwm-signal-generation">PWM Signal Generation</a></li>
   <li><a href="#block-diagram" id="toc-block-diagram" class="nav-link" data-scroll-target="#block-diagram">Block Diagram</a></li>
   <li><a href="#common-uses" id="toc-common-uses" class="nav-link" data-scroll-target="#common-uses">Common Uses</a></li>
@@ -481,6 +483,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Timing and duty cycle (pulse width) of <code>HIGH</code> and <code>LOW</code> signals can be used to approximate an analog voltage.</li>
 <li>LPF to smooth out the PWM signal.</li>
 </ul>
+</section>
+<section id="thought-exercise" class="level2">
+<h2 class="anchored" data-anchor-id="thought-exercise">Thought Exercise</h2>
+<p>How can you drive a car at 30 mph if you can only floor the gas pedal or let it coast?</p>
+<p>Answer: Press the gas pedal for part of the time, and let it coast for the rest of the time. That is the <strong>duty cycle</strong>.</p>
+<p>How long do you press the gas pedal for each cycle of “on”/“off”?</p>
+<ul>
+<li><p>Too long, and you’ll go too fast.</p></li>
+<li><p>Too short, and you can’t modulate that on time realistically with your leg.</p></li>
+</ul>
+<p>This is the <strong>period</strong> of the gas on/off cycle.</p>
+</section>
+<section id="generating-a-sine-wave-from-a-pwm-signal" class="level2">
+<h2 class="anchored" data-anchor-id="generating-a-sine-wave-from-a-pwm-signal">Generating a Sine Wave from a PWM Signal</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/pwm/sine-from-pwm.png" class="img-fluid figure-img"></p>

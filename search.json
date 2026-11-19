@@ -1043,7 +1043,7 @@
     "href": "slides/zephyr-pwm.html",
     "title": "Zephyr: Pulse Width Modulation",
     "section": "",
-    "text": "Most microcontrollers and SoCs do not have a native DAC.\nMuch easier to output digital HIGH or LOW signals.\nTiming and duty cycle (pulse width) of HIGH and LOW signals can be used to approximate an analog voltage.\nLPF to smooth out the PWM signal.\n\n\n\n\nsine-from-pwm",
+    "text": "Most microcontrollers and SoCs do not have a native DAC.\nMuch easier to output digital HIGH or LOW signals.\nTiming and duty cycle (pulse width) of HIGH and LOW signals can be used to approximate an analog voltage.\nLPF to smooth out the PWM signal.",
     "crumbs": [
       "Learning Modules",
       "Pulse Width Modulation (PWM)"
@@ -1054,7 +1054,29 @@
     "href": "slides/zephyr-pwm.html#overview",
     "title": "Zephyr: Pulse Width Modulation",
     "section": "",
-    "text": "Most microcontrollers and SoCs do not have a native DAC.\nMuch easier to output digital HIGH or LOW signals.\nTiming and duty cycle (pulse width) of HIGH and LOW signals can be used to approximate an analog voltage.\nLPF to smooth out the PWM signal.\n\n\n\n\nsine-from-pwm",
+    "text": "Most microcontrollers and SoCs do not have a native DAC.\nMuch easier to output digital HIGH or LOW signals.\nTiming and duty cycle (pulse width) of HIGH and LOW signals can be used to approximate an analog voltage.\nLPF to smooth out the PWM signal.",
+    "crumbs": [
+      "Learning Modules",
+      "Pulse Width Modulation (PWM)"
+    ]
+  },
+  {
+    "objectID": "slides/zephyr-pwm.html#thought-exercise",
+    "href": "slides/zephyr-pwm.html#thought-exercise",
+    "title": "Zephyr: Pulse Width Modulation",
+    "section": "Thought Exercise",
+    "text": "Thought Exercise\nHow can you drive a car at 30 mph if you can only floor the gas pedal or let it coast?\nAnswer: Press the gas pedal for part of the time, and let it coast for the rest of the time. That is the duty cycle.\nHow long do you press the gas pedal for each cycle of “on”/“off”?\n\nToo long, and you’ll go too fast.\nToo short, and you can’t modulate that on time realistically with your leg.\n\nThis is the period of the gas on/off cycle.",
+    "crumbs": [
+      "Learning Modules",
+      "Pulse Width Modulation (PWM)"
+    ]
+  },
+  {
+    "objectID": "slides/zephyr-pwm.html#generating-a-sine-wave-from-a-pwm-signal",
+    "href": "slides/zephyr-pwm.html#generating-a-sine-wave-from-a-pwm-signal",
+    "title": "Zephyr: Pulse Width Modulation",
+    "section": "Generating a Sine Wave from a PWM Signal",
+    "text": "Generating a Sine Wave from a PWM Signal\n\n\n\nsine-from-pwm",
     "crumbs": [
       "Learning Modules",
       "Pulse Width Modulation (PWM)"
@@ -1208,7 +1230,21 @@
     "href": "slides/zephyr-pwm-slides.html#overview",
     "title": "Zephyr: Pulse Width Modulation",
     "section": "Overview",
-    "text": "Overview\n\nMost microcontrollers and SoCs do not have a native DAC.\nMuch easier to output digital HIGH or LOW signals.\nTiming and duty cycle (pulse width) of HIGH and LOW signals can be used to approximate an analog voltage.\nLPF to smooth out the PWM signal.\n\n\nsine-from-pwm"
+    "text": "Overview\n\nMost microcontrollers and SoCs do not have a native DAC.\nMuch easier to output digital HIGH or LOW signals.\nTiming and duty cycle (pulse width) of HIGH and LOW signals can be used to approximate an analog voltage.\nLPF to smooth out the PWM signal."
+  },
+  {
+    "objectID": "slides/zephyr-pwm-slides.html#thought-exercise",
+    "href": "slides/zephyr-pwm-slides.html#thought-exercise",
+    "title": "Zephyr: Pulse Width Modulation",
+    "section": "Thought Exercise",
+    "text": "Thought Exercise\nHow can you drive a car at 30 mph if you can only floor the gas pedal or let it coast?\nAnswer: Press the gas pedal for part of the time, and let it coast for the rest of the time. That is the duty cycle.\nHow long do you press the gas pedal for each cycle of “on”/“off”?\n\nToo long, and you’ll go too fast.\nToo short, and you can’t modulate that on time realistically with your leg.\n\nThis is the period of the gas on/off cycle."
+  },
+  {
+    "objectID": "slides/zephyr-pwm-slides.html#generating-a-sine-wave-from-a-pwm-signal",
+    "href": "slides/zephyr-pwm-slides.html#generating-a-sine-wave-from-a-pwm-signal",
+    "title": "Zephyr: Pulse Width Modulation",
+    "section": "Generating a Sine Wave from a PWM Signal",
+    "text": "Generating a Sine Wave from a PWM Signal\n\nsine-from-pwm"
   },
   {
     "objectID": "slides/zephyr-pwm-slides.html#pwm-signal-generation",

@@ -222,6 +222,20 @@ Dr.&nbsp;Mark Palmeri, M.D., Ph.D.
 <li>Timing and duty cycle (pulse width) of <code>HIGH</code> and <code>LOW</code> signals can be used to approximate an analog voltage.</li>
 <li>LPF to smooth out the PWM signal.</li>
 </ul>
+</section>
+<section id="thought-exercise" class="slide level2">
+<h2>Thought Exercise</h2>
+<p>How can you drive a car at 30 mph if you can only floor the gas pedal or let it coast?</p>
+<p>Answer: Press the gas pedal for part of the time, and let it coast for the rest of the time. That is the <strong>duty cycle</strong>.</p>
+<p>How long do you press the gas pedal for each cycle of “on”/“off”?</p>
+<ul>
+<li><p>Too long, and you’ll go too fast.</p></li>
+<li><p>Too short, and you can’t modulate that on time realistically with your leg.</p></li>
+</ul>
+<p>This is the <strong>period</strong> of the gas on/off cycle.</p>
+</section>
+<section id="generating-a-sine-wave-from-a-pwm-signal" class="slide level2">
+<h2>Generating a Sine Wave from a PWM Signal</h2>
 
 <img data-src="images/pwm/sine-from-pwm.png" class="r-stretch quarto-figure-center"><p class="caption">sine-from-pwm</p></section>
 <section id="pwm-signal-generation" class="slide level2">
